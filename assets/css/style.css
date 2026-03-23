@@ -229,12 +229,12 @@ h1, h2, h3, .syne-font {
 @keyframes blink { 50% { opacity: 0; } }
 
 .hero-name {
-    font-size: clamp(1.8rem, 7vw, 4.2rem); /* Adjusted for better fit */
-    line-height: 1.05;
+    font-size: clamp(1.4rem, 6.5vw, 4.5rem); /* Scaled down for one-line fit */
+    line-height: 1.1;
     margin-bottom: 20px;
     text-transform: uppercase;
     letter-spacing: -1px;
-    word-break: break-word; /* Prevents overflow on very narrow screens */
+    white-space: nowrap; /* Forces text into one line */
 }
 
 .hero-bio {
@@ -736,7 +736,7 @@ h1, h2, h3, .syne-font {
 /* ── RESPONSIVE ── */
 @media (max-width: 768px) {
     /* Base typography overrides */
-    .hero-name          { font-size: 8.5vw !important; letter-spacing: -0.5px; line-height: 1.1; }
+    .hero-name          { font-size: 7.5vw !important; letter-spacing: -0.5px; }
     .section-title      { font-size: 8.5vw !important; }
     .hack-title         { font-size: 8vw !important; }
     h2.syne-font        { font-size: 8.5vw !important; }
