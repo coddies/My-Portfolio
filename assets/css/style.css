@@ -152,6 +152,7 @@ h1, h2, h3, .syne-font {
 /* ── UTILS ── */
 .gradient-text {
     background: linear-gradient(90deg, #fff, var(--cyan));
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -228,9 +229,11 @@ h1, h2, h3, .syne-font {
 @keyframes blink { 50% { opacity: 0; } }
 
 .hero-name {
-    font-size: 64px; /* Scaled up */
+    font-size: clamp(2.2rem, 8vw, 4.5rem); /* Naturally fluid across devices */
     line-height: 1.1;
-    margin-bottom: 12px;
+    margin-bottom: 20px;
+    text-transform: uppercase; /* Styled as requested */
+    letter-spacing: -1px;
 }
 
 .hero-bio {
@@ -731,16 +734,63 @@ h1, h2, h3, .syne-font {
 
 /* ── RESPONSIVE ── */
 @media (max-width: 768px) {
+    /* Base typography overrides */
+    .hero-name          { font-size: 11vw !important; letter-spacing: -0.5px; }
+    .section-title      { font-size: 8.5vw !important; }
+    .hack-title         { font-size: 8vw !important; }
+    h2.syne-font        { font-size: 8.5vw !important; }
+
+    /* Nav Rail App-like Bottom Tab Bar */
+    .nav-rail {
+        flex-direction: row;
+        top: auto;
+        bottom: 12px;
+        left: 50%;
+        transform: translateX(-50%);
+        right: auto;
+        padding: 10px 16px;
+        background: rgba(10, 10, 18, 0.85);
+        backdrop-filter: blur(20px);
+        border: 1px solid var(--glass-border);
+        border-radius: 99px;
+        justify-content: center;
+        gap: 12px;
+        z-index: 1000;
+        width: 90%;
+        max-width: 400px;
+    }
+    .nav-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1.1rem;
+    }
+    .nav-tooltip { display: none !important; }
+
+    /* Fix Grid and Layouts */
     #card-1 .hero-grid  { grid-template-columns: 1fr; gap: 32px; text-align: center; }
-    .about-grid         { grid-template-columns: 1fr; }
+    .about-grid         { grid-template-columns: 1fr; gap: 32px; text-align: center; }
     .hero-bio           { margin-left: auto; margin-right: auto; }
     .btn-group          { justify-content: center; }
-    .skills-grid        { grid-template-columns: repeat(2, 1fr); }
-    .projects-grid      { grid-template-columns: repeat(2, 1fr); }
-    .card               { padding: 40px 80px 40px 20px; }
-    .nav-rail           { right: 12px; }
+    
+    .skills-grid        { grid-template-columns: 1fr; gap: 16px; }
+    .projects-grid      { grid-template-columns: 1fr; gap: 16px; }
+    
+    .card               { padding: 20px 20px 100px 20px; align-items: flex-start; overflow-y: auto;} /* Extra padding for bottom rail */
+    .card-inner         { padding: 20px 0; }
+    .hero-photo         { max-width: 250px; margin: 0 auto; }
+    .about-photo        { height: auto; max-width: 250px; margin: 0 auto; }
+    
+    /* Content Tweaks */
     .terminal-glass     { display: none; }
-    .about-photo        { height: 280px; }
+    .hackathon-main-card{ padding: 32px 24px; }
+    .stats-row          { flex-direction: column; gap: 12px; }
+    .contact-panel      { padding: 32px 24px; }
+    
+    .cert-item          { flex-direction: column; align-items: flex-start; gap: 12px; margin-bottom: 32px; }
+    .cert-card          { flex-direction: column; text-align: center; padding: 20px; width: 100%; }
+    .timeline-dot       { top: 20px; left: -14px; }
+    .timeline-line      { left: 10px; }
+    .certs-container    { padding-left: 24px; }
 }
 
 /* ── CERT MODAL ── */
