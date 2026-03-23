@@ -196,7 +196,7 @@ h1, h2, h3, .syne-font {
 /* Profile photo — floating with side glow, NO box */
 .hero-photo {
     width: 100%;
-    max-width: 360px;
+    max-width: 450px; /* Increased for better laptop view */
     height: auto;
     display: block;
     background: transparent;
@@ -229,11 +229,12 @@ h1, h2, h3, .syne-font {
 @keyframes blink { 50% { opacity: 0; } }
 
 .hero-name {
-    font-size: clamp(2.2rem, 8vw, 4.5rem); /* Naturally fluid across devices */
-    line-height: 1.1;
+    font-size: clamp(1.8rem, 7vw, 4.2rem); /* Adjusted for better fit */
+    line-height: 1.05;
     margin-bottom: 20px;
-    text-transform: uppercase; /* Styled as requested */
+    text-transform: uppercase;
     letter-spacing: -1px;
+    word-break: break-word; /* Prevents overflow on very narrow screens */
 }
 
 .hero-bio {
@@ -735,7 +736,7 @@ h1, h2, h3, .syne-font {
 /* ── RESPONSIVE ── */
 @media (max-width: 768px) {
     /* Base typography overrides */
-    .hero-name          { font-size: 11vw !important; letter-spacing: -0.5px; }
+    .hero-name          { font-size: 10vw !important; letter-spacing: -0.5px; line-height: 0.95; }
     .section-title      { font-size: 8.5vw !important; }
     .hack-title         { font-size: 8vw !important; }
     h2.syne-font        { font-size: 8.5vw !important; }
