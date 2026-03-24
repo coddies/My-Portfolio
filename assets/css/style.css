@@ -146,13 +146,14 @@ h1, h2, h3, .syne-font {
     display: flex;
     justify-content: center;
     align-items: flex-start; /* Changed from center to allow scrolling from top */
-    overflow-y: auto;        /* Allow content to scroll */
+    overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
     transition: transform var(--card-transition), opacity var(--opacity-transition);
     visibility: hidden;
     pointer-events: none;
-    scrollbar-width: thin;
-    scrollbar-color: var(--purple) transparent;
 }
+.card::-webkit-scrollbar { display: none; }
 
 .card::-webkit-scrollbar {
     width: 6px;
@@ -838,7 +839,8 @@ h1, h2, h3, .syne-font {
     .skills-grid        { grid-template-columns: 1fr; gap: 16px; }
     .projects-grid      { grid-template-columns: 1fr; gap: 16px; }
     
-    .card               { padding: 20px 20px 100px 20px; align-items: flex-start; overflow-y: auto;} /* Extra padding for bottom rail */
+    .card               { padding: 20px 20px 100px 20px; align-items: flex-start; overflow-y: auto; scrollbar-width: none; }
+    .card::-webkit-scrollbar { display: none; }
     .card-inner         { padding: 20px 0; }
     .hero-photo         { max-width: 250px; margin: 0 auto; }
     .about-photo        { height: auto; max-width: 250px; margin: 0 auto; }
