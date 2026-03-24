@@ -25,8 +25,44 @@ body {
     overflow: hidden;
     height: 100vh;
     width: 100vw;
-    font-size: 18px; /* Scaled up */
+    font-size: 18px;
+    background: radial-gradient(circle at 50% 50%, #1a1a2e 0%, #0a0a12 100%);
 }
+
+/* PARTICLES CANVAS */
+#particles-canvas {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* KEYFRAMES */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeLeft { from { opacity: 0; transform: translateX(-40px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes glowPulse { 0%, 100% { box-shadow: 0 0 15px rgba(6, 182, 212, 0.3); } 50% { box-shadow: 0 0 35px rgba(6, 182, 212, 0.7), 0 0 60px rgba(124, 58, 237, 0.4); } }
+@keyframes borderFlow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+@keyframes floatAnim { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-8px); } }
+@keyframes scanLine { 0% { left: -60%; } 100% { left: 110%; } }
+@keyframes typeGlow { 0%, 100% { text-shadow: 0 0 10px rgba(6, 182, 212, 0.5); } 50% { text-shadow: 0 0 25px rgba(6, 182, 212, 1), 0 0 50px rgba(124, 58, 237, 0.5); } }
+
+/* HERO ANIMATIONS */
+.hero-right .tagline { animation: fadeUp .6s ease .1s both; }
+.hero-right .hero-name { animation: fadeUp .6s ease .25s both; }
+.hero-right .typewriter-container { animation: fadeUp .6s ease .4s both; }
+.hero-right .hero-bio { animation: fadeUp .6s ease .55s both; }
+.hero-right .btn-group { animation: fadeUp .6s ease .7s both; }
+.hero-left { animation: fadeLeft .8s ease .1s both; }
+
+/* PHOTO GLOW */
+.hero-photo-container { position: relative; display: inline-block; }
+.hero-photo-container::after { 
+    content: ''; position: absolute; inset: -3px; border-radius: 20px; 
+    background: linear-gradient(45deg, #7c3aed, #06b6d4, #ec4899, #7c3aed); 
+    background-size: 300% 300%; animation: borderFlow 3s ease infinite; 
+    z-index: -1; filter: blur(8px); opacity: 0.7; 
+}
+#typewriter { animation: typeGlow 2s ease-in-out infinite; }
 
 h1, h2, h3, .syne-font {
     font-family: 'Syne', sans-serif;
@@ -356,14 +392,21 @@ h1, h2, h3, .syne-font {
     border: 1px solid rgba(255,255,255,0.13);
     backdrop-filter: blur(20px);
     border-radius: 20px;
-    padding: 30px 24px; /* Scaled up */
-    transition: all 0.3s ease;
+    padding: 30px 24px;
+    transition: opacity .5s ease, transform .5s ease, border-color .3s, box-shadow .3s !important;
+    opacity: 0;
+    transform: scale(0.85);
+}
+
+.skill-card.anim-in {
+    opacity: 1;
+    transform: scale(1);
 }
 
 .skill-card:hover {
-    transform: translateY(-4px);
-    border-color: rgba(124,58,237,0.5);
-    background: rgba(255,255,255,0.1);
+    transform: translateY(-6px) scale(1.03) !important;
+    border-color: rgba(6, 182, 212, 0.6) !important;
+    box-shadow: 0 8px 30px rgba(6, 182, 212, 0.25) !important;
 }
 
 .skill-emoji   { font-size: 32px; margin-bottom: 14px; display: block; }
@@ -417,13 +460,20 @@ h1, h2, h3, .syne-font {
     display: flex;
     flex-direction: column;
     gap: 16px;
-    transition: all 0.3s ease;
+    opacity: 0;
+    transform: translateY(35px);
+    transition: opacity .5s ease, transform .5s ease, border-color .3s, box-shadow .3s !important;
+}
+
+.project-card.anim-in {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .project-card:hover {
-    transform: translateY(-4px);
-    border-color: rgba(6,182,212,0.5);
-    background: rgba(255,255,255,0.1);
+    transform: translateY(-6px) !important;
+    border-color: rgba(6, 182, 212, 0.5) !important;
+    box-shadow: 0 12px 40px rgba(6, 182, 212, 0.2) !important;
 }
 
 .project-icon {
@@ -616,17 +666,22 @@ h1, h2, h3, .syne-font {
     display: flex;
     align-items: center;
     gap: 24px;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Bouncy transition */
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: opacity .5s ease, transform .5s ease, border-color .3s !important;
     text-decoration: none;
     color: white;
     cursor: pointer;
 }
 
+.cert-card.anim-in {
+    opacity: 1;
+    transform: translateX(0) !important;
+}
+
 .cert-card:hover {
-    transform: translateY(-12px) rotate(1deg) scale(1.02);
-    border-color: var(--pink);
-    box-shadow: 0 15px 45px rgba(236, 72, 153, 0.3);
-    background: rgba(255, 255, 255, 0.12);
+    transform: translateX(8px) !important;
+    border-color: rgba(236, 72, 153, 0.5) !important;
 }
 
 .cert-icon {

@@ -3,11 +3,86 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Muhammad Burhan | AI & Data Science</title>
+    <title>Animation Test | Muhammad Burhan</title>
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=Syne:wght@800&display=swap" rel="stylesheet"/>
     <link rel="stylesheet" href="assets/css/style.css"/>
+
+<style>
+/* PARTICLES */
+#particles-canvas{position:fixed;inset:0;z-index:0;pointer-events:none;}
+
+/* KEYFRAMES */
+@keyframes fadeUp{from{opacity:0;transform:translateY(40px);}to{opacity:1;transform:translateY(0);}}
+@keyframes fadeLeft{from{opacity:0;transform:translateX(-40px);}to{opacity:1;transform:translateX(0);}}
+@keyframes glowPulse{0%,100%{box-shadow:0 0 15px rgba(6,182,212,0.3);}50%{box-shadow:0 0 35px rgba(6,182,212,0.7),0 0 60px rgba(124,58,237,0.4);}}
+@keyframes borderFlow{0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
+@keyframes floatAnim{0%,100%{transform:translateY(0px);}50%{transform:translateY(-8px);}}
+@keyframes scanLine{0%{left:-60%;}100%{left:110%;}}
+@keyframes typeGlow{0%,100%{text-shadow:0 0 10px rgba(6,182,212,0.5);}50%{text-shadow:0 0 25px rgba(6,182,212,1),0 0 50px rgba(124,58,237,0.5);}}
+
+/* HERO ANIMATIONS */
+.hero-right .tagline{animation:fadeUp .6s ease .1s both;}
+.hero-right .hero-name{animation:fadeUp .6s ease .25s both;}
+.hero-right .typewriter-container{animation:fadeUp .6s ease .4s both;}
+.hero-right .hero-bio{animation:fadeUp .6s ease .55s both;}
+.hero-right .btn-group{animation:fadeUp .6s ease .7s both;}
+.hero-left{animation:fadeLeft .8s ease .1s both;}
+
+/* PHOTO GLOW */
+.hero-photo-container{position:relative;display:inline-block;}
+.hero-photo-container::after{content:'';position:absolute;inset:-3px;border-radius:20px;background:linear-gradient(45deg,#7c3aed,#06b6d4,#ec4899,#7c3aed);background-size:300% 300%;animation:borderFlow 3s ease infinite;z-index:-1;filter:blur(8px);opacity:0.7;}
+.hero-photo{border-radius:18px;animation:floatAnim 5s ease-in-out infinite;}
+#typewriter{animation:typeGlow 2s ease-in-out infinite;}
+
+/* SKILL CARDS */
+.skill-card{opacity:0;transform:scale(0.85);transition:opacity .5s ease,transform .5s ease,border-color .3s,box-shadow .3s!important;}
+.skill-card.anim-in{opacity:1;transform:scale(1);}
+.skill-card:hover{transform:translateY(-6px) scale(1.03)!important;border-color:rgba(6,182,212,0.6)!important;box-shadow:0 8px 30px rgba(6,182,212,0.25)!important;}
+
+/* PROJECT CARDS */
+.project-card{opacity:0;transform:translateY(35px);transition:opacity .5s ease,transform .5s ease,border-color .3s,box-shadow .3s!important;}
+.project-card.anim-in{opacity:1;transform:translateY(0);}
+.project-card:hover{transform:translateY(-6px)!important;border-color:rgba(6,182,212,0.5)!important;box-shadow:0 12px 40px rgba(6,182,212,0.2)!important;}
+
+/* CERT CARDS */
+.cert-card{opacity:0;transform:translateX(-30px);transition:opacity .5s ease,transform .5s ease,border-color .3s!important;}
+.cert-card.anim-in{opacity:1;transform:translateX(0)!important;}
+.cert-card:hover{transform:translateX(0px)!important;border-color:rgba(236,72,153,0.5)!important;}
+
+/* HACKATHON */
+.hackathon-main-card{animation:glowPulse 3s ease-in-out infinite;overflow:hidden;position:relative;}
+.hackathon-main-card::after{content:'';position:absolute;left:-60%;top:-10%;width:40%;height:120%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.04),transparent);animation:scanLine 4s linear infinite;pointer-events:none;}
+.hack-title,.hack-desc,.stats-row,.hack-badge{opacity:0;transform:translateY(20px);transition:all .8s ease;}
+.hack-title.anim-in,.hack-desc.anim-in,.stats-row.anim-in,.hack-badge.anim-in{opacity:1;transform:translateY(0);}
+
+/* CONTACT */
+.contact-panel h2{opacity:0;transform:translateY(20px);transition:all .5s ease .1s;}
+.contact-subtitle{opacity:0;transform:translateY(20px);transition:all .5s ease .2s;}
+.contact-link-card{opacity:0;transform:translateX(-20px);transition:opacity .5s ease,transform .5s ease,border-color .3s,background .3s!important;}
+.contact-panel h2.anim-in,.contact-subtitle.anim-in,.contact-link-card.anim-in{opacity:1;transform:none!important;}
+.contact-link-card:hover{transform:translateX(6px)!important;}
+
+/* ABOUT */
+.about-grid>div:last-child>*{opacity:0;transform:translateX(30px);transition:opacity .6s ease,transform .6s ease;}
+.about-grid>div:last-child>*.anim-in{opacity:1;transform:translateX(0);}
+
+/* HOVER EFFECTS */
+.stat-box{transition:transform .3s,box-shadow .3s!important;}
+.stat-box:hover{transform:translateY(-4px);box-shadow:0 8px 25px rgba(6,182,212,0.2)!important;}
+.info-box{transition:border-color .3s,transform .3s!important;}
+.info-box:hover{border-color:rgba(6,182,212,0.4)!important;transform:translateY(-2px);}
+.progress-bar{box-shadow:0 0 8px rgba(6,182,212,0.4);}
+.pill-btn{position:relative;overflow:hidden;}
+.pill-btn::after{content:'';position:absolute;top:50%;left:50%;width:0;height:0;background:rgba(255,255,255,0.15);border-radius:50%;transform:translate(-50%,-50%);transition:width .4s,height .4s;}
+.pill-btn:hover::after{width:200px;height:200px;}
+
+/* SCROLL HINT */
+.scroll-hint{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:4px;opacity:0.4;pointer-events:none;}
+.scroll-hint span{font-size:10px;color:rgba(255,255,255,0.5);letter-spacing:2px;}
+.scroll-arrow{width:16px;height:16px;border-right:2px solid rgba(6,182,212,0.6);border-bottom:2px solid rgba(6,182,212,0.6);transform:rotate(45deg);animation:floatAnim 1.5s ease-in-out infinite;}
+</style>
 </head>
 <body>
 <canvas id="particles-canvas"></canvas>
@@ -56,7 +131,7 @@
 
         </div>
     </div>
-    <div class="scroll-hint"><span>SCROLL</span><div class="scroll-arrow"></div></div>
+  <div class="scroll-hint"><span>SCROLL</span><div class="scroll-arrow"></div></div>
 </section>
 
 <!-- ════════════════════════════
@@ -82,14 +157,14 @@
                 <div class="accent-line"></div>
                 <div class="about-bio">
                     <p style="margin-bottom: 12px;">
-                        I am a passionate AI & Data Science student at Saylani Mass IT Institute, dedicated to mastering the art of machine intelligence. My focus lies in **Generative AI and NLP**, where I explore how models can understand and augment human creativity.
+                        I am a passionate AI & Data Science student at Saylani Mass IT Institute, dedicated to mastering the art of machine intelligence. My focus lies in <strong style="color:var(--cyan);">Generative AI and NLP</strong>, where I explore how models can understand and augment human creativity.
                     </p>
                     <div id="aboutMoreContent" style="display: none;">
                         <p style="margin-bottom: 12px;">
                             My journey isn't just about writing lines of code; it's about solving real-world problems. Beyond the terminal, I’m an AI Content Creator and YouTuber, where I simplify complex tech concepts to empower the community.
                         </p>
                         <p>
-                            Whether it's Prompt Engineering, deep-diving into Data Science, or exploring the latest in 'Vibe Coding', I thrive on the edge of innovation. My ultimate goal is to build **intelligent, human-centric systems** that make a tangible difference.
+                            Whether it's Prompt Engineering, deep-diving into Data Science, or exploring the latest in 'Vibe Coding', I thrive on the edge of innovation. My ultimate goal is to build <strong style="color:var(--cyan);">intelligent, human-centric systems</strong> that make a tangible difference.
                         </p>
                     </div>
                     <button id="readMoreBtn" style="background:none; border:none; color:var(--cyan); font-weight:700; cursor:pointer; padding:0; margin-top:8px; font-size:14px; text-decoration:underline; font-family:inherit;">Read More</button>
@@ -368,11 +443,11 @@
                     <span class="contact-arrow">→</span>
                 </a>
 
-                <a href="mailto:mb6679605@gmail.com" class="contact-link-card link-email">
+                <a href="mailto:devmuhammadburhan@gmail.com" class="contact-link-card link-email">
                     <span class="contact-emoji">📧</span>
                     <div class="contact-label-group">
                         <span class="contact-main-label">Email</span>
-                        <span class="contact-sub-label">mb6679605@gmail.com</span>
+                        <span class="contact-sub-label">devmuhammadburhan@gmail.com</span>
                     </div>
                     <span class="contact-arrow">→</span>
                 </a>
@@ -386,10 +461,76 @@
 <div class="cert-modal" id="certModal">
     <div class="modal-content">
         <div class="modal-close" id="modalClose">&times;</div>
-        <img src="" alt="Certificate" id="modalImg">
+        <img id="modalImg" src="" alt="Certificate Preview">
     </div>
 </div>
 
 <script src="assets/js/main.js"></script>
+<script>
+// ── PARTICLES ENGINE ──
+const canvas = document.getElementById('particles-canvas');
+const ctx = canvas.getContext('2d');
+let particles = [];
+
+function initParticles() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    particles = [];
+    for(let i=0; i<80; i++) {
+        particles.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            vx: (Math.random() - 0.5) * 0.5,
+            vy: (Math.random() - 0.5) * 0.5,
+            size: Math.random() * 2 + 1
+        });
+    }
+}
+
+function drawParticles() {
+    ctx.clearRect(0,0,canvas.width, canvas.height);
+    ctx.fillStyle = 'rgba(6, 182, 212, 0.3)';
+    particles.forEach(p => {
+        p.x += p.vx; p.y += p.vy;
+        if(p.x<0 || p.x>canvas.width) p.vx *= -1;
+        if(p.y<0 || p.y>canvas.height) p.vy *= -1;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI*2);
+        ctx.fill();
+    });
+    requestAnimationFrame(drawParticles);
+}
+initParticles();
+drawParticles();
+window.addEventListener('resize', initParticles);
+
+// ── SCROLL ANIMATIONS (Intersection Observer) ──
+const observerOptions = { threshold: 0.15 };
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            // About Slide In
+            if(entry.target.classList.contains('about-grid')) {
+                entry.target.querySelectorAll('.about-grid>div:last-child>*').forEach(el => el.classList.add('anim-in'));
+            }
+            // Skills/Projects Scale In
+            entry.target.querySelectorAll('.skill-card, .project-card, .cert-card, .contact-link-card, .hack-title, .hack-desc, .stats-row, .hack-badge, .contact-panel h2, .contact-subtitle').forEach(el => {
+                el.classList.add('anim-in');
+            });
+            
+            // Progress Bars
+            if(entry.target.id === 'card-3') {
+                setTimeout(() => {
+                    entry.target.querySelectorAll('.progress-bar').forEach(bar => {
+                        bar.style.width = bar.getAttribute('data-width');
+                    });
+                }, 300);
+            }
+        }
+    });
+}, observerOptions);
+
+document.querySelectorAll('section.card, .about-grid').forEach(el => observer.observe(el));
+</script>
 </body>
 </html>
