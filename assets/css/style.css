@@ -106,14 +106,18 @@ h1, h2, h3, .syne-font {
 }
 
 .nav-btn:hover {
-    background: rgba(255,255,255,0.12);
-    border-color: rgba(255,255,255,0.3);
+    background: white;
+    border-color: white;
+    color: var(--purple);
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
 }
 
 .nav-btn.active {
-    box-shadow: 0 0 20px var(--purple);
+    box-shadow: 0 0 25px var(--purple);
     border-color: var(--purple);
-    background: rgba(124,58,237,0.2);
+    background: var(--purple);
+    color: white;
 }
 
 .nav-tooltip {
@@ -206,25 +210,39 @@ h1, h2, h3, .syne-font {
     font-weight: 600;
     text-decoration: none;
     font-size: 14px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     display: inline-flex;
     align-items: center;
     gap: 8px;
+    position: relative;
+    overflow: hidden;
 }
 
-.pill-btn:hover { transform: translateY(-2px); }
-
 .btn-github {
-    background: linear-gradient(135deg, var(--purple), #4c1d95);
+    background: var(--purple);
     color: white;
-    box-shadow: 0 4px 15px rgba(124,58,237,0.3);
+    border: 1px solid var(--purple);
+}
+
+.btn-github:hover {
+    background: white;
+    color: var(--purple);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px rgba(124,58,237,0.4);
 }
 
 .btn-linkedin {
     background: transparent;
     border: 1px solid var(--glass-border);
     color: white;
-    backdrop-filter: blur(10px);
+}
+
+.btn-linkedin:hover {
+    background: var(--purple);
+    border-color: var(--purple);
+    color: white;
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px rgba(124,58,237,0.3);
 }
 
 /* ── CARD 1: HERO ── */
@@ -377,7 +395,25 @@ h1, h2, h3, .syne-font {
     opacity: 0.8;
 }
 
-.info-val { font-size: 15px; font-weight: 600; color: white; }
+#readMoreBtn {
+    background: transparent;
+    border: 1px solid var(--cyan);
+    color: var(--cyan);
+    padding: 6px 16px;
+    border-radius: 99px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 12px;
+    font-size: 13px;
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+#readMoreBtn:hover {
+    background: var(--cyan);
+    color: var(--bg-deep);
+    box-shadow: 0 0 15px rgba(6, 182, 212, 0.4);
+}
 
 /* ── CARD 3: SKILLS ── */
 #card-3 { background: rgba(124,58,237,0.06); }
@@ -772,27 +808,21 @@ h1, h2, h3, .syne-font {
 .contact-sub-label  { display: block; font-size: 12px; color: var(--text-muted); }
 .contact-arrow { color: var(--text-muted); font-size: 16px; flex-shrink: 0; }
 
-.link-github { background: rgba(255,255,255,0.05); }
-.link-github:hover {
-    background: rgba(255,255,255,0.09);
-    border-color: rgba(255,255,255,0.3);
-    transform: translateY(-2px);
+.contact-link-card:hover {
+    background: white;
+    border-color: white;
+    transform: translateX(8px);
+    box-shadow: 0 5px 25px rgba(255, 255, 255, 0.3);
 }
 
-.link-linkedin { background: rgba(6,182,212,0.06); }
-.link-linkedin:hover {
-    background: rgba(6,182,212,0.12);
-    border-color: rgba(6,182,212,0.4);
-    box-shadow: 0 0 20px rgba(6,182,212,0.15);
-    transform: translateY(-2px);
+.contact-link-card:hover .contact-main-label,
+.contact-link-card:hover .contact-sub-label,
+.contact-link-card:hover .contact-arrow {
+    color: var(--bg-deep);
 }
 
-.link-email { background: rgba(236,72,153,0.06); }
-.link-email:hover {
-    background: rgba(236,72,153,0.1);
-    border-color: rgba(236,72,153,0.4);
-    box-shadow: 0 0 20px rgba(236,72,153,0.15);
-    transform: translateY(-2px);
+.contact-link-card:hover .contact-emoji {
+    filter: brightness(0.2);
 }
 
 /* ── RESPONSIVE ── */
