@@ -11,7 +11,7 @@ const observer = new IntersectionObserver((entries) => {
         if (entry.isIntersecting) {
             // Trigger animations for children
             if(entry.target.classList.contains('about-grid')) {
-                entry.target.querySelectorAll('.about-grid>div:last-child>*').forEach(el => el.classList.add('anim-in'));
+                entry.target.querySelectorAll('.about-photo, .about-grid>div:last-child>*').forEach(el => el.classList.add('anim-in'));
             }
             entry.target.querySelectorAll('.skill-card, .project-card, .cert-card, .contact-link-card, .hack-title, .hack-desc, .stats-row, .hack-badge, .contact-panel h2, .contact-subtitle').forEach(el => {
                 el.classList.add('anim-in');

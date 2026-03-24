@@ -54,15 +54,21 @@ body {
 .hero-right .btn-group { animation: fadeUp .6s ease .7s both; }
 .hero-left { animation: fadeLeft .8s ease .1s both; }
 
-/* PHOTO GLOW */
-.hero-photo-container { position: relative; display: inline-block; }
-.hero-photo-container::after { 
-    content: ''; position: absolute; inset: -3px; border-radius: 20px; 
-    background: linear-gradient(45deg, #7c3aed, #06b6d4, #ec4899, #7c3aed); 
-    background-size: 300% 300%; animation: borderFlow 3s ease infinite; 
-    z-index: -1; filter: blur(8px); opacity: 0.7; 
+.hero-photo {
+    width: 100%;
+    max-width: 450px;
+    height: auto;
+    display: block;
+    background: transparent;
+    filter: drop-shadow(0 15px 30px rgba(124,58,237,0.3));
+    animation: floatPhoto 4s ease-in-out infinite;
 }
-#typewriter { animation: typeGlow 2s ease-in-out infinite; }
+
+@keyframes floatPhoto {
+    0%   { transform: translateY(0px); }
+    50%  { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
 
 h1, h2, h3, .syne-font {
     font-family: 'Syne', sans-serif;
@@ -315,7 +321,7 @@ h1, h2, h3, .syne-font {
     100% { transform: translateY(0px) rotate(0deg); }
 }
 
-.about-photo.slide-in {
+.about-photo.anim-in {
     opacity: 1;
     transform: translateY(0) rotate(0deg) scale(1);
 }
@@ -680,8 +686,9 @@ h1, h2, h3, .syne-font {
 }
 
 .cert-card:hover {
-    transform: translateX(8px) !important;
-    border-color: rgba(236, 72, 153, 0.5) !important;
+    transform: translateY(-12px) rotate(1deg) scale(1.02) !important;
+    border-color: var(--pink) !important;
+    box-shadow: 0 15px 45px rgba(236, 72, 153, 0.45) !important;
 }
 
 .cert-icon {
