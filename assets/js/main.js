@@ -86,6 +86,11 @@ const certCards = document.querySelectorAll('.cert-card');
 
 certCards.forEach(card => {
     card.addEventListener('click', () => {
+        const link = card.getAttribute('data-link');
+        if (link) {
+            window.open(link, '_blank');
+            return;
+        }
         const imgPath = card.getAttribute('data-img');
         if (imgPath) { modalImg.src = imgPath; certModal.classList.add('active'); }
     });
