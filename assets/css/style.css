@@ -842,15 +842,14 @@ h1, h2, h3, .syne-font {
         left: 50%;
         transform: translateX(-50%);
         right: auto;
-        padding: 10px 16px;
-        background: rgba(10, 10, 18, 0.85);
-        backdrop-filter: blur(20px);
-        border: 1px solid var(--glass-border);
-        border-radius: 99px;
+        padding: 0px;
+        background: transparent;
+        backdrop-filter: none;
+        border: none;
         justify-content: center;
         gap: 12px;
         z-index: 1000;
-        width: 90%;
+        width: 100%;
         max-width: 400px;
     }
     .nav-btn {
