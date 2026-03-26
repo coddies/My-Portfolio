@@ -78,6 +78,15 @@ function type() {
 }
 if(typeEl) type();
 
+// ── HACKATHON CLICK ──
+const hackCard = document.querySelector('.hackathon-main-card');
+if (hackCard) {
+    hackCard.addEventListener('click', () => {
+        const link = hackCard.getAttribute('data-link');
+        if (link) window.open(link, '_blank');
+    });
+}
+
 // ── CERT MODAL ──
 const certModal = document.getElementById('certModal');
 const modalImg  = document.getElementById('modalImg');

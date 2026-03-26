@@ -573,6 +573,13 @@ h1, h2, h3, .syne-font {
     overflow: hidden;
     border: 1px solid transparent;
     background-clip: padding-box;
+    cursor: pointer;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.hackathon-main-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 50px rgba(124, 58, 237, 0.2);
 }
 
 .hackathon-main-card::before {
