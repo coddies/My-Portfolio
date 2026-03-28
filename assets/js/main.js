@@ -49,10 +49,10 @@ function updateCards(nextIndex) {
     });
 
     // Trigger animations after CSS card slide begins
-    setTimeout(() => { triggerCardAnimations(nextCard); }, 200);
+    setTimeout(() => { triggerCardAnimations(nextCard); }, 100);
 
     currentIndex = nextIndex;
-    setTimeout(() => { isTransitioning = false; }, 1100);
+    setTimeout(() => { isTransitioning = false; }, 750);
 }
 
 navBtns.forEach((btn, idx) => { btn.addEventListener('click', () => updateCards(idx)); });
@@ -127,16 +127,22 @@ if(canvas) {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
         particles = [];
-        for(let i=0; i<80; i++) {
+        const count = window.innerWidth < 768 ? 40 : 80;
+        for(let i=0; i<count; i++) {
             particles.push({
                 x: Math.random() * canvas.width,
                 y: Math.random() * canvas.height,
-                vx: (Math.random() - 0.5) * 0.5,
-                vy: (Math.random() - 0.5) * 0.5,
-                size: Math.random() * 2 + 1
+                vx: (Math.random() - 0.5) * 0.4,
+                vy: (Math.random() - 0.5) * 0.4,
+                size: Math.random() * 1.5 + 0.5
             });
         }
     }
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(initParticles, 200);
+    });
     function drawParticles() {
         ctx.clearRect(0,0,canvas.width, canvas.height);
         ctx.fillStyle = 'rgba(6, 182, 212, 0.3)';
@@ -149,5 +155,4 @@ if(canvas) {
         requestAnimationFrame(drawParticles);
     }
     initParticles(); drawParticles();
-    window.addEventListener('resize', initParticles);
 }
