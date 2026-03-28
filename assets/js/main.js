@@ -4,6 +4,36 @@ const navBtns = document.querySelectorAll('.nav-btn');
 let currentIndex   = 0;
 let isTransitioning = false;
 
+// ── THEME TOGGLE ──
+const themeToggle = document.getElementById('themeToggle');
+const sunIcon = document.querySelector('.sun-icon');
+const moonIcon = document.querySelector('.moon-icon');
+
+function setTheme(isLight) {
+    if (isLight) {
+        document.body.classList.add('light-theme');
+        sunIcon.style.display = 'none';
+        moonIcon.style.display = 'block';
+        localStorage.setItem('theme', 'light');
+    } else {
+        document.body.classList.remove('light-theme');
+        sunIcon.style.display = 'block';
+        moonIcon.style.display = 'none';
+        localStorage.setItem('theme', 'dark');
+    }
+}
+
+// Load saved theme
+if (localStorage.getItem('theme') === 'light') {
+    setTheme(true);
+}
+
+if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+        setTheme(!document.body.classList.contains('light-theme'));
+    });
+}
+
 // ── CARD IN-ANIMATIONS LOGIC ──
 function triggerCardAnimations(card) {
     if (!card) return;
