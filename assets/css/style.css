@@ -39,7 +39,7 @@ body {
 
 /* KEYFRAMES */
 @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-@keyframes fadeLeft { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes fadeLeft { from { opacity: 0; transform: translateX(-150px); } to { opacity: 1; transform: translateX(0); } }
 @keyframes glowPulse { 0%, 100% { box-shadow: 0 0 15px rgba(6, 182, 212, 0.3); } 50% { box-shadow: 0 0 35px rgba(6, 182, 212, 0.7), 0 0 60px rgba(124, 58, 237, 0.4); } }
 @keyframes borderFlow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
 @keyframes floatAnim { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-8px); } }
@@ -152,18 +152,19 @@ h1, h2, h3, .syne-font {
     justify-content: center;
     align-items: flex-start; /* Changed from center to allow scrolling from top */
     overflow-y: auto;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
+    scrollbar-width: thin;
+    scrollbar-color: var(--purple) transparent;
     transition: transform var(--card-transition), opacity var(--opacity-transition);
     visibility: hidden;
     pointer-events: none;
 }
-.card::-webkit-scrollbar { display: none; }
 
 .card::-webkit-scrollbar {
     width: 6px;
 }
-
+.card::-webkit-scrollbar-track {
+    background: transparent;
+}
 .card::-webkit-scrollbar-thumb {
     background: var(--purple);
     border-radius: 10px;
@@ -629,16 +630,16 @@ h1, h2, h3, .syne-font {
     line-height: 1;
 }
 
-.hack-title   { font-size: 44px; margin-bottom: 12px; position: relative; z-index: 1; }
+.hack-title   { font-size: 44px; margin-bottom: 12px; position: relative; z-index: 1; padding-right: 170px; }
 
 .hack-desc {
     color: var(--text-muted);
     font-size: 14px;
-    max-width: 500px;
     line-height: 1.6;
     margin-bottom: 36px;
     position: relative;
     z-index: 1;
+    padding-right: 170px;
 }
 
 .stats-row { display: flex; gap: 24px; position: relative; z-index: 1; }
