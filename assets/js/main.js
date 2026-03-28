@@ -4,32 +4,29 @@ const navBtns = document.querySelectorAll('.nav-btn');
 let currentIndex   = 0;
 let isTransitioning = false;
 
-// Initialize observer first
-const observerOptions = { threshold: 0.15 };
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            // Trigger animations for children
-            if(entry.target.classList.contains('about-grid')) {
-                entry.target.querySelectorAll('.about-photo, .about-grid>div:last-child>*').forEach(el => el.classList.add('anim-in'));
-            }
-            entry.target.querySelectorAll('.skill-card, .project-card, .cert-card, .contact-link-card, .hack-title, .hack-desc, .stats-row, .hack-badge, .contact-panel h2, .contact-subtitle').forEach(el => {
-                el.classList.add('anim-in');
-            });
-            
-            // Progress Bars logic
-            if(entry.target.id === 'card-3') {
-                setTimeout(() => {
-                    entry.target.querySelectorAll('.progress-bar').forEach(bar => {
-                        bar.style.width = bar.getAttribute('data-width');
-                    });
-                }, 300);
-            }
-        }
+// ── CARD IN-ANIMATIONS LOGIC ──
+function triggerCardAnimations(card) {
+    if (!card) return;
+    // Handle About Section
+    if(card.id === 'card-2') {
+        card.querySelectorAll('.about-photo, .about-grid>div:last-child>*').forEach(el => el.classList.add('anim-in'));
+    }
+    // Handle all generic anim-in items
+    card.querySelectorAll('.skill-card, .project-card, .cert-card, .contact-link-card, .hack-title, .hack-desc, .stats-row, .hack-badge, .contact-panel h2, .contact-subtitle').forEach(el => {
+        el.classList.add('anim-in');
     });
-}, observerOptions);
+    // Handle Progress bars specific to Skills
+    if(card.id === 'card-3') {
+        setTimeout(() => {
+            card.querySelectorAll('.progress-bar').forEach(bar => {
+                bar.style.width = bar.getAttribute('data-width');
+            });
+        }, 300);
+    }
+}
 
-document.querySelectorAll('section.card, .about-grid').forEach(el => observer.observe(el));
+// Initial trigger for card 1 (and 2 if needed immediately)
+setTimeout(() => { triggerCardAnimations(cards[0]); }, 100);
 
 function updateCards(nextIndex) {
     if (nextIndex === currentIndex || isTransitioning) return;
@@ -50,6 +47,9 @@ function updateCards(nextIndex) {
     cards.forEach((card, idx) => {
         card.className = 'card ' + (idx === nextIndex ? 'state-active' : (idx < nextIndex ? 'state-above' : 'state-below'));
     });
+
+    // Trigger animations after CSS card slide begins
+    setTimeout(() => { triggerCardAnimations(nextCard); }, 200);
 
     currentIndex = nextIndex;
     setTimeout(() => { isTransitioning = false; }, 1100);
