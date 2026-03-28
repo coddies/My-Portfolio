@@ -51,7 +51,8 @@ body {
 .hero-right .hero-name { animation: fadeUp .6s ease .2s both; }
 .hero-right .typewriter-container { animation: fadeUp .6s ease .3s both; }
 .hero-right .hero-bio { animation: fadeUp .6s ease .4s both; }
-.hero-right .btn-group { animation: fadeUp .6s ease .5s both; }
+.hero-right .btn-group { animation: fadeUp 1s cubic-bezier(0.25, 1, 0.5, 1) .7s both; }
+.hero-right .cv-btn-wrapper { animation: fadeUp 1s cubic-bezier(0.25, 1, 0.5, 1) .85s both; }
 .hero-left { animation: fadeLeft .8s ease .1s both; }
 
 .hero-photo {
@@ -240,6 +241,19 @@ h1, h2, h3, .syne-font {
     color: white;
     transform: translateY(-4px);
     box-shadow: 0 10px 30px rgba(124,58,237,0.3);
+}
+
+.btn-cv {
+    background: linear-gradient(90deg, var(--purple), var(--cyan));
+    color: white;
+    border: none;
+    box-shadow: 0 4px 15px rgba(6, 182, 212, 0.2);
+}
+
+.btn-cv:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px rgba(6, 182, 212, 0.4);
+    color: white;
 }
 
 /* ── CARD 1: HERO ── */
