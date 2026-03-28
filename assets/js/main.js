@@ -32,6 +32,14 @@ function updateCards(nextIndex) {
     if (nextIndex === currentIndex || isTransitioning) return;
     isTransitioning = true;
 
+    if (window.innerWidth <= 768) {
+        const flash = document.getElementById('transition-flash');
+        if (flash) {
+            flash.style.opacity = '1';
+            setTimeout(() => flash.style.opacity = '0', 150);
+        }
+    }
+
     // Reset animations for the next card to re-trigger
     const nextCard = cards[nextIndex];
     nextCard.querySelectorAll('.anim-in').forEach(el => el.classList.remove('anim-in'));

@@ -971,6 +971,78 @@ h1, h2, h3, .syne-font {
     /* Skills & Projects Fit */
     .skill-card { padding: 20px 15px; }
     .project-card { padding: 24px 20px; }
+
+    /* ════════════════════════════════
+       MOBILE ENTRANCE ANIMATIONS
+    ════════════════════════════════ */
+    /* 1. SKILL CARDS */
+    @keyframes cardFlip {
+      0%   { opacity: 0; transform: rotateY(90deg) scale(0.8); }
+      60%  { transform: rotateY(-10deg) scale(1.02); }
+      100% { opacity: 1; transform: rotateY(0deg) scale(1); }
+    }
+    .skill-card.anim-in {
+      animation: cardFlip 0.5s ease forwards;
+    }
+    .skill-card:nth-child(1).anim-in { animation-delay: 0ms; }
+    .skill-card:nth-child(2).anim-in { animation-delay: 60ms; }
+    .skill-card:nth-child(3).anim-in { animation-delay: 120ms; }
+    .skill-card:nth-child(4).anim-in { animation-delay: 180ms; }
+    .skill-card:nth-child(5).anim-in { animation-delay: 240ms; }
+    .skill-card:nth-child(6).anim-in { animation-delay: 300ms; }
+    .skill-card:nth-child(7).anim-in { animation-delay: 360ms; }
+    .skill-card:nth-child(8).anim-in { animation-delay: 420ms; }
+
+    /* 2. PROJECT CARDS */
+    @keyframes slideFromLeft {
+      from { opacity: 0; transform: translateX(-60px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes slideFromRight {
+      from { opacity: 0; transform: translateX(60px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    .project-card:nth-child(odd).anim-in  { animation: slideFromLeft 0.5s ease forwards; }
+    .project-card:nth-child(even).anim-in { animation: slideFromRight 0.5s ease forwards; }
+    .project-card:nth-child(1).anim-in { animation-delay: 0ms; }
+    .project-card:nth-child(2).anim-in { animation-delay: 100ms; }
+    .project-card:nth-child(3).anim-in { animation-delay: 200ms; }
+    .project-card:nth-child(4).anim-in { animation-delay: 300ms; }
+    .project-card:nth-child(5).anim-in { animation-delay: 400ms; }
+
+    /* 3. CERT CARDS */
+    @keyframes bounceIn {
+      0%   { opacity: 0; transform: translateY(50px) scale(0.9); }
+      60%  { transform: translateY(-8px) scale(1.02); }
+      80%  { transform: translateY(4px) scale(0.99); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .cert-card.anim-in {
+      animation: bounceIn 0.6s cubic-bezier(0.36,0.07,0.19,0.97) forwards;
+    }
+    .cert-item:nth-child(1) .cert-card.anim-in { animation-delay: 0ms; }
+    .cert-item:nth-child(2) .cert-card.anim-in { animation-delay: 120ms; }
+    .cert-item:nth-child(3) .cert-card.anim-in { animation-delay: 240ms; }
+    .cert-item:nth-child(4) .cert-card.anim-in { animation-delay: 360ms; }
+
+    /* 4. HERO NAME GLITCH */
+    @keyframes glitchReveal {
+      0%   { opacity: 0; clip-path: inset(50% 0 50% 0); }
+      40%  { opacity: 1; clip-path: inset(0% 0 60% 0); }
+      70%  { clip-path: inset(40% 0 0% 0); }
+      100% { clip-path: inset(0% 0 0% 0); }
+    }
+    .hero-name { animation: glitchReveal 0.8s ease 0.3s both; }
+
+    /* 5. NAV BUTTONS PULSE */
+    @keyframes navPulse {
+      0%   { box-shadow: 0 0 0 0 rgba(124,58,237,0.6); }
+      70%  { box-shadow: 0 0 0 8px rgba(124,58,237,0); }
+      100% { box-shadow: 0 0 0 0 rgba(124,58,237,0); }
+    }
+    .nav-btn.active {
+      animation: navPulse 1.5s ease infinite;
+    }
 }
 
 /* ── CERT MODAL ── */
