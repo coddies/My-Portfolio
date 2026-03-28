@@ -52,7 +52,7 @@ function updateCards(nextIndex) {
     });
 
     currentIndex = nextIndex;
-    setTimeout(() => { isTransitioning = false; }, 700);
+    setTimeout(() => { isTransitioning = false; }, 1100);
 }
 
 navBtns.forEach((btn, idx) => { btn.addEventListener('click', () => updateCards(idx)); });
