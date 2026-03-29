@@ -57,7 +57,6 @@ body {
 .hero-right .typewriter-container { animation: fadeUp .6s ease .3s both; }
 .hero-right .hero-bio { animation: fadeUp .6s ease .4s both; }
 .hero-right .btn-group { animation: fadeUp 1s cubic-bezier(0.25, 1, 0.5, 1) .7s both; }
-.hero-right .cv-btn-wrapper { animation: fadeUp 1s cubic-bezier(0.25, 1, 0.5, 1) .85s both; }
 .hero-left { animation: fadeLeft .8s ease .1s both; }
 
 .hero-photo {
@@ -328,7 +327,7 @@ h1, h2, h3, .syne-font {
     max-width: 400px;
 }
 
-.btn-group { display: flex; gap: 16px; }
+.btn-group { display: flex; gap: 16px; flex-wrap: wrap; }
 
 
 /* ── CARD 2: ABOUT ── */
