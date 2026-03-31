@@ -194,6 +194,115 @@ certCards.forEach(card => {
 if (modalClose) modalClose.addEventListener('click', () => { certModal.classList.remove('active'); });
 if (certModal) certModal.addEventListener('click', (e) => { if (e.target === certModal) certModal.classList.remove('active'); });
 
+// ── CASE STUDIES DATA & MODAL ──
+const caseStudiesData = [
+    {
+        title:    'AI-Powered Customer Support Bot',
+        category: 'AI / NLP',
+        tags:     ['Python', 'LangChain', 'GPT-4', 'FastAPI', 'Pinecone'],
+        problem:  'A mid-sized e-commerce company was receiving over 10,000 support tickets per day. Their human agents were overwhelmed, response times averaged 48 hours, and customer satisfaction scores were dropping sharply. They needed an intelligent solution that could scale without scaling costs.',
+        solution: 'I built a conversational AI system using LangChain and GPT-4, backed by a Pinecone vector database for Retrieval-Augmented Generation (RAG). The bot was trained on the company\'s knowledge base, historical tickets, and product catalog. A FastAPI backend served the model, with a fallback mechanism to route complex cases to human agents.',
+        result:   '70% of incoming tickets were autonomously resolved without human intervention. Average response time dropped from 48 hours to under 2 seconds. Customer satisfaction scores increased by 34% in the first month. Human agents could focus on complex, high-value interactions, improving their productivity and morale.'
+    },
+    {
+        title:    'Real-Time Business Intelligence Dashboard',
+        category: 'Data Analytics',
+        tags:     ['Python', 'Pandas', 'Plotly', 'SQL', 'PostgreSQL', 'Streamlit'],
+        problem:  'A retail chain with 50+ branches had critical business data scattered across Excel files, isolated POS systems, and manual reports. Decision-makers were operating on week-old data, making it impossible to react quickly to inventory shortages, regional sales dips, or emerging customer trends.',
+        solution: 'Designed and built a centralized data pipeline using Python and Pandas to ETL data from multiple sources into a single PostgreSQL database. Created an interactive Plotly + Streamlit dashboard with real-time KPI monitoring, geographic sales maps, inventory heatmaps, and automated alerts for anomalies.',
+        result:   'Leadership gained access to live, unified business data for the first time. Inventory waste reduced by 22% as managers could spot shortages immediately. The dashboard identified an underperforming region that, once addressed, increased regional revenue by 18%. Time spent on manual reporting was eliminated entirely.'
+    },
+    {
+        title:    'Faceless AI Video Studio Pipeline',
+        category: 'AI Automation',
+        tags:     ['Python', 'FFmpeg', 'ElevenLabs', 'OpenAI', 'MoviePy', 'Stable Diffusion'],
+        problem:  'Content creators on YouTube and TikTok were spending 20+ hours per video on scripting, voiceover recording, image sourcing, and editing. This bottleneck meant they could only publish 1–2 videos per week, severely limiting their channel growth and revenue potential.',
+        solution: 'Built a fully automated end-to-end video production pipeline. Given only a topic, the system: generates a script using GPT-4, converts it to natural speech via ElevenLabs, generates matching visuals with Stable Diffusion, assembles everything using MoviePy and FFmpeg, and outputs a ready-to-upload video with subtitles and background music.',
+        result:   'Video production time dropped from 20+ hours to under 15 minutes per video. Creators using the tool increased their upload frequency by 5x. One client grew their channel from 2,000 to 28,000 subscribers in 3 months by leveraging the increased content output. The pipeline paid for itself in the first week of operation.'
+    }
+];
+
+const csModal    = document.getElementById('csModal');
+const csModalClose = document.getElementById('csModalClose');
+
+function openCsModal(idx) {
+    const data = caseStudiesData[idx];
+    if (!data || !csModal) return;
+
+    document.getElementById('csModalTitle').textContent    = data.title;
+    document.getElementById('csModalCategory').textContent = data.category;
+    document.getElementById('csModalProblem').textContent  = data.problem;
+    document.getElementById('csModalSolution').textContent = data.solution;
+    document.getElementById('csModalResult').textContent   = data.result;
+
+    const tagsEl = document.getElementById('csModalTags');
+    tagsEl.innerHTML = data.tags.map(t => `<span class="cs-tag">${t}</span>`).join('');
+
+    csModal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    requestAnimationFrame(() => { csModal.classList.add('visible'); });
+}
+
+function closeCsModal() {
+    if (!csModal) return;
+    csModal.classList.remove('visible');
+    document.body.style.overflow = '';
+    setTimeout(() => { csModal.classList.remove('active'); }, 400);
+}
+
+document.querySelectorAll('.cs-read-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        openCsModal(parseInt(btn.getAttribute('data-cs')));
+    });
+});
+
+if (csModalClose) csModalClose.addEventListener('click', closeCsModal);
+if (csModal) csModal.addEventListener('click', (e) => { if (e.target === csModal) closeCsModal(); });
+
+// Comment submission
+const csSubmitBtn = document.getElementById('csCommentSubmit');
+if (csSubmitBtn) {
+    csSubmitBtn.addEventListener('click', () => {
+        const nameEl = document.getElementById('csCommentName');
+        const textEl = document.getElementById('csCommentText');
+        const name   = nameEl.value.trim();
+        const text   = textEl.value.trim();
+        if (!name || !text) {
+            nameEl.style.borderColor = !name ? 'var(--pink)' : '';
+            textEl.style.borderColor = !text ? 'var(--pink)' : '';
+            return;
+        }
+        const initials = name.split(' ').map(w => w[0]).join('').slice(0,2).toUpperCase();
+        const colors   = ['linear-gradient(135deg,var(--purple),var(--cyan))',
+                          'linear-gradient(135deg,var(--pink),var(--purple))',
+                          'linear-gradient(135deg,var(--cyan),var(--purple))'];
+        const color    = colors[Math.floor(Math.random() * colors.length)];
+
+        const newComment = document.createElement('div');
+        newComment.className = 'cs-comment';
+        newComment.style.animation = 'fadeUp 0.4s ease both';
+        newComment.innerHTML = `
+            <div class="cs-comment-avatar" style="background:${color};">${initials}</div>
+            <div class="cs-comment-content">
+                <div class="cs-comment-meta"><strong>${name}</strong><span>Just now</span></div>
+                <p>${text}</p>
+            </div>`;
+
+        document.getElementById('csCommentsList').prepend(newComment);
+        nameEl.value = '';
+        textEl.value = '';
+        nameEl.style.borderColor = '';
+        textEl.style.borderColor = '';
+        csSubmitBtn.textContent = '✓ Comment Posted!';
+        csSubmitBtn.style.background = 'linear-gradient(90deg, #22c55e, #06b6d4)';
+        setTimeout(() => {
+            csSubmitBtn.textContent = 'Submit Comment';
+            csSubmitBtn.style.background = '';
+        }, 2500);
+    });
+}
+
 // ── READ MORE TOGGLE ──
 const rmBtn = document.getElementById('readMoreBtn');
 const amContent = document.getElementById('aboutMoreContent');
