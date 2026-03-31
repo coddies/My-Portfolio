@@ -49,22 +49,29 @@ function updateCards(nextIndex) {
     navBtns.forEach(btn => btn.classList.remove('active'));
     navBtns[nextIndex].classList.add('active');
 
-    // Apply direction-aware positioning before transition
-    // Outgoing card: goes opposite of direction
+    // Step 1: Position the incoming card just off-screen (direction-aware), instantly with no transition
+    nextCard.style.transition = 'none';
+    nextCard.style.opacity    = '0';
+    nextCard.style.transform  = `translateX(${direction * 80}px)`;
+    nextCard.style.visibility = 'visible';
+    nextCard.style.pointerEvents = 'none';
+
+    // Step 2: Force reflow so the browser registers the starting position
+    nextCard.offsetHeight; // eslint-disable-line no-unused-expressions
+
+    // Step 3: Clear inline styles so CSS transition takes over
+    nextCard.style.transition    = '';
+    nextCard.style.opacity       = '';
+    nextCard.style.transform     = '';
+    nextCard.style.visibility    = '';
+    nextCard.style.pointerEvents = '';
+
+    // Step 4: Set classes for all cards
     cards.forEach((card, idx) => {
         if (idx === nextIndex) {
-            // Incoming card: start from the direction side
-            card.style.transition = 'none';
-            card.style.transform  = `translateX(${direction * 80}px)`;
-            card.style.opacity    = '0';
-            card.style.visibility = 'visible';
-
-            // Force reflow then start transition
-            card.offsetHeight;
-            card.style.transition = '';
             card.className = 'card state-active';
         } else if (idx === currentIndex) {
-            // Outgoing card
+            // Outgoing: slide opposite to direction
             card.className = 'card ' + (direction > 0 ? 'state-above' : 'state-below');
         } else {
             card.className = 'card ' + (idx < nextIndex ? 'state-above' : 'state-below');

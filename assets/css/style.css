@@ -155,14 +155,14 @@ h1, h2, h3, .syne-font {
     position: fixed;
     inset: 0;
     z-index: 5;
-    padding: 60px 100px 60px 60px; /* Scaled up padding */
+    padding: 60px 100px 60px 60px;
     display: flex;
     justify-content: center;
-    align-items: flex-start; /* Changed from center to allow scrolling from top */
+    align-items: flex-start;
     overflow-y: auto;
     scrollbar-width: none;
     -ms-overflow-style: none;
-    transition: transform var(--card-transition), opacity var(--opacity-transition);
+    transition: transform var(--card-transition), opacity var(--opacity-transition), visibility var(--opacity-transition);
     visibility: hidden;
     pointer-events: none;
     will-change: transform, opacity;
@@ -180,16 +180,19 @@ h1, h2, h3, .syne-font {
     pointer-events: all;
 }
 
+/* state-above = went to left (previous), state-below = to the right (next) */
 .card.state-above {
     transform: translateX(-60px);
     opacity: 0;
     visibility: hidden;
+    pointer-events: none;
 }
 
 .card.state-below {
     transform: translateX(60px);
     opacity: 0;
     visibility: hidden;
+    pointer-events: none;
 }
 
 .card-inner {
