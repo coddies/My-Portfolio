@@ -8,8 +8,8 @@
     --text-muted: rgba(255, 255, 255, 0.6);
     --glass-bg: rgba(255, 255, 255, 0.06);
     --glass-border: rgba(255, 255, 255, 0.14);
-    --card-transition: 700ms cubic-bezier(0.4, 0, 0.2, 1);
-    --opacity-transition: 600ms ease;
+    --card-transition: 550ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --opacity-transition: 450ms ease-out;
     --shadow-rgb: 255, 255, 255;
 }
 
@@ -182,14 +182,14 @@ h1, h2, h3, .syne-font {
 
 /* state-above = went to left (previous), state-below = to the right (next) */
 .card.state-above {
-    transform: translateX(-60px);
+    transform: translateX(-35px);
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
 }
 
 .card.state-below {
-    transform: translateX(60px);
+    transform: translateX(35px);
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
@@ -977,23 +977,22 @@ h1, h2, h3, .syne-font {
     /* ════════════════════════════════
        MOBILE ENTRANCE ANIMATIONS
     ════════════════════════════════ */
-    /* 1. SKILL CARDS */
-    @keyframes cardFlip {
-      0%   { opacity: 0; transform: rotateY(90deg) scale(0.8); }
-      60%  { transform: rotateY(-10deg) scale(1.02); }
-      100% { opacity: 1; transform: rotateY(0deg) scale(1); }
-    }
+    /* 1. SKILL CARDS — lightweight fade+slide (no heavy 3D) */
     .skill-card.anim-in {
-      animation: cardFlip 0.5s ease forwards;
+      animation: mobileFadeUp 0.45s ease-out forwards;
+    }
+    @keyframes mobileFadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
     .skill-card:nth-child(1).anim-in { animation-delay: 0ms; }
-    .skill-card:nth-child(2).anim-in { animation-delay: 60ms; }
-    .skill-card:nth-child(3).anim-in { animation-delay: 120ms; }
-    .skill-card:nth-child(4).anim-in { animation-delay: 180ms; }
-    .skill-card:nth-child(5).anim-in { animation-delay: 240ms; }
-    .skill-card:nth-child(6).anim-in { animation-delay: 300ms; }
-    .skill-card:nth-child(7).anim-in { animation-delay: 360ms; }
-    .skill-card:nth-child(8).anim-in { animation-delay: 420ms; }
+    .skill-card:nth-child(2).anim-in { animation-delay: 50ms; }
+    .skill-card:nth-child(3).anim-in { animation-delay: 100ms; }
+    .skill-card:nth-child(4).anim-in { animation-delay: 150ms; }
+    .skill-card:nth-child(5).anim-in { animation-delay: 200ms; }
+    .skill-card:nth-child(6).anim-in { animation-delay: 250ms; }
+    .skill-card:nth-child(7).anim-in { animation-delay: 300ms; }
+    .skill-card:nth-child(8).anim-in { animation-delay: 350ms; }
 
     /* 2. PROJECT CARDS */
     @keyframes slideFromLeft {

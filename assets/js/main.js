@@ -78,10 +78,10 @@ function updateCards(nextIndex) {
         }
     });
 
-    setTimeout(() => { triggerCardAnimations(nextCard); }, 100);
+    setTimeout(() => { triggerCardAnimations(nextCard); }, 80);
 
     currentIndex = nextIndex;
-    setTimeout(() => { isTransitioning = false; }, 750);
+    setTimeout(() => { isTransitioning = false; }, 600);
 }
 
 navBtns.forEach((btn, idx) => { btn.addEventListener('click', () => updateCards(idx)); });
