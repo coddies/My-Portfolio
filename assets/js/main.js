@@ -244,14 +244,13 @@ if(canvas) {
     initParticles(); drawParticles();
 }
 
-// ── CUSTOM CURSOR LOGIC ──
-const dot = document.querySelector('.cursor-dot');
-const ring = document.querySelector('.cursor-ring');
+// ── CUSTOM CURSOR LOGIC (ORBITAL RETICLE) ──
+const dotWrap  = document.querySelector('.cursor-dot-wrap');
+const ringWrap = document.querySelector('.cursor-ring-wrap');
 
-if (dot && ring && window.matchMedia('(pointer: fine)').matches) {
-    let mouseX = 0, mouseY = 0; // Current mouse position
-    let ringX = 0, ringY = 0;   // Position of the trailing ring
-    let dotX = 0, dotY = 0;     // Position of the inner dot
+if (dotWrap && ringWrap && window.matchMedia('(pointer: fine)').matches) {
+    let mouseX = 0, mouseY = 0;
+    let ringX  = 0, ringY  = 0;
 
     window.addEventListener('mousemove', (e) => {
         mouseX = e.clientX;
@@ -259,25 +258,27 @@ if (dot && ring && window.matchMedia('(pointer: fine)').matches) {
     });
 
     const animateCursor = () => {
-        // Dot follows instantly but we use a tiny bit of lerp for ultra-smoothness
-        dotX += (mouseX - dotX) * 1;
-        dotY += (mouseY - dotY) * 1;
-        dot.style.transform = `translate(${dotX}px, ${dotY}px)`;
+        // Dot-wrap: snap instantly to cursor
+        dotWrap.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
 
-        // Ring follows with easing (delay effect)
-        // Adjust the multiplier (0.15) for more or less lag
-        ringX += (mouseX - ringX) * 0.15;
-        ringY += (mouseY - ringY) * 0.15;
-        ring.style.transform = `translate(${ringX}px, ${ringY}px)`;
+        // Ring-wrap: follows with smooth easing (the "lag" effect)
+        ringX += (mouseX - ringX) * 0.12;
+        ringY += (mouseY - ringY) * 0.12;
+        ringWrap.style.transform = `translate(${ringX}px, ${ringY}px)`;
 
         requestAnimationFrame(animateCursor);
     };
     animateCursor();
 
-    // Hover effect for links and buttons
-    const interactiveElements = 'a, button, .nav-btn, .project-card, .cert-card, .hackathon-main-card';
-    document.querySelectorAll(interactiveElements).forEach(el => {
-        el.addEventListener('mouseenter', () => document.body.classList.add('is-hovering'));
-        el.addEventListener('mouseleave', () => document.body.classList.remove('is-hovering'));
+    // Hover: detectinteractive elements
+    document.addEventListener('mouseover', (e) => {
+        if (e.target.closest('a, button, .nav-btn, .project-card, .cert-card, .hackathon-main-card, .skill-card')) {
+            document.body.classList.add('is-hovering');
+        }
+    });
+    document.addEventListener('mouseout', (e) => {
+        if (e.target.closest('a, button, .nav-btn, .project-card, .cert-card, .hackathon-main-card, .skill-card')) {
+            document.body.classList.remove('is-hovering');
+        }
     });
 }
