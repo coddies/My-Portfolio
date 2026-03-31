@@ -174,20 +174,20 @@ h1, h2, h3, .syne-font {
 }
 
 .card.state-active {
-    transform: translateY(0);
+    transform: translateX(0);
     opacity: 1;
     visibility: visible;
     pointer-events: all;
 }
 
 .card.state-above {
-    transform: translateY(-50px);
+    transform: translateX(-60px);
     opacity: 0;
     visibility: hidden;
 }
 
 .card.state-below {
-    transform: translateY(50px);
+    transform: translateX(60px);
     opacity: 0;
     visibility: hidden;
 }
@@ -1107,4 +1107,46 @@ h1, h2, h3, .syne-font {
     transform: scale(1.1);
     background: var(--pink);
     color: white;
+}
+
+/* ── SWIPE HINT POPUP ── */
+#swipe-hint {
+    position: fixed;
+    bottom: 90px;
+    left: 50%;
+    transform: translateX(-50%) translateY(30px);
+    background: rgba(15, 15, 30, 0.92);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(6, 182, 212, 0.3);
+    border-radius: 50px;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-white);
+    z-index: 9999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    white-space: nowrap;
+    box-shadow: 0 4px 30px rgba(6, 182, 212, 0.15);
+}
+
+#swipe-hint.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+#swipe-hint .hint-icon {
+    font-size: 18px;
+    animation: swipeAnim 1.2s ease infinite;
+}
+
+@keyframes swipeAnim {
+    0%, 100% { transform: translateX(0); }
+    40%       { transform: translateX(-6px); }
+    60%       { transform: translateX(6px); }
 }

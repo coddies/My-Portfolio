@@ -7,15 +7,12 @@ let isTransitioning = false;
 // ── CARD IN-ANIMATIONS LOGIC ──
 function triggerCardAnimations(card) {
     if (!card) return;
-    // Handle About Section
     if(card.id === 'card-2') {
         card.querySelectorAll('.about-photo, .about-grid>div:last-child>*').forEach(el => el.classList.add('anim-in'));
     }
-    // Handle all generic anim-in items
     card.querySelectorAll('.skill-card, .project-card, .cert-card, .contact-link-card, .hack-title, .hack-desc, .stats-row, .hack-badge, .contact-panel h2, .contact-subtitle').forEach(el => {
         el.classList.add('anim-in');
     });
-    // Handle Progress bars specific to Skills
     if(card.id === 'card-3') {
         setTimeout(() => {
             card.querySelectorAll('.progress-bar').forEach(bar => {
@@ -25,38 +22,55 @@ function triggerCardAnimations(card) {
     }
 }
 
-// Initial trigger for card 1 (and 2 if needed immediately)
 setTimeout(() => { triggerCardAnimations(cards[0]); }, 100);
 
 function updateCards(nextIndex) {
     if (nextIndex === currentIndex || isTransitioning) return;
+    if (nextIndex < 0 || nextIndex >= cards.length) return;
     isTransitioning = true;
 
+    const direction = nextIndex > currentIndex ? 1 : -1; // 1 = going right, -1 = going left
+
+    // Flash effect on mobile
     if (window.innerWidth <= 768) {
         const flash = document.getElementById('transition-flash');
         if (flash) {
-            flash.style.opacity = '1';
+            flash.style.opacity = '0.7';
             setTimeout(() => flash.style.opacity = '0', 150);
         }
     }
 
-    // Reset animations for the next card to re-trigger
     const nextCard = cards[nextIndex];
     nextCard.querySelectorAll('.anim-in').forEach(el => el.classList.remove('anim-in'));
     if(nextIndex === 2) {
         nextCard.querySelectorAll('.progress-bar').forEach(bar => bar.style.width = '0%');
     }
 
-    // Update nav active state
     navBtns.forEach(btn => btn.classList.remove('active'));
     navBtns[nextIndex].classList.add('active');
 
-    // Sync all cards positions
+    // Apply direction-aware positioning before transition
+    // Outgoing card: goes opposite of direction
     cards.forEach((card, idx) => {
-        card.className = 'card ' + (idx === nextIndex ? 'state-active' : (idx < nextIndex ? 'state-above' : 'state-below'));
+        if (idx === nextIndex) {
+            // Incoming card: start from the direction side
+            card.style.transition = 'none';
+            card.style.transform  = `translateX(${direction * 80}px)`;
+            card.style.opacity    = '0';
+            card.style.visibility = 'visible';
+
+            // Force reflow then start transition
+            card.offsetHeight;
+            card.style.transition = '';
+            card.className = 'card state-active';
+        } else if (idx === currentIndex) {
+            // Outgoing card
+            card.className = 'card ' + (direction > 0 ? 'state-above' : 'state-below');
+        } else {
+            card.className = 'card ' + (idx < nextIndex ? 'state-above' : 'state-below');
+        }
     });
 
-    // Trigger animations after CSS card slide begins
     setTimeout(() => { triggerCardAnimations(nextCard); }, 100);
 
     currentIndex = nextIndex;
@@ -65,10 +79,59 @@ function updateCards(nextIndex) {
 
 navBtns.forEach((btn, idx) => { btn.addEventListener('click', () => updateCards(idx)); });
 
+// Keyboard: Arrow Right / Arrow Left for navigation
 window.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' && currentIndex < cards.length - 1) updateCards(currentIndex + 1);
+    if (e.key === 'ArrowLeft'  && currentIndex > 0)               updateCards(currentIndex - 1);
+    // Keep up/down as well for backward compat
     if (e.key === 'ArrowDown' && currentIndex < cards.length - 1) updateCards(currentIndex + 1);
     if (e.key === 'ArrowUp'   && currentIndex > 0)               updateCards(currentIndex - 1);
 });
+
+// ── TOUCH SWIPE GESTURE ──
+let touchStartX = 0;
+let touchStartY = 0;
+let touchStartTime = 0;
+
+document.addEventListener('touchstart', (e) => {
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+    touchStartTime = Date.now();
+}, { passive: true });
+
+document.addEventListener('touchend', (e) => {
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    const dy = e.changedTouches[0].clientY - touchStartY;
+    const dt = Date.now() - touchStartTime;
+
+    // Minimum swipe: 50px horizontal, must be mostly horizontal, under 500ms
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5 && dt < 500) {
+        if (dx < 0) {
+            updateCards(currentIndex + 1); // swipe left = next
+        } else {
+            updateCards(currentIndex - 1); // swipe right = prev
+        }
+    }
+}, { passive: true });
+
+// ── SWIPE HINT POPUP ──
+const swipeHint = document.getElementById('swipe-hint');
+if (swipeHint && window.innerWidth <= 768) {
+    const hintKey = 'swipeHintShown_v1';
+    if (!localStorage.getItem(hintKey)) {
+        setTimeout(() => {
+            swipeHint.classList.add('show');
+            setTimeout(() => {
+                swipeHint.classList.remove('show');
+                localStorage.setItem(hintKey, '1');
+            }, 4000);
+        }, 1500);
+        swipeHint.addEventListener('click', () => {
+            swipeHint.classList.remove('show');
+            localStorage.setItem(hintKey, '1');
+        });
+    }
+}
 
 // ── TYPEWRITER ──
 const phrases   = ['AI Developer', 'Data Scientist', 'AWS Hackathon Participant', 'Problem Solver', 'Content Creator', 'Prompt Engineer', 'Vibe Coder'];
