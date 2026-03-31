@@ -1407,6 +1407,31 @@ h1, h2, h3, .syne-font {
     .nav-btn.active {
       animation: navPulse 1.5s ease infinite;
     }
+
+    /* 6. CASE STUDIES REFINE MENTS */
+    .cs-grid { grid-template-columns: 1fr; gap: 20px; margin-top: 20px; }
+    .cs-card-img { height: 150px; }
+    
+    .cs-modal { padding: 15px 10px; }
+    .cs-modal-panel { max-height: calc(100vh - 30px); overflow-y: auto; }
+    .cs-modal-close { top: 12px; right: 12px; width: 32px; height: 32px; font-size: 16px; }
+    .cs-modal-hero { padding: 30px 20px 20px; }
+    .cs-modal-title { font-size: 22px; }
+    .cs-modal-body { padding: 20px 20px 30px; gap: 24px; }
+    
+    .cs-detail-section { flex-direction: column; gap: 8px; padding: 18px 16px; }
+    .cs-detail-icon { font-size: 22px; }
+    .cs-detail-text { font-size: 13.5px; }
+    
+    .cs-tech-section { padding: 18px 16px; }
+    .cs-tags-large .cs-tag { font-size: 11px; padding: 4px 10px; }
+    
+    .cs-comment { padding: 14px; gap: 12px; flex-direction: column; }
+    .cs-comment-avatar { width: 36px; height: 36px; min-width: 36px; font-size: 12px; }
+    .cs-comment-meta { flex-wrap: wrap; }
+    
+    .cs-comment-form { padding: 20px 16px; }
+    .cs-comment-submit { width: 100%; text-align: center; padding: 12px; }
 }
 
 /* ── CUSTOM CURSOR: ORBITAL RETICLE ── */
