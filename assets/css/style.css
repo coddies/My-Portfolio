@@ -95,7 +95,7 @@ h1, h2, h3, .syne-font {
 }
 
 .nav-btn {
-    width: 52px; /* Scaled up */
+    width: 52px;
     height: 52px;
     border-radius: 50%;
     background: var(--glass-bg);
@@ -106,8 +106,9 @@ h1, h2, h3, .syne-font {
     align-items: center;
     cursor: pointer;
     position: relative;
-    transition: all 0.3s ease;
-    font-size: 1.4rem; /* Scaled up */
+    /* Only transition color/shadow — NOT transform, to avoid lingering scale effect */
+    transition: background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, color 0.25s ease;
+    font-size: 1.4rem;
     color: var(--text-white);
 }
 
@@ -125,7 +126,7 @@ h1, h2, h3, .syne-font {
     background: rgba(124, 58, 237, 0.25);
     backdrop-filter: blur(12px);
     color: var(--text-white);
-    transform: scale(1.1);
+    /* No transform here — scale only on hover, not permanent active state */
 }
 
 .nav-tooltip {
@@ -144,8 +145,7 @@ h1, h2, h3, .syne-font {
     transform: translateX(10px);
 }
 
-.nav-btn:hover .nav-tooltip,
-.nav-btn.active .nav-tooltip {
+.nav-btn:hover .nav-tooltip {
     opacity: 1;
     transform: translateX(0);
 }

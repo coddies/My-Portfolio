@@ -46,6 +46,15 @@ function updateCards(nextIndex) {
         nextCard.querySelectorAll('.progress-bar').forEach(bar => bar.style.width = '0%');
     }
 
+    // Instantly reset the old active button (no lingering transition glow)
+    const oldBtn = navBtns[currentIndex];
+    if (oldBtn) {
+        oldBtn.style.transition = 'none';
+        oldBtn.classList.remove('active');
+        // Re-enable transition on next frame
+        requestAnimationFrame(() => { oldBtn.style.transition = ''; });
+    }
+
     navBtns.forEach(btn => btn.classList.remove('active'));
     navBtns[nextIndex].classList.add('active');
 
