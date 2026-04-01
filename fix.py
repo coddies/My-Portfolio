@@ -1,234 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Muhammad Burhan | AI & Data Science</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com"/>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
-    <link rel="stylesheet" href="assets/css/style.css"/>
-    <link rel="icon" href="assets/images/mb-logo.svg" type="image/svg+xml"/>
-</head>
-<body>
-<div id="transition-flash" style="position:fixed;inset:0;z-index:50;pointer-events:none;opacity:0;background:radial-gradient(circle at center, rgba(124,58,237,0.15), transparent);transition:opacity 0.15s ease;"></div>
-<div class="cursor-dot-wrap">
-    <div class="cursor-dot"></div>
-</div>
-<div class="cursor-ring-wrap">
-    <div class="cursor-ring-outer"></div>
-    <div class="cursor-ring-inner"></div>
-</div>
-<canvas id="particles-canvas"></canvas>
+import re
 
+with open("index.html", "r", encoding="utf-8") as f:
+    text = f.read()
 
-<!-- ── NAV RAIL ── -->
-<nav class="nav-rail">
-    <div class="nav-btn active" data-index="0">🏠<span class="nav-tooltip">Home</span></div>
-    <div class="nav-btn"        data-index="1">👤<span class="nav-tooltip">About</span></div>
-    <div class="nav-btn"        data-index="2">🛠️<span class="nav-tooltip">Skills</span></div>
-    <div class="nav-btn"        data-index="3">💼<span class="nav-tooltip">Projects</span></div>
-    <div class="nav-btn"        data-index="4">🏅<span class="nav-tooltip">Achievements</span></div>
-    <div class="nav-btn"        data-index="5">🔬<span class="nav-tooltip">Case Studies</span></div>
-    <div class="nav-btn"        data-index="6">✉️<span class="nav-tooltip">Contact</span></div>
-</nav>
+# We need to extract:
+# Card 1-4 (From start of file to CARD 5)
+card1_4 = text.split("<!-- ════════════════════════════\n     CARD 5 — HACKATHON")[0]
 
-<!-- ════════════════════════════
-     CARD 1 — HOME
-════════════════════════════ -->
-<section id="card-1" class="card state-active">
-    <div class="card-inner">
-        <div class="hero-grid">
+rest = text.split("<!-- ════════════════════════════\n     CARD 5 — HACKATHON")[1]
+# extract swipe hint block (end of the file)
+swipe_hint = "<!-- Swipe Hint -->\n" + rest.split("<!-- Swipe Hint -->\n")[1]
 
-            <!-- Profile photo -->
-            <div class="hero-left">
-                <img src="assets/images/my-img.png" alt="Muhammad Burhan" class="hero-photo">
-            </div>
-
-            <!-- Text content -->
-            <div class="hero-right">
-                <span class="tagline">AI & Data Science Student</span>
-                <h1 class="hero-name">Muhammad <br><span class="gradient-text">Burhan</span></h1>
-                <div class="typewriter-container">
-                    <span id="typewriter"></span><span class="cursor"></span>
-                </div>
-                <p class="hero-bio">
-                    Hi, I'm Muhammad Burhan—An AI & Data Science Student at Saylani Mass IT. I turn complex data into intelligent solutions through code, creativity, and a passion for problem-solving.
-                </p>
-                <div class="btn-group">
-                    <a href="https://github.com/coddies" target="_blank" class="pill-btn btn-github">GitHub</a>
-                    <a href="https://www.linkedin.com/in/muhammad-burhan-73a81b27b/" target="_blank" class="pill-btn btn-linkedin">LinkedIn</a>
-                    <a href="Muhammad_Burhan_CV.pdf" download="Muhammad_Burhan_CV.pdf" class="pill-btn btn-cv">📄 CV</a>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
-
-<!-- ════════════════════════════
-     CARD 2 — ABOUT
-════════════════════════════ -->
-<section id="card-2" class="card state-below">
-    <div class="card-inner">
-        <div class="about-grid">
-
-            <!-- Photo slides in from top -->
-            <div>
-                <img
-                    src="assets/images/my-img.png"
-                    alt="Muhammad Burhan"
-                    class="about-photo"
-                />
-            </div>
-
-            <!-- Info -->
-            <div>
-                <span class="tagline">Who I Am</span>
-                <h2 class="section-title">About Me</h2>
-                <div class="accent-line"></div>
-                <div class="about-bio">
-                    <p style="margin-bottom: 12px;">
-                        I am a passionate AI & Data Science student at Saylani Mass IT Institute, dedicated to mastering the art of machine intelligence. My focus lies in **Generative AI and NLP**, where I explore how models can understand and augment human creativity.
-                    </p>
-                    <div id="aboutMoreContent" style="display: none;">
-                        <p style="margin-bottom: 12px;">
-                            My journey isn't just about writing lines of code; it's about solving real-world problems. Beyond the terminal, I’m an AI Content Creator and YouTuber, where I simplify complex tech concepts to empower the community.
-                        </p>
-                        <p>
-                            Whether it's Prompt Engineering, deep-diving into Data Science, or exploring the latest in 'Vibe Coding', I thrive on the edge of innovation. My ultimate goal is to build **intelligent, human-centric systems** that make a tangible difference.
-                        </p>
-                    </div>
-                    <button id="readMoreBtn" style="background:none; border:none; color:var(--cyan); font-weight:700; cursor:pointer; padding:0; margin-top:8px; font-size:14px; text-decoration:underline; font-family:inherit;">Read More</button>
-                </div>
-                <div class="info-grid">
-                    <div class="info-box">
-                        <span class="info-label">Name</span>
-                        <span class="info-val">Muhammad Burhan</span>
-                    </div>
-                    <div class="info-box">
-                        <span class="info-label">Location</span>
-                        <span class="info-val">Chiniot, PK</span>
-                    </div>
-                    <div class="info-box">
-                        <span class="info-label">Institute</span>
-                        <span class="info-val">Saylani Mass IT</span>
-                    </div>
-                    <div class="info-box">
-                        <span class="info-label">Focus</span>
-                        <span class="info-val">AI & Data Science</span>
-                    </div>
-                    <div class="info-box">
-                        <span class="info-label">GitHub</span>
-                        <span class="info-val">@coddies</span>
-                    </div>
-                    <div class="info-box">
-                        <span class="info-label">Status</span>
-                        <span class="info-val">Open to Work ✅</span>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
-
-<!-- ════════════════════════════
-     CARD 3 — SKILLS
-════════════════════════════ -->
-<section id="card-3" class="card state-below">
-    <div class="card-inner">
-        <div style="width:100%;max-width:820px;">
-            <div class="section-header">
-                <span class="tagline">MY TOOLKIT</span>
-                <h2 class="section-title">Skills & Tools</h2>
-                <div class="accent-line" style="margin:0 auto 0;"></div>
-            </div>
-            <div class="skills-grid">
-                <div class="skill-card"><span class="skill-emoji">🌐</span><span class="skill-name">HTML / CSS / JS</span><div class="progress-container"><div class="progress-bar" data-width="62%"></div></div></div>
-                <div class="skill-card"><span class="skill-emoji">🗄️</span><span class="skill-name">SQL</span><div class="progress-container"><div class="progress-bar" data-width="50%"></div></div></div>
-                <div class="skill-card"><span class="skill-emoji">🐍</span><span class="skill-name">Python</span><div class="progress-container"><div class="progress-bar" data-width="80%"></div></div></div>
-                <div class="skill-card"><span class="skill-emoji">📈</span><span class="skill-name">Data Analysis</span><div class="progress-container"><div class="progress-bar" data-width="72%"></div></div></div>
-                <div class="skill-card"><span class="skill-emoji">📊</span><span class="skill-name">Data Science</span><div class="progress-container"><div class="progress-bar" data-width="70%"></div></div></div>
-                <div class="skill-card"><span class="skill-emoji">🤖</span><span class="skill-name">Machine Learning</span><div class="progress-container"><div class="progress-bar" data-width="65%"></div></div></div>
-                <div class="skill-card"><span class="skill-emoji">🧠</span><span class="skill-name">AI / LLMs</span><div class="progress-container"><div class="progress-bar" data-width="60%"></div></div></div>
-                <div class="skill-card"><span class="skill-emoji">☁️</span><span class="skill-name">AWS Cloud</span><div class="progress-container"><div class="progress-bar" data-width="55%"></div></div></div>
-                <div class="skill-card"><span class="skill-emoji">✍️</span><span class="skill-name">Prompt Engineering</span><div class="progress-container"><div class="progress-bar" data-width="80%"></div></div></div>
-                <div class="skill-card"><span class="skill-emoji">🎥</span><span class="skill-name">AI Video Editing</span><div class="progress-container"><div class="progress-bar" data-width="70%"></div></div></div>
-                <div class="skill-card"><span class="skill-emoji">🎬</span><span class="skill-name">Content Creation</span><div class="progress-container"><div class="progress-bar" data-width="75%"></div></div></div>
-                <div class="skill-card"><span class="skill-emoji">💻</span><span class="skill-name">Vibe Coding</span><div class="progress-container"><div class="progress-bar" data-width="65%"></div></div></div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ════════════════════════════
-     CARD 4 — PROJECTS
-════════════════════════════ -->
-<section id="card-4" class="card state-below">
-    <div class="card-inner">
-        <div style="width:100%;max-width:1100px;">
-            <div class="section-header" style="text-align:left;">
-                <span class="tagline">WORK HIGHLIGHTS</span>
-                <h2 class="section-title">Projects</h2>
-                <div class="accent-line"></div>
-            </div>
-            <div class="projects-grid">
-
-                <div class="project-card">
-                    <span class="project-icon">🤖</span>
-                    <span class="project-name">AI Chatbot</span>
-                    <p class="project-desc">NLP-driven intelligent chatbot using Python that understands and responds to natural language.</p>
-                    <div class="badge-row"><span class="tech-pill">Python</span><span class="tech-pill">NLP</span><span class="tech-pill">AI</span></div>
-                    <a href="https://github.com/coddies" target="_blank" class="project-link">GitHub Repo →</a>
-                </div>
-
-                <div class="project-card">
-                    <span class="project-icon">🎬</span>
-                    <span class="project-name">Faceless AI Studio</span>
-                    <p class="project-desc">Fully automated AI video creation pipeline. Scripts to Voice to Video with zero manual effort.</p>
-                    <div class="badge-row"><span class="tech-pill">AI</span><span class="tech-pill">Automation</span><span class="tech-pill">Video</span></div>
-                    <a href="https://github.com/coddies" target="_blank" class="project-link">View Studio →</a>
-                </div>
-
-                <div class="project-card">
-                    <span class="project-icon">📊</span>
-                    <span class="project-name">Data Analysis</span>
-                    <p class="project-desc">Real-world dataset deep analysis with beautiful visualizations and business insights.</p>
-                    <div class="badge-row"><span class="tech-pill">Pandas</span><span class="tech-pill">Matplotlib</span><span class="tech-pill">Python</span></div>
-                    <a href="https://github.com/coddies" target="_blank" class="project-link">GitHub Repo →</a>
-                </div>
-
-                <div class="project-card">
-                    <span class="project-icon">🧠</span>
-                    <span class="project-name">ML Classification</span>
-                    <p class="project-desc">Scikit-learn classification model achieving 92% accuracy on real-world test data.</p>
-                    <div class="badge-row"><span class="tech-pill">Scikit-learn</span><span class="tech-pill">ML</span><span class="tech-pill">Python</span></div>
-                    <a href="https://github.com/coddies" target="_blank" class="project-link">GitHub Repo →</a>
-                </div>
-
-                <div class="project-card">
-                    <span class="project-icon">✍️</span>
-                    <span class="project-name">Prompt Engineering</span>
-                    <p class="project-desc">Advanced AI prompt collection for content creation, coding, and automation workflows.</p>
-                    <div class="badge-row"><span class="tech-pill">ChatGPT</span><span class="tech-pill">Claude</span><span class="tech-pill">Gemini</span></div>
-                    <a href="https://github.com/coddies" target="_blank" class="project-link">View Prompts →</a>
-                </div>
-
-                <div class="project-card">
-                    <span class="project-icon">🎥</span>
-                    <span class="project-name">YouTube AI Channel</span>
-                    <p class="project-desc">AI-powered content creation — scripting, video editing, and full automation with AI tools.</p>
-                    <div class="badge-row"><span class="tech-pill">AI Video</span><span class="tech-pill">Content</span><span class="tech-pill">YouTube</span></div>
-                    <a href="https://github.com/coddies" target="_blank" class="project-link">View Channel →</a>
-                </div>
-
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ════════════════════════════
+# Reconstruct cards
+content = card1_4 + """<!-- ════════════════════════════
      CARD 5 — ACHIEVEMENTS (Hackathon merged with Certs)
 ════════════════════════════ -->
 <section id="card-5" class="card state-below">
@@ -548,12 +332,7 @@
     </div>
 </div>
 
-<!-- Swipe Hint -->
-<div id="swipe-hint">
-    <span class="hint-icon">👆</span>
-    <span>Swipe left or right to navigate</span>
-</div>
+""" + swipe_hint
 
-<script src="assets/js/main.js"></script>
-</body>
-</html>
+with open("index.html", "w", encoding="utf-8") as f:
+    f.write(content)
