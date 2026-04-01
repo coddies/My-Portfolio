@@ -323,7 +323,7 @@ if(canvas) {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
         particles = [];
-        const count = window.innerWidth < 768 ? 40 : 80;
+        const count = window.innerWidth < 768 ? 30 : 60;
         for(let i=0; i<count; i++) {
             particles.push({
                 x: Math.random() * canvas.width,
@@ -367,13 +367,13 @@ if (dotWrap && ringWrap && window.matchMedia('(pointer: fine)').matches) {
     });
 
     const animateCursor = () => {
-        // Dot-wrap: snap instantly to cursor
-        dotWrap.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
+        // Dot-wrap: snap instantly to cursor using translate3d for hardware acceleration
+        dotWrap.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`;
 
-        // Ring-wrap: follows with smooth easing (the "lag" effect)
-        ringX += (mouseX - ringX) * 0.12;
-        ringY += (mouseY - ringY) * 0.12;
-        ringWrap.style.transform = `translate(${ringX}px, ${ringY}px)`;
+        // Ring-wrap: follows with snappier easing (0.2 instead of 0.12)
+        ringX += (mouseX - ringX) * 0.2;
+        ringY += (mouseY - ringY) * 0.2;
+        ringWrap.style.transform = `translate3d(${ringX}px, ${ringY}px, 0)`;
 
         requestAnimationFrame(animateCursor);
     };
