@@ -104,27 +104,8 @@ window.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowUp'   && currentIndex > 0)               updateCards(currentIndex - 1);
 });
 
-// Wheel / Mouse Scroll listener
-let lastMainScroll = 0;
-window.addEventListener('wheel', (e) => {
-    const now = Date.now();
-    if (now - lastMainScroll < 1200) return; // 1.2s cooldown
-    
-    if (e.deltaY > 50) { // Scroll Down
-        if (currentIndex < cards.length - 1) { 
-            updateCards(currentIndex + 1);
-            lastMainScroll = now;
-        }
-    } else if (e.deltaY < -50) { // Scroll Up
-        if (currentIndex > 0) {
-            updateCards(currentIndex - 1);
-            lastMainScroll = now;
-        }
-    }
-}, { passive: true });
-
-
 // ── TOUCH SWIPE GESTURE ──
+
 let touchStartX = 0;
 let touchStartY = 0;
 let touchStartTime = 0;
@@ -506,13 +487,46 @@ function updatePreciseFooter(index) {
 function preciseScroll(dir) {
     const track = document.getElementById('precise-gallery-track');
     if (!track) return;
-    const cardWidth = track.querySelector('.precise-project-card').offsetWidth + 30; // 30 is gap
-    track.scrollBy({ left: dir * cardWidth, behavior: 'smooth' });
+    
+    // Dynamic width calculation — handle hidden container case
+    const firstCard = track.querySelector('.precise-project-card');
+    let cardWidth = firstCard ? firstCard.offsetWidth : 750;
+    
+    // If it's zero (hidden section), use a reasonable fallback
+    if (cardWidth === 0) cardWidth = 750;
+    
+    // Add gap
+    const finalStep = cardWidth + 30; 
+    
+    track.scrollBy({ left: dir * finalStep, behavior: 'smooth' });
 }
+
+// Wheel Listener: Check if user is over the gallery track before switching cards
+let lastMainScroll = 0;
+window.addEventListener('wheel', (e) => {
+    // If we're inside the gallery track, let it scroll horizontally (ignore wheel section skip)
+    if (e.target.closest('.precise-gallery-track')) return;
+
+    const now = Date.now();
+    if (now - lastMainScroll < 1200) return;
+    
+    if (e.deltaY > 50) { 
+        if (currentIndex < cards.length - 1) { 
+            updateCards(currentIndex + 1);
+            lastMainScroll = now;
+        }
+    } else if (e.deltaY < -50) { 
+        if (currentIndex > 0) {
+            updateCards(currentIndex - 1);
+            lastMainScroll = now;
+        }
+    }
+}, { passive: true });
 
 document.addEventListener('DOMContentLoaded', () => {
     renderPreciseGallery();
 });
+
 
 
 
