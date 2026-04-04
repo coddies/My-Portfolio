@@ -230,57 +230,50 @@
         </div>
     </section>
 
-    <!-- ════════════════════════════
-     CARD 4 — PROJECTS
-════════════════════════════ -->
+<!-- ════════════════════════════
+     CARD 4 — PROJECTS (ONE AT A TIME, SCROLL UP/DOWN)
+ ════════════════════════════ -->
     <section id="card-4" class="card state-below">
         <div class="card-inner">
-            <div class="precise-showcase-container">
+            <div style="width:100%;max-width:1100px;">
+                <div class="section-header">
+                    <span class="tagline" style="color:var(--cyan);">MY WORK</span>
+                    <h2 class="section-title">Projects</h2>
+                    <div class="accent-line"></div>
+                </div>
                 
-                <!-- TOP: Gallery Track -->
-                <div class="precise-gallery-viewport">
-                    <div id="precise-gallery-track" class="precise-gallery-track">
-                        <!-- JS Dynamically Injects Cards with Images -->
-                    </div>
-                </div>
-
-                <!-- BOTTOM: Precision Info Bar -->
-                <div class="precise-footer">
-                    <!-- Far Left Label -->
-                    <div class="sidebar-label">PORTFOLIO</div>
-
-                    <!-- Meta Details & Button Box -->
-                    <div class="precise-info-panel">
-                        <div class="meta-row">
-                            <span id="p-cat" class="p-category">MOBILE APP</span>
-                            <span id="p-date" class="p-date">MAR 2024</span>
-                        </div>
-                        <h3 id="p-title" class="p-title">Project Name</h3>
-                        
-                        <div id="p-action-box" class="p-action-box">
-                            <!-- JS Injects Orange Button with Arrow inside -->
-                        </div>
-                    </div>
-
-                    <!-- Nav Pill Box -->
-                    <div class="precise-nav-panel">
-                        <div class="precise-nav-pill">
-                            <span id="p-counter" class="p-counter">0 / 0</span>
-                            <div class="p-arrows">
-                                <button class="p-arrow-btn" onclick="preciseScroll(-1)">‹</button>
-                                <button class="p-arrow-btn" onclick="preciseScroll(1)">›</button>
+                <!-- Single Project Display -->
+                <div class="single-project-container">
+                    <div class="project-nav-btn project-prev" onclick="scrollProject(-1)">▲</div>
+                    
+                    <div class="single-project-card" id="singleProjectCard">
+                        <div class="sp-card-inner">
+                            <div class="sp-icon" id="spIcon">🤖</div>
+                            <div class="sp-category" id="spCategory">AI PROJECT</div>
+                            <h3 class="sp-title" id="spTitle">AI Chatbot - INTELLIGENT ASSISTANT</h3>
+                            <p class="sp-desc" id="spDesc">An intelligent AI chatbot powered by OpenAI and LangChain for natural conversations.</p>
+                            <div class="sp-tags" id="spTags">
+                                <span class="cs-tag">Python</span>
+                                <span class="cs-tag">LangChain</span>
+                                <span class="cs-tag">OpenAI</span>
                             </div>
+                            <a href="#" class="sp-view-btn" id="spLink" target="_blank">View Project →</a>
                         </div>
                     </div>
+                    
+                    <div class="project-counter">
+                        <span id="projectCounter">1 / 4</span>
+                    </div>
+                    
+                    <div class="project-nav-btn project-next" onclick="scrollProject(1)">▼</div>
                 </div>
-
             </div>
         </div>
     </section>
 
-    <!-- ════════════════════════════
-     CARD 5 — ACHIEVEMENTS (Hackathon merged with Certs)
-════════════════════════════ -->
+<!-- ════════════════════════════
+     CARD 5 — ACHIEVEMENTS (Certs first, then Hackathon below)
+ ════════════════════════════ -->
     <section id="card-5" class="card state-below">
         <div class="card-inner">
             <div style="width:100%;max-width:780px;">
@@ -292,35 +285,9 @@
                         style="background:linear-gradient(90deg,var(--purple),var(--pink));margin-left:0;"></div>
                 </div>
 
-                <!-- ── HACKATHON: Featured Achievement Card ── -->
-                <div class="cs-grid" style="grid-template-columns: 1fr; margin-bottom: 50px;">
-                    <div class="cs-card anim-in" style="max-width: 500px; margin: 0 auto; width: 100%;">
-                        <div class="cs-card-img"
-                            style="background: linear-gradient(135deg, rgba(235, 12, 193, 0.2), rgba(0, 0, 0, 0.4)); height: 200px; display: flex; align-items: center; justify-content: center; font-size: 80px; font-weight: 800; color: rgba(255,255,255,0.05); position: relative;">
-                            AWS
-                            <span class="cs-card-tag" style="background: var(--pink);">🏆 Hackathon</span>
-                        </div>
-                        <div class="cs-card-body">
-                            <div
-                                style="font-size: 11px; color: var(--pink); font-weight: 700; letter-spacing: 1px; margin-bottom: 8px;">
-                                FEATURED ACHIEVEMENT · 2025</div>
-                            <h3 class="cs-card-title">AWS Nova AI Hackathon</h3>
-                            <p class="cs-card-summary">Participated in the AWS Nova AI Hackathon — built real AI
-                                solutions alongside industry experts, pushing the frontier of intelligent systems.</p>
-                            <div class="cs-card-footer">
-                                <div class="cs-tags"><span class="cs-tag">AI / ML</span><span
-                                        class="cs-tag">Applied</span></div>
-                                <a href="https://devpost.com/software/faceless-ai-studio" target="_blank"
-                                    class="cs-read-btn" style="text-decoration:none; padding: 6px 12px;">View Project
-                                    →</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ── CERTIFICATIONS TIMELINE ── -->
+                <!-- ── CERTIFICATIONS TIMELINE (NOW FIRST) ── -->
                 <div class="certs-subheading"
-                    style="font-family:'Syne',sans-serif;font-size:24px;margin-bottom:24px;margin-top:40px;">📜
+                    style="font-family:'Syne',sans-serif;font-size:24px;margin-bottom:24px;">📜
                     Certifications</div>
                 <div class="certs-container">
                     <div class="timeline-line"></div>
@@ -424,8 +391,34 @@
                             </div>
                             <span class="status-badge status-completed">Completed</span>
                         </div>
-                    </div>
+</div>
 
+                </div>
+
+                <!-- ── HACKATHON (NOW AFTER CERTIFICATIONS) ── -->
+                <div class="cs-grid" style="grid-template-columns: 1fr; margin-top: 50px;">
+                    <div class="cs-card anim-in" style="max-width: 500px; margin: 0 auto; width: 100%;">
+                        <div class="cs-card-img"
+                            style="background: linear-gradient(135deg, rgba(235, 12, 193, 0.2), rgba(0, 0, 0, 0.4)); height: 200px; display: flex; align-items: center; justify-content: center; font-size: 80px; font-weight: 800; color: rgba(255,255,255,0.05); position: relative;">
+                            AWS
+                            <span class="cs-card-tag" style="background: var(--pink);">🏆 Hackathon</span>
+                        </div>
+                        <div class="cs-card-body">
+                            <div
+                                style="font-size: 11px; color: var(--pink); font-weight: 700; letter-spacing: 1px; margin-bottom: 8px;">
+                                FEATURED ACHIEVEMENT · 2025</div>
+                            <h3 class="cs-card-title">AWS Nova AI Hackathon</h3>
+                            <p class="cs-card-summary">Participated in the AWS Nova AI Hackathon — built real AI
+                                solutions alongside industry experts, pushing the frontier of intelligent systems.</p>
+                            <div class="cs-card-footer">
+                                <div class="cs-tags"><span class="cs-tag">AI / ML</span><span
+                                        class="cs-tag">Applied</span></div>
+                                <a href="https://devpost.com/software/faceless-ai-studio" target="_blank"
+                                    class="cs-read-btn" style="text-decoration:none; padding: 6px 12px;">View Project
+                                    →</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -433,7 +426,7 @@
 
     <!-- ════════════════════════════
      CARD 6 — CASE STUDIES
-════════════════════════════ -->
+ ════════════════════════════ -->
     <section id="card-6" class="card state-below">
         <div class="card-inner">
             <div style="width:100%;max-width:1100px;">

@@ -401,104 +401,98 @@ if (dotWrap && ringWrap && window.matchMedia('(pointer: fine)').matches) {
     });
 }
 
-// ── PROJECTS LOGIC (Precise Reference Clone with Branded Placeholders) ──
+// ── PROJECTS LOGIC (SINGLE PROJECT, SCROLL UP/DOWN) ──
 const projects = [
-  {
-    category: 'AI PROJECT',
-    date: 'JAN 2025',
-    title: 'AI Chatbot - INTELLIGENT ASSISTANT',
-    icon: '🤖',
-    color: '#ff9d00', // Branded Orange
-    github: 'https://github.com/coddies/AI-Chatbot'
-  },
-  {
-    category: 'WEBSITE',
-    date: 'FEB 2025',
-    title: 'PORTFOLIO - THE DARK GLASS EXPERIENCE',
-    icon: '✨',
-    color: '#06b6d4', // Cyan
-    github: 'https://github.com/coddies/My-Portfolio'
-  },
-  {
-    category: 'AI AUTOMATION',
-    date: 'MAR 2025',
-    title: 'FACELESS AI - VIDEO STUDIO',
-    icon: '🎬',
-    color: '#7c3aed', // Purple
-    github: 'https://github.com/coddies/Faceless-AI-Studio'
-  },
-  {
-    category: 'CONTENT CREATION',
-    date: 'APR 2025',
-    title: 'YOUTUBE - NOOR-E-SADA OFFICIAL',
-    icon: '🎥',
-    color: '#ec4899', // Pink
-    demo: 'https://www.youtube.com/@Noor-e-SadaOfficial'
-  }
+    {
+        category: 'AI PROJECT',
+        date: 'JAN 2025',
+        title: 'AI Chatbot - Intelligent Assistant',
+        icon: '🤖',
+        desc: 'An intelligent AI chatbot powered by OpenAI and LangChain for natural conversations.',
+        tags: ['Python', 'LangChain', 'OpenAI'],
+        link: 'https://github.com/coddies/AI-Chatbot'
+    },
+    {
+        category: 'WEBSITE',
+        date: 'FEB 2025',
+        title: 'Portfolio - Dark Glass Experience',
+        icon: '✨',
+        desc: 'A modern glassmorphism portfolio with custom cursor and smooth animations.',
+        tags: ['HTML', 'CSS', 'JavaScript'],
+        link: 'https://github.com/coddies/My-Portfolio'
+    },
+    {
+        category: 'AI AUTOMATION',
+        date: 'MAR 2025',
+        title: 'Faceless AI Video Studio',
+        icon: '🎬',
+        desc: 'End-to-end automated pipeline for AI-generated videos with voiceover.',
+        tags: ['Python', 'MoviePy', 'ElevenLabs'],
+        link: 'https://github.com/coddies/Faceless-AI-Studio'
+    },
+    {
+        category: 'CONTENT CHANNEL',
+        date: 'APR 2025',
+        title: 'Noor-e-Sada Official',
+        icon: '🎥',
+        desc: 'YouTube channel focused on AI education and tech tutorials.',
+        tags: ['YouTube', 'SEO', 'Automation'],
+        link: 'https://www.youtube.com/@Noor-e-SadaOfficial'
+    },
+    {
+        category: 'ML PROJECT',
+        date: 'MAY 2025',
+        title: 'House Price Predictor',
+        icon: '🏠',
+        desc: 'Machine learning model to predict house prices using regression models.',
+        tags: ['Python', 'Scikit-learn', 'Pandas'],
+        link: 'https://github.com/coddies/House-Price-Predictor'
+    },
+    {
+        category: 'DATA ANALYSIS',
+        date: 'JUN 2025',
+        title: 'Sales Dashboard Analytics',
+        icon: '📊',
+        desc: 'Interactive sales dashboard with real-time data visualization.',
+        tags: ['Python', 'Plotly', 'SQL'],
+        link: 'https://github.com/coddies/Sales-Dashboard'
+    }
 ];
 
-function renderPreciseGallery() {
-    const track = document.getElementById('precise-gallery-track');
-    if (!track) return;
+let currentProjectIndex = 0;
 
-    track.innerHTML = projects.map((p, i) => `
-        <div class="precise-project-card" data-index="${i}">
-            <div class="p-card-decor-arrows">‹‹‹</div>
-            <div class="p-card-inner-frame">
-                <div class="p-card-placeholder" style="background: linear-gradient(135deg, ${p.color}22, ${p.color}05);">
-                    <div class="p-card-glow" style="background: radial-gradient(circle at center, ${p.color}33, transparent 70%);"></div>
-                    <span class="p-card-icon">${p.icon}</span>
-                    <div class="p-card-overlay-text">${p.category}</div>
-                </div>
-            </div>
-        </div>
-    `).join('');
-
-    track.addEventListener('scroll', () => {
-        const index = Math.round(track.scrollLeft / track.offsetWidth);
-        updatePreciseFooter(index);
-    });
-
-    updatePreciseFooter(0);
-}
-
-function updatePreciseFooter(index) {
-    const proj = projects[index];
-    const cat = document.getElementById('p-cat');
-    const date = document.getElementById('p-date');
-    const title = document.getElementById('p-title');
-    const actionBox = document.getElementById('p-action-box');
-    const counter = document.getElementById('p-counter');
-
-    if(cat) cat.textContent = proj.category;
-    if(date) date.textContent = proj.date;
-    if(title) title.textContent = proj.title;
-    if(counter) counter.textContent = `${index + 1} / ${projects.length}`;
-
-    if(actionBox) {
-        const link = proj.github || proj.demo;
-        const text = proj.github ? 'VIEW PROJECT' : 'VISIT CHANNEL';
-        actionBox.innerHTML = `
-            <a href="${link}" target="_blank" class="p-action-btn">
-                ${text}
-                <div class="p-btn-circle">→</div>
-            </a>
-        `;
-    }
-}
-
-function preciseScroll(dir) {
-    const track = document.getElementById('precise-gallery-track');
-    if (!track) return;
+function renderSingleProject() {
+    const card = document.getElementById('singleProjectCard');
+    if (!card) return;
     
-    // Each card is exactly 100% of viewport width in the track
-    const walk = track.offsetWidth; 
-    track.scrollBy({ left: dir * walk, behavior: 'smooth' });
+    const proj = projects[currentProjectIndex];
+    
+    // Add transition class
+    card.classList.add('transitioning');
+    
+    setTimeout(() => {
+        document.getElementById('spIcon').textContent = proj.icon;
+        document.getElementById('spCategory').textContent = proj.category;
+        document.getElementById('spTitle').textContent = proj.title;
+        document.getElementById('spDesc').textContent = proj.desc;
+        document.getElementById('spTags').innerHTML = proj.tags.map(t => `<span class="cs-tag">${t}</span>`).join('');
+        document.getElementById('spLink').href = proj.link;
+        document.getElementById('projectCounter').textContent = `${currentProjectIndex + 1} / ${projects.length}`;
+        
+        card.classList.remove('transitioning');
+    }, 300);
 }
 
+function scrollProject(dir) {
+    currentProjectIndex += dir;
+    if (currentProjectIndex < 0) currentProjectIndex = projects.length - 1;
+    if (currentProjectIndex >= projects.length) currentProjectIndex = 0;
+    renderSingleProject();
+}
 
+// Initialize on load
 document.addEventListener('DOMContentLoaded', () => {
-    renderPreciseGallery();
+    renderSingleProject();
 });
 
 
