@@ -443,10 +443,13 @@ function renderPreciseGallery() {
 
     track.innerHTML = projects.map((p, i) => `
         <div class="precise-project-card" data-index="${i}">
-            <div class="p-card-placeholder" style="background: linear-gradient(135deg, ${p.color}22, ${p.color}05);">
-                <div class="p-card-glow" style="background: radial-gradient(circle at center, ${p.color}33, transparent 70%);"></div>
-                <span class="p-card-icon">${p.icon}</span>
-                <div class="p-card-overlay-text">${p.category}</div>
+            <div class="p-card-decor-arrows">‹‹‹</div>
+            <div class="p-card-inner-frame">
+                <div class="p-card-placeholder" style="background: linear-gradient(135deg, ${p.color}22, ${p.color}05);">
+                    <div class="p-card-glow" style="background: radial-gradient(circle at center, ${p.color}33, transparent 70%);"></div>
+                    <span class="p-card-icon">${p.icon}</span>
+                    <div class="p-card-overlay-text">${p.category}</div>
+                </div>
             </div>
         </div>
     `).join('');
