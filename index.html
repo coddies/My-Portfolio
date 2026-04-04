@@ -233,28 +233,51 @@
     <!-- ════════════════════════════
      CARD 4 — PROJECTS
 ════════════════════════════ -->
-    <section id="card-4" class="card state-below" style="padding: 0 !important; overflow: hidden !important;">
-        
-        <!-- Free Floating Arrows -->
-        <button class="nav-arrow left-arrow" style="position: absolute; left: 20px; z-index: 100; top: 50%; transform: translateY(-50%);" onclick="scrollProjects(-1)">‹</button>
-        <button class="nav-arrow right-arrow" style="position: absolute; right: 20px; z-index: 100; top: 50%; transform: translateY(-50%);" onclick="scrollProjects(1)">›</button>
+    <section id="card-4" class="card state-below">
+        <div class="card-inner">
+            <div style="width:100%;max-width:1100px;">
+                
+                <div class="section-header" style="text-align:left; margin-bottom: 30px;">
+                    <span class="tagline">WORK HIGHLIGHTS</span>
+                    <h2 class="section-title">Projects</h2>
+                    <div class="accent-line"></div>
+                </div>
 
-        <!-- Fixed Header Overlay -->
-        <div style="position: absolute; top: 40px; left: 5%; z-index: 50; pointer-events: none; text-align: left;">
-            <span class="tagline">WORK HIGHLIGHTS</span>
-            <h2 class="section-title">Projects</h2>
-            <div class="accent-line"></div>
+                <!-- NEW: Unified Showcase Container -->
+                <div class="case-container">
+                    
+                    <!-- UP: Visual Stage -->
+                    <div id="case-visual-stage" class="case-visual-stage">
+                        <!-- Dynamic Visual (Emoji/Glow) Injected Here -->
+                    </div>
+
+                    <!-- DOWN: Info Bar -->
+                    <div class="case-info-bar">
+                        <!-- Left: Meta Details -->
+                        <div id="case-meta" class="case-meta">
+                            <span class="case-cat">CATEGORY</span>
+                            <h3 class="case-title">Project Name</h3>
+                        </div>
+
+                        <!-- Center: Visit Action -->
+                        <div id="case-action" class="case-action">
+                            <!-- Dynamic Button Injected Here -->
+                        </div>
+
+                        <!-- Right: Navigation Pill (Matches Reference) -->
+                        <div class="case-nav-pill">
+                            <div id="case-counter" class="case-count">01 / 04</div>
+                            <div class="case-arrows">
+                                <button class="pill-arrow arrow-left" onclick="prevCaseProject()">‹</button>
+                                <button class="pill-arrow arrow-right" onclick="nextCaseProject()">›</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
         </div>
-
-        <!-- The Horizontal Scroller -->
-        <div id="project-horizontal-track" style="display: flex; width: 100%; height: 100%; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; scrollbar-width: none; scroll-behavior: smooth; -webkit-overflow-scrolling: touch;">
-            <!-- JS injects project layout here -->
-        </div>
-
-        <div class="project-dots-container" id="project-dots" style="position: absolute; bottom: 30px; left: 0; right: 0; margin-top: 0; z-index: 50; pointer-events: none;">
-            <!-- JS injects dots here -->
-        </div>
-
     </section>
 
     <!-- ════════════════════════════

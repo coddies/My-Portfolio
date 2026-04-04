@@ -392,7 +392,7 @@ if (dotWrap && ringWrap && window.matchMedia('(pointer: fine)').matches) {
     });
 }
 
-// ── PROJECTS LOGIC ──
+// ── PROJECTS LOGIC (Info-Bar Style) ──
 const projects = [
   {
     number: '01',
@@ -440,65 +440,79 @@ const projects = [
   }
 ];
 
-function getProjectSlideHTML(proj) {
-    const tagsHTML = proj.tags.map(t => `<span>${t}</span>`).join('');
-    
-    let btnsHTML = '';
-    if (proj.github) btnsHTML += `<a href="${proj.github}" target="_blank" class="proj-btn-primary">View on GitHub →</a>`;
-    if (proj.demo) {
-        const isYT = proj.demo.includes('youtube.com');
-        btnsHTML += `<a href="${proj.demo}" target="_blank" class="${proj.github ? 'proj-btn-secondary' : 'proj-btn-primary'}">${isYT ? 'Visit Channel ↗' : 'Live Demo ↗'}</a>`;
-    }
+let currentCaseIndex = 0;
+let isCaseAnimating = false;
 
-    return `
-        <div class="project-slide">
-            <div class="proj-preview">
-                <div class="proj-bg-glow" style="background: radial-gradient(circle at center, ${proj.color}, transparent 70%);"></div>
-                <span class="proj-emoji">${proj.emoji}</span>
-            </div>
-            <div class="proj-details">
-                <span class="proj-num">${proj.number}</span>
-                <div class="proj-cat">${proj.category}</div>
-                <h3 class="proj-title">${proj.name}</h3>
-                <p class="proj-desc">${proj.desc}</p>
-                <div class="proj-tags">${tagsHTML}</div>
-                <div class="proj-actions">${btnsHTML}</div>
-            </div>
-        </div>
-    `;
-}
+function renderCaseProject(index) {
+    if (isCaseAnimating) return;
+    isCaseAnimating = true;
 
-function renderProjectsHorizontal() {
-    const track = document.getElementById('project-horizontal-track');
-    const dotsContainer = document.getElementById('project-dots');
-    if (!track || !dotsContainer) return;
+    const proj = projects[index];
+    const visualStage = document.getElementById('case-visual-stage');
+    const metaBox = document.getElementById('case-meta');
+    const actionBox = document.getElementById('case-action');
+    const counterBox = document.getElementById('case-counter');
 
-    track.innerHTML = projects.map(p => getProjectSlideHTML(p)).join('');
-    dotsContainer.innerHTML = projects.map((_, i) => `<div class="proj-dot ${i === 0 ? 'active' : ''}"></div>`).join('');
-
-    track.addEventListener('scroll', () => {
-        const scrollLeft = track.scrollLeft;
-        const width = track.offsetWidth;
-        const index = Math.round(scrollLeft / width);
-        updateActiveDot(index);
+    // Start Fade Out
+    [visualStage, metaBox, actionBox, counterBox].forEach(el => {
+        if(el) {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(10px)';
+            el.style.transition = 'all 0.3s ease';
+        }
     });
+
+    setTimeout(() => {
+        // Update Content
+        if(visualStage) {
+            visualStage.innerHTML = `
+                <div class="case-visual-content">
+                    <div class="proj-bg-glow" style="background: radial-gradient(circle at center, ${proj.color}, transparent 70%);"></div>
+                    <span class="case-emoji-large">${proj.emoji}</span>
+                </div>
+            `;
+        }
+        if(metaBox) {
+            metaBox.innerHTML = `
+                <span class="case-cat">${proj.category}</span>
+                <h3 class="case-title">${proj.name}</h3>
+            `;
+        }
+        if(actionBox) {
+            const isYT = proj.demo && proj.demo.includes('youtube.com');
+            const link = proj.github || proj.demo;
+            const text = isYT ? 'Visit Channel' : (proj.github ? 'View Project' : 'Live Demo');
+            actionBox.innerHTML = `<a href="${link}" target="_blank" class="case-btn">${text} <span style="font-size:18px;">→</span></a>`;
+        }
+        if(counterBox) {
+            counterBox.textContent = `${String(index + 1).padStart(2, '0')} / ${String(projects.length).padStart(2, '0')}`;
+        }
+
+        // Start Fade In
+        [visualStage, metaBox, actionBox, counterBox].forEach(el => {
+            if(el) {
+                el.style.opacity = '1';
+                el.style.transform = 'translateY(0)';
+            }
+        });
+
+        currentCaseIndex = index;
+        isCaseAnimating = false;
+    }, 300);
 }
 
-function updateActiveDot(index) {
-    const dots = document.querySelectorAll('.proj-dot');
-    dots.forEach((dot, i) => {
-        dot.classList.toggle('active', i === index);
-    });
+function nextCaseProject() {
+    const next = (currentCaseIndex + 1) % projects.length;
+    renderCaseProject(next);
 }
 
-function scrollProjects(direction) {
-    const track = document.getElementById('project-horizontal-track');
-    if (!track) return;
-    const width = track.offsetWidth;
-    track.scrollBy({ left: direction * width, behavior: 'smooth' });
+function prevCaseProject() {
+    const prev = (currentCaseIndex - 1 + projects.length) % projects.length;
+    renderCaseProject(prev);
 }
 
 // Initial render
 document.addEventListener('DOMContentLoaded', () => {
-    renderProjectsHorizontal();
+    renderCaseProject(0);
 });
+
