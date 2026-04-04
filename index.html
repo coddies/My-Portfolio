@@ -233,51 +233,45 @@
     <!-- ════════════════════════════
      CARD 4 — PROJECTS
 ════════════════════════════ -->
-    <section id="card-4" class="card state-below">
+    <section id="card-4" class="card state-below" style="background: #f4f4f6 !important; color: #1a1a1a !important;">
         <div class="card-inner">
-            <div style="width:100%;max-width:1200px;">
+            <div class="precise-showcase-container">
                 
-                <div class="section-header" style="text-align:left; margin-bottom: 35px;">
-                    <span class="tagline">WORK HIGHLIGHTS</span>
-                    <h2 class="section-title">Projects</h2>
-                    <div class="accent-line"></div>
+                <!-- TOP: Gallery Track -->
+                <div class="precise-gallery-viewport">
+                    <div id="precise-gallery-track" class="precise-gallery-track">
+                        <!-- JS Dynamically Injects Cards with Images -->
+                    </div>
                 </div>
 
-                <!-- NEW: Professional Gallery Container -->
-                <div class="gallery-showcase">
-                    
-                    <!-- UP: Horizontal Gallery Track -->
-                    <div id="gallery-viewport" class="gallery-viewport">
-                        <div id="gallery-track" class="gallery-track">
-                             <!-- JS will inject .gallery-item (preview boxes) here -->
+                <!-- BOTTOM: Precision Info Bar -->
+                <div class="precise-footer">
+                    <!-- Far Left Label -->
+                    <div class="sidebar-label">PORTFOLIO</div>
+
+                    <!-- Meta Details & Button Box -->
+                    <div class="precise-info-panel">
+                        <div class="meta-row">
+                            <span id="p-cat" class="p-category">MOBILE APP</span>
+                            <span id="p-date" class="p-date">MAR 2024</span>
+                        </div>
+                        <h3 id="p-title" class="p-title">Project Name</h3>
+                        
+                        <div id="p-action-box" class="p-action-box">
+                            <!-- JS Injects Orange Button with Arrow inside -->
                         </div>
                     </div>
 
-                    <!-- DOWN: Fixed Info-Bar (Footer) -->
-                    <div class="gallery-footer">
-                        <!-- Left: Info -->
-                        <div class="footer-info">
-                            <span id="footer-cat" class="footer-cat">CATEGORY</span>
-                            <h3 id="footer-title" class="footer-title">Project Name</h3>
-                        </div>
-
-                        <!-- Center: Visit Button -->
-                        <div id="footer-action" class="footer-action">
-                            <!-- JS will inject View Project button here -->
-                        </div>
-
-                        <!-- Right: Nav Pill -->
-                        <div class="footer-nav">
-                            <div class="footer-pill">
-                                <div id="footer-counter" class="footer-count">01 / 04</div>
-                                <div class="footer-arrows">
-                                    <button class="nav-pill-btn btn-left" onclick="scrollGallery(-1)">‹</button>
-                                    <button class="nav-pill-btn btn-right" onclick="scrollGallery(1)">›</button>
-                                </div>
+                    <!-- Nav Pill Box -->
+                    <div class="precise-nav-panel">
+                        <div class="precise-nav-pill">
+                            <span id="p-counter" class="p-counter">0 / 0</span>
+                            <div class="p-arrows">
+                                <button class="p-arrow-btn" onclick="preciseScroll(-1)">‹</button>
+                                <button class="p-arrow-btn" onclick="preciseScroll(1)">›</button>
                             </div>
                         </div>
                     </div>
-
                 </div>
 
             </div>

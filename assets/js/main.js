@@ -392,124 +392,90 @@ if (dotWrap && ringWrap && window.matchMedia('(pointer: fine)').matches) {
     });
 }
 
-// ── PROJECTS LOGIC (Gallery & Footer Style) ──
+// ── PROJECTS LOGIC (Precise Reference Clone) ──
 const projects = [
   {
-    number: '01',
     category: 'AI PROJECT',
-    name: 'AI Chatbot',
-    desc: 'NLP-driven intelligent chatbot built with Python.',
-    emoji: '🤖',
-    color: 'rgba(124,58,237,0.15)',
-    github: 'https://github.com/coddies/AI-Chatbot',
-    demo: null
+    date: 'JAN 2025',
+    title: 'MUSICO - AI-Powered Music Player',
+    image: 'assets/images/p1.png',
+    github: 'https://github.com/coddies/AI-Chatbot'
   },
   {
-    number: '02',
-    category: 'FRONTEND',
-    name: 'My Portfolio',
-    desc: 'Premium Dark Glass portfolio website.',
-    emoji: '✨',
-    color: 'rgba(6,182,212,0.15)',
-    github: 'https://github.com/coddies/My-Portfolio',
-    demo: null
+    category: 'WEBSITE',
+    date: 'FEB 2025',
+    title: 'THE PORTFOLIO - Dark Glass',
+    image: 'assets/images/p2.png',
+    github: 'https://github.com/coddies/My-Portfolio'
   },
   {
-    number: '03',
-    category: 'AI AUTOMATION',
-    name: 'Faceless AI Studio',
-    desc: 'Automated AI video creation pipeline.',
-    emoji: '🎬',
-    color: 'rgba(236,72,153,0.15)',
-    github: 'https://github.com/coddies/Faceless-AI-Studio',
-    demo: null
+    category: 'AUTOMATION',
+    date: 'MAR 2025',
+    title: 'FACELESS - AI Studio',
+    image: 'assets/images/p3.png',
+    github: 'https://github.com/coddies/Faceless-AI-Studio'
   },
   {
-    number: '04',
-    category: 'CONTENT CREATION',
-    name: 'YouTube AI Channel',
-    desc: 'AI content covering programming and tools.',
-    emoji: '🎥',
-    color: 'rgba(124,58,237,0.15)',
-    github: null,
+    category: 'YOUTUBE',
+    date: 'APR 2025',
+    title: 'NOOR-E-SADA Official Channel',
+    image: 'assets/images/p4.png',
     demo: 'https://www.youtube.com/@Noor-e-SadaOfficial'
   }
 ];
 
-function getGalleryItemHTML(proj, index) {
-    return `
-        <div class="gallery-item" data-index="${index}">
-            <div class="item-glow" style="background: radial-gradient(circle at center, ${proj.color}, transparent 70%);"></div>
-            <span class="item-visual">${proj.emoji}</span>
+function renderPreciseGallery() {
+    const track = document.getElementById('precise-gallery-track');
+    if (!track) return;
+
+    track.innerHTML = projects.map((p, i) => `
+        <div class="precise-project-card" data-index="${i}">
+            <img src="${p.image}" alt="${p.title}" class="p-card-image">
         </div>
-    `;
+    `).join('');
+
+    track.addEventListener('scroll', () => {
+        const index = Math.round(track.scrollLeft / track.offsetWidth);
+        updatePreciseFooter(index);
+    });
+
+    updatePreciseFooter(0);
 }
 
-function updateFooter(index) {
+function updatePreciseFooter(index) {
     const proj = projects[index];
-    const cat = document.getElementById('footer-cat');
-    const title = document.getElementById('footer-title');
-    const action = document.getElementById('footer-action');
-    const counter = document.getElementById('footer-counter');
+    const cat = document.getElementById('p-cat');
+    const date = document.getElementById('p-date');
+    const title = document.getElementById('p-title');
+    const actionBox = document.getElementById('p-action-box');
+    const counter = document.getElementById('p-counter');
 
     if(cat) cat.textContent = proj.category;
-    if(title) title.textContent = proj.name;
-    if(counter) counter.textContent = `${String(index + 1).padStart(2, '0')} / ${String(projects.length).padStart(2, '0')}`;
+    if(date) date.textContent = proj.date;
+    if(title) title.textContent = proj.title;
+    if(counter) counter.textContent = `${index + 1} / ${projects.length}`;
 
-    if(action) {
-        const isYT = proj.demo && proj.demo.includes('youtube.com');
+    if(actionBox) {
         const link = proj.github || proj.demo;
-        const text = isYT ? 'Visit Channel' : (proj.github ? 'View Project' : 'Live Demo');
-        action.innerHTML = `<a href="${link}" target="_blank" class="footer-btn">${text} <span style="font-size:18px;">→</span></a>`;
+        const text = proj.github ? 'VIEW PROJECT' : 'VISIT CHANNEL';
+        actionBox.innerHTML = `
+            <a href="${link}" target="_blank" class="p-action-btn">
+                ${text}
+                <div class="p-btn-circle">→</div>
+            </a>
+        `;
     }
-
-    // Update Active Class
-    const items = document.querySelectorAll('.gallery-item');
-    items.forEach((item, i) => {
-        item.classList.toggle('active', i === index);
-    });
 }
 
-function scrollGallery(direction) {
-    const track = document.getElementById('gallery-track');
+function preciseScroll(dir) {
+    const track = document.getElementById('precise-gallery-track');
     if (!track) return;
-    const scrollAmount = track.offsetWidth * 0.6; // Scroll roughly one item distance
-    track.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
-}
-
-function initGallery() {
-    const track = document.getElementById('gallery-track');
-    if (!track) return;
-
-    track.innerHTML = projects.map((p, i) => getGalleryItemHTML(p, i)).join('');
-
-    // Sync Footer on Scroll
-    track.addEventListener('scroll', () => {
-        const trackLeft = track.getBoundingClientRect().left;
-        const trackCenter = trackLeft + track.offsetWidth / 2;
-        
-        let closestIndex = 0;
-        let minDiff = Infinity;
-
-        const items = document.querySelectorAll('.gallery-item');
-        items.forEach((item, i) => {
-            const rect = item.getBoundingClientRect();
-            const itemCenter = rect.left + rect.width / 2;
-            const diff = Math.abs(trackCenter - itemCenter);
-            if (diff < minDiff) {
-                minDiff = diff;
-                closestIndex = i;
-            }
-        });
-
-        updateFooter(closestIndex);
-    });
-
-    // Initial State
-    updateFooter(0);
+    const cardWidth = track.querySelector('.precise-project-card').offsetWidth + 30; // 30 is gap
+    track.scrollBy({ left: dir * cardWidth, behavior: 'smooth' });
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    initGallery();
+    renderPreciseGallery();
 });
+
 
