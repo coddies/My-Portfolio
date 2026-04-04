@@ -501,31 +501,10 @@ function preciseScroll(dir) {
     track.scrollBy({ left: dir * finalStep, behavior: 'smooth' });
 }
 
-// Wheel Listener: Check if user is over the gallery track before switching cards
-let lastMainScroll = 0;
-window.addEventListener('wheel', (e) => {
-    // If we're inside the gallery track, let it scroll horizontally (ignore wheel section skip)
-    if (e.target.closest('.precise-gallery-track')) return;
-
-    const now = Date.now();
-    if (now - lastMainScroll < 1200) return;
-    
-    if (e.deltaY > 50) { 
-        if (currentIndex < cards.length - 1) { 
-            updateCards(currentIndex + 1);
-            lastMainScroll = now;
-        }
-    } else if (e.deltaY < -50) { 
-        if (currentIndex > 0) {
-            updateCards(currentIndex - 1);
-            lastMainScroll = now;
-        }
-    }
-}, { passive: true });
-
 document.addEventListener('DOMContentLoaded', () => {
     renderPreciseGallery();
 });
+
 
 
 

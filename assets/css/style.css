@@ -537,8 +537,7 @@ h1, h2, h3, .syne-font {
     letter-spacing: 4px;
     font-size: 14px;
     font-weight: 700;
-    color: #888;
-    opacity: 0.8;
+    color: rgba(255,255,255,0.3);
 }
 
 /* Gallery Carousel */
@@ -563,18 +562,18 @@ h1, h2, h3, .syne-font {
 
 .precise-project-card {
     min-width: 750px;
-    background: #fff;
+    background: rgba(255,255,255,0.02);
+    backdrop-filter: blur(10px);
     border-radius: 12px;
     overflow: hidden;
     scroll-snap-align: center;
-    box-shadow: 0 15px 45px rgba(0,0,0,0.06);
-    transition: transform 0.6s cubic-bezier(0.2, 1, 0.3, 1);
-    position: relative;
-    border: 1px solid #eee;
+    border: 1px solid rgba(255,255,255,0.08);
+    transition: transform 0.6s cubic-bezier(0.2, 1, 0.3, 1), border-color 0.4s ease;
 }
 
 .precise-project-card:hover {
     transform: scale(1.02);
+    border-color: rgba(255, 157, 0, 0.4);
 }
 
 .p-card-placeholder {
@@ -597,7 +596,7 @@ h1, h2, h3, .syne-font {
 .p-card-icon {
     font-size: 100px;
     z-index: 2;
-    filter: drop-shadow(0 20px 40px rgba(0,0,0,0.2));
+    filter: drop-shadow(0 20px 40px rgba(0,0,0,0.5));
     margin-bottom: 20px;
 }
 
@@ -607,7 +606,7 @@ h1, h2, h3, .syne-font {
     font-size: 14px;
     font-weight: 800;
     letter-spacing: 5px;
-    color: rgba(255, 255, 255, 0.4);
+    color: rgba(255, 255, 255, 0.2);
     text-transform: uppercase;
 }
 
@@ -623,10 +622,12 @@ h1, h2, h3, .syne-font {
 /* Metadata & Button Box */
 .precise-info-panel {
     flex: 2;
-    background: #e9e9eb;
+    background: rgba(255,255,255,0.03);
+    backdrop-filter: blur(25px);
     border-radius: 12px;
     padding: 40px 50px;
     position: relative;
+    border: 1px solid rgba(255,255,255,0.05);
 }
 
 .meta-row {
@@ -638,14 +639,14 @@ h1, h2, h3, .syne-font {
     letter-spacing: 1px;
 }
 
-.p-category { color: #ff9d00; text-transform: uppercase; }
-.p-date { color: #888; }
+.p-category { color: #ff9d00; text-transform: uppercase; text-shadow: 0 0 10px rgba(255, 157, 0, 0.3); }
+.p-date { color: rgba(255,255,255,0.4); }
 
 .p-title {
     font-family: 'Syne', sans-serif;
     font-size: 38px;
     font-weight: 800;
-    color: #1a1a1a;
+    color: #fff;
     margin-bottom: 30px;
     line-height: 1.1;
 }
@@ -658,7 +659,7 @@ h1, h2, h3, .syne-font {
     padding: 10px 10px 10px 35px;
     border-radius: 50px;
     text-decoration: none;
-    color: #1a1a1a;
+    color: #000;
     font-weight: 800;
     text-transform: uppercase;
     font-size: 14px;
@@ -686,27 +687,30 @@ h1, h2, h3, .syne-font {
 /* Nav Pill Panel */
 .precise-nav-panel {
     flex: 1;
-    background: #e9e9eb;
+    background: rgba(255,255,255,0.03);
+    backdrop-filter: blur(25px);
     border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
+    border: 1px solid rgba(255,255,255,0.05);
 }
 
 .precise-nav-pill {
-    background: #fff;
+    background: rgba(255,255,255,0.05);
     padding: 12px 14px 12px 40px;
     border-radius: 60px;
     display: flex;
     align-items: center;
     gap: 35px;
+    border: 1px solid rgba(255,255,255,0.1);
 }
 
 .p-counter {
     font-family: 'Syne', sans-serif;
     font-size: 18px;
     font-weight: 700;
-    color: #888;
+    color: rgba(255,255,255,0.5);
 }
 
 .p-arrows { display: flex; gap: 8px; }
@@ -714,10 +718,10 @@ h1, h2, h3, .syne-font {
 .p-arrow-btn {
     width: 54px;
     height: 54px;
-    background: #000;
+    background: #fff;
     border-radius: 50%;
     border: none;
-    color: white;
+    color: #000;
     font-size: 24px;
     cursor: pointer;
     display: flex;
@@ -726,7 +730,7 @@ h1, h2, h3, .syne-font {
     transition: all 0.2s ease;
 }
 
-.p-arrow-btn:hover { background: #333; transform: scale(1.05); }
+.p-arrow-btn:hover { background: #ff9d00; transform: scale(1.05); }
 
 @media (max-width: 1000px) {
     .precise-project-card { min-width: 90%; height: 350px; }
