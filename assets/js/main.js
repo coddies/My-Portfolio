@@ -401,98 +401,129 @@ if (dotWrap && ringWrap && window.matchMedia('(pointer: fine)').matches) {
     });
 }
 
-// ── PROJECTS LOGIC (SINGLE PROJECT, SCROLL UP/DOWN) ──
-const projects = [
-    {
-        category: 'AI PROJECT',
-        date: 'JAN 2025',
-        title: 'AI Chatbot - Intelligent Assistant',
-        icon: '🤖',
-        desc: 'An intelligent AI chatbot powered by OpenAI and LangChain for natural conversations.',
-        tags: ['Python', 'LangChain', 'OpenAI'],
-        link: 'https://github.com/coddies/AI-Chatbot'
-    },
-    {
-        category: 'WEBSITE',
-        date: 'FEB 2025',
-        title: 'Portfolio - Dark Glass Experience',
-        icon: '✨',
-        desc: 'A modern glassmorphism portfolio with custom cursor and smooth animations.',
-        tags: ['HTML', 'CSS', 'JavaScript'],
-        link: 'https://github.com/coddies/My-Portfolio'
-    },
-    {
-        category: 'AI AUTOMATION',
-        date: 'MAR 2025',
-        title: 'Faceless AI Video Studio',
-        icon: '🎬',
-        desc: 'End-to-end automated pipeline for AI-generated videos with voiceover.',
-        tags: ['Python', 'MoviePy', 'ElevenLabs'],
-        link: 'https://github.com/coddies/Faceless-AI-Studio'
-    },
-    {
-        category: 'CONTENT CHANNEL',
-        date: 'APR 2025',
-        title: 'Noor-e-Sada Official',
-        icon: '🎥',
-        desc: 'YouTube channel focused on AI education and tech tutorials.',
-        tags: ['YouTube', 'SEO', 'Automation'],
-        link: 'https://www.youtube.com/@Noor-e-SadaOfficial'
-    },
-    {
-        category: 'ML PROJECT',
-        date: 'MAY 2025',
-        title: 'House Price Predictor',
-        icon: '🏠',
-        desc: 'Machine learning model to predict house prices using regression models.',
-        tags: ['Python', 'Scikit-learn', 'Pandas'],
-        link: 'https://github.com/coddies/House-Price-Predictor'
-    },
-    {
-        category: 'DATA ANALYSIS',
-        date: 'JUN 2025',
-        title: 'Sales Dashboard Analytics',
-        icon: '📊',
-        desc: 'Interactive sales dashboard with real-time data visualization.',
-        tags: ['Python', 'Plotly', 'SQL'],
-        link: 'https://github.com/coddies/Sales-Dashboard'
-    }
+// ── PROJECTS LOGIC: DARK GLASS PREMIUM ──
+const projectData = [
+  {
+    number: '01',
+    category: 'AI PROJECT',
+    name: 'AI Chatbot',
+    desc: 'NLP-driven intelligent chatbot built with Python. Understands and responds to natural language queries with high accuracy.',
+    tags: ['Python', 'NLP', 'AI'],
+    emoji: '🤖',
+    color: 'rgba(124,58,237,0.12)',
+    github: 'https://github.com/coddies',
+    demo: null
+  },
+  {
+    number: '02',
+    category: 'AI AUTOMATION',
+    name: 'Faceless AI Studio',
+    desc: 'Fully automated AI video creation pipeline. Converts scripts to voice to video with zero manual effort.',
+    tags: ['AI', 'Automation', 'Video'],
+    emoji: '🎬',
+    color: 'rgba(236,72,153,0.12)',
+    github: 'https://github.com/coddies',
+    demo: null
+  },
+  {
+    number: '03',
+    category: 'DATA SCIENCE',
+    name: 'Data Analysis Dashboard',
+    desc: 'Real-world dataset deep analysis with beautiful Pandas and Matplotlib visualizations and business insights.',
+    tags: ['Pandas', 'Matplotlib', 'Python'],
+    emoji: '📊',
+    color: 'rgba(6,182,212,0.12)',
+    github: 'https://github.com/coddies',
+    demo: null
+  },
+  {
+    number: '04',
+    category: 'MACHINE LEARNING',
+    name: 'ML Classification Model',
+    desc: 'Scikit-learn classification model achieving 92% accuracy. Trained on real-world test data with full evaluation.',
+    tags: ['Scikit-learn', 'ML', 'Python'],
+    emoji: '🧠',
+    color: 'rgba(124,58,237,0.12)',
+    github: 'https://github.com/coddies',
+    demo: null
+  }
 ];
 
-let currentProjectIndex = 0;
+let currentProject = 0;
+let isAnimating = false;
 
-function renderSingleProject() {
-    const card = document.getElementById('singleProjectCard');
-    if (!card) return;
+function showProject(idx, direction) {
+  if (isAnimating) return;
+  isAnimating = true;
+
+  const container = document.getElementById('projectContainer');
+  const dots = document.querySelectorAll('.dot');
+  
+  // 1. Start OUT animation
+  container.classList.add(`slide-${direction}-out`);
+  
+  setTimeout(() => {
+    const p = projectData[idx];
+    currentProject = idx;
+
+    // 2. Update Content
+    document.getElementById('projectEmoji').textContent = p.emoji;
+    document.getElementById('projectNameMuted').textContent = p.name;
+    document.getElementById('projectPreview').style.background = `radial-gradient(circle at center, ${p.color}, transparent 70%)`;
     
-    const proj = projects[currentProjectIndex];
+    document.getElementById('projectWatermark').textContent = p.number;
+    document.getElementById('projectCategory').textContent = p.category;
+    document.getElementById('projectTitle').textContent = p.name;
+    document.getElementById('projectDescription').textContent = p.desc;
     
-    // Add transition class
-    card.classList.add('transitioning');
+    const techBox = document.getElementById('projectTech');
+    techBox.innerHTML = p.tags.map(tag => `<span class="cs-tag">${tag}</span>`).join('');
+    
+    const githubBtn = document.getElementById('projectGithub');
+    githubBtn.href = p.github;
+    
+    const demoBtn = document.getElementById('projectDemo');
+    if (p.demo) {
+      demoBtn.href = p.demo;
+      demoBtn.style.display = 'inline-flex';
+    } else {
+      demoBtn.style.display = 'none';
+    }
+
+    // Update Dots
+    dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+
+    // 3. Prepare for IN animation
+    container.classList.remove(`slide-${direction}-out`);
+    container.classList.add(`slide-${direction}-in`);
+
+    // Force reflow
+    void container.offsetWidth;
+
+    // 4. Run IN animation
+    container.classList.remove(`slide-${direction}-in`);
     
     setTimeout(() => {
-        document.getElementById('spIcon').textContent = proj.icon;
-        document.getElementById('spCategory').textContent = proj.category;
-        document.getElementById('spTitle').textContent = proj.title;
-        document.getElementById('spDesc').textContent = proj.desc;
-        document.getElementById('spTags').innerHTML = proj.tags.map(t => `<span class="cs-tag">${t}</span>`).join('');
-        document.getElementById('spLink').href = proj.link;
-        document.getElementById('projectCounter').textContent = `${currentProjectIndex + 1} / ${projects.length}`;
-        
-        card.classList.remove('transitioning');
-    }, 300);
+      isAnimating = false;
+    }, 400); 
+  }, 200);
 }
 
-function scrollProject(dir) {
-    currentProjectIndex += dir;
-    if (currentProjectIndex < 0) currentProjectIndex = projects.length - 1;
-    if (currentProjectIndex >= projects.length) currentProjectIndex = 0;
-    renderSingleProject();
+function nextProject() {
+  const next = (currentProject + 1) % projectData.length;
+  showProject(next, 'next');
 }
 
-// Initialize on load
+function prevProject() {
+  const prev = (currentProject - 1 + projectData.length) % projectData.length;
+  showProject(prev, 'prev');
+}
+
+// Initial Sync
 document.addEventListener('DOMContentLoaded', () => {
-    renderSingleProject();
+    if (document.getElementById('projectContainer')) {
+        showProject(0, 'next');
+    }
 });
 
 

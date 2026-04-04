@@ -7,7 +7,7 @@
     <title>Muhammad Burhan | AI & Data Science</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@400;600;800&display=swap"
         rel="stylesheet" />
     <link rel="stylesheet" href="assets/css/style.css" />
     <link rel="icon" href="assets/images/mb-logo.svg" type="image/svg+xml" />
@@ -219,8 +219,7 @@
                             <div class="progress-bar" data-width="75%"></div>
                         </div>
                     </div>
-                    <div class="skill-card"><span class="skill-emoji">💻</span><span class="skill-name">Vibe
-                            Coding</span>
+                    <div class="skill-card"><span class="skill-emoji">💻</span><span class="skill-name">Vibe Coding</span>
                         <div class="progress-container">
                             <div class="progress-bar" data-width="65%"></div>
                         </div>
@@ -230,49 +229,71 @@
         </div>
     </section>
 
-<!-- ════════════════════════════
-     CARD 4 — PROJECTS (ONE AT A TIME, SCROLL UP/DOWN)
+    <!-- ════════════════════════════
+     CARD 4 — PROJECTS
  ════════════════════════════ -->
     <section id="card-4" class="card state-below">
         <div class="card-inner">
             <div style="width:100%;max-width:1100px;">
                 <div class="section-header">
-                    <span class="tagline" style="color:var(--cyan);">MY WORK</span>
+                    <span class="tagline" style="color:var(--cyan);">WORK HIGHLIGHTS</span>
                     <h2 class="section-title">Projects</h2>
                     <div class="accent-line"></div>
                 </div>
                 
-                <!-- Single Project Display -->
-                <div class="single-project-container">
-                    <div class="project-nav-btn project-prev" onclick="scrollProject(-1)">▲</div>
-                    
-                    <div class="single-project-card" id="singleProjectCard">
-                        <div class="sp-card-inner">
-                            <div class="sp-icon" id="spIcon">🤖</div>
-                            <div class="sp-category" id="spCategory">AI PROJECT</div>
-                            <h3 class="sp-title" id="spTitle">AI Chatbot - INTELLIGENT ASSISTANT</h3>
-                            <p class="sp-desc" id="spDesc">An intelligent AI chatbot powered by OpenAI and LangChain for natural conversations.</p>
-                            <div class="sp-tags" id="spTags">
-                                <span class="cs-tag">Python</span>
-                                <span class="cs-tag">LangChain</span>
-                                <span class="cs-tag">OpenAI</span>
+                <div class="project-showcase-wrapper">
+                    <!-- Navigation Arrows -->
+                    <button class="project-nav-arrow arrow-left" onclick="prevProject()" aria-label="Previous Project">‹</button>
+                    <button class="project-nav-arrow arrow-right" onclick="nextProject()" aria-label="Next Project">›</button>
+
+                    <!-- Main Showcase Card -->
+                    <div class="project-showcase">
+                        <div class="project-content" id="projectContainer">
+                            <!-- LEFT SIDE — Project Preview -->
+                            <div class="project-preview" id="projectPreview">
+                                <div class="project-emoji-box">
+                                    <span class="project-emoji" id="projectEmoji">🤖</span>
+                                    <span class="project-name-muted" id="projectNameMuted">AI Chatbot</span>
+                                </div>
                             </div>
-                            <a href="#" class="sp-view-btn" id="spLink" target="_blank">View Project →</a>
+
+                            <!-- RIGHT SIDE — Project Details -->
+                            <div class="project-details" id="projectDetails">
+                                <span class="project-num-watermark" id="projectWatermark">01</span>
+                                <span class="project-category-tag" id="projectCategory">AI PROJECT</span>
+                                <h3 class="project-title" id="projectTitle">AI Chatbot</h3>
+                                <p class="project-description" id="projectDescription">
+                                    NLP-driven intelligent chatbot built with Python. Understands and responds to natural language queries with high accuracy.
+                                </p>
+                                
+                                <div class="project-tech-badges" id="projectTech">
+                                    <span class="cs-tag">Python</span>
+                                    <span class="cs-tag">NLP</span>
+                                    <span class="cs-tag">AI</span>
+                                </div>
+
+                                <div class="project-buttons">
+                                    <a href="https://github.com/coddies" class="btn-primary" id="projectGithub" target="_blank">View on GitHub →</a>
+                                    <a href="#" class="btn-secondary" id="projectDemo" target="_blank" style="display:none;">Live Demo ↗</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    
-                    <div class="project-counter">
-                        <span id="projectCounter">1 / 4</span>
+
+                    <!-- Bottom Counter Dots -->
+                    <div class="project-counter-dots" id="projectDots">
+                        <div class="dot active"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
                     </div>
-                    
-                    <div class="project-nav-btn project-next" onclick="scrollProject(1)">▼</div>
                 </div>
             </div>
         </div>
     </section>
 
-<!-- ════════════════════════════
-     CARD 5 — ACHIEVEMENTS (Certs first, then Hackathon below)
+    <!-- ════════════════════════════
+     CARD 5 — ACHIEVEMENTS
  ════════════════════════════ -->
     <section id="card-5" class="card state-below">
         <div class="card-inner">
@@ -412,7 +433,7 @@
                             </div>
                             <span class="status-badge status-completed">Completed</span>
                         </div>
-</div>
+                    </div>
 
                 </div>
             </div>
@@ -437,12 +458,14 @@
                             <span class="cs-card-tag">AI / NLP</span>
                         </div>
                         <div class="cs-card-body">
-                            <h3 class="cs-card-title">AI-Powered Customer Support Bot</h3>
-                            <p class="cs-card-summary">A business drowning in 10,000+ daily tickets needed relief. Built
-                                an NLP chatbot that autonomously resolved 70% of queries instantly.</p>
+                            <h3 class="cs-card-title">AI Chatbot - Intelligent NLP Assistant</h3>
+                            <p class="cs-card-summary">Users needed a smarter way to interact with data and get instant, accurate human-like responses.</p>
                             <div class="cs-card-footer">
-                                <div class="cs-tags"><span class="cs-tag">Python</span><span
-                                        class="cs-tag">LangChain</span><span class="cs-tag">GPT-4</span></div>
+                                <div class="cs-tags">
+                                    <span class="cs-tag">Python</span>
+                                    <span class="cs-tag">LangChain</span>
+                                    <span class="cs-tag">OpenAI</span>
+                                </div>
                                 <button class="cs-read-btn" data-cs="0">Read More →</button>
                             </div>
                         </div>
@@ -450,15 +473,17 @@
 
                     <div class="cs-card anim-in" data-cs="1">
                         <div class="cs-card-img cs-img-2">
-                            <span class="cs-card-tag">Data Analytics</span>
+                            <span class="cs-card-tag">Frontend Development</span>
                         </div>
                         <div class="cs-card-body">
-                            <h3 class="cs-card-title">Real-Time Business Intelligence Dashboard</h3>
-                            <p class="cs-card-summary">A retail chain had data locked in siloed spreadsheets. Designed a
-                                live Pandas + Plotly dashboard to unify all KPIs in real time.</p>
+                            <h3 class="cs-card-title">Modern Glassmorphism Portfolio</h3>
+                            <p class="cs-card-summary">Standard portfolios lack the premium feel and interactivity required for a modern AI developer.</p>
                             <div class="cs-card-footer">
-                                <div class="cs-tags"><span class="cs-tag">Pandas</span><span
-                                        class="cs-tag">Plotly</span><span class="cs-tag">SQL</span></div>
+                                <div class="cs-tags">
+                                    <span class="cs-tag">HTML</span>
+                                    <span class="cs-tag">CSS</span>
+                                    <span class="cs-tag">JavaScript</span>
+                                </div>
                                 <button class="cs-read-btn" data-cs="1">Read More →</button>
                             </div>
                         </div>
@@ -469,12 +494,14 @@
                             <span class="cs-card-tag">AI Automation</span>
                         </div>
                         <div class="cs-card-body">
-                            <h3 class="cs-card-title">Faceless AI Video Studio Pipeline</h3>
-                            <p class="cs-card-summary">Content creators spent 20+ hours per video. Built a fully
-                                automated pipeline — from script to final export with zero manual effort.</p>
+                            <h3 class="cs-card-title">Faceless AI Video Studio</h3>
+                            <p class="cs-card-summary">Manual video editing takes dozens of hours, limiting content output and channel growth.</p>
                             <div class="cs-card-footer">
-                                <div class="cs-tags"><span class="cs-tag">Python</span><span
-                                        class="cs-tag">FFmpeg</span><span class="cs-tag">ElevenLabs</span></div>
+                                <div class="cs-tags">
+                                    <span class="cs-tag">Python</span>
+                                    <span class="cs-tag">MoviePy</span>
+                                    <span class="cs-tag">ElevenLabs</span>
+                                </div>
                                 <button class="cs-read-btn" data-cs="2">Read More →</button>
                             </div>
                         </div>
@@ -573,52 +600,8 @@
                     <h3 class="cs-detail-heading" style="margin-bottom:14px;">Tech Stack</h3>
                     <div class="cs-tags-large" id="csModalTags"></div>
                 </div>
-                <div class="cs-comments-section">
-                    <h3 class="cs-comments-heading">💬 Comments</h3>
-                    <div class="cs-comments-list" id="csCommentsList">
-                        <div class="cs-comment">
-                            <div class="cs-comment-avatar">AK</div>
-                            <div class="cs-comment-content">
-                                <div class="cs-comment-meta"><strong>Ahmed Khan</strong><span>2 days ago</span></div>
-                                <p>This is exactly the kind of real-world AI application I was looking for. Great
-                                    breakdown of the architecture!</p>
-                            </div>
-                        </div>
-                        <div class="cs-comment">
-                            <div class="cs-comment-avatar"
-                                style="background:linear-gradient(135deg,var(--pink),var(--purple));">SR</div>
-                            <div class="cs-comment-content">
-                                <div class="cs-comment-meta"><strong>Sara Rizvi</strong><span>5 days ago</span></div>
-                                <p>Loved the Result section — 70% autonomous resolution is phenomenal. Would love to
-                                    know more about the training data pipeline.</p>
-                            </div>
-                        </div>
-                        <div class="cs-comment">
-                            <div class="cs-comment-avatar"
-                                style="background:linear-gradient(135deg,var(--cyan),var(--purple));">MB</div>
-                            <div class="cs-comment-content">
-                                <div class="cs-comment-meta"><strong>M. Bilal</strong><span>1 week ago</span></div>
-                                <p>Impressive work. Did you use RAG for the knowledge base or fine-tuning on
-                                    domain-specific data?</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="cs-comment-form">
-                        <h4 class="cs-form-title">Leave a Comment</h4>
-                        <input class="cs-comment-name" id="csCommentName" type="text" placeholder="Your name" />
-                        <textarea class="cs-comment-textarea" id="csCommentText"
-                            placeholder="Share your thoughts or ask a question..."></textarea>
-                        <button class="cs-comment-submit" id="csCommentSubmit">Submit Comment</button>
-                    </div>
-                </div>
             </div>
         </div>
-    </div>
-
-    <!-- Swipe Hint -->
-    <div id="swipe-hint">
-        <span class="hint-icon">👆</span>
-        <span>Swipe left or right to navigate</span>
     </div>
 
     <script src="assets/js/main.js"></script>
