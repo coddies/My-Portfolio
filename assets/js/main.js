@@ -392,16 +392,15 @@ if (dotWrap && ringWrap && window.matchMedia('(pointer: fine)').matches) {
     });
 }
 
-// ── PROJECTS LOGIC (Info-Bar Style) ──
+// ── PROJECTS LOGIC (Gallery & Footer Style) ──
 const projects = [
   {
     number: '01',
     category: 'AI PROJECT',
     name: 'AI Chatbot',
-    desc: 'NLP-driven intelligent chatbot built with Python. Understands and responds to natural language queries with high accuracy.',
-    tags: ['Python', 'NLP', 'AI'],
+    desc: 'NLP-driven intelligent chatbot built with Python.',
     emoji: '🤖',
-    color: 'rgba(124,58,237,0.12)',
+    color: 'rgba(124,58,237,0.15)',
     github: 'https://github.com/coddies/AI-Chatbot',
     demo: null
   },
@@ -409,10 +408,9 @@ const projects = [
     number: '02',
     category: 'FRONTEND',
     name: 'My Portfolio',
-    desc: 'A premium, highly interactive portfolio website built with Dark Glass aesthetics, dynamic carousels, and complex CSS layouts.',
-    tags: ['HTML', 'CSS', 'JavaScript'],
+    desc: 'Premium Dark Glass portfolio website.',
     emoji: '✨',
-    color: 'rgba(6,182,212,0.12)',
+    color: 'rgba(6,182,212,0.15)',
     github: 'https://github.com/coddies/My-Portfolio',
     demo: null
   },
@@ -420,10 +418,9 @@ const projects = [
     number: '03',
     category: 'AI AUTOMATION',
     name: 'Faceless AI Studio',
-    desc: 'Fully automated AI video creation pipeline. Converts scripts to voice to video with zero manual effort.',
-    tags: ['AI', 'Automation', 'Video'],
+    desc: 'Automated AI video creation pipeline.',
     emoji: '🎬',
-    color: 'rgba(236,72,153,0.12)',
+    color: 'rgba(236,72,153,0.15)',
     github: 'https://github.com/coddies/Faceless-AI-Studio',
     demo: null
   },
@@ -431,88 +428,88 @@ const projects = [
     number: '04',
     category: 'CONTENT CREATION',
     name: 'YouTube AI Channel',
-    desc: 'AI-powered content creation covering programming, AI tools, and full lifecycle automation.',
-    tags: ['YouTube', 'Content', 'AI Video'],
+    desc: 'AI content covering programming and tools.',
     emoji: '🎥',
-    color: 'rgba(124,58,237,0.12)',
+    color: 'rgba(124,58,237,0.15)',
     github: null,
     demo: 'https://www.youtube.com/@Noor-e-SadaOfficial'
   }
 ];
 
-let currentCaseIndex = 0;
-let isCaseAnimating = false;
+function getGalleryItemHTML(proj, index) {
+    return `
+        <div class="gallery-item" data-index="${index}">
+            <div class="item-glow" style="background: radial-gradient(circle at center, ${proj.color}, transparent 70%);"></div>
+            <span class="item-visual">${proj.emoji}</span>
+        </div>
+    `;
+}
 
-function renderCaseProject(index) {
-    if (isCaseAnimating) return;
-    isCaseAnimating = true;
-
+function updateFooter(index) {
     const proj = projects[index];
-    const visualStage = document.getElementById('case-visual-stage');
-    const metaBox = document.getElementById('case-meta');
-    const actionBox = document.getElementById('case-action');
-    const counterBox = document.getElementById('case-counter');
+    const cat = document.getElementById('footer-cat');
+    const title = document.getElementById('footer-title');
+    const action = document.getElementById('footer-action');
+    const counter = document.getElementById('footer-counter');
 
-    // Start Fade Out
-    [visualStage, metaBox, actionBox, counterBox].forEach(el => {
-        if(el) {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(10px)';
-            el.style.transition = 'all 0.3s ease';
-        }
+    if(cat) cat.textContent = proj.category;
+    if(title) title.textContent = proj.name;
+    if(counter) counter.textContent = `${String(index + 1).padStart(2, '0')} / ${String(projects.length).padStart(2, '0')}`;
+
+    if(action) {
+        const isYT = proj.demo && proj.demo.includes('youtube.com');
+        const link = proj.github || proj.demo;
+        const text = isYT ? 'Visit Channel' : (proj.github ? 'View Project' : 'Live Demo');
+        action.innerHTML = `<a href="${link}" target="_blank" class="footer-btn">${text} <span style="font-size:18px;">→</span></a>`;
+    }
+
+    // Update Active Class
+    const items = document.querySelectorAll('.gallery-item');
+    items.forEach((item, i) => {
+        item.classList.toggle('active', i === index);
     });
+}
 
-    setTimeout(() => {
-        // Update Content
-        if(visualStage) {
-            visualStage.innerHTML = `
-                <div class="case-visual-content">
-                    <div class="proj-bg-glow" style="background: radial-gradient(circle at center, ${proj.color}, transparent 70%);"></div>
-                    <span class="case-emoji-large">${proj.emoji}</span>
-                </div>
-            `;
-        }
-        if(metaBox) {
-            metaBox.innerHTML = `
-                <span class="case-cat">${proj.category}</span>
-                <h3 class="case-title">${proj.name}</h3>
-            `;
-        }
-        if(actionBox) {
-            const isYT = proj.demo && proj.demo.includes('youtube.com');
-            const link = proj.github || proj.demo;
-            const text = isYT ? 'Visit Channel' : (proj.github ? 'View Project' : 'Live Demo');
-            actionBox.innerHTML = `<a href="${link}" target="_blank" class="case-btn">${text} <span style="font-size:18px;">→</span></a>`;
-        }
-        if(counterBox) {
-            counterBox.textContent = `${String(index + 1).padStart(2, '0')} / ${String(projects.length).padStart(2, '0')}`;
-        }
+function scrollGallery(direction) {
+    const track = document.getElementById('gallery-track');
+    if (!track) return;
+    const scrollAmount = track.offsetWidth * 0.6; // Scroll roughly one item distance
+    track.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
+}
 
-        // Start Fade In
-        [visualStage, metaBox, actionBox, counterBox].forEach(el => {
-            if(el) {
-                el.style.opacity = '1';
-                el.style.transform = 'translateY(0)';
+function initGallery() {
+    const track = document.getElementById('gallery-track');
+    if (!track) return;
+
+    track.innerHTML = projects.map((p, i) => getGalleryItemHTML(p, i)).join('');
+
+    // Sync Footer on Scroll
+    track.addEventListener('scroll', () => {
+        const trackLeft = track.getBoundingClientRect().left;
+        const trackCenter = trackLeft + track.offsetWidth / 2;
+        
+        let closestIndex = 0;
+        let minDiff = Infinity;
+
+        const items = document.querySelectorAll('.gallery-item');
+        items.forEach((item, i) => {
+            const rect = item.getBoundingClientRect();
+            const itemCenter = rect.left + rect.width / 2;
+            const diff = Math.abs(trackCenter - itemCenter);
+            if (diff < minDiff) {
+                minDiff = diff;
+                closestIndex = i;
             }
         });
 
-        currentCaseIndex = index;
-        isCaseAnimating = false;
-    }, 300);
+        updateFooter(closestIndex);
+    });
+
+    // Initial State
+    updateFooter(0);
 }
 
-function nextCaseProject() {
-    const next = (currentCaseIndex + 1) % projects.length;
-    renderCaseProject(next);
-}
-
-function prevCaseProject() {
-    const prev = (currentCaseIndex - 1 + projects.length) % projects.length;
-    renderCaseProject(prev);
-}
-
-// Initial render
 document.addEventListener('DOMContentLoaded', () => {
-    renderCaseProject(0);
+    initGallery();
 });
 

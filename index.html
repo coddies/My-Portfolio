@@ -235,41 +235,45 @@
 ════════════════════════════ -->
     <section id="card-4" class="card state-below">
         <div class="card-inner">
-            <div style="width:100%;max-width:1100px;">
+            <div style="width:100%;max-width:1200px;">
                 
-                <div class="section-header" style="text-align:left; margin-bottom: 30px;">
+                <div class="section-header" style="text-align:left; margin-bottom: 35px;">
                     <span class="tagline">WORK HIGHLIGHTS</span>
                     <h2 class="section-title">Projects</h2>
                     <div class="accent-line"></div>
                 </div>
 
-                <!-- NEW: Unified Showcase Container -->
-                <div class="case-container">
+                <!-- NEW: Professional Gallery Container -->
+                <div class="gallery-showcase">
                     
-                    <!-- UP: Visual Stage -->
-                    <div id="case-visual-stage" class="case-visual-stage">
-                        <!-- Dynamic Visual (Emoji/Glow) Injected Here -->
+                    <!-- UP: Horizontal Gallery Track -->
+                    <div id="gallery-viewport" class="gallery-viewport">
+                        <div id="gallery-track" class="gallery-track">
+                             <!-- JS will inject .gallery-item (preview boxes) here -->
+                        </div>
                     </div>
 
-                    <!-- DOWN: Info Bar -->
-                    <div class="case-info-bar">
-                        <!-- Left: Meta Details -->
-                        <div id="case-meta" class="case-meta">
-                            <span class="case-cat">CATEGORY</span>
-                            <h3 class="case-title">Project Name</h3>
+                    <!-- DOWN: Fixed Info-Bar (Footer) -->
+                    <div class="gallery-footer">
+                        <!-- Left: Info -->
+                        <div class="footer-info">
+                            <span id="footer-cat" class="footer-cat">CATEGORY</span>
+                            <h3 id="footer-title" class="footer-title">Project Name</h3>
                         </div>
 
-                        <!-- Center: Visit Action -->
-                        <div id="case-action" class="case-action">
-                            <!-- Dynamic Button Injected Here -->
+                        <!-- Center: Visit Button -->
+                        <div id="footer-action" class="footer-action">
+                            <!-- JS will inject View Project button here -->
                         </div>
 
-                        <!-- Right: Navigation Pill (Matches Reference) -->
-                        <div class="case-nav-pill">
-                            <div id="case-counter" class="case-count">01 / 04</div>
-                            <div class="case-arrows">
-                                <button class="pill-arrow arrow-left" onclick="prevCaseProject()">‹</button>
-                                <button class="pill-arrow arrow-right" onclick="nextCaseProject()">›</button>
+                        <!-- Right: Nav Pill -->
+                        <div class="footer-nav">
+                            <div class="footer-pill">
+                                <div id="footer-counter" class="footer-count">01 / 04</div>
+                                <div class="footer-arrows">
+                                    <button class="nav-pill-btn btn-left" onclick="scrollGallery(-1)">‹</button>
+                                    <button class="nav-pill-btn btn-right" onclick="scrollGallery(1)">›</button>
+                                </div>
                             </div>
                         </div>
                     </div>
