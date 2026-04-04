@@ -491,18 +491,11 @@ function preciseScroll(dir) {
     const track = document.getElementById('precise-gallery-track');
     if (!track) return;
     
-    // Dynamic width calculation — handle hidden container case
-    const firstCard = track.querySelector('.precise-project-card');
-    let cardWidth = firstCard ? firstCard.offsetWidth : 750;
-    
-    // If it's zero (hidden section), use a reasonable fallback
-    if (cardWidth === 0) cardWidth = 750;
-    
-    // Add gap
-    const finalStep = cardWidth + 30; 
-    
-    track.scrollBy({ left: dir * finalStep, behavior: 'smooth' });
+    // Each card is exactly 100% of viewport width in the track
+    const walk = track.offsetWidth; 
+    track.scrollBy({ left: dir * walk, behavior: 'smooth' });
 }
+
 
 document.addEventListener('DOMContentLoaded', () => {
     renderPreciseGallery();

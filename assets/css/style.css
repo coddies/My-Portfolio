@@ -26,7 +26,6 @@ html, body {
     padding: 0;
     width: 100vw;
     height: 100vh;
-    overflow: hidden !important; /* STRICT NO SCROLL */
     background: var(--bg-gradient);
     color: var(--text-white);
     font-family: 'Plus Jakarta Sans', sans-serif;
@@ -166,7 +165,7 @@ h1, h2, h3, .syne-font {
     display: flex;
     justify-content: center;
     align-items: center; /* Center content vertically */
-    overflow: hidden; /* ABSOLUTE NO SCROLL */
+    overflow-y: auto; /* Restore scrollability */
     scrollbar-width: none;
     -ms-overflow-style: none;
     transition: transform var(--card-transition), opacity var(--opacity-transition), visibility var(--opacity-transition);
@@ -512,6 +511,11 @@ h1, h2, h3, .syne-font {
 }
 
 /* ── CARD 4: PRECISE REFERENCE CLONE ── */
+#card-4 {
+    height: 100vh;
+    overflow: hidden !important;
+}
+
 #card-4 .card-inner {
     padding: 0 !important;
 }
@@ -548,12 +552,11 @@ h1, h2, h3, .syne-font {
 
 .precise-gallery-track {
     display: flex;
-    gap: 30px;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     scrollbar-width: none;
     -ms-overflow-style: none;
-    padding: 20px 0;
+    padding: 10px 0;
 }
 
 .precise-gallery-track::-webkit-scrollbar {
@@ -561,18 +564,18 @@ h1, h2, h3, .syne-font {
 }
 
 .precise-project-card {
-    min-width: 800px;
-    height: 460px;
+    min-width: 100%;
+    height: 480px;
     background: rgba(255,255,255,0.01);
     backdrop-filter: blur(10px);
-    border-radius: 20px;
+    border-radius: 24px;
     overflow: hidden;
     scroll-snap-align: center;
     border: 1px solid rgba(255,255,255,0.05);
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 30px;
+    padding: 40px;
     position: relative;
 }
 
@@ -592,11 +595,11 @@ h1, h2, h3, .syne-font {
 
 .p-card-decor-arrows {
     position: absolute;
-    top: 20px;
-    right: 30px;
-    font-size: 24px;
+    top: 30px;
+    right: 40px;
+    font-size: 28px;
     letter-spacing: -2px;
-    color: rgba(255,255,255,0.1);
+    color: rgba(6, 182, 212, 0.1);
     font-weight: 900;
 }
 
@@ -661,7 +664,7 @@ h1, h2, h3, .syne-font {
     letter-spacing: 1px;
 }
 
-.p-category { color: #ff9d00; text-transform: uppercase; text-shadow: 0 0 10px rgba(255, 157, 0, 0.3); }
+.p-category { color: #06b6d4; text-transform: uppercase; text-shadow: 0 0 10px rgba(6, 182, 212, 0.3); }
 .p-date { color: rgba(255,255,255,0.4); }
 
 .p-title {
@@ -680,26 +683,26 @@ h1, h2, h3, .syne-font {
     z-index: 10;
 }
 
-/* The exact orange button from screenshot */
 .p-action-btn {
     display: inline-flex;
     align-items: center;
-    background: #ff9d00;
+    background: linear-gradient(135deg, #7c3aed, #4f46e5);
     padding: 10px 10px 10px 35px;
     border-radius: 50px;
     text-decoration: none;
-    color: #000;
+    color: #fff;
     font-weight: 800;
     text-transform: uppercase;
-    font-size: 14px;
+    font-size: 13px;
     gap: 20px;
     transition: all 0.3s ease;
-    box-shadow: 0 10px 30px rgba(255, 157, 0, 0.4);
+    box-shadow: 0 10px 30px rgba(124, 58, 237, 0.3);
 }
 
-.p-action-btn:hover {
-    background: #ffae00;
-    transform: translateY(-2px);
+.p-action-btn:hover { 
+    background: linear-gradient(135deg, #4f46e5, #7c3aed); 
+    transform: translateY(-2px); 
+    box-shadow: 0 15px 40px rgba(124, 58, 237, 0.5); 
 }
 
 .p-btn-circle {
@@ -760,7 +763,7 @@ h1, h2, h3, .syne-font {
     transition: all 0.2s ease;
 }
 
-.p-arrow-btn:hover { background: #ff9d00; transform: scale(1.05); }
+.p-arrow-btn:hover { background: #7c3aed; transform: scale(1.05); color: #fff; }
 
 @media (max-width: 1000px) {
     .precise-project-card { min-width: 90%; height: 350px; }
