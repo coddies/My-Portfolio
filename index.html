@@ -165,66 +165,40 @@
 <!-- ════════════════════════════
      CARD 4 — PROJECTS
 ════════════════════════════ -->
-<section id="card-4" class="card state-below">
-    <div class="card-inner">
-        <div style="width:100%;max-width:1100px;">
-            <div class="section-header" style="text-align:left;">
-                <span class="tagline">WORK HIGHLIGHTS</span>
-                <h2 class="section-title">Projects</h2>
-                <div class="accent-line"></div>
-            </div>
-            <div class="projects-grid">
-
-                <div class="project-card">
-                    <span class="project-icon">🤖</span>
-                    <span class="project-name">AI Chatbot</span>
-                    <p class="project-desc">NLP-driven intelligent chatbot using Python that understands and responds to natural language.</p>
-                    <div class="badge-row"><span class="tech-pill">Python</span><span class="tech-pill">NLP</span><span class="tech-pill">AI</span></div>
-                    <a href="https://github.com/coddies" target="_blank" class="project-link">GitHub Repo →</a>
-                </div>
-
-                <div class="project-card">
-                    <span class="project-icon">🎬</span>
-                    <span class="project-name">Faceless AI Studio</span>
-                    <p class="project-desc">Fully automated AI video creation pipeline. Scripts to Voice to Video with zero manual effort.</p>
-                    <div class="badge-row"><span class="tech-pill">AI</span><span class="tech-pill">Automation</span><span class="tech-pill">Video</span></div>
-                    <a href="https://github.com/coddies" target="_blank" class="project-link">View Studio →</a>
-                </div>
-
-                <div class="project-card">
-                    <span class="project-icon">📊</span>
-                    <span class="project-name">Data Analysis</span>
-                    <p class="project-desc">Real-world dataset deep analysis with beautiful visualizations and business insights.</p>
-                    <div class="badge-row"><span class="tech-pill">Pandas</span><span class="tech-pill">Matplotlib</span><span class="tech-pill">Python</span></div>
-                    <a href="https://github.com/coddies" target="_blank" class="project-link">GitHub Repo →</a>
-                </div>
-
-                <div class="project-card">
-                    <span class="project-icon">🧠</span>
-                    <span class="project-name">ML Classification</span>
-                    <p class="project-desc">Scikit-learn classification model achieving 92% accuracy on real-world test data.</p>
-                    <div class="badge-row"><span class="tech-pill">Scikit-learn</span><span class="tech-pill">ML</span><span class="tech-pill">Python</span></div>
-                    <a href="https://github.com/coddies" target="_blank" class="project-link">GitHub Repo →</a>
-                </div>
-
-                <div class="project-card">
-                    <span class="project-icon">✍️</span>
-                    <span class="project-name">Prompt Engineering</span>
-                    <p class="project-desc">Advanced AI prompt collection for content creation, coding, and automation workflows.</p>
-                    <div class="badge-row"><span class="tech-pill">ChatGPT</span><span class="tech-pill">Claude</span><span class="tech-pill">Gemini</span></div>
-                    <a href="https://github.com/coddies" target="_blank" class="project-link">View Prompts →</a>
-                </div>
-
-                <div class="project-card">
-                    <span class="project-icon">🎥</span>
-                    <span class="project-name">YouTube AI Channel</span>
-                    <p class="project-desc">AI-powered content creation — scripting, video editing, and full automation with AI tools.</p>
-                    <div class="badge-row"><span class="tech-pill">AI Video</span><span class="tech-pill">Content</span><span class="tech-pill">YouTube</span></div>
-                    <a href="https://github.com/coddies" target="_blank" class="project-link">View Channel →</a>
-                </div>
-
-            </div>
+<section id="card-4" class="card state-below showcase-card-override">
+    <div class="card-inner showcase-inner">
+        
+        <div id="project-slide-container" class="project-slide-container">
+            <!-- Dynamic project slides will be injected here via main.js -->
         </div>
+
+        <!-- ════ BOTTOM SECTION DESIGN ════ -->
+        <div class="showcase-bottom-bar">
+            
+            <!-- Progress Line -->
+            <div class="progress-indicator-track">
+                <div id="showcase-progress" class="progress-indicator-fill"></div>
+            </div>
+
+            <!-- Pre-counter-Next -->
+            <div class="showcase-nav-row">
+                <div class="sc-btn-prev" onclick="prevShowcaseProject()">
+                    <span>← PREV</span>
+                </div>
+                
+                <div class="sc-counter">
+                    <span id="sc-curr">01</span>
+                    <span class="sc-divider">/</span>
+                    <span id="sc-total">06</span>
+                </div>
+                
+                <div class="sc-btn-next" onclick="nextShowcaseProject()">
+                    <span>NEXT →</span>
+                </div>
+            </div>
+            
+        </div>
+        
     </div>
 </section>
 
