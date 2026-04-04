@@ -402,50 +402,39 @@ const projects = [
     tags: ['Python', 'NLP', 'AI'],
     emoji: '🤖',
     color: 'rgba(124,58,237,0.12)',
-    github: 'https://github.com/coddies',
+    github: 'https://github.com/coddies/AI-Chatbot',
     demo: null
   },
   {
     number: '02',
+    category: 'FRONTEND',
+    name: 'My Portfolio',
+    desc: 'A premium, highly interactive portfolio website built with Dark Glass aesthetics, dynamic carousels, and complex CSS layouts.',
+    tags: ['HTML', 'CSS', 'JavaScript'],
+    emoji: '✨',
+    color: 'rgba(6,182,212,0.12)',
+    github: 'https://github.com/coddies/My-Portfolio',
+    demo: null
+  },
+  {
+    number: '03',
     category: 'AI AUTOMATION',
     name: 'Faceless AI Studio',
     desc: 'Fully automated AI video creation pipeline. Converts scripts to voice to video with zero manual effort.',
     tags: ['AI', 'Automation', 'Video'],
     emoji: '🎬',
     color: 'rgba(236,72,153,0.12)',
-    github: 'https://github.com/coddies',
-    demo: null
-  },
-  {
-    number: '03',
-    category: 'DATA SCIENCE',
-    name: 'Data Analysis Dashboard',
-    desc: 'Real-world dataset deep analysis with beautiful Pandas and Matplotlib visualizations and business insights.',
-    tags: ['Pandas', 'Matplotlib', 'Python'],
-    emoji: '📊',
-    color: 'rgba(6,182,212,0.12)',
-    github: 'https://github.com/coddies',
+    github: 'https://github.com/coddies/Faceless-AI-Studio',
     demo: null
   },
   {
     number: '04',
-    category: 'MACHINE LEARNING',
-    name: 'ML Classification Model',
-    desc: 'Scikit-learn classification model achieving 92% accuracy. Trained on real-world test data with full evaluation.',
-    tags: ['Scikit-learn', 'ML', 'Python'],
-    emoji: '🧠',
-    color: 'rgba(124,58,237,0.12)',
-    github: 'https://github.com/coddies',
-    demo: null
-  },
-  {
-    number: '05',
     category: 'CONTENT CREATION',
     name: 'YouTube AI Channel',
     desc: 'AI-powered content creation covering programming, AI tools, and full lifecycle automation.',
     tags: ['YouTube', 'Content', 'AI Video'],
     emoji: '🎥',
-    color: 'rgba(236,72,153,0.12)',
+    color: 'rgba(124,58,237,0.12)',
     github: null,
     demo: 'https://www.youtube.com/@Noor-e-SadaOfficial'
   }
@@ -462,7 +451,7 @@ function renderProjectDots() {
     ).join('');
 }
 
-function getProjectHTML(proj) {
+function getProjectHTML(proj, animClass = '') {
     const tagsHTML = proj.tags.map(t => `<span>${t}</span>`).join('');
     
     let btnsHTML = '';
@@ -473,7 +462,7 @@ function getProjectHTML(proj) {
     }
 
     return `
-        <div class="project-anim-wrapper">
+        <div class="project-anim-wrapper ${animClass}">
             <div class="proj-preview">
                 <div class="proj-bg-glow" style="background: radial-gradient(circle at center, ${proj.color}, transparent 70%);"></div>
                 <span class="proj-emoji">${proj.emoji}</span>
@@ -492,28 +481,29 @@ function getProjectHTML(proj) {
 }
 
 function showProject(idx, direction) {
-    if (isAnimatingProj) return;
+    if (isAnimatingProj || idx === currentProject) return;
     isAnimatingProj = true;
     
     const contentBox = document.getElementById('project-content');
     if (!contentBox) return;
 
-    // Apply out animation 
-    contentBox.className = `project-content ${direction === 'next' ? 'anim-next-out' : 'anim-prev-out'}`;
+    const oldWrapper = contentBox.querySelector('.project-anim-wrapper');
+    if (oldWrapper) {
+        oldWrapper.className = `project-anim-wrapper ${direction === 'next' ? 'anim-next-out' : 'anim-prev-out'}`;
+    }
+
+    const inClass = direction === 'next' ? 'anim-next-in' : 'anim-prev-in';
+    contentBox.insertAdjacentHTML('beforeend', getProjectHTML(projects[idx], inClass));
+    
+    currentProject = idx;
+    renderProjectDots();
 
     setTimeout(() => {
-        currentProject = idx;
-        contentBox.innerHTML = getProjectHTML(projects[idx]);
-        renderProjectDots();
-        
-        // Prepare IN animation
-        contentBox.className = `project-content ${direction === 'next' ? 'anim-next-in' : 'anim-prev-in'}`;
-        
-        setTimeout(() => {
-            contentBox.className = 'project-content';
-            isAnimatingProj = false;
-        }, 300); // 300ms in duration
-    }, 200); // 200ms out duration
+        if (oldWrapper) oldWrapper.remove();
+        const newWrapper = contentBox.querySelector('.project-anim-wrapper:last-child');
+        if(newWrapper) newWrapper.className = 'project-anim-wrapper';
+        isAnimatingProj = false;
+    }, 300); // 300ms matches CSS animation duration
 }
 
 function nextProject() {
