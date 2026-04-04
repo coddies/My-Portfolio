@@ -859,8 +859,8 @@ h1, h2, h3, .syne-font {
     z-index: 1;
 }
 
-/* ── CARD 6: CERTIFICATIONS ── */
-#card-6 { background: rgba(236,72,153,0.05); }
+/* ── CARD 5: ACHIEVEMENTS / CERTIFICATIONS ── */
+#card-5 { background: rgba(124, 58, 237, 0.05); }
 
 .certs-container {
     width: 100%;
@@ -1028,8 +1028,8 @@ h1, h2, h3, .syne-font {
     transition: transform 0.1s !important;
 }
 
-/* ── CARD 8: CASE STUDIES ── */
-#card-8 { background: rgba(6, 182, 212, 0.03); }
+/* ── CARD 6: CASE STUDIES ── */
+#card-6 { background: rgba(6, 182, 212, 0.03); }
 
 .cs-grid {
     display: grid;
