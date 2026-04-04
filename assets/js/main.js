@@ -392,158 +392,143 @@ if (dotWrap && ringWrap && window.matchMedia('(pointer: fine)').matches) {
     });
 }
 
-// ── PROJECT SHOWCASE LOGIC ──
-const GITHUB_USERNAME = 'coddies';
-
-const manualProjects = [
+// ── PROJECTS LOGIC ──
+const projects = [
   {
-    number: '01', category: 'AI PROJECT', name: 'AI Chatbot',
-    desc: 'NLP-driven intelligent chatbot using Python that understands and responds to natural language.',
-    tags: ['Python', 'NLP', 'AI'], emoji: '🤖', github: 'https://github.com/coddies', demo: null
+    number: '01',
+    category: 'AI PROJECT',
+    name: 'AI Chatbot',
+    desc: 'NLP-driven intelligent chatbot built with Python. Understands and responds to natural language queries with high accuracy.',
+    tags: ['Python', 'NLP', 'AI'],
+    emoji: '🤖',
+    color: 'rgba(124,58,237,0.12)',
+    github: 'https://github.com/coddies',
+    demo: null
   },
   {
-    number: '02', category: 'AI AUTOMATION', name: 'Faceless AI Studio',
-    desc: 'Fully automated AI video creation pipeline. Scripts to Voice to Video with zero manual effort.',
-    tags: ['AI', 'Automation', 'Video'], emoji: '🎬', github: 'https://github.com/coddies', demo: null
+    number: '02',
+    category: 'AI AUTOMATION',
+    name: 'Faceless AI Studio',
+    desc: 'Fully automated AI video creation pipeline. Converts scripts to voice to video with zero manual effort.',
+    tags: ['AI', 'Automation', 'Video'],
+    emoji: '🎬',
+    color: 'rgba(236,72,153,0.12)',
+    github: 'https://github.com/coddies',
+    demo: null
   },
   {
-    number: '03', category: 'DATA SCIENCE', name: 'Data Analysis',
-    desc: 'Real-world dataset deep analysis with beautiful visualizations and business insights.',
-    tags: ['Pandas', 'Matplotlib', 'Python'], emoji: '📊', github: 'https://github.com/coddies', demo: null
+    number: '03',
+    category: 'DATA SCIENCE',
+    name: 'Data Analysis Dashboard',
+    desc: 'Real-world dataset deep analysis with beautiful Pandas and Matplotlib visualizations and business insights.',
+    tags: ['Pandas', 'Matplotlib', 'Python'],
+    emoji: '📊',
+    color: 'rgba(6,182,212,0.12)',
+    github: 'https://github.com/coddies',
+    demo: null
   },
   {
-    number: '04', category: 'MACHINE LEARNING', name: 'ML Classification',
-    desc: 'Scikit-learn model achieving 92% accuracy on real-world test data.',
-    tags: ['Scikit-learn', 'ML', 'Python'], emoji: '🧠', github: 'https://github.com/coddies', demo: null
+    number: '04',
+    category: 'MACHINE LEARNING',
+    name: 'ML Classification Model',
+    desc: 'Scikit-learn classification model achieving 92% accuracy. Trained on real-world test data with full evaluation.',
+    tags: ['Scikit-learn', 'ML', 'Python'],
+    emoji: '🧠',
+    color: 'rgba(124,58,237,0.12)',
+    github: 'https://github.com/coddies',
+    demo: null
   },
   {
-    number: '05', category: 'AI TOOLS', name: 'Prompt Engineering',
-    desc: 'Advanced AI prompt collection for content creation and automation workflows.',
-    tags: ['ChatGPT', 'Claude', 'Gemini'], emoji: '✍️', github: 'https://github.com/coddies', demo: null
-  },
-  {
-    number: '06', category: 'CONTENT', name: 'YouTube AI Channel',
-    desc: 'AI-powered content creation with scripting, video editing and full automation.',
-    tags: ['AI Video', 'Content', 'YouTube'], emoji: '🎥', github: 'https://github.com/coddies', demo: null
+    number: '05',
+    category: 'CONTENT CREATION',
+    name: 'YouTube AI Channel',
+    desc: 'AI-powered content creation covering programming, AI tools, and full lifecycle automation.',
+    tags: ['YouTube', 'Content', 'AI Video'],
+    emoji: '🎥',
+    color: 'rgba(236,72,153,0.12)',
+    github: null,
+    demo: 'https://www.youtube.com/@Noor-e-SadaOfficial'
   }
 ];
 
-let showcaseProjects = [...manualProjects];
-let scCurrentIndex = 0;
-let isScTransitioning = false;
+let currentProject = 0;
+let isAnimatingProj = false;
 
-async function fetchGitHubRepos() {
-    try {
-        const res = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=10`);
-        if (!res.ok) throw new Error('GitHub API Limit or Error');
-        const repos = await res.json();
-        
-        const offset = manualProjects.length + 1;
-        repos.forEach((repo, i) => {
-            showcaseProjects.push({
-                number: String(offset + i).padStart(2, '0'),
-                category: 'GITHUB REPO',
-                name: repo.name,
-                desc: repo.description || 'No description provided.',
-                tags: [repo.language || 'Code'],
-                emoji: '💻',
-                github: repo.html_url,
-                demo: repo.homepage || null
-            });
-        });
-        updateShowcaseUI();
-    } catch (e) {
-        console.log('GitHub fetch skipped/failed, using manual projects.');
-    }
+function renderProjectDots() {
+    const dotsContainer = document.getElementById('project-dots');
+    if (!dotsContainer) return;
+    dotsContainer.innerHTML = projects.map((_, i) => 
+        `<div class="proj-dot ${i === currentProject ? 'active' : ''}"></div>`
+    ).join('');
 }
 
-function updateShowcaseUI() {
-    const elCurr = document.getElementById('sc-curr');
-    const elTotal = document.getElementById('sc-total');
-    const elProg = document.getElementById('showcase-progress');
+function getProjectHTML(proj) {
+    const tagsHTML = proj.tags.map(t => `<span>${t}</span>`).join('');
     
-    if(elTotal) elTotal.textContent = String(showcaseProjects.length).padStart(2, '0');
-    if(elCurr) elCurr.textContent = String(scCurrentIndex + 1).padStart(2, '0');
-    
-    if(elProg) {
-        const pct = ((scCurrentIndex + 1) / showcaseProjects.length) * 100;
-        elProg.style.width = pct + '%';
+    let btnsHTML = '';
+    if (proj.github) btnsHTML += `<a href="${proj.github}" target="_blank" class="proj-btn-primary">View on GitHub →</a>`;
+    if (proj.demo) {
+        const isYT = proj.demo.includes('youtube.com');
+        btnsHTML += `<a href="${proj.demo}" target="_blank" class="${proj.github ? 'proj-btn-secondary' : 'proj-btn-primary'}">${isYT ? 'Visit Channel ↗' : 'Live Demo ↗'}</a>`;
     }
-}
 
-function buildSlideHTML(proj, isActive, animClass = '') {
-    const cls = isActive ? `sc-slide sc-active ${animClass}` : `sc-slide ${animClass}`;
-    const tagsHTML = proj.tags.filter(t => t).map(t => `<span class="tech-pill">${t}</span>`).join('');
-    
-    let btns = '';
-    if (proj.github) btns += `<a href="${proj.github}" target="_blank" class="sc-btn-fill">View on GitHub →</a>`;
-    if (proj.demo) btns += `<a href="${proj.demo}" target="_blank" class="sc-btn-outline">Live Demo →</a>`;
-    
     return `
-    <div class="${cls.trim()}">
-        <div class="sc-left">
-            <span class="sc-watermark">${proj.number}</span>
-            <div class="sc-content-wrap">
-                <span class="sc-tag">${proj.category}</span>
-                <h3 class="sc-title">${proj.name}</h3>
-                <p class="sc-desc">${proj.desc}</p>
-                <div class="sc-badges">${tagsHTML}</div>
-                <div class="sc-buttons">${btns}</div>
+        <div class="project-anim-wrapper">
+            <div class="proj-preview">
+                <div class="proj-bg-glow" style="background: radial-gradient(circle at center, ${proj.color}, transparent 70%);"></div>
+                <span class="proj-emoji">${proj.emoji}</span>
+                <span class="proj-preview-name">${proj.name}</span>
+            </div>
+            <div class="proj-details">
+                <span class="proj-num">${proj.number}</span>
+                <div class="proj-cat">${proj.category}</div>
+                <h3 class="proj-title">${proj.name}</h3>
+                <p class="proj-desc">${proj.desc}</p>
+                <div class="proj-tags">${tagsHTML}</div>
+                <div class="proj-actions">${btnsHTML}</div>
             </div>
         </div>
-        <div class="sc-right">
-            <div class="sc-preview">
-                <div class="sc-preview-glow"></div>
-                <span class="sc-emoji">${proj.emoji}</span>
-                <span class="sc-preview-title">${proj.name}</span>
-            </div>
-        </div>
-    </div>`;
+    `;
 }
 
-function renderInitialShowcase() {
-    const container = document.getElementById('project-slide-container');
-    if (!container) return;
-    container.innerHTML = buildSlideHTML(showcaseProjects[0], true);
-    updateShowcaseUI();
-}
+function showProject(idx, direction) {
+    if (isAnimatingProj) return;
+    isAnimatingProj = true;
+    
+    const contentBox = document.getElementById('project-content');
+    if (!contentBox) return;
 
-function prevShowcaseProject() {
-    if (isScTransitioning || showcaseProjects.length === 0) return;
-    let prevIdx = scCurrentIndex - 1;
-    if (prevIdx < 0) prevIdx = showcaseProjects.length - 1;
-    goToShowcaseProject(prevIdx, 'prev');
-}
+    // Apply out animation 
+    contentBox.className = `project-content ${direction === 'next' ? 'anim-next-out' : 'anim-prev-out'}`;
 
-function nextShowcaseProject() {
-    if (isScTransitioning || showcaseProjects.length === 0) return;
-    let nextIdx = scCurrentIndex + 1;
-    if (nextIdx >= showcaseProjects.length) nextIdx = 0;
-    goToShowcaseProject(nextIdx, 'next');
-}
-
-function goToShowcaseProject(targetIdx, dir) {
-    isScTransitioning = true;
-    const container = document.getElementById('project-slide-container');
-    const oldSlide = container.querySelector('.sc-slide.sc-active');
-    
-    if (oldSlide) {
-        oldSlide.style.animation = dir === 'next' ? 'scSlideOutLeft 400ms ease forwards' : 'scSlideOutRight 400ms ease forwards';
-    }
-    
-    const animClass = dir === 'next' ? 'anim-in-right' : 'anim-in-left';
-    container.insertAdjacentHTML('beforeend', buildSlideHTML(showcaseProjects[targetIdx], true, animClass));
-    
-    scCurrentIndex = targetIdx;
-    updateShowcaseUI();
-    
     setTimeout(() => {
-        if (oldSlide) oldSlide.remove();
-        isScTransitioning = false;
-        const newSlide = container.querySelector('.sc-slide.sc-active');
-        if (newSlide) newSlide.className = 'sc-slide sc-active';
-    }, 400);
+        currentProject = idx;
+        contentBox.innerHTML = getProjectHTML(projects[idx]);
+        renderProjectDots();
+        
+        // Prepare IN animation
+        contentBox.className = `project-content ${direction === 'next' ? 'anim-next-in' : 'anim-prev-in'}`;
+        
+        setTimeout(() => {
+            contentBox.className = 'project-content';
+            isAnimatingProj = false;
+        }, 300); // 300ms in duration
+    }, 200); // 200ms out duration
 }
 
-renderInitialShowcase();
-fetchGitHubRepos();
+function nextProject() {
+    const next = (currentProject + 1) % projects.length;
+    showProject(next, 'next');
+}
+
+function prevProject() {
+    const prev = (currentProject - 1 + projects.length) % projects.length;
+    showProject(prev, 'prev');
+}
+
+// Initial render
+const initialContentBox = document.getElementById('project-content');
+if(initialContentBox) {
+    initialContentBox.innerHTML = getProjectHTML(projects[0]);
+    renderProjectDots();
+}

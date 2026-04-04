@@ -1,528 +1,621 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Muhammad Burhan | AI & Data Science</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com"/>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
-    <link rel="stylesheet" href="assets/css/style.css"/>
-    <link rel="icon" href="assets/images/mb-logo.svg" type="image/svg+xml"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="icon" href="assets/images/mb-logo.svg" type="image/svg+xml" />
 </head>
+
 <body>
-<div id="transition-flash" style="position:fixed;inset:0;z-index:50;pointer-events:none;opacity:0;background:radial-gradient(circle at center, rgba(124,58,237,0.15), transparent);transition:opacity 0.15s ease;"></div>
-<div class="cursor-dot-wrap">
-    <div class="cursor-dot"></div>
-</div>
-<div class="cursor-ring-wrap">
-    <div class="cursor-ring-outer"></div>
-    <div class="cursor-ring-inner"></div>
-</div>
-<canvas id="particles-canvas"></canvas>
+    <div id="transition-flash"
+        style="position:fixed;inset:0;z-index:50;pointer-events:none;opacity:0;background:radial-gradient(circle at center, rgba(124,58,237,0.15), transparent);transition:opacity 0.15s ease;">
+    </div>
+    <div class="cursor-dot-wrap">
+        <div class="cursor-dot"></div>
+    </div>
+    <div class="cursor-ring-wrap">
+        <div class="cursor-ring-outer"></div>
+        <div class="cursor-ring-inner"></div>
+    </div>
+    <canvas id="particles-canvas"></canvas>
 
 
-<!-- ── NAV RAIL ── -->
-<nav class="nav-rail">
-    <div class="nav-btn active" data-index="0">🏠<span class="nav-tooltip">Home</span></div>
-    <div class="nav-btn"        data-index="1">👤<span class="nav-tooltip">About</span></div>
-    <div class="nav-btn"        data-index="2">🛠️<span class="nav-tooltip">Skills</span></div>
-    <div class="nav-btn"        data-index="3">💼<span class="nav-tooltip">Projects</span></div>
-    <div class="nav-btn"        data-index="4">🏅<span class="nav-tooltip">Achievements</span></div>
-    <div class="nav-btn"        data-index="5">🔬<span class="nav-tooltip">Case Studies</span></div>
-    <div class="nav-btn"        data-index="6">✉️<span class="nav-tooltip">Contact</span></div>
-</nav>
+    <!-- ── NAV RAIL ── -->
+    <nav class="nav-rail">
+        <div class="nav-btn active" data-index="0">🏠<span class="nav-tooltip">Home</span></div>
+        <div class="nav-btn" data-index="1">👤<span class="nav-tooltip">About</span></div>
+        <div class="nav-btn" data-index="2">🛠️<span class="nav-tooltip">Skills</span></div>
+        <div class="nav-btn" data-index="3">💼<span class="nav-tooltip">Projects</span></div>
+        <div class="nav-btn" data-index="4">🏅<span class="nav-tooltip">Achievements</span></div>
+        <div class="nav-btn" data-index="5">🔬<span class="nav-tooltip">Case Studies</span></div>
+        <div class="nav-btn" data-index="6">✉️<span class="nav-tooltip">Contact</span></div>
+    </nav>
 
-<!-- ════════════════════════════
+    <!-- ════════════════════════════
      CARD 1 — HOME
 ════════════════════════════ -->
-<section id="card-1" class="card state-active">
-    <div class="card-inner">
-        <div class="hero-grid">
+    <section id="card-1" class="card state-active">
+        <div class="card-inner">
+            <div class="hero-grid">
 
-            <!-- Profile photo -->
-            <div class="hero-left">
-                <img src="assets/images/my-img.png" alt="Muhammad Burhan" class="hero-photo">
-            </div>
-
-            <!-- Text content -->
-            <div class="hero-right">
-                <span class="tagline">AI & Data Science Student</span>
-                <h1 class="hero-name">Muhammad <br><span class="gradient-text">Burhan</span></h1>
-                <div class="typewriter-container">
-                    <span id="typewriter"></span><span class="cursor"></span>
+                <!-- Profile photo -->
+                <div class="hero-left">
+                    <img src="assets/images/my-img.png" alt="Muhammad Burhan" class="hero-photo">
                 </div>
-                <p class="hero-bio">
-                    Hi, I'm Muhammad Burhan—An AI & Data Science Student at Saylani Mass IT. I turn complex data into intelligent solutions through code, creativity, and a passion for problem-solving.
-                </p>
-                <div class="btn-group">
-                    <a href="https://github.com/coddies" target="_blank" class="pill-btn btn-github">GitHub</a>
-                    <a href="https://www.linkedin.com/in/muhammad-burhan-73a81b27b/" target="_blank" class="pill-btn btn-linkedin">LinkedIn</a>
-                    <a href="Muhammad_Burhan_CV.pdf" download="Muhammad_Burhan_CV.pdf" class="pill-btn btn-cv">📄 CV</a>
-                </div>
-            </div>
 
+                <!-- Text content -->
+                <div class="hero-right">
+                    <span class="tagline">AI & Data Science Student</span>
+                    <h1 class="hero-name">Muhammad <br><span class="gradient-text">Burhan</span></h1>
+                    <div class="typewriter-container">
+                        <span id="typewriter"></span><span class="cursor"></span>
+                    </div>
+                    <p class="hero-bio">
+                        Hi, I'm Muhammad Burhan—An AI & Data Science Student at Saylani Mass IT. I turn complex data
+                        into intelligent solutions through code, creativity, and a passion for problem-solving.
+                    </p>
+                    <div class="btn-group">
+                        <a href="https://github.com/coddies" target="_blank" class="pill-btn btn-github">GitHub</a>
+                        <a href="https://www.linkedin.com/in/muhammad-burhan-73a81b27b/" target="_blank"
+                            class="pill-btn btn-linkedin">LinkedIn</a>
+                        <a href="Muhammad_Burhan_CV.pdf" download="Muhammad_Burhan_CV.pdf" class="pill-btn btn-cv">📄
+                            CV</a>
+                    </div>
+                </div>
+
+            </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- ════════════════════════════
+    <!-- ════════════════════════════
      CARD 2 — ABOUT
 ════════════════════════════ -->
-<section id="card-2" class="card state-below">
-    <div class="card-inner">
-        <div class="about-grid">
+    <section id="card-2" class="card state-below">
+        <div class="card-inner">
+            <div class="about-grid">
 
-            <!-- Photo slides in from top -->
-            <div>
-                <img
-                    src="assets/images/my-img.png"
-                    alt="Muhammad Burhan"
-                    class="about-photo"
-                />
-            </div>
+                <!-- Photo slides in from top -->
+                <div>
+                    <img src="assets/images/my-img.png" alt="Muhammad Burhan" class="about-photo" />
+                </div>
 
-            <!-- Info -->
-            <div>
-                <span class="tagline">Who I Am</span>
-                <h2 class="section-title">About Me</h2>
-                <div class="accent-line"></div>
-                <div class="about-bio">
-                    <p style="margin-bottom: 12px;">
-                        I am a passionate AI & Data Science student at Saylani Mass IT Institute, dedicated to mastering the art of machine intelligence. My focus lies in **Generative AI and NLP**, where I explore how models can understand and augment human creativity.
-                    </p>
-                    <div id="aboutMoreContent" style="display: none;">
+                <!-- Info -->
+                <div>
+                    <span class="tagline">Who I Am</span>
+                    <h2 class="section-title">About Me</h2>
+                    <div class="accent-line"></div>
+                    <div class="about-bio">
                         <p style="margin-bottom: 12px;">
-                            My journey isn't just about writing lines of code; it's about solving real-world problems. Beyond the terminal, I’m an AI Content Creator and YouTuber, where I simplify complex tech concepts to empower the community.
+                            I am a passionate AI & Data Science student at Saylani Mass IT Institute, dedicated to
+                            mastering the art of machine intelligence. My focus lies in **Generative AI and NLP**, where
+                            I explore how models can understand and augment human creativity.
                         </p>
-                        <p>
-                            Whether it's Prompt Engineering, deep-diving into Data Science, or exploring the latest in 'Vibe Coding', I thrive on the edge of innovation. My ultimate goal is to build **intelligent, human-centric systems** that make a tangible difference.
-                        </p>
+                        <div id="aboutMoreContent" style="display: none;">
+                            <p style="margin-bottom: 12px;">
+                                My journey isn't just about writing lines of code; it's about solving real-world
+                                problems. Beyond the terminal, I’m an AI Content Creator and YouTuber, where I simplify
+                                complex tech concepts to empower the community.
+                            </p>
+                            <p>
+                                Whether it's Prompt Engineering, deep-diving into Data Science, or exploring the latest
+                                in 'Vibe Coding', I thrive on the edge of innovation. My ultimate goal is to build
+                                **intelligent, human-centric systems** that make a tangible difference.
+                            </p>
+                        </div>
+                        <button id="readMoreBtn"
+                            style="background:none; border:none; color:var(--cyan); font-weight:700; cursor:pointer; padding:0; margin-top:8px; font-size:14px; text-decoration:underline; font-family:inherit;">Read
+                            More</button>
                     </div>
-                    <button id="readMoreBtn" style="background:none; border:none; color:var(--cyan); font-weight:700; cursor:pointer; padding:0; margin-top:8px; font-size:14px; text-decoration:underline; font-family:inherit;">Read More</button>
+                    <div class="info-grid">
+                        <div class="info-box">
+                            <span class="info-label">Name</span>
+                            <span class="info-val">Muhammad Burhan</span>
+                        </div>
+                        <div class="info-box">
+                            <span class="info-label">Location</span>
+                            <span class="info-val">Chiniot, PK</span>
+                        </div>
+                        <div class="info-box">
+                            <span class="info-label">Institute</span>
+                            <span class="info-val">Saylani Mass IT</span>
+                        </div>
+                        <div class="info-box">
+                            <span class="info-label">Focus</span>
+                            <span class="info-val">AI & Data Science</span>
+                        </div>
+                        <div class="info-box">
+                            <span class="info-label">GitHub</span>
+                            <span class="info-val">@coddies</span>
+                        </div>
+                        <div class="info-box">
+                            <span class="info-label">Status</span>
+                            <span class="info-val">Open to Work ✅</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="info-grid">
-                    <div class="info-box">
-                        <span class="info-label">Name</span>
-                        <span class="info-val">Muhammad Burhan</span>
-                    </div>
-                    <div class="info-box">
-                        <span class="info-label">Location</span>
-                        <span class="info-val">Chiniot, PK</span>
-                    </div>
-                    <div class="info-box">
-                        <span class="info-label">Institute</span>
-                        <span class="info-val">Saylani Mass IT</span>
-                    </div>
-                    <div class="info-box">
-                        <span class="info-label">Focus</span>
-                        <span class="info-val">AI & Data Science</span>
-                    </div>
-                    <div class="info-box">
-                        <span class="info-label">GitHub</span>
-                        <span class="info-val">@coddies</span>
-                    </div>
-                    <div class="info-box">
-                        <span class="info-label">Status</span>
-                        <span class="info-val">Open to Work ✅</span>
-                    </div>
-                </div>
+
             </div>
-
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- ════════════════════════════
+    <!-- ════════════════════════════
      CARD 3 — SKILLS
 ════════════════════════════ -->
-<section id="card-3" class="card state-below">
-    <div class="card-inner">
-        <div style="width:100%;max-width:820px;">
-            <div class="section-header">
-                <span class="tagline">MY TOOLKIT</span>
-                <h2 class="section-title">Skills & Tools</h2>
-                <div class="accent-line" style="margin:0 auto 0;"></div>
-            </div>
-            <div class="skills-grid">
-                <div class="skill-card"><span class="skill-emoji">🌐</span><span class="skill-name">HTML / CSS / JS</span><div class="progress-container"><div class="progress-bar" data-width="62%"></div></div></div>
-                <div class="skill-card"><span class="skill-emoji">🗄️</span><span class="skill-name">SQL</span><div class="progress-container"><div class="progress-bar" data-width="50%"></div></div></div>
-                <div class="skill-card"><span class="skill-emoji">🐍</span><span class="skill-name">Python</span><div class="progress-container"><div class="progress-bar" data-width="80%"></div></div></div>
-                <div class="skill-card"><span class="skill-emoji">📈</span><span class="skill-name">Data Analysis</span><div class="progress-container"><div class="progress-bar" data-width="72%"></div></div></div>
-                <div class="skill-card"><span class="skill-emoji">📊</span><span class="skill-name">Data Science</span><div class="progress-container"><div class="progress-bar" data-width="70%"></div></div></div>
-                <div class="skill-card"><span class="skill-emoji">🤖</span><span class="skill-name">Machine Learning</span><div class="progress-container"><div class="progress-bar" data-width="65%"></div></div></div>
-                <div class="skill-card"><span class="skill-emoji">🧠</span><span class="skill-name">AI / LLMs</span><div class="progress-container"><div class="progress-bar" data-width="60%"></div></div></div>
-                <div class="skill-card"><span class="skill-emoji">☁️</span><span class="skill-name">AWS Cloud</span><div class="progress-container"><div class="progress-bar" data-width="55%"></div></div></div>
-                <div class="skill-card"><span class="skill-emoji">✍️</span><span class="skill-name">Prompt Engineering</span><div class="progress-container"><div class="progress-bar" data-width="80%"></div></div></div>
-                <div class="skill-card"><span class="skill-emoji">🎥</span><span class="skill-name">AI Video Editing</span><div class="progress-container"><div class="progress-bar" data-width="70%"></div></div></div>
-                <div class="skill-card"><span class="skill-emoji">🎬</span><span class="skill-name">Content Creation</span><div class="progress-container"><div class="progress-bar" data-width="75%"></div></div></div>
-                <div class="skill-card"><span class="skill-emoji">💻</span><span class="skill-name">Vibe Coding</span><div class="progress-container"><div class="progress-bar" data-width="65%"></div></div></div>
+    <section id="card-3" class="card state-below">
+        <div class="card-inner">
+            <div style="width:100%;max-width:820px;">
+                <div class="section-header">
+                    <span class="tagline">MY TOOLKIT</span>
+                    <h2 class="section-title">Skills & Tools</h2>
+                    <div class="accent-line" style="margin:0 auto 0;"></div>
+                </div>
+                <div class="skills-grid">
+                    <div class="skill-card"><span class="skill-emoji">🌐</span><span class="skill-name">HTML / CSS /
+                            JS</span>
+                        <div class="progress-container">
+                            <div class="progress-bar" data-width="62%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-card"><span class="skill-emoji">🗄️</span><span class="skill-name">SQL</span>
+                        <div class="progress-container">
+                            <div class="progress-bar" data-width="50%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-card"><span class="skill-emoji">🐍</span><span class="skill-name">Python</span>
+                        <div class="progress-container">
+                            <div class="progress-bar" data-width="80%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-card"><span class="skill-emoji">📈</span><span class="skill-name">Data
+                            Analysis</span>
+                        <div class="progress-container">
+                            <div class="progress-bar" data-width="72%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-card"><span class="skill-emoji">📊</span><span class="skill-name">Data
+                            Science</span>
+                        <div class="progress-container">
+                            <div class="progress-bar" data-width="70%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-card"><span class="skill-emoji">🤖</span><span class="skill-name">Machine
+                            Learning</span>
+                        <div class="progress-container">
+                            <div class="progress-bar" data-width="65%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-card"><span class="skill-emoji">🧠</span><span class="skill-name">AI / LLMs</span>
+                        <div class="progress-container">
+                            <div class="progress-bar" data-width="60%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-card"><span class="skill-emoji">☁️</span><span class="skill-name">AWS Cloud</span>
+                        <div class="progress-container">
+                            <div class="progress-bar" data-width="55%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-card"><span class="skill-emoji">✍️</span><span class="skill-name">Prompt
+                            Engineering</span>
+                        <div class="progress-container">
+                            <div class="progress-bar" data-width="80%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-card"><span class="skill-emoji">🎥</span><span class="skill-name">AI Video
+                            Editing</span>
+                        <div class="progress-container">
+                            <div class="progress-bar" data-width="70%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-card"><span class="skill-emoji">🎬</span><span class="skill-name">Content
+                            Creation</span>
+                        <div class="progress-container">
+                            <div class="progress-bar" data-width="75%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-card"><span class="skill-emoji">💻</span><span class="skill-name">Vibe
+                            Coding</span>
+                        <div class="progress-container">
+                            <div class="progress-bar" data-width="65%"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- ════════════════════════════
+    <!-- ════════════════════════════
      CARD 4 — PROJECTS
 ════════════════════════════ -->
-<section id="card-4" class="card state-below showcase-card-override">
-    <div class="card-inner showcase-inner">
-        
-        <div id="project-slide-container" class="project-slide-container">
-            <!-- Dynamic project slides will be injected here via main.js -->
-        </div>
+    <section id="card-4" class="card state-below">
+        <div class="card-inner">
+            <div style="width:100%;max-width:1100px;">
 
-        <!-- ════ BOTTOM SECTION DESIGN ════ -->
-        <div class="showcase-bottom-bar">
-            
-            <!-- Progress Line -->
-            <div class="progress-indicator-track">
-                <div id="showcase-progress" class="progress-indicator-fill"></div>
+                <div class="section-header" style="text-align:left;">
+                    <span class="tagline">WORK HIGHLIGHTS</span>
+                    <h2 class="section-title">Projects</h2>
+                    <div class="accent-line"></div>
+                </div>
+
+                <div class="project-showcase">
+                    <button class="nav-arrow left-arrow" onclick="prevProject()">‹</button>
+                    <button class="nav-arrow right-arrow" onclick="nextProject()">›</button>
+
+                    <div id="project-content" class="project-content">
+                        <!-- JS injects project layout here -->
+                    </div>
+                </div>
+
+                <div class="project-dots-container" id="project-dots">
+                    <!-- JS injects dots here -->
+                </div>
+
             </div>
-
-            <!-- Pre-counter-Next -->
-            <div class="showcase-nav-row">
-                <div class="sc-btn-prev" onclick="prevShowcaseProject()">
-                    <span>← PREV</span>
-                </div>
-                
-                <div class="sc-counter">
-                    <span id="sc-curr">01</span>
-                    <span class="sc-divider">/</span>
-                    <span id="sc-total">06</span>
-                </div>
-                
-                <div class="sc-btn-next" onclick="nextShowcaseProject()">
-                    <span>NEXT →</span>
-                </div>
-            </div>
-            
         </div>
-        
-    </div>
-</section>
+    </section>
 
-<!-- ════════════════════════════
+    <!-- ════════════════════════════
      CARD 5 — ACHIEVEMENTS (Hackathon merged with Certs)
 ════════════════════════════ -->
-<section id="card-5" class="card state-below">
-    <div class="card-inner">
-        <div style="width:100%;max-width:780px;">
+    <section id="card-5" class="card state-below">
+        <div class="card-inner">
+            <div style="width:100%;max-width:780px;">
 
-            <div class="section-header" style="text-align:left;">
-                <span class="tagline" style="color:var(--pink);">MY CREDENTIALS</span>
-                <h2 class="section-title">Achievements</h2>
-                <div class="accent-line" style="background:linear-gradient(90deg,var(--purple),var(--pink));margin-left:0;"></div>
-            </div>
+                <div class="section-header" style="text-align:left;">
+                    <span class="tagline" style="color:var(--pink);">MY CREDENTIALS</span>
+                    <h2 class="section-title">Achievements</h2>
+                    <div class="accent-line"
+                        style="background:linear-gradient(90deg,var(--purple),var(--pink));margin-left:0;"></div>
+                </div>
 
-            <!-- ── HACKATHON: Featured Achievement Card ── -->
-            <div class="cs-grid" style="grid-template-columns: 1fr; margin-bottom: 50px;">
-                <div class="cs-card anim-in" style="max-width: 500px; margin: 0 auto; width: 100%;">
-                    <div class="cs-card-img" style="background: linear-gradient(135deg, rgba(235, 12, 193, 0.2), rgba(0, 0, 0, 0.4)); height: 200px; display: flex; align-items: center; justify-content: center; font-size: 80px; font-weight: 800; color: rgba(255,255,255,0.05); position: relative;">
-                        AWS
-                        <span class="cs-card-tag" style="background: var(--pink);">🏆 Hackathon</span>
-                    </div>
-                    <div class="cs-card-body">
-                        <div style="font-size: 11px; color: var(--pink); font-weight: 700; letter-spacing: 1px; margin-bottom: 8px;">FEATURED ACHIEVEMENT · 2025</div>
-                        <h3 class="cs-card-title">AWS Nova AI Hackathon</h3>
-                        <p class="cs-card-summary">Participated in the AWS Nova AI Hackathon — built real AI solutions alongside industry experts, pushing the frontier of intelligent systems.</p>
-                        <div class="cs-card-footer">
-                            <div class="cs-tags"><span class="cs-tag">AI / ML</span><span class="cs-tag">Applied</span></div>
-                            <a href="https://devpost.com/software/faceless-ai-studio" target="_blank" class="cs-read-btn" style="text-decoration:none; padding: 6px 12px;">View Project →</a>
+                <!-- ── HACKATHON: Featured Achievement Card ── -->
+                <div class="cs-grid" style="grid-template-columns: 1fr; margin-bottom: 50px;">
+                    <div class="cs-card anim-in" style="max-width: 500px; margin: 0 auto; width: 100%;">
+                        <div class="cs-card-img"
+                            style="background: linear-gradient(135deg, rgba(235, 12, 193, 0.2), rgba(0, 0, 0, 0.4)); height: 200px; display: flex; align-items: center; justify-content: center; font-size: 80px; font-weight: 800; color: rgba(255,255,255,0.05); position: relative;">
+                            AWS
+                            <span class="cs-card-tag" style="background: var(--pink);">🏆 Hackathon</span>
+                        </div>
+                        <div class="cs-card-body">
+                            <div
+                                style="font-size: 11px; color: var(--pink); font-weight: 700; letter-spacing: 1px; margin-bottom: 8px;">
+                                FEATURED ACHIEVEMENT · 2025</div>
+                            <h3 class="cs-card-title">AWS Nova AI Hackathon</h3>
+                            <p class="cs-card-summary">Participated in the AWS Nova AI Hackathon — built real AI
+                                solutions alongside industry experts, pushing the frontier of intelligent systems.</p>
+                            <div class="cs-card-footer">
+                                <div class="cs-tags"><span class="cs-tag">AI / ML</span><span
+                                        class="cs-tag">Applied</span></div>
+                                <a href="https://devpost.com/software/faceless-ai-studio" target="_blank"
+                                    class="cs-read-btn" style="text-decoration:none; padding: 6px 12px;">View Project
+                                    →</a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- ── CERTIFICATIONS TIMELINE ── -->
-            <div class="certs-subheading" style="font-family:'Syne',sans-serif;font-size:24px;margin-bottom:24px;margin-top:40px;">📜 Certifications</div>
-            <div class="certs-container">
-                <div class="timeline-line"></div>
+                <!-- ── CERTIFICATIONS TIMELINE ── -->
+                <div class="certs-subheading"
+                    style="font-family:'Syne',sans-serif;font-size:24px;margin-bottom:24px;margin-top:40px;">📜
+                    Certifications</div>
+                <div class="certs-container">
+                    <div class="timeline-line"></div>
 
-                <div class="cert-item">
-                    <div class="timeline-dot"></div>
-                    <div class="cert-card">
-                        <div class="cert-icon">🧠</div>
-                        <div class="cert-info">
-                            <span class="cert-title">AI & Data Science Track</span>
-                            <span class="cert-issuer">Saylani Mass IT Institute</span>
+                    <div class="cert-item">
+                        <div class="timeline-dot"></div>
+                        <div class="cert-card">
+                            <div class="cert-icon">🧠</div>
+                            <div class="cert-info">
+                                <span class="cert-title">AI & Data Science Track</span>
+                                <span class="cert-issuer">Saylani Mass IT Institute</span>
+                            </div>
+                            <div class="cert-preview-img"
+                                style="width: 80px; height: 60px; overflow: hidden; border-radius: 8px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.05);">
+                                <span style="font-size:30px;">⏳</span>
+                            </div>
+                            <span class="status-badge status-inprogress">In Progress</span>
                         </div>
-                        <div class="cert-preview-img" style="width: 80px; height: 60px; overflow: hidden; border-radius: 8px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.05);">
-                            <span style="font-size:30px;">⏳</span>
-                        </div>
-                        <span class="status-badge status-inprogress">In Progress</span>
                     </div>
-                </div>
 
-                <div class="cert-item">
-                    <div class="timeline-dot"></div>
-                    <div class="cert-card" data-link="https://learn.microsoft.com/en-us/training/modules/get-started-ai-fundamentals/?wt.mc_id=studentamb_509266">
-                        <div class="cert-icon">🤖</div>
-                        <div class="cert-info">
-                            <span class="cert-title">Azure AI Fundamentals</span>
-                            <span class="cert-issuer">Microsoft Learn</span>
+                    <div class="cert-item">
+                        <div class="timeline-dot"></div>
+                        <div class="cert-card"
+                            data-link="https://learn.microsoft.com/en-us/training/modules/get-started-ai-fundamentals/?wt.mc_id=studentamb_509266">
+                            <div class="cert-icon">🤖</div>
+                            <div class="cert-info">
+                                <span class="cert-title">Azure AI Fundamentals</span>
+                                <span class="cert-issuer">Microsoft Learn</span>
+                            </div>
+                            <div class="cert-preview-img"
+                                style="width: 80px; height: 60px; overflow: hidden; border-radius: 8px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.05);">
+                                <span style="font-size:30px;">🧠</span>
+                            </div>
+                            <span class="status-badge status-completed">Completed</span>
                         </div>
-                        <div class="cert-preview-img" style="width: 80px; height: 60px; overflow: hidden; border-radius: 8px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.05);">
-                            <span style="font-size:30px;">🧠</span>
-                        </div>
-                        <span class="status-badge status-completed">Completed</span>
                     </div>
-                </div>
 
-                <div class="cert-item">
-                    <div class="timeline-dot"></div>
-                    <div class="cert-card" data-img="assets/certificates/python-crash-cert.jpg">
-                        <div class="cert-icon">🐍</div>
-                        <div class="cert-info">
-                            <span class="cert-title">Python Crash Basics</span>
-                            <span class="cert-issuer">Mind Luster</span>
+                    <div class="cert-item">
+                        <div class="timeline-dot"></div>
+                        <div class="cert-card" data-img="assets/certificates/python-crash-cert.jpg">
+                            <div class="cert-icon">🐍</div>
+                            <div class="cert-info">
+                                <span class="cert-title">Python Crash Basics</span>
+                                <span class="cert-issuer">Mind Luster</span>
+                            </div>
+                            <div class="cert-preview-img"
+                                style="width: 80px; height: 60px; overflow: hidden; border-radius: 8px;">
+                                <img src="assets/certificates/python-crash-cert.jpg" alt="Python Crash Basics"
+                                    style="width:100%; height:100%; object-fit:cover;">
+                            </div>
+                            <span class="status-badge status-completed">Completed</span>
                         </div>
-                        <div class="cert-preview-img" style="width: 80px; height: 60px; overflow: hidden; border-radius: 8px;">
-                            <img src="assets/certificates/python-crash-cert.jpg" alt="Python Crash Basics" style="width:100%; height:100%; object-fit:cover;">
-                        </div>
-                        <span class="status-badge status-completed">Completed</span>
                     </div>
-                </div>
 
-                <div class="cert-item">
-                    <div class="timeline-dot"></div>
-                    <div class="cert-card" data-img="assets/certificates/python-essentials-cert.jpg">
-                        <div class="cert-icon">🐍</div>
-                        <div class="cert-info">
-                            <span class="cert-title">Python Essentials 1</span>
-                            <span class="cert-issuer">Cisco Networking Academy</span>
+                    <div class="cert-item">
+                        <div class="timeline-dot"></div>
+                        <div class="cert-card" data-img="assets/certificates/python-essentials-cert.jpg">
+                            <div class="cert-icon">🐍</div>
+                            <div class="cert-info">
+                                <span class="cert-title">Python Essentials 1</span>
+                                <span class="cert-issuer">Cisco Networking Academy</span>
+                            </div>
+                            <div class="cert-preview-img"
+                                style="width: 80px; height: 60px; overflow: hidden; border-radius: 8px;">
+                                <img src="assets/certificates/python-essentials-cert.jpg" alt="Python Cert"
+                                    style="width:100%; height:100%; object-fit:cover;">
+                            </div>
+                            <span class="status-badge status-completed">Completed</span>
                         </div>
-                        <div class="cert-preview-img" style="width: 80px; height: 60px; overflow: hidden; border-radius: 8px;">
-                            <img src="assets/certificates/python-essentials-cert.jpg" alt="Python Cert" style="width:100%; height:100%; object-fit:cover;">
-                        </div>
-                        <span class="status-badge status-completed">Completed</span>
                     </div>
-                </div>
 
-                <div class="cert-item">
-                    <div class="timeline-dot"></div>
-                    <div class="cert-card" data-img="assets/certificates/digital-marketing-cert.jpg">
-                        <div class="cert-icon">📈</div>
-                        <div class="cert-info">
-                            <span class="cert-title">Digital Marketing</span>
-                            <span class="cert-issuer">DigiSkills Training Program</span>
+                    <div class="cert-item">
+                        <div class="timeline-dot"></div>
+                        <div class="cert-card" data-img="assets/certificates/digital-marketing-cert.jpg">
+                            <div class="cert-icon">📈</div>
+                            <div class="cert-info">
+                                <span class="cert-title">Digital Marketing</span>
+                                <span class="cert-issuer">DigiSkills Training Program</span>
+                            </div>
+                            <div class="cert-preview-img"
+                                style="width: 80px; height: 60px; overflow: hidden; border-radius: 8px;">
+                                <img src="assets/certificates/digital-marketing-cert.jpg" alt="Digital Marketing Cert"
+                                    style="width:100%; height:100%; object-fit:cover;">
+                            </div>
+                            <span class="status-badge status-completed">Completed</span>
                         </div>
-                        <div class="cert-preview-img" style="width: 80px; height: 60px; overflow: hidden; border-radius: 8px;">
-                            <img src="assets/certificates/digital-marketing-cert.jpg" alt="Digital Marketing Cert" style="width:100%; height:100%; object-fit:cover;">
-                        </div>
-                        <span class="status-badge status-completed">Completed</span>
                     </div>
-                </div>
 
-                <div class="cert-item">
-                    <div class="timeline-dot"></div>
-                    <div class="cert-card" data-img="assets/certificates/ecommerce-cert.jpg">
-                        <div class="cert-icon">🛒</div>
-                        <div class="cert-info">
-                            <span class="cert-title">E-Commerce Management</span>
-                            <span class="cert-issuer">DigiSkills Training Program</span>
+                    <div class="cert-item">
+                        <div class="timeline-dot"></div>
+                        <div class="cert-card" data-img="assets/certificates/ecommerce-cert.jpg">
+                            <div class="cert-icon">🛒</div>
+                            <div class="cert-info">
+                                <span class="cert-title">E-Commerce Management</span>
+                                <span class="cert-issuer">DigiSkills Training Program</span>
+                            </div>
+                            <div class="cert-preview-img"
+                                style="width: 80px; height: 60px; overflow: hidden; border-radius: 8px;">
+                                <img src="assets/certificates/ecommerce-cert.jpg" alt="E-Commerce Cert"
+                                    style="width:100%; height:100%; object-fit:cover;">
+                            </div>
+                            <span class="status-badge status-completed">Completed</span>
                         </div>
-                        <div class="cert-preview-img" style="width: 80px; height: 60px; overflow: hidden; border-radius: 8px;">
-                            <img src="assets/certificates/ecommerce-cert.jpg" alt="E-Commerce Cert" style="width:100%; height:100%; object-fit:cover;">
-                        </div>
-                        <span class="status-badge status-completed">Completed</span>
                     </div>
-                </div>
 
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- ════════════════════════════
+    <!-- ════════════════════════════
      CARD 6 — CASE STUDIES
 ════════════════════════════ -->
-<section id="card-6" class="card state-below">
-    <div class="card-inner">
-        <div style="width:100%;max-width:1100px;">
-            <div class="section-header">
-                <span class="tagline" style="color:var(--cyan);">DEEP DIVES</span>
-                <h2 class="section-title">Case Studies</h2>
-                <div class="accent-line"></div>
-            </div>
-            <div class="cs-grid">
+    <section id="card-6" class="card state-below">
+        <div class="card-inner">
+            <div style="width:100%;max-width:1100px;">
+                <div class="section-header">
+                    <span class="tagline" style="color:var(--cyan);">DEEP DIVES</span>
+                    <h2 class="section-title">Case Studies</h2>
+                    <div class="accent-line"></div>
+                </div>
+                <div class="cs-grid">
 
-                <div class="cs-card anim-in" data-cs="0">
-                    <div class="cs-card-img cs-img-1">
-                        <span class="cs-card-tag">AI / NLP</span>
-                    </div>
-                    <div class="cs-card-body">
-                        <h3 class="cs-card-title">AI-Powered Customer Support Bot</h3>
-                        <p class="cs-card-summary">A business drowning in 10,000+ daily tickets needed relief. Built an NLP chatbot that autonomously resolved 70% of queries instantly.</p>
-                        <div class="cs-card-footer">
-                            <div class="cs-tags"><span class="cs-tag">Python</span><span class="cs-tag">LangChain</span><span class="cs-tag">GPT-4</span></div>
-                            <button class="cs-read-btn" data-cs="0">Read More →</button>
+                    <div class="cs-card anim-in" data-cs="0">
+                        <div class="cs-card-img cs-img-1">
+                            <span class="cs-card-tag">AI / NLP</span>
+                        </div>
+                        <div class="cs-card-body">
+                            <h3 class="cs-card-title">AI-Powered Customer Support Bot</h3>
+                            <p class="cs-card-summary">A business drowning in 10,000+ daily tickets needed relief. Built
+                                an NLP chatbot that autonomously resolved 70% of queries instantly.</p>
+                            <div class="cs-card-footer">
+                                <div class="cs-tags"><span class="cs-tag">Python</span><span
+                                        class="cs-tag">LangChain</span><span class="cs-tag">GPT-4</span></div>
+                                <button class="cs-read-btn" data-cs="0">Read More →</button>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="cs-card anim-in" data-cs="1">
-                    <div class="cs-card-img cs-img-2">
-                        <span class="cs-card-tag">Data Analytics</span>
-                    </div>
-                    <div class="cs-card-body">
-                        <h3 class="cs-card-title">Real-Time Business Intelligence Dashboard</h3>
-                        <p class="cs-card-summary">A retail chain had data locked in siloed spreadsheets. Designed a live Pandas + Plotly dashboard to unify all KPIs in real time.</p>
-                        <div class="cs-card-footer">
-                            <div class="cs-tags"><span class="cs-tag">Pandas</span><span class="cs-tag">Plotly</span><span class="cs-tag">SQL</span></div>
-                            <button class="cs-read-btn" data-cs="1">Read More →</button>
+                    <div class="cs-card anim-in" data-cs="1">
+                        <div class="cs-card-img cs-img-2">
+                            <span class="cs-card-tag">Data Analytics</span>
+                        </div>
+                        <div class="cs-card-body">
+                            <h3 class="cs-card-title">Real-Time Business Intelligence Dashboard</h3>
+                            <p class="cs-card-summary">A retail chain had data locked in siloed spreadsheets. Designed a
+                                live Pandas + Plotly dashboard to unify all KPIs in real time.</p>
+                            <div class="cs-card-footer">
+                                <div class="cs-tags"><span class="cs-tag">Pandas</span><span
+                                        class="cs-tag">Plotly</span><span class="cs-tag">SQL</span></div>
+                                <button class="cs-read-btn" data-cs="1">Read More →</button>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="cs-card anim-in" data-cs="2">
-                    <div class="cs-card-img cs-img-3">
-                        <span class="cs-card-tag">AI Automation</span>
-                    </div>
-                    <div class="cs-card-body">
-                        <h3 class="cs-card-title">Faceless AI Video Studio Pipeline</h3>
-                        <p class="cs-card-summary">Content creators spent 20+ hours per video. Built a fully automated pipeline — from script to final export with zero manual effort.</p>
-                        <div class="cs-card-footer">
-                            <div class="cs-tags"><span class="cs-tag">Python</span><span class="cs-tag">FFmpeg</span><span class="cs-tag">ElevenLabs</span></div>
-                            <button class="cs-read-btn" data-cs="2">Read More →</button>
+                    <div class="cs-card anim-in" data-cs="2">
+                        <div class="cs-card-img cs-img-3">
+                            <span class="cs-card-tag">AI Automation</span>
+                        </div>
+                        <div class="cs-card-body">
+                            <h3 class="cs-card-title">Faceless AI Video Studio Pipeline</h3>
+                            <p class="cs-card-summary">Content creators spent 20+ hours per video. Built a fully
+                                automated pipeline — from script to final export with zero manual effort.</p>
+                            <div class="cs-card-footer">
+                                <div class="cs-tags"><span class="cs-tag">Python</span><span
+                                        class="cs-tag">FFmpeg</span><span class="cs-tag">ElevenLabs</span></div>
+                                <button class="cs-read-btn" data-cs="2">Read More →</button>
+                            </div>
                         </div>
                     </div>
-                </div>
 
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- ════════════════════════════
+    <!-- ════════════════════════════
      CARD 7 — CONTACT
 ════════════════════════════ -->
-<section id="card-7" class="card state-below">
-    <div class="card-inner">
-        <div class="contact-panel">
-            <h2 class="syne-font" style="font-size:42px;">Let's Connect</h2>
-            <div class="accent-line" style="margin:12px auto 0 auto;"></div>
-            <p class="contact-subtitle">Open to collaboration, projects & opportunities</p>
-            <div class="contact-list">
+    <section id="card-7" class="card state-below">
+        <div class="card-inner">
+            <div class="contact-panel">
+                <h2 class="syne-font" style="font-size:42px;">Let's Connect</h2>
+                <div class="accent-line" style="margin:12px auto 0 auto;"></div>
+                <p class="contact-subtitle">Open to collaboration, projects & opportunities</p>
+                <div class="contact-list">
 
-                <a href="https://github.com/coddies" target="_blank" class="contact-link-card link-github">
-                    <span class="contact-emoji">🐙</span>
-                    <div class="contact-label-group">
-                        <span class="contact-main-label">GitHub</span>
-                        <span class="contact-sub-label">github.com/coddies</span>
-                    </div>
-                    <span class="contact-arrow">→</span>
-                </a>
-
-                <a href="https://www.linkedin.com/in/muhammad-burhan-73a81b27b/" target="_blank" class="contact-link-card link-linkedin">
-                    <span class="contact-emoji">💼</span>
-                    <div class="contact-label-group">
-                        <span class="contact-main-label">LinkedIn</span>
-                        <span class="contact-sub-label">muhammad-burhan-73a81b27b</span>
-                    </div>
-                    <span class="contact-arrow">→</span>
-                </a>
-
-                <a href="mailto:mb6679605@gmail.com" class="contact-link-card link-email">
-                    <span class="contact-emoji">📧</span>
-                    <div class="contact-label-group">
-                        <span class="contact-main-label">Email</span>
-                        <span class="contact-sub-label">mb6679605@gmail.com</span>
-                    </div>
-                    <span class="contact-arrow">→</span>
-                </a>
-
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Cert Modal -->
-<div class="cert-modal" id="certModal">
-    <div class="modal-content">
-        <div class="modal-close" id="modalClose">&times;</div>
-        <img src="" alt="Certificate" id="modalImg">
-    </div>
-</div>
-
-<!-- Case Study Detail Modal -->
-<div id="csModal" class="cs-modal">
-    <div class="cs-modal-panel">
-        <button class="cs-modal-close" id="csModalClose">✕</button>
-        <div class="cs-modal-hero" id="csModalHero">
-            <span class="cs-modal-category" id="csModalCategory"></span>
-            <h2 class="cs-modal-title" id="csModalTitle"></h2>
-        </div>
-        <div class="cs-modal-body">
-            <div class="cs-detail-grid">
-                <div class="cs-detail-section cs-problem">
-                    <div class="cs-detail-icon">🚨</div>
-                    <div>
-                        <h3 class="cs-detail-heading">The Problem</h3>
-                        <p class="cs-detail-text" id="csModalProblem"></p>
-                    </div>
-                </div>
-                <div class="cs-detail-section cs-solution">
-                    <div class="cs-detail-icon">💡</div>
-                    <div>
-                        <h3 class="cs-detail-heading">The Solution</h3>
-                        <p class="cs-detail-text" id="csModalSolution"></p>
-                    </div>
-                </div>
-                <div class="cs-detail-section cs-result">
-                    <div class="cs-detail-icon">📈</div>
-                    <div>
-                        <h3 class="cs-detail-heading">The Result</h3>
-                        <p class="cs-detail-text" id="csModalResult"></p>
-                    </div>
-                </div>
-            </div>
-            <div class="cs-tech-section">
-                <h3 class="cs-detail-heading" style="margin-bottom:14px;">Tech Stack</h3>
-                <div class="cs-tags-large" id="csModalTags"></div>
-            </div>
-            <div class="cs-comments-section">
-                <h3 class="cs-comments-heading">💬 Comments</h3>
-                <div class="cs-comments-list" id="csCommentsList">
-                    <div class="cs-comment">
-                        <div class="cs-comment-avatar">AK</div>
-                        <div class="cs-comment-content">
-                            <div class="cs-comment-meta"><strong>Ahmed Khan</strong><span>2 days ago</span></div>
-                            <p>This is exactly the kind of real-world AI application I was looking for. Great breakdown of the architecture!</p>
+                    <a href="https://github.com/coddies" target="_blank" class="contact-link-card link-github">
+                        <span class="contact-emoji">🐙</span>
+                        <div class="contact-label-group">
+                            <span class="contact-main-label">GitHub</span>
+                            <span class="contact-sub-label">github.com/coddies</span>
                         </div>
-                    </div>
-                    <div class="cs-comment">
-                        <div class="cs-comment-avatar" style="background:linear-gradient(135deg,var(--pink),var(--purple));">SR</div>
-                        <div class="cs-comment-content">
-                            <div class="cs-comment-meta"><strong>Sara Rizvi</strong><span>5 days ago</span></div>
-                            <p>Loved the Result section — 70% autonomous resolution is phenomenal. Would love to know more about the training data pipeline.</p>
+                        <span class="contact-arrow">→</span>
+                    </a>
+
+                    <a href="https://www.linkedin.com/in/muhammad-burhan-73a81b27b/" target="_blank"
+                        class="contact-link-card link-linkedin">
+                        <span class="contact-emoji">💼</span>
+                        <div class="contact-label-group">
+                            <span class="contact-main-label">LinkedIn</span>
+                            <span class="contact-sub-label">muhammad-burhan-73a81b27b</span>
                         </div>
-                    </div>
-                    <div class="cs-comment">
-                        <div class="cs-comment-avatar" style="background:linear-gradient(135deg,var(--cyan),var(--purple));">MB</div>
-                        <div class="cs-comment-content">
-                            <div class="cs-comment-meta"><strong>M. Bilal</strong><span>1 week ago</span></div>
-                            <p>Impressive work. Did you use RAG for the knowledge base or fine-tuning on domain-specific data?</p>
+                        <span class="contact-arrow">→</span>
+                    </a>
+
+                    <a href="mailto:mb6679605@gmail.com" class="contact-link-card link-email">
+                        <span class="contact-emoji">📧</span>
+                        <div class="contact-label-group">
+                            <span class="contact-main-label">Email</span>
+                            <span class="contact-sub-label">mb6679605@gmail.com</span>
                         </div>
-                    </div>
-                </div>
-                <div class="cs-comment-form">
-                    <h4 class="cs-form-title">Leave a Comment</h4>
-                    <input class="cs-comment-name" id="csCommentName" type="text" placeholder="Your name" />
-                    <textarea class="cs-comment-textarea" id="csCommentText" placeholder="Share your thoughts or ask a question..."></textarea>
-                    <button class="cs-comment-submit" id="csCommentSubmit">Submit Comment</button>
+                        <span class="contact-arrow">→</span>
+                    </a>
+
                 </div>
             </div>
         </div>
+    </section>
+
+    <!-- Cert Modal -->
+    <div class="cert-modal" id="certModal">
+        <div class="modal-content">
+            <div class="modal-close" id="modalClose">&times;</div>
+            <img src="" alt="Certificate" id="modalImg">
+        </div>
     </div>
-</div>
 
-<!-- Swipe Hint -->
-<div id="swipe-hint">
-    <span class="hint-icon">👆</span>
-    <span>Swipe left or right to navigate</span>
-</div>
+    <!-- Case Study Detail Modal -->
+    <div id="csModal" class="cs-modal">
+        <div class="cs-modal-panel">
+            <button class="cs-modal-close" id="csModalClose">✕</button>
+            <div class="cs-modal-hero" id="csModalHero">
+                <span class="cs-modal-category" id="csModalCategory"></span>
+                <h2 class="cs-modal-title" id="csModalTitle"></h2>
+            </div>
+            <div class="cs-modal-body">
+                <div class="cs-detail-grid">
+                    <div class="cs-detail-section cs-problem">
+                        <div class="cs-detail-icon">🚨</div>
+                        <div>
+                            <h3 class="cs-detail-heading">The Problem</h3>
+                            <p class="cs-detail-text" id="csModalProblem"></p>
+                        </div>
+                    </div>
+                    <div class="cs-detail-section cs-solution">
+                        <div class="cs-detail-icon">💡</div>
+                        <div>
+                            <h3 class="cs-detail-heading">The Solution</h3>
+                            <p class="cs-detail-text" id="csModalSolution"></p>
+                        </div>
+                    </div>
+                    <div class="cs-detail-section cs-result">
+                        <div class="cs-detail-icon">📈</div>
+                        <div>
+                            <h3 class="cs-detail-heading">The Result</h3>
+                            <p class="cs-detail-text" id="csModalResult"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="cs-tech-section">
+                    <h3 class="cs-detail-heading" style="margin-bottom:14px;">Tech Stack</h3>
+                    <div class="cs-tags-large" id="csModalTags"></div>
+                </div>
+                <div class="cs-comments-section">
+                    <h3 class="cs-comments-heading">💬 Comments</h3>
+                    <div class="cs-comments-list" id="csCommentsList">
+                        <div class="cs-comment">
+                            <div class="cs-comment-avatar">AK</div>
+                            <div class="cs-comment-content">
+                                <div class="cs-comment-meta"><strong>Ahmed Khan</strong><span>2 days ago</span></div>
+                                <p>This is exactly the kind of real-world AI application I was looking for. Great
+                                    breakdown of the architecture!</p>
+                            </div>
+                        </div>
+                        <div class="cs-comment">
+                            <div class="cs-comment-avatar"
+                                style="background:linear-gradient(135deg,var(--pink),var(--purple));">SR</div>
+                            <div class="cs-comment-content">
+                                <div class="cs-comment-meta"><strong>Sara Rizvi</strong><span>5 days ago</span></div>
+                                <p>Loved the Result section — 70% autonomous resolution is phenomenal. Would love to
+                                    know more about the training data pipeline.</p>
+                            </div>
+                        </div>
+                        <div class="cs-comment">
+                            <div class="cs-comment-avatar"
+                                style="background:linear-gradient(135deg,var(--cyan),var(--purple));">MB</div>
+                            <div class="cs-comment-content">
+                                <div class="cs-comment-meta"><strong>M. Bilal</strong><span>1 week ago</span></div>
+                                <p>Impressive work. Did you use RAG for the knowledge base or fine-tuning on
+                                    domain-specific data?</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cs-comment-form">
+                        <h4 class="cs-form-title">Leave a Comment</h4>
+                        <input class="cs-comment-name" id="csCommentName" type="text" placeholder="Your name" />
+                        <textarea class="cs-comment-textarea" id="csCommentText"
+                            placeholder="Share your thoughts or ask a question..."></textarea>
+                        <button class="cs-comment-submit" id="csCommentSubmit">Submit Comment</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-<script src="assets/js/main.js"></script>
+    <!-- Swipe Hint -->
+    <div id="swipe-hint">
+        <span class="hint-icon">👆</span>
+        <span>Swipe left or right to navigate</span>
+    </div>
+
+    <script src="assets/js/main.js"></script>
 </body>
+
 </html>
