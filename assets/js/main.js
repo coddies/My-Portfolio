@@ -440,18 +440,7 @@ const projects = [
   }
 ];
 
-let currentProject = 0;
-let isAnimatingProj = false;
-
-function renderProjectDots() {
-    const dotsContainer = document.getElementById('project-dots');
-    if (!dotsContainer) return;
-    dotsContainer.innerHTML = projects.map((_, i) => 
-        `<div class="proj-dot ${i === currentProject ? 'active' : ''}"></div>`
-    ).join('');
-}
-
-function getProjectHTML(proj, animClass = '') {
+function getProjectSlideHTML(proj) {
     const tagsHTML = proj.tags.map(t => `<span>${t}</span>`).join('');
     
     let btnsHTML = '';
@@ -462,11 +451,10 @@ function getProjectHTML(proj, animClass = '') {
     }
 
     return `
-        <div class="project-anim-wrapper ${animClass}">
+        <div class="project-slide">
             <div class="proj-preview">
                 <div class="proj-bg-glow" style="background: radial-gradient(circle at center, ${proj.color}, transparent 70%);"></div>
                 <span class="proj-emoji">${proj.emoji}</span>
-                <span class="proj-preview-name">${proj.name}</span>
             </div>
             <div class="proj-details">
                 <span class="proj-num">${proj.number}</span>
@@ -480,45 +468,37 @@ function getProjectHTML(proj, animClass = '') {
     `;
 }
 
-function showProject(idx, direction) {
-    if (isAnimatingProj || idx === currentProject) return;
-    isAnimatingProj = true;
-    
-    const contentBox = document.getElementById('project-content');
-    if (!contentBox) return;
+function renderProjectsHorizontal() {
+    const track = document.getElementById('project-horizontal-track');
+    const dotsContainer = document.getElementById('project-dots');
+    if (!track || !dotsContainer) return;
 
-    const oldWrapper = contentBox.querySelector('.project-anim-wrapper');
-    if (oldWrapper) {
-        oldWrapper.className = `project-anim-wrapper ${direction === 'next' ? 'anim-next-out' : 'anim-prev-out'}`;
-    }
+    track.innerHTML = projects.map(p => getProjectSlideHTML(p)).join('');
+    dotsContainer.innerHTML = projects.map((_, i) => `<div class="proj-dot ${i === 0 ? 'active' : ''}"></div>`).join('');
 
-    const inClass = direction === 'next' ? 'anim-next-in' : 'anim-prev-in';
-    contentBox.insertAdjacentHTML('beforeend', getProjectHTML(projects[idx], inClass));
-    
-    currentProject = idx;
-    renderProjectDots();
-
-    setTimeout(() => {
-        if (oldWrapper) oldWrapper.remove();
-        const newWrapper = contentBox.querySelector('.project-anim-wrapper:last-child');
-        if(newWrapper) newWrapper.className = 'project-anim-wrapper';
-        isAnimatingProj = false;
-    }, 300); // 300ms matches CSS animation duration
+    track.addEventListener('scroll', () => {
+        const scrollLeft = track.scrollLeft;
+        const width = track.offsetWidth;
+        const index = Math.round(scrollLeft / width);
+        updateActiveDot(index);
+    });
 }
 
-function nextProject() {
-    const next = (currentProject + 1) % projects.length;
-    showProject(next, 'next');
+function updateActiveDot(index) {
+    const dots = document.querySelectorAll('.proj-dot');
+    dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === index);
+    });
 }
 
-function prevProject() {
-    const prev = (currentProject - 1 + projects.length) % projects.length;
-    showProject(prev, 'prev');
+function scrollProjects(direction) {
+    const track = document.getElementById('project-horizontal-track');
+    if (!track) return;
+    const width = track.offsetWidth;
+    track.scrollBy({ left: direction * width, behavior: 'smooth' });
 }
 
 // Initial render
-const initialContentBox = document.getElementById('project-content');
-if(initialContentBox) {
-    initialContentBox.innerHTML = getProjectHTML(projects[0]);
-    renderProjectDots();
-}
+document.addEventListener('DOMContentLoaded', () => {
+    renderProjectsHorizontal();
+});

@@ -233,31 +233,28 @@
     <!-- ════════════════════════════
      CARD 4 — PROJECTS
 ════════════════════════════ -->
-    <section id="card-4" class="card state-below">
-        <div class="card-inner">
-            <div style="width:100%;max-width:1100px;">
+    <section id="card-4" class="card state-below" style="padding: 0 !important; overflow: hidden !important;">
+        
+        <!-- Free Floating Arrows -->
+        <button class="nav-arrow left-arrow" style="position: absolute; left: 20px; z-index: 100; top: 50%; transform: translateY(-50%);" onclick="scrollProjects(-1)">‹</button>
+        <button class="nav-arrow right-arrow" style="position: absolute; right: 20px; z-index: 100; top: 50%; transform: translateY(-50%);" onclick="scrollProjects(1)">›</button>
 
-                <div class="section-header" style="text-align:left;">
-                    <span class="tagline">WORK HIGHLIGHTS</span>
-                    <h2 class="section-title">Projects</h2>
-                    <div class="accent-line"></div>
-                </div>
-
-                <div class="project-showcase">
-                    <button class="nav-arrow left-arrow" onclick="prevProject()">‹</button>
-                    <button class="nav-arrow right-arrow" onclick="nextProject()">›</button>
-
-                    <div id="project-content" class="project-content">
-                        <!-- JS injects project layout here -->
-                    </div>
-                </div>
-
-                <div class="project-dots-container" id="project-dots">
-                    <!-- JS injects dots here -->
-                </div>
-
-            </div>
+        <!-- Fixed Header Overlay -->
+        <div style="position: absolute; top: 40px; left: 5%; z-index: 50; pointer-events: none; text-align: left;">
+            <span class="tagline">WORK HIGHLIGHTS</span>
+            <h2 class="section-title">Projects</h2>
+            <div class="accent-line"></div>
         </div>
+
+        <!-- The Horizontal Scroller -->
+        <div id="project-horizontal-track" style="display: flex; width: 100%; height: 100%; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; scrollbar-width: none; scroll-behavior: smooth; -webkit-overflow-scrolling: touch;">
+            <!-- JS injects project layout here -->
+        </div>
+
+        <div class="project-dots-container" id="project-dots" style="position: absolute; bottom: 30px; left: 0; right: 0; margin-top: 0; z-index: 50; pointer-events: none;">
+            <!-- JS injects dots here -->
+        </div>
+
     </section>
 
     <!-- ════════════════════════════
