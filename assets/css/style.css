@@ -862,39 +862,7 @@ h1, h2, h3, .syne-font {
 /* ── CARD 5: ACHIEVEMENTS / CERTIFICATIONS ── */
 #card-5 { background: rgba(124, 58, 237, 0.05); }
 
-.certs-container {
-    width: 100%;
-    max-width: 680px;
-    position: relative;
-    padding-left: 20px;
-}
-
-.timeline-line {
-    position: absolute;
-    left: 0; top: 0; bottom: 0;
-    width: 2px;
-    background: linear-gradient(to bottom, var(--purple), var(--pink));
-}
-
-.cert-item {
-    display: flex;
-    align-items: center;
-    gap: 30px;
-    margin-bottom: 24px;
-    position: relative;
-}
-
-.timeline-dot {
-    position: absolute;
-    left: -24px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 10px; height: 10px;
-    border-radius: 50%;
-    background: var(--purple);
-    box-shadow: 0 0 10px var(--purple);
-    z-index: 2;
-}
+/* Cert Grid handled by .cs-grid from Case Studies section */
 
 .cert-card {
     flex: 1;
