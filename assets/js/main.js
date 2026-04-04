@@ -104,6 +104,26 @@ window.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowUp'   && currentIndex > 0)               updateCards(currentIndex - 1);
 });
 
+// Wheel / Mouse Scroll listener
+let lastMainScroll = 0;
+window.addEventListener('wheel', (e) => {
+    const now = Date.now();
+    if (now - lastMainScroll < 1200) return; // 1.2s cooldown
+    
+    if (e.deltaY > 50) { // Scroll Down
+        if (currentIndex < cards.length - 1) { 
+            updateCards(currentIndex + 1);
+            lastMainScroll = now;
+        }
+    } else if (e.deltaY < -50) { // Scroll Up
+        if (currentIndex > 0) {
+            updateCards(currentIndex - 1);
+            lastMainScroll = now;
+        }
+    }
+}, { passive: true });
+
+
 // ── TOUCH SWIPE GESTURE ──
 let touchStartX = 0;
 let touchStartY = 0;
@@ -197,28 +217,36 @@ if (certModal) certModal.addEventListener('click', (e) => { if (e.target === cer
 // ── CASE STUDIES DATA & MODAL ──
 const caseStudiesData = [
     {
-        title:    'AI-Powered Customer Support Bot',
+        title:    'AI Chatbot - Intelligent NLP Assistant',
         category: 'AI / NLP',
-        tags:     ['Python', 'LangChain', 'GPT-4', 'FastAPI', 'Pinecone'],
-        problem:  'A mid-sized e-commerce company was receiving over 10,000 support tickets per day. Their human agents were overwhelmed, response times averaged 48 hours, and customer satisfaction scores were dropping sharply. They needed an intelligent solution that could scale without scaling costs.',
-        solution: 'I built a conversational AI system using LangChain and GPT-4, backed by a Pinecone vector database for Retrieval-Augmented Generation (RAG). The bot was trained on the company\'s knowledge base, historical tickets, and product catalog. A FastAPI backend served the model, with a fallback mechanism to route complex cases to human agents.',
-        result:   '70% of incoming tickets were autonomously resolved without human intervention. Average response time dropped from 48 hours to under 2 seconds. Customer satisfaction scores increased by 34% in the first month. Human agents could focus on complex, high-value interactions, improving their productivity and morale.'
+        tags:     ['Python', 'LangChain', 'OpenAI', 'FastAPI'],
+        problem:  'Users needed a smarter way to interact with data and get instant, accurate human-like responses.',
+        solution: 'Built a RAG-based chatbot using Python and OpenAI API, capable of understanding and processing complex queries.',
+        result:   'Successfully automated 90% of basic query handling.'
     },
     {
-        title:    'Real-Time Business Intelligence Dashboard',
-        category: 'Data Analytics',
-        tags:     ['Python', 'Pandas', 'Plotly', 'SQL', 'PostgreSQL', 'Streamlit'],
-        problem:  'A retail chain with 50+ branches had critical business data scattered across Excel files, isolated POS systems, and manual reports. Decision-makers were operating on week-old data, making it impossible to react quickly to inventory shortages, regional sales dips, or emerging customer trends.',
-        solution: 'Designed and built a centralized data pipeline using Python and Pandas to ETL data from multiple sources into a single PostgreSQL database. Created an interactive Plotly + Streamlit dashboard with real-time KPI monitoring, geographic sales maps, inventory heatmaps, and automated alerts for anomalies.',
-        result:   'Leadership gained access to live, unified business data for the first time. Inventory waste reduced by 22% as managers could spot shortages immediately. The dashboard identified an underperforming region that, once addressed, increased regional revenue by 18%. Time spent on manual reporting was eliminated entirely.'
+        title:    'Modern Glassmorphism Portfolio',
+        category: 'Frontend Development',
+        tags:     ['HTML', 'CSS', 'JavaScript'],
+        problem:  'Standard portfolios lack the premium feel and interactivity required for a modern AI developer.',
+        solution: 'Developed a high-end, card-based single-page portfolio with custom transitions and a fixed viewport design.',
+        result:   'Delivered a top-tier user experience with 100% fixed-viewport navigation.'
     },
     {
-        title:    'Faceless AI Video Studio Pipeline',
+        title:    'Faceless AI Video Studio',
         category: 'AI Automation',
-        tags:     ['Python', 'FFmpeg', 'ElevenLabs', 'OpenAI', 'MoviePy', 'Stable Diffusion'],
-        problem:  'Content creators on YouTube and TikTok were spending 20+ hours per video on scripting, voiceover recording, image sourcing, and editing. This bottleneck meant they could only publish 1–2 videos per week, severely limiting their channel growth and revenue potential.',
-        solution: 'Built a fully automated end-to-end video production pipeline. Given only a topic, the system: generates a script using GPT-4, converts it to natural speech via ElevenLabs, generates matching visuals with Stable Diffusion, assembles everything using MoviePy and FFmpeg, and outputs a ready-to-upload video with subtitles and background music.',
-        result:   'Video production time dropped from 20+ hours to under 15 minutes per video. Creators using the tool increased their upload frequency by 5x. One client grew their channel from 2,000 to 28,000 subscribers in 3 months by leveraging the increased content output. The pipeline paid for itself in the first week of operation.'
+        tags:     ['Python', 'MoviePy', 'ElevenLabs'],
+        problem:  'Manual video editing takes dozens of hours, limiting content output and channel growth.',
+        solution: 'Created an end-to-end automated pipeline that generates scripts, voices, and videos with zero manual effort.',
+        result:   'Reduced video production time by 98%.'
+    },
+    {
+        title:    'YouTube AI Education Channel',
+        category: 'Content Strategy',
+        tags:     ['YouTube', 'SEO', 'Automation'],
+        problem:  'Building a tech audience requires high-quality, consistent content delivery at scale.',
+        solution: 'Automated content research and video optimization strategies to build a niche-leading AI education channel.',
+        result:   'Established a scalable content factory with daily growth.'
     }
 ];
 
@@ -392,34 +420,38 @@ if (dotWrap && ringWrap && window.matchMedia('(pointer: fine)').matches) {
     });
 }
 
-// ── PROJECTS LOGIC (Precise Reference Clone) ──
+// ── PROJECTS LOGIC (Precise Reference Clone with Branded Placeholders) ──
 const projects = [
   {
     category: 'AI PROJECT',
     date: 'JAN 2025',
-    title: 'MUSICO - AI-Powered Music Player',
-    image: 'assets/images/p1.png',
+    title: 'AI Chatbot - INTELLIGENT ASSISTANT',
+    icon: '🤖',
+    color: '#ff9d00', // Branded Orange
     github: 'https://github.com/coddies/AI-Chatbot'
   },
   {
     category: 'WEBSITE',
     date: 'FEB 2025',
-    title: 'THE PORTFOLIO - Dark Glass',
-    image: 'assets/images/p2.png',
+    title: 'PORTFOLIO - THE DARK GLASS EXPERIENCE',
+    icon: '✨',
+    color: '#06b6d4', // Cyan
     github: 'https://github.com/coddies/My-Portfolio'
   },
   {
-    category: 'AUTOMATION',
+    category: 'AI AUTOMATION',
     date: 'MAR 2025',
-    title: 'FACELESS - AI Studio',
-    image: 'assets/images/p3.png',
+    title: 'FACELESS AI - VIDEO STUDIO',
+    icon: '🎬',
+    color: '#7c3aed', // Purple
     github: 'https://github.com/coddies/Faceless-AI-Studio'
   },
   {
-    category: 'YOUTUBE',
+    category: 'CONTENT CREATION',
     date: 'APR 2025',
-    title: 'NOOR-E-SADA Official Channel',
-    image: 'assets/images/p4.png',
+    title: 'YOUTUBE - NOOR-E-SADA OFFICIAL',
+    icon: '🎥',
+    color: '#ec4899', // Pink
     demo: 'https://www.youtube.com/@Noor-e-SadaOfficial'
   }
 ];
@@ -430,7 +462,11 @@ function renderPreciseGallery() {
 
     track.innerHTML = projects.map((p, i) => `
         <div class="precise-project-card" data-index="${i}">
-            <img src="${p.image}" alt="${p.title}" class="p-card-image">
+            <div class="p-card-placeholder" style="background: linear-gradient(135deg, ${p.color}22, ${p.color}05);">
+                <div class="p-card-glow" style="background: radial-gradient(circle at center, ${p.color}33, transparent 70%);"></div>
+                <span class="p-card-icon">${p.icon}</span>
+                <div class="p-card-overlay-text">${p.category}</div>
+            </div>
         </div>
     `).join('');
 
@@ -477,5 +513,6 @@ function preciseScroll(dir) {
 document.addEventListener('DOMContentLoaded', () => {
     renderPreciseGallery();
 });
+
 
 

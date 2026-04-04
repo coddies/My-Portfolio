@@ -21,15 +21,21 @@
     -webkit-font-smoothing: antialiased;
 }
 
-body {
-    background-color: var(--bg-deep);
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden !important; /* STRICT NO SCROLL */
+    background: var(--bg-gradient);
     color: var(--text-white);
     font-family: 'Plus Jakarta Sans', sans-serif;
-    overflow: hidden;
-    height: 100vh;
-    width: 100vw;
     font-size: 18px;
-    background: var(--bg-gradient);
+    -webkit-font-smoothing: antialiased;
+}
+
+body {
+    position: relative;
     transition: background 0.5s ease, color 0.5s ease;
 }
 
@@ -571,12 +577,38 @@ h1, h2, h3, .syne-font {
     transform: scale(1.02);
 }
 
-.p-card-image {
+.p-card-placeholder {
     width: 100%;
     height: 480px;
-    object-fit: cover;
-    background: #eee;
-    display: block;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.p-card-glow {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+}
+
+.p-card-icon {
+    font-size: 100px;
+    z-index: 2;
+    filter: drop-shadow(0 20px 40px rgba(0,0,0,0.2));
+    margin-bottom: 20px;
+}
+
+.p-card-overlay-text {
+    z-index: 2;
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 5px;
+    color: rgba(255, 255, 255, 0.4);
+    text-transform: uppercase;
 }
 
 /* Footer Panel (Two main boxes) */
