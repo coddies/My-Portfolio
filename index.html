@@ -291,67 +291,99 @@
                 <div class="accent-line" style="margin: 0 auto; background: linear-gradient(90deg, var(--purple), var(--pink));"></div>
             </div>
 
-            <!-- Main Achievement Box -->
-            <div class="achievement-featured">
-                <div class="hackathon-card active" data-link="https://devpost.com/software/faceless-ai-studio">
-                    <div class="hackathon-content">
-                        <div class="hackathon-header">
-                            <span class="badge">AWS NOVA HACKATHON 2025</span>
-                            <span class="status pulse">Active Participant</span>
-                        </div>
-                        <h3 class="hackathon-title">Faceless AI Video Studio 🚀</h3>
-                        <p class="hackathon-desc">Developing a high-end automated pipeline for AI video generation using AWS Bedrock and Nova Canvas. Focused on reducing production time by 98% with intelligent script-to-video automation.</p>
-                        <div class="hackathon-tags">
-                            <span class="htag">AWS Bedrock</span>
-                            <span class="htag">Python</span>
-                            <span class="htag">FFmpeg</span>
-                        </div>
+            <!-- Featured Achievement -->
+            <div style="display: flex; justify-content: center; margin-bottom: 40px;">
+                <div class="cs-card anim-in" data-link="https://devpost.com/software/faceless-ai-studio" style="max-width: 500px; width: 100%;">
+                    <div class="cs-card-img" style="height: 200px; background: linear-gradient(135deg, #1a1a2e 0%, #0a0a12 100%); display: flex; align-items: center; justify-content: center; position: relative;">
+                         <span class="cs-card-tag" style="top: 15px; left: 15px;">🏆 Winner / Participant</span>
+                         <div style="font-size: 60px; opacity: 0.1; position: absolute; right: 10px; bottom: 10px; font-weight: 800;">AWS</div>
+                         <div style="text-align: center;">🚀</div>
                     </div>
-                    <div class="hackathon-action">
-                        <a href="https://devpost.com/software/faceless-ai-studio" target="_blank" class="view-btn">View on Devpost →</a>
+                    <div class="cs-card-body">
+                        <h3 class="cs-card-title">AWS Nova AI Hackathon 2025</h3>
+                        <p class="cs-card-summary">Built high-end image & video generation pipelines using AWS Bedrock and Nova Canvas.</p>
+                        <div class="cs-card-footer">
+                            <div class="cs-tags"><span class="cs-tag">AWS</span><span class="cs-tag">Python</span></div>
+                            <a href="https://devpost.com/software/faceless-ai-studio" target="_blank" style="text-decoration:none; color:var(--cyan); font-weight:700; font-size:13px;">View Submission ↗</a>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Certifications Grid -->
-            <div class="certs-section" style="margin-top: 50px;">
-                <div class="section-subtitle">📜 Professional Certifications</div>
-                <div class="cert-grid">
-                    <div class="cert-card" data-img="assets/certificates/azure-fundamental.jpg">
-                        <div class="cert-icon">🤖</div>
-                        <h4 class="cert-name">Azure AI Fundamentals</h4>
-                        <p class="cert-org">Microsoft Learn</p>
-                        <span class="cert-status completed">Completed</span>
-                    </div>
-                    <div class="cert-card" data-img="assets/certificates/python-essentials-cert.jpg">
-                        <div class="cert-icon">🐍</div>
-                        <h4 class="cert-name">Python Essentials 1</h4>
-                        <p class="cert-org">Cisco Academy</p>
-                        <span class="cert-status completed">Completed</span>
-                    </div>
-                    <div class="cert-card" data-img="assets/certificates/python-crash-cert.jpg">
-                        <div class="cert-icon">💻</div>
-                        <h4 class="cert-name">Python Crash Basics</h4>
-                        <p class="cert-org">Mind Luster</p>
-                        <span class="cert-status completed">Completed</span>
-                    </div>
-                    <div class="cert-card" data-img="assets/certificates/digital-marketing-cert.jpg">
-                        <div class="cert-icon">📈</div>
-                        <h4 class="cert-name">Digital Marketing</h4>
-                        <p class="cert-org">DigiSkills (Official)</p>
-                        <span class="cert-status completed">Completed</span>
-                    </div>
-                    <div class="cert-card" data-img="assets/certificates/ecommerce-cert.jpg">
-                        <div class="cert-icon">🛒</div>
-                        <h4 class="cert-name">E-Commerce MGMT</h4>
-                        <p class="cert-org">DigiSkills (Official)</p>
-                        <span class="cert-status completed">Completed</span>
-                    </div>
+            <!-- ── CERTIFICATIONS TIMELINE (BACK TO ORIGINAL LIST) ── -->
+            <div class="certs-subheading" style="font-family:'Syne',sans-serif;font-size:24px;margin-bottom:24px;margin-top:40px;">📜 Certifications</div>
+            <div class="certs-container" style="position:relative; padding-left: 20px;">
+                <div class="timeline-line"></div>
+
+                <div class="cert-item">
+                    <div class="timeline-dot"></div>
                     <div class="cert-card">
                         <div class="cert-icon">🧠</div>
-                        <h4 class="cert-name">AI & Data Science</h4>
-                        <p class="cert-org">Saylani Mass IT</p>
-                        <span class="cert-status in-progress">In Progress</span>
+                        <div class="cert-info">
+                            <span class="cert-title">AI & Data Science Track</span>
+                            <span class="cert-issuer">Saylani Mass IT Institute</span>
+                        </div>
+                        <span class="status-badge status-inprogress">In Progress</span>
+                    </div>
+                </div>
+
+                <div class="cert-item">
+                    <div class="timeline-dot"></div>
+                    <div class="cert-card" data-link="https://learn.microsoft.com/en-us/training/modules/get-started-ai-fundamentals/">
+                        <div class="cert-icon">🤖</div>
+                        <div class="cert-info">
+                            <span class="cert-title">Azure AI Fundamentals</span>
+                            <span class="cert-issuer">Microsoft Learn</span>
+                        </div>
+                        <span class="status-badge status-completed">Completed</span>
+                    </div>
+                </div>
+
+                <div class="cert-item">
+                    <div class="timeline-dot"></div>
+                    <div class="cert-card" data-img="assets/certificates/python-essentials-cert.jpg">
+                        <div class="cert-icon">🐍</div>
+                        <div class="cert-info">
+                            <span class="cert-title">Python Essentials 1</span>
+                            <span class="cert-issuer">Cisco Networking Academy</span>
+                        </div>
+                        <span class="status-badge status-completed">Completed</span>
+                    </div>
+                </div>
+
+                <div class="cert-item">
+                    <div class="timeline-dot"></div>
+                    <div class="cert-card" data-img="assets/certificates/python-crash-cert.jpg">
+                        <div class="cert-icon">💻</div>
+                        <div class="cert-info">
+                            <span class="cert-title">Python Crash Basics</span>
+                            <span class="cert-issuer">Mind Luster</span>
+                        </div>
+                        <span class="status-badge status-completed">Completed</span>
+                    </div>
+                </div>
+
+                <div class="cert-item">
+                    <div class="timeline-dot"></div>
+                    <div class="cert-card" data-img="assets/certificates/digital-marketing-cert.jpg">
+                        <div class="cert-icon">📈</div>
+                        <div class="cert-info">
+                            <span class="cert-title">Digital Marketing</span>
+                            <span class="cert-issuer">DigiSkills Training Program</span>
+                        </div>
+                        <span class="status-badge status-completed">Completed</span>
+                    </div>
+                </div>
+
+                <div class="cert-item">
+                    <div class="timeline-dot"></div>
+                    <div class="cert-card" data-img="assets/certificates/ecommerce-cert.jpg">
+                        <div class="cert-icon">🛒</div>
+                        <div class="cert-info">
+                            <span class="cert-title">E-Commerce Management</span>
+                            <span class="cert-issuer">DigiSkills Training Program</span>
+                        </div>
+                        <span class="status-badge status-completed">Completed</span>
                     </div>
                 </div>
             </div>
