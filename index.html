@@ -109,43 +109,26 @@
 ════════════════════════════ -->
 <section id="card-3" class="card state-below">
     <div class="card-inner">
-        <div style="width:100%; max-width:1000px; padding: 20px;">
+        <div style="width:100%; max-width:850px; padding: 20px;">
             <div class="section-header" style="text-align: center; margin-bottom: 40px;">
                 <span class="tagline">MY TOOLKIT</span>
                 <h2 class="section-title">Skills & Expertise</h2>
                 <div class="accent-line" style="margin: 0 auto;"></div>
             </div>
             
-            <div class="skills-wrapper">
-                <!-- Group 1: Core Tech -->
-                <div class="skill-category">
-                    <h3 class="category-title">Core Development</h3>
-                    <div class="skills-grid">
-                        <div class="skill-card"><span class="skill-emoji">🐍</span><span class="skill-name">Python</span><div class="progress-container"><div class="progress-bar" data-width="85%"></div></div></div>
-                        <div class="skill-card"><span class="skill-emoji">🌐</span><span class="skill-name">HTML/CSS/JS</span><div class="progress-container"><div class="progress-bar" data-width="70%"></div></div></div>
-                        <div class="skill-card"><span class="skill-emoji">🗄️</span><span class="skill-name">SQL/Database</span><div class="progress-container"><div class="progress-bar" data-width="60%"></div></div></div>
-                    </div>
-                </div>
-
-                <!-- Group 2: AI & Data Science -->
-                <div class="skill-category">
-                    <h3 class="category-title">AI & Data Science</h3>
-                    <div class="skills-grid">
-                        <div class="skill-card"><span class="skill-emoji">🧠</span><span class="skill-name">Generative AI</span><div class="progress-container"><div class="progress-bar" data-width="80%"></div></div></div>
-                        <div class="skill-card"><span class="skill-emoji">🤖</span><span class="skill-name">Machine Learning</span><div class="progress-container"><div class="progress-bar" data-width="65%"></div></div></div>
-                        <div class="skill-card"><span class="skill-emoji">📊</span><span class="skill-name">Data Analysis</span><div class="progress-container"><div class="progress-bar" data-width="75%"></div></div></div>
-                    </div>
-                </div>
-
-                <!-- Group 3: Tools & Cloud -->
-                <div class="skill-category">
-                    <h3 class="category-title">Tools & Cloud</h3>
-                    <div class="skills-grid">
-                        <div class="skill-card"><span class="skill-emoji">☁️</span><span class="skill-name">AWS Cloud</span><div class="progress-container"><div class="progress-bar" data-width="55%"></div></div></div>
-                        <div class="skill-card"><span class="skill-emoji">✍️</span><span class="skill-name">Prompt Eng.</span><div class="progress-container"><div class="progress-bar" data-width="90%"></div></div></div>
-                        <div class="skill-card"><span class="skill-emoji">🎬</span><span class="skill-name">AI Automation</span><div class="progress-container"><div class="progress-bar" data-width="75%"></div></div></div>
-                    </div>
-                </div>
+            <div class="skills-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 15px;">
+                <div class="skill-card"><span class="skill-emoji">🐍</span><span class="skill-name">Python</span><div class="progress-container"><div class="progress-bar" data-width="85%"></div></div></div>
+                <div class="skill-card"><span class="skill-emoji">🌐</span><span class="skill-name">HTML/CSS/JS</span><div class="progress-container"><div class="progress-bar" data-width="70%"></div></div></div>
+                <div class="skill-card"><span class="skill-emoji">🗄️</span><span class="skill-name">SQL/Database</span><div class="progress-container"><div class="progress-bar" data-width="60%"></div></div></div>
+                <div class="skill-card"><span class="skill-emoji">🧠</span><span class="skill-name">Deep Learning</span><div class="progress-container"><div class="progress-bar" data-width="75%"></div></div></div>
+                <div class="skill-card"><span class="skill-emoji">🤖</span><span class="skill-name">NLP</span><div class="progress-container"><div class="progress-bar" data-width="80%"></div></div></div>
+                <div class="skill-card"><span class="skill-emoji">📊</span><span class="skill-name">Data Science</span><div class="progress-container"><div class="progress-bar" data-width="75%"></div></div></div>
+                <div class="skill-card"><span class="skill-emoji">👁️</span><span class="skill-name">Computer Vision</span><div class="progress-container"><div class="progress-bar" data-width="70%"></div></div></div>
+                <div class="skill-card"><span class="skill-emoji">☁️</span><span class="skill-name">AWS Cloud</span><div class="progress-container"><div class="progress-bar" data-width="55%"></div></div></div>
+                <div class="skill-card"><span class="skill-emoji">✍️</span><span class="skill-name">Prompt Eng.</span><div class="progress-container"><div class="progress-bar" data-width="90%"></div></div></div>
+                <div class="skill-card"><span class="skill-emoji">⚡</span><span class="skill-name">FastAPI</span><div class="progress-container"><div class="progress-bar" data-width="70%"></div></div></div>
+                <div class="skill-card"><span class="skill-emoji">🧬</span><span class="skill-name">TensorFlow</span><div class="progress-container"><div class="progress-bar" data-width="65%"></div></div></div>
+                <div class="skill-card"><span class="skill-emoji">🔬</span><span class="skill-name">Matplotlib</span><div class="progress-container"><div class="progress-bar" data-width="72%"></div></div></div>
             </div>
         </div>
     </div>
@@ -183,7 +166,8 @@
 .px-nav-box { flex:1.5; display:flex; align-items:center; justify-content:flex-end; gap:40px; }
 .px-count-box { font-family:'Syne',sans-serif; font-size:28px; font-weight:800; color:rgba(255,255,255,0.1); }
 .px-count-box b { color:var(--cyan); }
-.px-nav-btn { width:52px; height:52px; border-radius:50%; background:rgba(0,0,0,0.3); border:1px solid rgba(255,255,255,0.1); color:#fff; font-size:22px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all .3s; }
+.px-btns-box { display: flex; gap: 12px; }
+.px-nav-btn { width:48px; height:48px; border-radius:50%; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); color:#fff; font-size:20px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all .3s ease; }
 .px-nav-btn:hover { background:var(--purple); border-color:var(--purple); transform:scale(1.1); box-shadow:0 0 20px rgba(124,58,237,0.3); }
 
 @media(max-width:1024px) {
@@ -284,35 +268,33 @@
 ════════════════════════════ -->
 <section id="card-5" class="card state-below">
     <div class="card-inner">
-        <div style="width:100%; max-width:1100px; padding: 20px;">
-            <div class="section-header" style="text-align: center; margin-bottom: 40px;">
+        <div style="width:100%; max-width:700px; padding: 20px; display: flex; flex-direction: column; align-items: center;">
+            <div class="section-header" style="text-align: center; margin-bottom: 40px; width: 100%;">
                 <span class="tagline" style="color:var(--pink);">MY CREDENTIALS</span>
-                <h2 class="section-title">Achievements & Certifications</h2>
+                <h2 class="section-title">Achievements</h2>
                 <div class="accent-line" style="margin: 0 auto; background: linear-gradient(90deg, var(--purple), var(--pink));"></div>
             </div>
 
             <!-- Featured Achievement -->
-            <div style="display: flex; justify-content: center; margin-bottom: 40px;">
-                <div class="cs-card anim-in" data-link="https://devpost.com/software/faceless-ai-studio" style="max-width: 500px; width: 100%;">
-                    <div class="cs-card-img" style="height: 200px; background: linear-gradient(135deg, #1a1a2e 0%, #0a0a12 100%); display: flex; align-items: center; justify-content: center; position: relative;">
-                         <span class="cs-card-tag" style="top: 15px; left: 15px;">🏆 Winner / Participant</span>
-                         <div style="font-size: 60px; opacity: 0.1; position: absolute; right: 10px; bottom: 10px; font-weight: 800;">AWS</div>
-                         <div style="text-align: center;">🚀</div>
+            <div style="width: 100%; margin-bottom: 40px;">
+                <div class="cs-card anim-in" data-link="https://devpost.com/software/faceless-ai-studio" style="width: 100%;">
+                    <div class="cs-card-img" style="height: 180px; background: linear-gradient(135deg, #1a1a2e 0%, #0a0a12 100%); display: flex; align-items: center; justify-content: center; position: relative; border-radius: 20px 20px 0 0;">
+                         <span class="cs-card-tag" style="top: 15px; left: 15px;">🏆 AWS NOVA HACKATHON</span>
+                         <div style="text-align: center; font-size: 50px;">🚀</div>
                     </div>
                     <div class="cs-card-body">
-                        <h3 class="cs-card-title">AWS Nova AI Hackathon 2025</h3>
-                        <p class="cs-card-summary">Built high-end image & video generation pipelines using AWS Bedrock and Nova Canvas.</p>
+                        <h3 class="cs-card-title">Faceless AI Video Studio</h3>
+                        <p class="cs-card-summary">Developing automated pipelines for AI video generation using AWS Bedrock.</p>
                         <div class="cs-card-footer">
                             <div class="cs-tags"><span class="cs-tag">AWS</span><span class="cs-tag">Python</span></div>
-                            <a href="https://devpost.com/software/faceless-ai-studio" target="_blank" style="text-decoration:none; color:var(--cyan); font-weight:700; font-size:13px;">View Submission ↗</a>
+                            <a href="https://devpost.com/software/faceless-ai-studio" target="_blank" style="text-decoration:none; color:var(--cyan); font-weight:700; font-size:13px;">View ↗</a>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- ── CERTIFICATIONS TIMELINE (BACK TO ORIGINAL LIST) ── -->
-            <div class="certs-subheading" style="font-family:'Syne',sans-serif;font-size:24px;margin-bottom:24px;margin-top:40px;">📜 Certifications</div>
-            <div class="certs-container" style="position:relative; padding-left: 20px;">
+            <div class="certs-subheading" style="font-family:'Syne',sans-serif;font-size:24px;margin-bottom:24px; align-self: flex-start; color: white;">📜 Certifications</div>
+            <div class="certs-container" style="position:relative; padding-left: 20px; width: 100%;">
                 <div class="timeline-line"></div>
 
                 <div class="cert-item">
