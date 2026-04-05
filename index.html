@@ -7,9 +7,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=Syne:wght@800&family=Plus+Jakarta+Sans:wght@300..800&display=swap" rel="stylesheet"/>
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
     <link rel="stylesheet" href="assets/css/style.css"/>
 </head>
-<body>
+<body style="overflow:hidden; height:100vh; position:fixed; width:100%;">
 
     <div id="transition-flash" style="position:fixed;inset:0;z-index:50;pointer-events:none;opacity:0;background:radial-gradient(circle at center, rgba(124,58,237,0.15), transparent);transition:opacity 0.15s ease;"></div>
     
@@ -254,12 +255,12 @@
   function positionTrack(){
     const topW = track.parentElement.offsetWidth; 
     const cardW = 1000 + 100; // width + margins
-    let offset = (topW - 1000) / 2 - (cur * cardW) - 50;
+    const centerOffset = (topW / 2) - (cur * cardW + cardW / 2);
+    
     if(window.innerWidth <= 1024) { 
-        offset = -(cur * (topW * 1)); 
         track.style.transform = `translateX(${-cur*100}%)`; 
     } else {
-        track.style.transform = `translateX(${offset}px)`;
+        track.style.transform = `translateX(${centerOffset}px)`;
     }
   }
   function go(idx){
