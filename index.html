@@ -159,10 +159,10 @@
 ════════════════════════════ -->
 <section id="card-4" class="card state-below">
 <style>
-.px { width:100%; max-width:1150px; display:flex; flex-direction:column; gap:20px; margin:0 auto; height:85vh; justify-content:center; position:relative; z-index:2; padding: 20px 0; }
-.px-top { width:100%; overflow:hidden; position:relative; min-height:460px; display:flex; align-items:center; justify-content:center; border-radius:24px; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.05); }
+.px { width:100%; max-width:1250px; display:flex; flex-direction:column; gap:25px; margin:0 auto; height:85vh; justify-content:center; position:relative; z-index:2; padding: 20px 0; }
+.px-top { width:100%; overflow:hidden; position:relative; min-height:480px; display:flex; align-items:center; justify-content:center; border-radius:24px; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.05); }
 .px-track { display:flex; position:absolute; transition:transform 0.6s cubic-bezier(0.23, 1, 0.32, 1); height:100%; align-items:center; }
-.px-card { flex-shrink:0; width:1050px; height:400px; margin:0 50px; display:flex; border-radius:20px; background:rgba(10,12,24,0.95); border:1px solid rgba(124,58,237,0.3); overflow:hidden; transition:all 0.6s ease; position:relative; box-shadow:0 30px 80px rgba(0,0,0,0.6); }
+.px-card { flex-shrink:0; width:1150px; height:420px; margin:0 50px; display:flex; border-radius:20px; background:rgba(10,12,24,0.95); border:1px solid rgba(124,58,237,0.3); overflow:hidden; transition:all 0.6s ease; position:relative; box-shadow:0 30px 80px rgba(0,0,0,0.6); }
 .px-card:not(.px-active) { opacity:0.1; transform:scale(0.95); filter:blur(4px); }
 .px-card.px-active { opacity:1; transform:scale(1); border-color:rgba(124,58,237,0.5); box-shadow:0 40px 100px rgba(124,58,237,0.3); }
 .px-media { flex:1.4; height:100%; position:relative; background: radial-gradient(circle at center, rgba(124,58,237,0.1), transparent); overflow:hidden; border-right:1px solid rgba(255,255,255,0.1); z-index:1; display:flex; align-items:center; justify-content:center; }
@@ -176,7 +176,7 @@
 .px-tags { display:flex; flex-wrap:wrap; gap:10px; }
 .px-tag { font-size:11px; padding:5px 14px; border-radius:20px; background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); color:#fff; font-weight:600; }
 
-.px-ctrls { width:100%; height:160px; background:rgba(15,15,30,0.5); backdrop-filter:blur(20px); border:1px solid rgba(255,255,255,0.08); border-radius:24px; padding:0 50px; display:flex; align-items:center; justify-content:space-between; box-shadow:0 20px 60px rgba(0,0,0,0.5); }
+.px-ctrls { width:100%; height:160px; background:rgba(15,15,30,0.5); backdrop-filter:blur(20px); border:1px solid rgba(255,255,255,0.08); border-radius:24px; padding:0 60px; display:flex; align-items:center; justify-content:space-between; box-shadow:0 20px 60px rgba(0,0,0,0.5); }
 .px-info { display:flex; flex-direction:column; gap:8px; flex:1.5; }
 .px-cat-label { font-size:12px; letter-spacing:4px; text-transform:uppercase; color:var(--cyan); font-weight:800; opacity:0.9; text-shadow:0 0 10px rgba(6,182,212,0.3); }
 .px-title-label { font-family:'Syne',sans-serif; font-size:32px; font-weight:800; color:#fff; margin:0; line-height:1; }
@@ -191,18 +191,19 @@
 .px-nav-btn:hover { background:var(--purple); border-color:var(--purple); transform:scale(1.1); box-shadow:0 0 20px rgba(124,58,237,0.3); }
 
 @media(max-width:1024px) {
-  .px { height: auto; min-height: 100vh; padding-bottom: 100px; }
-  .px-top { min-height: 320px; }
+  .px { height: auto; min-height: 100vh; padding-bottom: 50px; gap: 0; }
+  .px-top { min-height: 280px; border-radius: 24px 24px 0 0; }
   .px-card { width: 100% !important; margin: 0; flex-direction: column; height: auto !important; }
-  .px-media { height: 260px; flex: none; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); }
+  .px-media { height: 280px; flex: none; border-right: none; }
   .px-details { display: none; }
-  .px-ctrls { flex-direction: column; height: auto; padding: 25px; gap: 15px; border-radius: 0 0 24px 24px; position: static; }
+  .px-ctrls { flex-direction: column; height: auto; padding: 35px 20px; gap: 25px; border-radius: 0 0 24px 24px; position: static; border-top: none; }
   .px-info { text-align: center; }
-  .px-title-label { font-size: 24px; }
-  .px-gh-btn { padding: 12px 28px; font-size: 13px; width: 100%; }
-  .px-nav-box { width: 100%; justify-content: center; gap: 25px; }
-  .px-count-box { font-size: 20px; }
-  .px-nav-btn { width: 44px; height: 44px; }
+  .px-title-label { font-size: 28px; line-height: 1.2; }
+  .px-gh-btn { padding: 15px 30px; font-size: 14px; width: 100%; }
+  .px-nav-box { width: 100%; justify-content: center; gap: 30px; flex-direction: row !important; }
+  .px-count-box { font-size: 22px; order: 1; }
+  .px-btns-box { order: 2; }
+  .px-nav-btn { width: 48px; height: 48px; }
 }
 </style>
 
@@ -240,7 +241,7 @@
     { cat:'AI & GEN-AI', title:'AI Chatbot Studio', features: ['Advanced NLU with real-time streaming','Context-aware persistent chat history','Multi-model support (Groq/OpenAI)','Responsive Dark Glass UI interface'], tags:['Python','FastAPI','React','AWS'], gh:'https://github.com/coddies/AI-Chatbot', img:'assets/images/p1.png', emoji: '🤖' },
     { cat:'AUTOMATION', title:'Faceless AI Video', features: ['Automated script-to-video pipeline','High-end generative image integration','Natural AI voice synthesis','Batch scene processing'], tags:['Python','FFmpeg','AWS Bedrock'], gh:'https://github.com/coddies/Faceless-AI-Studio', img:'assets/images/p2.png', emoji: '🎬' },
     { cat:'ML ENGINEERING', title:'Predictive Insights', features: ['Real-time 92%+ model accuracy','Interactive Matplotlib dashboards','Automated anomaly detection','High-throughput API serving'], tags:['Scikit-Learn','Pandas','FastAPI'], gh:'https://github.com/coddies', img:'assets/images/p3.png', emoji: '🧠' },
-    { cat:'FULL STACK', title:'Premium Portoflio', features: ['Dynamic card-based transitions','Responsive Glassmorphism design','Interactive project carousel','Automated deployment pipelines'], tags:['HTML5','CSS3','JS','GitHub'], gh:'https://github.com/coddies/My-Portfolio', img:'assets/images/p4.png', emoji: '💎' },
+    { cat:'FULL STACK', title:'Premium Portfolio', features: ['Dynamic card-based transitions','Responsive Glassmorphism design','Interactive project carousel','Automated deployment pipelines'], tags:['HTML5','CSS3','JS','GitHub'], gh:'https://github.com/coddies/My-Portfolio', img:'assets/images/p4.png', emoji: '💎' },
   ];
   const track = document.getElementById('pxTrack'); if(!track) return;
   const cards = track.querySelectorAll('.px-card');
