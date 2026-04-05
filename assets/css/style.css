@@ -1254,6 +1254,19 @@ h1, h2, h3, .syne-font {
 
 .cs-comments-list { display: flex; flex-direction: column; gap: 16px; margin-bottom: 30px; }
 
+.cert-card { 
+  display: flex; 
+  align-items: center; 
+  justify-content: space-between; 
+  padding: 30px 40px; 
+  min-height: 120px; 
+  background: rgba(255,255,255,0.03); 
+  border: 1px solid rgba(255,255,255,0.06); 
+  border-radius: 20px; 
+  transition: all 0.3s ease; 
+  box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+}
+
 .cs-comment {
     display: flex;
     gap: 14px;
