@@ -138,49 +138,40 @@
 ════════════════════════════ -->
 <section id="card-4" class="card state-below">
 <style>
-.px{width:100%;max-width:900px;display:flex;flex-direction:column;gap:16px;}
-.px-top{width:100%;overflow:hidden;position:relative;height:220px;}
-.px{width:100%;max-width:1100px;display:flex;flex-direction:column;gap:30px;margin:0 auto;}
-.px-top{width:100%;overflow:hidden;position:relative;height:520px;display:flex;align-items:center;justify-content:center;border-radius:24px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);}
+.px{width:100%;max-width:1100px;display:flex;flex-direction:column;gap:15px;margin:0 auto;height:85vh;justify-content:center;}
+.px-top{width:100%;overflow:hidden;position:relative;height:450px;display:flex;align-items:center;justify-content:center;border-radius:24px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);}
 .px-track{display:flex;position:absolute;transition:transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);height:100%;align-items:center;}
-.px-card{flex-shrink:0;width:1000px;height:460px;margin:0 50px;display:flex;border-radius:20px;background:rgba(10,12,24,0.92);border:1px solid rgba(124,58,237,0.2);overflow:hidden;transition:all 0.6s ease;position:relative;box-shadow:0 25px 60px rgba(0,0,0,0.5);}
-.px-card:not(.px-active){opacity:0;pointer-events:none;transform:scale(0.95);filter:blur(10px);}
-.px-card.px-active{opacity:1;pointer-events:auto;transform:scale(1);border-color:rgba(124,58,237,0.4);box-shadow:0 30px 80px rgba(124,58,237,0.25);}
-.px-media{flex:1.2;height:100%;position:relative;background:#030308;overflow:hidden;border-right:1px solid rgba(255,255,255,0.08);}
-.px-media img{width:100%;height:100%;object-fit:cover;transition:transform 0.8s ease;opacity:0.8;}
+.px-card{flex-shrink:0;width:1000px;height:400px;margin:0 50px;display:flex;border-radius:20px;background:rgba(10,12,24,0.95);border:1px solid rgba(124,58,237,0.25);overflow:hidden;transition:all 0.6s ease;position:relative;box-shadow:0 30px 80px rgba(0,0,0,0.5);}
+.px-card:not(.px-active){opacity:0;pointer-events:none;transform:scale(0.95);filter:blur(8px);}
+.px-card.px-active{opacity:1;pointer-events:auto;transform:scale(1);border-color:rgba(124,58,237,0.45);box-shadow:0 30px 100px rgba(124,58,237,0.25);}
+.px-media{flex:1.2;height:100%;position:relative;background:#020205;overflow:hidden;border-right:1px solid rgba(255,255,255,0.08);}
+.px-media img{width:100%;height:100%;object-fit:cover;transition:transform 0.8s ease;opacity:0.9;}
 .px-card.px-active .px-media img{transform:scale(1.05);opacity:1;}
-.px-details{flex:1;padding:40px;display:flex;flex-direction:column;justify-content:center;background:linear-gradient(135deg,rgba(124,58,237,0.05) 0%,rgba(0,0,0,0) 100%);}
-.px-cat{font-size:12px;letter-spacing:5px;text-transform:uppercase;color:var(--cyan);font-weight:700;margin-bottom:15px;display:block;opacity:1;text-shadow:0 0 15px rgba(6,182,212,0.4);}
-.px-title{font-family:'Syne',sans-serif;font-size:38px;font-weight:800;color:#fff;margin-bottom:20px;line-height:1.1;}
-.px-features{list-style:none;padding:0;margin:0 0 25px 0;display:flex;flex-direction:column;gap:12px;}
-.px-features li{font-size:15px;color:rgba(255,255,255,0.85);display:flex;align-items:flex-start;gap:12px;line-height:1.5;}
+.px-details{flex:1;padding:30px 40px;display:flex;flex-direction:column;justify-content:center;background:linear-gradient(135deg,rgba(124,58,237,0.05) 0%,rgba(0,0,0,0) 100%);}
+.px-cat{font-size:11px;letter-spacing:5px;text-transform:uppercase;color:var(--cyan);font-weight:700;margin-bottom:12px;display:block;text-shadow:0 0 15px rgba(6,182,212,0.4);}
+.px-title{font-family:'Syne',sans-serif;font-size:32px;font-weight:800;color:#fff;margin-bottom:15px;line-height:1.1;}
+.px-features{list-style:none;padding:0;margin:0 0 20px 0;display:flex;flex-direction:column;gap:10px;}
+.px-features li{font-size:14px;color:rgba(255,255,255,0.85);display:flex;align-items:flex-start;gap:12px;line-height:1.4;}
 .px-features li::before{content:'→';color:var(--cyan);font-weight:700;}
-.px-tags{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:30px;}
-.px-tag{font-size:11px;padding:5px 14px;border-radius:20px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.6);font-weight:600;}
-.px-gh{align-self:flex-start;display:inline-flex;align-items:center;gap:12px;padding:14px 32px;border-radius:99px;background:linear-gradient(135deg,var(--purple),var(--cyan));color:#fff;font-size:14px;font-weight:700;text-decoration:none;transition:all .3s;}
-.px-gh:hover{transform:translateY(-5px);box-shadow:0 15px 30px rgba(124,58,237,0.3);}
-.px-ctrls{width:100%;height:80px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:99px;padding:0 30px;display:flex;align-items:center;justify-content:space-between;margin-top:20px;}
-.px-meta{display:flex;align-items:center;gap:30px;}
-.px-count{font-family:'Syne',sans-serif;font-size:24px;font-weight:800;color:rgba(255,255,255,0.2);}
+.px-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:25px;}
+.px-tag{font-size:10px;padding:4px 12px;border-radius:20px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.6);font-weight:600;}
+.px-gh{align-self:flex-start;display:inline-flex;align-items:center;gap:10px;padding:12px 28px;border-radius:99px;background:linear-gradient(135deg,var(--purple),var(--cyan));color:#fff;font-size:13px;font-weight:700;text-decoration:none;transition:all .3s;}
+.px-gh:hover{transform:translateY(-4px);box-shadow:0 15px 30px rgba(124,58,237,0.35);}
+.px-ctrls{width:100%;height:70px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:99px;padding:0 30px;display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
+.px-meta{display:flex;align-items:center;gap:25px;}
+.px-count{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:rgba(255,255,255,0.25);}
 .px-count b{color:var(--cyan);}
-.px-dots{display:flex;gap:12px;}
-.px-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.1);cursor:pointer;transition:all .3s;}
-.px-dot.on{width:35px;border-radius:99px;background:linear-gradient(90deg,var(--purple),var(--cyan));}
-.px-btns{display:flex;gap:15px;}
-.px-btn{width:50px;height:50px;border-radius:50%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:#fff;font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .3s;}
-.px-btn:hover{background:var(--purple);border-color:var(--purple);box-shadow:0 0 20px rgba(124,58,237,0.3);}
-@media(max-width:1024px){.px-card{width:90% !important;flex-direction:column;height:auto !important;max-height:80vh;}.px-media{height:250px;}.px-details{padding:25px;}.px-title{font-size:26px;}.px-features li{font-size:13px;}.px-top{height:auto;padding:20px 0;}}
+.px-dots{display:flex;gap:10px;}
+.px-dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,0.1);cursor:pointer;transition:all .3s;}
+.px-dot.on{width:30px;border-radius:99px;background:linear-gradient(90deg,var(--purple),var(--cyan));}
+.px-btns{display:flex;gap:12px;}
+.px-btn{width:46px;height:46px;border-radius:50%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);color:#fff;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .3s;}
+.px-btn:hover{background:var(--purple);border-color:var(--purple);box-shadow:0 0 25px rgba(124,58,237,0.35);}
+@media(max-width:1024px){.px-card{width:90% !important;flex-direction:column;height:auto !important;max-height:80vh;}.px-media{height:200px;}.px-details{padding:20px;}.px-title{font-size:24px;}.px-features li{font-size:12px;}.px-top{height:auto;padding:15px 0;}}
 </style>
 <div class="card-inner">
 <div class="px">
-  <div class="px-top">
-    <div class="px-track" id="pxTrack">
-      <div class="px-card"><div class="px-media"><img></div><div class="px-details"></div></div>
-      <div class="px-card"><div class="px-media"><img></div><div class="px-details"></div></div>
-      <div class="px-card"><div class="px-media"><img></div><div class="px-details"></div></div>
-      <div class="px-card"><div class="px-media"><img></div><div class="px-details"></div></div>
-    </div>
-  </div>
+  <!-- TOP NAVIGATION CONTROLS -->
   <div class="px-ctrls">
     <div class="px-meta">
         <div class="px-count"><b id="pxCurr">1</b> / <span id="pxTotal">4</span></div>
@@ -189,6 +180,16 @@
     <div class="px-btns">
       <button class="px-btn" id="pxPrev">&#8249;</button>
       <button class="px-btn" id="pxNext">&#8250;</button>
+    </div>
+  </div>
+  
+  <!-- MAIN CONTENT AREA -->
+  <div class="px-top">
+    <div class="px-track" id="pxTrack">
+      <div class="px-card"><div class="px-media"><img></div><div class="px-details"></div></div>
+      <div class="px-card"><div class="px-media"><img></div><div class="px-details"></div></div>
+      <div class="px-card"><div class="px-media"><img></div><div class="px-details"></div></div>
+      <div class="px-card"><div class="px-media"><img></div><div class="px-details"></div></div>
     </div>
   </div>
 </div>
@@ -233,22 +234,25 @@
   const currEl = document.getElementById('pxCurr');  const totEl = document.getElementById('pxTotal'); 
   const dotsEl = document.getElementById('pxDots');  const prevB = document.getElementById('pxPrev');  const nextB = document.getElementById('pxNext');
   const N = data.length; totEl.textContent = N; let cur = 0;
+
   data.forEach((p,i)=>{ 
     const d=document.createElement('div'); d.className='px-dot'+(i===0?' on':''); d.onclick=()=>go(i); dotsEl.appendChild(d); 
-    const c = cards[i]; c.querySelector('img').src = p.img;
-    c.querySelector('.px-details').innerHTML = `
-      <span class="px-cat">${p.cat}</span>
-      <h3 class="px-title">${p.title}</h3>
-      <ul class="px-features">${p.features.map(f=>`<li>${f}</li>`).join('')}</ul>
-      <div class="px-tags">${p.tags.map(t=>`<span class="px-tag">${t}</span>`).join('')}</div>
-      <a href="${p.gh}" target="_blank" class="px-gh">View Research ↗</a>
-    `;
+    const c = cards[i]; 
+    if(c) {
+        c.querySelector('img').src = p.img;
+        c.querySelector('.px-details').innerHTML = `
+          <span class="px-cat">${p.cat}</span>
+          <h3 class="px-title">${p.title}</h3>
+          <ul class="px-features">${p.features.map(f=>`<li>${f}</li>`).join('')}</ul>
+          <div class="px-tags">${p.tags.map(t=>`<span class="px-tag">${t}</span>`).join('')}</div>
+          <a href="${p.gh}" target="_blank" class="px-gh">View Research ↗</a>
+        `;
+    }
   });
   function positionTrack(){
     const topW = track.parentElement.offsetWidth; 
     const cardW = 1000 + 100; // width + margins
     const centerOffset = (topW / 2) - (cur * cardW + cardW / 2);
-    
     if(window.innerWidth <= 1024) { 
         track.style.transform = `translateX(${-cur*100}%)`; 
     } else {
@@ -256,8 +260,10 @@
     }
   }
   function go(idx){
-    cur = (idx + N) % N; cards.forEach((c,i)=>c.classList.toggle('px-active', i===cur));
-    currEl.textContent = cur+1; dotsEl.querySelectorAll('.px-dot').forEach((d,i)=>d.classList.toggle('on',i===cur));
+    cur = (idx + N) % N; 
+    cards.forEach((c,i)=>c.classList.toggle('px-active', i===cur));
+    currEl.textContent = cur+1; 
+    dotsEl.querySelectorAll('.px-dot').forEach((d,i)=>d.classList.toggle('on',i===cur));
     positionTrack();
   }
   cards.forEach((c,i)=>c.addEventListener('click',()=>go(i)));
