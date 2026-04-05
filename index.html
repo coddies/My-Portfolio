@@ -107,28 +107,48 @@
 <!-- ════════════════════════════
      CARD 3 — SKILLS
 ════════════════════════════ -->
-<section id="card-3" class="card state-below">
+<section id="card-3" class="card state-active">
     <div class="card-inner">
-        <div style="width:100%; max-width:850px; padding: 20px;">
+        <div style="width:100%; max-width:1000px; padding: 20px;">
             <div class="section-header" style="text-align: center; margin-bottom: 40px;">
                 <span class="tagline">MY TOOLKIT</span>
                 <h2 class="section-title">Skills & Expertise</h2>
                 <div class="accent-line" style="margin: 0 auto;"></div>
             </div>
             
-            <div class="skills-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 15px;">
-                <div class="skill-card"><span class="skill-emoji">🐍</span><span class="skill-name">Python</span><div class="progress-container"><div class="progress-bar" data-width="85%"></div></div></div>
-                <div class="skill-card"><span class="skill-emoji">🌐</span><span class="skill-name">HTML/CSS/JS</span><div class="progress-container"><div class="progress-bar" data-width="70%"></div></div></div>
-                <div class="skill-card"><span class="skill-emoji">🗄️</span><span class="skill-name">SQL/Database</span><div class="progress-container"><div class="progress-bar" data-width="60%"></div></div></div>
-                <div class="skill-card"><span class="skill-emoji">🧠</span><span class="skill-name">Deep Learning</span><div class="progress-container"><div class="progress-bar" data-width="75%"></div></div></div>
-                <div class="skill-card"><span class="skill-emoji">🤖</span><span class="skill-name">NLP</span><div class="progress-container"><div class="progress-bar" data-width="80%"></div></div></div>
-                <div class="skill-card"><span class="skill-emoji">📊</span><span class="skill-name">Data Science</span><div class="progress-container"><div class="progress-bar" data-width="75%"></div></div></div>
-                <div class="skill-card"><span class="skill-emoji">👁️</span><span class="skill-name">Computer Vision</span><div class="progress-container"><div class="progress-bar" data-width="70%"></div></div></div>
-                <div class="skill-card"><span class="skill-emoji">☁️</span><span class="skill-name">AWS Cloud</span><div class="progress-container"><div class="progress-bar" data-width="55%"></div></div></div>
-                <div class="skill-card"><span class="skill-emoji">✍️</span><span class="skill-name">Prompt Eng.</span><div class="progress-container"><div class="progress-bar" data-width="90%"></div></div></div>
-                <div class="skill-card"><span class="skill-emoji">⚡</span><span class="skill-name">FastAPI</span><div class="progress-container"><div class="progress-bar" data-width="70%"></div></div></div>
-                <div class="skill-card"><span class="skill-emoji">🧬</span><span class="skill-name">TensorFlow</span><div class="progress-container"><div class="progress-bar" data-width="65%"></div></div></div>
-                <div class="skill-card"><span class="skill-emoji">🔬</span><span class="skill-name">Matplotlib</span><div class="progress-container"><div class="progress-bar" data-width="72%"></div></div></div>
+            <div class="skills-wrapper">
+                <!-- Group 1: Core Tech -->
+                <div class="skill-category">
+                    <h3 class="category-title">Core Development</h3>
+                    <div class="skills-grid">
+                        <div class="skill-card"><span class="skill-emoji">🐍</span><span class="skill-name">Python</span><div class="progress-container"><div class="progress-bar" data-width="85%"></div></div></div>
+                        <div class="skill-card"><span class="skill-emoji">🌐</span><span class="skill-name">HTML/CSS/JS</span><div class="progress-container"><div class="progress-bar" data-width="70%"></div></div></div>
+                        <div class="skill-card"><span class="skill-emoji">🗄️</span><span class="skill-name">SQL/Database</span><div class="progress-container"><div class="progress-bar" data-width="60%"></div></div></div>
+                        <div class="skill-card"><span class="skill-emoji">⚡</span><span class="skill-name">FastAPI</span><div class="progress-container"><div class="progress-bar" data-width="70%"></div></div></div>
+                    </div>
+                </div>
+
+                <!-- Group 2: AI & Data Science -->
+                <div class="skill-category">
+                    <h3 class="category-title">AI & Data Science</h3>
+                    <div class="skills-grid">
+                        <div class="skill-card"><span class="skill-emoji">🧠</span><span class="skill-name">Deep Learning</span><div class="progress-container"><div class="progress-bar" data-width="80%"></div></div></div>
+                        <div class="skill-card"><span class="skill-emoji">🤖</span><span class="skill-name">NLP</span><div class="progress-container"><div class="progress-bar" data-width="85%"></div></div></div>
+                        <div class="skill-card"><span class="skill-emoji">📊</span><span class="skill-name">Data Science</span><div class="progress-container"><div class="progress-bar" data-width="75%"></div></div></div>
+                        <div class="skill-card"><span class="skill-emoji">👁️</span><span class="skill-name">Computer Vision</span><div class="progress-container"><div class="progress-bar" data-width="70%"></div></div></div>
+                    </div>
+                </div>
+
+                <!-- Group 3: Tools & Automation -->
+                <div class="skill-category">
+                    <h3 class="category-title">Tools & Cloud</h3>
+                    <div class="skills-grid">
+                        <div class="skill-card"><span class="skill-emoji">☁️</span><span class="skill-name">AWS Cloud</span><div class="progress-container"><div class="progress-bar" data-width="55%"></div></div></div>
+                        <div class="skill-card"><span class="skill-emoji">✍️</span><span class="skill-name">Prompt Eng.</span><div class="progress-container"><div class="progress-bar" data-width="95%"></div></div></div>
+                        <div class="skill-card"><span class="skill-emoji">🎬</span><span class="skill-name">AI Automation</span><div class="progress-container"><div class="progress-bar" data-width="75%"></div></div></div>
+                        <div class="skill-card"><span class="skill-emoji">🧬</span><span class="skill-name">TensorFlow</span><div class="progress-container"><div class="progress-bar" data-width="65%"></div></div></div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -171,11 +191,18 @@
 .px-nav-btn:hover { background:var(--purple); border-color:var(--purple); transform:scale(1.1); box-shadow:0 0 20px rgba(124,58,237,0.3); }
 
 @media(max-width:1024px) {
-  .px-card { width: 90% !important; margin: 0 5%; flex-direction: column; height: auto !important; min-height: 500px; }
-  .px-media { height: 200px; }
-  .px-ctrls { flex-direction: column; height: auto; padding: 30px; gap: 20px; }
+  .px { height: auto; min-height: 100vh; padding-bottom: 100px; }
+  .px-top { min-height: 320px; }
+  .px-card { width: 100% !important; margin: 0; flex-direction: column; height: auto !important; }
+  .px-media { height: 260px; flex: none; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); }
+  .px-details { display: none; }
+  .px-ctrls { flex-direction: column; height: auto; padding: 25px; gap: 15px; border-radius: 0 0 24px 24px; position: static; }
   .px-info { text-align: center; }
-  .px-nav-box { width: 100%; justify-content: center; }
+  .px-title-label { font-size: 24px; }
+  .px-gh-btn { padding: 12px 28px; font-size: 13px; width: 100%; }
+  .px-nav-box { width: 100%; justify-content: center; gap: 25px; }
+  .px-count-box { font-size: 20px; }
+  .px-nav-btn { width: 44px; height: 44px; }
 }
 </style>
 
