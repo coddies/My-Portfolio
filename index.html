@@ -147,64 +147,55 @@
 .px-card.px-active::before{opacity:1;}
 .px-card:not(.px-active)::before{opacity:0.4;}
 .px-emoji{font-size:60px;z-index:1;transition:font-size 0.4s;}
-.px-top{width:100%;overflow:hidden;position:relative;height:300px;display:flex;align-items:center;justify-content:center;}
-.px-track{display:flex;position:absolute;transition:transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);height:100%;align-items:center;}
-.px-card{flex-shrink:0;border-radius:24px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:15px;cursor:pointer;transition:all 0.5s ease;overflow:hidden;position:relative;width:440px;height:280px;}
-.px-card::before{content:'';position:absolute;inset:0;background:var(--pc,rgba(124,58,237,0.1));transition:opacity 0.4s;}
-.px-card.px-active{opacity:1;pointer-events:auto;border-color:rgba(124,58,237,0.4);box-shadow:0 0 50px rgba(124,58,237,0.25);transform:scale(1);}
-.px-card:not(.px-active){opacity:0;pointer-events:none;transform:scale(0.9);}
-.px-card.px-active::before{opacity:1;}
-.px-card:not(.px-active)::before{opacity:0;}
-.px-emoji{font-size:75px;z-index:1;transition:font-size 0.5s;}
-.px-card.px-active .px-emoji{font-size:100px;}
-.px-lbl{font-size:12px;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,0.25);z-index:1;}
-.px-card.px-active .px-lbl{color:rgba(255,255,255,0.6);}
-.px-bot{width:100%;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:24px;padding:32px 36px;display:flex;flex-direction:column;gap:24px;}
-.px-info{width:100%;}
-.px-cat{font-size:12px;letter-spacing:5px;text-transform:uppercase;color:var(--cyan);font-weight:800;margin-bottom:10px;display:block;}
-.px-title{font-family:'Syne',sans-serif;font-size:28px;font-weight:800;color:#fff;margin-bottom:12px;line-height:1.1;}
-.px-desc{font-size:15px;color:rgba(190,210,255,0.55);line-height:1.8;margin-bottom:18px;max-width:650px;}
-.px-tags{display:flex;flex-wrap:wrap;gap:10px;}
-.px-tag{font-size:12px;padding:5px 14px;border-radius:24px;background:rgba(6,182,212,0.06);border:1px solid rgba(6,182,212,0.2);color:var(--cyan);font-weight:600;}
-.px-gh{display:inline-flex;align-items:center;gap:10px;margin-top:18px;padding:12px 28px;border-radius:99px;background:linear-gradient(135deg,var(--purple),var(--cyan));color:#fff;font-size:14px;font-weight:700;text-decoration:none;transition:all .3s;}
-.px-gh:hover{opacity:.9;transform:translateY(-4px);box-shadow:0 12px 24px rgba(6,182,212,0.25);}
-.px-ctrls{width:100%;display:flex;align-items:center;justify-content:space-between;padding-top:20px;border-top:1px solid rgba(255,255,255,0.04);}
-.px-count{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:rgba(255,255,255,0.2);}
+.px{width:100%;max-width:1100px;display:flex;flex-direction:column;gap:30px;margin:0 auto;}
+.px-top{width:100%;overflow:hidden;position:relative;height:520px;display:flex;align-items:center;justify-content:center;border-radius:24px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);}
+.px-track{display:flex;position:absolute;transition:transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);height:100%;align-items:center;}
+.px-card{flex-shrink:0;width:1000px;height:460px;margin:0 50px;display:flex;border-radius:20px;background:rgba(15,15,25,0.8);border:1px solid rgba(255,255,255,0.08);overflow:hidden;transition:all 0.6s ease;position:relative;box-shadow:0 20px 50px rgba(0,0,0,0.3);}
+.px-card:not(.px-active){opacity:0;pointer-events:none;transform:scale(0.95);filter:blur(10px);}
+.px-card.px-active{opacity:1;pointer-events:auto;transform:scale(1);border-color:rgba(124,58,237,0.3);box-shadow:0 30px 80px rgba(124,58,237,0.15);}
+.px-media{flex:1.2;height:100%;position:relative;background:#050510;overflow:hidden;border-right:1px solid rgba(255,255,255,0.05);}
+.px-media img{width:100%;height:100%;object-fit:cover;transition:transform 0.8s ease;}
+.px-card.px-active .px-media img{transform:scale(1.05);}
+.px-details{flex:1;padding:40px;display:flex;flex-direction:column;justify-content:center;background:linear-gradient(135deg,rgba(255,255,255,0.02) 0%,rgba(255,255,255,0) 100%);}
+.px-cat{font-size:12px;letter-spacing:5px;text-transform:uppercase;color:var(--cyan);font-weight:700;margin-bottom:15px;display:block;opacity:0.8;}
+.px-title{font-family:'Syne',sans-serif;font-size:36px;font-weight:800;color:#fff;margin-bottom:20px;line-height:1.1;}
+.px-features{list-style:none;padding:0;margin:0 0 25px 0;display:flex;flex-direction:column;gap:12px;}
+.px-features li{font-size:15px;color:rgba(190,210,255,0.7);display:flex;align-items:flex-start;gap:12px;line-height:1.5;}
+.px-features li::before{content:'→';color:var(--cyan);font-weight:700;}
+.px-tags{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:30px;}
+.px-tag{font-size:11px;padding:5px 14px;border-radius:20px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.6);font-weight:600;}
+.px-gh{align-self:flex-start;display:inline-flex;align-items:center;gap:12px;padding:14px 32px;border-radius:99px;background:linear-gradient(135deg,var(--purple),var(--cyan));color:#fff;font-size:14px;font-weight:700;text-decoration:none;transition:all .3s;}
+.px-gh:hover{transform:translateY(-5px);box-shadow:0 15px 30px rgba(124,58,237,0.3);}
+.px-ctrls{width:100%;height:80px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:99px;padding:0 30px;display:flex;align-items:center;justify-content:space-between;margin-top:20px;}
+.px-meta{display:flex;align-items:center;gap:30px;}
+.px-count{font-family:'Syne',sans-serif;font-size:24px;font-weight:800;color:rgba(255,255,255,0.2);}
 .px-count b{color:var(--cyan);}
-.px-dots{display:flex;gap:10px;align-items:center;}
-.px-dot{height:7px;border-radius:99px;cursor:pointer;transition:all .3s;}
-.px-dot.on{width:32px;background:linear-gradient(90deg,var(--purple),var(--cyan));}
-.px-dot:not(.on){width:7px;background:rgba(255,255,255,0.12);}
-.px-btns{display:flex;gap:12px;}
-.px-btn{width:50px;height:50px;border-radius:50%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);color:#fff;font-size:24px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .3s;}
-.px-btn:hover{background:rgba(124,58,237,0.25);border-color:rgba(124,58,237,0.5);transform:scale(1.1);box-shadow:0 0 25px rgba(124,58,237,0.3);}
-@media(max-width:768px){.px-card{width:280px;height:200px;}.px-top{height:220px;}.px-emoji{font-size:50px!important;}.px-card.px-active .px-emoji{font-size:65px!important;}.px-bot{padding:24px 20px;}.px-title{font-size:22px!important;}.px-ctrls{flex-direction:row;flex-wrap:wrap;gap:15px;}.px-btns{order:3;}}
+.px-dots{display:flex;gap:12px;}
+.px-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.1);cursor:pointer;transition:all .3s;}
+.px-dot.on{width:35px;border-radius:99px;background:linear-gradient(90deg,var(--purple),var(--cyan));}
+.px-btns{display:flex;gap:15px;}
+.px-btn{width:50px;height:50px;border-radius:50%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:#fff;font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .3s;}
+.px-btn:hover{background:var(--purple);border-color:var(--purple);box-shadow:0 0 20px rgba(124,58,237,0.3);}
+@media(max-width:1024px){.px-card{width:90% !important;flex-direction:column;height:auto !important;max-height:80vh;}.px-media{height:250px;}.px-details{padding:25px;}.px-title{font-size:26px;}.px-features li{font-size:13px;}.px-top{height:auto;padding:20px 0;}}
 </style>
 <div class="card-inner">
 <div class="px">
   <div class="px-top">
     <div class="px-track" id="pxTrack">
-      <div class="px-card" style="--pc:rgba(124,58,237,0.15)"><span class="px-emoji">🤖</span><span class="px-lbl">AI Chatbot</span></div>
-      <div class="px-card" style="--pc:rgba(236,72,153,0.15)"><span class="px-emoji">🎬</span><span class="px-lbl">AI Studio</span></div>
-      <div class="px-card" style="--pc:rgba(6,182,212,0.15)"><span class="px-emoji">📊</span><span class="px-lbl">Data Analysis</span></div>
-      <div class="px-card" style="--pc:rgba(124,58,237,0.15)"><span class="px-emoji">🧠</span><span class="px-lbl">ML Model</span></div>
+      <div class="px-card"><div class="px-media"><img></div><div class="px-details"></div></div>
+      <div class="px-card"><div class="px-media"><img></div><div class="px-details"></div></div>
+      <div class="px-card"><div class="px-media"><img></div><div class="px-details"></div></div>
+      <div class="px-card"><div class="px-media"><img></div><div class="px-details"></div></div>
     </div>
   </div>
-  <div class="px-bot">
-    <div class="px-info">
-      <span class="px-cat" id="pxCat">AI PROJECT</span>
-      <div class="px-title" id="pxTitle">AI Chatbot</div>
-      <div class="px-desc" id="pxDesc">NLP-driven intelligent chatbot built with Python. Understands and responds to natural language queries with high accuracy.</div>
-      <div class="px-tags" id="pxTags"></div>
-      <a href="https://github.com/coddies" target="_blank" class="px-gh" id="pxGh">View on GitHub →</a>
+  <div class="px-ctrls">
+    <div class="px-meta">
+        <div class="px-count"><b id="pxCurr">1</b> / <span id="pxTotal">4</span></div>
+        <div class="px-dots" id="pxDots"></div>
     </div>
-    <div class="px-ctrls">
-      <div class="px-count"><b id="pxCurr">1</b> / <span id="pxTotal">4</span></div>
-      <div class="px-dots" id="pxDots"></div>
-      <div class="px-btns">
-        <button class="px-btn" id="pxPrev">&#8249;</button>
-        <button class="px-btn" id="pxNext">&#8250;</button>
-      </div>
+    <div class="px-btns">
+      <button class="px-btn" id="pxPrev">&#8249;</button>
+      <button class="px-btn" id="pxNext">&#8250;</button>
     </div>
   </div>
 </div>
@@ -212,30 +203,67 @@
 <script>
 (function(){
   const data=[
-    {cat:'AI PROJECT',    title:'AI Chatbot',          desc:'NLP-driven intelligent chatbot built with Python. Understands and responds to natural language queries with high accuracy.',           tags:['Python','NLP','AI'],            gh:'https://github.com/coddies'},
-    {cat:'AI AUTOMATION', title:'Faceless AI Studio',  desc:'Fully automated AI video creation pipeline. Converts scripts to voice to video with zero manual effort.',                             tags:['AI','Automation','Video'],       gh:'https://github.com/coddies'},
-    {cat:'DATA SCIENCE',  title:'Data Analysis',       desc:'Real-world dataset deep analysis with beautiful Pandas and Matplotlib visualizations and actionable business insights.',               tags:['Pandas','Matplotlib','Python'],  gh:'https://github.com/coddies'},
-    {cat:'ML',            title:'ML Classification',   desc:'Scikit-learn classification model achieving 92% accuracy. Trained and evaluated on real-world test data.',                            tags:['Scikit-learn','ML','Python'],    gh:'https://github.com/coddies'},
+    {
+      cat:'AI PROJECT',
+      title:'AI Chatbot',
+      features: ['Natural Language Understanding','Real-time streaming responses','Context-aware conversation history','Integration with Groq & OpenAI APIs'],
+      tags:['Python','FastAPI','Groq'],
+      gh:'https://github.com/coddies',
+      img:'assets/images/p1.png'
+    },
+    {
+      cat:'AI AUTOMATION',
+      title:'Faceless AI Studio',
+      features: ['Automated script-to-video pipeline','High-resolution image generation','Natural-sounding AI voiceovers','Multi-scene dynamic transitions'],
+      tags:['AWS Bedrock','Python','FFmpeg'],
+      gh:'https://github.com/coddies',
+      img:'assets/images/p2.png'
+    },
+    {
+      cat:'DATA SCIENCE',
+      title:'Deep Data Analysis',
+      features: ['Real-time dataset processing','Interactive Matplotlib visualizations','Advanced statistical modeling','Automated business insight reports'],
+      tags:['Pandas','NumPy','Sklearn'],
+      gh:'https://github.com/coddies',
+      img:'assets/images/p3.png'
+    },
+    {
+      cat:'ML ENGINEERING',
+      title:'ML Model Deployment',
+      features: ['Classification with 92%+ accuracy','Batch prediction optimization','Model performance tracking','Scalable REST API serving'],
+      tags:['Scikit-Learn','Docker','FastAPI'],
+      gh:'https://github.com/coddies',
+      img:'assets/images/p4.png'
+    },
   ];
   const track = document.getElementById('pxTrack'); const cards = track.querySelectorAll('.px-card');
-  const catEl = document.getElementById('pxCat');   const titEl = document.getElementById('pxTitle');
-  const desEl = document.getElementById('pxDesc');  const tagEl = document.getElementById('pxTags');
-  const ghEl  = document.getElementById('pxGh');    const currEl = document.getElementById('pxCurr');
-  const totEl = document.getElementById('pxTotal'); const dotsEl = document.getElementById('pxDots');
-  const prevB = document.getElementById('pxPrev');  const nextB = document.getElementById('pxNext');
+  const currEl = document.getElementById('pxCurr');  const totEl = document.getElementById('pxTotal'); 
+  const dotsEl = document.getElementById('pxDots');  const prevB = document.getElementById('pxPrev');  const nextB = document.getElementById('pxNext');
   const N = data.length; totEl.textContent = N; let cur = 0;
-  data.forEach((_,i)=>{ const d=document.createElement('div'); d.className='px-dot'+(i===0?' on':''); d.onclick=()=>go(i); dotsEl.appendChild(d); });
+  data.forEach((p,i)=>{ 
+    const d=document.createElement('div'); d.className='px-dot'+(i===0?' on':''); d.onclick=()=>go(i); dotsEl.appendChild(d); 
+    const c = cards[i]; c.querySelector('img').src = p.img;
+    c.querySelector('.px-details').innerHTML = `
+      <span class="px-cat">${p.cat}</span>
+      <h3 class="px-title">${p.title}</h3>
+      <ul class="px-features">${p.features.map(f=>`<li>${f}</li>`).join('')}</ul>
+      <div class="px-tags">${p.tags.map(t=>`<span class="px-tag">${t}</span>`).join('')}</div>
+      <a href="${p.gh}" target="_blank" class="px-gh">View Research ↗</a>
+    `;
+  });
   function positionTrack(){
     const topW = track.parentElement.offsetWidth; 
-    const cardW = (window.innerWidth <= 768) ? 280 : 440;
-    // Basic centering calculation for single-card focus
-    let offset = (topW - cardW) / 2 - (cur * cardW);
-    track.style.transform = `translateX(${offset}px)`;
+    const cardW = 1000 + 100; // width + margins
+    let offset = (topW - 1000) / 2 - (cur * cardW) - 50;
+    if(window.innerWidth <= 1024) { 
+        offset = -(cur * (topW * 1)); 
+        track.style.transform = `translateX(${-cur*100}%)`; 
+    } else {
+        track.style.transform = `translateX(${offset}px)`;
+    }
   }
   function go(idx){
     cur = (idx + N) % N; cards.forEach((c,i)=>c.classList.toggle('px-active', i===cur));
-    const p = data[cur]; catEl.textContent = p.cat; titEl.textContent = p.title; desEl.textContent = p.desc;
-    ghEl.href = p.gh; tagEl.innerHTML = p.tags.map(t=>`<span class="px-tag">${t}</span>`).join('');
     currEl.textContent = cur+1; dotsEl.querySelectorAll('.px-dot').forEach((d,i)=>d.classList.toggle('on',i===cur));
     positionTrack();
   }
