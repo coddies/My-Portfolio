@@ -237,18 +237,22 @@
       img:'assets/images/p4.png'
     },
   ];
-  const track = document.getElementById('pxTrack'); const cards = track.querySelectorAll('.px-card');
+  const track = document.getElementById('pxTrack');
+  if(!track) return;
+  const cards = track.querySelectorAll('.px-card');
   const currEl = document.getElementById('pxCurr');  const totEl = document.getElementById('pxTotal'); 
   const prevB = document.getElementById('pxPrev');  const nextB = document.getElementById('pxNext');
   const catEl = document.getElementById('pxCat');   const titEl = document.getElementById('pxTitle');
   const mainBtn = document.getElementById('pxMainBtn');
-  const N = data.length; totEl.textContent = N; let cur = 0;
+  const N = data.length; if(totEl) totEl.textContent = N; let cur = 0;
 
   function draw(){
     data.forEach((p,i)=>{ 
       if(cards[i]){
-        cards[i].querySelector('img').src = p.img;
-        cards[i].querySelector('.px-details').innerHTML = `
+        const img = cards[i].querySelector('img');
+        if(img) img.src = p.img + '?v=' + Date.now(); // Cache busting to force reload
+        const details = cards[i].querySelector('.px-details');
+        if(details) details.innerHTML = `
           <ul class="px-features">${p.features.map(f=>`<li>${f}</li>`).join('')}</ul>
           <div class="px-tags">${p.tags.map(t=>`<span class="px-tag">${t}</span>`).join('')}</div>
         `;
@@ -265,7 +269,7 @@
   function go(idx){
     cur = (idx + N) % N; 
     cards.forEach((c,i)=>c.classList.toggle('px-active', i===cur));
-    currEl.textContent = cur+1; 
+    if(currEl) currEl.textContent = cur+1; 
     if(catEl) catEl.textContent = data[cur].cat;
     if(titEl) titEl.textContent = data[cur].title;
     if(mainBtn) mainBtn.href = data[cur].gh;
