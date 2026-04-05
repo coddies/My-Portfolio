@@ -125,9 +125,6 @@
                 <div class="skill-card"><span class="skill-emoji">🧠</span><span class="skill-name">AI / LLMs</span><div class="progress-container"><div class="progress-bar" data-width="60%"></div></div></div>
                 <div class="skill-card"><span class="skill-emoji">☁️</span><span class="skill-name">AWS Cloud</span><div class="progress-container"><div class="progress-bar" data-width="55%"></div></div></div>
                 <div class="skill-card"><span class="skill-emoji">✍️</span><span class="skill-name">Prompt Engineering</span><div class="progress-container"><div class="progress-bar" data-width="80%"></div></div></div>
-                <div class="skill-card"><span class="skill-emoji">🎥</span><span class="skill-name">AI Video Editing</span><div class="progress-container"><div class="progress-bar" data-width="70%"></div></div></div>
-                <div class="skill-card"><span class="skill-emoji">🎬</span><span class="skill-name">Content Creation</span><div class="progress-container"><div class="progress-bar" data-width="75%"></div></div></div>
-                <div class="skill-card"><span class="skill-emoji">💻</span><span class="skill-name">Vibe Coding</span><div class="progress-container"><div class="progress-bar" data-width="65%"></div></div></div>
             </div>
         </div>
     </div>
@@ -138,51 +135,55 @@
 ════════════════════════════ -->
 <section id="card-4" class="card state-below">
 <style>
-.px{width:100%;max-width:1150px;display:flex;flex-direction:column;gap:20px;margin:0 auto;height:85vh;justify-content:center;position:relative;z-index:2;}
-.px-top{width:100%;overflow:hidden;position:relative;height:460px;display:flex;align-items:center;justify-content:center;border-radius:24px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);}
-.px-track{display:flex;position:absolute;transition:transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);height:100%;align-items:center;}
-.px-card{flex-shrink:0;width:1050px;height:400px;margin:0 50px;display:flex;border-radius:20px;background:rgba(10,12,24,0.98);border:1px solid rgba(124,58,237,0.3);overflow:hidden;transition:all 0.6s ease;position:relative;box-shadow:0 30px 80px rgba(0,0,0,0.6);}
-.px-card:not(.px-active){opacity:0;pointer-events:none;transform:scale(0.95);filter:blur(8px);}
-.px-card.px-active{opacity:1;pointer-events:auto;transform:scale(1);border-color:rgba(124,58,237,0.5);box-shadow:0 40px 100px rgba(124,58,237,0.3);}
-.px-media{flex:1.4;height:100%;position:relative;background:#000;overflow:hidden;border-right:1px solid rgba(255,255,255,0.1);z-index:1;}
-.px-media img{width:100%;height:100%;object-fit:cover;transition:transform 0.8s ease;opacity:0.9;display:block;}
-.px-card.px-active .px-media img{transform:scale(1.05);opacity:1;}
-.px-details{flex:1;padding:45px;display:flex;flex-direction:column;justify-content:center;background:linear-gradient(135deg,rgba(124,58,237,0.1) 0%,rgba(0,0,0,0) 100%);z-index:2;position:relative;}
-.px-features{list-style:none;padding:0;margin:0 0 25px 0;display:flex;flex-direction:column;gap:12px;}
-.px-features li{font-size:15px;color:#ffffff;display:flex;align-items:flex-start;gap:12px;line-height:1.5;font-weight:500;}
-.px-features li::before{content:'→';color:var(--cyan);font-weight:700;}
-.px-tags{display:flex;flex-wrap:wrap;gap:10px;}
-.px-tag{font-size:11px;padding:5px 14px;border-radius:20px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:#fff;font-weight:600;}
+.px { width:100%; max-width:1150px; display:flex; flex-direction:column; gap:20px; margin:0 auto; height:85vh; justify-content:center; position:relative; z-index:2; padding: 20px 0; }
+.px-top { width:100%; overflow:hidden; position:relative; min-height:460px; display:flex; align-items:center; justify-content:center; border-radius:24px; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.05); }
+.px-track { display:flex; position:absolute; transition:transform 0.6s cubic-bezier(0.23, 1, 0.32, 1); height:100%; align-items:center; }
+.px-card { flex-shrink:0; width:1050px; height:400px; margin:0 50px; display:flex; border-radius:20px; background:rgba(10,12,24,0.95); border:1px solid rgba(124,58,237,0.3); overflow:hidden; transition:all 0.6s ease; position:relative; box-shadow:0 30px 80px rgba(0,0,0,0.6); }
+.px-card:not(.px-active) { opacity:0.1; transform:scale(0.95); filter:blur(4px); }
+.px-card.px-active { opacity:1; transform:scale(1); border-color:rgba(124,58,237,0.5); box-shadow:0 40px 100px rgba(124,58,237,0.3); }
+.px-media { flex:1.4; height:100%; position:relative; background: radial-gradient(circle at center, rgba(124,58,237,0.1), transparent); overflow:hidden; border-right:1px solid rgba(255,255,255,0.1); z-index:1; display:flex; align-items:center; justify-content:center; }
+.px-media img { width:100%; height:100%; object-fit:cover; transition:transform 0.8s ease; opacity:0.9; display:block; }
+.px-card.px-active .px-media img { transform:scale(1.05); opacity:1; }
+.px-fallback-emoji { position:absolute; font-size:120px; opacity:0.2; z-index:0; filter:blur(2px); pointer-events:none; }
+.px-details { flex:1; padding:45px; display:flex; flex-direction:column; justify-content:center; background:linear-gradient(135deg,rgba(124,58,237,0.08) 0%,rgba(0,0,0,0) 100%); z-index:2; position:relative; }
+.px-features { list-style:none; padding:0; margin:0 0 25px 0; display:flex; flex-direction:column; gap:12px; }
+.px-features li { font-size:15px; color:#ffffff; display:flex; align-items:flex-start; gap:12px; line-height:1.5; font-weight:500; }
+.px-features li::before { content:'→'; color:var(--cyan); font-weight:700; }
+.px-tags { display:flex; flex-wrap:wrap; gap:10px; }
+.px-tag { font-size:11px; padding:5px 14px; border-radius:20px; background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); color:#fff; font-weight:600; }
 
-/* BOTTOM CONTROLLER */
-.px-ctrls{width:100%;height:130px;background:rgba(15,15,30,0.6);backdrop-filter:blur(15px);border:1px solid rgba(255,255,255,0.1);border-radius:24px;padding:0 45px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 15px 40px rgba(0,0,0,0.4);}
-.px-info{display:flex;flex-direction:column;gap:8px;flex:1.5;}
-.px-cat-label{font-size:12px;letter-spacing:4px;text-transform:uppercase;color:var(--cyan);font-weight:800;opacity:0.9;text-shadow:0 0 10px rgba(6,182,212,0.3);}
-.px-title-label{font-family:'Syne',sans-serif;font-size:32px;font-weight:800;color:#fff;margin:0;line-height:1;}
-.px-action{flex:1;display:flex;justify-content:center;}
-.px-gh-btn{display:inline-flex;align-items:center;justify-content:center;gap:15px;padding:18px 45px;border-radius:99px;background:linear-gradient(135deg,#ff8000, #ff4000);color:#fff;font-size:15px;font-weight:800;text-decoration:none;transition:all .4s;box-shadow:0 10px 40px rgba(255,64,0,0.3);border:none;cursor:pointer;white-space:nowrap;}
-.px-gh-btn:hover{transform:translateY(-6px) scale(1.02);box-shadow:0 20px 50px rgba(255,64,0,0.5);}
-.px-nav-box{flex:1.5;display:flex;align-items:center;justify-content:flex-end;gap:40px;}
-.px-count-box{font-family:'Syne',sans-serif;font-size:32px;font-weight:800;color:rgba(255,255,255,0.15);}
-.px-count-box b{color:var(--cyan);}
-.px-btns-box{display:flex;gap:15px;}
-.px-nav-btn{width:60px;height:60px;border-radius:50%;background:#0a0a1a;border:1px solid rgba(255,255,255,0.15);color:#fff;font-size:26px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .3s;}
-.px-nav-btn:hover{background:var(--purple);border-color:var(--purple);transform:scale(1.1);box-shadow:0 0 30px rgba(124,58,237,0.4);}
-@media(max-width:1024px){.px-card{width:90% !important;flex-direction:column;height:auto !important;}.px-media{height:220px;}.px-ctrls{flex-direction:column;height:auto;padding:30px;gap:20px;}.px-info{text-align:center;}.px-title-label{font-size:24px;}}
+.px-ctrls { width:100%; height:130px; background:rgba(15,15,30,0.4); backdrop-filter:blur(15px); border:1px solid rgba(255,255,255,0.1); border-radius:24px; padding:0 45px; display:flex; align-items:center; justify-content:space-between; box-shadow:0 15px 40px rgba(0,0,0,0.4); }
+.px-info { display:flex; flex-direction:column; gap:8px; flex:1.5; }
+.px-cat-label { font-size:12px; letter-spacing:4px; text-transform:uppercase; color:var(--cyan); font-weight:800; opacity:0.9; text-shadow:0 0 10px rgba(6,182,212,0.3); }
+.px-title-label { font-family:'Syne',sans-serif; font-size:32px; font-weight:800; color:#fff; margin:0; line-height:1; }
+.px-action { flex:1; display:flex; justify-content:center; }
+.px-gh-btn { display:inline-flex; align-items:center; justify-content:center; gap:15px; padding:18px 45px; border-radius:99px; background:linear-gradient(135deg,#ff8000, #ff4000); color:#fff; font-size:14px; font-weight:800; text-decoration:none; transition:all .4s; box-shadow:0 10px 40px rgba(255,64,0,0.2); border:none; cursor:pointer; }
+.px-gh-btn:hover { transform:translateY(-6px) scale(1.02); box-shadow:0 15px 50px rgba(255,64,0,0.4); }
+.px-nav-box { flex:1.5; display:flex; align-items:center; justify-content:flex-end; gap:40px; }
+.px-count-box { font-family:'Syne',sans-serif; font-size:28px; font-weight:800; color:rgba(255,255,255,0.1); }
+.px-count-box b { color:var(--cyan); }
+.px-nav-btn { width:52px; height:52px; border-radius:50%; background:rgba(0,0,0,0.3); border:1px solid rgba(255,255,255,0.1); color:#fff; font-size:22px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all .3s; }
+.px-nav-btn:hover { background:var(--purple); border-color:var(--purple); transform:scale(1.1); box-shadow:0 0 20px rgba(124,58,237,0.3); }
+
+@media(max-width:1024px) {
+  .px-card { width: 90% !important; margin: 0 5%; flex-direction: column; height: auto !important; min-height: 500px; }
+  .px-media { height: 200px; }
+  .px-ctrls { flex-direction: column; height: auto; padding: 30px; gap: 20px; }
+  .px-info { text-align: center; }
+  .px-nav-box { width: 100%; justify-content: center; }
+}
 </style>
+
 <div class="card-inner">
 <div class="px">
-  <!-- PREVIEW CAROUSEL (TOP) -->
   <div class="px-top">
     <div class="px-track" id="pxTrack">
-      <div class="px-card"><div class="px-media"><img></div><div class="px-details"></div></div>
-      <div class="px-card"><div class="px-media"><img></div><div class="px-details"></div></div>
-      <div class="px-card"><div class="px-media"><img></div><div class="px-details"></div></div>
-      <div class="px-card"><div class="px-media"><img></div><div class="px-details"></div></div>
+      <div class="px-card"><div class="px-media"><img><span class="px-fallback-emoji">🤖</span></div><div class="px-details"></div></div>
+      <div class="px-card"><div class="px-media"><img><span class="px-fallback-emoji">🎬</span></div><div class="px-details"></div></div>
+      <div class="px-card"><div class="px-media"><img><span class="px-fallback-emoji">📊</span></div><div class="px-details"></div></div>
+      <div class="px-card"><div class="px-media"><img><span class="px-fallback-emoji">🧠</span></div><div class="px-details"></div></div>
     </div>
   </div>
-  
-  <!-- DYNAMIC CONTROLLER (BOTTOM) -->
   <div class="px-ctrls">
     <div class="px-info">
       <span class="px-cat-label" id="pxCat">PROJECT PREVIEW</span>
@@ -204,83 +205,55 @@
 <script>
 (function(){
   const data=[
-    {
-      cat:'AI PROJECT',
-      title:'AI Chatbot',
-      features: ['Natural Language Understanding','Real-time streaming responses','Context-aware conversation history','Integration with Groq & OpenAI APIs'],
-      tags:['Python','FastAPI','Groq'],
-      gh:'https://github.com/coddies',
-      img:'assets/images/p1.png'
-    },
-    {
-      cat:'AI AUTOMATION',
-      title:'Faceless AI Studio',
-      features: ['Automated script-to-video pipeline','High-resolution image generation','Natural-sounding AI voiceovers','Multi-scene dynamic transitions'],
-      tags:['AWS Bedrock','Python','FFmpeg'],
-      gh:'https://github.com/coddies',
-      img:'assets/images/p2.png'
-    },
-    {
-      cat:'DATA SCIENCE',
-      title:'Deep Data Analysis',
-      features: ['Real-time dataset processing','Interactive Matplotlib visualizations','Advanced statistical modeling','Automated business insight reports'],
-      tags:['Pandas','NumPy','Sklearn'],
-      gh:'https://github.com/coddies',
-      img:'assets/images/p3.png'
-    },
-    {
-      cat:'ML ENGINEERING',
-      title:'ML Model Deployment',
-      features: ['Classification with 92%+ accuracy','Batch prediction optimization','Model performance tracking','Scalable REST API serving'],
-      tags:['Scikit-Learn','Docker','FastAPI'],
-      gh:'https://github.com/coddies',
-      img:'assets/images/p4.png'
-    },
+    { cat:'AI PROJECT', title:'AI Chatbot', features: ['Natural Language Understanding','Real-time streaming responses','Context-aware conversation history','Integration with Groq & OpenAI APIs'], tags:['Python','FastAPI','Groq'], gh:'https://github.com/coddies', img:'assets/images/p1.png', emoji: '🤖' },
+    { cat:'AI AUTOMATION', title:'Faceless AI Studio', features: ['Automated script-to-video pipeline','High-resolution image generation','Natural-sounding AI voiceovers','Multi-scene dynamic transitions'], tags:['AWS Bedrock','Python','FFmpeg'], gh:'https://github.com/coddies', img:'assets/images/p2.png', emoji: '🎬' },
+    { cat:'DATA SCIENCE', title:'Deep Data Analysis', features: ['Real-time dataset processing','Interactive Matplotlib visualizations','Advanced statistical modeling','Automated business insight reports'], tags:['Pandas','NumPy','Sklearn'], gh:'https://github.com/coddies', img:'assets/images/p3.png', emoji: '📊' },
+    { cat:'ML ENGINEERING', title:'ML Model Deployment', features: ['Classification with 92%+ accuracy','Batch prediction optimization','Model performance tracking','Scalable REST API serving'], tags:['Scikit-Learn','Docker','FastAPI'], gh:'https://github.com/coddies', img:'assets/images/p4.png', emoji: '🧠' },
   ];
-  const track = document.getElementById('pxTrack');
-  if(!track) return;
+  const track = document.getElementById('pxTrack'); if(!track) return;
   const cards = track.querySelectorAll('.px-card');
-  const currEl = document.getElementById('pxCurr');  const totEl = document.getElementById('pxTotal'); 
-  const prevB = document.getElementById('pxPrev');  const nextB = document.getElementById('pxNext');
-  const catEl = document.getElementById('pxCat');   const titEl = document.getElementById('pxTitle');
+  const currEl = document.getElementById('pxCurr'); const totEl = document.getElementById('pxTotal');
+  const prevB = document.getElementById('pxPrev'); const nextB = document.getElementById('pxNext');
+  const catEl = document.getElementById('pxCat'); const titEl = document.getElementById('pxTitle');
   const mainBtn = document.getElementById('pxMainBtn');
   const N = data.length; if(totEl) totEl.textContent = N; let cur = 0;
 
   function draw(){
-    data.forEach((p,i)=>{ 
-      if(cards[i]){
-        const img = cards[i].querySelector('img');
-        if(img) img.src = p.img; // Removed cache-busting (?v=) which breaks local file paths
-        const details = cards[i].querySelector('.px-details');
+    data.forEach((p,i)=>{
+      const card = cards[i];
+      if(card){
+        const img = card.querySelector('img');
+        const fallback = card.querySelector('.px-fallback-emoji');
+        if(img) {
+          img.src = p.img;
+          img.onload = () => { if(fallback) fallback.style.display = 'none'; };
+          img.onerror = () => { img.style.display = 'none'; if(fallback) { fallback.style.display = 'block'; fallback.textContent = p.emoji; } };
+        }
+        const details = card.querySelector('.px-details');
         if(details) {
-          details.innerHTML = `
-            <ul class="px-features">${p.features.map(f=>`<li>${f}</li>`).join('')}</ul>
-            <div class="px-tags">${p.tags.map(t=>`<span class="px-tag">${t}</span>`).join('')}</div>
-          `;
+          details.innerHTML = `<ul class="px-features">${p.features.map(f=>`<li>${f}</li>`).join('')}</ul><div class="px-tags">${p.tags.map(t=>`<span class="px-tag">${t}</span>`).join('')}</div>`;
         }
       }
     });
   }
   function positionTrack(){
     const topW = track.parentElement.offsetWidth || window.innerWidth;
-    const cardW = 1050 + 100;
-    const centerOffset = (topW / 2) - (cur * cardW + cardW / 2);
-    if(window.innerWidth <= 1024) track.style.transform = `translateX(${-cur*100}%)`; 
-    else track.style.transform = `translateX(${centerOffset}px)`;
+    if(window.innerWidth <= 1024) { track.style.transform = `translateX(${-cur*100}%)`; track.style.left = '0'; }
+    else { const cardW = 1050 + 100; const centerOffset = (topW / 2) - (cur * cardW + cardW / 2); track.style.transform = `translateX(${centerOffset}px)`; track.style.left = '0'; }
   }
   function go(idx){
-    cur = (idx + N) % N; 
+    cur = (idx + N) % N;
     cards.forEach((c,i)=>c.classList.toggle('px-active', i===cur));
-    if(currEl) currEl.textContent = cur+1; 
-    if(catEl) catEl.textContent = data[cur].cat;
-    if(titEl) titEl.textContent = data[cur].title;
-    if(mainBtn) mainBtn.href = data[cur].gh;
+    if(currEl) currEl.textContent = cur+1; if(catEl) catEl.textContent = data[cur].cat; if(titEl) titEl.textContent = data[cur].title; if(mainBtn) mainBtn.href = data[cur].gh;
     positionTrack();
   }
+  const cardSection = document.getElementById('card-4');
+  const observer = new MutationObserver((mutations) => { mutations.forEach((mutation) => { if (mutation.attributeName === 'class' && cardSection.classList.contains('state-active')) { setTimeout(positionTrack, 100); } }); });
+  observer.observe(cardSection, { attributes: true });
   cards.forEach((c,i)=>c.addEventListener('click',()=>go(i)));
   prevB.onclick=()=>go(cur-1); nextB.onclick=()=>go(cur+1);
   window.addEventListener('resize', positionTrack);
-  setTimeout(positionTrack, 100); go(0);
+  draw(); setTimeout(positionTrack, 100); go(0);
 })();
 </script>
 </section>
@@ -500,6 +473,38 @@
     <div class="modal-content">
         <div class="modal-close" id="modalClose">&times;</div>
         <img src="" alt="Certificate" id="modalImg">
+    </div>
+</div>
+
+<!-- Case Study Modal -->
+<div class="cs-modal" id="csModal">
+    <div class="cs-modal-inner">
+        <div class="cs-modal-close" id="csModalClose">&times;</div>
+        <div class="cs-modal-scroll">
+            <div class="cs-modal-header">
+                <span class="cs-badge" id="csModalCategory">Category</span>
+                <h2 id="csModalTitle">Project Title</h2>
+                <div class="cs-modal-tags" id="csModalTags"></div>
+            </div>
+            <div class="cs-modal-grid">
+                <div class="cs-modal-main">
+                    <div class="cs-modal-block"><h3>Problem Statement</h3><p id="csModalProblem"></p></div>
+                    <div class="cs-modal-block"><h3>Our Solution</h3><p id="csModalSolution"></p></div>
+                    <div class="cs-modal-block"><h3>Key Results</h3><p id="csModalResult"></p></div>
+                </div>
+                <div class="cs-modal-side">
+                    <div class="cs-comments-section">
+                        <h3>Discussion</h3>
+                        <div class="cs-comments-list" id="csCommentsList"></div>
+                        <div class="cs-comment-input">
+                            <input type="text" id="csCommentName" placeholder="Your Name">
+                            <textarea id="csCommentText" placeholder="Share your thoughts..."></textarea>
+                            <button id="csCommentSubmit">Post Comment</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
