@@ -305,33 +305,37 @@
                     <div class="accent-line"></div>
                 </div>
 
-                <!-- ── HACKATHON BOX ── -->
-                <div class="hackathon-main-card" data-link="https://devpost.com/software/faceless-ai-studio" style="margin-bottom: 50px;">
-                    <span class="hack-badge">🏆 Winner / Participant</span>
-                    <span class="hack-watermark">AWS</span>
-                    <h3 class="hack-title">AWS Nova AI Hackathon 2025</h3>
-                    <p class="hack-desc">
-                        Built 'Faceless AI Studio' using AWS Bedrock and Nova Canvas. 
-                        Achieved high-end image and video generation through automated pipelines.
-                    </p>
-                    <div class="stats-row">
-                        <div class="stat-box">
-                            <span class="stat-value">Top 1%</span>
-                            <span class="stat-label">Ranking</span>
+                <!-- ── AWS FEATURED BOX (CASE STUDY STYLE) ── -->
+                <div class="cs-grid" style="grid-template-columns: 1fr; margin-bottom: 50px;">
+                    <div class="cs-card anim-in" data-link="https://devpost.com/software/faceless-ai-studio" style="max-width: 100%;">
+                        <div class="cs-card-img" style="height: 300px; background: linear-gradient(135deg, #1a1a2e 0%, #0a0a12 100%); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;">
+                             <span class="cs-card-tag" style="top: 20px; left: 20px;">🏆 Hackathon Winner</span>
+                             <div style="font-size: 80px; font-weight: 800; opacity: 0.1; position: absolute; right: -20px; bottom: -20px;">AWS</div>
+                             <div style="text-align: center; z-index: 1;">
+                                 <div style="font-size: 50px; margin-bottom: 10px;">🚀</div>
+                                 <h3 style="font-size: 28px; color: #fff;">AWS Nova AI Hackathon 2025</h3>
+                             </div>
                         </div>
-                        <div class="stat-box">
-                            <span class="stat-value">AI/ML</span>
-                            <span class="stat-label">Category</span>
+                        <div class="cs-card-body">
+                            <h3 class="cs-card-title">Faceless AI Studio - Automated Content Creation</h3>
+                            <p class="cs-card-summary">Built a high-performance video generation engine using AWS Bedrock and Nova Canvas, allowing creators to generate faceless content 10x faster.</p>
+                            <div class="cs-card-footer">
+                                <div class="cs-tags">
+                                    <span class="cs-tag">AWS Bedrock</span>
+                                    <span class="cs-tag">Nova Canvas</span>
+                                    <span class="cs-tag">Python</span>
+                                </div>
+                                <a href="https://devpost.com/software/faceless-ai-studio" target="_blank" style="text-decoration: none; color: var(--cyan); font-weight: 600; font-size: 14px;">View Submission ↗</a>
+                            </div>
                         </div>
                     </div>
-                    <div class="hack-glow-circle">AWS</div>
                 </div>
 
-                <!-- ── CERTIFICATIONS GRID ── -->
+                <!-- ── CERTIFICATIONS LIST (ONE PER LINE) ── -->
                 <div class="certs-subheading" style="font-family:'Syne',sans-serif;font-size:24px;margin-bottom:24px;">📜 Certifications</div>
-                <div class="cs-grid">
+                <div style="display: flex; flex-direction: column; gap: 16px;">
 
-                    <div class="cert-card anim-in">
+                    <div class="cert-card anim-in" style="width: 100%;">
                         <div class="cert-icon">🧠</div>
                         <div class="cert-info">
                             <span class="status-badge status-inprogress">In Progress</span>
@@ -340,7 +344,7 @@
                         </div>
                     </div>
 
-                    <div class="cert-card anim-in" data-link="https://learn.microsoft.com/en-us/training/modules/get-started-ai-fundamentals/?wt.mc_id=studentamb_509266">
+                    <div class="cert-card anim-in" style="width: 100%;" data-link="https://learn.microsoft.com/en-us/training/modules/get-started-ai-fundamentals/?wt.mc_id=studentamb_509266">
                         <div class="cert-icon">🤖</div>
                         <div class="cert-info">
                             <span class="status-badge status-completed">Completed</span>
@@ -349,7 +353,7 @@
                         </div>
                     </div>
 
-                    <div class="cert-card anim-in" data-img="assets/certificates/python-crash-cert.jpg">
+                    <div class="cert-card anim-in" style="width: 100%;" data-img="assets/certificates/python-crash-cert.jpg">
                         <div class="cert-icon">🐍</div>
                         <div class="cert-info">
                             <span class="status-badge status-completed">Completed</span>
@@ -358,7 +362,7 @@
                         </div>
                     </div>
 
-                    <div class="cert-card anim-in" data-img="assets/certificates/python-essentials-cert.jpg">
+                    <div class="cert-card anim-in" style="width: 100%;" data-img="assets/certificates/python-essentials-cert.jpg">
                         <div class="cert-icon">🐍</div>
                         <div class="cert-info">
                             <span class="status-badge status-completed">Completed</span>
@@ -367,12 +371,28 @@
                         </div>
                     </div>
 
-                    <div class="cert-card anim-in" data-img="assets/certificates/digital-marketing-cert.jpg">
+                    <div class="cert-card anim-in" style="width: 100%;" data-img="assets/certificates/digital-marketing-cert.jpg">
                         <div class="cert-icon">📈</div>
                         <div class="cert-info">
                             <span class="status-badge status-completed">Completed</span>
                             <span class="cert-title" style="margin-top:10px;">Digital Marketing</span>
                             <span class="cert-issuer">DigiSkills Training Program</span>
+                        </div>
+                    </div>
+
+                    <div class="cert-card anim-in" style="width: 100%;" data-img="assets/certificates/ecommerce-cert.jpg">
+                        <div class="cert-icon">🛒</div>
+                        <div class="cert-info">
+                            <span class="status-badge status-completed">Completed</span>
+                            <span class="cert-title" style="margin-top:10px;">E-Commerce Management</span>
+                            <span class="cert-issuer">DigiSkills Training Program</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>            <span class="cert-issuer">DigiSkills Training Program</span>
                         </div>
                     </div>
 
