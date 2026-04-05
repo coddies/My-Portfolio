@@ -250,12 +250,14 @@
     data.forEach((p,i)=>{ 
       if(cards[i]){
         const img = cards[i].querySelector('img');
-        if(img) img.src = p.img + '?v=' + Date.now(); // Cache busting to force reload
+        if(img) img.src = p.img; // Removed cache-busting (?v=) which breaks local file paths
         const details = cards[i].querySelector('.px-details');
-        if(details) details.innerHTML = `
-          <ul class="px-features">${p.features.map(f=>`<li>${f}</li>`).join('')}</ul>
-          <div class="px-tags">${p.tags.map(t=>`<span class="px-tag">${t}</span>`).join('')}</div>
-        `;
+        if(details) {
+          details.innerHTML = `
+            <ul class="px-features">${p.features.map(f=>`<li>${f}</li>`).join('')}</ul>
+            <div class="px-tags">${p.tags.map(t=>`<span class="px-tag">${t}</span>`).join('')}</div>
+          `;
+        }
       }
     });
   }
