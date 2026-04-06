@@ -315,13 +315,23 @@ if (csSubmitBtn) {
 // ── READ MORE TOGGLE ──
 const rmBtn = document.getElementById('readMoreBtn');
 const amContent = document.getElementById('aboutMoreContent');
-if (rmBtn && amContent) {
+const aboutCard = document.getElementById('card-2');
+if (rmBtn && amContent && aboutCard) {
     rmBtn.addEventListener('click', () => {
         const isHidden = amContent.style.display === 'none' || amContent.style.display === '';
         amContent.style.display = isHidden ? 'block' : 'none';
         rmBtn.textContent = isHidden ? 'Read Less' : 'Read More';
+        
+        // Toggle scrolling based on expansion
+        if (isHidden) {
+            aboutCard.classList.add('about-expanded');
+        } else {
+            aboutCard.classList.remove('about-expanded');
+            aboutCard.scrollTop = 0; // Reset scroll position when closing
+        }
     });
 }
+
 
 // ── PARTICLES ENGINE ──
 const canvas = document.getElementById('particles-canvas');

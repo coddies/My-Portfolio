@@ -162,7 +162,7 @@
 .px { width:100%; max-width:1250px; display:flex; flex-direction:column; gap:25px; margin:0 auto; height:85vh; justify-content:center; position:relative; z-index:2; padding: 20px 0; }
 .px-top { width:100%; overflow:hidden; position:relative; min-height:480px; display:flex; align-items:center; justify-content:center; border-radius:24px; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.05); }
 .px-track { display:flex; position:absolute; transition:transform 0.6s cubic-bezier(0.23, 1, 0.32, 1); height:100%; align-items:center; }
-.px-card { flex-shrink:0; width:1150px; height:420px; margin:0 50px; display:flex; border-radius:20px; background:rgba(10,12,24,0.95); border:1px solid rgba(124,58,237,0.3); overflow:hidden; transition:all 0.6s ease; position:relative; box-shadow:0 30px 80px rgba(0,0,0,0.6); }
+.px-card { flex-shrink:0; width:90%; max-width:1150px; height:420px; margin:0 25px; display:flex; border-radius:20px; background:rgba(10,12,24,0.95); border:1px solid rgba(124,58,237,0.3); overflow:hidden; transition:all 0.6s ease; position:relative; box-shadow:0 30px 80px rgba(0,0,0,0.6); }
 .px-card:not(.px-active) { opacity:0.1; transform:scale(0.95); filter:blur(4px); }
 .px-card.px-active { opacity:1; transform:scale(1); border-color:rgba(124,58,237,0.5); box-shadow:0 40px 100px rgba(124,58,237,0.3); }
 .px-media { flex:1.4; height:100%; position:relative; background: radial-gradient(circle at center, rgba(124,58,237,0.1), transparent); overflow:hidden; border-right:1px solid rgba(255,255,255,0.1); z-index:1; display:flex; align-items:center; justify-content:center; }
@@ -179,7 +179,7 @@
 .px-ctrls { width:100%; min-height:180px; height:auto; padding: 30px 60px; background:rgba(15,15,30,0.6); backdrop-filter:blur(25px); border:1px solid rgba(255,255,255,0.08); border-radius:24px; display:flex; align-items:center; justify-content:space-between; box-shadow:0 30px 80px rgba(0,0,0,0.6); margin-top: -10px; z-index: 5; }
 .px-info { display:flex; flex-direction:column; gap:10px; flex:1.5; }
 .px-cat-label { font-size:12px; letter-spacing:4px; text-transform:uppercase; color:var(--cyan); font-weight:800; opacity:0.9; }
-.px-title-label { font-family:'Syne',sans-serif; font-size:36px; font-weight:800; color:#fff; margin:0; line-height:1.2; text-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+.px-title-label { font-family:'Syne',sans-serif; font-size:clamp(24px, 5vw, 36px); font-weight:800; color:#fff; margin:0; line-height:1.2; text-shadow: 0 5px 15px rgba(0,0,0,0.3); }
 .px-action { flex:1; display:flex; justify-content:center; }
 .px-gh-btn { display:inline-flex; align-items:center; justify-content:center; gap:15px; padding:18px 45px; border-radius:99px; background:linear-gradient(135deg,#ff8000, #ff4000); color:#fff; font-size:14px; font-weight:800; text-decoration:none; transition:all .4s; box-shadow:0 10px 40px rgba(255,64,0,0.2); border:none; cursor:pointer; }
 .px-gh-btn:hover { transform:translateY(-6px) scale(1.02); box-shadow:0 15px 50px rgba(255,64,0,0.4); }
@@ -195,7 +195,7 @@
   .px-top { min-height: 240px; border-radius: 24px 24px 0 0; }
   .px-card { width: 100% !important; margin: 0; flex-direction: column; height: auto !important; border-radius: 24px 24px 0 0; }
   .px-media { height: 240px; flex: none; border-right: none; }
-  .px-details { display: none; }
+  .px-details { display: block; padding: 30px; }
   .px-ctrls { flex-direction: column; height: auto; min-height: unset; padding: 40px 25px; gap: 30px; border-radius: 0 0 24px 24px; position: static; border-top: 1px solid rgba(255,255,255,0.05); }
   .px-info { text-align: center; }
   .px-title-label { font-size: 30px; line-height: 1.2; }
@@ -204,6 +204,7 @@
   .px-count-box { font-size: 24px; }
   .px-nav-btn { width: 50px; height: 50px; font-size: 22px; }
 }
+
 </style>
 
 <div class="card-inner">
@@ -302,7 +303,7 @@
 ════════════════════════════ -->
 <section id="card-5" class="card state-below">
     <div class="card-inner">
-        <div style="width:100%; max-width:1200px; padding: 20px; display: flex; flex-direction: column; align-items: center;">
+        <div style="width:100%; max-width:900px; padding: 20px; display: flex; flex-direction: column; align-items: center;">
             <div class="section-header" style="text-align: center; margin-bottom: 40px; width: 100%;">
                 <span class="tagline" style="color:var(--pink);">MY CREDENTIALS</span>
                 <h2 class="section-title">Achievements</h2>
@@ -310,18 +311,18 @@
             </div>
 
             <!-- Featured Achievement -->
-            <div style="width: 100%; margin-bottom: 60px;">
-                <div class="cs-card anim-in" data-link="https://devpost.com/software/faceless-ai-studio" style="width: 100%; max-width: 1000px; margin: 0 auto; min-height: 450px; display: flex; flex-direction: column;">
-                    <div class="cs-card-img" style="height: 320px; background: linear-gradient(135deg, #1a1a2e 0%, #0a0a12 100%); display: flex; align-items: center; justify-content: center; position: relative; border-radius: 20px 20px 0 0;">
-                         <span class="cs-card-tag" style="top: 25px; left: 25px; padding: 8px 20px; font-size: 14px;">🏆 FEATURED: AWS NOVA HACKATHON</span>
-                         <div style="text-align: center; font-size: 100px; filter: drop-shadow(0 0 30px rgba(124,58,237,0.4));">🚀</div>
+            <div style="width: 100%; margin-bottom: 50px;">
+                <div class="cs-card anim-in" data-link="https://devpost.com/software/faceless-ai-studio" style="width: 100%; max-width: 400px; margin: 0 auto;">
+                    <div class="cs-card-img" style="height: 180px; background: linear-gradient(135deg, #1a1a2e 0%, #0a0a12 100%); display: flex; align-items: center; justify-content: center; position: relative; border-radius: 20px 20px 0 0;">
+                         <span class="cs-card-tag" style="top: 15px; left: 15px; font-size: 11px;">🏆 AWS NOVA HACKATHON</span>
+                         <div style="text-align: center; font-size: 60px;">🚀</div>
                     </div>
-                    <div class="cs-card-body" style="padding: 45px; flex: 1; display: flex; flex-direction: column; justify-content: center;">
-                        <h3 class="cs-card-title" style="font-size: 34px; margin-bottom: 15px;">Faceless AI Video Studio</h3>
-                        <p class="cs-card-summary" style="font-size: 18px; line-height: 1.6; color: rgba(255,255,255,0.8); margin-bottom: 25px;">Building a next-generation automated pipeline for AI video generation and scene rendering using AWS Bedrock and frontier models.</p>
-                        <div class="cs-card-footer" style="padding-top: 0; border-top: none;">
-                            <div class="cs-tags"><span class="cs-tag" style="padding: 6px 18px; font-size: 12px;">AWS Bedrock</span><span class="cs-tag" style="padding: 6px 18px; font-size: 12px;">Gen-AI</span><span class="cs-tag" style="padding: 6px 18px; font-size: 12px;">FFmpeg</span></div>
-                            <a href="https://devpost.com/software/faceless-ai-studio" target="_blank" style="text-decoration:none; color:var(--cyan); font-weight:800; font-size:16px; display: flex; align-items: center; gap: 8px;">View Detailed Case Study ↗</a>
+                    <div class="cs-card-body" style="padding: 25px;">
+                        <h3 class="cs-card-title" style="font-size: 20px; margin-bottom: 12px;">Faceless AI Video Studio</h3>
+                        <p class="cs-card-summary" style="font-size: 14px; line-height: 1.6; color: var(--text-muted); margin-bottom: 20px;">Developing automated pipelines for AI video generation using AWS Bedrock and frontier Gen-AI models.</p>
+                        <div class="cs-card-footer" style="padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.06); justify-content: space-between;">
+                            <div class="cs-tags"><span class="cs-tag" style="font-size: 10px;">AWS Bedrock</span><span class="cs-tag" style="font-size: 10px;">Python</span></div>
+                            <a href="https://devpost.com/software/faceless-ai-studio" target="_blank" style="text-decoration:none; color:var(--cyan); font-weight:700; font-size:13px;">View Project ↗</a>
                         </div>
                     </div>
                 </div>
