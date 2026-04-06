@@ -251,7 +251,7 @@
 (function(){
   const data=[
     { cat:'AI & GEN-AI', title:'AI Chatbot Studio', features: ['Advanced NLU with real-time streaming','Context-aware persistent chat history','Multi-model support (Groq/OpenAI)','Responsive Dark Glass UI interface'], tags:['Python','FastAPI','React','AWS'], gh:'https://github.com/coddies/AI-Chatbot', img:'assets/images/p1.png', emoji: '🤖' },
-    { cat:'AUTOMATION', title:'Faceless AI Video', features: ['Automated script-to-video pipeline','High-end generative image integration','Natural AI voice synthesis','Batch scene processing'], tags:['Python','FFmpeg','AWS Bedrock'], gh:'https://github.com/coddies/Faceless-AI-Studio', img:'assets/images/p2.png', emoji: '🎬' },
+    { cat:'AUTOMATION', title:'Faceless AI Video', features: ['Automated script-to-video pipeline','High-end generative image integration','Natural AI voice synthesis','Batch scene processing'], tags:['Python','FFmpeg','AWS Bedrock'], gh:'https://faceless-ai-studio-tau.vercel.app/', img:'assets/images/p2.png', emoji: '🎬' },
     { cat:'ML ENGINEERING', title:'Predictive Insights', features: ['Real-time 92%+ model accuracy','Interactive Matplotlib dashboards','Automated anomaly detection','High-throughput API serving'], tags:['Scikit-Learn','Pandas','FastAPI'], gh:'https://github.com/coddies', img:'assets/images/p3.png', emoji: '🧠' },
     { cat:'FULL STACK', title:'Premium Portfolio', features: ['Dynamic card-based transitions','Responsive Glassmorphism design','Interactive project carousel','Automated deployment pipelines'], tags:['HTML5','CSS3','JS','GitHub'], gh:'https://github.com/coddies/My-Portfolio', img:'assets/images/p4.png', emoji: '💎' },
   ];
@@ -302,9 +302,16 @@
   function go(idx){
     cur = (idx + N) % N;
     cards.forEach((c,i)=>c.classList.toggle('px-active', i===cur));
-    if(currEl) currEl.textContent = cur+1; if(catEl) catEl.textContent = data[cur].cat; if(titEl) titEl.textContent = data[cur].title; if(mainBtn) mainBtn.href = data[cur].gh;
+    if(currEl) currEl.textContent = cur+1; 
+    if(catEl) catEl.textContent = data[cur].cat; 
+    if(titEl) titEl.textContent = data[cur].title; 
+    if(mainBtn) {
+       mainBtn.href = data[cur].gh;
+       mainBtn.innerHTML = (data[cur].title === 'Faceless AI Video') ? 'VIEW LIVE APP &nbsp; &#10142;' : 'VIEW RESEARCH &nbsp; &#10142;';
+    }
     positionTrack();
   }
+
   const cardSection = document.getElementById('card-4');
   const observer = new MutationObserver((mutations) => { mutations.forEach((mutation) => { if (mutation.attributeName === 'class' && cardSection.classList.contains('state-active')) { setTimeout(positionTrack, 100); } }); });
   observer.observe(cardSection, { attributes: true });
@@ -330,7 +337,7 @@
 
             <!-- Featured Achievement -->
             <div style="width: 100%; margin-bottom: 50px;">
-                <div class="cs-card anim-in" data-link="https://devpost.com/software/faceless-ai-studio" style="width: 100%; max-width: 400px; margin: 0 auto;">
+                <div class="cs-card anim-in" data-link="https://faceless-ai-studio-tau.vercel.app/" style="width: 100%; max-width: 400px; margin: 0 auto;">
                     <div class="cs-card-img" style="height: 180px; background: linear-gradient(135deg, #1a1a2e 0%, #0a0a12 100%); display: flex; align-items: center; justify-content: center; position: relative; border-radius: 20px 20px 0 0;">
                          <span class="cs-card-tag" style="top: 15px; left: 15px; font-size: 11px;">🏆 AWS NOVA HACKATHON</span>
                          <div style="text-align: center; font-size: 60px;">🚀</div>
@@ -340,7 +347,7 @@
                         <p class="cs-card-summary" style="font-size: 14px; line-height: 1.6; color: var(--text-muted); margin-bottom: 20px;">Developing automated pipelines for AI video generation using AWS Bedrock and frontier Gen-AI models.</p>
                         <div class="cs-card-footer" style="padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.06); justify-content: space-between;">
                             <div class="cs-tags"><span class="cs-tag" style="font-size: 10px;">AWS Bedrock</span><span class="cs-tag" style="font-size: 10px;">Python</span></div>
-                            <a href="https://devpost.com/software/faceless-ai-studio" target="_blank" style="text-decoration:none; color:var(--cyan); font-weight:700; font-size:13px;">View Project ↗</a>
+                            <a href="https://faceless-ai-studio-tau.vercel.app/" target="_blank" style="text-decoration:none; color:var(--cyan); font-weight:700; font-size:13px;">View Live App ↗</a>
                         </div>
                     </div>
                 </div>
