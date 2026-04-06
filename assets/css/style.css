@@ -201,6 +201,20 @@ h1, h2, h3, .syne-font {
     overflow-y: auto;
 }
 
+/* Projects Card: Fixed Viewport, no scrolling */
+#card-4 {
+    overflow-y: hidden !important;
+    align-items: center;
+}
+
+#card-4 .card-inner {
+    padding: 0;
+    height: 100vh;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+}
+
 
 .card.state-active {
     transform: translateX(0);
