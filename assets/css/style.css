@@ -119,7 +119,8 @@ h1, h2, h3, .syne-font {
     border-color: var(--purple);
     color: var(--text-white);
     transform: scale(1.1);
-    box-shadow: 0 0 20px rgba(124, 58, 237, 0.4);
+    box-shadow: 0 0 30px rgba(124, 58, 237, 0.6), inset 0 0 15px rgba(255,255,255,0.1);
+    backdrop-filter: blur(15px);
 }
 
 .nav-btn.active {
@@ -128,7 +129,6 @@ h1, h2, h3, .syne-font {
     background: rgba(124, 58, 237, 0.25);
     backdrop-filter: blur(12px);
     color: var(--text-white);
-    /* No transform here — scale only on hover, not permanent active state */
 }
 
 .nav-tooltip {
@@ -147,10 +147,12 @@ h1, h2, h3, .syne-font {
     transform: translateX(10px);
 }
 
-.nav-btn:hover .nav-tooltip {
+.nav-btn:hover .nav-tooltip,
+.nav-btn.active .nav-tooltip {
     opacity: 1;
     transform: translateX(0);
 }
+
 
 /* ── CARDS ── */
 .card {
@@ -276,11 +278,12 @@ h1, h2, h3, .syne-font {
 }
 
 .btn-github:hover {
-    background: transparent;
+    background: rgba(255,255,255,0.05);
     color: var(--purple);
     border-color: var(--purple);
-    transform: translateY(-4px);
-    box-shadow: 0 10px 30px rgba(124,58,237,0.4);
+    transform: translateY(-10px) rotate(1deg) scale(1.05);
+    box-shadow: 0 15px 45px rgba(124,58,237,0.45);
+    backdrop-filter: blur(8px);
 }
 
 .btn-linkedin {
@@ -293,8 +296,8 @@ h1, h2, h3, .syne-font {
     background: var(--purple);
     border-color: var(--purple);
     color: var(--text-white);
-    transform: translateY(-4px);
-    box-shadow: 0 10px 30px rgba(124,58,237,0.3);
+    transform: translateY(-10px) rotate(1deg) scale(1.05);
+    box-shadow: 0 15px 45px rgba(124,58,237,0.45);
 }
 
 .btn-cv {
@@ -305,10 +308,14 @@ h1, h2, h3, .syne-font {
 }
 
 .btn-cv:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 10px 30px rgba(6, 182, 212, 0.4);
-    color: var(--text-white);
+    transform: translateY(-10px) rotate(1deg) scale(1.05);
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--cyan);
+    color: var(--cyan);
+    box-shadow: 0 15px 45px rgba(6, 182, 212, 0.45);
+    backdrop-filter: blur(8px);
 }
+
 
 /* ── CARD 1: HERO ── */
 #card-1 {
@@ -1002,11 +1009,13 @@ h1, h2, h3, .syne-font {
 .contact-arrow { color: var(--text-muted); font-size: 16px; flex-shrink: 0; }
 
 .contact-link-card:hover {
-    background: var(--purple);
+    background: rgba(255,255,255,0.05);
     border-color: var(--purple);
-    transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 12px 30px rgba(124, 58, 237, 0.4);
+    transform: translateY(-12px) rotate(1deg) scale(1.02);
+    box-shadow: 0 15px 45px rgba(124, 58, 237, 0.45);
+    backdrop-filter: blur(10px);
 }
+
 
 .contact-link-card:hover .contact-main-label,
 .contact-link-card:hover .contact-sub-label,
