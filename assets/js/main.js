@@ -219,7 +219,7 @@ const caseStudiesData = [
         tags:     ['Python', 'MoviePy', 'ElevenLabs'],
         problem:  'Manual video editing takes dozens of hours, limiting content output and channel growth.',
         solution: 'Created an end-to-end automated pipeline that generates scripts, voices, and videos with zero manual effort.',
-        result:   'Reduced video production time by 98%.'
+        result:   'Reduced video production time by 98%. Live app now available at https://faceless-ai-studio-tau.vercel.app/'
     },
     {
         title:    'YouTube AI Education Channel',
