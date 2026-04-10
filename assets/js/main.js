@@ -198,6 +198,14 @@ if (certModal) certModal.addEventListener('click', (e) => { if (e.target === cer
 // ── CASE STUDIES DATA & MODAL ──
 const caseStudiesData = [
     {
+        title:    'Faceless AI Video Studio',
+        category: 'AI Automation',
+        tags:     ['Python', 'MoviePy', 'ElevenLabs', 'AWS Bedrock'],
+        problem:  'Manual video editing takes dozens of hours per week, severely limiting content output and causing creator burnout. Consistency is hard to maintain when each piece of content requires scriptwriting, voiceover, asset gathering, and editing.',
+        solution: 'Developed an Agentic AI Pipeline using AWS Bedrock (Nova Models) and Python. It autonomously generates viral scripts, procures natural voiceovers via ElevenLabs, and stitches together the final MP4 using complete code automation.',
+        result:   '🏆 AWS Nova Hackathon Winner. Cut video production time by 98% (from 4 hours to under 3 minutes per video). Deployed as a scalable, live web platform at https://faceless-ai-studio-tau.vercel.app/'
+    },
+    {
         title:    'AI Chatbot - Intelligent NLP Assistant',
         category: 'AI / NLP',
         tags:     ['Python', 'LangChain', 'OpenAI', 'FastAPI'],
@@ -212,14 +220,6 @@ const caseStudiesData = [
         problem:  'Standard portfolios lack the premium feel and interactivity required for a modern AI developer.',
         solution: 'Developed a high-end, card-based single-page portfolio with custom transitions and a fixed viewport design.',
         result:   'Delivered a top-tier user experience with 100% fixed-viewport navigation.'
-    },
-    {
-        title:    'Faceless AI Video Studio',
-        category: 'AI Automation',
-        tags:     ['Python', 'MoviePy', 'ElevenLabs'],
-        problem:  'Manual video editing takes dozens of hours, limiting content output and channel growth.',
-        solution: 'Created an end-to-end automated pipeline that generates scripts, voices, and videos with zero manual effort.',
-        result:   'Reduced video production time by 98%. Live app now available at https://faceless-ai-studio-tau.vercel.app/'
     },
     {
         title:    'YouTube AI Education Channel',
@@ -259,10 +259,9 @@ function closeCsModal() {
     setTimeout(() => { csModal.classList.remove('active'); }, 400);
 }
 
-document.querySelectorAll('.cs-read-btn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        openCsModal(parseInt(btn.getAttribute('data-cs')));
+document.querySelectorAll('.cs-card[data-cs]').forEach(card => {
+    card.addEventListener('click', (e) => {
+        openCsModal(parseInt(card.getAttribute('data-cs')));
     });
 });
 

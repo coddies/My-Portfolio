@@ -446,35 +446,7 @@
                 <div class="accent-line"></div>
             </div>
             <div class="cs-grid">
-                <div class="cs-card anim-in" data-cs="0">
-                    <div class="cs-card-img cs-img-1">
-                        <span class="cs-card-tag">AI / NLP</span>
-                    </div>
-                    <div class="cs-card-body">
-                        <h3 class="cs-card-title">AI Chatbot - Intelligent NLP Assistant</h3>
-                        <p class="cs-card-summary">Users needed a smarter way to interact with data and get instant, accurate human-like responses.</p>
-                        <div class="cs-card-footer">
-                            <div class="cs-tags"><span class="cs-tag">Python</span><span class="cs-tag">LangChain</span><span class="cs-tag">OpenAI</span></div>
-                            <button class="cs-read-btn" data-cs="0">Read More →</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="cs-card anim-in" data-cs="1">
-                    <div class="cs-card-img cs-img-2">
-                        <span class="cs-card-tag">Frontend Development</span>
-                    </div>
-                    <div class="cs-card-body">
-                        <h3 class="cs-card-title">Modern Glassmorphism Portfolio</h3>
-                        <p class="cs-card-summary">Standard portfolios lack the premium feel and interactivity required for a modern AI developer.</p>
-                        <div class="cs-card-footer">
-                            <div class="cs-tags"><span class="cs-tag">HTML</span><span class="cs-tag">CSS</span><span class="cs-tag">JavaScript</span></div>
-                            <button class="cs-read-btn" data-cs="1">Read More →</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="cs-card anim-in" data-cs="2">
+                <div class="cs-card anim-in" data-cs="0" style="cursor: pointer;">
                     <div class="cs-card-img cs-img-3">
                         <span class="cs-card-tag">AI Automation</span>
                     </div>
@@ -483,6 +455,34 @@
                         <p class="cs-card-summary">Content creators spend hours editing. Built an automated pipeline from script to finish video.</p>
                         <div class="cs-card-footer">
                             <div class="cs-tags"><span class="cs-tag">Python</span><span class="cs-tag">FFmpeg</span><span class="cs-tag">elevenlabs</span></div>
+                            <button class="cs-read-btn" data-cs="0">Read More →</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cs-card anim-in" data-cs="1" style="cursor: pointer;">
+                    <div class="cs-card-img cs-img-1">
+                        <span class="cs-card-tag">AI / NLP</span>
+                    </div>
+                    <div class="cs-card-body">
+                        <h3 class="cs-card-title">AI Chatbot - Intelligent NLP Assistant</h3>
+                        <p class="cs-card-summary">Users needed a smarter way to interact with data and get instant, accurate human-like responses.</p>
+                        <div class="cs-card-footer">
+                            <div class="cs-tags"><span class="cs-tag">Python</span><span class="cs-tag">LangChain</span><span class="cs-tag">OpenAI</span></div>
+                            <button class="cs-read-btn" data-cs="1">Read More →</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cs-card anim-in" data-cs="2" style="cursor: pointer;">
+                    <div class="cs-card-img cs-img-2">
+                        <span class="cs-card-tag">Frontend Development</span>
+                    </div>
+                    <div class="cs-card-body">
+                        <h3 class="cs-card-title">Modern Glassmorphism Portfolio</h3>
+                        <p class="cs-card-summary">Standard portfolios lack the premium feel and interactivity required for a modern AI developer.</p>
+                        <div class="cs-card-footer">
+                            <div class="cs-tags"><span class="cs-tag">HTML</span><span class="cs-tag">CSS</span><span class="cs-tag">JavaScript</span></div>
                             <button class="cs-read-btn" data-cs="2">Read More →</button>
                         </div>
                     </div>
@@ -559,9 +559,9 @@
                     <div class="cs-comments-section">
                         <h3>Discussion</h3>
                         <div class="cs-comments-list" id="csCommentsList"></div>
-                        <div class="cs-comment-input">
-                            <input type="text" id="csCommentName" placeholder="Your Name">
-                            <textarea id="csCommentText" placeholder="Share your thoughts..."></textarea>
+                        <div class="cs-comment-form">
+                            <input type="text" id="csCommentName" class="cs-comment-name" placeholder="Your Name">
+                            <textarea id="csCommentText" class="cs-comment-textarea" placeholder="Share your thoughts..."></textarea>
                             <style>
                                 #csCommentSubmit {
                                     align-self: flex-end;
@@ -582,6 +582,7 @@
                             </style>
                             <button id="csCommentSubmit">Post Comment</button>
                         </div>
+
 
                     </div>
                 </div>
