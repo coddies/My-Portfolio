@@ -1045,6 +1045,24 @@ h1, h2, h3, .syne-font {
 }
 
 /* Case Study Card */
+.winner-ribbon {
+    position: absolute;
+    top: 20px;
+    left: -45px;
+    background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+    color: #000;
+    padding: 6px 45px;
+    font-size: 13px;
+    font-weight: 900;
+    font-family: inherit;
+    transform: rotate(-45deg);
+    text-transform: uppercase;
+    box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+    letter-spacing: 2px;
+    z-index: 10;
+    pointer-events: none;
+}
+
 .cs-card {
     background: rgba(255,255,255,0.07);
     border: 1px solid rgba(255,255,255,0.12);
