@@ -544,18 +544,10 @@
     <div class="cs-modal-inner">
         <div class="cs-modal-close" id="csModalClose">&times;</div>
         <div class="cs-modal-scroll">
-            <div class="cs-modal-header">
-                <span class="cs-badge" id="csModalCategory">Category</span>
-                <h2 id="csModalTitle">Project Title</h2>
-                <div class="cs-modal-tags" id="csModalTags"></div>
-            </div>
+            <div id="csModalDynamicContent"></div>
             <div class="cs-modal-grid">
-                <div class="cs-modal-main">
-                    <div class="cs-modal-block"><h3>Problem Statement</h3><p id="csModalProblem"></p></div>
-                    <div class="cs-modal-block"><h3>Our Solution</h3><p id="csModalSolution"></p></div>
-                    <div class="cs-modal-block"><h3>Key Results</h3><p id="csModalResult"></p></div>
-                </div>
-                <div class="cs-modal-side">
+                <div class="cs-modal-side" style="width: 100%;">
+
                     <div class="cs-comments-section">
                         <h3>Discussion</h3>
                         <div class="cs-comments-list" id="csCommentsList"></div>

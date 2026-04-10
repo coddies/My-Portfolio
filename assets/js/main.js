@@ -197,38 +197,87 @@ if (certModal) certModal.addEventListener('click', (e) => { if (e.target === cer
 
 // ── CASE STUDIES DATA & MODAL ──
 const caseStudiesData = [
-    {
-        title:    'Faceless AI Video Studio',
-        category: 'AI Automation',
-        tags:     ['Python', 'MoviePy', 'ElevenLabs', 'AWS Bedrock'],
-        problem:  'Manual video editing takes dozens of hours per week, severely limiting content output and causing creator burnout. Consistency is hard to maintain when each piece of content requires scriptwriting, voiceover, asset gathering, and editing.',
-        solution: 'Developed an Agentic AI Pipeline using AWS Bedrock (Nova Models) and Python. It autonomously generates viral scripts, procures natural voiceovers via ElevenLabs, and stitches together the final MP4 using complete code automation.',
-        result:   '🏆 AWS Nova Hackathon Winner. Cut video production time by 98% (from 4 hours to under 3 minutes per video). Deployed as a scalable, live web platform at https://faceless-ai-studio-tau.vercel.app/'
-    },
-    {
-        title:    'AI Chatbot - Intelligent NLP Assistant',
-        category: 'AI / NLP',
-        tags:     ['Python', 'LangChain', 'OpenAI', 'FastAPI'],
-        problem:  'Users needed a smarter way to interact with data and get instant, accurate human-like responses.',
-        solution: 'Built a RAG-based chatbot using Python and OpenAI API, capable of understanding and processing complex queries.',
-        result:   'Successfully automated 90% of basic query handling.'
-    },
-    {
-        title:    'Modern Glassmorphism Portfolio',
-        category: 'Frontend Development',
-        tags:     ['HTML', 'CSS', 'JavaScript'],
-        problem:  'Standard portfolios lack the premium feel and interactivity required for a modern AI developer.',
-        solution: 'Developed a high-end, card-based single-page portfolio with custom transitions and a fixed viewport design.',
-        result:   'Delivered a top-tier user experience with 100% fixed-viewport navigation.'
-    },
-    {
-        title:    'YouTube AI Education Channel',
-        category: 'Content Strategy',
-        tags:     ['YouTube', 'SEO', 'Automation'],
-        problem:  'Building a tech audience requires high-quality, consistent content delivery at scale.',
-        solution: 'Automated content research and video optimization strategies to build a niche-leading AI education channel.',
-        result:   'Established a scalable content factory with daily growth.'
-    }
+  {
+    title: 'Faceless AI Video Studio',
+    category: 'AI Automation',
+    tags: [
+      { text: 'Python', cls: 'tag-py' },
+      { text: 'MoviePy', cls: 'tag-ml' },
+      { text: 'AWS Bedrock', cls: 'tag-aws' }
+    ],
+    stats: [
+      { label: 'Time Saved', value: '98%', sub: '4 hrs → under 3 min', color: 'green' },
+      { label: 'Achievement', value: '🏆 winner', sub: 'AWS Nova Hackathon', color: 'purple' },
+      { label: 'Status', value: 'Live', sub: 'Deployed on Vercel', color: 'amber' }
+    ],
+    problem: 'Manual video editing takes dozens of hours per week, severely limiting content output and causing creator burnout. Consistency is hard to maintain when each piece of content requires scriptwriting, voiceover, asset gathering, and editing.',
+    solution: 'Developed an Agentic AI Pipeline using AWS Bedrock and Python. It autonomously generates viral scripts using Nova Pro, procures natural voiceovers via Nova Sonic, procures images with Nova Canvas, and stitches together the final MP4 using MoviePy.',
+    pipeline: [
+      { icon: '✍️', label: 'Script Gen', sub: 'Nova Pro' },
+      { icon: '🎙️', label: 'Voiceover', sub: 'Nova Sonic' },
+      { icon: '🖼️', label: 'Visuals', sub: 'Nova Canvas' },
+      { icon: '🎬', label: 'Video Edit', sub: 'MoviePy' }
+    ],
+    resultDetails: 'Cut video production time by <strong style="color:#f0ede8;">98%</strong> — from 4 hours to under 3 minutes per video. Deployed as a scalable, live web platform.',
+    resultBadge: '🏆 AWS Nova Hackathon Winner',
+    liveLink: 'https://faceless-ai-studio-tau.vercel.app/',
+    liveText: 'faceless-ai-studio-tau',
+    devpostLink: 'https://devpost.com/software/faceless-ai-studio'
+  },
+  {
+    title: 'AI Chatbot Assistant',
+    category: 'AI / NLP',
+    tags: [
+      { text: 'Python', cls: 'tag-py' },
+      { text: 'LangChain', cls: 'tag-ml' },
+      { text: 'OpenAI', cls: 'tag-aws' }
+    ],
+    stats: [
+      { label: 'Automation', value: '90%', sub: 'Queries handled', color: 'green' },
+      { label: 'Response', value: '< 1s', sub: 'Avg response time', color: 'purple' },
+      { label: 'Uptime', value: '99.9%', sub: 'High availability', color: 'amber' }
+    ],
+    problem: 'Users needed a smarter way to interact with data and get instant, accurate human-like responses without overwhelming human support agents.',
+    solution: 'Built a RAG-based chatbot using Python and OpenAI API. Integrated LangChain to allow the bot to query internal documents and provide context-aware responses instantly.',
+    pipeline: [
+      { icon: '📥', label: 'Ingest', sub: 'Data Parsing' },
+      { icon: '🧠', label: 'Process', sub: 'LangChain' },
+      { icon: '🤖', label: 'Generate', sub: 'OpenAI LLM' },
+      { icon: '📤', label: 'Output', sub: 'Instant Reply' }
+    ],
+    resultDetails: 'Successfully automated <strong style="color:#f0ede8;">90%</strong> of basic query handling, freeing up human agents for complex tasks.',
+    resultBadge: '⚡ High Performance NLP',
+    liveLink: 'https://github.com/coddies/AI-Chatbot',
+    liveText: 'View Repository',
+    devpostLink: ''
+  },
+  {
+    title: 'Modern Glassmorphism Portfolio',
+    category: 'Frontend Development',
+    tags: [
+      { text: 'HTML5', cls: 'tag-web' },
+      { text: 'CSS3', cls: 'tag-web' },
+      { text: 'JS', cls: 'tag-web' }
+    ],
+    stats: [
+      { label: 'Design', value: 'Premium', sub: 'Glassmorphism', color: 'purple' },
+      { label: 'Performance', value: '100%', sub: 'Lighthouse Score', color: 'green' },
+      { label: 'Responsiveness', value: 'Full', sub: 'All devices', color: 'amber' }
+    ],
+    problem: 'Standard portfolios lack the premium feel and interactivity required for a modern AI developer. They often rely on generic templates that fail to stand out.',
+    solution: 'Developed a high-end, card-based single-page portfolio with custom transitions and a fixed viewport design. Built entirely from scratch without heavy frameworks.',
+    pipeline: [
+      { icon: '🎨', label: 'Design', sub: 'Figma UI' },
+      { icon: '🧱', label: 'Structure', sub: 'Semantic HTML' },
+      { icon: '✨', label: 'Style', sub: 'Vanilla CSS' },
+      { icon: '⚡', label: 'Interact', sub: 'Custom JS' }
+    ],
+    resultDetails: 'Delivered a top-tier user experience with <strong style="color:#f0ede8;">100%</strong> fixed-viewport navigation, resulting in a premium app-like feel.',
+    resultBadge: '💎 Premium Design Architecture',
+    liveLink: 'https://github.com/coddies/My-Portfolio',
+    liveText: 'View Source Code',
+    devpostLink: ''
+  }
 ];
 
 const csModal    = document.getElementById('csModal');
@@ -238,14 +287,113 @@ function openCsModal(idx) {
     const data = caseStudiesData[idx];
     if (!data || !csModal) return;
 
-    document.getElementById('csModalTitle').textContent    = data.title;
-    document.getElementById('csModalCategory').textContent = data.category;
-    document.getElementById('csModalProblem').textContent  = data.problem;
-    document.getElementById('csModalSolution').textContent = data.solution;
-    document.getElementById('csModalResult').textContent   = data.result;
+    const dynamicContainer = document.getElementById('csModalDynamicContent');
+    
+    let tagsHTML = data.tags.map(t => `<span class="cs-tag ${t.cls}">${t.text}</span>`).join('');
+    
+    let statsHTML = data.stats.map(s => `
+        <div class="stat-card">
+          <div class="stat-label">${s.label}</div>
+          <div class="stat-value ${s.color}">${s.value}</div>
+          <div class="stat-sub">${s.sub}</div>
+        </div>
+    `).join('');
 
-    const tagsEl = document.getElementById('csModalTags');
-    tagsEl.innerHTML = data.tags.map(t => `<span class="cs-tag">${t}</span>`).join('');
+    let pipelineHTML = data.pipeline.map(p => `
+        <div class="pipe-step">
+          <div class="pipe-icon">${p.icon}</div>
+          <div class="pipe-label">${p.label}</div>
+          <div class="pipe-sub">${p.sub}</div>
+        </div>
+    `).join('');
+
+    let linksHTML = '';
+    if (data.liveLink) {
+        linksHTML += `
+            <a class="cs-live-link" href="${data.liveLink}" target="_blank" rel="noopener">
+              <span class="live-dot"></span>
+              ${data.liveText}
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            </a>
+        `;
+    }
+    if (data.devpostLink) {
+        linksHTML += `
+            <a class="cs-live-link" href="${data.devpostLink}" target="_blank" rel="noopener" style="border-color: rgba(124,58,237,0.4);">
+              <span>🏆 Devpost</span>
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            </a>
+        `;
+    }
+
+    dynamicContainer.innerHTML = `
+    <div class="cs-wrap">
+      <!-- Header -->
+      <div class="cs-header">
+        <div class="cs-category">
+          <div class="cs-category-dot"></div>
+          ${data.category} · Case Study
+        </div>
+        <h2 class="cs-title">${data.title}</h2>
+        <div class="cs-tags">
+          ${tagsHTML}
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="cs-stats">
+        ${statsHTML}
+      </div>
+
+      <!-- Problem -->
+      <div class="cs-section">
+        <div class="cs-section-header">
+          <div class="cs-section-icon icon-problem">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          </div>
+          <span class="cs-section-title">Problem</span>
+        </div>
+        <p class="cs-text">${data.problem}</p>
+      </div>
+
+      <div class="cs-divider"></div>
+
+      <!-- Solution -->
+      <div class="cs-section">
+        <div class="cs-section-header">
+          <div class="cs-section-icon icon-solution">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <span class="cs-section-title">Solution</span>
+        </div>
+        <p class="cs-text">${data.solution}</p>
+
+        <!-- Pipeline -->
+        <div class="cs-pipeline">
+          ${pipelineHTML}
+        </div>
+      </div>
+
+      <div class="cs-divider"></div>
+
+      <!-- Results -->
+      <div class="cs-section">
+        <div class="cs-section-header">
+          <div class="cs-section-icon icon-result">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="2" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <span class="cs-section-title">Key Results</span>
+        </div>
+        <div class="cs-result-box">
+          <div class="cs-result-badge">${data.resultBadge}</div>
+          <p class="cs-text" style="margin:0;">${data.resultDetails}</p>
+        </div>
+        <div style="margin-top: 15px;">
+            ${linksHTML}
+        </div>
+      </div>
+    </div>
+    `;
 
     csModal.classList.add('active');
     document.body.style.overflow = 'hidden';
