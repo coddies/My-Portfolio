@@ -198,35 +198,8 @@ if (certModal) certModal.addEventListener('click', (e) => { if (e.target === cer
 // ── CASE STUDIES DATA & MODAL ──
 const caseStudiesData = [
   {
-    title: 'Spin AI - Decision Maker',
-    category: 'AI & UTILITY',
-    tags: [
-      { text: 'JavaScript', cls: 'tag-py' },
-      { text: 'Groq Cloud', cls: 'tag-ml' },
-      { text: 'Tailwind', cls: 'tag-web' }
-    ],
-    stats: [
-      { label: 'Generation', value: '100%', sub: 'AI Powered', color: 'green' },
-      { label: 'Latency', value: '< 2s', sub: 'Instant results', color: 'purple' },
-      { label: 'Themes', value: 'Dynamic', sub: 'Purple-Pink', color: 'amber' }
-    ],
-    problem: 'People often struggle to make simple decisions or need random items for games, but manual entry is tedious and boring.',
-    solution: 'Built a smart wheel spinner where you just type a topic (e.g., "Dinner ideas"), and AI (Groq) instantly populates the wheel with relevant items using high-speed inference.',
-    pipeline: [
-      { icon: '⌨️', label: 'Prompt', sub: 'User Input' },
-      { icon: '🧠', label: 'Inference', sub: 'Groq API' },
-      { icon: '🎡', label: 'Render', sub: 'SVG Wheel' },
-      { icon: '🎉', label: 'Spin', sub: 'Confetti!' }
-    ],
-    resultDetails: 'Created a highly engaging utility tool with <strong style="color:#f0ede8;">zero manual entry</strong>. Deployed live on Vercel with smooth 60fps animations.',
-    resultBadge: '✨ AI Utility Innovation',
-    liveLink: 'https://spin-ai-brown.vercel.app/',
-    liveText: 'spin-ai-brown',
-    devpostLink: ''
-  },
-  {
     title: 'Faceless AI Video Studio',
-    category: 'AUTOMATION',
+    category: 'AI Automation',
     tags: [
       { text: 'Python', cls: 'tag-py' },
       { text: 'MoviePy', cls: 'tag-ml' },
@@ -252,8 +225,8 @@ const caseStudiesData = [
     devpostLink: 'https://devpost.com/software/faceless-ai-studio'
   },
   {
-    title: 'AI Chatbot Studio',
-    category: 'AI & NLP',
+    title: 'AI Chatbot Assistant',
+    category: 'AI / NLP',
     tags: [
       { text: 'Python', cls: 'tag-py' },
       { text: 'LangChain', cls: 'tag-ml' },
@@ -279,35 +252,8 @@ const caseStudiesData = [
     devpostLink: ''
   },
   {
-    title: 'Student Table CRUD',
-    category: 'FULL STACK',
-    tags: [
-      { text: 'Python', cls: 'tag-py' },
-      { text: 'FastAPI', cls: 'tag-ml' },
-      { text: 'SQLAlchemy', cls: 'tag-aws' }
-    ],
-    stats: [
-      { label: 'Latency', value: '0ms', sub: 'Instant CRUD', color: 'green' },
-      { label: 'DB Logic', value: 'ORM', sub: 'SQLAlchemy', color: 'blue' },
-      { label: 'UI', value: 'Clean', sub: 'Glassmorphism', color: 'amber' }
-    ],
-    problem: 'Managing student records often requires complex database management and a clear, functional UI for CRUD operations.',
-    solution: 'Developed a robust full-stack application using FastAPI and SQLAlchemy. Implemented a complete REST API with a clean Vanilla JS frontend for seamless data manipulation.',
-    pipeline: [
-      { icon: '🏗️', label: 'Backend', sub: 'FastAPI' },
-      { icon: '💾', label: 'Database', sub: 'SQLAlchemy' },
-      { icon: '🔗', label: 'API', sub: 'REST Endpoints' },
-      { icon: '🖥️', label: 'Frontend', sub: 'Vanilla JB' }
-    ],
-    resultDetails: 'Demonstrated complete mastery of <strong style="color:#f0ede8;">database integration</strong> and full-stack development patterns.',
-    resultBadge: '📁 Full Stack CRUD Master',
-    liveLink: 'https://github.com/coddies/Student-Table',
-    liveText: 'View Repository',
-    devpostLink: ''
-  },
-  {
-    title: 'Premium Portfolio',
-    category: 'FRONTEND DEVELOPMENT',
+    title: 'Modern Glassmorphism Portfolio',
+    category: 'Frontend Development',
     tags: [
       { text: 'HTML5', cls: 'tag-web' },
       { text: 'CSS3', cls: 'tag-web' },

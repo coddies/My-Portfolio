@@ -239,7 +239,7 @@
       <a href="#" target="_blank" id="pxMainBtn" class="px-gh-btn">VIEW RESEARCH &nbsp; &#10142;</a>
     </div>
     <div class="px-nav-box">
-        <div class="px-count-box"><b id="pxCurr">1</b> / <span id="pxTotal">4</span></div>
+        <div class="px-count-box"><b id="pxCurr">1</b> / <span id="pxTotal">5</span></div>
         <div class="px-btns-box">
           <button class="px-nav-btn" id="pxPrev">&#8249;</button>
           <button class="px-nav-btn" id="pxNext">&#8250;</button>
@@ -309,7 +309,14 @@
     if(titEl) titEl.textContent = data[cur].title; 
     if(mainBtn) {
        mainBtn.href = data[cur].gh;
-       mainBtn.innerHTML = (data[cur].title === 'Faceless AI Video') ? 'VIEW LIVE APP &nbsp; &#10142;' : 'VIEW RESEARCH &nbsp; &#10142;';
+       // Updated to match the new dynamic titles
+       const isFaceless = data[cur].title.includes('Faceless AI');
+       const isSpin = data[cur].title.includes('Spin AI');
+       if(isFaceless || isSpin) {
+         mainBtn.innerHTML = 'VIEW LIVE APP &nbsp; &#10142;';
+       } else {
+         mainBtn.innerHTML = 'VIEW RESEARCH &nbsp; &#10142;';
+       }
     }
     positionTrack();
   }
@@ -447,75 +454,49 @@
                 <h2 class="section-title">Case Studies</h2>
                 <div class="accent-line"></div>
             </div>
+            <div class="cs-grid">
                 <div class="cs-card anim-in" data-cs="0" style="cursor: pointer;">
-                    <div class="cs-card-img" style="background: url('assets/images/p1.png') center/cover no-repeat;">
-                        <span class="cs-card-tag">AI & UTILITY</span>
+                    <div class="cs-card-img cs-img-3">
+                        <span class="cs-card-tag">AI Automation</span>
                     </div>
                     <div class="cs-card-body">
-                        <h3 class="cs-card-title">Spin AI - Decision Maker</h3>
-                        <p class="cs-card-summary">Need to pick a topic or name? Just type a keyword and let AI generate your custom wheel instantly.</p>
+                        <h3 class="cs-card-title">Faceless AI Video Pipeline</h3>
+                        <p class="cs-card-summary">Content creators spend hours editing. Built an automated pipeline from script to finish video.</p>
                         <div class="cs-card-footer">
-                            <div class="cs-tags"><span class="cs-tag">JavaScript</span><span class="cs-tag">Groq API</span><span class="cs-tag">Tailwind</span></div>
+                            <div class="cs-tags"><span class="cs-tag">Python</span><span class="cs-tag">FFmpeg</span><span class="cs-tag">elevenlabs</span></div>
                             <button class="cs-read-btn" data-cs="0">Read More →</button>
                         </div>
                     </div>
                 </div>
 
                 <div class="cs-card anim-in" data-cs="1" style="cursor: pointer;">
-                    <div class="cs-card-img" style="background: url('assets/images/p2.png') center/cover no-repeat;">
-                        <span class="cs-card-tag">AI Automation</span>
+                    <div class="cs-card-img cs-img-1">
+                        <span class="cs-card-tag">AI / NLP</span>
                     </div>
                     <div class="cs-card-body">
-                        <h3 class="cs-card-title">Faceless AI Video Studio</h3>
-                        <p class="cs-card-summary">Content creators spend hours editing. Built an automated pipeline from script to finish video.</p>
+                        <h3 class="cs-card-title">AI Chatbot Assistant</h3>
+                        <p class="cs-card-summary">Users needed a smarter way to interact with data and get instant, accurate human-like responses.</p>
                         <div class="cs-card-footer">
-                            <div class="cs-tags"><span class="cs-tag">Python</span><span class="cs-tag">FFmpeg</span><span class="cs-tag">AWS Bedrock</span></div>
+                            <div class="cs-tags"><span class="cs-tag">Python</span><span class="cs-tag">LangChain</span><span class="cs-tag">OpenAI</span></div>
                             <button class="cs-read-btn" data-cs="1">Read More →</button>
                         </div>
                     </div>
                 </div>
 
                 <div class="cs-card anim-in" data-cs="2" style="cursor: pointer;">
-                    <div class="cs-card-img" style="background: url('assets/images/p3.png') center/cover no-repeat;">
-                        <span class="cs-card-tag">AI & NLP</span>
+                    <div class="cs-card-img cs-img-2">
+                        <span class="cs-card-tag">Frontend Development</span>
                     </div>
                     <div class="cs-card-body">
-                        <h3 class="cs-card-title">AI Chatbot Studio</h3>
-                        <p class="cs-card-summary">Users needed a smarter way to interact with data and get instant, accurate human-like responses.</p>
+                        <h3 class="cs-card-title">Modern Glassmorphism Portfolio</h3>
+                        <p class="cs-card-summary">Standard portfolios lack the premium feel and interactivity required for a modern AI developer.</p>
                         <div class="cs-card-footer">
-                            <div class="cs-tags"><span class="cs-tag">Python</span><span class="cs-tag">LangChain</span><span class="cs-tag">OpenAI</span></div>
+                            <div class="cs-tags"><span class="cs-tag">HTML</span><span class="cs-tag">CSS</span><span class="cs-tag">JavaScript</span></div>
                             <button class="cs-read-btn" data-cs="2">Read More →</button>
                         </div>
                     </div>
                 </div>
-
-                <div class="cs-card anim-in" data-cs="3" style="cursor: pointer;">
-                    <div class="cs-card-img" style="background: url('assets/images/p4.png') center/cover no-repeat;">
-                        <span class="cs-card-tag">Full Stack</span>
-                    </div>
-                    <div class="cs-card-body">
-                        <h3 class="cs-card-title">Student Table CRUD</h3>
-                        <p class="cs-card-summary">A full-stack application built to demonstrate SQLAlchemy integration and RESTful API development.</p>
-                        <div class="cs-card-footer">
-                            <div class="cs-tags"><span class="cs-tag">FastAPI</span><span class="cs-tag">SQLAlchemy</span><span class="cs-tag">JS</span></div>
-                            <button class="cs-read-btn" data-cs="3">Read More →</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="cs-card anim-in" data-cs="4" style="cursor: pointer;">
-                    <div class="cs-card-img" style="background: url('assets/images/p5.png') center/cover no-repeat;">
-                        <span class="cs-card-tag">Frontend Development</span>
-                    </div>
-                    <div class="cs-card-body">
-                        <h3 class="cs-card-title">Premium Portfolio</h3>
-                        <p class="cs-card-summary">A modern glassmorphism portfolio built to showcase high-end UI design and agentic AI projects.</p>
-                        <div class="cs-card-footer">
-                            <div class="cs-tags"><span class="cs-tag">HTML</span><span class="cs-tag">CSS</span><span class="cs-tag">JavaScript</span></div>
-                            <button class="cs-read-btn" data-cs="4">Read More →</button>
-                        </div>
-                    </div>
-                </div>
+            </div>
             </div>
         </div>
     </div>
