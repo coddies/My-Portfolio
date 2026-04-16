@@ -198,6 +198,33 @@ if (certModal) certModal.addEventListener('click', (e) => { if (e.target === cer
 // ── CASE STUDIES DATA & MODAL ──
 const caseStudiesData = [
   {
+    title: 'Spin AI - Decision Maker',
+    category: 'AI & UTILITY',
+    tags: [
+      { text: 'JavaScript', cls: 'tag-py' },
+      { text: 'Groq Cloud', cls: 'tag-ml' },
+      { text: 'Tailwind', cls: 'tag-web' }
+    ],
+    stats: [
+      { label: 'Generation', value: '100%', sub: 'AI Powered', color: 'green' },
+      { label: 'Latency', value: '< 2s', sub: 'Instant results', color: 'purple' },
+      { label: 'Themes', value: 'Dynamic', sub: 'Purple-Pink', color: 'amber' }
+    ],
+    problem: 'People often struggle to make simple decisions or need random items for games, but manual entry is tedious and boring.',
+    solution: 'Built a smart wheel spinner where you just type a topic (e.g., "Dinner ideas"), and AI (Groq) instantly populates the wheel with relevant items using high-speed inference.',
+    pipeline: [
+      { icon: '⌨️', label: 'Prompt', sub: 'User Input' },
+      { icon: '🧠', label: 'Inference', sub: 'Groq API' },
+      { icon: '🎡', label: 'Render', sub: 'SVG Wheel' },
+      { icon: '🎉', label: 'Spin', sub: 'Confetti!' }
+    ],
+    resultDetails: 'Created a highly engaging utility tool with <strong style="color:#f0ede8;">zero manual entry</strong>. Deployed live on Vercel with smooth 60fps animations.',
+    resultBadge: '✨ AI Utility Innovation',
+    liveLink: 'https://spin-ai-brown.vercel.app/',
+    liveText: 'spin-ai-brown',
+    devpostLink: ''
+  },
+  {
     title: 'Faceless AI Video Studio',
     category: 'AI Automation',
     tags: [
@@ -225,7 +252,7 @@ const caseStudiesData = [
     devpostLink: 'https://devpost.com/software/faceless-ai-studio'
   },
   {
-    title: 'AI Chatbot Assistant',
+    title: 'AI Chatbot Studio',
     category: 'AI / NLP',
     tags: [
       { text: 'Python', cls: 'tag-py' },
@@ -252,7 +279,34 @@ const caseStudiesData = [
     devpostLink: ''
   },
   {
-    title: 'Modern Glassmorphism Portfolio',
+    title: 'Student Table CRUD',
+    category: 'Full Stack',
+    tags: [
+      { text: 'Python', cls: 'tag-py' },
+      { text: 'FastAPI', cls: 'tag-ml' },
+      { text: 'SQLAlchemy', cls: 'tag-aws' }
+    ],
+    stats: [
+      { label: 'Latency', value: '0ms', sub: 'Instant CRUD', color: 'green' },
+      { label: 'DB Logic', value: 'ORM', sub: 'SQLAlchemy', color: 'blue' },
+      { label: 'UI', value: 'Clean', sub: 'Glassmorphism', color: 'amber' }
+    ],
+    problem: 'Managing student records often requires complex database management and a clear, functional UI for CRUD operations.',
+    solution: 'Developed a robust full-stack application using FastAPI and SQLAlchemy. Implemented a complete REST API with a clean Vanilla JS frontend for seamless data manipulation.',
+    pipeline: [
+      { icon: '🏗️', label: 'Backend', sub: 'FastAPI' },
+      { icon: '💾', label: 'Database', sub: 'SQLAlchemy' },
+      { icon: '🔗', label: 'API', sub: 'REST Endpoints' },
+      { icon: '🖥️', label: 'Frontend', sub: 'Vanilla JB' }
+    ],
+    resultDetails: 'Demonstrated complete mastery of <strong style="color:#f0ede8;">database integration</strong> and full-stack development patterns.',
+    resultBadge: '📁 Full Stack CRUD Master',
+    liveLink: 'https://github.com/coddies/Student-Table',
+    liveText: 'View Repository',
+    devpostLink: ''
+  },
+  {
+    title: 'Premium Portfolio',
     category: 'Frontend Development',
     tags: [
       { text: 'HTML5', cls: 'tag-web' },
@@ -264,15 +318,15 @@ const caseStudiesData = [
       { label: 'Performance', value: '100%', sub: 'Lighthouse Score', color: 'green' },
       { label: 'Responsiveness', value: 'Full', sub: 'All devices', color: 'amber' }
     ],
-    problem: 'Standard portfolios lack the premium feel and interactivity required for a modern AI developer. They often rely on generic templates that fail to stand out.',
-    solution: 'Developed a high-end, card-based single-page portfolio with custom transitions and a fixed viewport design. Built entirely from scratch without heavy frameworks.',
+    problem: 'Standard portfolios lack the premium feel and interactivity required for a modern AI developer.',
+    solution: 'Developed a high-end, card-based single-page portfolio with custom transitions and a fixed viewport design.',
     pipeline: [
       { icon: '🎨', label: 'Design', sub: 'Figma UI' },
       { icon: '🧱', label: 'Structure', sub: 'Semantic HTML' },
       { icon: '✨', label: 'Style', sub: 'Vanilla CSS' },
       { icon: '⚡', label: 'Interact', sub: 'Custom JS' }
     ],
-    resultDetails: 'Delivered a top-tier user experience with <strong style="color:#f0ede8;">100%</strong> fixed-viewport navigation, resulting in a premium app-like feel.',
+    resultDetails: 'Delivered a top-tier user experience with <strong style="color:#f0ede8;">100%</strong> fixed-viewport navigation.',
     resultBadge: '💎 Premium Design Architecture',
     liveLink: 'https://github.com/coddies/My-Portfolio',
     liveText: 'View Source Code',

@@ -223,10 +223,11 @@
 <div class="px">
   <div class="px-top">
     <div class="px-track" id="pxTrack">
-      <div class="px-card"><div class="px-media"><img><span class="px-fallback-emoji">🤖</span></div><div class="px-details"></div></div>
+      <div class="px-card"><div class="px-media"><img><span class="px-fallback-emoji">🎡</span></div><div class="px-details"></div></div>
       <div class="px-card"><div class="px-media"><img><span class="px-fallback-emoji">🎬</span></div><div class="px-details"></div></div>
-      <div class="px-card"><div class="px-media"><img><span class="px-fallback-emoji">📊</span></div><div class="px-details"></div></div>
-      <div class="px-card"><div class="px-media"><img><span class="px-fallback-emoji">🧠</span></div><div class="px-details"></div></div>
+      <div class="px-card"><div class="px-media"><img><span class="px-fallback-emoji">🤖</span></div><div class="px-details"></div></div>
+      <div class="px-card"><div class="px-media"><img><span class="px-fallback-emoji">📁</span></div><div class="px-details"></div></div>
+      <div class="px-card"><div class="px-media"><img><span class="px-fallback-emoji">💎</span></div><div class="px-details"></div></div>
     </div>
   </div>
   <div class="px-ctrls">
@@ -250,10 +251,11 @@
 <script>
 (function(){
   const data=[
-    { cat:'AI & GEN-AI', title:'AI Chatbot Studio', features: ['Advanced NLU with real-time streaming','Context-aware persistent chat history','Multi-model support (Groq/OpenAI)','Responsive Dark Glass UI interface'], tags:['Python','FastAPI','React','AWS'], gh:'https://github.com/coddies/AI-Chatbot', img:'assets/images/p1.png', emoji: '🤖' },
+    { cat:'AI & UTILITY', title:'Spin AI - Local Item Generator', features: ['AI-powered item generation via Groq','Customizable wheel categories & topics','Smooth CSS animations & confetti effects','Mobile-optimized responsive design'], tags:['JS','Groq Cloud','Vite','Tailwind'], gh:'https://spin-ai-brown.vercel.app/', img:'assets/images/p1.png', emoji: '🎡' },
     { cat:'AUTOMATION', title:'Faceless AI Video', features: ['Automated script-to-video pipeline','High-end generative image integration','Natural AI voice synthesis','Batch scene processing'], tags:['Python','FFmpeg','AWS Bedrock'], gh:'https://faceless-ai-studio-tau.vercel.app/', img:'assets/images/p2.png', emoji: '🎬' },
-    { cat:'ML ENGINEERING', title:'Predictive Insights', features: ['Real-time 92%+ model accuracy','Interactive Matplotlib dashboards','Automated anomaly detection','High-throughput API serving'], tags:['Scikit-Learn','Pandas','FastAPI'], gh:'https://github.com/coddies', img:'assets/images/p3.png', emoji: '🧠' },
-    { cat:'FULL STACK', title:'Premium Portfolio', features: ['Dynamic card-based transitions','Responsive Glassmorphism design','Interactive project carousel','Automated deployment pipelines'], tags:['HTML5','CSS3','JS','GitHub'], gh:'https://github.com/coddies/My-Portfolio', img:'assets/images/p4.png', emoji: '💎' },
+    { cat:'AI & GEN-AI', title:'AI Chatbot Studio', features: ['Advanced NLU with real-time streaming','Context-aware persistent chat history','Multi-model support (Groq/OpenAI)','Responsive Dark Glass UI interface'], tags:['Python','FastAPI','React','AWS'], gh:'https://github.com/coddies/AI-Chatbot', img:'assets/images/p3.png', emoji: '🤖' },
+    { cat:'FULL STACK', title:'Student Table CRUD', features: ['FastAPI Backend integration','SQLAlchemy Database management','RESTful API development','Vanilla JS Frontend CRUD'], tags:['Python','FastAPI','SQLAlchemy','PostgreSQL'], gh:'https://github.com/coddies/Student-Table', img:'assets/images/p4.png', emoji: '📁' },
+    { cat:'FULL STACK', title:'Premium Portfolio', features: ['Dynamic card-based transitions','Responsive Glassmorphism design','Interactive project carousel','Automated deployment pipelines'], tags:['HTML5','CSS3','JS','GitHub'], gh:'https://github.com/coddies/My-Portfolio', img:'assets/images/p5.png', emoji: '💎' },
   ];
   const track = document.getElementById('pxTrack'); if(!track) return;
   const cards = track.querySelectorAll('.px-card');
@@ -445,8 +447,21 @@
                 <h2 class="section-title">Case Studies</h2>
                 <div class="accent-line"></div>
             </div>
-            <div class="cs-grid">
                 <div class="cs-card anim-in" data-cs="0" style="cursor: pointer;">
+                    <div class="cs-card-img cs-img-1" style="background: linear-gradient(135deg, #7c3aed, #db2777);">
+                        <span class="cs-card-tag">AI & UTILITY</span>
+                    </div>
+                    <div class="cs-card-body">
+                        <h3 class="cs-card-title">Spin AI - Decision Maker</h3>
+                        <p class="cs-card-summary">Need to pick a topic or name? Just type a keyword and let AI generate your custom wheel instantly.</p>
+                        <div class="cs-card-footer">
+                            <div class="cs-tags"><span class="cs-tag">JavaScript</span><span class="cs-tag">Groq API</span><span class="cs-tag">Tailwind</span></div>
+                            <button class="cs-read-btn" data-cs="0">Read More →</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cs-card anim-in" data-cs="1" style="cursor: pointer;">
                     <div class="cs-card-img cs-img-3">
                         <span class="cs-card-tag">AI Automation</span>
                     </div>
@@ -454,36 +469,50 @@
                         <h3 class="cs-card-title">Faceless AI Video Pipeline</h3>
                         <p class="cs-card-summary">Content creators spend hours editing. Built an automated pipeline from script to finish video.</p>
                         <div class="cs-card-footer">
-                            <div class="cs-tags"><span class="cs-tag">Python</span><span class="cs-tag">FFmpeg</span><span class="cs-tag">elevenlabs</span></div>
-                            <button class="cs-read-btn" data-cs="0">Read More →</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="cs-card anim-in" data-cs="1" style="cursor: pointer;">
-                    <div class="cs-card-img cs-img-1">
-                        <span class="cs-card-tag">AI / NLP</span>
-                    </div>
-                    <div class="cs-card-body">
-                        <h3 class="cs-card-title">AI Chatbot - Intelligent NLP Assistant</h3>
-                        <p class="cs-card-summary">Users needed a smarter way to interact with data and get instant, accurate human-like responses.</p>
-                        <div class="cs-card-footer">
-                            <div class="cs-tags"><span class="cs-tag">Python</span><span class="cs-tag">LangChain</span><span class="cs-tag">OpenAI</span></div>
+                            <div class="cs-tags"><span class="cs-tag">Python</span><span class="cs-tag">FFmpeg</span><span class="cs-tag">AWS Bedrock</span></div>
                             <button class="cs-read-btn" data-cs="1">Read More →</button>
                         </div>
                     </div>
                 </div>
 
                 <div class="cs-card anim-in" data-cs="2" style="cursor: pointer;">
+                    <div class="cs-card-img cs-img-1">
+                        <span class="cs-card-tag">AI / NLP</span>
+                    </div>
+                    <div class="cs-card-body">
+                        <h3 class="cs-card-title">AI Chatbot Studio</h3>
+                        <p class="cs-card-summary">Users needed a smarter way to interact with data and get instant, accurate human-like responses.</p>
+                        <div class="cs-card-footer">
+                            <div class="cs-tags"><span class="cs-tag">Python</span><span class="cs-tag">LangChain</span><span class="cs-tag">OpenAI</span></div>
+                            <button class="cs-read-btn" data-cs="2">Read More →</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cs-card anim-in" data-cs="3" style="cursor: pointer;">
+                    <div class="cs-card-img cs-img-2" style="background: linear-gradient(135deg, #059669, #3b82f6);">
+                        <span class="cs-card-tag">Full Stack</span>
+                    </div>
+                    <div class="cs-card-body">
+                        <h3 class="cs-card-title">Student Table CRUD</h3>
+                        <p class="cs-card-summary">A full-stack application built to demonstrate SQLAlchemy integration and RESTful API development.</p>
+                        <div class="cs-card-footer">
+                            <div class="cs-tags"><span class="cs-tag">FastAPI</span><span class="cs-tag">SQLAlchemy</span><span class="cs-tag">JS</span></div>
+                            <button class="cs-read-btn" data-cs="3">Read More →</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cs-card anim-in" data-cs="4" style="cursor: pointer;">
                     <div class="cs-card-img cs-img-2">
                         <span class="cs-card-tag">Frontend Development</span>
                     </div>
                     <div class="cs-card-body">
-                        <h3 class="cs-card-title">Modern Glassmorphism Portfolio</h3>
-                        <p class="cs-card-summary">Standard portfolios lack the premium feel and interactivity required for a modern AI developer.</p>
+                        <h3 class="cs-card-title">Premium Portfolio</h3>
+                        <p class="cs-card-summary">A modern glassmorphism portfolio built to showcase high-end UI design and agentic AI projects.</p>
                         <div class="cs-card-footer">
                             <div class="cs-tags"><span class="cs-tag">HTML</span><span class="cs-tag">CSS</span><span class="cs-tag">JavaScript</span></div>
-                            <button class="cs-read-btn" data-cs="2">Read More →</button>
+                            <button class="cs-read-btn" data-cs="4">Read More →</button>
                         </div>
                     </div>
                 </div>
