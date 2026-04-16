@@ -226,7 +226,7 @@ const caseStudiesData = [
   },
   {
     title: 'Faceless AI Video Studio',
-    category: 'AI Automation',
+    category: 'AUTOMATION',
     tags: [
       { text: 'Python', cls: 'tag-py' },
       { text: 'MoviePy', cls: 'tag-ml' },
@@ -253,7 +253,7 @@ const caseStudiesData = [
   },
   {
     title: 'AI Chatbot Studio',
-    category: 'AI / NLP',
+    category: 'AI & NLP',
     tags: [
       { text: 'Python', cls: 'tag-py' },
       { text: 'LangChain', cls: 'tag-ml' },
@@ -280,7 +280,7 @@ const caseStudiesData = [
   },
   {
     title: 'Student Table CRUD',
-    category: 'Full Stack',
+    category: 'FULL STACK',
     tags: [
       { text: 'Python', cls: 'tag-py' },
       { text: 'FastAPI', cls: 'tag-ml' },
@@ -307,7 +307,7 @@ const caseStudiesData = [
   },
   {
     title: 'Premium Portfolio',
-    category: 'Frontend Development',
+    category: 'FRONTEND DEVELOPMENT',
     tags: [
       { text: 'HTML5', cls: 'tag-web' },
       { text: 'CSS3', cls: 'tag-web' },
