@@ -593,9 +593,9 @@ if (dotWrap && ringWrap && window.matchMedia('(pointer: fine)').matches) {
         const tearTop  = document.createElement('div');  tearTop.id  = 'rl-tear-top';
         const tearBot  = document.createElement('div');  tearBot.id  = 'rl-tear-bot';
 
-        nameEl.textContent   = 'Muhammad Burhan';
-        subEl.textContent    = 'AI & Data Science';
-        rocketEl.innerHTML   = SVG;
+        nameEl.textContent = 'Muhammad Burhan';
+        subEl.textContent  = 'AI & Data Science';
+        rocketEl.innerHTML = SVG;
 
         content.appendChild(nameEl);
         content.appendChild(subEl);
@@ -605,67 +605,59 @@ if (dotWrap && ringWrap && window.matchMedia('(pointer: fine)').matches) {
         screen.appendChild(tearLine);
         screen.appendChild(tearTop);
         screen.appendChild(tearBot);
+
+        // Prepend to body — loader sits at z-index 99999, covers everything below it
         document.body.insertAdjacentElement('afterbegin', screen);
 
         // ── 50 random star dots ──
         for (let i = 0; i < 50; i++) {
-            const s    = document.createElement('div');
-            const sz   = Math.random() * 2 + 0.5;
+            const s  = document.createElement('div');
+            const sz = Math.random() * 2 + 0.5;
             s.style.cssText = [
-                'position:absolute', `width:${sz}px`, `height:${sz}px`,
+                'position:absolute',
+                `width:${sz}px`, `height:${sz}px`,
                 'background:#ffffff', 'border-radius:50%',
-                `top:${(Math.random()*98).toFixed(1)}%`,
-                `left:${(Math.random()*98).toFixed(1)}%`,
-                `opacity:${(Math.random()*0.7+0.3).toFixed(2)}`,
+                `top:${(Math.random() * 98).toFixed(1)}%`,
+                `left:${(Math.random() * 98).toFixed(1)}%`,
+                `opacity:${(Math.random() * 0.7 + 0.3).toFixed(2)}`,
             ].join(';');
             starsEl.appendChild(s);
         }
 
-        // ── Hide portfolio siblings behind loader ──
-        Array.from(document.body.children)
-            .filter(el => el.id !== 'rocket-loader')
-            .forEach(el => { el.style.opacity = '0'; el.style.transform = 'scale(0.92)'; });
-
-        // ── PHASE 2 — Rocket launch (2500ms) ──
+        // ── PHASE 2 — Rocket launches at 2500ms ──
         setTimeout(() => {
             rocketEl.classList.add('launching');
             content.style.transition = 'opacity 0.45s ease';
             content.style.opacity    = '0';
         }, 2500);
 
-        // ── PHASE 3 — Sky tear (3200ms) ──
+        // ── PHASE 3 — Sky tear at 3200ms ──
         setTimeout(() => {
             tearLine.style.opacity    = '1';
             tearLine.style.transition = 'height 0.3s ease-out';
-            void tearLine.offsetHeight; // force reflow
-            tearLine.style.height     = '100vh';
+            void tearLine.offsetHeight;
+            tearLine.style.height = '100vh';
 
-            // After line is full, split panels apart
             setTimeout(() => {
-                tearTop.style.transition = 'transform 0.42s ease-in';
-                tearBot.style.transition = 'transform 0.42s ease-in';
-                tearTop.style.transform  = 'translateY(-100%)';
-                tearBot.style.transform  = 'translateY(100%)';
+                tearTop.style.transition  = 'transform 0.42s ease-in';
+                tearBot.style.transition  = 'transform 0.42s ease-in';
+                tearTop.style.transform   = 'translateY(-100%)';
+                tearBot.style.transform   = 'translateY(100%)';
                 tearLine.style.transition = 'opacity 0.25s ease';
                 tearLine.style.opacity    = '0';
             }, 310);
         }, 3200);
 
-        // ── PHASE 4 — Reveal portfolio (3700ms) ──
+        // ── PHASE 4 — Remove loader at 3800ms (portfolio shows underneath) ──
         setTimeout(() => {
-            Array.from(document.body.children)
-                .filter(el => el.id !== 'rocket-loader')
-                .forEach(el => {
-                    el.style.transition = 'opacity 0.45s ease, transform 0.45s ease';
-                    el.style.opacity    = '1';
-                    el.style.transform  = 'scale(1)';
-                });
-        }, 3700);
+            screen.style.transition = 'opacity 0.35s ease';
+            screen.style.opacity    = '0';
+            screen.style.pointerEvents = 'none';
+        }, 3750);
 
-        // ── Remove loader (4300ms) ──
         setTimeout(() => {
             if (screen.parentNode) screen.parentNode.removeChild(screen);
-        }, 4300);
+        }, 4150);
 
     })();
 
