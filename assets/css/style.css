@@ -147,8 +147,7 @@ h1, h2, h3, .syne-font {
     transform: translateX(10px);
 }
 
-.nav-btn:hover .nav-tooltip,
-.nav-btn.active .nav-tooltip {
+.nav-btn:hover .nav-tooltip {
     opacity: 1;
     transform: translateX(0);
 }
@@ -2056,8 +2055,9 @@ h1, h2, h3, .syne-font {
    === SPACE ANIMATIONS ===
    ============================================================ */
 
-/* ── 1. LOADING SCREEN — Full 4-Phase Redesign ── */
-#loading-screen {
+/* === ROCKET LOADER === */
+
+#rocket-loader {
     position: fixed;
     top: 0; left: 0;
     width: 100vw; height: 100vh;
@@ -2070,92 +2070,91 @@ h1, h2, h3, .syne-font {
     pointer-events: all;
 }
 
-/* Stars background layer */
-#loading-stars {
+/* Star dots layer */
+#rl-stars {
     position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
+    inset: 0;
     pointer-events: none;
     z-index: 1;
 }
 
-/* Central content wrapper */
-#loading-content {
+/* Center content */
+#rl-content {
     position: relative;
+    z-index: 2;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 8px;
-    z-index: 2;
+    gap: 10px;
     pointer-events: none;
 }
 
-/* Name */
-#loading-name {
+#rl-name {
     font-family: 'Space Grotesk', 'Syne', 'Plus Jakarta Sans', sans-serif;
-    font-size: clamp(1.8rem, 5vw, 2.5rem);
+    font-size: clamp(1.6rem, 4vw, 2.8rem);
     font-weight: 700;
     color: #ffffff;
-    letter-spacing: 2px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
     opacity: 0;
-    animation: lsNameIn 0.5s ease 0.1s forwards;
+    animation: rlFadeUp 0.6s ease 0.15s forwards;
 }
-@keyframes lsNameIn {
-    from { opacity: 0; transform: translateY(12px); }
+
+#rl-subtitle {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 1rem;
+    color: #00D4FF;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    opacity: 0;
+    animation: rlFadeUp 0.6s ease 0.4s forwards;
+}
+
+@keyframes rlFadeUp {
+    from { opacity: 0; transform: translateY(14px); }
     to   { opacity: 1; transform: translateY(0); }
 }
 
-/* Subtitle */
-#loading-subtitle {
-    font-family: 'Plus Jakarta Sans', 'Space Grotesk', sans-serif;
-    font-size: clamp(0.8rem, 2vw, 1rem);
-    color: #00D4FF;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    opacity: 0;
-    animation: lsNameIn 0.5s ease 0.4s forwards;
-}
-
-/* Rocket wrapper */
-#loading-rocket {
-    margin-top: 28px;
+/* Rocket */
+#rl-rocket {
+    margin-top: 32px;
     display: flex;
     justify-content: center;
-    filter: drop-shadow(0 0 12px rgba(0,212,255,0.5));
-    animation: lsRocketBob 0.8s ease-in-out infinite;
+    filter: drop-shadow(0 0 14px rgba(0, 212, 255, 0.55));
+    animation: rlBob 0.85s ease-in-out infinite;
     will-change: transform;
 }
-#loading-rocket.launching {
-    animation: lsRocketLaunch 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards !important;
+#rl-rocket.launching {
+    animation: rlLaunch 0.7s cubic-bezier(0.25, 0.1, 0.1, 1) forwards !important;
 }
-@keyframes lsRocketBob {
-    0%, 100% { transform: translateY(0px);  }
+@keyframes rlBob {
+    0%, 100% { transform: translateY(0);    }
     50%       { transform: translateY(-10px); }
 }
-@keyframes lsRocketLaunch {
-    0%   { transform: translateY(0)      scale(1);   opacity: 1; }
-    100% { transform: translateY(-120vh) scale(0.2); opacity: 0; }
+@keyframes rlLaunch {
+    0%   { transform: translateY(0)       scale(1);    opacity: 1; }
+    30%  { transform: translateY(-20px)   scale(1.05); opacity: 1; }
+    100% { transform: translateY(-130vh)  scale(0.15); opacity: 0; }
 }
 
-/* SVG flame elements flicker */
-#flame-outer {
-    transform-origin: center bottom;
-    animation: lsFlicker 0.15s ease-in-out infinite alternate;
+/* Flame flicker */
+#rl-flame-outer {
+    transform-origin: 27px 83px;
+    animation: rlFlicker 0.15s ease-in-out infinite alternate;
 }
-#flame-inner {
-    transform-origin: center bottom;
-    animation: lsFlicker 0.12s ease-in-out infinite alternate-reverse;
+#rl-flame-inner {
+    transform-origin: 27px 76px;
+    animation: rlFlicker 0.11s ease-in-out infinite alternate-reverse;
 }
-@keyframes lsFlicker {
-    from { transform: scaleY(1)   scaleX(1);   opacity: 0.85; }
-    to   { transform: scaleY(1.2) scaleX(0.88); opacity: 1; }
+@keyframes rlFlicker {
+    from { transform: scaleY(1)    scaleX(1);    opacity: 0.85; }
+    to   { transform: scaleY(1.22) scaleX(0.87); opacity: 1; }
 }
 
-/* Tear line — grows vertically from center */
-#tear-line {
+/* Tear line */
+#rl-tear-line {
     position: absolute;
-    top: 50%;
-    left: 50%;
+    top: 50%; left: 50%;
     transform: translate(-50%, -50%);
     width: 3px;
     height: 0;
@@ -2167,38 +2166,35 @@ h1, h2, h3, .syne-font {
         #ffffff 80%,
         transparent
     );
-    box-shadow: 0 0 18px #ffffff, 0 0 36px #00D4FF;
+    box-shadow: 0 0 18px #ffffff, 0 0 40px #00D4FF;
     z-index: 3;
     opacity: 0;
     pointer-events: none;
-    /* height is animated by JS inline style */
 }
 
-/* Top half black panel */
-#tear-top {
+/* Tear panels */
+#rl-tear-top {
     position: absolute;
     top: 0; left: 0;
     width: 100%; height: 50%;
-    background: #000000;
+    background: #000;
     z-index: 4;
-    transform: translateY(0);
     pointer-events: none;
 }
-
-/* Bottom half black panel */
-#tear-bottom {
+#rl-tear-bot {
     position: absolute;
     bottom: 0; left: 0;
     width: 100%; height: 50%;
-    background: #000000;
+    background: #000;
     z-index: 4;
-    transform: translateY(0);
     pointer-events: none;
 }
 
-/* Mobile adjustments */
+/* Mobile */
 @media (max-width: 768px) {
-    #loading-rocket svg { width: 40px !important; height: 72px !important; }
+    #rl-rocket svg { width: 40px !important; height: 72px !important; }
+    #rl-name { letter-spacing: 2px; }
+    #rl-subtitle { letter-spacing: 3px; font-size: 0.85rem; }
 }
 
 

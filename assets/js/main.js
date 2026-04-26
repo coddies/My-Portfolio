@@ -567,53 +567,35 @@ if (dotWrap && ringWrap && window.matchMedia('(pointer: fine)').matches) {
 (function() {
     'use strict';
 
-    // ─────────────────────────────────────────────────────────
-    // 1. LOADING SCREEN — Full 4-Phase Animation
-    // ─────────────────────────────────────────────────────────
-    (function() {
+    // === ROCKET LOADER ===
+    (function () {
 
-        // ── Build DOM ──
-        const rocketSVG = `<svg width="50" height="90" viewBox="0 0 50 90" xmlns="http://www.w3.org/2000/svg">
-  <ellipse cx="25" cy="35" rx="12" ry="22" fill="white"/>
-  <polygon points="25,2 13,20 37,20" fill="white"/>
-  <circle cx="25" cy="30" r="6" fill="#00D4FF" opacity="0.8"/>
-  <circle cx="25" cy="30" r="4" fill="#001a2e"/>
-  <polygon points="13,50 4,70 13,60" fill="#00D4FF"/>
-  <polygon points="37,50 46,70 37,60" fill="#00D4FF"/>
-  <ellipse cx="25" cy="65" rx="8" ry="14" fill="#FF6B00" opacity="0.9" id="flame-outer"/>
-  <ellipse cx="25" cy="63" rx="5" ry="9"  fill="#FFD700" id="flame-inner"/>
-  <ellipse cx="25" cy="61" rx="3" ry="6"  fill="white"/>
+        const SVG = `<svg width="54" height="96" viewBox="0 0 54 96" xmlns="http://www.w3.org/2000/svg">
+  <ellipse cx="27" cy="38" rx="13" ry="23" fill="white"/>
+  <polygon points="27,4 14,22 40,22" fill="white"/>
+  <circle cx="27" cy="33" r="7" fill="#00D4FF" opacity="0.85"/>
+  <circle cx="27" cy="33" r="4.5" fill="#05060f"/>
+  <polygon points="14,54 3,76 14,64" fill="#00D4FF"/>
+  <polygon points="40,54 51,76 40,64" fill="#00D4FF"/>
+  <ellipse cx="27" cy="68" rx="9" ry="15" fill="#FF6B00" opacity="0.95" id="rl-flame-outer"/>
+  <ellipse cx="27" cy="66" rx="6" ry="10" fill="#FFD700" id="rl-flame-inner"/>
+  <ellipse cx="27" cy="64" rx="3.5" ry="6" fill="white"/>
 </svg>`;
 
-        const screen    = document.createElement('div');
-        screen.id       = 'loading-screen';
+        // ── Build DOM ──
+        const screen   = document.createElement('div');  screen.id  = 'rocket-loader';
+        const starsEl  = document.createElement('div');  starsEl.id = 'rl-stars';
+        const content  = document.createElement('div');  content.id = 'rl-content';
+        const nameEl   = document.createElement('div');  nameEl.id  = 'rl-name';
+        const subEl    = document.createElement('div');  subEl.id   = 'rl-subtitle';
+        const rocketEl = document.createElement('div');  rocketEl.id = 'rl-rocket';
+        const tearLine = document.createElement('div');  tearLine.id = 'rl-tear-line';
+        const tearTop  = document.createElement('div');  tearTop.id  = 'rl-tear-top';
+        const tearBot  = document.createElement('div');  tearBot.id  = 'rl-tear-bot';
 
-        const starsEl   = document.createElement('div');
-        starsEl.id      = 'loading-stars';
-
-        const content   = document.createElement('div');
-        content.id      = 'loading-content';
-
-        const nameEl    = document.createElement('div');
-        nameEl.id       = 'loading-name';
-        nameEl.textContent = 'Muhammad Burhan';
-
-        const subEl     = document.createElement('div');
-        subEl.id        = 'loading-subtitle';
-        subEl.textContent = 'AI & Data Science';
-
-        const rocketEl  = document.createElement('div');
-        rocketEl.id     = 'loading-rocket';
-        rocketEl.innerHTML = rocketSVG;
-
-        const tearLine  = document.createElement('div');
-        tearLine.id     = 'tear-line';
-
-        const tearTop   = document.createElement('div');
-        tearTop.id      = 'tear-top';
-
-        const tearBot   = document.createElement('div');
-        tearBot.id      = 'tear-bottom';
+        nameEl.textContent   = 'Muhammad Burhan';
+        subEl.textContent    = 'AI & Data Science';
+        rocketEl.innerHTML   = SVG;
 
         content.appendChild(nameEl);
         content.appendChild(subEl);
@@ -625,79 +607,65 @@ if (dotWrap && ringWrap && window.matchMedia('(pointer: fine)').matches) {
         screen.appendChild(tearBot);
         document.body.insertAdjacentElement('afterbegin', screen);
 
-        // ── Create 50 static star dots ──
+        // ── 50 random star dots ──
         for (let i = 0; i < 50; i++) {
             const s    = document.createElement('div');
-            const size = Math.random() * 2 + 0.5;
+            const sz   = Math.random() * 2 + 0.5;
             s.style.cssText = [
-                'position:absolute',
-                `width:${size}px`,
-                `height:${size}px`,
-                'background:white',
-                'border-radius:50%',
-                `top:${Math.random() * 100}%`,
-                `left:${Math.random() * 100}%`,
-                `opacity:${(Math.random() * 0.7 + 0.3).toFixed(2)}`,
+                'position:absolute', `width:${sz}px`, `height:${sz}px`,
+                'background:#ffffff', 'border-radius:50%',
+                `top:${(Math.random()*98).toFixed(1)}%`,
+                `left:${(Math.random()*98).toFixed(1)}%`,
+                `opacity:${(Math.random()*0.7+0.3).toFixed(2)}`,
             ].join(';');
             starsEl.appendChild(s);
         }
 
-        // ── PHASE 2: Rocket launch at 2500ms ──
+        // ── Hide portfolio siblings behind loader ──
+        Array.from(document.body.children)
+            .filter(el => el.id !== 'rocket-loader')
+            .forEach(el => { el.style.opacity = '0'; el.style.transform = 'scale(0.92)'; });
+
+        // ── PHASE 2 — Rocket launch (2500ms) ──
         setTimeout(() => {
-            // Stop bob, start launch
             rocketEl.classList.add('launching');
-            // Fade out name + subtitle
-            content.style.transition = 'opacity 0.5s ease';
+            content.style.transition = 'opacity 0.45s ease';
             content.style.opacity    = '0';
         }, 2500);
 
-        // ── PHASE 3: Tear effect at 3200ms ──
+        // ── PHASE 3 — Sky tear (3200ms) ──
         setTimeout(() => {
-            // Grow tear line vertically
             tearLine.style.opacity    = '1';
             tearLine.style.transition = 'height 0.3s ease-out';
-            // Force reflow so transition fires
-            void tearLine.offsetHeight;
-            tearLine.style.height = '100vh';
+            void tearLine.offsetHeight; // force reflow
+            tearLine.style.height     = '100vh';
 
-            // After line reaches full height (300ms), split the panels
+            // After line is full, split panels apart
             setTimeout(() => {
-                const ease = 'transform 0.4s ease-in';
-                tearTop.style.transition = ease;
-                tearBot.style.transition = ease;
+                tearTop.style.transition = 'transform 0.42s ease-in';
+                tearBot.style.transition = 'transform 0.42s ease-in';
                 tearTop.style.transform  = 'translateY(-100%)';
                 tearBot.style.transform  = 'translateY(100%)';
-                // Fade the line as panels split
-                tearLine.style.transition = 'opacity 0.3s ease';
+                tearLine.style.transition = 'opacity 0.25s ease';
                 tearLine.style.opacity    = '0';
             }, 310);
         }, 3200);
 
-        // ── PHASE 4: Reveal portfolio at 3800ms ──
+        // ── PHASE 4 — Reveal portfolio (3700ms) ──
         setTimeout(() => {
-            // Find all direct body children that are not the loading screen
-            const siblings = Array.from(document.body.children)
-                .filter(el => el.id !== 'loading-screen');
-            siblings.forEach(el => {
-                el.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
-                el.style.opacity    = '1';
-                el.style.transform  = 'scale(1)';
-            });
-        }, 3800);
+            Array.from(document.body.children)
+                .filter(el => el.id !== 'rocket-loader')
+                .forEach(el => {
+                    el.style.transition = 'opacity 0.45s ease, transform 0.45s ease';
+                    el.style.opacity    = '1';
+                    el.style.transform  = 'scale(1)';
+                });
+        }, 3700);
 
-        // ── Remove loading screen at 4300ms ──
+        // ── Remove loader (4300ms) ──
         setTimeout(() => {
             if (screen.parentNode) screen.parentNode.removeChild(screen);
         }, 4300);
-
-        // ── Hide portfolio siblings during loading so tear reveal works ──
-        // (do this synchronously right after building the DOM)
-        Array.from(document.body.children)
-            .filter(el => el.id !== 'loading-screen')
-            .forEach(el => {
-                el.style.opacity   = '0';
-                el.style.transform = 'scale(0.97)';
-            });
 
     })();
 
