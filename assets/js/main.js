@@ -568,76 +568,138 @@ if (dotWrap && ringWrap && window.matchMedia('(pointer: fine)').matches) {
     'use strict';
 
     // ─────────────────────────────────────────────────────────
-    // 1. LOADING SCREEN
+    // 1. LOADING SCREEN — Full 4-Phase Animation
     // ─────────────────────────────────────────────────────────
-    const LOADER_DURATION = 2500; // ms
+    (function() {
 
-    function createLoader() {
-        const rocketSVG = `
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 100" width="60" height="100">
-              <path d="M30 5 C16 5 10 28 10 50 L50 50 C50 28 44 5 30 5Z" fill="#e0e8ff"/>
-              <path d="M30 2 C25 10 10 26 10 38 L50 38 C50 26 35 10 30 2Z" fill="#c0ccff"/>
-              <circle cx="30" cy="36" r="7" fill="#00d4ff" opacity="0.9"/>
-              <circle cx="30" cy="36" r="4" fill="#0099cc" opacity="0.8"/>
-              <path d="M10 50 L2 70 L10 65Z" fill="#9ca3f5"/>
-              <path d="M50 50 L58 70 L50 65Z" fill="#9ca3f5"/>
-              <rect x="22" y="50" width="16" height="8" rx="3" fill="#6b7de8"/>
-              <ellipse cx="30" cy="58" rx="8" ry="3" fill="#ff6a00" opacity="0.85"/>
-            </svg>`;
+        // ── Build DOM ──
+        const rocketSVG = `<svg width="50" height="90" viewBox="0 0 50 90" xmlns="http://www.w3.org/2000/svg">
+  <ellipse cx="25" cy="35" rx="12" ry="22" fill="white"/>
+  <polygon points="25,2 13,20 37,20" fill="white"/>
+  <circle cx="25" cy="30" r="6" fill="#00D4FF" opacity="0.8"/>
+  <circle cx="25" cy="30" r="4" fill="#001a2e"/>
+  <polygon points="13,50 4,70 13,60" fill="#00D4FF"/>
+  <polygon points="37,50 46,70 37,60" fill="#00D4FF"/>
+  <ellipse cx="25" cy="65" rx="8" ry="14" fill="#FF6B00" opacity="0.9" id="flame-outer"/>
+  <ellipse cx="25" cy="63" rx="5" ry="9"  fill="#FFD700" id="flame-inner"/>
+  <ellipse cx="25" cy="61" rx="3" ry="6"  fill="white"/>
+</svg>`;
 
-        const loader = document.createElement('div');
-        loader.id = 'space-loader';
+        const screen    = document.createElement('div');
+        screen.id       = 'loading-screen';
 
-        const rocketEl = document.createElement('div');
-        rocketEl.id = 'loader-rocket';
+        const starsEl   = document.createElement('div');
+        starsEl.id      = 'loading-stars';
+
+        const content   = document.createElement('div');
+        content.id      = 'loading-content';
+
+        const nameEl    = document.createElement('div');
+        nameEl.id       = 'loading-name';
+        nameEl.textContent = 'Muhammad Burhan';
+
+        const subEl     = document.createElement('div');
+        subEl.id        = 'loading-subtitle';
+        subEl.textContent = 'AI & Data Science';
+
+        const rocketEl  = document.createElement('div');
+        rocketEl.id     = 'loading-rocket';
         rocketEl.innerHTML = rocketSVG;
 
-        const textEl = document.createElement('div');
-        textEl.id = 'loader-text';
+        const tearLine  = document.createElement('div');
+        tearLine.id     = 'tear-line';
 
-        const barTrack = document.createElement('div');
-        barTrack.id = 'loader-bar-track';
-        const barFill = document.createElement('div');
-        barFill.id = 'loader-bar-fill';
-        barTrack.appendChild(barFill);
+        const tearTop   = document.createElement('div');
+        tearTop.id      = 'tear-top';
 
-        loader.appendChild(rocketEl);
-        loader.appendChild(textEl);
-        loader.appendChild(barTrack);
-        document.body.insertAdjacentElement('afterbegin', loader);
+        const tearBot   = document.createElement('div');
+        tearBot.id      = 'tear-bottom';
 
-        // Typewriter for loading text
-        const loadingPhrases = ['Launching Portfolio...', 'Loading Stars...', 'Calibrating Systems...'];
-        let lIdx = 0, lChar = 0, lDeleting = false;
-        function typeLoad() {
-            const word = loadingPhrases[lIdx];
-            if (lDeleting) lChar--; else lChar++;
-            textEl.textContent = word.substring(0, lChar);
-            let spd = lDeleting ? 30 : 65;
-            if (!lDeleting && lChar === word.length) { spd = 600; lDeleting = true; }
-            if (lDeleting && lChar === 0) { lDeleting = false; lIdx = (lIdx + 1) % loadingPhrases.length; spd = 200; }
-            setTimeout(typeLoad, spd);
+        content.appendChild(nameEl);
+        content.appendChild(subEl);
+        content.appendChild(rocketEl);
+        screen.appendChild(starsEl);
+        screen.appendChild(content);
+        screen.appendChild(tearLine);
+        screen.appendChild(tearTop);
+        screen.appendChild(tearBot);
+        document.body.insertAdjacentElement('afterbegin', screen);
+
+        // ── Create 50 static star dots ──
+        for (let i = 0; i < 50; i++) {
+            const s    = document.createElement('div');
+            const size = Math.random() * 2 + 0.5;
+            s.style.cssText = [
+                'position:absolute',
+                `width:${size}px`,
+                `height:${size}px`,
+                'background:white',
+                'border-radius:50%',
+                `top:${Math.random() * 100}%`,
+                `left:${Math.random() * 100}%`,
+                `opacity:${(Math.random() * 0.7 + 0.3).toFixed(2)}`,
+            ].join(';');
+            starsEl.appendChild(s);
         }
-        typeLoad();
 
-        // Fuel bar animation
-        let progress = 0;
-        const interval = setInterval(() => {
-            progress = Math.min(progress + (100 / (LOADER_DURATION / 60)), 100);
-            barFill.style.width = progress + '%';
-            if (progress >= 100) clearInterval(interval);
-        }, 60);
-
-        // Dismiss loader after duration — no wrapper needed; loader covers everything at z-index 99999
+        // ── PHASE 2: Rocket launch at 2500ms ──
         setTimeout(() => {
-            loader.classList.add('loader-exit');
-            setTimeout(() => {
-                if (loader.parentNode) loader.parentNode.removeChild(loader);
-            }, 650);
-        }, LOADER_DURATION);
-    }
+            // Stop bob, start launch
+            rocketEl.classList.add('launching');
+            // Fade out name + subtitle
+            content.style.transition = 'opacity 0.5s ease';
+            content.style.opacity    = '0';
+        }, 2500);
 
-    createLoader();
+        // ── PHASE 3: Tear effect at 3200ms ──
+        setTimeout(() => {
+            // Grow tear line vertically
+            tearLine.style.opacity    = '1';
+            tearLine.style.transition = 'height 0.3s ease-out';
+            // Force reflow so transition fires
+            void tearLine.offsetHeight;
+            tearLine.style.height = '100vh';
+
+            // After line reaches full height (300ms), split the panels
+            setTimeout(() => {
+                const ease = 'transform 0.4s ease-in';
+                tearTop.style.transition = ease;
+                tearBot.style.transition = ease;
+                tearTop.style.transform  = 'translateY(-100%)';
+                tearBot.style.transform  = 'translateY(100%)';
+                // Fade the line as panels split
+                tearLine.style.transition = 'opacity 0.3s ease';
+                tearLine.style.opacity    = '0';
+            }, 310);
+        }, 3200);
+
+        // ── PHASE 4: Reveal portfolio at 3800ms ──
+        setTimeout(() => {
+            // Find all direct body children that are not the loading screen
+            const siblings = Array.from(document.body.children)
+                .filter(el => el.id !== 'loading-screen');
+            siblings.forEach(el => {
+                el.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+                el.style.opacity    = '1';
+                el.style.transform  = 'scale(1)';
+            });
+        }, 3800);
+
+        // ── Remove loading screen at 4300ms ──
+        setTimeout(() => {
+            if (screen.parentNode) screen.parentNode.removeChild(screen);
+        }, 4300);
+
+        // ── Hide portfolio siblings during loading so tear reveal works ──
+        // (do this synchronously right after building the DOM)
+        Array.from(document.body.children)
+            .filter(el => el.id !== 'loading-screen')
+            .forEach(el => {
+                el.style.opacity   = '0';
+                el.style.transform = 'scale(0.97)';
+            });
+
+    })();
 
     // ─────────────────────────────────────────────────────────
     // 2. SPACE BACKGROUND — Enhanced Canvas
