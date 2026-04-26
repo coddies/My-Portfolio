@@ -2188,6 +2188,8 @@ h1, h2, h3, .syne-font {
     background: #000;
     z-index: 4;
     pointer-events: none;
+    transform: translateY(0);
+    will-change: transform;
 }
 #rl-tear-bot {
     position: absolute;
@@ -2196,6 +2198,8 @@ h1, h2, h3, .syne-font {
     background: #000;
     z-index: 4;
     pointer-events: none;
+    transform: translateY(0);
+    will-change: transform;
 }
 
 /* Mobile */

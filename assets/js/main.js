@@ -568,8 +568,8 @@ if (dotWrap && ringWrap && window.matchMedia('(pointer: fine)').matches) {
     'use strict';
 
     // === ROCKET LOADER ===
-    (function () {
-
+    // Runs immediately — script is at end of <body> so DOM is ready
+    try {
         const SVG = `<svg width="54" height="96" viewBox="0 0 54 96" xmlns="http://www.w3.org/2000/svg">
   <ellipse cx="27" cy="38" rx="13" ry="23" fill="white"/>
   <polygon points="27,4 14,22 40,22" fill="white"/>
@@ -582,84 +582,85 @@ if (dotWrap && ringWrap && window.matchMedia('(pointer: fine)').matches) {
   <ellipse cx="27" cy="64" rx="3.5" ry="6" fill="white"/>
 </svg>`;
 
-        // ── Build DOM ──
-        const screen   = document.createElement('div');  screen.id  = 'rocket-loader';
-        const starsEl  = document.createElement('div');  starsEl.id = 'rl-stars';
-        const content  = document.createElement('div');  content.id = 'rl-content';
-        const nameEl   = document.createElement('div');  nameEl.id  = 'rl-name';
-        const subEl    = document.createElement('div');  subEl.id   = 'rl-subtitle';
-        const rocketEl = document.createElement('div');  rocketEl.id = 'rl-rocket';
-        const tearLine = document.createElement('div');  tearLine.id = 'rl-tear-line';
-        const tearTop  = document.createElement('div');  tearTop.id  = 'rl-tear-top';
-        const tearBot  = document.createElement('div');  tearBot.id  = 'rl-tear-bot';
+        // Build loader DOM
+        const RL      = id => { const d = document.createElement('div'); d.id = id; return d; };
+        const screen  = RL('rocket-loader');
+        const starsEl = RL('rl-stars');
+        const content = RL('rl-content');
+        const nameEl  = RL('rl-name');
+        const subEl   = RL('rl-subtitle');
+        const rocket  = RL('rl-rocket');
+        const line    = RL('rl-tear-line');
+        const top     = RL('rl-tear-top');
+        const bot     = RL('rl-tear-bot');
 
         nameEl.textContent = 'Muhammad Burhan';
         subEl.textContent  = 'AI & Data Science';
-        rocketEl.innerHTML = SVG;
+        rocket.innerHTML   = SVG;
 
         content.appendChild(nameEl);
         content.appendChild(subEl);
-        content.appendChild(rocketEl);
+        content.appendChild(rocket);
         screen.appendChild(starsEl);
         screen.appendChild(content);
-        screen.appendChild(tearLine);
-        screen.appendChild(tearTop);
-        screen.appendChild(tearBot);
+        screen.appendChild(line);
+        screen.appendChild(top);
+        screen.appendChild(bot);
 
-        // Prepend to body — loader sits at z-index 99999, covers everything below it
+        // Insert as very first child of body — z-index:99999 covers all
         document.body.insertAdjacentElement('afterbegin', screen);
 
-        // ── 50 random star dots ──
+        // 50 random white star dots on black background
         for (let i = 0; i < 50; i++) {
             const s  = document.createElement('div');
             const sz = Math.random() * 2 + 0.5;
-            s.style.cssText = [
-                'position:absolute',
-                `width:${sz}px`, `height:${sz}px`,
-                'background:#ffffff', 'border-radius:50%',
-                `top:${(Math.random() * 98).toFixed(1)}%`,
-                `left:${(Math.random() * 98).toFixed(1)}%`,
-                `opacity:${(Math.random() * 0.7 + 0.3).toFixed(2)}`,
-            ].join(';');
+            s.style.cssText = `position:absolute;width:${sz}px;height:${sz}px;background:#fff;border-radius:50%;top:${(Math.random()*98).toFixed(1)}%;left:${(Math.random()*98).toFixed(1)}%;opacity:${(Math.random()*0.7+0.3).toFixed(2)}`;
             starsEl.appendChild(s);
         }
 
-        // ── PHASE 2 — Rocket launches at 2500ms ──
+        // PHASE 2 — Rocket blasts off at 2500ms
         setTimeout(() => {
-            rocketEl.classList.add('launching');
+            rocket.classList.add('launching');
             content.style.transition = 'opacity 0.45s ease';
             content.style.opacity    = '0';
         }, 2500);
 
-        // ── PHASE 3 — Sky tear at 3200ms ──
+        // PHASE 3 — Sky tears open at 3200ms
         setTimeout(() => {
-            tearLine.style.opacity    = '1';
-            tearLine.style.transition = 'height 0.3s ease-out';
-            void tearLine.offsetHeight;
-            tearLine.style.height = '100vh';
+            line.style.opacity = '1';
+            // Force reflow so height transition registers
+            line.getBoundingClientRect();
+            line.style.transition = 'height 0.3s ease-out';
+            line.style.height = '100vh';
 
+            // After line grows, split the panels
             setTimeout(() => {
-                tearTop.style.transition  = 'transform 0.42s ease-in';
-                tearBot.style.transition  = 'transform 0.42s ease-in';
-                tearTop.style.transform   = 'translateY(-100%)';
-                tearBot.style.transform   = 'translateY(100%)';
-                tearLine.style.transition = 'opacity 0.25s ease';
-                tearLine.style.opacity    = '0';
-            }, 310);
+                top.style.transition = 'transform 0.42s ease-in';
+                bot.style.transition = 'transform 0.42s ease-in';
+                top.style.transform  = 'translateY(-100%)';
+                bot.style.transform  = 'translateY(100%)';
+                line.style.transition = 'opacity 0.25s ease';
+                line.style.opacity    = '0';
+            }, 320);
         }, 3200);
 
-        // ── PHASE 4 — Remove loader at 3800ms (portfolio shows underneath) ──
+        // PHASE 4 — Fade entire loader out at 3750ms
         setTimeout(() => {
-            screen.style.transition = 'opacity 0.35s ease';
-            screen.style.opacity    = '0';
+            screen.style.transition    = 'opacity 0.35s ease';
+            screen.style.opacity       = '0';
             screen.style.pointerEvents = 'none';
         }, 3750);
 
+        // Remove from DOM at 4150ms — portfolio is fully visible underneath
         setTimeout(() => {
             if (screen.parentNode) screen.parentNode.removeChild(screen);
         }, 4150);
 
-    })();
+    } catch (e) {
+        // If loader fails for any reason, remove it so portfolio shows
+        const existing = document.getElementById('rocket-loader');
+        if (existing) existing.remove();
+    }
 
     // ─────────────────────────────────────────────────────────
     // 2. SPACE BACKGROUND — Enhanced Canvas
