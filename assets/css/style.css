@@ -2114,6 +2114,7 @@ h1, h2, h3, .syne-font {
 }
 #mb-rocket {
   margin-top: 28px;
+  filter: drop-shadow(0 0 14px rgba(0,212,255,0.6));
   animation: mbBob 0.85s ease-in-out infinite;
 }
 #mb-rocket.mb-launching {
@@ -2151,6 +2152,8 @@ h1, h2, h3, .syne-font {
   width: 100%; height: 50%;
   background: #000000;
   z-index: 4;
+  transform: translateY(0);
+  will-change: transform;
 }
 #mb-tear-bottom {
   position: absolute;
@@ -2158,6 +2161,8 @@ h1, h2, h3, .syne-font {
   width: 100%; height: 50%;
   background: #000000;
   z-index: 4;
+  transform: translateY(0);
+  will-change: transform;
 }
 
 /* Mobile */

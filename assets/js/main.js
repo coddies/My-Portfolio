@@ -570,83 +570,74 @@ if (dotWrap && ringWrap && window.matchMedia('(pointer: fine)').matches) {
     // === ROCKET LOADER ===
     document.addEventListener('DOMContentLoaded', function() {
 
-      // Hide main content
-      const main = document.querySelector('main, .main, #main, .container, .sections-wrapper, .portfolio') || document.body.children[0];
-      if (main && main.id !== 'mb-loader') {
-        main.style.opacity = '0';
-        main.style.transform = 'scale(0.92)';
-        main.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
-      }
-
-      // Create loader
-      const loader = document.createElement('div');
+      var loader = document.createElement('div');
       loader.id = 'mb-loader';
-      loader.innerHTML = `
-        <div id="mb-stars"></div>
-        <div id="mb-content">
-          <div id="mb-name">Muhammad Burhan</div>
-          <div id="mb-subtitle">AI &amp; Data Science</div>
-          <div id="mb-rocket">
-            <svg width="54" height="96" viewBox="0 0 54 96" xmlns="http://www.w3.org/2000/svg">
-              <ellipse cx="27" cy="38" rx="13" ry="23" fill="white"/>
-              <polygon points="27,4 14,22 40,22" fill="white"/>
-              <circle cx="27" cy="33" r="7" fill="#00D4FF" opacity="0.85"/>
-              <circle cx="27" cy="33" r="4.5" fill="#050610"/>
-              <polygon points="14,54 3,76 14,64" fill="#00D4FF"/>
-              <polygon points="40,54 51,76 40,64" fill="#00D4FF"/>
-              <ellipse cx="27" cy="68" rx="9" ry="15" fill="#FF6B00" class="fl-o"/>
-              <ellipse cx="27" cy="66" rx="6" ry="10" fill="#FFD700" class="fl-i"/>
-              <ellipse cx="27" cy="64" rx="3.5" ry="6" fill="white"/>
-            </svg>
-          </div>
-        </div>
-        <div id="mb-tear-top"></div>
-        <div id="mb-tear-bottom"></div>
-        <div id="mb-tear-line"></div>
-      `;
+      loader.innerHTML =
+        '<div id="mb-stars"></div>' +
+        '<div id="mb-content">' +
+          '<div id="mb-name">Muhammad Burhan</div>' +
+          '<div id="mb-subtitle">AI &amp; Data Science</div>' +
+          '<div id="mb-rocket">' +
+            '<svg width="54" height="96" viewBox="0 0 54 96" xmlns="http://www.w3.org/2000/svg">' +
+              '<ellipse cx="27" cy="38" rx="13" ry="23" fill="white"/>' +
+              '<polygon points="27,4 14,22 40,22" fill="white"/>' +
+              '<circle cx="27" cy="33" r="7" fill="#00D4FF" opacity="0.85"/>' +
+              '<circle cx="27" cy="33" r="4.5" fill="#050610"/>' +
+              '<polygon points="14,54 3,76 14,64" fill="#00D4FF"/>' +
+              '<polygon points="40,54 51,76 40,64" fill="#00D4FF"/>' +
+              '<ellipse cx="27" cy="68" rx="9" ry="15" fill="#FF6B00" class="fl-o"/>' +
+              '<ellipse cx="27" cy="66" rx="6" ry="10" fill="#FFD700" class="fl-i"/>' +
+              '<ellipse cx="27" cy="64" rx="3.5" ry="6" fill="white"/>' +
+            '</svg>' +
+          '</div>' +
+        '</div>' +
+        '<div id="mb-tear-top"></div>' +
+        '<div id="mb-tear-bottom"></div>' +
+        '<div id="mb-tear-line"></div>';
+
       document.body.prepend(loader);
       document.body.style.overflow = 'hidden';
 
-      // Stars
-      const sc = document.getElementById('mb-stars');
-      for (let i = 0; i < 60; i++) {
-        const s = document.createElement('div');
-        const sz = Math.random() * 2 + 0.5;
-        s.style.cssText = `position:absolute;width:${sz}px;height:${sz}px;background:white;border-radius:50%;top:${Math.random()*100}%;left:${Math.random()*100}%;opacity:${Math.random()*0.6+0.2};`;
+      // 60 random star dots
+      var sc = document.getElementById('mb-stars');
+      for (var i = 0; i < 60; i++) {
+        var s = document.createElement('div');
+        var sz = Math.random() * 2 + 0.5;
+        s.style.cssText = 'position:absolute;width:'+sz+'px;height:'+sz+'px;background:white;border-radius:50%;top:'+(Math.random()*100)+'%;left:'+(Math.random()*100)+'%;opacity:'+(Math.random()*0.6+0.2)+';';
         sc.appendChild(s);
       }
 
-      // Phase 2 — Launch
+      // Phase 2 - Launch at 2500ms
       setTimeout(function() {
-        const rocket = document.getElementById('mb-rocket');
-        const content = document.getElementById('mb-content');
+        var rocket = document.getElementById('mb-rocket');
+        var content = document.getElementById('mb-content');
         if (rocket) rocket.classList.add('mb-launching');
         if (content) { content.style.transition = 'opacity 0.5s ease'; content.style.opacity = '0'; }
       }, 2500);
 
-      // Phase 3 — Tear
+      // Phase 3 - Tear at 3200ms
       setTimeout(function() {
-        const line = document.getElementById('mb-tear-line');
-        if (line) { line.style.opacity = '1'; line.style.transition = 'height 0.35s ease-out'; line.style.height = '100vh'; }
+        var line = document.getElementById('mb-tear-line');
+        if (line) {
+          line.style.opacity = '1';
+          line.getBoundingClientRect();
+          line.style.transition = 'height 0.35s ease-out';
+          line.style.height = '100vh';
+        }
         setTimeout(function() {
-          const top = document.getElementById('mb-tear-top');
-          const bot = document.getElementById('mb-tear-bottom');
+          var top = document.getElementById('mb-tear-top');
+          var bot = document.getElementById('mb-tear-bottom');
           if (top) { top.style.transition = 'transform 0.45s ease-in'; top.style.transform = 'translateY(-100%)'; }
           if (bot) { bot.style.transition = 'transform 0.45s ease-in'; bot.style.transform = 'translateY(100%)'; }
           if (line) { line.style.transition = 'opacity 0.25s'; line.style.opacity = '0'; }
         }, 350);
       }, 3200);
 
-      // Phase 4 — Reveal
+      // Phase 4 - Remove at 4300ms
       setTimeout(function() {
-        if (main && main.id !== 'mb-loader') { main.style.opacity = '1'; main.style.transform = 'scale(1)'; }
-        document.body.style.overflow = '';
-      }, 3750);
-
-      // Phase 5 — Remove
-      setTimeout(function() {
-        const l = document.getElementById('mb-loader');
+        var l = document.getElementById('mb-loader');
         if (l) l.remove();
+        document.body.style.overflow = '';
       }, 4300);
 
     });
