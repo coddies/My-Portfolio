@@ -568,99 +568,88 @@ if (dotWrap && ringWrap && window.matchMedia('(pointer: fine)').matches) {
     'use strict';
 
     // === ROCKET LOADER ===
-    // Runs immediately — script is at end of <body> so DOM is ready
-    try {
-        const SVG = `<svg width="54" height="96" viewBox="0 0 54 96" xmlns="http://www.w3.org/2000/svg">
-  <ellipse cx="27" cy="38" rx="13" ry="23" fill="white"/>
-  <polygon points="27,4 14,22 40,22" fill="white"/>
-  <circle cx="27" cy="33" r="7" fill="#00D4FF" opacity="0.85"/>
-  <circle cx="27" cy="33" r="4.5" fill="#05060f"/>
-  <polygon points="14,54 3,76 14,64" fill="#00D4FF"/>
-  <polygon points="40,54 51,76 40,64" fill="#00D4FF"/>
-  <ellipse cx="27" cy="68" rx="9" ry="15" fill="#FF6B00" opacity="0.95" id="rl-flame-outer"/>
-  <ellipse cx="27" cy="66" rx="6" ry="10" fill="#FFD700" id="rl-flame-inner"/>
-  <ellipse cx="27" cy="64" rx="3.5" ry="6" fill="white"/>
-</svg>`;
+    document.addEventListener('DOMContentLoaded', function() {
 
-        // Build loader DOM
-        const RL      = id => { const d = document.createElement('div'); d.id = id; return d; };
-        const screen  = RL('rocket-loader');
-        const starsEl = RL('rl-stars');
-        const content = RL('rl-content');
-        const nameEl  = RL('rl-name');
-        const subEl   = RL('rl-subtitle');
-        const rocket  = RL('rl-rocket');
-        const line    = RL('rl-tear-line');
-        const top     = RL('rl-tear-top');
-        const bot     = RL('rl-tear-bot');
+      // Hide main content
+      const main = document.querySelector('main, .main, #main, .container, .sections-wrapper, .portfolio') || document.body.children[0];
+      if (main && main.id !== 'mb-loader') {
+        main.style.opacity = '0';
+        main.style.transform = 'scale(0.92)';
+        main.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+      }
 
-        nameEl.textContent = 'Muhammad Burhan';
-        subEl.textContent  = 'AI & Data Science';
-        rocket.innerHTML   = SVG;
+      // Create loader
+      const loader = document.createElement('div');
+      loader.id = 'mb-loader';
+      loader.innerHTML = `
+        <div id="mb-stars"></div>
+        <div id="mb-content">
+          <div id="mb-name">Muhammad Burhan</div>
+          <div id="mb-subtitle">AI &amp; Data Science</div>
+          <div id="mb-rocket">
+            <svg width="54" height="96" viewBox="0 0 54 96" xmlns="http://www.w3.org/2000/svg">
+              <ellipse cx="27" cy="38" rx="13" ry="23" fill="white"/>
+              <polygon points="27,4 14,22 40,22" fill="white"/>
+              <circle cx="27" cy="33" r="7" fill="#00D4FF" opacity="0.85"/>
+              <circle cx="27" cy="33" r="4.5" fill="#050610"/>
+              <polygon points="14,54 3,76 14,64" fill="#00D4FF"/>
+              <polygon points="40,54 51,76 40,64" fill="#00D4FF"/>
+              <ellipse cx="27" cy="68" rx="9" ry="15" fill="#FF6B00" class="fl-o"/>
+              <ellipse cx="27" cy="66" rx="6" ry="10" fill="#FFD700" class="fl-i"/>
+              <ellipse cx="27" cy="64" rx="3.5" ry="6" fill="white"/>
+            </svg>
+          </div>
+        </div>
+        <div id="mb-tear-top"></div>
+        <div id="mb-tear-bottom"></div>
+        <div id="mb-tear-line"></div>
+      `;
+      document.body.prepend(loader);
+      document.body.style.overflow = 'hidden';
 
-        content.appendChild(nameEl);
-        content.appendChild(subEl);
-        content.appendChild(rocket);
-        screen.appendChild(starsEl);
-        screen.appendChild(content);
-        screen.appendChild(line);
-        screen.appendChild(top);
-        screen.appendChild(bot);
+      // Stars
+      const sc = document.getElementById('mb-stars');
+      for (let i = 0; i < 60; i++) {
+        const s = document.createElement('div');
+        const sz = Math.random() * 2 + 0.5;
+        s.style.cssText = `position:absolute;width:${sz}px;height:${sz}px;background:white;border-radius:50%;top:${Math.random()*100}%;left:${Math.random()*100}%;opacity:${Math.random()*0.6+0.2};`;
+        sc.appendChild(s);
+      }
 
-        // Insert as very first child of body — z-index:99999 covers all
-        document.body.insertAdjacentElement('afterbegin', screen);
+      // Phase 2 — Launch
+      setTimeout(function() {
+        const rocket = document.getElementById('mb-rocket');
+        const content = document.getElementById('mb-content');
+        if (rocket) rocket.classList.add('mb-launching');
+        if (content) { content.style.transition = 'opacity 0.5s ease'; content.style.opacity = '0'; }
+      }, 2500);
 
-        // 50 random white star dots on black background
-        for (let i = 0; i < 50; i++) {
-            const s  = document.createElement('div');
-            const sz = Math.random() * 2 + 0.5;
-            s.style.cssText = `position:absolute;width:${sz}px;height:${sz}px;background:#fff;border-radius:50%;top:${(Math.random()*98).toFixed(1)}%;left:${(Math.random()*98).toFixed(1)}%;opacity:${(Math.random()*0.7+0.3).toFixed(2)}`;
-            starsEl.appendChild(s);
-        }
+      // Phase 3 — Tear
+      setTimeout(function() {
+        const line = document.getElementById('mb-tear-line');
+        if (line) { line.style.opacity = '1'; line.style.transition = 'height 0.35s ease-out'; line.style.height = '100vh'; }
+        setTimeout(function() {
+          const top = document.getElementById('mb-tear-top');
+          const bot = document.getElementById('mb-tear-bottom');
+          if (top) { top.style.transition = 'transform 0.45s ease-in'; top.style.transform = 'translateY(-100%)'; }
+          if (bot) { bot.style.transition = 'transform 0.45s ease-in'; bot.style.transform = 'translateY(100%)'; }
+          if (line) { line.style.transition = 'opacity 0.25s'; line.style.opacity = '0'; }
+        }, 350);
+      }, 3200);
 
-        // PHASE 2 — Rocket blasts off at 2500ms
-        setTimeout(() => {
-            rocket.classList.add('launching');
-            content.style.transition = 'opacity 0.45s ease';
-            content.style.opacity    = '0';
-        }, 2500);
+      // Phase 4 — Reveal
+      setTimeout(function() {
+        if (main && main.id !== 'mb-loader') { main.style.opacity = '1'; main.style.transform = 'scale(1)'; }
+        document.body.style.overflow = '';
+      }, 3750);
 
-        // PHASE 3 — Sky tears open at 3200ms
-        setTimeout(() => {
-            line.style.opacity = '1';
-            // Force reflow so height transition registers
-            line.getBoundingClientRect();
-            line.style.transition = 'height 0.3s ease-out';
-            line.style.height = '100vh';
+      // Phase 5 — Remove
+      setTimeout(function() {
+        const l = document.getElementById('mb-loader');
+        if (l) l.remove();
+      }, 4300);
 
-            // After line grows, split the panels
-            setTimeout(() => {
-                top.style.transition = 'transform 0.42s ease-in';
-                bot.style.transition = 'transform 0.42s ease-in';
-                top.style.transform  = 'translateY(-100%)';
-                bot.style.transform  = 'translateY(100%)';
-                line.style.transition = 'opacity 0.25s ease';
-                line.style.opacity    = '0';
-            }, 320);
-        }, 3200);
-
-        // PHASE 4 — Fade entire loader out at 3750ms
-        setTimeout(() => {
-            screen.style.transition    = 'opacity 0.35s ease';
-            screen.style.opacity       = '0';
-            screen.style.pointerEvents = 'none';
-        }, 3750);
-
-        // Remove from DOM at 4150ms — portfolio is fully visible underneath
-        setTimeout(() => {
-            if (screen.parentNode) screen.parentNode.removeChild(screen);
-        }, 4150);
-
-    } catch (e) {
-        // If loader fails for any reason, remove it so portfolio shows
-        const existing = document.getElementById('rocket-loader');
-        if (existing) existing.remove();
-    }
+    });
 
     // ─────────────────────────────────────────────────────────
     // 2. SPACE BACKGROUND — Enhanced Canvas

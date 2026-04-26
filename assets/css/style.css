@@ -2073,133 +2073,99 @@ h1, h2, h3, .syne-font {
     z-index: 99999;
     display: flex;
     align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    pointer-events: all;
+#mb-loader {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #000000;
+  z-index: 999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
 }
-
-/* Star dots layer */
-#rl-stars {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    z-index: 1;
+#mb-stars {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
 }
-
-/* Center content */
-#rl-content {
-    position: relative;
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    pointer-events: none;
+#mb-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
 }
-
-#rl-name {
-    font-family: 'Space Grotesk', 'Syne', 'Plus Jakarta Sans', sans-serif;
-    font-size: clamp(1.6rem, 4vw, 2.8rem);
-    font-weight: 700;
-    color: #ffffff;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    opacity: 0;
-    animation: rlFadeUp 0.6s ease 0.15s forwards;
+#mb-name {
+  font-family: 'Space Grotesk', 'Syne', 'Inter', sans-serif;
+  font-size: clamp(1.6rem, 4vw, 2.8rem);
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  animation: mbFadeUp 0.6s ease forwards;
 }
-
-#rl-subtitle {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 1rem;
-    color: #00D4FF;
-    letter-spacing: 5px;
-    text-transform: uppercase;
-    opacity: 0;
-    animation: rlFadeUp 0.6s ease 0.4s forwards;
+#mb-subtitle {
+  font-size: clamp(0.75rem, 2vw, 1rem);
+  color: #00D4FF;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  opacity: 0;
+  animation: mbFadeUp 0.6s ease 0.3s forwards;
 }
-
-@keyframes rlFadeUp {
-    from { opacity: 0; transform: translateY(14px); }
-    to   { opacity: 1; transform: translateY(0); }
+@keyframes mbFadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
-
-/* Rocket */
-#rl-rocket {
-    margin-top: 32px;
-    display: flex;
-    justify-content: center;
-    filter: drop-shadow(0 0 14px rgba(0, 212, 255, 0.55));
-    animation: rlBob 0.85s ease-in-out infinite;
-    will-change: transform;
+#mb-rocket {
+  margin-top: 28px;
+  animation: mbBob 0.85s ease-in-out infinite;
 }
-#rl-rocket.launching {
-    animation: rlLaunch 0.7s cubic-bezier(0.25, 0.1, 0.1, 1) forwards !important;
+#mb-rocket.mb-launching {
+  animation: mbLaunch 0.75s cubic-bezier(0.25, 0.1, 0.1, 1) forwards !important;
 }
-@keyframes rlBob {
-    0%, 100% { transform: translateY(0);    }
-    50%       { transform: translateY(-10px); }
+@keyframes mbBob {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-12px); }
 }
-@keyframes rlLaunch {
-    0%   { transform: translateY(0)       scale(1);    opacity: 1; }
-    30%  { transform: translateY(-20px)   scale(1.05); opacity: 1; }
-    100% { transform: translateY(-130vh)  scale(0.15); opacity: 0; }
+@keyframes mbLaunch {
+  0%   { transform: translateY(0) scale(1); opacity: 1; }
+  30%  { transform: translateY(-20px) scale(1.05); opacity: 1; }
+  100% { transform: translateY(-130vh) scale(0.15); opacity: 0; }
 }
-
-/* Flame flicker */
-#rl-flame-outer {
-    transform-origin: 27px 83px;
-    animation: rlFlicker 0.15s ease-in-out infinite alternate;
+.fl-o { animation: flFlicker 0.13s ease-in-out infinite alternate; transform-origin: center top; }
+.fl-i { animation: flFlicker 0.1s ease-in-out infinite alternate-reverse; transform-origin: center top; }
+@keyframes flFlicker {
+  from { transform: scaleY(1) scaleX(1); opacity: 0.85; }
+  to   { transform: scaleY(1.3) scaleX(0.85); opacity: 1; }
 }
-#rl-flame-inner {
-    transform-origin: 27px 76px;
-    animation: rlFlicker 0.11s ease-in-out infinite alternate-reverse;
+#mb-tear-line {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 3px;
+  height: 0;
+  background: linear-gradient(to bottom, transparent, #ffffff, #00D4FF, #ffffff, transparent);
+  box-shadow: 0 0 18px #ffffff, 0 0 35px #00D4FF;
+  z-index: 5;
+  opacity: 0;
 }
-@keyframes rlFlicker {
-    from { transform: scaleY(1)    scaleX(1);    opacity: 0.85; }
-    to   { transform: scaleY(1.22) scaleX(0.87); opacity: 1; }
+#mb-tear-top {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 50%;
+  background: #000000;
+  z-index: 4;
 }
-
-/* Tear line */
-#rl-tear-line {
-    position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    width: 3px;
-    height: 0;
-    background: linear-gradient(
-        to bottom,
-        transparent,
-        #ffffff 20%,
-        #00D4FF 50%,
-        #ffffff 80%,
-        transparent
-    );
-    box-shadow: 0 0 18px #ffffff, 0 0 40px #00D4FF;
-    z-index: 3;
-    opacity: 0;
-    pointer-events: none;
-}
-
-/* Tear panels */
-#rl-tear-top {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 50%;
-    background: #000;
-    z-index: 4;
-    pointer-events: none;
-    transform: translateY(0);
-    will-change: transform;
-}
-#rl-tear-bot {
-    position: absolute;
-    bottom: 0; left: 0;
-    width: 100%; height: 50%;
-    background: #000;
-    z-index: 4;
-    pointer-events: none;
-    transform: translateY(0);
-    will-change: transform;
+#mb-tear-bottom {
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 100%; height: 50%;
+  background: #000000;
+  z-index: 4;
 }
 
 /* Mobile */
