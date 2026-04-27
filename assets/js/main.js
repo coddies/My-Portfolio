@@ -2076,4 +2076,4 @@ if (dotWrap && ringWrap && window.matchMedia('(pointer: fine)').matches) {
           card.style.transition = 'transform 0.1s ease-out';
       });
   });
-\n})();
+})();
