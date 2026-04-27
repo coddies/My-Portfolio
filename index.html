@@ -169,180 +169,296 @@
 <!-- ════════════════════════════
      CARD 3 — SKILLS
 ════════════════════════════ -->
+<!-- ════════════════════════════
+     CARD 3 — SKILLS
+════════════════════════════ -->
 <section id="card-3" class="card state-below">
 <style>
-/* ── HOLOGRAPHIC 3D SKILLS ── */
-.holo-skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-    gap: 24px;
-    perspective: 1200px;
-    padding: 10px 0 20px 0;
-}
-.holo-card {
-    position: relative;
-    background: rgba(255,255,255,0.04);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255,255,255,0.09);
-    border-radius: 22px;
-    height: 190px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transform-style: preserve-3d;
-    transform: rotateX(10deg) rotateY(-6deg);
-    transition: transform 0.5s cubic-bezier(0.23,1,0.32,1),
-                border-color 0.4s ease,
-                box-shadow 0.4s ease;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-    cursor: default;
-    overflow: hidden;
-}
-.holo-card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: 22px;
-    background: linear-gradient(135deg,rgba(255,255,255,0.07) 0%,rgba(255,255,255,0) 60%);
-    pointer-events: none;
-    z-index: 1;
-}
-.holo-card::after {
-    content: '';
-    position: absolute;
-    top: -50%; left: -50%;
-    width: 200%; height: 200%;
-    background: radial-gradient(circle at 50% 50%, var(--card-glow,rgba(0,229,255,0.08)) 0%,transparent 60%);
-    pointer-events: none;
-    z-index: 0;
-    opacity: 0;
-    transition: opacity 0.4s ease;
-}
-.holo-card:hover::after { opacity: 1; }
-.holo-card:hover {
-    transform: rotateX(0deg) rotateY(0deg) translateZ(14px) scale(1.05);
-    border-color: var(--card-color, var(--cyan));
-    box-shadow: 0 28px 64px rgba(0,0,0,0.5),
-                0 0 28px var(--card-glow, rgba(0,229,255,0.2));
-}
-.holo-content {
+/* ══ HOLOGRAPHIC SKILLS ══ */
+.hs-wrapper {
+    width: 100%;
+    max-width: 1200px;
+    padding: 10px 24px 24px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 12px;
+}
+.hs-heading {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(26px, 4vw, 42px);
+    font-weight: 800;
+    color: var(--cyan);
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 6px;
+    margin-bottom: 8px;
+    text-shadow: 0 0 24px rgba(0,229,255,0.5);
+}
+.hs-sub {
+    font-family: 'Space Grotesk', monospace;
+    font-size: 11px;
+    color: rgba(255,255,255,0.35);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 36px;
+}
+.hs-accent {
+    width: 60px; height: 2px;
+    background: linear-gradient(90deg, var(--cyan), var(--purple));
+    border-radius: 99px;
+    box-shadow: 0 0 12px var(--cyan);
+    margin: 0 auto 36px;
+}
+
+/* GRID */
+.hs-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    width: 100%;
+}
+@media (max-width: 900px) { .hs-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; } }
+@media (max-width: 480px) { .hs-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; } }
+
+/* SCENE + CARD */
+.hs-scene { perspective: 1200px; width: 100%; }
+.hs-card {
     transform-style: preserve-3d;
-    transform: translateZ(44px);
+    background: rgba(255,255,255,0.025);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 20px;
+    width: 100%;
+    height: 210px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: crosshair;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
     position: relative;
-    z-index: 2;
+    overflow: hidden;
 }
-.holo-icon {
-    font-size: 48px;
+.hs-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.06) 0%, transparent 55%);
+    pointer-events: none;
+}
+.hs-card.cyan-card:hover {
+    border-color: rgba(0,229,255,0.35);
+    box-shadow: 0 0 30px rgba(0,229,255,0.12), 0 20px 50px rgba(0,0,0,0.5);
+}
+.hs-card.purple-card:hover {
+    border-color: rgba(139,92,246,0.35);
+    box-shadow: 0 0 30px rgba(139,92,246,0.12), 0 20px 50px rgba(0,0,0,0.5);
+}
+
+/* ICON WRAP */
+.hs-icon-wrap {
+    transform-style: preserve-3d;
+    transform: translateZ(50px);
+    width: 80px; height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 18px;
+    transition: box-shadow 0.3s ease;
+}
+.hs-icon-wrap.cyan-wrap {
+    background: rgba(0,229,255,0.06);
+    border: 1px solid rgba(0,229,255,0.2);
+    box-shadow: 0 0 24px rgba(0,229,255,0.12);
+}
+.hs-icon-wrap.purple-wrap {
+    background: rgba(139,92,246,0.06);
+    border: 1px solid rgba(139,92,246,0.2);
+    box-shadow: 0 0 24px rgba(139,92,246,0.12);
+}
+.hs-card:hover .hs-icon-wrap.cyan-wrap   { box-shadow: 0 0 36px rgba(0,229,255,0.35); }
+.hs-card:hover .hs-icon-wrap.purple-wrap { box-shadow: 0 0 36px rgba(139,92,246,0.35); }
+
+.hs-icon {
+    font-size: 40px;
     line-height: 1;
-    filter: drop-shadow(0 8px 20px var(--card-glow, rgba(0,229,255,0.7)));
-    transition: filter 0.4s ease, transform 0.4s ease;
+    filter: drop-shadow(0 0 12px currentColor);
+    transition: transform 0.3s ease;
 }
-.holo-card:hover .holo-icon {
-    filter: drop-shadow(0 12px 30px var(--card-glow, rgba(0,229,255,0.9)));
-    transform: translateY(-4px) scale(1.1);
-}
-.holo-title {
-    font-family: 'Space Grotesk', sans-serif;
+.hs-card:hover .hs-icon { transform: scale(1.15) translateY(-2px); }
+
+/* TEXT */
+.hs-title {
+    transform-style: preserve-3d;
+    transform: translateZ(30px);
+    font-family: 'Space Grotesk', monospace;
     font-size: 13px;
     font-weight: 700;
     color: #fff;
-    letter-spacing: 1.5px;
+    letter-spacing: 2.5px;
     text-transform: uppercase;
-    text-shadow: 0 2px 10px rgba(0,0,0,0.6);
+    text-align: center;
+    margin-bottom: 6px;
 }
-.holo-line {
-    position: absolute;
-    bottom: 0; left: 10%;
-    width: 80%; height: 2px;
-    border-radius: 99px;
-    background: var(--card-color, var(--cyan));
-    box-shadow: 0 0 10px var(--card-glow, rgba(0,229,255,0.7));
-    opacity: 0;
-    transition: opacity 0.4s ease;
+.hs-label {
+    transform-style: preserve-3d;
+    transform: translateZ(30px);
+    font-family: 'Space Grotesk', monospace;
+    font-size: 9px;
+    color: rgba(255,255,255,0.28);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-align: center;
 }
-.holo-card:hover .holo-line { opacity: 1; }
-@media (max-width: 768px) {
-    .holo-skills-grid { grid-template-columns: repeat(2,1fr); gap: 14px; }
-    .holo-card { height: 148px; transform: none; border-radius: 16px; }
-    .holo-content { transform: translateZ(0); }
-    .holo-icon { font-size: 36px; }
-    .holo-title { font-size: 12px; }
+.hs-label.cyan-label  { color: rgba(0,229,255,0.4); }
+.hs-label.purple-label{ color: rgba(139,92,246,0.4); }
+
+/* Mobile: smaller cards */
+@media (max-width: 900px) {
+    .hs-card { height: 175px; }
+    .hs-icon-wrap { width: 64px; height: 64px; margin-bottom: 14px; }
+    .hs-icon { font-size: 32px; }
+    .hs-title { font-size: 11px; letter-spacing: 2px; }
 }
-@media (max-width: 400px) {
-    .holo-skills-grid { gap: 10px; }
-    .holo-card { height: 130px; }
+@media (max-width: 480px) {
+    .hs-card { height: 155px; border-radius: 16px; }
+    .hs-icon-wrap { width: 56px; height: 56px; margin-bottom: 12px; }
+    .hs-icon { font-size: 28px; }
+    .hs-heading { letter-spacing: 3px; }
 }
 </style>
 
     <div class="card-inner">
-        <div style="width:100%; max-width:1100px; padding:10px 20px 20px;">
+        <div class="hs-wrapper">
+            <p class="hs-heading">Neural Toolkit</p>
+            <p class="hs-sub">Skills &amp; Expertise</p>
+            <div class="hs-accent"></div>
 
-            <div class="section-header" style="text-align:center; margin-bottom:40px;">
-                <span class="tagline" style="color:var(--cyan); text-shadow:0 0 12px var(--cyan); letter-spacing:4px;">HOLOGRAPHIC TOOLKIT</span>
-                <h2 class="section-title" style="font-size:clamp(30px,5vw,46px);">Skills &amp; Expertise</h2>
-                <div class="accent-line" style="margin:0 auto; box-shadow:0 0 18px var(--cyan);"></div>
-            </div>
+            <div class="hs-grid">
 
-            <div class="holo-skills-grid">
-                <!-- Core Dev -->
-                <div class="holo-card" style="--card-color:#00E5FF;--card-glow:rgba(0,229,255,0.25);">
-                    <div class="holo-content"><span class="holo-icon">🐍</span><span class="holo-title">Python</span></div>
-                    <div class="holo-line"></div>
+                <!-- Row 1: Core Dev -->
+                <div class="hs-scene">
+                    <div class="hs-card cyan-card">
+                        <div class="hs-icon-wrap cyan-wrap"><span class="hs-icon" style="color:#00E5FF;">🐍</span></div>
+                        <p class="hs-title">Python</p>
+                        <p class="hs-label cyan-label">Core_System_v1</p>
+                    </div>
                 </div>
-                <div class="holo-card" style="--card-color:#8B5CF6;--card-glow:rgba(139,92,246,0.25);">
-                    <div class="holo-content"><span class="holo-icon">🌐</span><span class="holo-title">HTML/CSS/JS</span></div>
-                    <div class="holo-line"></div>
+                <div class="hs-scene">
+                    <div class="hs-card purple-card">
+                        <div class="hs-icon-wrap purple-wrap"><span class="hs-icon" style="color:#8B5CF6;">🌐</span></div>
+                        <p class="hs-title">HTML/CSS/JS</p>
+                        <p class="hs-label purple-label">Web_Stack_v3</p>
+                    </div>
                 </div>
-                <div class="holo-card" style="--card-color:#00E5FF;--card-glow:rgba(0,229,255,0.25);">
-                    <div class="holo-content"><span class="holo-icon">🗄️</span><span class="holo-title">SQL / Database</span></div>
-                    <div class="holo-line"></div>
+                <div class="hs-scene">
+                    <div class="hs-card cyan-card">
+                        <div class="hs-icon-wrap cyan-wrap"><span class="hs-icon" style="color:#00E5FF;">🗄️</span></div>
+                        <p class="hs-title">SQL / DB</p>
+                        <p class="hs-label cyan-label">Data_Layer_v2</p>
+                    </div>
                 </div>
-                <div class="holo-card" style="--card-color:#8B5CF6;--card-glow:rgba(139,92,246,0.25);">
-                    <div class="holo-content"><span class="holo-icon">⚡</span><span class="holo-title">FastAPI</span></div>
-                    <div class="holo-line"></div>
+                <div class="hs-scene">
+                    <div class="hs-card purple-card">
+                        <div class="hs-icon-wrap purple-wrap"><span class="hs-icon" style="color:#8B5CF6;">⚡</span></div>
+                        <p class="hs-title">FastAPI</p>
+                        <p class="hs-label purple-label">API_Engine_v2</p>
+                    </div>
                 </div>
-                <!-- AI & Data Science -->
-                <div class="holo-card" style="--card-color:#8B5CF6;--card-glow:rgba(139,92,246,0.25);">
-                    <div class="holo-content"><span class="holo-icon">🧠</span><span class="holo-title">Deep Learning</span></div>
-                    <div class="holo-line"></div>
+
+                <!-- Row 2: AI & Data Science -->
+                <div class="hs-scene">
+                    <div class="hs-card purple-card">
+                        <div class="hs-icon-wrap purple-wrap"><span class="hs-icon" style="color:#8B5CF6;">🧠</span></div>
+                        <p class="hs-title">Deep Learning</p>
+                        <p class="hs-label purple-label">Neural_Net_v4</p>
+                    </div>
                 </div>
-                <div class="holo-card" style="--card-color:#00E5FF;--card-glow:rgba(0,229,255,0.25);">
-                    <div class="holo-content"><span class="holo-icon">🤖</span><span class="holo-title">NLP</span></div>
-                    <div class="holo-line"></div>
+                <div class="hs-scene">
+                    <div class="hs-card cyan-card">
+                        <div class="hs-icon-wrap cyan-wrap"><span class="hs-icon" style="color:#00E5FF;">🤖</span></div>
+                        <p class="hs-title">NLP</p>
+                        <p class="hs-label cyan-label">Lang_Model_v3</p>
+                    </div>
                 </div>
-                <div class="holo-card" style="--card-color:#8B5CF6;--card-glow:rgba(139,92,246,0.25);">
-                    <div class="holo-content"><span class="holo-icon">📊</span><span class="holo-title">Data Science</span></div>
-                    <div class="holo-line"></div>
+                <div class="hs-scene">
+                    <div class="hs-card purple-card">
+                        <div class="hs-icon-wrap purple-wrap"><span class="hs-icon" style="color:#8B5CF6;">📊</span></div>
+                        <p class="hs-title">Data Science</p>
+                        <p class="hs-label purple-label">Analytics_v2</p>
+                    </div>
                 </div>
-                <div class="holo-card" style="--card-color:#00E5FF;--card-glow:rgba(0,229,255,0.25);">
-                    <div class="holo-content"><span class="holo-icon">👁️</span><span class="holo-title">Computer Vision</span></div>
-                    <div class="holo-line"></div>
+                <div class="hs-scene">
+                    <div class="hs-card cyan-card">
+                        <div class="hs-icon-wrap cyan-wrap"><span class="hs-icon" style="color:#00E5FF;">👁️</span></div>
+                        <p class="hs-title">Computer Vision</p>
+                        <p class="hs-label cyan-label">Vision_AI_v2</p>
+                    </div>
                 </div>
-                <!-- Tools & Cloud -->
-                <div class="holo-card" style="--card-color:#00E5FF;--card-glow:rgba(0,229,255,0.25);">
-                    <div class="holo-content"><span class="holo-icon">☁️</span><span class="holo-title">AWS Cloud</span></div>
-                    <div class="holo-line"></div>
+
+                <!-- Row 3: Tools & Cloud -->
+                <div class="hs-scene">
+                    <div class="hs-card cyan-card">
+                        <div class="hs-icon-wrap cyan-wrap"><span class="hs-icon" style="color:#00E5FF;">☁️</span></div>
+                        <p class="hs-title">AWS Cloud</p>
+                        <p class="hs-label cyan-label">Cloud_Infra_v1</p>
+                    </div>
                 </div>
-                <div class="holo-card" style="--card-color:#8B5CF6;--card-glow:rgba(139,92,246,0.25);">
-                    <div class="holo-content"><span class="holo-icon">✍️</span><span class="holo-title">Prompt Eng.</span></div>
-                    <div class="holo-line"></div>
+                <div class="hs-scene">
+                    <div class="hs-card purple-card">
+                        <div class="hs-icon-wrap purple-wrap"><span class="hs-icon" style="color:#8B5CF6;">✍️</span></div>
+                        <p class="hs-title">Prompt Eng.</p>
+                        <p class="hs-label purple-label">LLM_Craft_v5</p>
+                    </div>
                 </div>
-                <div class="holo-card" style="--card-color:#00E5FF;--card-glow:rgba(0,229,255,0.25);">
-                    <div class="holo-content"><span class="holo-icon">🎬</span><span class="holo-title">AI Automation</span></div>
-                    <div class="holo-line"></div>
+                <div class="hs-scene">
+                    <div class="hs-card cyan-card">
+                        <div class="hs-icon-wrap cyan-wrap"><span class="hs-icon" style="color:#00E5FF;">🎬</span></div>
+                        <p class="hs-title">AI Automation</p>
+                        <p class="hs-label cyan-label">Pipeline_v3</p>
+                    </div>
                 </div>
-                <div class="holo-card" style="--card-color:#8B5CF6;--card-glow:rgba(139,92,246,0.25);">
-                    <div class="holo-content"><span class="holo-icon">🧬</span><span class="holo-title">TensorFlow</span></div>
-                    <div class="holo-line"></div>
+                <div class="hs-scene">
+                    <div class="hs-card purple-card">
+                        <div class="hs-icon-wrap purple-wrap"><span class="hs-icon" style="color:#8B5CF6;">🧬</span></div>
+                        <p class="hs-title">TensorFlow</p>
+                        <p class="hs-label purple-label">ML_Frame_v2</p>
+                    </div>
                 </div>
+
             </div>
         </div>
     </div>
+
+<script>
+// ── HOLOGRAPHIC CARD 3D MOUSE PHYSICS ──
+(function() {
+    document.querySelectorAll('.hs-card').forEach(card => {
+        card.addEventListener('mousemove', function(e) {
+            const rect = card.getBoundingClientRect();
+            const cx = rect.left + rect.width  / 2;
+            const cy = rect.top  + rect.height / 2;
+            const dx = (e.clientX - cx) / (rect.width  / 2);   // -1 to 1
+            const dy = (e.clientY - cy) / (rect.height / 2);   // -1 to 1
+            const maxDeg = 22;
+            const rotY =  dx * maxDeg;
+            const rotX = -dy * maxDeg;
+            card.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg)`;
+        });
+        card.addEventListener('mouseleave', function() {
+            card.style.transition = 'transform 0.5s cubic-bezier(0.23,1,0.32,1), border-color 0.3s ease, box-shadow 0.3s ease';
+            card.style.transform  = 'rotateX(0deg) rotateY(0deg)';
+            setTimeout(() => { card.style.transition = ''; }, 500);
+        });
+        card.addEventListener('mouseenter', function() {
+            card.style.transition = 'transform 0.1s ease-out, border-color 0.3s ease, box-shadow 0.3s ease';
+        });
+    });
+})();
+</script>
 </section>
 
 <!-- ════════════════════════════
