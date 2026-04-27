@@ -2804,3 +2804,56 @@ body > div:not(#warp-overlay) {
 }
 .skill-3d-card[data-color="#00E5FF"]:hover .skill-3d-title { color: #00E5FF; }
 .skill-3d-card[data-color="#8B5CF6"]:hover .skill-3d-title { color: #8B5CF6; }
+
+/* ── RESPONSIVE GRID FOR 3D CARDS ── */
+.skills-3d-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 40px;
+    perspective: 1200px;
+    padding: 20px;
+}
+
+@media (max-width: 768px) {
+    #card-3 {
+        padding-bottom: 120px; /* Ensure content is not hidden behind mobile navbar */
+    }
+    .skills-3d-grid {
+        grid-template-columns: repeat(2, 1fr); /* Force 2 columns on tablet/mobile */
+        gap: 15px;
+        padding: 10px;
+    }
+    .skill-3d-card {
+        height: 130px;
+        border-radius: 15px;
+    }
+    .skill-3d-icon {
+        font-size: 35px;
+    }
+    .skill-3d-title {
+        font-size: 14px;
+        margin-top: 10px;
+    }
+    .skill-3d-content {
+        transform: translateZ(30px);
+    }
+    .skill-3d-card:hover .skill-3d-content {
+        transform: translateZ(45px);
+    }
+}
+@media (max-width: 400px) {
+    .skills-3d-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+    .skill-3d-card {
+        height: 110px;
+    }
+    .skill-3d-icon {
+        font-size: 28px;
+    }
+    .skill-3d-title {
+        font-size: 12px;
+        margin-top: 8px;
+    }
+}
