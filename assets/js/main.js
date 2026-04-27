@@ -117,8 +117,8 @@ if(tEl) type();
         window.addEventListener('mousemove', (e) => { mX = e.clientX; mY = e.clientY; });
         const anim = () => { dW.style.transform = `translate3d(${mX}px,${mY}px,0)`; rX += (mX-rX)*0.2; rY += (mY-rY)*0.2; rW.style.transform = `translate3d(${rX}px,${rY}px,0)`; requestAnimationFrame(anim); };
         anim();
-        document.addEventListener('mouseover', (e) => { if (e.target.closest('a, button, .nav-btn, .skill-3d-card, .cs-card')) document.body.classList.add('is-hovering'); });
-        document.addEventListener('mouseout', (e) => { if (e.target.closest('a, button, .nav-btn, .skill-3d-card, .cs-card')) document.body.classList.remove('is-hovering'); });
+        document.addEventListener('mouseover', (e) => { if (e.target.closest('a, button, .nav-btn, .skill-3d-card, .cs-card, .hybrid-cube')) document.body.classList.add('is-hovering'); });
+        document.addEventListener('mouseout', (e) => { if (e.target.closest('a, button, .nav-btn, .skill-3d-card, .cs-card, .hybrid-cube')) document.body.classList.remove('is-hovering'); });
     }
 })();
 
@@ -178,7 +178,12 @@ if(document.getElementById('csModalClose')) document.getElementById('csModalClos
     }, 3100);
 
     // Phase 4: Cleanup
-    setTimeout(()=>{ loader.remove(); document.body.style.overflow = ''; }, 4000);
+    setTimeout(()=>{ 
+        loader.remove(); 
+        document.body.style.overflow = ''; 
+        document.body.style.position = '';
+        document.body.style.height = '';
+    }, 4000);
   }
 
   function buildTransitionElements() {

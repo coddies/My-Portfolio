@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=Syne:wght@800&family=Plus+Jakarta+Sans:wght@300..800&display=swap" rel="stylesheet"/>
     <link rel="icon" type="image/png" href="assets/images/favicon.png">
     <link rel="stylesheet" href="assets/css/style.css"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 </head>
 <body style="overflow:hidden; height:100vh; position:fixed; width:100%; background:#060B14;">
     <!-- FORCED INITIAL LOADER -->
@@ -166,45 +167,35 @@
     </div>
 </section>
 
-<!-- ════════════════════════════
-     CARD 3 — SKILLS
-════════════════════════════ -->
-<!-- ════════════════════════════
-     CARD 3 — SKILLS
-════════════════════════════ -->
-<!-- ════════════════════════════
-     CARD 3 — SKILLS
-════════════════════════════ -->
-<!-- ════════ CARD 3 — SKILLS ════════ -->
-<!-- ════════ CARD 3 — SKILLS ════════ -->
 <!-- ════════ CARD 3 — SKILLS ════════ -->
 <section id="card-3" class="card state-below">
 <style>
+/* ── SKILL UNIVERSE ── */
 .skill-universe {
-  perspective: 2000px;
-  overflow: visible;
-  padding: 80px 20px;
+  perspective: 1800px;
+  overflow: hidden;
+  padding: 40px 20px 80px;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
+  width: 100%;
 }
 
+/* ── ISO GRID — DESKTOP ── */
 .iso-grid {
-  transform: rotateX(55deg) rotateZ(-45deg);
+  display: grid;
+  grid-template-columns: repeat(3, 160px);
+  gap: 48px;
+  transform: rotateX(52deg) rotateZ(-45deg);
   transform-style: preserve-3d;
   transition: transform 0.5s ease;
-  display: grid;
-  grid-template-columns: repeat(3, 192px);
-  gap: 64px;
-  max-width: 900px;
 }
 
-
-}
-
+/* ── CUBE ── */
 .hybrid-cube {
-  width: 192px;
-  height: 192px;
+  width: 160px;
+  height: 160px;
   position: relative;
   transform-style: preserve-3d;
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -216,184 +207,194 @@
   inset: 0;
 }
 
+/* TOP FACE */
 .cube-top {
   background: rgba(255, 255, 255, 0.03);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(0, 229, 255, 0.3);
-  transform: translateZ(20px);
+  transform: translateZ(16px);
   transition: all 0.4s ease;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border-radius: 12px;
+  border-radius: 10px;
 }
-
 .cube-top.purple-card {
   border-color: rgba(139, 92, 246, 0.3);
 }
 
+/* LEFT SIDE FACE */
 .cube-left {
-  background: rgba(0, 229, 255, 0.1);
-  transform: rotateY(-90deg) translateZ(100px);
-  width: 20px;
-  border-radius: 4px;
+  background: rgba(0, 229, 255, 0.08);
+  transform: rotateY(-90deg) translateZ(80px);
+  width: 16px;
+  border-radius: 3px;
 }
-
 .cube-left.purple-side {
-  background: rgba(139, 92, 246, 0.1);
+  background: rgba(139, 92, 246, 0.08);
 }
 
+/* BOTTOM FACE */
 .cube-bottom {
-  background: rgba(0, 229, 255, 0.05);
-  transform: rotateX(-90deg) translateZ(100px);
-  height: 20px;
-  border-radius: 4px;
+  background: rgba(0, 229, 255, 0.04);
+  transform: rotateX(-90deg) translateZ(80px);
+  height: 16px;
+  border-radius: 3px;
 }
-
 .cube-bottom.purple-bottom {
-  background: rgba(139, 92, 246, 0.05);
+  background: rgba(139, 92, 246, 0.04);
 }
 
+/* POP ELEMENTS */
 .pop-element {
-  transform: translateZ(30px);
+  transform: translateZ(20px);
   transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
+/* HOVER EFFECTS */
 .hybrid-cube:hover {
-  transform: translateY(-30px) scale(1.12);
+  transform: translateY(-24px) scale(1.1);
   z-index: 100;
 }
 .hybrid-cube:hover .cube-top {
-  background: rgba(0, 229, 255, 0.15);
-  box-shadow: 
-    0 0 60px rgba(0, 229, 255, 0.5), 
-    inset 0 0 30px rgba(0, 229, 255, 0.15),
-    0 40px 80px rgba(0,0,0,0.8);
-  transform: translateZ(20px) scale(1.05);
+  background: rgba(0, 229, 255, 0.12);
+  box-shadow:
+    0 0 50px rgba(0, 229, 255, 0.5),
+    inset 0 0 20px rgba(0, 229, 255, 0.15),
+    0 30px 60px rgba(0,0,0,0.8);
+  transform: translateZ(16px) scale(1.04);
 }
 .hybrid-cube:hover .cube-top.purple-card {
-  background: rgba(139, 92, 246, 0.15);
-  box-shadow: 
-    0 0 60px rgba(139, 92, 246, 0.5), 
-    inset 0 0 30px rgba(139, 92, 246, 0.15),
-    0 40px 80px rgba(0,0,0,0.8);
+  background: rgba(139, 92, 246, 0.12);
+  box-shadow:
+    0 0 50px rgba(139, 92, 246, 0.5),
+    inset 0 0 20px rgba(139, 92, 246, 0.15),
+    0 30px 60px rgba(0,0,0,0.8);
 }
 .hybrid-cube:hover .pop-element {
-  transform: translateY(-8px) translateZ(30px);
-  text-shadow: 0 10px 20px rgba(0,0,0,0.9);
+  transform: translateY(-6px) translateZ(20px);
+  text-shadow: 0 8px 16px rgba(0,0,0,0.9);
 }
 .hybrid-cube:hover .pop-icon {
-  filter: drop-shadow(0 0 20px rgba(0,229,255,0.8)) drop-shadow(0 10px 15px rgba(0,0,0,0.6));
-  transform: translateY(-8px) translateZ(30px) scale(1.1);
+  filter: drop-shadow(0 0 16px rgba(0,229,255,0.8));
+  transform: translateY(-6px) translateZ(20px) scale(1.08);
 }
 .hybrid-cube:hover .pop-icon.purple-icon {
-  filter: drop-shadow(0 0 20px rgba(139,92,246,0.8)) drop-shadow(0 10px 15px rgba(0,0,0,0.6));
+  filter: drop-shadow(0 0 16px rgba(139,92,246,0.8));
 }
 
+/* TITLE */
 .skill-section-title {
-  text-align: center;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 2rem;
+  font-family: 'Space Grotesk', monospace;
+  font-size: 1.8rem;
   color: #00E5FF;
   text-transform: uppercase;
-  letter-spacing: 0.3em;
-  margin-bottom: 8px;
+  letter-spacing: 0.25em;
+  margin-bottom: 6px;
   text-shadow: 0 0 20px rgba(0, 229, 255, 0.5);
-}
-
-.skill-section-sub {
   text-align: center;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.7rem;
+}
+.skill-section-sub {
+  font-family: 'Space Grotesk', monospace;
+  font-size: 0.65rem;
   color: rgba(0, 229, 255, 0.4);
-  letter-spacing: 0.4em;
+  letter-spacing: 0.35em;
   text-transform: uppercase;
+  text-align: center;
   margin-bottom: 0;
 }
 
+/* ════════════════════════
+   MOBILE — max 768px
+════════════════════════ */
 @media (max-width: 768px) {
-
   .skill-section-title {
-    font-size: 0.9rem !important;
-    letter-spacing: 0.1em !important;
-    text-align: center !important;
-    padding: 0 12px !important;
+    font-size: 1rem;
+    letter-spacing: 0.1em;
   }
-
   .skill-section-sub {
-    font-size: 0.5rem !important;
-    letter-spacing: 0.15em !important;
-    text-align: center !important;
-    padding: 0 12px !important;
+    font-size: 0.5rem;
+    letter-spacing: 0.15em;
   }
 
   .skill-universe {
-    padding: 20px 0 60px 0 !important;
-    overflow: hidden !important;
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    justify-content: center !important;
-    width: 100vw !important;
+    padding: 20px 0 100px 0;
+    /* Extra bottom padding because isometric grid takes vertical space */
   }
 
+  /* Scale down entire grid and center it */
   .iso-grid {
-    grid-template-columns: repeat(2, 100px) !important;
-    gap: 20px !important;
-    transform: rotateX(50deg) rotateZ(-45deg) scale(0.75) !important;
-    transform-origin: center center !important;
-    margin: 0 auto !important;
-    width: fit-content !important;
-    /* Push grid left so it appears centered after isometric rotation */
-    position: relative !important;
-    left: -40px !important;
+    grid-template-columns: repeat(2, 120px);
+    gap: 32px;
+    /* 
+      KEY FIX: 
+      - scale(0.8) shrinks the grid to fit screen
+      - translateX(30px) corrects the visual offset caused by rotateZ(-45deg)
+      - translateY(-20px) corrects vertical offset
+    */
+    transform: rotateX(52deg) rotateZ(-45deg) scale(0.8) translateX(30px) translateY(-20px);
+    transform-origin: center center;
+    margin: 0 auto;
   }
 
   .hybrid-cube {
-    width: 100px !important;
-    height: 100px !important;
+    width: 120px;
+    height: 120px;
   }
 
+  /* Smaller icon */
   .hybrid-cube .pop-icon {
-    width: 32px !important;
-    height: 32px !important;
+    width: 36px !important;
+    height: 36px !important;
     margin-bottom: 6px !important;
   }
-
   .hybrid-cube .pop-icon .material-symbols-outlined {
-    font-size: 18px !important;
+    font-size: 20px !important;
   }
 
+  /* Smaller text */
   .hybrid-cube h3 {
-    font-size: 0.5rem !important;
-    letter-spacing: 0.08em !important;
+    font-size: 0.55rem !important;
+    letter-spacing: 0.06em !important;
   }
 
+  /* Lighter hover on mobile (touch) */
   .hybrid-cube:hover {
-    transform: translateY(-10px) scale(1.06) !important;
+    transform: translateY(-12px) scale(1.06);
   }
 
+  /* Thinner side faces */
   .cube-left {
-    width: 14px !important;
+    width: 12px;
+    transform: rotateY(-90deg) translateZ(60px);
   }
-
   .cube-bottom {
-    height: 14px !important;
+    height: 12px;
+    transform: rotateX(-90deg) translateZ(60px);
   }
 }
 
+/* ════════════════════════
+   SMALL MOBILE — max 400px
+════════════════════════ */
 @media (max-width: 400px) {
   .iso-grid {
-    grid-template-columns: repeat(2, 85px) !important;
-    gap: 16px !important;
-    transform: rotateX(50deg) rotateZ(-45deg) scale(0.65) !important;
-    left: -30px !important;
+    grid-template-columns: repeat(2, 100px);
+    gap: 24px;
+    transform: rotateX(52deg) rotateZ(-45deg) scale(0.7) translateX(25px) translateY(-10px);
   }
   .hybrid-cube {
-    width: 85px !important;
-    height: 85px !important;
+    width: 100px;
+    height: 100px;
   }
+  .cube-left {
+    transform: rotateY(-90deg) translateZ(50px);
+  }
+  .cube-bottom {
+    transform: rotateX(-90deg) translateZ(50px);
+  }
+}
 </style>
 
 <div class="card-inner w-full">
@@ -406,7 +407,7 @@
   <div class="iso-grid" id="iso-grid">
 
     <!-- Card 1: Python — CYAN -->
-    <div class="hybrid-cube group">
+    <div class="hybrid-cube group anim-in">
       <div class="cube-face cube-left"></div>
       <div class="cube-face cube-bottom"></div>
       <div class="cube-face cube-top">
@@ -419,7 +420,7 @@
     </div>
 
     <!-- Card 2: FastAPI — PURPLE -->
-    <div class="hybrid-cube group">
+    <div class="hybrid-cube group anim-in">
       <div class="cube-face cube-left purple-side"></div>
       <div class="cube-face cube-bottom purple-bottom"></div>
       <div class="cube-face cube-top purple-card">
@@ -432,7 +433,7 @@
     </div>
 
     <!-- Card 3: AI / LLM — CYAN -->
-    <div class="hybrid-cube group">
+    <div class="hybrid-cube group anim-in">
       <div class="cube-face cube-left"></div>
       <div class="cube-face cube-bottom"></div>
       <div class="cube-face cube-top">
@@ -445,7 +446,7 @@
     </div>
 
     <!-- Card 4: Deep Learning — PURPLE -->
-    <div class="hybrid-cube group">
+    <div class="hybrid-cube group anim-in">
       <div class="cube-face cube-left purple-side"></div>
       <div class="cube-face cube-bottom purple-bottom"></div>
       <div class="cube-face cube-top purple-card">
@@ -458,7 +459,7 @@
     </div>
 
     <!-- Card 5: SQL — CYAN -->
-    <div class="hybrid-cube group">
+    <div class="hybrid-cube group anim-in">
       <div class="cube-face cube-left"></div>
       <div class="cube-face cube-bottom"></div>
       <div class="cube-face cube-top">
@@ -471,7 +472,7 @@
     </div>
 
     <!-- Card 6: AWS — PURPLE -->
-    <div class="hybrid-cube group">
+    <div class="hybrid-cube group anim-in">
       <div class="cube-face cube-left purple-side"></div>
       <div class="cube-face cube-bottom purple-bottom"></div>
       <div class="cube-face cube-top purple-card">
@@ -479,6 +480,84 @@
           <span class="material-symbols-outlined text-4xl text-[#8B5CF6]">cloud</span>
         </div>
         <h3 class="pop-element font-mono text-sm text-white font-bold tracking-widest uppercase">AWS Cloud</h3>
+        <div class="pop-element w-8 h-1 bg-[#8B5CF6] mt-2" style="box-shadow: 0 0 10px #8B5CF6"></div>
+      </div>
+    </div>
+
+    <!-- Card 7: NLP — CYAN -->
+    <div class="hybrid-cube group anim-in">
+      <div class="cube-face cube-left"></div>
+      <div class="cube-face cube-bottom"></div>
+      <div class="cube-face cube-top">
+        <div class="pop-element pop-icon w-16 h-16 rounded-full bg-[#00E5FF]/10 border border-[#00E5FF]/40 flex items-center justify-center mb-3">
+          <span class="material-symbols-outlined text-4xl text-[#00E5FF]">chat</span>
+        </div>
+        <h3 class="pop-element font-mono text-sm text-white font-bold tracking-widest uppercase">NLP</h3>
+        <div class="pop-element w-8 h-1 bg-[#00E5FF] mt-2" style="box-shadow: 0 0 10px #00E5FF"></div>
+      </div>
+    </div>
+
+    <!-- Card 8: Data Science — PURPLE -->
+    <div class="hybrid-cube group anim-in">
+      <div class="cube-face cube-left purple-side"></div>
+      <div class="cube-face cube-bottom purple-bottom"></div>
+      <div class="cube-face cube-top purple-card">
+        <div class="pop-element pop-icon purple-icon w-16 h-16 rounded-full bg-[#8B5CF6]/10 border border-[#8B5CF6]/40 flex items-center justify-center mb-3">
+          <span class="material-symbols-outlined text-4xl text-[#8B5CF6]">analytics</span>
+        </div>
+        <h3 class="pop-element font-mono text-sm text-white font-bold tracking-widest uppercase">Data Science</h3>
+        <div class="pop-element w-8 h-1 bg-[#8B5CF6] mt-2" style="box-shadow: 0 0 10px #8B5CF6"></div>
+      </div>
+    </div>
+
+    <!-- Card 9: Computer Vision — CYAN -->
+    <div class="hybrid-cube group anim-in">
+      <div class="cube-face cube-left"></div>
+      <div class="cube-face cube-bottom"></div>
+      <div class="cube-face cube-top">
+        <div class="pop-element pop-icon w-16 h-16 rounded-full bg-[#00E5FF]/10 border border-[#00E5FF]/40 flex items-center justify-center mb-3">
+          <span class="material-symbols-outlined text-4xl text-[#00E5FF]">visibility</span>
+        </div>
+        <h3 class="pop-element font-mono text-sm text-white font-bold tracking-widest uppercase">Comp. Vision</h3>
+        <div class="pop-element w-8 h-1 bg-[#00E5FF] mt-2" style="box-shadow: 0 0 10px #00E5FF"></div>
+      </div>
+    </div>
+
+    <!-- Card 10: Prompt Engineering — PURPLE -->
+    <div class="hybrid-cube group anim-in">
+      <div class="cube-face cube-left purple-side"></div>
+      <div class="cube-face cube-bottom purple-bottom"></div>
+      <div class="cube-face cube-top purple-card">
+        <div class="pop-element pop-icon purple-icon w-16 h-16 rounded-full bg-[#8B5CF6]/10 border border-[#8B5CF6]/40 flex items-center justify-center mb-3">
+          <span class="material-symbols-outlined text-4xl text-[#8B5CF6]">auto_awesome</span>
+        </div>
+        <h3 class="pop-element font-mono text-sm text-white font-bold tracking-widest uppercase">Prompt Eng.</h3>
+        <div class="pop-element w-8 h-1 bg-[#8B5CF6] mt-2" style="box-shadow: 0 0 10px #8B5CF6"></div>
+      </div>
+    </div>
+
+    <!-- Card 11: AI Automation — CYAN -->
+    <div class="hybrid-cube group anim-in">
+      <div class="cube-face cube-left"></div>
+      <div class="cube-face cube-bottom"></div>
+      <div class="cube-face cube-top">
+        <div class="pop-element pop-icon w-16 h-16 rounded-full bg-[#00E5FF]/10 border border-[#00E5FF]/40 flex items-center justify-center mb-3">
+          <span class="material-symbols-outlined text-4xl text-[#00E5FF]">smart_toy</span>
+        </div>
+        <h3 class="pop-element font-mono text-sm text-white font-bold tracking-widest uppercase">Automation</h3>
+        <div class="pop-element w-8 h-1 bg-[#00E5FF] mt-2" style="box-shadow: 0 0 10px #00E5FF"></div>
+      </div>
+    </div>
+
+    <!-- Card 12: TensorFlow — PURPLE -->
+    <div class="hybrid-cube group anim-in">
+      <div class="cube-face cube-left purple-side"></div>
+      <div class="cube-face cube-bottom purple-bottom"></div>
+      <div class="cube-face cube-top purple-card">
+        <div class="pop-element pop-icon purple-icon w-16 h-16 rounded-full bg-[#8B5CF6]/10 border border-[#8B5CF6]/40 flex items-center justify-center mb-3">
+          <span class="material-symbols-outlined text-4xl text-[#8B5CF6]">hub</span>
+        </div>
+        <h3 class="pop-element font-mono text-sm text-white font-bold tracking-widest uppercase">TensorFlow</h3>
         <div class="pop-element w-8 h-1 bg-[#8B5CF6] mt-2" style="box-shadow: 0 0 10px #8B5CF6"></div>
       </div>
     </div>
