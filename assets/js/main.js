@@ -1433,7 +1433,7 @@ if (dotWrap && ringWrap && window.matchMedia('(pointer: fine)').matches) {
                 d.style.width = '6px';
                 d.style.height = '6px';
                 d.style.borderRadius = '50%';
-                d.style.background = i % 2 ? '#FFD700' : '#FFB300';
+                d.style.background = i % 2 ? '#B829FF' : '#B829FF';
                 d.style.zIndex = '1000';
                 document.body.appendChild(d);
                 const a = (Math.PI * 2 * i) / 12;
@@ -1473,7 +1473,7 @@ if (dotWrap && ringWrap && window.matchMedia('(pointer: fine)').matches) {
       '<polygon points="13,50 4,70 13,60" fill="#00D4FF"/>' +
       '<polygon points="37,50 46,70 37,60" fill="#00D4FF"/>' +
       '<ellipse cx="25" cy="65" rx="8" ry="14" fill="#FF6B00" id="mb-fl-o"/>' +
-      '<ellipse cx="25" cy="63" rx="5" ry="9" fill="#FFD700" id="mb-fl-i"/>' +
+      '<ellipse cx="25" cy="63" rx="5" ry="9" fill="#B829FF" id="mb-fl-i"/>' +
       '<ellipse cx="25" cy="61" rx="3" ry="6" fill="white"/>' +
     '</svg>';
 
