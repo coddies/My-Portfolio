@@ -146,6 +146,16 @@ if(document.getElementById('csModalClose')) document.getElementById('csModalClos
     loader.appendChild(stars);
     setTimeout(()=>{ document.getElementById('mb-rocket-wrap').classList.add('launching'); document.getElementById('mb-loader-content').style.opacity = '0'; }, 2500);
     setTimeout(()=>{ document.getElementById('mb-panel-left').style.transform = 'translateX(-100%)'; document.getElementById('mb-panel-right').style.transform = 'translateX(100%)'; }, 2800);
+    
+    // Trigger entry animation for the initial card (Home)
+    setTimeout(() => {
+        const activeCard = document.querySelector('.card.state-active');
+        if (activeCard) {
+            activeCard.classList.add('section-entering');
+            setTimeout(() => activeCard.classList.remove('section-entering'), 1000);
+        }
+    }, 2800); // Trigger right as rocket clears and panels open
+
     setTimeout(()=>{ loader.remove(); document.body.style.overflow = ''; }, 3500);
   }
 
