@@ -2705,22 +2705,26 @@ body > div:not(#warp-overlay) {
 #mb-trans-right { right: 0; transform: translateX(100%); }
 #mb-trans-rocket {
   position: fixed;
-  bottom: -80px;
+  bottom: -120px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 99999;
   pointer-events: none;
   opacity: 0;
-  filter: drop-shadow(0 0 8px rgba(0,212,255,0.5));
+  filter: drop-shadow(0 0 18px rgba(0,212,255,0.75)) drop-shadow(0 0 35px rgba(255,107,0,0.5));
+}
+#mb-trans-rocket svg {
+  width: 80px !important;
+  height: auto !important;
 }
 @keyframes mbTransLaunch {
-  0%   { bottom: -80px; opacity: 0; transform: translateX(-50%) scale(0.8); }
+  0%   { bottom: -120px; opacity: 0; transform: translateX(-50%) scale(0.8); }
   15%  { opacity: 1; }
-  100% { bottom: 110vh; opacity: 0; transform: translateX(-50%) scale(0.5); }
+  100% { bottom: 110vh; opacity: 0; transform: translateX(-50%) scale(0.4); }
 }
 
 /* ── MOBILE ── */
 @media (max-width: 767px) {
   #mb-rocket-wrap svg  { width: 36px !important; height: auto !important; }
-  #mb-trans-rocket svg { width: 36px !important; height: auto !important; }
+  #mb-trans-rocket svg { width: 58px !important; height: auto !important; }
 }
