@@ -1596,4 +1596,79 @@ if (dotWrap && ringWrap && window.matchMedia('(pointer: fine)').matches) {
     init();
   }
 
+  // ── HYBRID NEURAL MATRIX LOGIC ──
+  // 1. Dynamic Header Cycler
+  const headers = ['SYSTEM_KERNEL_INFO', 'AI_ARCHITECT_LAB', 'NEURAL_SYNC_ACTIVE', 'BURHAN_OS_v2.0'];
+  let headerIdx = 0;
+  const headerEl = document.getElementById('dynamic-header');
+  if (headerEl) {
+      setInterval(() => {
+          headerIdx = (headerIdx + 1) % headers.length;
+          headerEl.style.opacity = 0;
+          setTimeout(() => {
+              headerEl.textContent = headers[headerIdx];
+              headerEl.style.opacity = 1;
+          }, 300);
+      }, 3000);
+      headerEl.style.transition = 'opacity 0.3s ease';
+  }
+
+  // 2. Second Typewriter
+  const aboutRoles = ['Data Scientist', 'ML Engineer', 'Neural Architect', 'Microsoft Learn Student Ambassador'];
+  let aRoleIdx = 0; let aCharIdx = 0; let aIsDeleting = false;
+  const aRoleEl = document.getElementById('typewriter-roles');
+  function typeAboutRoles() {
+      if (!aRoleEl) return;
+      const word = aboutRoles[aRoleIdx];
+      if (aIsDeleting) aCharIdx--; else aCharIdx++;
+      aRoleEl.textContent = word.substring(0, aCharIdx);
+      let speed = aIsDeleting ? 30 : 80;
+      if (!aIsDeleting && aCharIdx === word.length) { speed = 2000; aIsDeleting = true; }
+      if (aIsDeleting && aCharIdx === 0) { aIsDeleting = false; aRoleIdx = (aRoleIdx + 1) % aboutRoles.length; speed = 400; }
+      setTimeout(typeAboutRoles, speed);
+  }
+  if (aRoleEl) setTimeout(typeAboutRoles, 1000);
+
+  // 3. Matrix Digital Rain
+  const canvas = document.getElementById('matrix-canvas');
+  if (canvas) {
+      const ctx = canvas.getContext('2d');
+      let width, height, columns, drops;
+      
+      function initMatrix() {
+          width = canvas.width = canvas.offsetWidth;
+          height = canvas.height = canvas.offsetHeight;
+          columns = Math.floor(width / 20);
+          drops = [];
+          for (let x = 0; x < columns; x++) drops[x] = 1;
+      }
+      initMatrix();
+      window.addEventListener('resize', initMatrix);
+
+      const chars = '01'.split('');
+      function drawMatrix() {
+          ctx.fillStyle = 'rgba(10, 15, 22, 0.15)'; // Slightly darker fade
+          ctx.fillRect(0, 0, width, height);
+          ctx.fillStyle = '#8B5CF6'; // Electric Purple
+          ctx.font = '15px monospace';
+          
+          for (let i = 0; i < drops.length; i++) {
+              const text = chars[Math.floor(Math.random() * chars.length)];
+              ctx.fillText(text, i * 20, drops[i] * 20);
+              if (drops[i] * 20 > height && Math.random() > 0.975) drops[i] = 0;
+              drops[i]++;
+          }
+      }
+      setInterval(drawMatrix, 50);
+  }
+
+  // 4. Rocket Ping Animation
+  const terminalRocket = document.getElementById('terminal-rocket');
+  if (terminalRocket) {
+      setInterval(() => {
+          terminalRocket.style.transform = `translateY(-${Math.random() * 5 + 2}px) translateX(${Math.random() * 5}px)`;
+          setTimeout(() => terminalRocket.style.transform = 'translate(0, 0)', 200);
+      }, 1500);
+  }
+
 })();
