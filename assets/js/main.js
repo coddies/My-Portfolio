@@ -732,34 +732,7 @@ if (dotWrap && ringWrap && window.matchMedia('(pointer: fine)').matches) {
         window.addEventListener('resize', () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(initSpace, 200); });
         initSpace();
         requestAnimationFrame(drawSpace);
-    
-  // ── 3D HOLOGRAPHIC PARALLAX HOVER EFFECT ──
-  const skillCards = document.querySelectorAll('.skill-3d-card');
-  skillCards.forEach(card => {
-      card.addEventListener('mousemove', (e) => {
-          const rect = card.getBoundingClientRect();
-          const x = e.clientX - rect.left; // x position within the card
-          const y = e.clientY - rect.top;  // y position within the card
-          
-          const centerX = rect.width / 2;
-          const centerY = rect.height / 2;
-          
-          const rotateX = ((y - centerY) / centerY) * -20; // Max 20deg tilt
-          const rotateY = ((x - centerX) / centerX) * 20;
-          
-          card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
-      });
-      
-      card.addEventListener('mouseleave', () => {
-          card.style.transform = 'rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
-          card.style.transition = 'transform 0.5s ease-out';
-      });
-      
-      card.addEventListener('mouseenter', () => {
-          card.style.transition = 'transform 0.1s ease-out';
-      });
-  });
-\n})();
+    })();
 
     // ─────────────────────────────────────────────────────────
     // 3. SECTION TRANSITION — Warp + section-entering class
@@ -802,34 +775,7 @@ if (dotWrap && ringWrap && window.matchMedia('(pointer: fine)').matches) {
                 setTimeout(() => initCard.classList.remove('section-entering'), 800);
             }, 2700); // After loader finishes
         }
-    
-  // ── 3D HOLOGRAPHIC PARALLAX HOVER EFFECT ──
-  const skillCards = document.querySelectorAll('.skill-3d-card');
-  skillCards.forEach(card => {
-      card.addEventListener('mousemove', (e) => {
-          const rect = card.getBoundingClientRect();
-          const x = e.clientX - rect.left; // x position within the card
-          const y = e.clientY - rect.top;  // y position within the card
-          
-          const centerX = rect.width / 2;
-          const centerY = rect.height / 2;
-          
-          const rotateX = ((y - centerY) / centerY) * -20; // Max 20deg tilt
-          const rotateY = ((x - centerX) / centerX) * 20;
-          
-          card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
-      });
-      
-      card.addEventListener('mouseleave', () => {
-          card.style.transform = 'rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
-          card.style.transition = 'transform 0.5s ease-out';
-      });
-      
-      card.addEventListener('mouseenter', () => {
-          card.style.transition = 'transform 0.1s ease-out';
-      });
-  });
-\n})();
+    })();
 
     // ─────────────────────────────────────────────────────────
     // 4. HERO PHOTO — 3D mouse tilt
@@ -851,34 +797,7 @@ if (dotWrap && ringWrap && window.matchMedia('(pointer: fine)').matches) {
             photo.style.transition = 'transform 0.5s cubic-bezier(0.25,1,0.5,1)';
             photo.style.transform  = '';
         });
-    
-  // ── 3D HOLOGRAPHIC PARALLAX HOVER EFFECT ──
-  const skillCards = document.querySelectorAll('.skill-3d-card');
-  skillCards.forEach(card => {
-      card.addEventListener('mousemove', (e) => {
-          const rect = card.getBoundingClientRect();
-          const x = e.clientX - rect.left; // x position within the card
-          const y = e.clientY - rect.top;  // y position within the card
-          
-          const centerX = rect.width / 2;
-          const centerY = rect.height / 2;
-          
-          const rotateX = ((y - centerY) / centerY) * -20; // Max 20deg tilt
-          const rotateY = ((x - centerX) / centerX) * 20;
-          
-          card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
-      });
-      
-      card.addEventListener('mouseleave', () => {
-          card.style.transform = 'rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
-          card.style.transition = 'transform 0.5s ease-out';
-      });
-      
-      card.addEventListener('mouseenter', () => {
-          card.style.transition = 'transform 0.1s ease-out';
-      });
-  });
-\n})();
+    })();
 
     // ─────────────────────────────────────────────────────────
     // 6. PROJECT CARDS — hologram scan line + 3D tilt
@@ -904,34 +823,7 @@ if (dotWrap && ringWrap && window.matchMedia('(pointer: fine)').matches) {
                 card.style.transform  = '';
             });
         });
-    
-  // ── 3D HOLOGRAPHIC PARALLAX HOVER EFFECT ──
-  const skillCards = document.querySelectorAll('.skill-3d-card');
-  skillCards.forEach(card => {
-      card.addEventListener('mousemove', (e) => {
-          const rect = card.getBoundingClientRect();
-          const x = e.clientX - rect.left; // x position within the card
-          const y = e.clientY - rect.top;  // y position within the card
-          
-          const centerX = rect.width / 2;
-          const centerY = rect.height / 2;
-          
-          const rotateX = ((y - centerY) / centerY) * -20; // Max 20deg tilt
-          const rotateY = ((x - centerX) / centerX) * 20;
-          
-          card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
-      });
-      
-      card.addEventListener('mouseleave', () => {
-          card.style.transform = 'rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
-          card.style.transition = 'transform 0.5s ease-out';
-      });
-      
-      card.addEventListener('mouseenter', () => {
-          card.style.transition = 'transform 0.1s ease-out';
-      });
-  });
-\n})();
+    })();
 
     // ─────────────────────────────────────────────────────────
     // 7. ACHIEVEMENT CARD — fly-in + gold burst + gold glow
@@ -973,34 +865,7 @@ if (dotWrap && ringWrap && window.matchMedia('(pointer: fine)').matches) {
             }
         });
         obs.observe(achievementSection, { attributes: true, attributeFilter: ['class'] });
-    
-  // ── 3D HOLOGRAPHIC PARALLAX HOVER EFFECT ──
-  const skillCards = document.querySelectorAll('.skill-3d-card');
-  skillCards.forEach(card => {
-      card.addEventListener('mousemove', (e) => {
-          const rect = card.getBoundingClientRect();
-          const x = e.clientX - rect.left; // x position within the card
-          const y = e.clientY - rect.top;  // y position within the card
-          
-          const centerX = rect.width / 2;
-          const centerY = rect.height / 2;
-          
-          const rotateX = ((y - centerY) / centerY) * -20; // Max 20deg tilt
-          const rotateY = ((x - centerX) / centerX) * 20;
-          
-          card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
-      });
-      
-      card.addEventListener('mouseleave', () => {
-          card.style.transform = 'rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
-          card.style.transition = 'transform 0.5s ease-out';
-      });
-      
-      card.addEventListener('mouseenter', () => {
-          card.style.transition = 'transform 0.1s ease-out';
-      });
-  });
-\n})();
+    })();
 
     // ─────────────────────────────────────────────────────────
     // 8. CONTACT — inject radar icon
@@ -1012,34 +877,7 @@ if (dotWrap && ringWrap && window.matchMedia('(pointer: fine)').matches) {
             r.className = 'radar-icon'; r.setAttribute('aria-hidden', 'true');
             h.appendChild(r);
         }
-    
-  // ── 3D HOLOGRAPHIC PARALLAX HOVER EFFECT ──
-  const skillCards = document.querySelectorAll('.skill-3d-card');
-  skillCards.forEach(card => {
-      card.addEventListener('mousemove', (e) => {
-          const rect = card.getBoundingClientRect();
-          const x = e.clientX - rect.left; // x position within the card
-          const y = e.clientY - rect.top;  // y position within the card
-          
-          const centerX = rect.width / 2;
-          const centerY = rect.height / 2;
-          
-          const rotateX = ((y - centerY) / centerY) * -20; // Max 20deg tilt
-          const rotateY = ((x - centerX) / centerX) * 20;
-          
-          card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
-      });
-      
-      card.addEventListener('mouseleave', () => {
-          card.style.transform = 'rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
-          card.style.transition = 'transform 0.5s ease-out';
-      });
-      
-      card.addEventListener('mouseenter', () => {
-          card.style.transition = 'transform 0.1s ease-out';
-      });
-  });
-\n})();
+    })();
 
     // ─────────────────────────────────────────────────────────
     // 5. SKILL BARS — MutationObserver re-trigger
@@ -1058,63 +896,9 @@ if (dotWrap && ringWrap && window.matchMedia('(pointer: fine)').matches) {
             }
         });
         obs.observe(skillSection, { attributes: true, attributeFilter: ['class'] });
-    
-  // ── 3D HOLOGRAPHIC PARALLAX HOVER EFFECT ──
-  const skillCards = document.querySelectorAll('.skill-3d-card');
-  skillCards.forEach(card => {
-      card.addEventListener('mousemove', (e) => {
-          const rect = card.getBoundingClientRect();
-          const x = e.clientX - rect.left; // x position within the card
-          const y = e.clientY - rect.top;  // y position within the card
-          
-          const centerX = rect.width / 2;
-          const centerY = rect.height / 2;
-          
-          const rotateX = ((y - centerY) / centerY) * -20; // Max 20deg tilt
-          const rotateY = ((x - centerX) / centerX) * 20;
-          
-          card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
-      });
-      
-      card.addEventListener('mouseleave', () => {
-          card.style.transform = 'rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
-          card.style.transition = 'transform 0.5s ease-out';
-      });
-      
-      card.addEventListener('mouseenter', () => {
-          card.style.transition = 'transform 0.1s ease-out';
-      });
-  });
-\n})();
+    })();
 
-
-  // ── 3D HOLOGRAPHIC PARALLAX HOVER EFFECT ──
-  const skillCards = document.querySelectorAll('.skill-3d-card');
-  skillCards.forEach(card => {
-      card.addEventListener('mousemove', (e) => {
-          const rect = card.getBoundingClientRect();
-          const x = e.clientX - rect.left; // x position within the card
-          const y = e.clientY - rect.top;  // y position within the card
-          
-          const centerX = rect.width / 2;
-          const centerY = rect.height / 2;
-          
-          const rotateX = ((y - centerY) / centerY) * -20; // Max 20deg tilt
-          const rotateY = ((x - centerX) / centerX) * 20;
-          
-          card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
-      });
-      
-      card.addEventListener('mouseleave', () => {
-          card.style.transform = 'rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
-          card.style.transition = 'transform 0.5s ease-out';
-      });
-      
-      card.addEventListener('mouseenter', () => {
-          card.style.transition = 'transform 0.1s ease-out';
-      });
-  });
-\n})(); // end SPACE ANIMATIONS IIFE
+})(); // end SPACE ANIMATIONS IIFE
 
 // === SPACE FIXES v2 ===
 (function () {
@@ -1248,34 +1032,7 @@ if (dotWrap && ringWrap && window.matchMedia('(pointer: fine)').matches) {
             window._spaceWarpActive = false;
             if (_origWarpEnd) _origWarpEnd();
         };
-    
-  // ── 3D HOLOGRAPHIC PARALLAX HOVER EFFECT ──
-  const skillCards = document.querySelectorAll('.skill-3d-card');
-  skillCards.forEach(card => {
-      card.addEventListener('mousemove', (e) => {
-          const rect = card.getBoundingClientRect();
-          const x = e.clientX - rect.left; // x position within the card
-          const y = e.clientY - rect.top;  // y position within the card
-          
-          const centerX = rect.width / 2;
-          const centerY = rect.height / 2;
-          
-          const rotateX = ((y - centerY) / centerY) * -20; // Max 20deg tilt
-          const rotateY = ((x - centerX) / centerX) * 20;
-          
-          card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
-      });
-      
-      card.addEventListener('mouseleave', () => {
-          card.style.transform = 'rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
-          card.style.transition = 'transform 0.5s ease-out';
-      });
-      
-      card.addEventListener('mouseenter', () => {
-          card.style.transition = 'transform 0.1s ease-out';
-      });
-  });
-\n})();
+    })();
 
     // ─────────────────────────────────────────────────────────────────────────
     // FIX 3 — ACHIEVEMENT CARDS: 3D hover tilt
@@ -1322,34 +1079,7 @@ if (dotWrap && ringWrap && window.matchMedia('(pointer: fine)').matches) {
                 card.style.boxShadow  = '';
             });
         });
-    
-  // ── 3D HOLOGRAPHIC PARALLAX HOVER EFFECT ──
-  const skillCards = document.querySelectorAll('.skill-3d-card');
-  skillCards.forEach(card => {
-      card.addEventListener('mousemove', (e) => {
-          const rect = card.getBoundingClientRect();
-          const x = e.clientX - rect.left; // x position within the card
-          const y = e.clientY - rect.top;  // y position within the card
-          
-          const centerX = rect.width / 2;
-          const centerY = rect.height / 2;
-          
-          const rotateX = ((y - centerY) / centerY) * -20; // Max 20deg tilt
-          const rotateY = ((x - centerX) / centerX) * 20;
-          
-          card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
-      });
-      
-      card.addEventListener('mouseleave', () => {
-          card.style.transform = 'rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
-          card.style.transition = 'transform 0.5s ease-out';
-      });
-      
-      card.addEventListener('mouseenter', () => {
-          card.style.transition = 'transform 0.1s ease-out';
-      });
-  });
-\n})();
+    })();
 
     // ─────────────────────────────────────────────────────────────────────────
     // FIX 4 — CASE STUDY CARDS: 3D hover tilt + scan line
@@ -1396,63 +1126,9 @@ if (dotWrap && ringWrap && window.matchMedia('(pointer: fine)').matches) {
                 card.style.boxShadow  = '';
             });
         });
-    
-  // ── 3D HOLOGRAPHIC PARALLAX HOVER EFFECT ──
-  const skillCards = document.querySelectorAll('.skill-3d-card');
-  skillCards.forEach(card => {
-      card.addEventListener('mousemove', (e) => {
-          const rect = card.getBoundingClientRect();
-          const x = e.clientX - rect.left; // x position within the card
-          const y = e.clientY - rect.top;  // y position within the card
-          
-          const centerX = rect.width / 2;
-          const centerY = rect.height / 2;
-          
-          const rotateX = ((y - centerY) / centerY) * -20; // Max 20deg tilt
-          const rotateY = ((x - centerX) / centerX) * 20;
-          
-          card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
-      });
-      
-      card.addEventListener('mouseleave', () => {
-          card.style.transform = 'rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
-          card.style.transition = 'transform 0.5s ease-out';
-      });
-      
-      card.addEventListener('mouseenter', () => {
-          card.style.transition = 'transform 0.1s ease-out';
-      });
-  });
-\n})();
+    })();
 
-
-  // ── 3D HOLOGRAPHIC PARALLAX HOVER EFFECT ──
-  const skillCards = document.querySelectorAll('.skill-3d-card');
-  skillCards.forEach(card => {
-      card.addEventListener('mousemove', (e) => {
-          const rect = card.getBoundingClientRect();
-          const x = e.clientX - rect.left; // x position within the card
-          const y = e.clientY - rect.top;  // y position within the card
-          
-          const centerX = rect.width / 2;
-          const centerY = rect.height / 2;
-          
-          const rotateX = ((y - centerY) / centerY) * -20; // Max 20deg tilt
-          const rotateY = ((x - centerX) / centerX) * 20;
-          
-          card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
-      });
-      
-      card.addEventListener('mouseleave', () => {
-          card.style.transform = 'rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
-          card.style.transition = 'transform 0.5s ease-out';
-      });
-      
-      card.addEventListener('mouseenter', () => {
-          card.style.transition = 'transform 0.1s ease-out';
-      });
-  });
-\n})(); // end SPACE FIXES v2 IIFE
+})(); // end SPACE FIXES v2 IIFE
 
 // === SPACE ANIMATIONS ===
 (function () {
@@ -1471,34 +1147,7 @@ if (dotWrap && ringWrap && window.matchMedia('(pointer: fine)').matches) {
         c.style.pointerEvents = 'none';
         document.body.prepend(c);
         return c;
-    
-  // ── 3D HOLOGRAPHIC PARALLAX HOVER EFFECT ──
-  const skillCards = document.querySelectorAll('.skill-3d-card');
-  skillCards.forEach(card => {
-      card.addEventListener('mousemove', (e) => {
-          const rect = card.getBoundingClientRect();
-          const x = e.clientX - rect.left; // x position within the card
-          const y = e.clientY - rect.top;  // y position within the card
-          
-          const centerX = rect.width / 2;
-          const centerY = rect.height / 2;
-          
-          const rotateX = ((y - centerY) / centerY) * -20; // Max 20deg tilt
-          const rotateY = ((x - centerX) / centerX) * 20;
-          
-          card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
-      });
-      
-      card.addEventListener('mouseleave', () => {
-          card.style.transform = 'rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
-          card.style.transition = 'transform 0.5s ease-out';
-      });
-      
-      card.addEventListener('mouseenter', () => {
-          card.style.transition = 'transform 0.1s ease-out';
-      });
-  });
-\n})();
+    })();
 
     const ctx = spaceCanvas.getContext('2d');
     let w = 0;
@@ -1806,34 +1455,7 @@ if (dotWrap && ringWrap && window.matchMedia('(pointer: fine)').matches) {
         radar.setAttribute('aria-hidden', 'true');
         connectHeading.appendChild(radar);
     }
-
-  // ── 3D HOLOGRAPHIC PARALLAX HOVER EFFECT ──
-  const skillCards = document.querySelectorAll('.skill-3d-card');
-  skillCards.forEach(card => {
-      card.addEventListener('mousemove', (e) => {
-          const rect = card.getBoundingClientRect();
-          const x = e.clientX - rect.left; // x position within the card
-          const y = e.clientY - rect.top;  // y position within the card
-          
-          const centerX = rect.width / 2;
-          const centerY = rect.height / 2;
-          
-          const rotateX = ((y - centerY) / centerY) * -20; // Max 20deg tilt
-          const rotateY = ((x - centerX) / centerX) * 20;
-          
-          card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
-      });
-      
-      card.addEventListener('mouseleave', () => {
-          card.style.transform = 'rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
-          card.style.transition = 'transform 0.5s ease-out';
-      });
-      
-      card.addEventListener('mouseenter', () => {
-          card.style.transition = 'transform 0.1s ease-out';
-      });
-  });
-\n})();
+})();
 
 // === ROCKET SYSTEM v3 ===
 (function() {
@@ -2055,13 +1677,13 @@ if (dotWrap && ringWrap && window.matchMedia('(pointer: fine)').matches) {
   skillCards.forEach(card => {
       card.addEventListener('mousemove', (e) => {
           const rect = card.getBoundingClientRect();
-          const x = e.clientX - rect.left; // x position within the card
-          const y = e.clientY - rect.top;  // y position within the card
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
           
           const centerX = rect.width / 2;
           const centerY = rect.height / 2;
           
-          const rotateX = ((y - centerY) / centerY) * -20; // Max 20deg tilt
+          const rotateX = ((y - centerY) / centerY) * -20;
           const rotateY = ((x - centerX) / centerX) * 20;
           
           card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
@@ -2076,4 +1698,5 @@ if (dotWrap && ringWrap && window.matchMedia('(pointer: fine)').matches) {
           card.style.transition = 'transform 0.1s ease-out';
       });
   });
+
 })();
