@@ -177,290 +177,261 @@
 ════════════════════════════ -->
 <!-- ════════ CARD 3 — SKILLS ════════ -->
 <!-- ════════ CARD 3 — SKILLS ════════ -->
+<!-- ════════ CARD 3 — SKILLS ════════ -->
 <section id="card-3" class="card state-below">
 <style>
-/* ══ FLOATING CARD SKILLS ══ */
-.fcs-wrap {
-    width:100%; max-width:1100px;
-    padding:10px 20px 20px;
-    display:flex; flex-direction:column; align-items:center;
-}
-.fcs-title {
-    font-family:'Syne',sans-serif;
-    font-size:clamp(22px,4vw,40px);
-    font-weight:800; color:var(--cyan);
-    text-transform:uppercase; letter-spacing:6px;
-    text-align:center;
-    text-shadow:0 0 28px rgba(0,229,255,0.55);
-    margin-bottom:6px;
-}
-.fcs-sub {
-    font-family:'Space Grotesk',monospace;
-    font-size:10px; color:rgba(255,255,255,0.3);
-    letter-spacing:4px; text-transform:uppercase;
-    margin-bottom:10px;
-}
-.fcs-bar {
-    width:56px; height:2px;
-    background:linear-gradient(90deg,var(--cyan),var(--purple));
-    box-shadow:0 0 14px var(--cyan);
-    border-radius:99px; margin:0 auto 28px;
+.skill-universe {
+  perspective: 2000px;
+  overflow: visible;
+  padding: 80px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.fcs-grid {
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:20px; width:100%;
-    perspective:1600px;
+.iso-grid {
+  transform: rotateX(55deg) rotateZ(-45deg);
+  transform-style: preserve-3d;
+  transition: transform 0.5s ease;
+  display: grid;
+  grid-template-columns: repeat(3, 192px);
+  gap: 64px;
+  max-width: 900px;
 }
 
-/* ── CARD SCENE ── */
-.fk { position:relative; height:200px; }
-
-/* ── THE CARD ── */
-.fcard {
-    position:absolute; inset:0;
-    border-radius:20px;
-    background:rgba(255,255,255,0.03);
-    backdrop-filter:blur(14px);
-    -webkit-backdrop-filter:blur(14px);
-    border:1px solid rgba(255,255,255,0.08);
-    display:flex; flex-direction:column;
-    align-items:center; justify-content:center;
-    gap:14px; overflow:hidden;
-    transform-style:preserve-3d;
-    transform:perspective(900px) rotateX(0deg) rotateY(0deg) translateZ(0px);
-    transition:transform 0.45s cubic-bezier(0.23,1,0.32,1),
-               border-color 0.35s ease,
-               box-shadow 0.45s ease,
-               background 0.35s ease;
-    box-shadow:0 8px 32px rgba(0,0,0,0.45),
-               0 0 0 0 transparent;
-    cursor:pointer;
+@media (max-width: 768px) {
+  .iso-grid {
+    grid-template-columns: repeat(2, 160px);
+    gap: 40px;
+    transform: rotateX(45deg) rotateZ(-45deg);
+  }
+  .hybrid-cube { width: 160px; height: 160px; }
 }
 
-/* shine layer */
-.fcard::before {
-    content:'';
-    position:absolute; inset:0;
-    border-radius:20px;
-    background:linear-gradient(135deg,rgba(255,255,255,0.07) 0%,transparent 55%);
-    pointer-events:none; z-index:0;
+.hybrid-cube {
+  width: 192px;
+  height: 192px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  cursor: crosshair;
 }
 
-/* scanline on hover */
-.fcard::after {
-    content:'';
-    position:absolute;
-    top:-100%; left:0; right:0; height:50%;
-    background:linear-gradient(to bottom,
-        transparent 0%,
-        rgba(0,229,255,0.05) 50%,
-        transparent 100%);
-    transition:top 0.55s ease;
-    pointer-events:none; z-index:0;
-}
-.fcard:hover::after { top:180%; }
-
-/* ── ICON ── */
-.fik {
-    position:relative; z-index:2;
-    width:72px; height:72px;
-    border-radius:50%;
-    background:rgba(var(--rgb,0,229,255),0.06);
-    border:1px solid rgba(var(--rgb,0,229,255),0.2);
-    box-shadow:0 0 20px rgba(var(--rgb,0,229,255),0.1);
-    display:flex; align-items:center; justify-content:center;
-    font-size:34px;
-    transform:translateZ(0px);
-    transition:transform 0.45s cubic-bezier(0.23,1,0.32,1),
-               box-shadow 0.35s ease,
-               background 0.35s ease;
-    filter:drop-shadow(0 0 10px rgba(var(--rgb,0,229,255),0.5));
+.cube-face {
+  position: absolute;
+  inset: 0;
 }
 
-/* ── SKILL NAME ── */
-.fnm {
-    position:relative; z-index:2;
-    font-family:'Space Grotesk',sans-serif;
-    font-size:13px; font-weight:800;
-    color:#fff; letter-spacing:2px;
-    text-transform:uppercase; text-align:center;
-    transform:translateZ(0px) translateY(0px);
-    transition:transform 0.45s cubic-bezier(0.23,1,0.32,1),
-               text-shadow 0.35s ease;
+.cube-top {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 229, 255, 0.3);
+  transform: translateZ(20px);
+  transition: all 0.4s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
 }
 
-/* ── LABEL ── */
-.flb {
-    position:relative; z-index:2;
-    font-family:'Space Grotesk',monospace;
-    font-size:9px; letter-spacing:2px;
-    text-transform:uppercase;
-    color:rgba(var(--rgb,0,229,255),0.45);
-    transform:translateZ(0px);
-    transition:transform 0.45s cubic-bezier(0.23,1,0.32,1),
-               opacity 0.35s ease;
-    opacity:0.7;
+.cube-top.purple-card {
+  border-color: rgba(139, 92, 246, 0.3);
 }
 
-/* ══ HOVER — card floats up into the air ══ */
-.fcard:hover {
-    transform:perspective(900px)
-              rotateX(var(--hx,-14deg))
-              rotateY(var(--hy,0deg))
-              translateZ(50px)
-              translateY(-22px)
-              scale(1.06);
-    border-color:rgba(var(--rgb,0,229,255),0.55);
-    background:rgba(255,255,255,0.07);
-    box-shadow:
-        0 50px 80px rgba(0,0,0,0.6),
-        0 0 40px rgba(var(--rgb,0,229,255),0.18),
-        0 0 0 1px rgba(var(--rgb,0,229,255),0.2),
-        inset 0 0 30px rgba(var(--rgb,0,229,255),0.04);
-}
-.fcard:hover .fik {
-    transform:translateZ(40px) translateY(-4px) scale(1.18);
-    box-shadow:0 0 36px rgba(var(--rgb,0,229,255),0.45);
-    background:rgba(var(--rgb,0,229,255),0.12);
-    filter:drop-shadow(0 0 20px rgba(var(--rgb,0,229,255),0.8));
-}
-.fcard:hover .fnm {
-    transform:translateZ(30px) translateY(-2px);
-    text-shadow:0 0 20px rgba(var(--rgb,0,229,255),0.6);
-}
-.fcard:hover .flb {
-    transform:translateZ(20px);
-    opacity:1;
+.cube-left {
+  background: rgba(0, 229, 255, 0.1);
+  transform: rotateY(-90deg) translateZ(100px);
+  width: 20px;
+  border-radius: 4px;
 }
 
-/* ── MOBILE ── */
-@media(max-width:900px){
-    .fcs-grid{grid-template-columns:repeat(2,1fr);gap:14px;}
-    .fk{height:170px;}
-    .fcard{transform:none !important;}
-    .fcard:hover{
-        transform:translateY(-8px) scale(1.04) !important;
-        box-shadow:0 20px 40px rgba(0,0,0,0.5),0 0 20px rgba(var(--rgb,0,229,255),0.2) !important;
-    }
-    .fcard:hover .fik{transform:scale(1.12) !important;}
-    .fcard:hover .fnm{transform:none !important;}
-    .fcard:hover .flb{transform:none !important;}
-    .fik{width:58px;height:58px;font-size:28px;}
-    .fnm{font-size:11px;}
+.cube-left.purple-side {
+  background: rgba(139, 92, 246, 0.1);
 }
-@media(max-width:480px){
-    .fcs-grid{gap:10px;}
-    .fk{height:150px;}
-    .fik{width:50px;height:50px;font-size:24px;}
+
+.cube-bottom {
+  background: rgba(0, 229, 255, 0.05);
+  transform: rotateX(-90deg) translateZ(100px);
+  height: 20px;
+  border-radius: 4px;
+}
+
+.cube-bottom.purple-bottom {
+  background: rgba(139, 92, 246, 0.05);
+}
+
+.pop-element {
+  transform: translateZ(30px);
+  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.hybrid-cube:hover {
+  transform: translateZ(40px) scale(1.05);
+}
+
+.hybrid-cube:hover .cube-top {
+  background: rgba(0, 229, 255, 0.1);
+  box-shadow: 0 0 40px rgba(0, 229, 255, 0.4), inset 0 0 20px rgba(0, 229, 255, 0.2);
+}
+
+.hybrid-cube:hover .cube-top.purple-card {
+  background: rgba(139, 92, 246, 0.1);
+  box-shadow: 0 0 40px rgba(139, 92, 246, 0.4), inset 0 0 20px rgba(139, 92, 246, 0.2);
+}
+
+.hybrid-cube:hover .pop-element {
+  transform: translateZ(100px);
+  text-shadow: 0 20px 20px rgba(0, 0, 0, 0.8);
+}
+
+.hybrid-cube:hover .pop-icon {
+  filter: drop-shadow(0 20px 15px rgba(0, 229, 255, 0.6));
+}
+
+.hybrid-cube:hover .pop-icon.purple-icon {
+  filter: drop-shadow(0 20px 15px rgba(139, 92, 246, 0.6));
+}
+
+.skill-section-title {
+  text-align: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 2rem;
+  color: #00E5FF;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  margin-bottom: 8px;
+  text-shadow: 0 0 20px rgba(0, 229, 255, 0.5);
+}
+
+.skill-section-sub {
+  text-align: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  color: rgba(0, 229, 255, 0.4);
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  margin-bottom: 0;
 }
 </style>
 
-    <div class="card-inner">
-      <div class="fcs-wrap">
-        <p class="fcs-title">Neural Toolkit</p>
-        <p class="fcs-sub">Skills &amp; Expertise</p>
-        <div class="fcs-bar"></div>
+<div class="card-inner w-full">
+<div class="max-w-[1280px] mx-auto px-8 pb-8 pt-16" style="width: 100%;">
+  <h2 class="skill-section-title">Core_Neural_Matrix</h2>
+  <p class="skill-section-sub">// Isometric Skill Architecture — Hover to Pop</p>
+</div>
 
-        <div class="fcs-grid">
+<div class="skill-universe" id="skill-universe">
+  <div class="iso-grid" id="iso-grid">
 
-          <div class="fk"><div class="fcard" style="--rgb:0,229,255;">
-            <div class="fik">🐍</div>
-            <div class="fnm">Python</div>
-            <div class="flb">Core_System_v1</div>
-          </div></div>
-
-          <div class="fk"><div class="fcard" style="--rgb:139,92,246;">
-            <div class="fik">🌐</div>
-            <div class="fnm">HTML/CSS/JS</div>
-            <div class="flb">Web_Stack_v3</div>
-          </div></div>
-
-          <div class="fk"><div class="fcard" style="--rgb:0,229,255;">
-            <div class="fik">🗄️</div>
-            <div class="fnm">SQL / DB</div>
-            <div class="flb">Data_Layer_v2</div>
-          </div></div>
-
-          <div class="fk"><div class="fcard" style="--rgb:139,92,246;">
-            <div class="fik">⚡</div>
-            <div class="fnm">FastAPI</div>
-            <div class="flb">API_Engine_v2</div>
-          </div></div>
-
-          <div class="fk"><div class="fcard" style="--rgb:139,92,246;">
-            <div class="fik">🧠</div>
-            <div class="fnm">Deep Learning</div>
-            <div class="flb">Neural_Net_v4</div>
-          </div></div>
-
-          <div class="fk"><div class="fcard" style="--rgb:0,229,255;">
-            <div class="fik">🤖</div>
-            <div class="fnm">NLP</div>
-            <div class="flb">Lang_Model_v3</div>
-          </div></div>
-
-          <div class="fk"><div class="fcard" style="--rgb:139,92,246;">
-            <div class="fik">📊</div>
-            <div class="fnm">Data Science</div>
-            <div class="flb">Analytics_v2</div>
-          </div></div>
-
-          <div class="fk"><div class="fcard" style="--rgb:0,229,255;">
-            <div class="fik">👁️</div>
-            <div class="fnm">Computer Vision</div>
-            <div class="flb">Vision_AI_v2</div>
-          </div></div>
-
-          <div class="fk"><div class="fcard" style="--rgb:0,229,255;">
-            <div class="fik">☁️</div>
-            <div class="fnm">AWS Cloud</div>
-            <div class="flb">Cloud_Infra_v1</div>
-          </div></div>
-
-          <div class="fk"><div class="fcard" style="--rgb:139,92,246;">
-            <div class="fik">✍️</div>
-            <div class="fnm">Prompt Eng.</div>
-            <div class="flb">LLM_Craft_v5</div>
-          </div></div>
-
-          <div class="fk"><div class="fcard" style="--rgb:0,229,255;">
-            <div class="fik">🎬</div>
-            <div class="fnm">AI Automation</div>
-            <div class="flb">Pipeline_v3</div>
-          </div></div>
-
-          <div class="fk"><div class="fcard" style="--rgb:139,92,246;">
-            <div class="fik">🧬</div>
-            <div class="fnm">TensorFlow</div>
-            <div class="flb">ML_Frame_v2</div>
-          </div></div>
-
+    <!-- Card 1: Python — CYAN -->
+    <div class="hybrid-cube group">
+      <div class="cube-face cube-left"></div>
+      <div class="cube-face cube-bottom"></div>
+      <div class="cube-face cube-top">
+        <div class="pop-element pop-icon w-16 h-16 rounded-full bg-[#00E5FF]/10 border border-[#00E5FF]/40 flex items-center justify-center mb-3">
+          <span class="material-symbols-outlined text-4xl text-[#00E5FF]">code</span>
         </div>
+        <h3 class="pop-element font-mono text-sm text-white font-bold tracking-widest uppercase">Python</h3>
+        <div class="pop-element w-8 h-1 bg-[#00E5FF] mt-2" style="box-shadow: 0 0 10px #00E5FF"></div>
       </div>
     </div>
 
+    <!-- Card 2: FastAPI — PURPLE -->
+    <div class="hybrid-cube group">
+      <div class="cube-face cube-left purple-side"></div>
+      <div class="cube-face cube-bottom purple-bottom"></div>
+      <div class="cube-face cube-top purple-card">
+        <div class="pop-element pop-icon purple-icon w-16 h-16 rounded-full bg-[#8B5CF6]/10 border border-[#8B5CF6]/40 flex items-center justify-center mb-3">
+          <span class="material-symbols-outlined text-4xl text-[#8B5CF6]">bolt</span>
+        </div>
+        <h3 class="pop-element font-mono text-sm text-white font-bold tracking-widest uppercase">FastAPI</h3>
+        <div class="pop-element w-8 h-1 bg-[#8B5CF6] mt-2" style="box-shadow: 0 0 10px #8B5CF6"></div>
+      </div>
+    </div>
+
+    <!-- Card 3: AI / LLM — CYAN -->
+    <div class="hybrid-cube group">
+      <div class="cube-face cube-left"></div>
+      <div class="cube-face cube-bottom"></div>
+      <div class="cube-face cube-top">
+        <div class="pop-element pop-icon w-16 h-16 rounded-full bg-[#00E5FF]/10 border border-[#00E5FF]/40 flex items-center justify-center mb-3">
+          <span class="material-symbols-outlined text-4xl text-[#00E5FF]">psychology</span>
+        </div>
+        <h3 class="pop-element font-mono text-sm text-white font-bold tracking-widest uppercase">AI / LLM</h3>
+        <div class="pop-element w-8 h-1 bg-[#00E5FF] mt-2" style="box-shadow: 0 0 10px #00E5FF"></div>
+      </div>
+    </div>
+
+    <!-- Card 4: Deep Learning — PURPLE -->
+    <div class="hybrid-cube group">
+      <div class="cube-face cube-left purple-side"></div>
+      <div class="cube-face cube-bottom purple-bottom"></div>
+      <div class="cube-face cube-top purple-card">
+        <div class="pop-element pop-icon purple-icon w-16 h-16 rounded-full bg-[#8B5CF6]/10 border border-[#8B5CF6]/40 flex items-center justify-center mb-3">
+          <span class="material-symbols-outlined text-4xl text-[#8B5CF6]">neurology</span>
+        </div>
+        <h3 class="pop-element font-mono text-sm text-white font-bold tracking-widest uppercase">Deep Learning</h3>
+        <div class="pop-element w-8 h-1 bg-[#8B5CF6] mt-2" style="box-shadow: 0 0 10px #8B5CF6"></div>
+      </div>
+    </div>
+
+    <!-- Card 5: SQL — CYAN -->
+    <div class="hybrid-cube group">
+      <div class="cube-face cube-left"></div>
+      <div class="cube-face cube-bottom"></div>
+      <div class="cube-face cube-top">
+        <div class="pop-element pop-icon w-16 h-16 rounded-full bg-[#00E5FF]/10 border border-[#00E5FF]/40 flex items-center justify-center mb-3">
+          <span class="material-symbols-outlined text-4xl text-[#00E5FF]">database</span>
+        </div>
+        <h3 class="pop-element font-mono text-sm text-white font-bold tracking-widest uppercase">SQL / NoSQL</h3>
+        <div class="pop-element w-8 h-1 bg-[#00E5FF] mt-2" style="box-shadow: 0 0 10px #00E5FF"></div>
+      </div>
+    </div>
+
+    <!-- Card 6: AWS — PURPLE -->
+    <div class="hybrid-cube group">
+      <div class="cube-face cube-left purple-side"></div>
+      <div class="cube-face cube-bottom purple-bottom"></div>
+      <div class="cube-face cube-top purple-card">
+        <div class="pop-element pop-icon purple-icon w-16 h-16 rounded-full bg-[#8B5CF6]/10 border border-[#8B5CF6]/40 flex items-center justify-center mb-3">
+          <span class="material-symbols-outlined text-4xl text-[#8B5CF6]">cloud</span>
+        </div>
+        <h3 class="pop-element font-mono text-sm text-white font-bold tracking-widest uppercase">AWS Cloud</h3>
+        <div class="pop-element w-8 h-1 bg-[#8B5CF6] mt-2" style="box-shadow: 0 0 10px #8B5CF6"></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
 <script>
-/* ── Real-time mouse tilt per card ── */
-(function(){
-    var mob = window.innerWidth <= 900;
-    window.addEventListener('resize', function(){ mob = window.innerWidth <= 900; });
-    document.querySelectorAll('.fcard').forEach(function(card){
-        card.addEventListener('mousemove', function(e){
-            if(mob) return;
-            var r = card.getBoundingClientRect();
-            var mx = (e.clientX - r.left)/r.width  - 0.5;   /* -0.5 to 0.5 */
-            var my = (e.clientY - r.top) /r.height - 0.5;
-            var ry =  mx * 20;     /* left-right tilt ±20° */
-            var rx = -my * 14 - 14; /* top-bottom tilt, offset -14 so card leans back */
-            card.style.transform =
-                'perspective(900px) rotateX('+rx+'deg) rotateY('+ry+'deg) translateZ(50px) translateY(-22px) scale(1.06)';
-        });
-        card.addEventListener('mouseleave', function(){
-            card.style.transform = '';
-        });
-    });
+(function() {
+  const universe = document.getElementById('skill-universe');
+  const grid = document.getElementById('iso-grid');
+  if (!universe || !grid) return;
+
+  const BASE_X = 55;
+  const BASE_Z = -45;
+  const MAX_TILT = 8;
+
+  universe.addEventListener('mousemove', function(e) {
+    const rect = universe.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    const mouseX = (e.clientX - centerX) / (rect.width / 2);
+    const mouseY = (e.clientY - centerY) / (rect.height / 2);
+    const newRotateX = BASE_X - mouseY * MAX_TILT;
+    const newRotateZ = BASE_Z + mouseX * MAX_TILT;
+    grid.style.transform = `rotateX(${newRotateX}deg) rotateZ(${newRotateZ}deg)`;
+  });
+
+  universe.addEventListener('mouseleave', function() {
+    grid.style.transition = 'transform 0.8s ease';
+    grid.style.transform = `rotateX(${BASE_X}deg) rotateZ(${BASE_Z}deg)`;
+    setTimeout(() => { grid.style.transition = 'transform 0.5s ease'; }, 800);
+  });
 })();
 </script>
 </section>
