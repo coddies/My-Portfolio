@@ -69,35 +69,71 @@
 ════════════════════════════ -->
 <section id="card-2" class="card state-below">
     <div class="card-inner">
-        <div class="about-grid">
-            <div>
-                <img src="assets/images/my-img.png" alt="Muhammad Burhan" class="about-photo" />
-            </div>
-            <div>
-                <span class="tagline">Who I Am</span>
-                <h2 class="section-title">About Me</h2>
-                <div class="accent-line"></div>
-                <div class="about-bio">
-                    <p style="margin-bottom: 12px;">
-                        I am a passionate AI & Data Science student at Saylani Mass IT Institute, dedicated to mastering the art of machine intelligence. My focus lies in **Generative AI and NLP**, where I explore how models can understand and augment human creativity.
-                    </p>
-                    <div id="aboutMoreContent" style="display: none;">
-                        <p style="margin-bottom: 12px;">
-                            My journey isn't just about writing lines of code; it's about solving real-world problems. Beyond the terminal, I’m an AI Content Creator and YouTuber, where I simplify complex tech concepts to empower the community.
-                        </p>
-                        <p>
-                            Whether it's Prompt Engineering, deep-diving into Data Science, or exploring the latest in 'Vibe Coding', I thrive on the edge of innovation. My ultimate goal is to build **intelligent, human-centric systems** that make a tangible difference.
-                        </p>
+        <div style="display: flex; flex-wrap: wrap; gap: 40px; width: 100%; max-width: 1100px; align-items: center; text-align: left; padding: 0 20px;">
+            <!-- LEFT COLUMN -->
+            <div style="flex: 1 1 400px; min-width: 0;">
+                <h2 style="font-family: 'Space Grotesk', monospace; font-size: 24px; color: #fff; margin-bottom: 24px; border-left: 4px solid var(--cyan); padding-left: 16px; text-transform: uppercase; letter-spacing: 2px;">
+                    System_Kernel_Info
+                </h2>
+                
+                <p style="font-family: 'Space Grotesk', sans-serif; font-size: 16px; color: rgba(255,255,255,0.6); margin-bottom: 24px; line-height: 1.7;">
+                    I am a passionate AI & Data Science student at Saylani Mass IT Institute, dedicated to mastering the art of machine intelligence. My focus lies in <strong>Generative AI and NLP</strong>, where I explore how models can understand and augment human creativity.
+                </p>
+                <p style="font-family: 'Space Grotesk', sans-serif; font-size: 16px; color: rgba(255,255,255,0.6); margin-bottom: 32px; line-height: 1.7;">
+                    My journey isn't just about writing lines of code; it's about solving real-world problems. Whether it's Prompt Engineering, deep-diving into Data Science, or exploring the latest in 'Vibe Coding', I thrive on the edge of innovation.
+                </p>
+
+                <!-- SKILL GRID -->
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 20px;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <span style="color: var(--cyan); font-size: 20px;">🧠</span>
+                        <span style="font-family: monospace; font-size: 14px; color: rgba(255,255,255,0.8);">Cognitive Computing</span>
                     </div>
-                    <button id="readMoreBtn" style="background:none; border:none; color:var(--cyan); font-weight:700; cursor:pointer; padding:0; margin-top:8px; font-size:14px; text-decoration:underline; font-family:inherit;">Read More</button>
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <span style="color: var(--cyan); font-size: 20px;">⚙️</span>
+                        <span style="font-family: monospace; font-size: 14px; color: rgba(255,255,255,0.8);">Clean Architecture</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <span style="color: var(--cyan); font-size: 20px;">📊</span>
+                        <span style="font-family: monospace; font-size: 14px; color: rgba(255,255,255,0.8);">Data Science</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <span style="color: var(--cyan); font-size: 20px;">🤖</span>
+                        <span style="font-family: monospace; font-size: 14px; color: rgba(255,255,255,0.8);">Generative AI</span>
+                    </div>
                 </div>
-                <div class="info-grid">
-                    <div class="info-box"><span class="info-label">Name</span><span class="info-val">Muhammad Burhan</span></div>
-                    <div class="info-box"><span class="info-label">Location</span><span class="info-val">Chiniot, PK</span></div>
-                    <div class="info-box"><span class="info-label">Institute</span><span class="info-val">Saylani Mass IT</span></div>
-                    <div class="info-box"><span class="info-label">Focus</span><span class="info-val">AI & Data Science</span></div>
-                    <div class="info-box"><span class="info-label">GitHub</span><span class="info-val">@coddies</span></div>
-                    <div class="info-box"><span class="info-label">Status</span><span class="info-val">Open to Work ✅</span></div>
+            </div>
+
+            <!-- RIGHT COLUMN (Terminal) -->
+            <div style="flex: 1 1 400px; min-width: 0;">
+                <div style="background: #0A0F16; border: 1px solid rgba(0, 229, 255, 0.2); border-radius: 12px; overflow: hidden; box-shadow: 0 0 30px rgba(0, 229, 255, 0.1);">
+                    <!-- Terminal Header -->
+                    <div style="background: rgba(255,255,255,0.05); padding: 12px 16px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                        <div style="display: flex; gap: 8px;">
+                            <div style="width: 12px; height: 12px; border-radius: 50%; background: #EF4444;"></div>
+                            <div style="width: 12px; height: 12px; border-radius: 50%; background: #FBBF24;"></div>
+                            <div style="width: 12px; height: 12px; border-radius: 50%; background: #10B981;"></div>
+                        </div>
+                        <span style="font-family: monospace; font-size: 11px; color: rgba(255,255,255,0.4); letter-spacing: 2px;">burhan_system_v2.0.4</span>
+                        <div style="width: 52px;"></div> <!-- Spacer for perfect centering -->
+                    </div>
+                    <!-- Terminal Body -->
+                    <div style="padding: 24px; font-family: monospace; font-size: 14px; line-height: 2; color: #fff; overflow-x: auto;">
+                        <span style="color: #60A5FA;">const</span> developer = {<br>
+                        &nbsp;&nbsp;<span style="color: var(--cyan);">name:</span> <span style="color: #FDE047;">"Muhammad Burhan"</span>,<br>
+                        &nbsp;&nbsp;<span style="color: var(--cyan);">role:</span> <span style="color: #FDE047;">"AI & Data Science Student"</span>,<br>
+                        &nbsp;&nbsp;<span style="color: var(--cyan);">location:</span> <span style="color: #FDE047;">"Chiniot, PK"</span>,<br>
+                        &nbsp;&nbsp;<span style="color: var(--cyan);">focus:</span> [<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #FDE047;">"Generative AI"</span>,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #FDE047;">"Machine Learning"</span>,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #FDE047;">"Data Analysis"</span><br>
+                        &nbsp;&nbsp;],<br>
+                        &nbsp;&nbsp;<span style="color: var(--cyan);">status:</span> <span style="color: #FDE047;">"Open to Work ✅"</span><br>
+                        };<br>
+                        <br>
+                        <span style="color: rgba(255,255,255,0.4);">// System ready. Awaiting instructions...</span><br>
+                        > <span style="animation: mbFl1 1s infinite alternate; font-weight: bold; color: var(--cyan);">_</span>
+                    </div>
                 </div>
             </div>
         </div>
