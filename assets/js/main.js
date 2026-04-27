@@ -155,7 +155,7 @@ if (swipeHint && window.innerWidth <= 768) {
 }
 
 // ── TYPEWRITER ──
-const phrases   = ['AI Developer', 'Data Scientist', 'AWS Hackathon Participant', 'Problem Solver', 'Content Creator', 'Prompt Engineer', 'Vibe Coder'];
+const phrases   = ['AI Developer', 'Data Scientist', 'Neural Architect', 'Microsoft Learn Student Ambassador', 'AWS Hackathon Participant', 'Problem Solver', 'Content Creator', 'Prompt Engineer', 'Vibe Coder'];
 let phraseIdx   = 0; let charIdx = 0; let isDeleting = false;
 const typeEl    = document.getElementById('typewriter');
 

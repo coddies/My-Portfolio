@@ -1,8 +1,8 @@
 :root {
-    --bg-deep: #0a0a12;
-    --bg-gradient: radial-gradient(circle at 50% 50%, #1a1a2e 0%, #0a0a12 100%);
+    --bg-deep: #060B14;
+    --bg-gradient: radial-gradient(circle at 50% 50%, #1a1a2e 0%, #060B14 100%);
     --purple: #7c3aed;
-    --cyan: #06b6d4;
+    --cyan: #00E5FF;
     --pink: #ec4899;
     --text-white: #ffffff;
     --text-muted: rgba(255, 255, 255, 0.6);
