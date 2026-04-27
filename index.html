@@ -200,77 +200,86 @@
 }
 
 @media (max-width: 768px) {
-  /* Section heading fix */
+
   .skill-section-title {
-    font-size: 1rem !important;
-    letter-spacing: 0.15em !important;
+    font-size: 0.9rem !important;
+    letter-spacing: 0.1em !important;
     text-align: center !important;
-    padding: 0 16px !important;
+    padding: 0 12px !important;
   }
 
   .skill-section-sub {
-    font-size: 0.55rem !important;
-    letter-spacing: 0.2em !important;
-    padding: 0 16px !important;
+    font-size: 0.5rem !important;
+    letter-spacing: 0.15em !important;
     text-align: center !important;
+    padding: 0 12px !important;
   }
 
-  /* Universe container */
   .skill-universe {
-    padding: 40px 0px !important;
+    padding: 20px 0 60px 0 !important;
     overflow: hidden !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100vw !important;
   }
 
-  /* Isometric grid — smaller and centered */
   .iso-grid {
-    grid-template-columns: repeat(2, 130px) !important;
-    gap: 28px !important;
-    transform: rotateX(50deg) rotateZ(-45deg) !important;
+    grid-template-columns: repeat(2, 100px) !important;
+    gap: 20px !important;
+    transform: rotateX(50deg) rotateZ(-45deg) scale(0.75) !important;
+    transform-origin: center center !important;
     margin: 0 auto !important;
+    width: fit-content !important;
+    /* Push grid left so it appears centered after isometric rotation */
+    position: relative !important;
+    left: -40px !important;
   }
 
-  /* Cards smaller on mobile */
   .hybrid-cube {
-    width: 130px !important;
-    height: 130px !important;
+    width: 100px !important;
+    height: 100px !important;
   }
 
-  /* Icon smaller */
   .hybrid-cube .pop-icon {
-    width: 40px !important;
-    height: 40px !important;
-    margin-bottom: 8px !important;
+    width: 32px !important;
+    height: 32px !important;
+    margin-bottom: 6px !important;
   }
 
   .hybrid-cube .pop-icon .material-symbols-outlined {
-    font-size: 22px !important;
+    font-size: 18px !important;
   }
 
-  /* Text smaller */
   .hybrid-cube h3 {
-    font-size: 0.6rem !important;
-    letter-spacing: 0.1em !important;
+    font-size: 0.5rem !important;
+    letter-spacing: 0.08em !important;
   }
 
-  /* Purple bar smaller */
-  .hybrid-cube .pop-element.w-8 {
-    width: 20px !important;
-  }
-
-  /* Hover effect lighter on mobile */
   .hybrid-cube:hover {
-    transform: translateY(-15px) scale(1.08) !important;
+    transform: translateY(-10px) scale(1.06) !important;
+  }
+
+  .cube-left {
+    width: 14px !important;
+  }
+
+  .cube-bottom {
+    height: 14px !important;
   }
 }
 
 @media (max-width: 400px) {
   .iso-grid {
-    grid-template-columns: repeat(2, 110px) !important;
-    gap: 20px !important;
+    grid-template-columns: repeat(2, 85px) !important;
+    gap: 16px !important;
+    transform: rotateX(50deg) rotateZ(-45deg) scale(0.65) !important;
+    left: -30px !important;
   }
   .hybrid-cube {
-    width: 110px !important;
-    height: 110px !important;
+    width: 85px !important;
+    height: 85px !important;
   }
 }
 
