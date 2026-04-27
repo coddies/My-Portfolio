@@ -153,29 +153,30 @@ if(document.getElementById('csModalClose')) document.getElementById('csModalClos
         }
     }
 
-    // Phase 2: Launch
+    // Phase 2: Launch rocket + simultaneously start panels opening
     setTimeout(()=>{ 
         const wrap = document.getElementById('mb-rocket-wrap');
         const content = document.getElementById('mb-loader-content');
         if (wrap) wrap.classList.add('launching'); 
-        if (content) content.style.opacity = '0'; 
+        if (content) content.style.opacity = '0';
+        // Start panels RIGHT as rocket launches — no black gap
+        const pL = document.getElementById('mb-panel-left');
+        const pR = document.getElementById('mb-panel-right');
+        if (pL) pL.style.transform = 'translateX(-100%)';
+        if (pR) pR.style.transform = 'translateX(100%)';
     }, 2500);
 
-    // Phase 3: Trigger Home Page entry + Panels
+    // Phase 3: Trigger Home Page entry animation
     setTimeout(() => {
         const home = document.getElementById('card-1');
         if (home) {
             home.classList.add('section-entering');
             setTimeout(() => home.classList.remove('section-entering'), 1000);
         }
-        const pL = document.getElementById('mb-panel-left');
-        const pR = document.getElementById('mb-panel-right');
-        if (pL) pL.style.transform = 'translateX(-100%)';
-        if (pR) pR.style.transform = 'translateX(100%)';
-    }, 2800);
+    }, 2600);
 
     // Phase 4: Cleanup
-    setTimeout(()=>{ loader.remove(); document.body.style.overflow = ''; }, 3500);
+    setTimeout(()=>{ loader.remove(); document.body.style.overflow = ''; }, 3300);
   }
 
   function buildTransitionElements() {
