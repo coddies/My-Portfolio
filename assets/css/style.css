@@ -5199,19 +5199,11 @@ body > div:not(#warp-overlay) {
 /* ── LOADING SCREEN ── */
 
 #mb-loader {
-
   position: fixed;
-
   inset: 0;
-
   z-index: 999999;
-
-  background: #060B14;
-
   overflow: hidden;
-
-  pointer-events: all;
-
+  pointer-events: none;
 }
 
 #mb-panel-left {

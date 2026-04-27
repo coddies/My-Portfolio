@@ -156,9 +156,11 @@ if(document.getElementById('csModalClose')) document.getElementById('csModalClos
     // Phase 2: Launch rocket first
     setTimeout(()=>{ 
         const wrap = document.getElementById('mb-rocket-wrap');
-        const content = document.getElementById('mb-loader-content');
+        const name = document.getElementById('mb-name');
+        const subtitle = document.getElementById('mb-subtitle');
         if (wrap) wrap.classList.add('launching'); 
-        if (content) content.style.opacity = '0';
+        if (name) { name.style.transition = 'opacity 0.4s ease'; name.style.opacity = '0'; }
+        if (subtitle) { subtitle.style.transition = 'opacity 0.4s ease'; subtitle.style.opacity = '0'; }
     }, 2500);
 
     // Phase 3: Wait for rocket to go up, then open panels and show Home Page
