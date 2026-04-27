@@ -201,9 +201,9 @@ h1, h2, h3, .syne-font {
     align-items: center;
 }
 
-/* About Card: No scrolling by default, enabled via JS */
+/* About Card: Allow scrolling on mobile */
 #card-2 {
-    overflow-y: hidden;
+    overflow-y: auto;
 }
 
 #card-2.about-expanded {
