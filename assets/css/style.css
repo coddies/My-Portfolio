@@ -2661,7 +2661,7 @@ body > div:not(#warp-overlay) {
   animation: mbBob 0.9s ease-in-out infinite;
 }
 #mb-rocket-wrap.launching {
-  animation: mbLaunch 0.75s cubic-bezier(0.3, 0, 0.1, 1) forwards !important;
+  animation: mbLaunch 1.2s cubic-bezier(0.3, 0, 0.1, 1) forwards !important;
 }
 @keyframes mbBob {
   0%, 100% { transform: translateY(0); }
@@ -2744,5 +2744,6 @@ body > div:not(#warp-overlay) {
  . p u l s e - c o d e   { 
          a n i m a t i o n :   p u l s e - c o d e   2 s   i n f i n i t e   e a s e - i n - o u t ; 
  } 
-  
+ 
+ 
  
