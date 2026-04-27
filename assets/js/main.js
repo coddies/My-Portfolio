@@ -551,12 +551,12 @@ if (dotWrap && ringWrap && window.matchMedia('(pointer: fine)').matches) {
 
     // Hover: detectinteractive elements
     document.addEventListener('mouseover', (e) => {
-        if (e.target.closest('a, button, .nav-btn, .project-card, .cert-card, .hackathon-main-card, .skill-card, .sc-btn-prev, .sc-btn-next, .sc-preview, .sc-btn-fill, .sc-btn-outline')) {
+        if (e.target.closest('a, button, .nav-btn, .project-card, .cert-card, .hackathon-main-card, .skill-card, .skill-3d-card, .sc-btn-prev, .sc-btn-next, .sc-preview, .sc-btn-fill, .sc-btn-outline')) {
             document.body.classList.add('is-hovering');
         }
     });
     document.addEventListener('mouseout', (e) => {
-        if (e.target.closest('a, button, .nav-btn, .project-card, .cert-card, .hackathon-main-card, .skill-card, .sc-btn-prev, .sc-btn-next, .sc-preview, .sc-btn-fill, .sc-btn-outline')) {
+        if (e.target.closest('a, button, .nav-btn, .project-card, .cert-card, .hackathon-main-card, .skill-card, .skill-3d-card, .sc-btn-prev, .sc-btn-next, .sc-preview, .sc-btn-fill, .sc-btn-outline')) {
             document.body.classList.remove('is-hovering');
         }
     });
