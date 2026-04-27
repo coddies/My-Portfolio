@@ -176,338 +176,286 @@
      CARD 3 — SKILLS
 ════════════════════════════ -->
 <!-- ════════ CARD 3 — SKILLS ════════ -->
+<!-- ════════ CARD 3 — SKILLS ════════ -->
 <section id="card-3" class="card state-below">
 <style>
-/* ═══ CINEMATIC 3D SKILLS ═══ */
-.cin-wrap { width:100%; max-width:1100px; padding:10px 20px 20px; display:flex; flex-direction:column; align-items:center; }
-.cin-title { font-family:'Syne',sans-serif; font-size:clamp(22px,4vw,40px); font-weight:800; color:var(--cyan); text-transform:uppercase; letter-spacing:6px; text-align:center; text-shadow:0 0 30px rgba(0,229,255,0.6); margin-bottom:6px; }
-.cin-sub { font-family:'Space Grotesk',monospace; font-size:10px; color:rgba(255,255,255,0.3); letter-spacing:4px; text-transform:uppercase; margin-bottom:10px; }
-.cin-bar { width:60px; height:2px; background:linear-gradient(90deg,var(--cyan),var(--purple)); box-shadow:0 0 14px var(--cyan); border-radius:99px; margin:0 auto 28px; }
+/* ══ FLOATING CARD SKILLS ══ */
+.fcs-wrap {
+    width:100%; max-width:1100px;
+    padding:10px 20px 20px;
+    display:flex; flex-direction:column; align-items:center;
+}
+.fcs-title {
+    font-family:'Syne',sans-serif;
+    font-size:clamp(22px,4vw,40px);
+    font-weight:800; color:var(--cyan);
+    text-transform:uppercase; letter-spacing:6px;
+    text-align:center;
+    text-shadow:0 0 28px rgba(0,229,255,0.55);
+    margin-bottom:6px;
+}
+.fcs-sub {
+    font-family:'Space Grotesk',monospace;
+    font-size:10px; color:rgba(255,255,255,0.3);
+    letter-spacing:4px; text-transform:uppercase;
+    margin-bottom:10px;
+}
+.fcs-bar {
+    width:56px; height:2px;
+    background:linear-gradient(90deg,var(--cyan),var(--purple));
+    box-shadow:0 0 14px var(--cyan);
+    border-radius:99px; margin:0 auto 28px;
+}
 
-.cin-grid {
+.fcs-grid {
     display:grid;
     grid-template-columns:repeat(4,1fr);
-    gap:20px;
-    width:100%;
-    perspective:1400px;
+    gap:20px; width:100%;
+    perspective:1600px;
 }
 
-/* SCENE */
-.cs { position:relative; height:220px; }
+/* ── CARD SCENE ── */
+.fk { position:relative; height:200px; }
 
-/* CARD */
-.cc {
+/* ── THE CARD ── */
+.fcard {
     position:absolute; inset:0;
-    transform-style:preserve-3d;
-    transform:rotateX(8deg) rotateY(0deg);
-    transition:transform 0.5s cubic-bezier(0.23,1,0.32,1),
-               box-shadow 0.5s ease;
-    border-radius:18px;
-    cursor:pointer;
-    animation:cinFloat var(--dur,4s) ease-in-out infinite;
-    animation-delay:var(--del,0s);
-}
-
-/* idle float */
-@keyframes cinFloat {
-    0%,100%{ transform:rotateX(8deg) translateY(0px); }
-    50%    { transform:rotateX(8deg) translateY(-8px); }
-}
-
-/* FRONT FACE */
-.cf {
-    position:absolute; inset:0;
-    border-radius:18px;
+    border-radius:20px;
     background:rgba(255,255,255,0.03);
     backdrop-filter:blur(14px);
     -webkit-backdrop-filter:blur(14px);
-    border:1px solid var(--cc,rgba(0,229,255,0.15));
-    box-shadow:0 10px 40px rgba(0,0,0,0.5),
-               inset 0 0 30px rgba(0,229,255,0.03);
+    border:1px solid rgba(255,255,255,0.08);
     display:flex; flex-direction:column;
     align-items:center; justify-content:center;
-    gap:12px; overflow:hidden;
-    transform:translateZ(0);
-    transition:border-color 0.4s, box-shadow 0.4s, background 0.4s;
+    gap:14px; overflow:hidden;
+    transform-style:preserve-3d;
+    transform:perspective(900px) rotateX(0deg) rotateY(0deg) translateZ(0px);
+    transition:transform 0.45s cubic-bezier(0.23,1,0.32,1),
+               border-color 0.35s ease,
+               box-shadow 0.45s ease,
+               background 0.35s ease;
+    box-shadow:0 8px 32px rgba(0,0,0,0.45),
+               0 0 0 0 transparent;
+    cursor:pointer;
 }
 
-/* scanline sweep on hover */
-.cf::before {
+/* shine layer */
+.fcard::before {
+    content:'';
+    position:absolute; inset:0;
+    border-radius:20px;
+    background:linear-gradient(135deg,rgba(255,255,255,0.07) 0%,transparent 55%);
+    pointer-events:none; z-index:0;
+}
+
+/* scanline on hover */
+.fcard::after {
     content:'';
     position:absolute;
-    top:-100%; left:0; right:0; height:100%;
-    background:linear-gradient(to bottom, transparent 0%, rgba(0,229,255,0.06) 50%, transparent 100%);
-    transition:top 0.6s ease;
-    z-index:0;
-    pointer-events:none;
+    top:-100%; left:0; right:0; height:50%;
+    background:linear-gradient(to bottom,
+        transparent 0%,
+        rgba(0,229,255,0.05) 50%,
+        transparent 100%);
+    transition:top 0.55s ease;
+    pointer-events:none; z-index:0;
 }
-.cc:hover .cf::before { top:200%; }
+.fcard:hover::after { top:180%; }
 
-/* corner decorations */
-.cf::after {
-    content:'';
-    position:absolute;
-    inset:0; border-radius:18px;
-    background:linear-gradient(135deg,rgba(255,255,255,0.07) 0%,transparent 50%);
-    pointer-events:none;
-}
-
-/* icon container */
-.ci {
+/* ── ICON ── */
+.fik {
     position:relative; z-index:2;
-    font-size:48px; line-height:1;
-    transform:translateZ(30px) translateY(0px);
-    filter:drop-shadow(0 0 12px var(--gc,rgba(0,229,255,0.6)));
-    transition:transform 0.5s cubic-bezier(0.23,1,0.32,1),
-               filter 0.4s ease;
+    width:72px; height:72px;
+    border-radius:50%;
+    background:rgba(var(--rgb,0,229,255),0.06);
+    border:1px solid rgba(var(--rgb,0,229,255),0.2);
+    box-shadow:0 0 20px rgba(var(--rgb,0,229,255),0.1);
+    display:flex; align-items:center; justify-content:center;
+    font-size:34px;
+    transform:translateZ(0px);
+    transition:transform 0.45s cubic-bezier(0.23,1,0.32,1),
+               box-shadow 0.35s ease,
+               background 0.35s ease;
+    filter:drop-shadow(0 0 10px rgba(var(--rgb,0,229,255),0.5));
 }
 
-/* skill name — hidden below by default */
-.cn {
+/* ── SKILL NAME ── */
+.fnm {
     position:relative; z-index:2;
     font-family:'Space Grotesk',sans-serif;
     font-size:13px; font-weight:800;
-    color:#fff;
-    letter-spacing:2.5px;
-    text-transform:uppercase;
-    text-align:center;
-    transform:translateZ(10px) translateY(12px);
-    opacity:0;
-    transition:transform 0.5s cubic-bezier(0.23,1,0.32,1),
-               opacity 0.4s ease;
+    color:#fff; letter-spacing:2px;
+    text-transform:uppercase; text-align:center;
+    transform:translateZ(0px) translateY(0px);
+    transition:transform 0.45s cubic-bezier(0.23,1,0.32,1),
+               text-shadow 0.35s ease;
 }
 
-/* label */
-.cl {
+/* ── LABEL ── */
+.flb {
     position:relative; z-index:2;
     font-family:'Space Grotesk',monospace;
-    font-size:9px;
-    color:var(--gc,rgba(0,229,255,0.5));
-    letter-spacing:2px;
+    font-size:9px; letter-spacing:2px;
     text-transform:uppercase;
-    opacity:0;
-    transform:translateY(8px) translateZ(8px);
-    transition:opacity 0.4s ease 0.05s,
-               transform 0.5s cubic-bezier(0.23,1,0.32,1) 0.05s;
+    color:rgba(var(--rgb,0,229,255),0.45);
+    transform:translateZ(0px);
+    transition:transform 0.45s cubic-bezier(0.23,1,0.32,1),
+               opacity 0.35s ease;
+    opacity:0.7;
 }
 
-/* top glow bar */
-.cgbar {
-    position:absolute; top:0; left:10%; right:10%; height:2px;
-    background:var(--gc,rgba(0,229,255,0.7));
-    box-shadow:0 0 12px var(--gc,rgba(0,229,255,0.7));
-    border-radius:0 0 99px 99px;
-    transform:scaleX(0);
-    transition:transform 0.4s cubic-bezier(0.23,1,0.32,1);
-    z-index:3;
-}
-
-/* ══ HOVER STATE ══ */
-.cc:hover {
-    animation:none;
-    transform:rotateX(-12deg) rotateY(0deg) translateY(-18px) scale(1.04) !important;
-    box-shadow:0 40px 80px rgba(0,0,0,0.6),
-               0 0 40px var(--gc,rgba(0,229,255,0.2));
-}
-.cc:hover .cf {
+/* ══ HOVER — card floats up into the air ══ */
+.fcard:hover {
+    transform:perspective(900px)
+              rotateX(var(--hx,-14deg))
+              rotateY(var(--hy,0deg))
+              translateZ(50px)
+              translateY(-22px)
+              scale(1.06);
+    border-color:rgba(var(--rgb,0,229,255),0.55);
     background:rgba(255,255,255,0.07);
-    border-color:var(--cc,rgba(0,229,255,0.5));
-    box-shadow:0 20px 60px rgba(0,0,0,0.5),
-               0 0 30px var(--gc,rgba(0,229,255,0.15)),
-               inset 0 0 40px rgba(0,229,255,0.05);
+    box-shadow:
+        0 50px 80px rgba(0,0,0,0.6),
+        0 0 40px rgba(var(--rgb,0,229,255),0.18),
+        0 0 0 1px rgba(var(--rgb,0,229,255),0.2),
+        inset 0 0 30px rgba(var(--rgb,0,229,255),0.04);
 }
-.cc:hover .ci {
-    transform:translateZ(60px) translateY(-6px) scale(1.2);
-    filter:drop-shadow(0 0 24px var(--gc,rgba(0,229,255,0.9)));
+.fcard:hover .fik {
+    transform:translateZ(40px) translateY(-4px) scale(1.18);
+    box-shadow:0 0 36px rgba(var(--rgb,0,229,255),0.45);
+    background:rgba(var(--rgb,0,229,255),0.12);
+    filter:drop-shadow(0 0 20px rgba(var(--rgb,0,229,255),0.8));
 }
-.cc:hover .cn {
-    transform:translateZ(40px) translateY(0px);
+.fcard:hover .fnm {
+    transform:translateZ(30px) translateY(-2px);
+    text-shadow:0 0 20px rgba(var(--rgb,0,229,255),0.6);
+}
+.fcard:hover .flb {
+    transform:translateZ(20px);
     opacity:1;
 }
-.cc:hover .cl {
-    opacity:1;
-    transform:translateY(0) translateZ(24px);
-}
-.cc:hover .cgbar { transform:scaleX(1); }
-
-/* JS mousemove tilt (applied inline) */
 
 /* ── MOBILE ── */
 @media(max-width:900px){
-    .cin-grid{ grid-template-columns:repeat(2,1fr); gap:14px; }
-    .cs{ height:170px; }
-    .ci{ font-size:36px; }
-    .cc{ animation:none; transform:none !important; }
-    .cc:hover{ transform:scale(1.04) !important; }
-    .cc:hover .ci{ transform:scale(1.15) !important; }
-    .cn,.cl{ opacity:1; transform:none !important; }
+    .fcs-grid{grid-template-columns:repeat(2,1fr);gap:14px;}
+    .fk{height:170px;}
+    .fcard{transform:none !important;}
+    .fcard:hover{
+        transform:translateY(-8px) scale(1.04) !important;
+        box-shadow:0 20px 40px rgba(0,0,0,0.5),0 0 20px rgba(var(--rgb,0,229,255),0.2) !important;
+    }
+    .fcard:hover .fik{transform:scale(1.12) !important;}
+    .fcard:hover .fnm{transform:none !important;}
+    .fcard:hover .flb{transform:none !important;}
+    .fik{width:58px;height:58px;font-size:28px;}
+    .fnm{font-size:11px;}
 }
 @media(max-width:480px){
-    .cin-grid{ gap:10px; }
-    .cs{ height:150px; }
-    .ci{ font-size:28px; }
-    .cin-title{ letter-spacing:3px; }
+    .fcs-grid{gap:10px;}
+    .fk{height:150px;}
+    .fik{width:50px;height:50px;font-size:24px;}
 }
 </style>
 
     <div class="card-inner">
-      <div class="cin-wrap">
-        <p class="cin-title">Neural Toolkit</p>
-        <p class="cin-sub">Skills &amp; Expertise</p>
-        <div class="cin-bar"></div>
+      <div class="fcs-wrap">
+        <p class="fcs-title">Neural Toolkit</p>
+        <p class="fcs-sub">Skills &amp; Expertise</p>
+        <div class="fcs-bar"></div>
 
-        <div class="cin-grid">
+        <div class="fcs-grid">
 
-          <div class="cs">
-            <div class="cc" style="--cc:rgba(0,229,255,0.3);--gc:rgba(0,229,255,0.7);--dur:3.8s;--del:0s;">
-              <div class="cf">
-                <div class="cgbar"></div>
-                <div class="ci">🐍</div>
-                <div class="cn">Python</div>
-                <div class="cl">Core_System_v1</div>
-              </div>
-            </div>
-          </div>
+          <div class="fk"><div class="fcard" style="--rgb:0,229,255;">
+            <div class="fik">🐍</div>
+            <div class="fnm">Python</div>
+            <div class="flb">Core_System_v1</div>
+          </div></div>
 
-          <div class="cs">
-            <div class="cc" style="--cc:rgba(139,92,246,0.3);--gc:rgba(139,92,246,0.7);--dur:4.2s;--del:-1s;">
-              <div class="cf">
-                <div class="cgbar" style="background:rgba(139,92,246,0.7);box-shadow:0 0 12px rgba(139,92,246,0.7);"></div>
-                <div class="ci">🌐</div>
-                <div class="cn">HTML/CSS/JS</div>
-                <div class="cl">Web_Stack_v3</div>
-              </div>
-            </div>
-          </div>
+          <div class="fk"><div class="fcard" style="--rgb:139,92,246;">
+            <div class="fik">🌐</div>
+            <div class="fnm">HTML/CSS/JS</div>
+            <div class="flb">Web_Stack_v3</div>
+          </div></div>
 
-          <div class="cs">
-            <div class="cc" style="--cc:rgba(0,229,255,0.3);--gc:rgba(0,229,255,0.7);--dur:3.5s;--del:-2s;">
-              <div class="cf">
-                <div class="cgbar"></div>
-                <div class="ci">🗄️</div>
-                <div class="cn">SQL / DB</div>
-                <div class="cl">Data_Layer_v2</div>
-              </div>
-            </div>
-          </div>
+          <div class="fk"><div class="fcard" style="--rgb:0,229,255;">
+            <div class="fik">🗄️</div>
+            <div class="fnm">SQL / DB</div>
+            <div class="flb">Data_Layer_v2</div>
+          </div></div>
 
-          <div class="cs">
-            <div class="cc" style="--cc:rgba(139,92,246,0.3);--gc:rgba(139,92,246,0.7);--dur:4.6s;--del:-0.5s;">
-              <div class="cf">
-                <div class="cgbar" style="background:rgba(139,92,246,0.7);box-shadow:0 0 12px rgba(139,92,246,0.7);"></div>
-                <div class="ci">⚡</div>
-                <div class="cn">FastAPI</div>
-                <div class="cl">API_Engine_v2</div>
-              </div>
-            </div>
-          </div>
+          <div class="fk"><div class="fcard" style="--rgb:139,92,246;">
+            <div class="fik">⚡</div>
+            <div class="fnm">FastAPI</div>
+            <div class="flb">API_Engine_v2</div>
+          </div></div>
 
-          <div class="cs">
-            <div class="cc" style="--cc:rgba(139,92,246,0.3);--gc:rgba(139,92,246,0.7);--dur:4s;--del:-1.5s;">
-              <div class="cf">
-                <div class="cgbar" style="background:rgba(139,92,246,0.7);box-shadow:0 0 12px rgba(139,92,246,0.7);"></div>
-                <div class="ci">🧠</div>
-                <div class="cn">Deep Learning</div>
-                <div class="cl">Neural_Net_v4</div>
-              </div>
-            </div>
-          </div>
+          <div class="fk"><div class="fcard" style="--rgb:139,92,246;">
+            <div class="fik">🧠</div>
+            <div class="fnm">Deep Learning</div>
+            <div class="flb">Neural_Net_v4</div>
+          </div></div>
 
-          <div class="cs">
-            <div class="cc" style="--cc:rgba(0,229,255,0.3);--gc:rgba(0,229,255,0.7);--dur:3.7s;--del:-3s;">
-              <div class="cf">
-                <div class="cgbar"></div>
-                <div class="ci">🤖</div>
-                <div class="cn">NLP</div>
-                <div class="cl">Lang_Model_v3</div>
-              </div>
-            </div>
-          </div>
+          <div class="fk"><div class="fcard" style="--rgb:0,229,255;">
+            <div class="fik">🤖</div>
+            <div class="fnm">NLP</div>
+            <div class="flb">Lang_Model_v3</div>
+          </div></div>
 
-          <div class="cs">
-            <div class="cc" style="--cc:rgba(139,92,246,0.3);--gc:rgba(139,92,246,0.7);--dur:4.4s;--del:-2.5s;">
-              <div class="cf">
-                <div class="cgbar" style="background:rgba(139,92,246,0.7);box-shadow:0 0 12px rgba(139,92,246,0.7);"></div>
-                <div class="ci">📊</div>
-                <div class="cn">Data Science</div>
-                <div class="cl">Analytics_v2</div>
-              </div>
-            </div>
-          </div>
+          <div class="fk"><div class="fcard" style="--rgb:139,92,246;">
+            <div class="fik">📊</div>
+            <div class="fnm">Data Science</div>
+            <div class="flb">Analytics_v2</div>
+          </div></div>
 
-          <div class="cs">
-            <div class="cc" style="--cc:rgba(0,229,255,0.3);--gc:rgba(0,229,255,0.7);--dur:3.9s;--del:-0.8s;">
-              <div class="cf">
-                <div class="cgbar"></div>
-                <div class="ci">👁️</div>
-                <div class="cn">Computer Vision</div>
-                <div class="cl">Vision_AI_v2</div>
-              </div>
-            </div>
-          </div>
+          <div class="fk"><div class="fcard" style="--rgb:0,229,255;">
+            <div class="fik">👁️</div>
+            <div class="fnm">Computer Vision</div>
+            <div class="flb">Vision_AI_v2</div>
+          </div></div>
 
-          <div class="cs">
-            <div class="cc" style="--cc:rgba(0,229,255,0.3);--gc:rgba(0,229,255,0.7);--dur:4.1s;--del:-1.8s;">
-              <div class="cf">
-                <div class="cgbar"></div>
-                <div class="ci">☁️</div>
-                <div class="cn">AWS Cloud</div>
-                <div class="cl">Cloud_Infra_v1</div>
-              </div>
-            </div>
-          </div>
+          <div class="fk"><div class="fcard" style="--rgb:0,229,255;">
+            <div class="fik">☁️</div>
+            <div class="fnm">AWS Cloud</div>
+            <div class="flb">Cloud_Infra_v1</div>
+          </div></div>
 
-          <div class="cs">
-            <div class="cc" style="--cc:rgba(139,92,246,0.3);--gc:rgba(139,92,246,0.7);--dur:3.6s;--del:-3.5s;">
-              <div class="cf">
-                <div class="cgbar" style="background:rgba(139,92,246,0.7);box-shadow:0 0 12px rgba(139,92,246,0.7);"></div>
-                <div class="ci">✍️</div>
-                <div class="cn">Prompt Eng.</div>
-                <div class="cl">LLM_Craft_v5</div>
-              </div>
-            </div>
-          </div>
+          <div class="fk"><div class="fcard" style="--rgb:139,92,246;">
+            <div class="fik">✍️</div>
+            <div class="fnm">Prompt Eng.</div>
+            <div class="flb">LLM_Craft_v5</div>
+          </div></div>
 
-          <div class="cs">
-            <div class="cc" style="--cc:rgba(0,229,255,0.3);--gc:rgba(0,229,255,0.7);--dur:4.3s;--del:-2.2s;">
-              <div class="cf">
-                <div class="cgbar"></div>
-                <div class="ci">🎬</div>
-                <div class="cn">AI Automation</div>
-                <div class="cl">Pipeline_v3</div>
-              </div>
-            </div>
-          </div>
+          <div class="fk"><div class="fcard" style="--rgb:0,229,255;">
+            <div class="fik">🎬</div>
+            <div class="fnm">AI Automation</div>
+            <div class="flb">Pipeline_v3</div>
+          </div></div>
 
-          <div class="cs">
-            <div class="cc" style="--cc:rgba(139,92,246,0.3);--gc:rgba(139,92,246,0.7);--dur:4.7s;--del:-4s;">
-              <div class="cf">
-                <div class="cgbar" style="background:rgba(139,92,246,0.7);box-shadow:0 0 12px rgba(139,92,246,0.7);"></div>
-                <div class="ci">🧬</div>
-                <div class="cn">TensorFlow</div>
-                <div class="cl">ML_Frame_v2</div>
-              </div>
-            </div>
-          </div>
+          <div class="fk"><div class="fcard" style="--rgb:139,92,246;">
+            <div class="fik">🧬</div>
+            <div class="fnm">TensorFlow</div>
+            <div class="flb">ML_Frame_v2</div>
+          </div></div>
 
         </div>
       </div>
     </div>
 
 <script>
+/* ── Real-time mouse tilt per card ── */
 (function(){
-    var isMobile = window.innerWidth <= 900;
-    window.addEventListener('resize', function(){ isMobile = window.innerWidth <= 900; });
-    document.querySelectorAll('.cc').forEach(function(card){
+    var mob = window.innerWidth <= 900;
+    window.addEventListener('resize', function(){ mob = window.innerWidth <= 900; });
+    document.querySelectorAll('.fcard').forEach(function(card){
         card.addEventListener('mousemove', function(e){
-            if(isMobile) return;
+            if(mob) return;
             var r = card.getBoundingClientRect();
-            var cx = r.left + r.width/2, cy = r.top + r.height/2;
-            var dx = (e.clientX - cx)/(r.width/2);
-            var dy = (e.clientY - cy)/(r.height/2);
-            var rY = dx * 14;
-            var rX = -dy * 10 - 12;
-            card.style.transform = 'rotateX('+rX+'deg) rotateY('+rY+'deg) translateY(-18px) scale(1.04)';
+            var mx = (e.clientX - r.left)/r.width  - 0.5;   /* -0.5 to 0.5 */
+            var my = (e.clientY - r.top) /r.height - 0.5;
+            var ry =  mx * 20;     /* left-right tilt ±20° */
+            var rx = -my * 14 - 14; /* top-bottom tilt, offset -14 so card leans back */
+            card.style.transform =
+                'perspective(900px) rotateX('+rx+'deg) rotateY('+ry+'deg) translateZ(50px) translateY(-22px) scale(1.06)';
         });
         card.addEventListener('mouseleave', function(){
             card.style.transform = '';
