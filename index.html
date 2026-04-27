@@ -200,12 +200,78 @@
 }
 
 @media (max-width: 768px) {
-  .iso-grid {
-    grid-template-columns: repeat(2, 160px);
-    gap: 40px;
-    transform: rotateX(45deg) rotateZ(-45deg);
+  /* Section heading fix */
+  .skill-section-title {
+    font-size: 1rem !important;
+    letter-spacing: 0.15em !important;
+    text-align: center !important;
+    padding: 0 16px !important;
   }
-  .hybrid-cube { width: 160px; height: 160px; }
+
+  .skill-section-sub {
+    font-size: 0.55rem !important;
+    letter-spacing: 0.2em !important;
+    padding: 0 16px !important;
+    text-align: center !important;
+  }
+
+  /* Universe container */
+  .skill-universe {
+    padding: 40px 0px !important;
+    overflow: hidden !important;
+  }
+
+  /* Isometric grid — smaller and centered */
+  .iso-grid {
+    grid-template-columns: repeat(2, 130px) !important;
+    gap: 28px !important;
+    transform: rotateX(50deg) rotateZ(-45deg) !important;
+    margin: 0 auto !important;
+  }
+
+  /* Cards smaller on mobile */
+  .hybrid-cube {
+    width: 130px !important;
+    height: 130px !important;
+  }
+
+  /* Icon smaller */
+  .hybrid-cube .pop-icon {
+    width: 40px !important;
+    height: 40px !important;
+    margin-bottom: 8px !important;
+  }
+
+  .hybrid-cube .pop-icon .material-symbols-outlined {
+    font-size: 22px !important;
+  }
+
+  /* Text smaller */
+  .hybrid-cube h3 {
+    font-size: 0.6rem !important;
+    letter-spacing: 0.1em !important;
+  }
+
+  /* Purple bar smaller */
+  .hybrid-cube .pop-element.w-8 {
+    width: 20px !important;
+  }
+
+  /* Hover effect lighter on mobile */
+  .hybrid-cube:hover {
+    transform: translateY(-15px) scale(1.08) !important;
+  }
+}
+
+@media (max-width: 400px) {
+  .iso-grid {
+    grid-template-columns: repeat(2, 110px) !important;
+    gap: 20px !important;
+  }
+  .hybrid-cube {
+    width: 110px !important;
+    height: 110px !important;
+  }
 }
 
 .hybrid-cube {
@@ -421,6 +487,7 @@
   const MAX_TILT = 8;
 
   universe.addEventListener('mousemove', function(e) {
+    if (window.innerWidth < 768) return;
     const rect = universe.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;
     const centerY = rect.top + rect.height / 2;
