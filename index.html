@@ -172,291 +172,470 @@
 <!-- ════════════════════════════
      CARD 3 — SKILLS
 ════════════════════════════ -->
+<!-- ════════════════════════════
+     CARD 3 — SKILLS
+════════════════════════════ -->
 <section id="card-3" class="card state-below">
 <style>
-/* ══ HOLOGRAPHIC SKILLS ══ */
-.hs-wrapper {
+/* ══ ISOMETRIC SKILLS ══ */
+.iso-section-wrap {
     width: 100%;
-    max-width: 1200px;
-    padding: 10px 24px 24px;
+    max-width: 1100px;
+    padding: 10px 20px 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-.hs-heading {
+.iso-heading {
     font-family: 'Syne', sans-serif;
-    font-size: clamp(26px, 4vw, 42px);
+    font-size: clamp(24px,4vw,40px);
     font-weight: 800;
     color: var(--cyan);
     text-align: center;
     text-transform: uppercase;
-    letter-spacing: 6px;
-    margin-bottom: 8px;
+    letter-spacing: 5px;
+    margin-bottom: 6px;
     text-shadow: 0 0 24px rgba(0,229,255,0.5);
 }
-.hs-sub {
+.iso-sub {
     font-family: 'Space Grotesk', monospace;
-    font-size: 11px;
-    color: rgba(255,255,255,0.35);
+    font-size: 10px;
+    color: rgba(255,255,255,0.3);
     letter-spacing: 4px;
     text-transform: uppercase;
-    margin-bottom: 36px;
+    margin-bottom: 12px;
 }
-.hs-accent {
-    width: 60px; height: 2px;
+.iso-accent {
+    width: 56px; height: 2px;
     background: linear-gradient(90deg, var(--cyan), var(--purple));
     border-radius: 99px;
     box-shadow: 0 0 12px var(--cyan);
-    margin: 0 auto 36px;
+    margin: 0 auto 32px;
 }
 
-/* GRID */
-.hs-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
+/* perspective container */
+.iso-perspective {
+    perspective: 2000px;
     width: 100%;
 }
-@media (max-width: 900px) { .hs-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; } }
-@media (max-width: 480px) { .hs-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; } }
 
-/* SCENE + CARD */
-.hs-scene { perspective: 1200px; width: 100%; }
-.hs-card {
+/* isometric wrapper — desktop only */
+.iso-wrapper {
+    transform: rotateX(55deg) rotateY(0deg) rotateZ(-45deg);
     transform-style: preserve-3d;
-    background: rgba(255,255,255,0.025);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255,255,255,0.06);
-    border-radius: 20px;
-    width: 100%;
-    height: 210px;
+    transition: transform 0.3s ease;
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
-    cursor: crosshair;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    position: relative;
-    overflow: hidden;
+    padding: 30px;
 }
-.hs-card::before {
-    content: '';
+
+.iso-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 200px);
+    gap: 24px;
+    transform-style: preserve-3d;
+}
+
+/* individual cube scene */
+.cube-scene {
+    width: 200px;
+    height: 200px;
+    transform-style: preserve-3d;
+    transition: transform 0.4s cubic-bezier(0.23,1,0.32,1);
+}
+.cube-scene:hover { transform: translateZ(-28px); }
+
+/* cube container */
+.iso-cube {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    transform-style: preserve-3d;
+}
+
+/* TOP FACE — main visible face */
+.cube-top {
     position: absolute;
     inset: 0;
-    border-radius: 20px;
-    background: linear-gradient(135deg, rgba(255,255,255,0.06) 0%, transparent 55%);
-    pointer-events: none;
+    transform: translateZ(32px);
+    background: rgba(255,255,255,0.04);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6),
+                inset 0 0 20px rgba(0,229,255,0.03);
+    overflow: hidden;
 }
-.hs-card.cyan-card:hover {
-    border-color: rgba(0,229,255,0.35);
-    box-shadow: 0 0 30px rgba(0,229,255,0.12), 0 20px 50px rgba(0,0,0,0.5);
-}
-.hs-card.purple-card:hover {
-    border-color: rgba(139,92,246,0.35);
-    box-shadow: 0 0 30px rgba(139,92,246,0.12), 0 20px 50px rgba(0,0,0,0.5);
+.cube-top::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, var(--card-c, #00E5FF), transparent);
+    box-shadow: 0 0 8px var(--card-c, #00E5FF);
 }
 
-/* ICON WRAP */
-.hs-icon-wrap {
-    transform-style: preserve-3d;
-    transform: translateZ(50px);
-    width: 80px; height: 80px;
-    border-radius: 50%;
+/* LEFT SIDE FACE */
+.cube-left {
+    position: absolute;
+    width: 32px;
+    height: 200px;
+    left: 0; top: 0;
+    background: var(--card-side, rgba(139,92,246,0.18));
+    border: 1px solid rgba(139,92,246,0.25);
+    transform-origin: right center;
+    transform: rotateY(-90deg);
+}
+
+/* BOTTOM SIDE FACE */
+.cube-bottom {
+    position: absolute;
+    width: 200px;
+    height: 32px;
+    left: 0; bottom: 0;
+    background: rgba(0,0,0,0.35);
+    border: 1px solid rgba(139,92,246,0.15);
+    transform-origin: top center;
+    transform: rotateX(90deg);
+}
+
+/* TOP ACCENT LINE */
+.cube-line {
+    width: 100%;
+    height: 2px;
+    border-radius: 1px;
+    background: var(--card-c, #00E5FF);
+    box-shadow: 0 0 10px var(--card-c, #00E5FF);
+    margin-bottom: 10px;
+    flex-shrink: 0;
+}
+
+/* ICON ROW */
+.cube-icon-row {
     display: flex;
     align-items: center;
-    justify-content: center;
-    margin-bottom: 18px;
-    transition: box-shadow 0.3s ease;
+    gap: 12px;
 }
-.hs-icon-wrap.cyan-wrap {
-    background: rgba(0,229,255,0.06);
-    border: 1px solid rgba(0,229,255,0.2);
-    box-shadow: 0 0 24px rgba(0,229,255,0.12);
-}
-.hs-icon-wrap.purple-wrap {
-    background: rgba(139,92,246,0.06);
-    border: 1px solid rgba(139,92,246,0.2);
-    box-shadow: 0 0 24px rgba(139,92,246,0.12);
-}
-.hs-card:hover .hs-icon-wrap.cyan-wrap   { box-shadow: 0 0 36px rgba(0,229,255,0.35); }
-.hs-card:hover .hs-icon-wrap.purple-wrap { box-shadow: 0 0 36px rgba(139,92,246,0.35); }
-
-.hs-icon {
-    font-size: 40px;
+.cube-icon {
+    font-size: 36px;
     line-height: 1;
-    filter: drop-shadow(0 0 12px currentColor);
+    filter: drop-shadow(0 0 8px var(--card-c, #00E5FF));
+    transition: transform 0.3s ease, filter 0.3s ease;
+    transform: translateZ(20px);
+}
+.cube-scene:hover .cube-icon {
+    transform: translateZ(36px) scale(1.15);
+    filter: drop-shadow(0 0 16px var(--card-c, #00E5FF));
+}
+.cube-name {
+    font-family: 'Space Grotesk', monospace;
+    font-size: 15px;
+    font-weight: 800;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transform: translateZ(20px);
     transition: transform 0.3s ease;
 }
-.hs-card:hover .hs-icon { transform: scale(1.15) translateY(-2px); }
+.cube-scene:hover .cube-name { transform: translateZ(34px); }
 
-/* TEXT */
-.hs-title {
-    transform-style: preserve-3d;
-    transform: translateZ(30px);
-    font-family: 'Space Grotesk', monospace;
-    font-size: 13px;
-    font-weight: 700;
-    color: #fff;
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-    text-align: center;
-    margin-bottom: 6px;
-}
-.hs-label {
-    transform-style: preserve-3d;
-    transform: translateZ(30px);
+/* SUBTITLE */
+.cube-label {
     font-family: 'Space Grotesk', monospace;
     font-size: 9px;
-    color: rgba(255,255,255,0.28);
-    letter-spacing: 2px;
+    color: var(--card-c, rgba(0,229,255,0.5));
     text-transform: uppercase;
-    text-align: center;
+    letter-spacing: 2px;
+    opacity: 0.6;
+    transform: translateZ(14px);
 }
-.hs-label.cyan-label  { color: rgba(0,229,255,0.4); }
-.hs-label.purple-label{ color: rgba(139,92,246,0.4); }
 
-/* Mobile: smaller cards */
+/* ── MOBILE: disable isometric, show flat responsive grid ── */
 @media (max-width: 900px) {
-    .hs-card { height: 175px; }
-    .hs-icon-wrap { width: 64px; height: 64px; margin-bottom: 14px; }
-    .hs-icon { font-size: 32px; }
-    .hs-title { font-size: 11px; letter-spacing: 2px; }
+    .iso-perspective { perspective: none; }
+    .iso-wrapper {
+        transform: none !important;
+        padding: 0;
+    }
+    .iso-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+        width: 100%;
+    }
+    .cube-scene, .iso-cube { width: 100%; height: auto; }
+    .cube-top {
+        position: relative;
+        transform: none;
+        border-radius: 16px;
+        padding: 18px;
+        min-height: 150px;
+    }
+    .cube-left, .cube-bottom { display: none; }
+    .cube-icon { transform: none; font-size: 30px; }
+    .cube-name { font-size: 13px; transform: none; }
+    .cube-label { transform: none; }
+    .cube-scene:hover { transform: none; }
+    .cube-scene:hover .cube-icon  { transform: scale(1.1); }
+    .cube-scene:hover .cube-name  { transform: none; }
 }
 @media (max-width: 480px) {
-    .hs-card { height: 155px; border-radius: 16px; }
-    .hs-icon-wrap { width: 56px; height: 56px; margin-bottom: 12px; }
-    .hs-icon { font-size: 28px; }
-    .hs-heading { letter-spacing: 3px; }
+    .iso-grid { gap: 10px; }
+    .cube-top { min-height: 130px; padding: 14px; }
+    .cube-icon { font-size: 26px; }
+    .cube-name { font-size: 11px; letter-spacing: 1.5px; }
 }
 </style>
 
     <div class="card-inner">
-        <div class="hs-wrapper">
-            <p class="hs-heading">Neural Toolkit</p>
-            <p class="hs-sub">Skills &amp; Expertise</p>
-            <div class="hs-accent"></div>
+        <div class="iso-section-wrap">
+            <p class="iso-heading">Neural Toolkit</p>
+            <p class="iso-sub">Skills &amp; Expertise — Isometric View</p>
+            <div class="iso-accent"></div>
 
-            <div class="hs-grid">
+            <div class="iso-perspective" id="isoPerspective">
+                <div class="iso-wrapper" id="isoWrapper">
+                    <div class="iso-grid">
 
-                <!-- Row 1: Core Dev -->
-                <div class="hs-scene">
-                    <div class="hs-card cyan-card">
-                        <div class="hs-icon-wrap cyan-wrap"><span class="hs-icon" style="color:#00E5FF;">🐍</span></div>
-                        <p class="hs-title">Python</p>
-                        <p class="hs-label cyan-label">Core_System_v1</p>
-                    </div>
-                </div>
-                <div class="hs-scene">
-                    <div class="hs-card purple-card">
-                        <div class="hs-icon-wrap purple-wrap"><span class="hs-icon" style="color:#8B5CF6;">🌐</span></div>
-                        <p class="hs-title">HTML/CSS/JS</p>
-                        <p class="hs-label purple-label">Web_Stack_v3</p>
-                    </div>
-                </div>
-                <div class="hs-scene">
-                    <div class="hs-card cyan-card">
-                        <div class="hs-icon-wrap cyan-wrap"><span class="hs-icon" style="color:#00E5FF;">🗄️</span></div>
-                        <p class="hs-title">SQL / DB</p>
-                        <p class="hs-label cyan-label">Data_Layer_v2</p>
-                    </div>
-                </div>
-                <div class="hs-scene">
-                    <div class="hs-card purple-card">
-                        <div class="hs-icon-wrap purple-wrap"><span class="hs-icon" style="color:#8B5CF6;">⚡</span></div>
-                        <p class="hs-title">FastAPI</p>
-                        <p class="hs-label purple-label">API_Engine_v2</p>
-                    </div>
-                </div>
+                        <!-- Row 1: Core Dev -->
+                        <div class="cube-scene">
+                          <div class="iso-cube" style="--card-c:#00E5FF;--card-side:rgba(0,180,220,0.2);">
+                            <div class="cube-top" style="--card-c:#00E5FF;">
+                              <div class="cube-line" style="--card-c:#00E5FF;"></div>
+                              <div class="cube-icon-row">
+                                <span class="cube-icon" style="--card-c:#00E5FF;">🐍</span>
+                                <span class="cube-name">Python</span>
+                              </div>
+                              <p class="cube-label" style="--card-c:#00E5FF;">Python_Core_v1</p>
+                            </div>
+                            <div class="cube-left"></div>
+                            <div class="cube-bottom"></div>
+                          </div>
+                        </div>
 
-                <!-- Row 2: AI & Data Science -->
-                <div class="hs-scene">
-                    <div class="hs-card purple-card">
-                        <div class="hs-icon-wrap purple-wrap"><span class="hs-icon" style="color:#8B5CF6;">🧠</span></div>
-                        <p class="hs-title">Deep Learning</p>
-                        <p class="hs-label purple-label">Neural_Net_v4</p>
-                    </div>
-                </div>
-                <div class="hs-scene">
-                    <div class="hs-card cyan-card">
-                        <div class="hs-icon-wrap cyan-wrap"><span class="hs-icon" style="color:#00E5FF;">🤖</span></div>
-                        <p class="hs-title">NLP</p>
-                        <p class="hs-label cyan-label">Lang_Model_v3</p>
-                    </div>
-                </div>
-                <div class="hs-scene">
-                    <div class="hs-card purple-card">
-                        <div class="hs-icon-wrap purple-wrap"><span class="hs-icon" style="color:#8B5CF6;">📊</span></div>
-                        <p class="hs-title">Data Science</p>
-                        <p class="hs-label purple-label">Analytics_v2</p>
-                    </div>
-                </div>
-                <div class="hs-scene">
-                    <div class="hs-card cyan-card">
-                        <div class="hs-icon-wrap cyan-wrap"><span class="hs-icon" style="color:#00E5FF;">👁️</span></div>
-                        <p class="hs-title">Computer Vision</p>
-                        <p class="hs-label cyan-label">Vision_AI_v2</p>
-                    </div>
-                </div>
+                        <div class="cube-scene">
+                          <div class="iso-cube" style="--card-c:#8B5CF6;--card-side:rgba(139,92,246,0.2);">
+                            <div class="cube-top" style="--card-c:#8B5CF6;">
+                              <div class="cube-line" style="--card-c:#8B5CF6;"></div>
+                              <div class="cube-icon-row">
+                                <span class="cube-icon" style="--card-c:#8B5CF6;">🌐</span>
+                                <span class="cube-name">HTML/CSS/JS</span>
+                              </div>
+                              <p class="cube-label" style="--card-c:#8B5CF6;">Web_Stack_v3</p>
+                            </div>
+                            <div class="cube-left" style="background:rgba(139,92,246,0.2);border-color:rgba(139,92,246,0.3);"></div>
+                            <div class="cube-bottom"></div>
+                          </div>
+                        </div>
 
-                <!-- Row 3: Tools & Cloud -->
-                <div class="hs-scene">
-                    <div class="hs-card cyan-card">
-                        <div class="hs-icon-wrap cyan-wrap"><span class="hs-icon" style="color:#00E5FF;">☁️</span></div>
-                        <p class="hs-title">AWS Cloud</p>
-                        <p class="hs-label cyan-label">Cloud_Infra_v1</p>
-                    </div>
-                </div>
-                <div class="hs-scene">
-                    <div class="hs-card purple-card">
-                        <div class="hs-icon-wrap purple-wrap"><span class="hs-icon" style="color:#8B5CF6;">✍️</span></div>
-                        <p class="hs-title">Prompt Eng.</p>
-                        <p class="hs-label purple-label">LLM_Craft_v5</p>
-                    </div>
-                </div>
-                <div class="hs-scene">
-                    <div class="hs-card cyan-card">
-                        <div class="hs-icon-wrap cyan-wrap"><span class="hs-icon" style="color:#00E5FF;">🎬</span></div>
-                        <p class="hs-title">AI Automation</p>
-                        <p class="hs-label cyan-label">Pipeline_v3</p>
-                    </div>
-                </div>
-                <div class="hs-scene">
-                    <div class="hs-card purple-card">
-                        <div class="hs-icon-wrap purple-wrap"><span class="hs-icon" style="color:#8B5CF6;">🧬</span></div>
-                        <p class="hs-title">TensorFlow</p>
-                        <p class="hs-label purple-label">ML_Frame_v2</p>
-                    </div>
-                </div>
+                        <div class="cube-scene">
+                          <div class="iso-cube" style="--card-c:#00E5FF;">
+                            <div class="cube-top" style="--card-c:#00E5FF;">
+                              <div class="cube-line" style="--card-c:#00E5FF;"></div>
+                              <div class="cube-icon-row">
+                                <span class="cube-icon" style="--card-c:#00E5FF;">🗄️</span>
+                                <span class="cube-name">SQL / DB</span>
+                              </div>
+                              <p class="cube-label" style="--card-c:#00E5FF;">Data_Layer_v2</p>
+                            </div>
+                            <div class="cube-left"></div>
+                            <div class="cube-bottom"></div>
+                          </div>
+                        </div>
 
+                        <div class="cube-scene">
+                          <div class="iso-cube" style="--card-c:#8B5CF6;">
+                            <div class="cube-top" style="--card-c:#8B5CF6;">
+                              <div class="cube-line" style="--card-c:#8B5CF6;"></div>
+                              <div class="cube-icon-row">
+                                <span class="cube-icon" style="--card-c:#8B5CF6;">⚡</span>
+                                <span class="cube-name">FastAPI</span>
+                              </div>
+                              <p class="cube-label" style="--card-c:#8B5CF6;">API_Engine_v2</p>
+                            </div>
+                            <div class="cube-left" style="background:rgba(139,92,246,0.2);border-color:rgba(139,92,246,0.3);"></div>
+                            <div class="cube-bottom"></div>
+                          </div>
+                        </div>
+
+                        <!-- Row 2: AI & Data Science -->
+                        <div class="cube-scene">
+                          <div class="iso-cube" style="--card-c:#8B5CF6;">
+                            <div class="cube-top" style="--card-c:#8B5CF6;">
+                              <div class="cube-line" style="--card-c:#8B5CF6;"></div>
+                              <div class="cube-icon-row">
+                                <span class="cube-icon" style="--card-c:#8B5CF6;">🧠</span>
+                                <span class="cube-name">Deep Learning</span>
+                              </div>
+                              <p class="cube-label" style="--card-c:#8B5CF6;">Neural_Net_v4</p>
+                            </div>
+                            <div class="cube-left" style="background:rgba(139,92,246,0.2);border-color:rgba(139,92,246,0.3);"></div>
+                            <div class="cube-bottom"></div>
+                          </div>
+                        </div>
+
+                        <div class="cube-scene">
+                          <div class="iso-cube" style="--card-c:#00E5FF;">
+                            <div class="cube-top" style="--card-c:#00E5FF;">
+                              <div class="cube-line" style="--card-c:#00E5FF;"></div>
+                              <div class="cube-icon-row">
+                                <span class="cube-icon" style="--card-c:#00E5FF;">🤖</span>
+                                <span class="cube-name">NLP</span>
+                              </div>
+                              <p class="cube-label" style="--card-c:#00E5FF;">Lang_Model_v3</p>
+                            </div>
+                            <div class="cube-left"></div>
+                            <div class="cube-bottom"></div>
+                          </div>
+                        </div>
+
+                        <div class="cube-scene">
+                          <div class="iso-cube" style="--card-c:#8B5CF6;">
+                            <div class="cube-top" style="--card-c:#8B5CF6;">
+                              <div class="cube-line" style="--card-c:#8B5CF6;"></div>
+                              <div class="cube-icon-row">
+                                <span class="cube-icon" style="--card-c:#8B5CF6;">📊</span>
+                                <span class="cube-name">Data Science</span>
+                              </div>
+                              <p class="cube-label" style="--card-c:#8B5CF6;">Analytics_v2</p>
+                            </div>
+                            <div class="cube-left" style="background:rgba(139,92,246,0.2);border-color:rgba(139,92,246,0.3);"></div>
+                            <div class="cube-bottom"></div>
+                          </div>
+                        </div>
+
+                        <div class="cube-scene">
+                          <div class="iso-cube" style="--card-c:#00E5FF;">
+                            <div class="cube-top" style="--card-c:#00E5FF;">
+                              <div class="cube-line" style="--card-c:#00E5FF;"></div>
+                              <div class="cube-icon-row">
+                                <span class="cube-icon" style="--card-c:#00E5FF;">👁️</span>
+                                <span class="cube-name">Computer Vision</span>
+                              </div>
+                              <p class="cube-label" style="--card-c:#00E5FF;">Vision_AI_v2</p>
+                            </div>
+                            <div class="cube-left"></div>
+                            <div class="cube-bottom"></div>
+                          </div>
+                        </div>
+
+                        <!-- Row 3: Tools & Cloud -->
+                        <div class="cube-scene">
+                          <div class="iso-cube" style="--card-c:#00E5FF;">
+                            <div class="cube-top" style="--card-c:#00E5FF;">
+                              <div class="cube-line" style="--card-c:#00E5FF;"></div>
+                              <div class="cube-icon-row">
+                                <span class="cube-icon" style="--card-c:#00E5FF;">☁️</span>
+                                <span class="cube-name">AWS Cloud</span>
+                              </div>
+                              <p class="cube-label" style="--card-c:#00E5FF;">Cloud_Infra_v1</p>
+                            </div>
+                            <div class="cube-left"></div>
+                            <div class="cube-bottom"></div>
+                          </div>
+                        </div>
+
+                        <div class="cube-scene">
+                          <div class="iso-cube" style="--card-c:#8B5CF6;">
+                            <div class="cube-top" style="--card-c:#8B5CF6;">
+                              <div class="cube-line" style="--card-c:#8B5CF6;"></div>
+                              <div class="cube-icon-row">
+                                <span class="cube-icon" style="--card-c:#8B5CF6;">✍️</span>
+                                <span class="cube-name">Prompt Eng.</span>
+                              </div>
+                              <p class="cube-label" style="--card-c:#8B5CF6;">LLM_Craft_v5</p>
+                            </div>
+                            <div class="cube-left" style="background:rgba(139,92,246,0.2);border-color:rgba(139,92,246,0.3);"></div>
+                            <div class="cube-bottom"></div>
+                          </div>
+                        </div>
+
+                        <div class="cube-scene">
+                          <div class="iso-cube" style="--card-c:#00E5FF;">
+                            <div class="cube-top" style="--card-c:#00E5FF;">
+                              <div class="cube-line" style="--card-c:#00E5FF;"></div>
+                              <div class="cube-icon-row">
+                                <span class="cube-icon" style="--card-c:#00E5FF;">🎬</span>
+                                <span class="cube-name">AI Automation</span>
+                              </div>
+                              <p class="cube-label" style="--card-c:#00E5FF;">Pipeline_v3</p>
+                            </div>
+                            <div class="cube-left"></div>
+                            <div class="cube-bottom"></div>
+                          </div>
+                        </div>
+
+                        <div class="cube-scene">
+                          <div class="iso-cube" style="--card-c:#8B5CF6;">
+                            <div class="cube-top" style="--card-c:#8B5CF6;">
+                              <div class="cube-line" style="--card-c:#8B5CF6;"></div>
+                              <div class="cube-icon-row">
+                                <span class="cube-icon" style="--card-c:#8B5CF6;">🧬</span>
+                                <span class="cube-name">TensorFlow</span>
+                              </div>
+                              <p class="cube-label" style="--card-c:#8B5CF6;">ML_Frame_v2</p>
+                            </div>
+                            <div class="cube-left" style="background:rgba(139,92,246,0.2);border-color:rgba(139,92,246,0.3);"></div>
+                            <div class="cube-bottom"></div>
+                          </div>
+                        </div>
+
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
 <script>
-// ── HOLOGRAPHIC CARD 3D MOUSE PHYSICS ──
+// ── ISO MOUSE TRACKING (subtle ±3° nudge) ──
 (function() {
-    document.querySelectorAll('.hs-card').forEach(card => {
-        card.addEventListener('mousemove', function(e) {
-            const rect = card.getBoundingClientRect();
-            const cx = rect.left + rect.width  / 2;
-            const cy = rect.top  + rect.height / 2;
-            const dx = (e.clientX - cx) / (rect.width  / 2);   // -1 to 1
-            const dy = (e.clientY - cy) / (rect.height / 2);   // -1 to 1
-            const maxDeg = 22;
-            const rotY =  dx * maxDeg;
-            const rotX = -dy * maxDeg;
-            card.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg)`;
-        });
-        card.addEventListener('mouseleave', function() {
-            card.style.transition = 'transform 0.5s cubic-bezier(0.23,1,0.32,1), border-color 0.3s ease, box-shadow 0.3s ease';
-            card.style.transform  = 'rotateX(0deg) rotateY(0deg)';
-            setTimeout(() => { card.style.transition = ''; }, 500);
-        });
-        card.addEventListener('mouseenter', function() {
-            card.style.transition = 'transform 0.1s ease-out, border-color 0.3s ease, box-shadow 0.3s ease';
-        });
+    var wrapper = document.getElementById('isoWrapper');
+    var section = document.getElementById('card-3');
+    if (!wrapper || !section) return;
+    var BASE_X = 55, BASE_Z = -45;
+    var targetX = BASE_X, targetZ = BASE_Z;
+    var currentX = BASE_X, currentZ = BASE_Z;
+    var animating = false;
+    var isMobile = window.innerWidth <= 900;
+    window.addEventListener('resize', function(){ isMobile = window.innerWidth <= 900; });
+
+    section.addEventListener('mousemove', function(e) {
+        if (isMobile) return;
+        var rect = section.getBoundingClientRect();
+        var mx = (e.clientX - rect.left) / rect.width  - 0.5;  // -0.5 to 0.5
+        var my = (e.clientY - rect.top)  / rect.height - 0.5;
+        var MAX = 3;
+        targetX = BASE_X + my * MAX * -1;
+        targetZ = BASE_Z + mx * MAX;
+        if (!animating) { animating = true; nudge(); }
     });
+
+    section.addEventListener('mouseleave', function() {
+        targetX = BASE_X; targetZ = BASE_Z;
+    });
+
+    function nudge() {
+        currentX += (targetX - currentX) * 0.08;
+        currentZ += (targetZ - currentZ) * 0.08;
+        if (!isMobile) {
+            wrapper.style.transform = 'rotateX('+currentX+'deg) rotateY(0deg) rotateZ('+currentZ+'deg)';
+        }
+        var dX = Math.abs(targetX - currentX);
+        var dZ = Math.abs(targetZ - currentZ);
+        if (dX > 0.02 || dZ > 0.02) {
+            requestAnimationFrame(nudge);
+        } else {
+            animating = false;
+            currentX = targetX; currentZ = targetZ;
+            if (!isMobile) {
+                wrapper.style.transform = 'rotateX('+currentX+'deg) rotateY(0deg) rotateZ('+currentZ+'deg)';
+            }
+        }
+    }
 })();
 </script>
 </section>
