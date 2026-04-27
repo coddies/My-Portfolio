@@ -170,141 +170,179 @@
      CARD 3 — SKILLS
 ════════════════════════════ -->
 <section id="card-3" class="card state-below">
+<style>
+/* ── HOLOGRAPHIC 3D SKILLS ── */
+.holo-skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 24px;
+    perspective: 1200px;
+    padding: 10px 0 20px 0;
+}
+.holo-card {
+    position: relative;
+    background: rgba(255,255,255,0.04);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 22px;
+    height: 190px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform-style: preserve-3d;
+    transform: rotateX(10deg) rotateY(-6deg);
+    transition: transform 0.5s cubic-bezier(0.23,1,0.32,1),
+                border-color 0.4s ease,
+                box-shadow 0.4s ease;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    cursor: default;
+    overflow: hidden;
+}
+.holo-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 22px;
+    background: linear-gradient(135deg,rgba(255,255,255,0.07) 0%,rgba(255,255,255,0) 60%);
+    pointer-events: none;
+    z-index: 1;
+}
+.holo-card::after {
+    content: '';
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: radial-gradient(circle at 50% 50%, var(--card-glow,rgba(0,229,255,0.08)) 0%,transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+.holo-card:hover::after { opacity: 1; }
+.holo-card:hover {
+    transform: rotateX(0deg) rotateY(0deg) translateZ(14px) scale(1.05);
+    border-color: var(--card-color, var(--cyan));
+    box-shadow: 0 28px 64px rgba(0,0,0,0.5),
+                0 0 28px var(--card-glow, rgba(0,229,255,0.2));
+}
+.holo-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    transform-style: preserve-3d;
+    transform: translateZ(44px);
+    position: relative;
+    z-index: 2;
+}
+.holo-icon {
+    font-size: 48px;
+    line-height: 1;
+    filter: drop-shadow(0 8px 20px var(--card-glow, rgba(0,229,255,0.7)));
+    transition: filter 0.4s ease, transform 0.4s ease;
+}
+.holo-card:hover .holo-icon {
+    filter: drop-shadow(0 12px 30px var(--card-glow, rgba(0,229,255,0.9)));
+    transform: translateY(-4px) scale(1.1);
+}
+.holo-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.6);
+}
+.holo-line {
+    position: absolute;
+    bottom: 0; left: 10%;
+    width: 80%; height: 2px;
+    border-radius: 99px;
+    background: var(--card-color, var(--cyan));
+    box-shadow: 0 0 10px var(--card-glow, rgba(0,229,255,0.7));
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+.holo-card:hover .holo-line { opacity: 1; }
+@media (max-width: 768px) {
+    .holo-skills-grid { grid-template-columns: repeat(2,1fr); gap: 14px; }
+    .holo-card { height: 148px; transform: none; border-radius: 16px; }
+    .holo-content { transform: translateZ(0); }
+    .holo-icon { font-size: 36px; }
+    .holo-title { font-size: 12px; }
+}
+@media (max-width: 400px) {
+    .holo-skills-grid { gap: 10px; }
+    .holo-card { height: 130px; }
+}
+</style>
+
     <div class="card-inner">
-        <div style="width:100%; max-width:1100px; padding: 20px;">
-            <div class="section-header" style="text-align: center; margin-bottom: 50px;">
-                <span class="tagline" style="color: var(--cyan); text-shadow: 0 0 10px var(--cyan);">MY 3D TOOLKIT</span>
-                <h2 class="section-title" style="font-size: clamp(32px, 5vw, 48px);">Skills & Expertise</h2>
-                <div class="accent-line" style="margin: 0 auto; box-shadow: 0 0 15px var(--cyan);"></div>
+        <div style="width:100%; max-width:1100px; padding:10px 20px 20px;">
+
+            <div class="section-header" style="text-align:center; margin-bottom:40px;">
+                <span class="tagline" style="color:var(--cyan); text-shadow:0 0 12px var(--cyan); letter-spacing:4px;">HOLOGRAPHIC TOOLKIT</span>
+                <h2 class="section-title" style="font-size:clamp(30px,5vw,46px);">Skills &amp; Expertise</h2>
+                <div class="accent-line" style="margin:0 auto; box-shadow:0 0 18px var(--cyan);"></div>
             </div>
-            
-            <div class="skills-3d-grid">
-                
-                <!-- CORE DEV -->
-                <div class="skill-3d-card" data-color="#00E5FF">
-                    <div class="skill-3d-content">
-                        <span class="skill-3d-icon">🐍</span>
-                        <span class="skill-3d-title">Python</span>
-                    </div>
-                </div>
-                <div class="skill-3d-card" data-color="#8B5CF6">
-                    <div class="skill-3d-content">
-                        <span class="skill-3d-icon">🌐</span>
-                        <span class="skill-3d-title">HTML/CSS/JS</span>
-                    </div>
-                </div>
-                <div class="skill-3d-card" data-color="#00E5FF">
-                    <div class="skill-3d-content">
-                        <span class="skill-3d-icon">🗄️</span>
-                        <span class="skill-3d-title">SQL/Database</span>
-                    </div>
-                </div>
-                <div class="skill-3d-card" data-color="#8B5CF6">
-                    <div class="skill-3d-content">
-                        <span class="skill-3d-icon">⚡</span>
-                        <span class="skill-3d-title">FastAPI</span>
-                    </div>
-                </div>
 
-                <!-- AI & DATA SCIENCE -->
-                <div class="skill-3d-card" data-color="#8B5CF6">
-                    <div class="skill-3d-content">
-                        <span class="skill-3d-icon">🧠</span>
-                        <span class="skill-3d-title">Deep Learning</span>
-                    </div>
+            <div class="holo-skills-grid">
+                <!-- Core Dev -->
+                <div class="holo-card" style="--card-color:#00E5FF;--card-glow:rgba(0,229,255,0.25);">
+                    <div class="holo-content"><span class="holo-icon">🐍</span><span class="holo-title">Python</span></div>
+                    <div class="holo-line"></div>
                 </div>
-                <div class="skill-3d-card" data-color="#00E5FF">
-                    <div class="skill-3d-content">
-                        <span class="skill-3d-icon">🤖</span>
-                        <span class="skill-3d-title">NLP</span>
-                    </div>
+                <div class="holo-card" style="--card-color:#8B5CF6;--card-glow:rgba(139,92,246,0.25);">
+                    <div class="holo-content"><span class="holo-icon">🌐</span><span class="holo-title">HTML/CSS/JS</span></div>
+                    <div class="holo-line"></div>
                 </div>
-                <div class="skill-3d-card" data-color="#8B5CF6">
-                    <div class="skill-3d-content">
-                        <span class="skill-3d-icon">📊</span>
-                        <span class="skill-3d-title">Data Science</span>
-                    </div>
+                <div class="holo-card" style="--card-color:#00E5FF;--card-glow:rgba(0,229,255,0.25);">
+                    <div class="holo-content"><span class="holo-icon">🗄️</span><span class="holo-title">SQL / Database</span></div>
+                    <div class="holo-line"></div>
                 </div>
-                <div class="skill-3d-card" data-color="#00E5FF">
-                    <div class="skill-3d-content">
-                        <span class="skill-3d-icon">👁️</span>
-                        <span class="skill-3d-title">Computer Vision</span>
-                    </div>
+                <div class="holo-card" style="--card-color:#8B5CF6;--card-glow:rgba(139,92,246,0.25);">
+                    <div class="holo-content"><span class="holo-icon">⚡</span><span class="holo-title">FastAPI</span></div>
+                    <div class="holo-line"></div>
                 </div>
-
-                <!-- TOOLS & CLOUD -->
-                <div class="skill-3d-card" data-color="#00E5FF">
-                    <div class="skill-3d-content">
-                        <span class="skill-3d-icon">☁️</span>
-                        <span class="skill-3d-title">AWS Cloud</span>
-                    </div>
+                <!-- AI & Data Science -->
+                <div class="holo-card" style="--card-color:#8B5CF6;--card-glow:rgba(139,92,246,0.25);">
+                    <div class="holo-content"><span class="holo-icon">🧠</span><span class="holo-title">Deep Learning</span></div>
+                    <div class="holo-line"></div>
                 </div>
-                <div class="skill-3d-card" data-color="#8B5CF6">
-                    <div class="skill-3d-content">
-                        <span class="skill-3d-icon">✍️</span>
-                        <span class="skill-3d-title">Prompt Eng.</span>
-                    </div>
+                <div class="holo-card" style="--card-color:#00E5FF;--card-glow:rgba(0,229,255,0.25);">
+                    <div class="holo-content"><span class="holo-icon">🤖</span><span class="holo-title">NLP</span></div>
+                    <div class="holo-line"></div>
                 </div>
-                <div class="skill-3d-card" data-color="#00E5FF">
-                    <div class="skill-3d-content">
-                        <span class="skill-3d-icon">🎬</span>
-                        <span class="skill-3d-title">AI Automation</span>
-                    </div>
+                <div class="holo-card" style="--card-color:#8B5CF6;--card-glow:rgba(139,92,246,0.25);">
+                    <div class="holo-content"><span class="holo-icon">📊</span><span class="holo-title">Data Science</span></div>
+                    <div class="holo-line"></div>
                 </div>
-                <div class="skill-3d-card" data-color="#8B5CF6">
-                    <div class="skill-3d-content">
-                        <span class="skill-3d-icon">🧬</span>
-                        <span class="skill-3d-title">TensorFlow</span>
-                    </div>
+                <div class="holo-card" style="--card-color:#00E5FF;--card-glow:rgba(0,229,255,0.25);">
+                    <div class="holo-content"><span class="holo-icon">👁️</span><span class="holo-title">Computer Vision</span></div>
+                    <div class="holo-line"></div>
                 </div>
-
-            
-            
-            
-
-</div>
+                <!-- Tools & Cloud -->
+                <div class="holo-card" style="--card-color:#00E5FF;--card-glow:rgba(0,229,255,0.25);">
+                    <div class="holo-content"><span class="holo-icon">☁️</span><span class="holo-title">AWS Cloud</span></div>
+                    <div class="holo-line"></div>
+                </div>
+                <div class="holo-card" style="--card-color:#8B5CF6;--card-glow:rgba(139,92,246,0.25);">
+                    <div class="holo-content"><span class="holo-icon">✍️</span><span class="holo-title">Prompt Eng.</span></div>
+                    <div class="holo-line"></div>
+                </div>
+                <div class="holo-card" style="--card-color:#00E5FF;--card-glow:rgba(0,229,255,0.25);">
+                    <div class="holo-content"><span class="holo-icon">🎬</span><span class="holo-title">AI Automation</span></div>
+                    <div class="holo-line"></div>
+                </div>
+                <div class="holo-card" style="--card-color:#8B5CF6;--card-glow:rgba(139,92,246,0.25);">
+                    <div class="holo-content"><span class="holo-icon">🧬</span><span class="holo-title">TensorFlow</span></div>
+                    <div class="holo-line"></div>
+                </div>
+            </div>
         </div>
-    <!-- ── PROTOTYPE 1: HOLOGRAPHIC PARALLAX CARDS ── -->
-            <div style="margin-top: 100px; padding-top: 60px; border-top: 1px dashed rgba(0, 229, 255, 0.3);">
-                <div style="text-align: center; margin-bottom: 40px;">
-                    <h3 style="color: var(--cyan); font-family: 'Syne', sans-serif; font-size: 28px; letter-spacing: 2px;">PROTOTYPE 1: HOLOGRAPHIC PARALLAX</h3>
-                    <p style="color: var(--text-muted); font-size: 14px; margin-top: 10px;">Depth Illusion with Glassmorphism & Floating Elements</p>
-                </div>
-                <div class="p1-grid">
-                    <div class="p1-card"><div class="p1-content"><span class="p1-icon">🐍</span><span class="p1-title">Python</span></div></div><div class="p1-card"><div class="p1-content"><span class="p1-icon">🌐</span><span class="p1-title">HTML/CSS/JS</span></div></div><div class="p1-card"><div class="p1-content"><span class="p1-icon">🗄️</span><span class="p1-title">SQL/Database</span></div></div><div class="p1-card"><div class="p1-content"><span class="p1-icon">⚡</span><span class="p1-title">FastAPI</span></div></div><div class="p1-card"><div class="p1-content"><span class="p1-icon">🧠</span><span class="p1-title">Deep Learning</span></div></div><div class="p1-card"><div class="p1-content"><span class="p1-icon">🤖</span><span class="p1-title">NLP</span></div></div><div class="p1-card"><div class="p1-content"><span class="p1-icon">📊</span><span class="p1-title">Data Science</span></div></div><div class="p1-card"><div class="p1-content"><span class="p1-icon">👁️</span><span class="p1-title">Computer Vision</span></div></div><div class="p1-card"><div class="p1-content"><span class="p1-icon">☁️</span><span class="p1-title">AWS Cloud</span></div></div><div class="p1-card"><div class="p1-content"><span class="p1-icon">✍️</span><span class="p1-title">Prompt Eng.</span></div></div><div class="p1-card"><div class="p1-content"><span class="p1-icon">🎬</span><span class="p1-title">AI Automation</span></div></div><div class="p1-card"><div class="p1-content"><span class="p1-icon">🧬</span><span class="p1-title">TensorFlow</span></div></div>
-                </div>
-            </div>
-
-            <!-- ── PROTOTYPE 2: FLOATING ISOMETRIC TECH NODES ── -->
-            <div style="margin-top: 150px; padding-top: 60px; border-top: 1px dashed rgba(139, 92, 246, 0.3); padding-bottom: 150px;">
-                <div style="text-align: center; margin-bottom: 80px;">
-                    <h3 style="color: var(--purple); font-family: 'Syne', sans-serif; font-size: 28px; letter-spacing: 2px;">PROTOTYPE 2: ISOMETRIC TECH NODES</h3>
-                    <p style="color: var(--text-muted); font-size: 14px; margin-top: 10px;">Isometric Cyber-Matrix with 3D Glowing Platforms</p>
-                </div>
-                <div class="p2-iso-container">
-                    <div class="p2-iso-node"><div class="p2-node-top">🐍</div><div class="p2-node-side p2-side-right"></div><div class="p2-node-side p2-side-left"></div><span class="p2-node-label">Python</span></div><div class="p2-iso-node"><div class="p2-node-top">🌐</div><div class="p2-node-side p2-side-right"></div><div class="p2-node-side p2-side-left"></div><span class="p2-node-label">HTML/CSS/JS</span></div><div class="p2-iso-node"><div class="p2-node-top">🗄️</div><div class="p2-node-side p2-side-right"></div><div class="p2-node-side p2-side-left"></div><span class="p2-node-label">SQL/Database</span></div><div class="p2-iso-node"><div class="p2-node-top">⚡</div><div class="p2-node-side p2-side-right"></div><div class="p2-node-side p2-side-left"></div><span class="p2-node-label">FastAPI</span></div><div class="p2-iso-node"><div class="p2-node-top">🧠</div><div class="p2-node-side p2-side-right"></div><div class="p2-node-side p2-side-left"></div><span class="p2-node-label">Deep Learning</span></div><div class="p2-iso-node"><div class="p2-node-top">🤖</div><div class="p2-node-side p2-side-right"></div><div class="p2-node-side p2-side-left"></div><span class="p2-node-label">NLP</span></div><div class="p2-iso-node"><div class="p2-node-top">📊</div><div class="p2-node-side p2-side-right"></div><div class="p2-node-side p2-side-left"></div><span class="p2-node-label">Data Science</span></div><div class="p2-iso-node"><div class="p2-node-top">👁️</div><div class="p2-node-side p2-side-right"></div><div class="p2-node-side p2-side-left"></div><span class="p2-node-label">Computer Vision</span></div><div class="p2-iso-node"><div class="p2-node-top">☁️</div><div class="p2-node-side p2-side-right"></div><div class="p2-node-side p2-side-left"></div><span class="p2-node-label">AWS Cloud</span></div><div class="p2-iso-node"><div class="p2-node-top">✍️</div><div class="p2-node-side p2-side-right"></div><div class="p2-node-side p2-side-left"></div><span class="p2-node-label">Prompt Eng.</span></div><div class="p2-iso-node"><div class="p2-node-top">🎬</div><div class="p2-node-side p2-side-right"></div><div class="p2-node-side p2-side-left"></div><span class="p2-node-label">AI Automation</span></div><div class="p2-iso-node"><div class="p2-node-top">🧬</div><div class="p2-node-side p2-side-right"></div><div class="p2-node-side p2-side-left"></div><span class="p2-node-label">TensorFlow</span></div>
-                </div>
-            </div>
-
-            <style>
-                /* P1 STYLES */
-                .p1-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 40px; perspective: 1200px; padding: 20px; }
-                .p1-card { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 24px; height: 220px; display: flex; align-items: center; justify-content: center; transform-style: preserve-3d; transform: rotateX(15deg) rotateY(-15deg); transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); }
-                .p1-card:hover { transform: rotateX(0deg) rotateY(0deg) translateZ(20px); border-color: var(--cyan); box-shadow: 0 0 30px rgba(0, 229, 255, 0.2); }
-                .p1-content { transform: translateZ(60px); display: flex; flex-direction: column; align-items: center; transform-style: preserve-3d; }
-                .p1-icon { font-size: 60px; margin-bottom: 15px; filter: drop-shadow(0 15px 20px rgba(0, 229, 255, 0.7)); }
-                .p1-title { font-weight: 800; color: white; letter-spacing: 1.5px; font-size: 18px; text-shadow: 0 5px 15px rgba(0,0,0,0.5); }
-
-                /* P2 STYLES */
-                .p2-iso-container { display: flex; justify-content: center; gap: 120px; flex-wrap: wrap; padding: 60px; }
-                .p2-iso-node { position: relative; width: 90px; height: 90px; transform: rotateX(60deg) rotateZ(-45deg); transform-style: preserve-3d; transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1); }
-                .p2-iso-node:hover { transform: rotateX(60deg) rotateZ(-45deg) translateZ(30px); }
-                .p2-node-top { position: absolute; inset: 0; background: var(--cyan); display: flex; align-items: center; justify-content: center; font-size: 40px; box-shadow: inset 0 0 20px rgba(0,0,0,0.3), 0 0 40px var(--cyan); z-index: 3; }
-                .p2-node-side { position: absolute; background: var(--purple); filter: brightness(0.4); }
-                .p2-side-right { width: 30px; height: 100%; top: 0; left: 100%; transform-origin: left; transform: rotateY(90deg); }
-                .p2-side-left { width: 100%; height: 30px; top: 100%; left: 0; transform-origin: top; transform: rotateX(-90deg); }
-                .p2-node-label { position: absolute; top: 150%; left: 50%; transform: rotateZ(45deg) rotateX(-60deg) translateX(-50%); color: var(--cyan); white-space: nowrap; font-weight: 900; font-size: 16px; text-transform: uppercase; letter-spacing: 1px; text-shadow: 0 0 10px rgba(0,229,255,0.5); }
-            </style></div>
+    </div>
 </section>
 
 <!-- ════════════════════════════
