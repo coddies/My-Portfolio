@@ -351,3 +351,32 @@ if (document.getElementById('csModalClose')) document.getElementById('csModalClo
       card.addEventListener('mouseenter', () => { card.style.transition = 'transform 0.1s ease-out'; });
   });
 })();
+
+// ── NEURAL MATRIX ABOUT EXTRAS ──
+(function() {
+  const headers = ['SYSTEM_KERNEL_INFO', 'AI_ARCHITECT_LAB', 'NEURAL_SYNC_ACTIVE', 'BURHAN_OS_v2.0'];
+  let hIdx = 0;
+  const hEl = document.getElementById('dynamic-header');
+  if (hEl) {
+      setInterval(() => {
+          hIdx = (hIdx + 1) % headers.length;
+          hEl.style.opacity = 0;
+          setTimeout(() => { hEl.textContent = headers[hIdx]; hEl.style.opacity = 1; }, 300);
+      }, 3000);
+  }
+
+  const roles = ['Data Scientist', 'ML Engineer', 'Neural Architect', 'Microsoft Learn Student Ambassador'];
+  let rIdx = 0, cIdx = 0, del = false;
+  const rEl = document.getElementById('typewriter-roles');
+  function typeRoles() {
+      if (!rEl) return;
+      const word = roles[rIdx];
+      if (del) cIdx--; else cIdx++;
+      rEl.textContent = word.substring(0, cIdx);
+      let speed = del ? 30 : 80;
+      if (!del && cIdx === word.length) { speed = 2000; del = true; }
+      if (del && cIdx === 0) { del = false; rIdx = (rIdx + 1) % roles.length; speed = 400; }
+      setTimeout(typeRoles, speed);
+  }
+  if (rEl) setTimeout(typeRoles, 1000);
+})();
