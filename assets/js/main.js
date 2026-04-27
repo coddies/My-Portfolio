@@ -155,7 +155,7 @@ if (swipeHint && window.innerWidth <= 768) {
 }
 
 // ── TYPEWRITER ──
-const phrases   = ['AI Developer', 'Data Scientist', 'Neural Architect', 'Microsoft Learn Student Ambassador', 'AWS Hackathon Participant', 'Problem Solver', 'Content Creator', 'Prompt Engineer', 'Vibe Coder'];
+const phrases   = ['AI Developer', 'Data Scientist', 'Neural Architect', 'Microsoft Learn Student Ambassador'];
 let phraseIdx   = 0; let charIdx = 0; let isDeleting = false;
 const typeEl    = document.getElementById('typewriter');
 
@@ -1555,31 +1555,31 @@ if (dotWrap && ringWrap && window.matchMedia('(pointer: fine)').matches) {
     var tRocket = document.getElementById('mb-trans-rocket');
     if (!tLeft || !tRight || !tRocket) return callback && callback();
 
-    // Reset rocket animation
+    // Reset rocket animation (1.0s duration)
     tRocket.style.animation = 'none';
     tRocket.offsetHeight; // force reflow
-    tRocket.style.animation = 'mbTransLaunch 0.55s ease-in forwards';
+    tRocket.style.animation = 'mbTransLaunch 1.0s ease-in forwards';
 
-    // At 250ms — panels slide IN
+    // At 400ms — panels slide IN
     setTimeout(function() {
-      tLeft.style.transition  = 'transform 0.3s ease-in';
-      tRight.style.transition = 'transform 0.3s ease-in';
+      tLeft.style.transition  = 'transform 0.4s ease-in';
+      tRight.style.transition = 'transform 0.4s ease-in';
       tLeft.style.transform   = 'translateX(0)';
       tRight.style.transform  = 'translateX(0)';
-    }, 250);
+    }, 400);
 
-    // At 550ms — call original section switch
+    // At 850ms — call original section switch (panels are fully closed)
     setTimeout(function() {
       if (callback) callback();
-    }, 550);
+    }, 850);
 
-    // At 700ms — panels slide OUT
+    // At 1000ms — panels slide OUT
     setTimeout(function() {
-      tLeft.style.transition  = 'transform 0.4s ease-out';
-      tRight.style.transition = 'transform 0.4s ease-out';
+      tLeft.style.transition  = 'transform 0.5s ease-out';
+      tRight.style.transition = 'transform 0.5s ease-out';
       tLeft.style.transform   = 'translateX(-100%)';
       tRight.style.transform  = 'translateX(100%)';
-    }, 700);
+    }, 1000);
   };
 
   // ─────────────────────────────────────────
