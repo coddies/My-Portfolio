@@ -199,88 +199,7 @@
   max-width: 900px;
 }
 
-@media (max-width: 768px) {
 
-  .skill-section-title {
-    font-size: 0.9rem !important;
-    letter-spacing: 0.1em !important;
-    text-align: center !important;
-    padding: 0 12px !important;
-  }
-
-  .skill-section-sub {
-    font-size: 0.5rem !important;
-    letter-spacing: 0.15em !important;
-    text-align: center !important;
-    padding: 0 12px !important;
-  }
-
-  .skill-universe {
-    padding: 20px 0 60px 0 !important;
-    overflow: hidden !important;
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    justify-content: center !important;
-    width: 100vw !important;
-  }
-
-  .iso-grid {
-    grid-template-columns: repeat(2, 100px) !important;
-    gap: 20px !important;
-    transform: rotateX(50deg) rotateZ(-45deg) scale(0.75) !important;
-    transform-origin: center center !important;
-    margin: 0 auto !important;
-    width: fit-content !important;
-    /* Push grid left so it appears centered after isometric rotation */
-    position: relative !important;
-    left: -40px !important;
-  }
-
-  .hybrid-cube {
-    width: 100px !important;
-    height: 100px !important;
-  }
-
-  .hybrid-cube .pop-icon {
-    width: 32px !important;
-    height: 32px !important;
-    margin-bottom: 6px !important;
-  }
-
-  .hybrid-cube .pop-icon .material-symbols-outlined {
-    font-size: 18px !important;
-  }
-
-  .hybrid-cube h3 {
-    font-size: 0.5rem !important;
-    letter-spacing: 0.08em !important;
-  }
-
-  .hybrid-cube:hover {
-    transform: translateY(-10px) scale(1.06) !important;
-  }
-
-  .cube-left {
-    width: 14px !important;
-  }
-
-  .cube-bottom {
-    height: 14px !important;
-  }
-}
-
-@media (max-width: 400px) {
-  .iso-grid {
-    grid-template-columns: repeat(2, 85px) !important;
-    gap: 16px !important;
-    transform: rotateX(50deg) rotateZ(-45deg) scale(0.65) !important;
-    left: -30px !important;
-  }
-  .hybrid-cube {
-    width: 85px !important;
-    height: 85px !important;
-  }
 }
 
 .hybrid-cube {
@@ -392,6 +311,89 @@
   text-transform: uppercase;
   margin-bottom: 0;
 }
+
+@media (max-width: 768px) {
+
+  .skill-section-title {
+    font-size: 0.9rem !important;
+    letter-spacing: 0.1em !important;
+    text-align: center !important;
+    padding: 0 12px !important;
+  }
+
+  .skill-section-sub {
+    font-size: 0.5rem !important;
+    letter-spacing: 0.15em !important;
+    text-align: center !important;
+    padding: 0 12px !important;
+  }
+
+  .skill-universe {
+    padding: 20px 0 60px 0 !important;
+    overflow: hidden !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100vw !important;
+  }
+
+  .iso-grid {
+    grid-template-columns: repeat(2, 100px) !important;
+    gap: 20px !important;
+    transform: rotateX(50deg) rotateZ(-45deg) scale(0.75) !important;
+    transform-origin: center center !important;
+    margin: 0 auto !important;
+    width: fit-content !important;
+    /* Push grid left so it appears centered after isometric rotation */
+    position: relative !important;
+    left: -40px !important;
+  }
+
+  .hybrid-cube {
+    width: 100px !important;
+    height: 100px !important;
+  }
+
+  .hybrid-cube .pop-icon {
+    width: 32px !important;
+    height: 32px !important;
+    margin-bottom: 6px !important;
+  }
+
+  .hybrid-cube .pop-icon .material-symbols-outlined {
+    font-size: 18px !important;
+  }
+
+  .hybrid-cube h3 {
+    font-size: 0.5rem !important;
+    letter-spacing: 0.08em !important;
+  }
+
+  .hybrid-cube:hover {
+    transform: translateY(-10px) scale(1.06) !important;
+  }
+
+  .cube-left {
+    width: 14px !important;
+  }
+
+  .cube-bottom {
+    height: 14px !important;
+  }
+}
+
+@media (max-width: 400px) {
+  .iso-grid {
+    grid-template-columns: repeat(2, 85px) !important;
+    gap: 16px !important;
+    transform: rotateX(50deg) rotateZ(-45deg) scale(0.65) !important;
+    left: -30px !important;
+  }
+  .hybrid-cube {
+    width: 85px !important;
+    height: 85px !important;
+  }
 </style>
 
 <div class="card-inner w-full">
