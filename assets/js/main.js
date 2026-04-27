@@ -93,15 +93,19 @@ function updateCards(nextIndex) {
     setTimeout(() => { isTransitioning = false; }, 1000);
 }
 
-navBtns.forEach((btn, idx) => { btn.addEventListener('click', () => updateCards(idx)); });
+// Keep a stable reference to the original card switcher.
+// Later animation wrappers must call this base function only.
+window.__baseUpdateCards = updateCards;
+
+navBtns.forEach((btn, idx) => { btn.addEventListener('click', () => { if (typeof mbRocketTransition === 'function') { mbRocketTransition(() => window.__baseUpdateCards(idx)); } else { window.__baseUpdateCards(idx); } }); });
 
 // Keyboard: Arrow Right / Arrow Left for navigation
 window.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowRight' && currentIndex < cards.length - 1) updateCards(currentIndex + 1);
-    if (e.key === 'ArrowLeft'  && currentIndex > 0)               updateCards(currentIndex - 1);
+    if (e.key === 'ArrowRight' && currentIndex < cards.length - 1) { if (typeof mbRocketTransition === 'function') mbRocketTransition(() => window.__baseUpdateCards(currentIndex + 1)); else window.__baseUpdateCards(currentIndex + 1); }
+    if (e.key === 'ArrowLeft'  && currentIndex > 0) { if (typeof mbRocketTransition === 'function') mbRocketTransition(() => window.__baseUpdateCards(currentIndex - 1)); else window.__baseUpdateCards(currentIndex - 1); }
     // Keep up/down as well for backward compat
-    if (e.key === 'ArrowDown' && currentIndex < cards.length - 1) updateCards(currentIndex + 1);
-    if (e.key === 'ArrowUp'   && currentIndex > 0)               updateCards(currentIndex - 1);
+    if (e.key === 'ArrowDown' && currentIndex < cards.length - 1) { if (typeof mbRocketTransition === 'function') mbRocketTransition(() => window.__baseUpdateCards(currentIndex + 1)); else window.__baseUpdateCards(currentIndex + 1); }
+    if (e.key === 'ArrowUp'   && currentIndex > 0) { if (typeof mbRocketTransition === 'function') mbRocketTransition(() => window.__baseUpdateCards(currentIndex - 1)); else window.__baseUpdateCards(currentIndex - 1); }
 });
 
 // ── TOUCH SWIPE GESTURE ──
@@ -124,9 +128,9 @@ document.addEventListener('touchend', (e) => {
     // Minimum swipe: 50px horizontal, must be mostly horizontal, under 500ms
     if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5 && dt < 500) {
         if (dx < 0) {
-            updateCards(currentIndex + 1); // swipe left = next
+            if (typeof mbRocketTransition === 'function') mbRocketTransition(() => window.__baseUpdateCards(currentIndex + 1)); else window.__baseUpdateCards(currentIndex + 1); // swipe left = next
         } else {
-            updateCards(currentIndex - 1); // swipe right = prev
+            if (typeof mbRocketTransition === 'function') mbRocketTransition(() => window.__baseUpdateCards(currentIndex - 1)); else window.__baseUpdateCards(currentIndex - 1); // swipe right = prev
         }
     }
 }, { passive: true });
@@ -566,81 +570,6 @@ if (dotWrap && ringWrap && window.matchMedia('(pointer: fine)').matches) {
 
 (function() {
     'use strict';
-
-    // === ROCKET LOADER ===
-    document.addEventListener('DOMContentLoaded', function() {
-
-      var loader = document.createElement('div');
-      loader.id = 'mb-loader';
-      loader.innerHTML =
-        '<div id="mb-stars"></div>' +
-        '<div id="mb-content">' +
-          '<div id="mb-name">Muhammad Burhan</div>' +
-          '<div id="mb-subtitle">AI &amp; Data Science</div>' +
-          '<div id="mb-rocket">' +
-            '<svg width="54" height="96" viewBox="0 0 54 96" xmlns="http://www.w3.org/2000/svg">' +
-              '<ellipse cx="27" cy="38" rx="13" ry="23" fill="white"/>' +
-              '<polygon points="27,4 14,22 40,22" fill="white"/>' +
-              '<circle cx="27" cy="33" r="7" fill="#00D4FF" opacity="0.85"/>' +
-              '<circle cx="27" cy="33" r="4.5" fill="#050610"/>' +
-              '<polygon points="14,54 3,76 14,64" fill="#00D4FF"/>' +
-              '<polygon points="40,54 51,76 40,64" fill="#00D4FF"/>' +
-              '<ellipse cx="27" cy="68" rx="9" ry="15" fill="#FF6B00" class="fl-o"/>' +
-              '<ellipse cx="27" cy="66" rx="6" ry="10" fill="#FFD700" class="fl-i"/>' +
-              '<ellipse cx="27" cy="64" rx="3.5" ry="6" fill="white"/>' +
-            '</svg>' +
-          '</div>' +
-        '</div>' +
-        '<div id="mb-tear-top"></div>' +
-        '<div id="mb-tear-bottom"></div>' +
-        '<div id="mb-tear-line"></div>';
-
-      document.body.prepend(loader);
-      document.body.style.overflow = 'hidden';
-
-      // 60 random star dots
-      var sc = document.getElementById('mb-stars');
-      for (var i = 0; i < 60; i++) {
-        var s = document.createElement('div');
-        var sz = Math.random() * 2 + 0.5;
-        s.style.cssText = 'position:absolute;width:'+sz+'px;height:'+sz+'px;background:white;border-radius:50%;top:'+(Math.random()*100)+'%;left:'+(Math.random()*100)+'%;opacity:'+(Math.random()*0.6+0.2)+';';
-        sc.appendChild(s);
-      }
-
-      // Phase 2 - Launch at 2500ms
-      setTimeout(function() {
-        var rocket = document.getElementById('mb-rocket');
-        var content = document.getElementById('mb-content');
-        if (rocket) rocket.classList.add('mb-launching');
-        if (content) { content.style.transition = 'opacity 0.5s ease'; content.style.opacity = '0'; }
-      }, 2500);
-
-      // Phase 3 - Tear at 3200ms
-      setTimeout(function() {
-        var line = document.getElementById('mb-tear-line');
-        if (line) {
-          line.style.opacity = '1';
-          line.getBoundingClientRect();
-          line.style.transition = 'height 0.35s ease-out';
-          line.style.height = '100vh';
-        }
-        setTimeout(function() {
-          var top = document.getElementById('mb-tear-top');
-          var bot = document.getElementById('mb-tear-bottom');
-          if (top) { top.style.transition = 'transform 0.45s ease-in'; top.style.transform = 'translateY(-100%)'; }
-          if (bot) { bot.style.transition = 'transform 0.45s ease-in'; bot.style.transform = 'translateY(100%)'; }
-          if (line) { line.style.transition = 'opacity 0.25s'; line.style.opacity = '0'; }
-        }, 350);
-      }, 3200);
-
-      // Phase 4 - Remove at 4300ms
-      setTimeout(function() {
-        var l = document.getElementById('mb-loader');
-        if (l) l.remove();
-        document.body.style.overflow = '';
-      }, 4300);
-
-    });
 
     // ─────────────────────────────────────────────────────────
     // 2. SPACE BACKGROUND — Enhanced Canvas
@@ -1200,3 +1129,471 @@ if (dotWrap && ringWrap && window.matchMedia('(pointer: fine)').matches) {
     })();
 
 })(); // end SPACE FIXES v2 IIFE
+
+// === SPACE ANIMATIONS ===
+(function () {
+    'use strict';
+
+    const isMobile = window.matchMedia('(max-width: 767px)').matches;
+    const reduceFactor = isMobile ? 0.4 : 1;
+
+    // 2) Space background enhancement (uses existing canvas if found)
+    const spaceCanvas = document.getElementById('particles-canvas') || (() => {
+        const c = document.createElement('canvas');
+        c.id = 'particles-canvas';
+        c.style.position = 'fixed';
+        c.style.inset = '0';
+        c.style.zIndex = '0';
+        c.style.pointerEvents = 'none';
+        document.body.prepend(c);
+        return c;
+    })();
+
+    const ctx = spaceCanvas.getContext('2d');
+    let w = 0;
+    let h = 0;
+    let stars = [];
+    let nebula = [];
+    let shooting = [];
+    let warpActive = false;
+    let warpUntil = 0;
+    let mouseX = 0.5;
+    let mouseY = 0.5;
+    let mxTarget = 0.5;
+    let myTarget = 0.5;
+    let lastMouseFrame = 0;
+
+    function resizeSpace() {
+        w = spaceCanvas.width = window.innerWidth;
+        h = spaceCanvas.height = window.innerHeight;
+        const base = Math.floor(850 * reduceFactor);
+        const far = Math.floor(base * 0.5);
+        const mid = Math.floor(base * 0.32);
+        const near = Math.floor(base * 0.18);
+        stars = [];
+        function pushLayer(count, speed, minSize, maxSize) {
+            for (let i = 0; i < count; i += 1) {
+                stars.push({
+                    x: Math.random() * w,
+                    // Bias stars toward upper area for cleaner hero/content readability
+                    y: Math.pow(Math.random(), 1.65) * h,
+                    z: speed,
+                    r: minSize + Math.random() * (maxSize - minSize),
+                    tw: Math.random() * Math.PI * 2,
+                    tws: 0.004 + Math.random() * 0.02,
+                    c: Math.random() > 0.8 ? '170,210,255' : '255,255,255'
+                });
+            }
+        }
+        pushLayer(far, 0.12, 0.5, 1.1);
+        pushLayer(mid, 0.2, 0.7, 1.5);
+        pushLayer(near, 0.34, 1.0, 2.0);
+
+        nebula = [
+            { x: w * 0.2, y: h * 0.25, r: 280, c: '139,92,246', a: 0.03, vx: 0.02, vy: 0.01 },
+            { x: w * 0.75, y: h * 0.3, r: 340, c: '0,212,255', a: 0.03, vx: -0.02, vy: 0.012 },
+            { x: w * 0.6, y: h * 0.72, r: 300, c: '139,92,246', a: 0.025, vx: 0.018, vy: -0.01 },
+            { x: w * 0.3, y: h * 0.8, r: 260, c: '0,212,255', a: 0.02, vx: -0.017, vy: -0.012 }
+        ];
+    }
+
+    function spawnShootingStar() {
+        shooting.push({
+            x: Math.random() * w * 0.7,
+            y: -30,
+            vx: 12 + Math.random() * 6,
+            vy: 6 + Math.random() * 4,
+            life: 1,
+            len: 120 + Math.random() * 80
+        });
+        const next = 9500 + Math.random() * 4500;
+        setTimeout(spawnShootingStar, next);
+    }
+
+    window.addEventListener('mousemove', (e) => {
+        const now = performance.now();
+        if (now - lastMouseFrame < 16) return;
+        lastMouseFrame = now;
+        mxTarget = e.clientX / Math.max(1, w);
+        myTarget = e.clientY / Math.max(1, h);
+    }, { passive: true });
+
+    function drawSpace(ts) {
+        mouseX += (mxTarget - mouseX) * 0.06;
+        mouseY += (myTarget - mouseY) * 0.06;
+        const shiftX = (0.5 - mouseX) * 30;
+        const shiftY = (0.5 - mouseY) * 30;
+
+        ctx.clearRect(0, 0, w, h);
+
+        for (const n of nebula) {
+            n.x += n.vx;
+            n.y += n.vy;
+            if (n.x < -n.r) n.x = w + n.r;
+            if (n.x > w + n.r) n.x = -n.r;
+            if (n.y < -n.r) n.y = h + n.r;
+            if (n.y > h + n.r) n.y = -n.r;
+            const g = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.r);
+            g.addColorStop(0, `rgba(${n.c},${n.a})`);
+            g.addColorStop(1, 'rgba(0,0,0,0)');
+            ctx.fillStyle = g;
+            ctx.beginPath();
+            ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        const warpProgress = warpActive ? Math.min(1, (performance.now() - (warpUntil - 320)) / 320) : 0;
+        const cx = w / 2;
+        const cy = h / 2;
+
+        for (const s of stars) {
+            const x = s.x + shiftX * s.z * 8;
+            const y = s.y + shiftY * s.z * 8;
+            const pulse = 0.45 + 0.55 * Math.sin(ts * s.tws + s.tw);
+            const alpha = 0.3 + pulse * 0.7;
+            if (warpActive) {
+                const dx = x - cx;
+                const dy = y - cy;
+                const d = Math.hypot(dx, dy) || 1;
+                const len = (18 + 120 * warpProgress) * s.z;
+                ctx.strokeStyle = `rgba(255,255,255,${alpha * 0.8})`;
+                ctx.lineWidth = Math.max(0.6, s.r * 0.8);
+                ctx.beginPath();
+                ctx.moveTo(x, y);
+                ctx.lineTo(x + (dx / d) * len, y + (dy / d) * len);
+                ctx.stroke();
+            } else {
+                ctx.fillStyle = `rgba(${s.c},${alpha})`;
+                ctx.beginPath();
+                ctx.arc(x, y, s.r, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        if (!warpActive) {
+            shooting = shooting.filter((st) => st.life > 0);
+            for (const st of shooting) {
+                st.x += st.vx;
+                st.y += st.vy;
+                st.life -= 0.02;
+                const t = ctx.createLinearGradient(st.x, st.y, st.x - st.len, st.y - st.len * 0.5);
+                t.addColorStop(0, `rgba(255,255,255,${st.life})`);
+                t.addColorStop(1, 'rgba(255,255,255,0)');
+                ctx.strokeStyle = t;
+                ctx.lineWidth = 1.4;
+                ctx.beginPath();
+                ctx.moveTo(st.x, st.y);
+                ctx.lineTo(st.x - st.len, st.y - st.len * 0.5);
+                ctx.stroke();
+            }
+        }
+
+        if (warpActive && performance.now() > warpUntil) {
+            warpActive = false;
+        }
+
+        requestAnimationFrame(drawSpace);
+    }
+
+    resizeSpace();
+    window.addEventListener('resize', resizeSpace);
+        setTimeout(spawnShootingStar, 5200);
+    requestAnimationFrame(drawSpace);
+
+    // 3) Section transition wrapper (without replacing existing nav logic)
+    let warpOverlay = document.getElementById('warp-flash-overlay');
+    if (!warpOverlay) {
+        warpOverlay = document.createElement('div');
+        warpOverlay.id = 'warp-flash-overlay';
+        document.body.appendChild(warpOverlay);
+    }
+
+    function runWarpEffect() {
+        warpActive = true;
+        warpUntil = performance.now() + 320;
+        warpOverlay.classList.add('active');
+        setTimeout(() => warpOverlay.classList.remove('active'), 170);
+    }
+
+    const cards = document.querySelectorAll('.card');
+    const navBtns = document.querySelectorAll('.nav-btn');
+    if (typeof window.updateCards === 'function') {
+        const oldUpdate = window.updateCards;
+        window.updateCards = function updateCardsWithWarp(nextIndex) {
+            runWarpEffect();
+            oldUpdate(nextIndex);
+            const card = cards[nextIndex];
+            if (card) {
+                card.classList.remove('section-entering');
+                void card.offsetWidth;
+                card.classList.add('section-entering');
+                setTimeout(() => card.classList.remove('section-entering'), 420);
+            }
+        };
+        navBtns.forEach((btn, idx) => {
+            btn.addEventListener('click', () => {
+                btn.style.transition = 'transform 0.2s ease, box-shadow 0.2s ease';
+                const card = cards[idx];
+                if (card) {
+                    card.classList.remove('section-entering');
+                    void card.offsetWidth;
+                    card.classList.add('section-entering');
+                    setTimeout(() => card.classList.remove('section-entering'), 420);
+                }
+            }, { passive: true });
+        });
+    }
+
+    // 4) Hero profile 3D float + tilt
+    const heroPhoto = document.querySelector('.hero-photo');
+    const heroCard = heroPhoto ? heroPhoto.closest('.hero-left, .hero-photo-container, .hero-grid > *') : null;
+    if (heroPhoto && heroCard && window.matchMedia('(pointer:fine)').matches) {
+        heroCard.addEventListener('mousemove', (e) => {
+            const r = heroCard.getBoundingClientRect();
+            const px = ((e.clientX - r.left) / r.width - 0.5) * 2;
+            const py = ((e.clientY - r.top) / r.height - 0.5) * 2;
+            const rx = (-py * 15).toFixed(2);
+            const ry = (px * 15).toFixed(2);
+            heroPhoto.style.transform = `translateY(0px) rotateX(${rx}deg) rotateY(${ry}deg) rotateZ(0deg)`;
+            heroPhoto.classList.add('is-hovered');
+            heroPhoto.style.transition = 'transform 0.08s linear, box-shadow 0.35s ease';
+        });
+        heroCard.addEventListener('mouseleave', () => {
+            heroPhoto.style.transition = 'transform 0.5s ease, box-shadow 0.5s ease';
+            heroPhoto.style.transform = '';
+            heroPhoto.classList.remove('is-hovered');
+        });
+    }
+
+    // 5) Skill cards and progress bars intersection reveal
+    const skillCards = document.querySelectorAll('.skill-card');
+    if ('IntersectionObserver' in window && skillCards.length) {
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (!entry.isIntersecting) return;
+                const card = entry.target;
+                const bars = card.querySelectorAll('.progress-bar');
+                bars.forEach((bar) => {
+                    const target = bar.getAttribute('data-width');
+                    if (!target) return;
+                    bar.style.width = '0%';
+                    setTimeout(() => { bar.style.width = target; }, 80);
+                });
+                io.unobserve(card);
+            });
+        }, { threshold: 0.22 });
+        skillCards.forEach((c) => io.observe(c));
+    }
+
+    // 6) Project cards hologram tilt
+    const projectCards = document.querySelectorAll('.project-card');
+    projectCards.forEach((card) => {
+        if (!card.querySelector('.scan-line')) {
+            const line = document.createElement('div');
+            line.className = 'scan-line';
+            card.appendChild(line);
+        }
+        if (!window.matchMedia('(pointer:fine)').matches) return;
+        card.addEventListener('mousemove', (e) => {
+            const r = card.getBoundingClientRect();
+            const px = ((e.clientX - r.left) / r.width - 0.5) * 2;
+            const py = ((e.clientY - r.top) / r.height - 0.5) * 2;
+            card.style.transform = `translateY(-8px) rotateX(${(-py * 10).toFixed(2)}deg) rotateY(${(px * 10).toFixed(2)}deg)`;
+            card.style.transition = 'transform 0.08s linear';
+            const content = card.firstElementChild;
+            if (content) content.style.transform = `translateY(${(py * -5).toFixed(2)}px)`;
+        });
+        card.addEventListener('mouseleave', () => {
+            card.style.transition = 'transform 0.5s ease';
+            card.style.transform = '';
+            const content = card.firstElementChild;
+            if (content) {
+                content.style.transition = 'transform 0.4s ease';
+                content.style.transform = '';
+            }
+        });
+    });
+
+    // 7) Achievement card entrance + gold burst
+    const achievementCard = document.querySelector('.hackathon-main-card');
+    if (achievementCard) {
+        achievementCard.classList.add('space-achievement');
+        let burstDone = false;
+        function runBurst() {
+            if (burstDone) return;
+            burstDone = true;
+            const r = achievementCard.getBoundingClientRect();
+            const cx = r.left + r.width / 2;
+            const cy = r.top + r.height / 2;
+            for (let i = 0; i < 12; i += 1) {
+                const d = document.createElement('div');
+                d.style.position = 'fixed';
+                d.style.left = `${cx}px`;
+                d.style.top = `${cy}px`;
+                d.style.width = '6px';
+                d.style.height = '6px';
+                d.style.borderRadius = '50%';
+                d.style.background = i % 2 ? '#FFD700' : '#FFB300';
+                d.style.zIndex = '1000';
+                document.body.appendChild(d);
+                const a = (Math.PI * 2 * i) / 12;
+                const dist = 32 + Math.random() * 45;
+                d.animate([
+                    { transform: 'translate(-50%,-50%) scale(1)', opacity: 1 },
+                    { transform: `translate(calc(-50% + ${Math.cos(a) * dist}px), calc(-50% + ${Math.sin(a) * dist}px)) scale(0.1)`, opacity: 0 }
+                ], { duration: 700, easing: 'ease-out', fill: 'forwards' }).onfinish = () => d.remove();
+            }
+        }
+        setTimeout(runBurst, 900);
+    }
+
+    // 8) Contact heading radar icon
+    const connectHeading = document.querySelector('#card-7 h2');
+    if (connectHeading && !connectHeading.querySelector('.radar-icon')) {
+        const radar = document.createElement('span');
+        radar.className = 'radar-icon';
+        radar.setAttribute('aria-hidden', 'true');
+        connectHeading.appendChild(radar);
+    }
+})();
+
+// === ROCKET SYSTEM v3 ===
+(function() {
+  'use strict';
+
+  if (window.__rocketSystemV3) return;
+  window.__rocketSystemV3 = true;
+
+  var ROCKET_SVG =
+    '<svg width="50" height="90" viewBox="0 0 50 90" xmlns="http://www.w3.org/2000/svg">' +
+      '<ellipse cx="25" cy="35" rx="12" ry="22" fill="white"/>' +
+      '<polygon points="25,2 13,20 37,20" fill="white"/>' +
+      '<circle cx="25" cy="30" r="6" fill="#00D4FF" opacity="0.8"/>' +
+      '<circle cx="25" cy="30" r="4" fill="#050610"/>' +
+      '<polygon points="13,50 4,70 13,60" fill="#00D4FF"/>' +
+      '<polygon points="37,50 46,70 37,60" fill="#00D4FF"/>' +
+      '<ellipse cx="25" cy="65" rx="8" ry="14" fill="#FF6B00" id="mb-fl-o"/>' +
+      '<ellipse cx="25" cy="63" rx="5" ry="9" fill="#FFD700" id="mb-fl-i"/>' +
+      '<ellipse cx="25" cy="61" rx="3" ry="6" fill="white"/>' +
+    '</svg>';
+
+  // ─────────────────────────────────────────
+  // PART A — LOADING SCREEN (on DOMContentLoaded)
+  // ─────────────────────────────────────────
+  function buildLoader() {
+    var loader = document.createElement('div');
+    loader.id = 'mb-loader';
+    loader.innerHTML =
+      '<div id="mb-panel-left"></div>' +
+      '<div id="mb-panel-right"></div>' +
+      '<div id="mb-loader-content">' +
+        '<div id="mb-name">Muhammad Burhan</div>' +
+        '<div id="mb-subtitle">AI &amp; Data Science</div>' +
+        '<div id="mb-rocket-wrap">' + ROCKET_SVG + '</div>' +
+      '</div>';
+    document.body.prepend(loader);
+    document.body.style.overflow = 'hidden';
+
+    // 60 random stars
+    var starsContainer = document.createElement('div');
+    starsContainer.id = 'mb-loader-stars';
+    starsContainer.style.cssText = 'position:absolute;inset:0;pointer-events:none;z-index:1;overflow:hidden;';
+    for (var i = 0; i < 60; i++) {
+      var s = document.createElement('div');
+      var sz = Math.random() * 2 + 0.5;
+      s.style.cssText = 'position:absolute;width:'+sz+'px;height:'+sz+'px;background:white;border-radius:50%;' +
+        'top:'+(Math.random()*100)+'%;left:'+(Math.random()*100)+'%;opacity:'+(Math.random()*0.6+0.2)+';';
+      starsContainer.appendChild(s);
+    }
+    loader.appendChild(starsContainer);
+
+    // Phase 2 — Launch at 2500ms
+    setTimeout(function() {
+      var wrap = document.getElementById('mb-rocket-wrap');
+      var content = document.getElementById('mb-loader-content');
+      if (wrap) wrap.classList.add('launching');
+      if (content) { content.style.transition = 'opacity 0.4s ease'; content.style.opacity = '0'; }
+    }, 2500);
+
+    // Phase 3 — Panels slide apart at 2800ms
+    setTimeout(function() {
+      var pl = document.getElementById('mb-panel-left');
+      var pr = document.getElementById('mb-panel-right');
+      if (pl) { pl.style.transition = 'transform 0.6s cubic-bezier(0.4,0,0.2,1)'; pl.style.transform = 'translateX(-100%)'; }
+      if (pr) { pr.style.transition = 'transform 0.6s cubic-bezier(0.4,0,0.2,1)'; pr.style.transform = 'translateX(100%)'; }
+    }, 2800);
+
+    // Phase 4 — Remove at 3500ms
+    setTimeout(function() {
+      var l = document.getElementById('mb-loader');
+      if (l) l.remove();
+      document.body.style.overflow = '';
+    }, 3500);
+  }
+
+  // ─────────────────────────────────────────
+  // PART B — SECTION TRANSITION ELEMENTS
+  // ─────────────────────────────────────────
+  function buildTransitionElements() {
+    if (document.getElementById('mb-trans-left')) return;
+
+    var tl = document.createElement('div'); tl.id = 'mb-trans-left';
+    var tr = document.createElement('div'); tr.id = 'mb-trans-right';
+    var tk = document.createElement('div'); tk.id = 'mb-trans-rocket';
+    tk.innerHTML = ROCKET_SVG;
+    document.body.appendChild(tl);
+    document.body.appendChild(tr);
+    document.body.appendChild(tk);
+  }
+
+  // ─────────────────────────────────────────
+  // PART C — mbRocketTransition
+  // ─────────────────────────────────────────
+  window.mbRocketTransition = function(callback) {
+    var tLeft   = document.getElementById('mb-trans-left');
+    var tRight  = document.getElementById('mb-trans-right');
+    var tRocket = document.getElementById('mb-trans-rocket');
+    if (!tLeft || !tRight || !tRocket) return callback && callback();
+
+    // Reset rocket animation
+    tRocket.style.animation = 'none';
+    tRocket.offsetHeight; // force reflow
+    tRocket.style.animation = 'mbTransLaunch 0.55s ease-in forwards';
+
+    // At 250ms — panels slide IN
+    setTimeout(function() {
+      tLeft.style.transition  = 'transform 0.3s ease-in';
+      tRight.style.transition = 'transform 0.3s ease-in';
+      tLeft.style.transform   = 'translateX(0)';
+      tRight.style.transform  = 'translateX(0)';
+    }, 250);
+
+    // At 550ms — call original section switch
+    setTimeout(function() {
+      if (callback) callback();
+    }, 550);
+
+    // At 700ms — panels slide OUT
+    setTimeout(function() {
+      tLeft.style.transition  = 'transform 0.4s ease-out';
+      tRight.style.transition = 'transform 0.4s ease-out';
+      tLeft.style.transform   = 'translateX(-100%)';
+      tRight.style.transform  = 'translateX(100%)';
+    }, 700);
+  };
+
+  // ─────────────────────────────────────────
+  // INIT
+  // ─────────────────────────────────────────
+  function init() {
+    buildLoader();
+    buildTransitionElements();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init, { once: true });
+  } else {
+    init();
+  }
+
+})();

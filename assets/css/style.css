@@ -2063,116 +2063,6 @@ h1, h2, h3, .syne-font {
    === SPACE ANIMATIONS ===
    ============================================================ */
 
-/* === ROCKET LOADER === */
-
-#mb-loader {
-  position: fixed;
-  inset: 0;
-  width: 100vw;
-  height: 100vh;
-  background: #000000;
-  z-index: 999999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
-#mb-stars {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 1;
-}
-#mb-content {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-}
-#mb-name {
-  font-family: 'Space Grotesk', 'Syne', 'Inter', sans-serif;
-  font-size: clamp(1.6rem, 4vw, 2.8rem);
-  font-weight: 700;
-  color: #ffffff;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  animation: mbFadeUp 0.6s ease forwards;
-}
-#mb-subtitle {
-  font-size: clamp(0.75rem, 2vw, 1rem);
-  color: #00D4FF;
-  letter-spacing: 5px;
-  text-transform: uppercase;
-  opacity: 0;
-  animation: mbFadeUp 0.6s ease 0.3s forwards;
-}
-@keyframes mbFadeUp {
-  from { opacity: 0; transform: translateY(12px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-#mb-rocket {
-  margin-top: 28px;
-  filter: drop-shadow(0 0 14px rgba(0,212,255,0.6));
-  animation: mbBob 0.85s ease-in-out infinite;
-}
-#mb-rocket.mb-launching {
-  animation: mbLaunch 0.75s cubic-bezier(0.25, 0.1, 0.1, 1) forwards !important;
-}
-@keyframes mbBob {
-  0%, 100% { transform: translateY(0); }
-  50%       { transform: translateY(-12px); }
-}
-@keyframes mbLaunch {
-  0%   { transform: translateY(0) scale(1); opacity: 1; }
-  30%  { transform: translateY(-20px) scale(1.05); opacity: 1; }
-  100% { transform: translateY(-130vh) scale(0.15); opacity: 0; }
-}
-.fl-o { animation: flFlicker 0.13s ease-in-out infinite alternate; transform-origin: center top; }
-.fl-i { animation: flFlicker 0.1s ease-in-out infinite alternate-reverse; transform-origin: center top; }
-@keyframes flFlicker {
-  from { transform: scaleY(1) scaleX(1); opacity: 0.85; }
-  to   { transform: scaleY(1.3) scaleX(0.85); opacity: 1; }
-}
-#mb-tear-line {
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  width: 3px;
-  height: 0;
-  background: linear-gradient(to bottom, transparent, #ffffff, #00D4FF, #ffffff, transparent);
-  box-shadow: 0 0 18px #ffffff, 0 0 35px #00D4FF;
-  z-index: 5;
-  opacity: 0;
-}
-#mb-tear-top {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 50%;
-  background: #000000;
-  z-index: 4;
-  transform: translateY(0);
-  will-change: transform;
-}
-#mb-tear-bottom {
-  position: absolute;
-  bottom: 0; left: 0;
-  width: 100%; height: 50%;
-  background: #000000;
-  z-index: 4;
-  transform: translateY(0);
-  will-change: transform;
-}
-
-/* Mobile */
-@media (max-width: 768px) {
-    #rl-rocket svg { width: 40px !important; height: 72px !important; }
-    #rl-name { letter-spacing: 2px; }
-    #rl-subtitle { letter-spacing: 3px; font-size: 0.85rem; }
-}
-
-
 #warp-overlay {
     position: fixed;
     inset: 0;
@@ -2185,6 +2075,12 @@ h1, h2, h3, .syne-font {
 #warp-overlay.warp-flash {
     opacity: 1;
     transition: opacity 0.2s ease;
+}
+
+/* Disable older warp flash overlays to avoid double-screen feel */
+#warp-overlay,
+#warp-flash-overlay {
+    display: none !important;
 }
 
 /* ── 4. HERO PHOTO — 3D Tilt + Floating ── */
@@ -2431,14 +2327,12 @@ body > .cursor-dot-wrap,
 body > .cursor-ring-wrap,
 body > nav,
 body > section,
-body > div:not(#space-loader):not(#warp-overlay) {
+body > div:not(#warp-overlay) {
     /* These are inside the reveal wrapper after JS moves them */
 }
 
 /* ── Mobile overrides for space animations ── */
 @media (max-width: 768px) {
-    #loader-rocket { width: 44px; }
-    #loader-text { font-size: 14px; letter-spacing: 2px; }
     .hero-photo-container .hero-photo {
         /* Disable 3D tilt on mobile — keep float only */
         transform: none !important;
@@ -2514,4 +2408,319 @@ body > div:not(#space-loader):not(#warp-overlay) {
         transform: none !important;
         will-change: auto;
     }
+}
+
+
+#warp-flash-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 900;
+    pointer-events: none;
+    opacity: 0;
+    background: radial-gradient(circle at center, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.05) 35%, transparent 75%);
+    transition: opacity 0.16s ease;
+}
+
+#warp-flash-overlay.active { opacity: 1; }
+
+.card.section-entering {
+    animation: section-zoom-reveal 0.32s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.card.section-entering .section-title,
+.card.section-entering h2 {
+    animation: heading-in-left 0.36s ease 0.04s both;
+}
+
+.card.section-entering .card-inner > * {
+    animation: content-up 0.3s ease both;
+}
+
+.card.section-entering .card-inner > *:nth-child(1) { animation-delay: 0.1s; }
+.card.section-entering .card-inner > *:nth-child(2) { animation-delay: 0.14s; }
+.card.section-entering .card-inner > *:nth-child(3) { animation-delay: 0.18s; }
+.card.section-entering .card-inner > *:nth-child(4) { animation-delay: 0.22s; }
+
+.hero-photo {
+    animation: hero-float-3d 3s ease-in-out infinite;
+    transform-style: preserve-3d;
+    will-change: transform;
+}
+
+.hero-photo.is-hovered {
+    box-shadow: 0 0 40px rgba(0,212,255,0.4);
+}
+
+.skill-card {
+    will-change: transform;
+}
+
+.skill-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -140%;
+    width: 80%;
+    height: 100%;
+    background: linear-gradient(100deg, transparent, rgba(255,255,255,0.18), transparent);
+    transform: skewX(-24deg);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.skill-card:hover {
+    transform: translateY(-12px) scale(1.04) !important;
+    box-shadow: 0 20px 60px rgba(0,212,255,0.25) !important;
+    border-color: rgba(0,212,255,0.65) !important;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+.skill-card:hover::before {
+    opacity: 1;
+    animation: skill-shimmer 0.75s linear forwards;
+}
+
+.project-card {
+    transform-style: preserve-3d;
+    will-change: transform;
+    position: relative;
+    overflow: hidden;
+}
+
+.project-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    border: 1px solid transparent;
+    pointer-events: none;
+}
+
+.project-card:hover::before {
+    animation: trace-border 0.8s linear forwards;
+    border-color: rgba(0,212,255,0.7);
+}
+
+.project-card .scan-line {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    top: -4px;
+    background: linear-gradient(90deg, transparent, rgba(0,212,255,0.55), transparent);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.project-card:hover .scan-line {
+    opacity: 1;
+    animation: scan-down 1.4s linear infinite;
+}
+
+.hackathon-main-card.space-achievement {
+    animation: hack-pulse-gold 2s ease-in-out infinite;
+}
+
+.contact-link-card::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 999px;
+    transform: translate(-50%, -50%);
+    background: rgba(0,212,255,0.3);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.contact-link-card:hover::after {
+    animation: contact-radar 0.8s ease-out forwards;
+}
+
+.nav-btn.active::after {
+    content: "";
+    position: absolute;
+    inset: -6px;
+    border-radius: 50%;
+    border: 1px solid rgba(0,212,255,0.5);
+    animation: nav-ring-pulse 1.8s ease-out infinite;
+}
+
+@keyframes section-zoom-reveal {
+    from { transform: scale(1.08); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+@keyframes heading-in-left {
+    from { transform: translateX(-40px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+@keyframes content-up {
+    from { transform: translateY(14px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+@keyframes hero-float-3d {
+    0% { transform: translateY(-8px) rotateZ(-1deg); }
+    50% { transform: translateY(8px) rotateZ(1deg); }
+    100% { transform: translateY(-8px) rotateZ(-1deg); }
+}
+@keyframes skill-shimmer {
+    from { left: -140%; }
+    to { left: 160%; }
+}
+@keyframes trace-border {
+    from { box-shadow: inset 0 0 0 0 rgba(0,212,255,0.1); }
+    to { box-shadow: inset 0 0 0 1px rgba(0,212,255,0.7); }
+}
+@keyframes scan-down {
+    from { top: -4px; }
+    to { top: 104%; }
+}
+@keyframes hack-pulse-gold {
+    0%, 100% { box-shadow: 0 0 22px rgba(255,215,0,0.28); }
+    50% { box-shadow: 0 0 38px rgba(255,215,0,0.5); }
+}
+@keyframes contact-radar {
+    0% { width: 0; height: 0; opacity: 0.7; }
+    100% { width: 320px; height: 320px; opacity: 0; }
+}
+@keyframes nav-ring-pulse {
+    0% { transform: scale(0.95); opacity: 0.9; }
+    70% { transform: scale(1.2); opacity: 0; }
+    100% { transform: scale(0.95); opacity: 0; }
+}
+
+@media (max-width: 767px) {
+    .hero-photo { animation-duration: 3.2s; }
+}
+
+/* === ROCKET SYSTEM v3 === */
+
+/* ── LOADING SCREEN ── */
+#mb-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  overflow: hidden;
+  pointer-events: all;
+}
+#mb-panel-left {
+  position: absolute;
+  top: 0; left: 0;
+  width: 50%; height: 100%;
+  background: #000;
+  z-index: 2;
+  transform: translateX(0);
+  will-change: transform;
+}
+#mb-panel-right {
+  position: absolute;
+  top: 0; right: 0;
+  width: 50%; height: 100%;
+  background: #000;
+  z-index: 2;
+  transform: translateX(0);
+  will-change: transform;
+}
+#mb-loader-content {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  pointer-events: none;
+}
+#mb-name {
+  font-family: 'Space Grotesk', 'Syne', sans-serif;
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  animation: mbFadeUp 0.6s ease forwards;
+}
+#mb-subtitle {
+  font-size: clamp(0.8rem, 2vw, 1rem);
+  color: #00D4FF;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  opacity: 0;
+  animation: mbFadeUp 0.6s ease 0.3s forwards;
+}
+@keyframes mbFadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+#mb-rocket-wrap {
+  margin-top: 28px;
+  filter: drop-shadow(0 0 12px rgba(0,212,255,0.55));
+  animation: mbBob 0.9s ease-in-out infinite;
+}
+#mb-rocket-wrap.launching {
+  animation: mbLaunch 0.75s cubic-bezier(0.3, 0, 0.1, 1) forwards !important;
+}
+@keyframes mbBob {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-14px); }
+}
+@keyframes mbLaunch {
+  0%   { transform: translateY(0) scale(1); opacity: 1; }
+  20%  { transform: translateY(-25px) scale(1.06); opacity: 1; }
+  100% { transform: translateY(-140vh) scale(0.1); opacity: 0; }
+}
+#mb-fl-o {
+  animation: mbFl1 0.13s ease-in-out infinite alternate;
+  transform-origin: center top;
+}
+#mb-fl-i {
+  animation: mbFl2 0.1s ease-in-out infinite alternate-reverse;
+  transform-origin: center top;
+}
+@keyframes mbFl1 {
+  from { transform: scaleY(1) scaleX(1); opacity: .85; }
+  to   { transform: scaleY(1.3) scaleX(.85); opacity: 1; }
+}
+@keyframes mbFl2 {
+  from { transform: scaleY(.9) scaleX(1.1); opacity: .9; }
+  to   { transform: scaleY(1.2) scaleX(.88); opacity: 1; }
+}
+
+/* ── SECTION TRANSITION ELEMENTS ── */
+#mb-trans-left,
+#mb-trans-right {
+  position: fixed;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  background: #0a0a1a;
+  z-index: 99998;
+  pointer-events: none;
+  will-change: transform;
+}
+#mb-trans-left  { left: 0;  transform: translateX(-100%); }
+#mb-trans-right { right: 0; transform: translateX(100%); }
+#mb-trans-rocket {
+  position: fixed;
+  bottom: -80px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 99999;
+  pointer-events: none;
+  opacity: 0;
+  filter: drop-shadow(0 0 8px rgba(0,212,255,0.5));
+}
+@keyframes mbTransLaunch {
+  0%   { bottom: -80px; opacity: 0; transform: translateX(-50%) scale(0.8); }
+  15%  { opacity: 1; }
+  100% { bottom: 110vh; opacity: 0; transform: translateX(-50%) scale(0.5); }
+}
+
+/* ── MOBILE ── */
+@media (max-width: 767px) {
+  #mb-rocket-wrap svg  { width: 36px !important; height: auto !important; }
+  #mb-trans-rocket svg { width: 36px !important; height: auto !important; }
 }
