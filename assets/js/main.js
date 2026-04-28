@@ -81,7 +81,8 @@ window.__baseUpdateCards = updateCards;
 
 navBtns.forEach((btn, idx) => {
     btn.addEventListener('click', () => {
-        if (typeof mbRocketTransition === 'function') mbRocketTransition(() => window.__baseUpdateCards(idx));
+        const isBack = idx < currentIndex;
+        if (typeof mbRocketTransition === 'function') mbRocketTransition(() => window.__baseUpdateCards(idx), isBack);
         else window.__baseUpdateCards(idx);
     });
 });
@@ -89,11 +90,11 @@ navBtns.forEach((btn, idx) => {
 // Keyboard
 window.addEventListener('keydown', (e) => {
     if ((e.key === 'ArrowRight' || e.key === 'ArrowDown') && currentIndex < cards.length - 1) {
-        if (typeof mbRocketTransition === 'function') mbRocketTransition(() => window.__baseUpdateCards(currentIndex + 1));
+        if (typeof mbRocketTransition === 'function') mbRocketTransition(() => window.__baseUpdateCards(currentIndex + 1), false);
         else window.__baseUpdateCards(currentIndex + 1);
     }
     if ((e.key === 'ArrowLeft' || e.key === 'ArrowUp') && currentIndex > 0) {
-        if (typeof mbRocketTransition === 'function') mbRocketTransition(() => window.__baseUpdateCards(currentIndex - 1));
+        if (typeof mbRocketTransition === 'function') mbRocketTransition(() => window.__baseUpdateCards(currentIndex - 1), true);
         else window.__baseUpdateCards(currentIndex - 1);
     }
 });
@@ -106,10 +107,10 @@ document.addEventListener('touchend', (e) => {
     const dy = e.changedTouches[0].clientY - touchStartY;
     if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) {
         if (dx < 0 && currentIndex < cards.length - 1) {
-             if (typeof mbRocketTransition === 'function') mbRocketTransition(() => window.__baseUpdateCards(currentIndex + 1));
+             if (typeof mbRocketTransition === 'function') mbRocketTransition(() => window.__baseUpdateCards(currentIndex + 1), false);
              else window.__baseUpdateCards(currentIndex + 1);
         } else if (dx > 0 && currentIndex > 0) {
-             if (typeof mbRocketTransition === 'function') mbRocketTransition(() => window.__baseUpdateCards(currentIndex - 1));
+             if (typeof mbRocketTransition === 'function') mbRocketTransition(() => window.__baseUpdateCards(currentIndex - 1), true);
              else window.__baseUpdateCards(currentIndex - 1);
         }
     }
@@ -235,11 +236,14 @@ if(document.getElementById('csModalClose')) document.getElementById('csModalClos
     document.body.appendChild(tl); document.body.appendChild(tr); document.body.appendChild(tk);
   }
 
-  window.mbRocketTransition = function(callback) {
+  window.mbRocketTransition = function(callback, isBack = false) {
     var tL = document.getElementById('mb-trans-left'), tR = document.getElementById('mb-trans-right'), tK = document.getElementById('mb-trans-rocket');
     if (!tL || !tK) return callback && callback();
+    
     tK.style.animation = 'none'; tK.offsetHeight;
-    tK.style.animation = 'mbTransLaunch 1.0s ease-in forwards';
+    // Set directional animation
+    tK.style.animation = isBack ? 'mbTransLaunchDown 1.0s ease-in forwards' : 'mbTransLaunch 1.0s ease-in forwards';
+    
     setTimeout(() => { tL.style.transition = 'transform 0.4s ease-in'; tR.style.transition = 'transform 0.4s ease-in'; tL.style.transform = 'translateX(0)'; tR.style.transform = 'translateX(0)'; }, 400);
     setTimeout(() => { if (callback) callback(); }, 850);
     setTimeout(() => { tL.style.transition = 'transform 0.5s ease-out'; tR.style.transition = 'transform 0.5s ease-out'; tL.style.transform = 'translateX(-100%)'; tR.style.transform = 'translateX(100%)'; }, 1000);

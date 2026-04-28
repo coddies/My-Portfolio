@@ -5448,13 +5448,15 @@ body > div:not(#warp-overlay) {
 }
 
 @keyframes mbTransLaunch {
-
   0%   { bottom: -120px; opacity: 0; transform: translateX(-50%) scale(0.8); }
-
   15%  { opacity: 1; }
-
   100% { bottom: 110vh; opacity: 0; transform: translateX(-50%) scale(0.4); }
+}
 
+@keyframes mbTransLaunchDown {
+  0%   { top: -120px; opacity: 0; transform: translateX(-50%) rotate(180deg) scale(0.8); }
+  15%  { opacity: 1; }
+  100% { top: 110vh; opacity: 0; transform: translateX(-50%) rotate(180deg) scale(0.4); }
 }
 
 
