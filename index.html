@@ -168,433 +168,197 @@
 </section>
 
 <!-- ════════ CARD 3 — SKILLS ════════ -->
+
 <section id="card-3" class="card state-below">
-<style>
-/* ── SKILL UNIVERSE ── */
-.skill-universe {
-  perspective: 1800px;
-  overflow: hidden;
-  padding: 40px 20px 80px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
+    <style>
+/* === 3D POP-UP STAGE SKILLS === */
+.skill-scene { 
+    perspective: 1200px; 
+    width: 100%; 
+    height: 100px; 
+}
+.skill-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+}
+/* The Base Box (Flattens on hover) */
+.skill-base {
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(0, 229, 255, 0.15);
+    border-radius: 8px;
+    transform-origin: bottom center;
+    transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+/* The Content (Stands up and pops out on hover) */
+.skill-content {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    padding: 0 24px;
+    transform-origin: bottom center;
+    transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transform: translateZ(10px);
+}
+/* PROGRESS BAR GLOW */
+.progress-line { transition: width 1.5s cubic-bezier(0.1, 0, 0.2, 1); }
+
+/* === THE 3D POP-UP HOVER LOGIC === */
+.skill-wrapper:hover .skill-base {
+    transform: rotateX(70deg) translateY(20px) translateZ(-30px);
+    background: rgba(0, 229, 255, 0.08);
+    box-shadow: 0 0 30px rgba(0, 229, 255, 0.4);
+    border-color: rgba(0, 229, 255, 0.6);
+}
+.skill-wrapper.purple-mode:hover .skill-base {
+    background: rgba(139, 92, 246, 0.08);
+    box-shadow: 0 0 30px rgba(139, 92, 246, 0.4);
+    border-color: rgba(139, 92, 246, 0.6);
+}
+.skill-wrapper:hover .skill-content {
+    transform: translateY(-20px) translateZ(60px);
+}
+.skill-wrapper:hover .skill-icon {
+    filter: drop-shadow(0 0 15px rgba(0, 229, 255, 0.8));
+    transform: scale(1.2);
+}
+.skill-wrapper.purple-mode:hover .skill-icon {
+    filter: drop-shadow(0 0 15px rgba(139, 92, 246, 0.8));
 }
 
-/* ── ISO GRID — DESKTOP ── */
-.iso-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 160px);
-  gap: 48px;
-  transform: rotateX(52deg) rotateZ(-45deg);
-  transform-style: preserve-3d;
-  transition: transform 0.5s ease;
-}
-
-/* ── CUBE ── */
-.hybrid-cube {
-  width: 160px;
-  height: 160px;
-  position: relative;
-  transform-style: preserve-3d;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  cursor: crosshair;
-}
-
-.cube-face {
-  position: absolute;
-  inset: 0;
-}
-
-/* TOP FACE */
-.cube-top {
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(0, 229, 255, 0.3);
-  transform: translateZ(16px);
-  transition: all 0.4s ease;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  border-radius: 10px;
-}
-.cube-top.purple-card {
-  border-color: rgba(139, 92, 246, 0.3);
-}
-
-/* LEFT SIDE FACE */
-.cube-left {
-  background: rgba(0, 229, 255, 0.08);
-  transform: rotateY(-90deg) translateZ(80px);
-  width: 16px;
-  border-radius: 3px;
-}
-.cube-left.purple-side {
-  background: rgba(139, 92, 246, 0.08);
-}
-
-/* BOTTOM FACE */
-.cube-bottom {
-  background: rgba(0, 229, 255, 0.04);
-  transform: rotateX(-90deg) translateZ(80px);
-  height: 16px;
-  border-radius: 3px;
-}
-.cube-bottom.purple-bottom {
-  background: rgba(139, 92, 246, 0.04);
-}
-
-/* POP ELEMENTS */
-.pop-element {
-  transform: translateZ(20px);
-  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-/* HOVER EFFECTS */
-.hybrid-cube:hover {
-  transform: translateY(-24px) scale(1.1);
-  z-index: 100;
-}
-.hybrid-cube:hover .cube-top {
-  background: rgba(0, 229, 255, 0.12);
-  box-shadow:
-    0 0 50px rgba(0, 229, 255, 0.5),
-    inset 0 0 20px rgba(0, 229, 255, 0.15),
-    0 30px 60px rgba(0,0,0,0.8);
-  transform: translateZ(16px) scale(1.04);
-}
-.hybrid-cube:hover .cube-top.purple-card {
-  background: rgba(139, 92, 246, 0.12);
-  box-shadow:
-    0 0 50px rgba(139, 92, 246, 0.5),
-    inset 0 0 20px rgba(139, 92, 246, 0.15),
-    0 30px 60px rgba(0,0,0,0.8);
-}
-.hybrid-cube:hover .pop-element {
-  transform: translateY(-6px) translateZ(20px);
-  text-shadow: 0 8px 16px rgba(0,0,0,0.9);
-}
-.hybrid-cube:hover .pop-icon {
-  filter: drop-shadow(0 0 16px rgba(0,229,255,0.8));
-  transform: translateY(-6px) translateZ(20px) scale(1.08);
-}
-.hybrid-cube:hover .pop-icon.purple-icon {
-  filter: drop-shadow(0 0 16px rgba(139,92,246,0.8));
-}
-
-/* TITLE */
-.skill-section-title {
-  font-family: 'Space Grotesk', monospace;
-  font-size: 1.8rem;
-  color: #00E5FF;
-  text-transform: uppercase;
-  letter-spacing: 0.25em;
-  margin-bottom: 6px;
-  text-shadow: 0 0 20px rgba(0, 229, 255, 0.5);
-  text-align: center;
-}
-.skill-section-sub {
-  font-family: 'Space Grotesk', monospace;
-  font-size: 0.65rem;
-  color: rgba(0, 229, 255, 0.4);
-  letter-spacing: 0.35em;
-  text-transform: uppercase;
-  text-align: center;
-  margin-bottom: 0;
-}
-
-/* ════════════════════════
-   MOBILE — max 768px
-════════════════════════ */
 @media (max-width: 768px) {
-  .skill-section-title {
-    font-size: 1rem;
-    letter-spacing: 0.1em;
-  }
-  .skill-section-sub {
-    font-size: 0.5rem;
-    letter-spacing: 0.15em;
-  }
-
-  .skill-universe {
-    padding: 20px 0 100px 0;
-    /* Extra bottom padding because isometric grid takes vertical space */
-  }
-
-  /* Scale down entire grid and center it */
-  .iso-grid {
-    grid-template-columns: repeat(2, 120px);
-    gap: 32px;
-    /* 
-      KEY FIX: 
-      - scale(0.8) shrinks the grid to fit screen
-      - translateX(30px) corrects the visual offset caused by rotateZ(-45deg)
-      - translateY(-20px) corrects vertical offset
-    */
-    transform: rotateX(52deg) rotateZ(-45deg) scale(0.8) translateX(30px) translateY(-20px);
-    transform-origin: center center;
-    margin: 0 auto;
-  }
-
-  .hybrid-cube {
-    width: 120px;
-    height: 120px;
-  }
-
-  /* Smaller icon */
-  .hybrid-cube .pop-icon {
-    width: 36px !important;
-    height: 36px !important;
-    margin-bottom: 6px !important;
-  }
-  .hybrid-cube .pop-icon .material-symbols-outlined {
-    font-size: 20px !important;
-  }
-
-  /* Smaller text */
-  .hybrid-cube h3 {
-    font-size: 0.55rem !important;
-    letter-spacing: 0.06em !important;
-  }
-
-  /* Lighter hover on mobile (touch) */
-  .hybrid-cube:hover {
-    transform: translateY(-12px) scale(1.06);
-  }
-
-  /* Thinner side faces */
-  .cube-left {
-    width: 12px;
-    transform: rotateY(-90deg) translateZ(60px);
-  }
-  .cube-bottom {
-    height: 12px;
-    transform: rotateX(-90deg) translateZ(60px);
-  }
-}
-
-/* ════════════════════════
-   SMALL MOBILE — max 400px
-════════════════════════ */
-@media (max-width: 400px) {
-  .iso-grid {
-    grid-template-columns: repeat(2, 100px);
-    gap: 24px;
-    transform: rotateX(52deg) rotateZ(-45deg) scale(0.7) translateX(25px) translateY(-10px);
-  }
-  .hybrid-cube {
-    width: 100px;
-    height: 100px;
-  }
-  .cube-left {
-    transform: rotateY(-90deg) translateZ(50px);
-  }
-  .cube-bottom {
-    transform: rotateX(-90deg) translateZ(50px);
-  }
+    .skill-scene { height: 90px; }
+    .skill-content { padding: 0 16px; }
+    .skill-wrapper:hover .skill-content { transform: translateY(-10px) translateZ(40px); }
 }
 </style>
-
-<div class="card-inner w-full">
-<div class="max-w-[1280px] mx-auto px-8 pb-8 pt-16" style="width: 100%;">
-  <h2 class="skill-section-title">Core_Neural_Matrix</h2>
-  <p class="skill-section-sub">// Isometric Skill Architecture — Hover to Pop</p>
-</div>
-
-<div class="skill-universe" id="skill-universe">
-  <div class="iso-grid" id="iso-grid">
-
-    <!-- Card 1: Python — CYAN -->
-    <div class="hybrid-cube group anim-in">
-      <div class="cube-face cube-left"></div>
-      <div class="cube-face cube-bottom"></div>
-      <div class="cube-face cube-top">
-        <div class="pop-element pop-icon w-16 h-16 rounded-full bg-[#00E5FF]/10 border border-[#00E5FF]/40 flex items-center justify-center mb-3">
-          <span class="material-symbols-outlined text-4xl text-[#00E5FF]">code</span>
+    <div class="card-inner w-full">
+        <div class="max-w-[1280px] mx-auto px-8 pb-12 pt-16">
+            <h2 class="text-center font-mono text-2xl text-[#00E5FF] uppercase tracking-[0.3em] mb-2 text-shadow-[0_0_20px_rgba(0,229,255,0.5)]">Core_Neural_Matrix</h2>
+            <p class="text-center font-mono text-[10px] text-white/40 uppercase tracking-[0.4em] mb-12">// 3D Pop-Up Stage Architecture</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8 max-w-[1000px] mx-auto px-8">
+                
+    <div class="skill-scene cursor-crosshair anim-in">
+        <div class="skill-wrapper group ">
+            <div class="skill-base"></div>
+            <div class="skill-content gap-6">
+                <div class="skill-icon text-[#00E5FF] transition-all duration-500">
+                    <span class="material-symbols-outlined text-4xl">code</span>
+                </div>
+                <div class="flex-1">
+                    <div class="flex justify-between items-end mb-2">
+                        <h3 class="font-mono text-lg text-white font-bold tracking-widest uppercase">Python</h3>
+                        <span class="font-mono text-[10px] text-[#00E5FF]">95%</span>
+                    </div>
+                    <div class="w-full h-1 bg-white/10 rounded overflow-hidden">
+                        <div class="h-full bg-[#00E5FF] shadow-[0_0_10px_#00E5FF] progress-line" style="width: 95%;"></div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <h3 class="pop-element font-mono text-sm text-white font-bold tracking-widest uppercase">Python</h3>
-        <div class="pop-element w-8 h-1 bg-[#00E5FF] mt-2" style="box-shadow: 0 0 10px #00E5FF"></div>
-      </div>
     </div>
-
-    <!-- Card 2: FastAPI — PURPLE -->
-    <div class="hybrid-cube group anim-in">
-      <div class="cube-face cube-left purple-side"></div>
-      <div class="cube-face cube-bottom purple-bottom"></div>
-      <div class="cube-face cube-top purple-card">
-        <div class="pop-element pop-icon purple-icon w-16 h-16 rounded-full bg-[#8B5CF6]/10 border border-[#8B5CF6]/40 flex items-center justify-center mb-3">
-          <span class="material-symbols-outlined text-4xl text-[#8B5CF6]">bolt</span>
+    <div class="skill-scene cursor-crosshair anim-in">
+        <div class="skill-wrapper group purple-mode">
+            <div class="skill-base"></div>
+            <div class="skill-content gap-6">
+                <div class="skill-icon text-[#8B5CF6] transition-all duration-500">
+                    <span class="material-symbols-outlined text-4xl">bolt</span>
+                </div>
+                <div class="flex-1">
+                    <div class="flex justify-between items-end mb-2">
+                        <h3 class="font-mono text-lg text-white font-bold tracking-widest uppercase">FastAPI</h3>
+                        <span class="font-mono text-[10px] text-[#8B5CF6]">88%</span>
+                    </div>
+                    <div class="w-full h-1 bg-white/10 rounded overflow-hidden">
+                        <div class="h-full bg-[#8B5CF6] shadow-[0_0_10px_#8B5CF6] progress-line" style="width: 88%;"></div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <h3 class="pop-element font-mono text-sm text-white font-bold tracking-widest uppercase">FastAPI</h3>
-        <div class="pop-element w-8 h-1 bg-[#8B5CF6] mt-2" style="box-shadow: 0 0 10px #8B5CF6"></div>
-      </div>
     </div>
-
-    <!-- Card 3: AI / LLM — CYAN -->
-    <div class="hybrid-cube group anim-in">
-      <div class="cube-face cube-left"></div>
-      <div class="cube-face cube-bottom"></div>
-      <div class="cube-face cube-top">
-        <div class="pop-element pop-icon w-16 h-16 rounded-full bg-[#00E5FF]/10 border border-[#00E5FF]/40 flex items-center justify-center mb-3">
-          <span class="material-symbols-outlined text-4xl text-[#00E5FF]">psychology</span>
+    <div class="skill-scene cursor-crosshair anim-in">
+        <div class="skill-wrapper group ">
+            <div class="skill-base"></div>
+            <div class="skill-content gap-6">
+                <div class="skill-icon text-[#00E5FF] transition-all duration-500">
+                    <span class="material-symbols-outlined text-4xl">psychology</span>
+                </div>
+                <div class="flex-1">
+                    <div class="flex justify-between items-end mb-2">
+                        <h3 class="font-mono text-lg text-white font-bold tracking-widest uppercase">AI / LLM</h3>
+                        <span class="font-mono text-[10px] text-[#00E5FF]">92%</span>
+                    </div>
+                    <div class="w-full h-1 bg-white/10 rounded overflow-hidden">
+                        <div class="h-full bg-[#00E5FF] shadow-[0_0_10px_#00E5FF] progress-line" style="width: 92%;"></div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <h3 class="pop-element font-mono text-sm text-white font-bold tracking-widest uppercase">AI / LLM</h3>
-        <div class="pop-element w-8 h-1 bg-[#00E5FF] mt-2" style="box-shadow: 0 0 10px #00E5FF"></div>
-      </div>
     </div>
-
-    <!-- Card 4: Deep Learning — PURPLE -->
-    <div class="hybrid-cube group anim-in">
-      <div class="cube-face cube-left purple-side"></div>
-      <div class="cube-face cube-bottom purple-bottom"></div>
-      <div class="cube-face cube-top purple-card">
-        <div class="pop-element pop-icon purple-icon w-16 h-16 rounded-full bg-[#8B5CF6]/10 border border-[#8B5CF6]/40 flex items-center justify-center mb-3">
-          <span class="material-symbols-outlined text-4xl text-[#8B5CF6]">neurology</span>
+    <div class="skill-scene cursor-crosshair anim-in">
+        <div class="skill-wrapper group purple-mode">
+            <div class="skill-base"></div>
+            <div class="skill-content gap-6">
+                <div class="skill-icon text-[#8B5CF6] transition-all duration-500">
+                    <span class="material-symbols-outlined text-4xl">neurology</span>
+                </div>
+                <div class="flex-1">
+                    <div class="flex justify-between items-end mb-2">
+                        <h3 class="font-mono text-lg text-white font-bold tracking-widest uppercase">Deep Learning</h3>
+                        <span class="font-mono text-[10px] text-[#8B5CF6]">85%</span>
+                    </div>
+                    <div class="w-full h-1 bg-white/10 rounded overflow-hidden">
+                        <div class="h-full bg-[#8B5CF6] shadow-[0_0_10px_#8B5CF6] progress-line" style="width: 85%;"></div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <h3 class="pop-element font-mono text-sm text-white font-bold tracking-widest uppercase">Deep Learning</h3>
-        <div class="pop-element w-8 h-1 bg-[#8B5CF6] mt-2" style="box-shadow: 0 0 10px #8B5CF6"></div>
-      </div>
     </div>
-
-    <!-- Card 5: SQL — CYAN -->
-    <div class="hybrid-cube group anim-in">
-      <div class="cube-face cube-left"></div>
-      <div class="cube-face cube-bottom"></div>
-      <div class="cube-face cube-top">
-        <div class="pop-element pop-icon w-16 h-16 rounded-full bg-[#00E5FF]/10 border border-[#00E5FF]/40 flex items-center justify-center mb-3">
-          <span class="material-symbols-outlined text-4xl text-[#00E5FF]">database</span>
+    <div class="skill-scene cursor-crosshair anim-in">
+        <div class="skill-wrapper group ">
+            <div class="skill-base"></div>
+            <div class="skill-content gap-6">
+                <div class="skill-icon text-[#00E5FF] transition-all duration-500">
+                    <span class="material-symbols-outlined text-4xl">database</span>
+                </div>
+                <div class="flex-1">
+                    <div class="flex justify-between items-end mb-2">
+                        <h3 class="font-mono text-lg text-white font-bold tracking-widest uppercase">SQL / NoSQL</h3>
+                        <span class="font-mono text-[10px] text-[#00E5FF]">90%</span>
+                    </div>
+                    <div class="w-full h-1 bg-white/10 rounded overflow-hidden">
+                        <div class="h-full bg-[#00E5FF] shadow-[0_0_10px_#00E5FF] progress-line" style="width: 90%;"></div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <h3 class="pop-element font-mono text-sm text-white font-bold tracking-widest uppercase">SQL / NoSQL</h3>
-        <div class="pop-element w-8 h-1 bg-[#00E5FF] mt-2" style="box-shadow: 0 0 10px #00E5FF"></div>
-      </div>
     </div>
-
-    <!-- Card 6: AWS — PURPLE -->
-    <div class="hybrid-cube group anim-in">
-      <div class="cube-face cube-left purple-side"></div>
-      <div class="cube-face cube-bottom purple-bottom"></div>
-      <div class="cube-face cube-top purple-card">
-        <div class="pop-element pop-icon purple-icon w-16 h-16 rounded-full bg-[#8B5CF6]/10 border border-[#8B5CF6]/40 flex items-center justify-center mb-3">
-          <span class="material-symbols-outlined text-4xl text-[#8B5CF6]">cloud</span>
+    <div class="skill-scene cursor-crosshair anim-in">
+        <div class="skill-wrapper group purple-mode">
+            <div class="skill-base"></div>
+            <div class="skill-content gap-6">
+                <div class="skill-icon text-[#8B5CF6] transition-all duration-500">
+                    <span class="material-symbols-outlined text-4xl">cloud</span>
+                </div>
+                <div class="flex-1">
+                    <div class="flex justify-between items-end mb-2">
+                        <h3 class="font-mono text-lg text-white font-bold tracking-widest uppercase">AWS Cloud</h3>
+                        <span class="font-mono text-[10px] text-[#8B5CF6]">82%</span>
+                    </div>
+                    <div class="w-full h-1 bg-white/10 rounded overflow-hidden">
+                        <div class="h-full bg-[#8B5CF6] shadow-[0_0_10px_#8B5CF6] progress-line" style="width: 82%;"></div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <h3 class="pop-element font-mono text-sm text-white font-bold tracking-widest uppercase">AWS Cloud</h3>
-        <div class="pop-element w-8 h-1 bg-[#8B5CF6] mt-2" style="box-shadow: 0 0 10px #8B5CF6"></div>
-      </div>
     </div>
-
-    <!-- Card 7: NLP — CYAN -->
-    <div class="hybrid-cube group anim-in">
-      <div class="cube-face cube-left"></div>
-      <div class="cube-face cube-bottom"></div>
-      <div class="cube-face cube-top">
-        <div class="pop-element pop-icon w-16 h-16 rounded-full bg-[#00E5FF]/10 border border-[#00E5FF]/40 flex items-center justify-center mb-3">
-          <span class="material-symbols-outlined text-4xl text-[#00E5FF]">chat</span>
+            </div>
         </div>
-        <h3 class="pop-element font-mono text-sm text-white font-bold tracking-widest uppercase">NLP</h3>
-        <div class="pop-element w-8 h-1 bg-[#00E5FF] mt-2" style="box-shadow: 0 0 10px #00E5FF"></div>
-      </div>
     </div>
-
-    <!-- Card 8: Data Science — PURPLE -->
-    <div class="hybrid-cube group anim-in">
-      <div class="cube-face cube-left purple-side"></div>
-      <div class="cube-face cube-bottom purple-bottom"></div>
-      <div class="cube-face cube-top purple-card">
-        <div class="pop-element pop-icon purple-icon w-16 h-16 rounded-full bg-[#8B5CF6]/10 border border-[#8B5CF6]/40 flex items-center justify-center mb-3">
-          <span class="material-symbols-outlined text-4xl text-[#8B5CF6]">analytics</span>
-        </div>
-        <h3 class="pop-element font-mono text-sm text-white font-bold tracking-widest uppercase">Data Science</h3>
-        <div class="pop-element w-8 h-1 bg-[#8B5CF6] mt-2" style="box-shadow: 0 0 10px #8B5CF6"></div>
-      </div>
-    </div>
-
-    <!-- Card 9: Computer Vision — CYAN -->
-    <div class="hybrid-cube group anim-in">
-      <div class="cube-face cube-left"></div>
-      <div class="cube-face cube-bottom"></div>
-      <div class="cube-face cube-top">
-        <div class="pop-element pop-icon w-16 h-16 rounded-full bg-[#00E5FF]/10 border border-[#00E5FF]/40 flex items-center justify-center mb-3">
-          <span class="material-symbols-outlined text-4xl text-[#00E5FF]">visibility</span>
-        </div>
-        <h3 class="pop-element font-mono text-sm text-white font-bold tracking-widest uppercase">Comp. Vision</h3>
-        <div class="pop-element w-8 h-1 bg-[#00E5FF] mt-2" style="box-shadow: 0 0 10px #00E5FF"></div>
-      </div>
-    </div>
-
-    <!-- Card 10: Prompt Engineering — PURPLE -->
-    <div class="hybrid-cube group anim-in">
-      <div class="cube-face cube-left purple-side"></div>
-      <div class="cube-face cube-bottom purple-bottom"></div>
-      <div class="cube-face cube-top purple-card">
-        <div class="pop-element pop-icon purple-icon w-16 h-16 rounded-full bg-[#8B5CF6]/10 border border-[#8B5CF6]/40 flex items-center justify-center mb-3">
-          <span class="material-symbols-outlined text-4xl text-[#8B5CF6]">auto_awesome</span>
-        </div>
-        <h3 class="pop-element font-mono text-sm text-white font-bold tracking-widest uppercase">Prompt Eng.</h3>
-        <div class="pop-element w-8 h-1 bg-[#8B5CF6] mt-2" style="box-shadow: 0 0 10px #8B5CF6"></div>
-      </div>
-    </div>
-
-    <!-- Card 11: AI Automation — CYAN -->
-    <div class="hybrid-cube group anim-in">
-      <div class="cube-face cube-left"></div>
-      <div class="cube-face cube-bottom"></div>
-      <div class="cube-face cube-top">
-        <div class="pop-element pop-icon w-16 h-16 rounded-full bg-[#00E5FF]/10 border border-[#00E5FF]/40 flex items-center justify-center mb-3">
-          <span class="material-symbols-outlined text-4xl text-[#00E5FF]">smart_toy</span>
-        </div>
-        <h3 class="pop-element font-mono text-sm text-white font-bold tracking-widest uppercase">Automation</h3>
-        <div class="pop-element w-8 h-1 bg-[#00E5FF] mt-2" style="box-shadow: 0 0 10px #00E5FF"></div>
-      </div>
-    </div>
-
-    <!-- Card 12: TensorFlow — PURPLE -->
-    <div class="hybrid-cube group anim-in">
-      <div class="cube-face cube-left purple-side"></div>
-      <div class="cube-face cube-bottom purple-bottom"></div>
-      <div class="cube-face cube-top purple-card">
-        <div class="pop-element pop-icon purple-icon w-16 h-16 rounded-full bg-[#8B5CF6]/10 border border-[#8B5CF6]/40 flex items-center justify-center mb-3">
-          <span class="material-symbols-outlined text-4xl text-[#8B5CF6]">hub</span>
-        </div>
-        <h3 class="pop-element font-mono text-sm text-white font-bold tracking-widest uppercase">TensorFlow</h3>
-        <div class="pop-element w-8 h-1 bg-[#8B5CF6] mt-2" style="box-shadow: 0 0 10px #8B5CF6"></div>
-      </div>
-    </div>
-
-  </div>
-</div>
-</div>
-
-<script>
-(function() {
-  const universe = document.getElementById('skill-universe');
-  const grid = document.getElementById('iso-grid');
-  if (!universe || !grid) return;
-
-  const BASE_X = 55;
-  const BASE_Z = -45;
-  const MAX_TILT = 8;
-
-  universe.addEventListener('mousemove', function(e) {
-    if (window.innerWidth < 768) return;
-    const rect = universe.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-    const mouseX = (e.clientX - centerX) / (rect.width / 2);
-    const mouseY = (e.clientY - centerY) / (rect.height / 2);
-    const newRotateX = BASE_X - mouseY * MAX_TILT;
-    const newRotateZ = BASE_Z + mouseX * MAX_TILT;
-    grid.style.transform = `rotateX(${newRotateX}deg) rotateZ(${newRotateZ}deg)`;
-  });
-
-  universe.addEventListener('mouseleave', function() {
-    grid.style.transition = 'transform 0.8s ease';
-    grid.style.transform = `rotateX(${BASE_X}deg) rotateZ(${BASE_Z}deg)`;
-    setTimeout(() => { grid.style.transition = 'transform 0.5s ease'; }, 800);
-  });
-})();
-</script>
 </section>
 
 <!-- ════════════════════════════
