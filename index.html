@@ -303,15 +303,40 @@
 }
     </style>
     <!-- Use inline styles to override any global flex-direction: row -->
-    <div class="card-inner w-full" style="display: flex !important; flex-direction: column !important; align-items: center !important; justify-content: flex-start !important; padding-top: 60px !important;">
+    <div class="card-inner w-full" style="display: flex !important; flex-direction: column !important; align-items: center !important; justify-content: flex-start !important; padding-top: 100px !important;">
         
         <!-- Heading Block -->
-        <div class="z-20 text-center w-full px-6 mb-8">
-            <h2 class="font-h2 text-3xl md:text-5xl text-white font-bold mb-2 uppercase tracking-widest">Intelligence_Matrix</h2>
-            <p class="font-mono text-[10px] md:text-xs text-white/40 uppercase tracking-[0.4em]">
+        <div class="z-20 text-center w-full px-6 mb-12">
+            <h2 id="skills-matrix-title" class="font-h2 text-3xl md:text-5xl text-white font-bold mb-2 uppercase tracking-widest transition-opacity duration-500">Intelligence_Matrix</h2>
+            <p id="skills-matrix-sub" class="font-mono text-[10px] md:text-xs text-white/40 uppercase tracking-[0.4em] transition-opacity duration-500">
                 // Machine Learning & Data Engineering Stack
             </p>
         </div>
+
+        <script>
+            (function() {
+                const titles = [
+                    { h: "Intelligence_Matrix", p: "// Machine Learning & Data Engineering Stack" },
+                    { h: "Core_Neural_Toolkit", p: "// Active Tech Stack & Development Frameworks" },
+                    { h: "System_Capabilities", p: "// Orbiting Technologies & AI Ecosystem" }
+                ];
+                let current = 0;
+                const hEl = document.getElementById('skills-matrix-title');
+                const pEl = document.getElementById('skills-matrix-sub');
+                
+                setInterval(() => {
+                    hEl.style.opacity = 0;
+                    pEl.style.opacity = 0;
+                    setTimeout(() => {
+                        current = (current + 1) % titles.length;
+                        hEl.textContent = titles[current].h;
+                        pEl.textContent = titles[current].p;
+                        hEl.style.opacity = 1;
+                        pEl.style.opacity = 1;
+                    }, 500);
+                }, 4000);
+            })();
+        </script>
 
         <!-- Solar System Block -->
         <div class="solar-universe">
