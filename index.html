@@ -169,13 +169,13 @@
 
 <!-- ════════ CARD 3 — SKILLS ════════ -->
 
+
 <section id="card-3" class="card state-below">
     <style>
-/* === EXPANDED 15-SKILL SOLAR SYSTEM === */
+/* === ULTRA-RESPONSIVE SOLAR SYSTEM === */
 .solar-universe {
     position: relative;
     width: 100%;
-    min-height: 500px; 
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -183,6 +183,7 @@
     overflow: hidden;
     background: radial-gradient(circle at center, rgba(0, 229, 255, 0.05), transparent 70%);
 }
+
 .solar-system-scale {
     position: relative;
     width: 800px;
@@ -191,6 +192,7 @@
     align-items: center;
     justify-content: center;
     transition: transform 0.3s ease;
+    transform-origin: center center;
 }
 
 .core-sun {
@@ -277,53 +279,54 @@
     text-shadow: 0 0 10px #00E5FF;
 }
 
-/* Precise Planet Positions for N-planet orbits */
+/* Positions */
 .p-0   { top: -24px; left: calc(50% - 24px); }
 .p-180 { bottom: -24px; left: calc(50% - 24px); }
-/* 3-planet offsets (Approx) */
 .p-120 { top: 75%; left: 93%; }
 .p-240 { top: 75%; left: -2%; }
-/* 4-planet offsets */
-.p-90  { top: calc(50% - 24px); right: -24px; }
-.p-270 { top: calc(50% - 24px); left: -24px; }
 
-/* CRITICAL: The Responsive Magic */
-@media (max-width: 1024px) {
-    .solar-system-scale {
-        transform: scale(0.8);
-    }
+/* MOBILE RESPONSIVE FIXES */
+@media (max-width: 1200px) {
+    .solar-system-scale { transform: scale(0.7); }
 }
 @media (max-width: 768px) {
-    .solar-system-scale {
-        transform: scale(0.55);
-        margin-top: -80px; 
-    }
-    .solar-universe {
-        min-height: 450px;
+    .solar-universe { min-height: 400px; }
+    .solar-system-scale { 
+        transform: scale(0.45); 
+        margin-top: -120px; 
     }
 }
-@media (max-width: 400px) {
-    .solar-system-scale {
-        transform: scale(0.42);
-        margin-top: -120px;
+@media (max-width: 480px) {
+    .solar-system-scale { 
+        transform: scale(0.38); 
+        margin-top: -160px; 
+    }
+}
+@media (max-width: 380px) {
+    .solar-system-scale { 
+        transform: scale(0.32); 
+        margin-top: -200px; 
     }
 }
 </style>
-    <div class="card-inner w-full py-16 flex flex-col xl:flex-row items-center justify-center overflow-hidden relative">
-        <div class="z-20 text-center xl:text-left mb-10 xl:mb-0 px-4 w-full max-w-lg">
-            <h2 class="font-h2 text-3xl md:text-5xl text-white font-bold mb-2">Intelligence_Matrix</h2>
-            <p class="font-mono text-[10px] md:text-xs text-white/40 uppercase tracking-[0.4em]">
+    <div class="card-inner w-full flex flex-col items-center justify-start overflow-hidden relative py-12">
+        
+        <!-- Heading Block: Always on top and centered on mobile -->
+        <div class="z-20 text-center w-full max-w-2xl px-6 mb-0 md:mb-10">
+            <h2 class="font-h2 text-3xl md:text-5xl text-white font-bold mb-2 uppercase tracking-widest">Intelligence_Matrix</h2>
+            <p class="font-mono text-[10px] md:text-xs text-white/40 uppercase tracking-[0.4em] mb-4">
                 // Machine Learning & Data Engineering Stack
             </p>
         </div>
 
-        <div class="solar-universe">
+        <!-- Solar System Block: Always centered below -->
+        <div class="solar-universe w-full">
             <div class="solar-system-scale">
                 <div class="core-sun">
                     <span class="material-symbols-outlined text-white text-4xl">psychology</span>
                 </div>
 
-                <!-- Orbit 1: Core -->
+                <!-- Orbit 1 -->
                 <div class="orbit-ring" style="width: 180px; height: 180px;"></div>
                 <div class="orbit-wrapper" style="width: 180px; height: 180px; animation: orbit 25s linear infinite;">
                     
@@ -335,7 +338,7 @@
                     </div>
                 </div>
 
-                <!-- Orbit 2: Backend & Automation -->
+                <!-- Orbit 2 -->
                 <div class="orbit-ring" style="width: 290px; height: 290px; border-color: rgba(139, 92, 246, 0.3);"></div>
                 <div class="orbit-wrapper" style="width: 290px; height: 290px; animation: orbit 35s linear infinite reverse;">
                     
@@ -354,7 +357,7 @@
                     </div>
                 </div>
 
-                <!-- Orbit 3: AI & Machine Intelligence -->
+                <!-- Orbit 3 -->
                 <div class="orbit-ring" style="width: 400px; height: 400px;"></div>
                 <div class="orbit-wrapper" style="width: 400px; height: 400px; animation: orbit 45s linear infinite;">
                     
@@ -380,7 +383,7 @@
                     </div>
                 </div>
 
-                <!-- Orbit 4: Data & Problem Solving -->
+                <!-- Orbit 4 -->
                 <div class="orbit-ring" style="width: 510px; height: 510px; border-color: rgba(139, 92, 246, 0.2);"></div>
                 <div class="orbit-wrapper" style="width: 510px; height: 510px; animation: orbit 55s linear infinite reverse;">
                     
@@ -406,7 +409,7 @@
                     </div>
                 </div>
 
-                <!-- Orbit 5: Infrastructure & Web -->
+                <!-- Orbit 5 -->
                 <div class="orbit-ring" style="width: 620px; height: 620px;"></div>
                 <div class="orbit-wrapper" style="width: 620px; height: 620px; animation: orbit 65s linear infinite;">
                     
@@ -432,7 +435,7 @@
                     </div>
                 </div>
 
-                <!-- Orbit 6: Creative Suite -->
+                <!-- Orbit 6 -->
                 <div class="orbit-ring" style="width: 730px; height: 730px; border-color: rgba(139, 92, 246, 0.2);"></div>
                 <div class="orbit-wrapper" style="width: 730px; height: 730px; animation: orbit 75s linear infinite reverse;">
                     
