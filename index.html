@@ -170,170 +170,208 @@
 <!-- ════════ CARD 3 — SKILLS ════════ -->
 
 
+
 <section id="card-3" class="card state-below">
     <style>
-/* === FIX: 3D TERMINAL SKILLS (STRICT HORIZONTAL) === */
-.skill-scene { perspective: 1200px; width: 100%; height: 90px; margin-bottom: 20px; }
-.skill-wrapper { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; cursor: crosshair; }
-.skill-base {
-    position: absolute; inset: 0;
-    background: rgba(6, 11, 20, 0.8);
-    border: 1px solid rgba(0, 229, 255, 0.2);
-    border-radius: 4px;
-    transform-origin: bottom center;
-    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+/* === SPACE THEME: ORBITING PLANET SKILLS === */
+.planet-scene {
+    perspective: 1500px;
+    width: 100%;
+    height: 180px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-.skill-content {
-    position: absolute; inset: 0;
-    display: flex; flex-direction: row; align-items: center; justify-content: flex-start;
-    padding: 0 24px; gap: 20px;
-    transform-origin: bottom center;
-    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-    transform: translateZ(1px);
+.planet-wrapper {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+    cursor: pointer;
 }
-.progress-line { transition: width 1.5s cubic-bezier(0.1, 0, 0.2, 1); }
 
-/* 3D Hover Action */
-.skill-wrapper:hover .skill-base {
-    transform: rotateX(75deg) translateY(20px) translateZ(-30px);
-    background: rgba(0, 229, 255, 0.05);
-    box-shadow: 0 0 40px rgba(0, 229, 255, 0.3);
+/* THE ORBIT RING */
+.orbit-ring {
+    position: absolute;
+    inset: -15px;
+    border: 1px dashed rgba(0, 229, 255, 0.3);
+    border-radius: 50%;
+    transform: rotateX(60deg);
+    transition: all 0.6s ease;
+    pointer-events: none;
+}
+.planet-wrapper.purple-mode .orbit-ring {
+    border-color: rgba(139, 92, 246, 0.3);
+}
+
+/* THE PLANET BODY */
+.planet-circle {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.05), rgba(0,0,0,0.4));
+    border: 1px solid rgba(0, 229, 255, 0.2);
+    border-radius: 50%;
+    backdrop-filter: blur(8px);
+    transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: inset 0 0 20px rgba(0, 229, 255, 0.1);
+}
+.planet-wrapper.purple-mode .planet-circle {
+    border-color: rgba(139, 92, 246, 0.2);
+    box-shadow: inset 0 0 20px rgba(139, 92, 246, 0.1);
+}
+
+/* THE CONTENT */
+.planet-content {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transform: translateZ(20px);
+    transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* HOVER ANIMATIONS */
+.planet-wrapper:hover .orbit-ring {
+    inset: -25px;
     border-color: rgba(0, 229, 255, 0.8);
+    transform: rotateX(60deg) rotateZ(180deg);
+    border-style: solid;
+    box-shadow: 0 0 20px rgba(0, 229, 255, 0.4);
 }
-.skill-wrapper.purple-mode:hover .skill-base {
-    background: rgba(139, 92, 246, 0.05);
-    box-shadow: 0 0 40px rgba(139, 92, 246, 0.3);
+.planet-wrapper.purple-mode:hover .orbit-ring {
     border-color: rgba(139, 92, 246, 0.8);
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
 }
-.skill-wrapper:hover .skill-content {
-    transform: translateY(-20px) translateZ(50px);
+
+.planet-wrapper:hover .planet-circle {
+    transform: translateZ(-40px) rotateX(10deg);
+    background: rgba(0, 229, 255, 0.05);
+    border-color: rgba(0, 229, 255, 0.4);
+    box-shadow: 0 0 40px rgba(0, 229, 255, 0.2);
 }
-.skill-wrapper:hover .pop-icon { transform: scale(1.2); filter: drop-shadow(0 0 10px rgba(0, 229, 255, 0.8)); }
-.skill-wrapper.purple-mode:hover .pop-icon { filter: drop-shadow(0 0 10px rgba(139, 92, 246, 0.8)); }
+.planet-wrapper.purple-mode:hover .planet-circle {
+    background: rgba(139, 92, 246, 0.05);
+    border-color: rgba(139, 92, 246, 0.4);
+    box-shadow: 0 0 40px rgba(139, 92, 246, 0.2);
+}
+
+.planet-wrapper:hover .planet-content {
+    transform: translateZ(80px) scale(1.15);
+}
+
+.planet-icon {
+    filter: drop-shadow(0 0 10px rgba(0, 229, 255, 0.4));
+    transition: all 0.4s ease;
+}
+.planet-wrapper.purple-mode .planet-icon {
+    filter: drop-shadow(0 0 10px rgba(139, 92, 246, 0.4));
+}
+.planet-wrapper:hover .planet-icon {
+    filter: drop-shadow(0 0 20px rgba(0, 229, 255, 0.8));
+}
+.planet-wrapper.purple-mode:hover .planet-icon {
+    filter: drop-shadow(0 0 20px rgba(139, 92, 246, 0.8));
+}
+
+@keyframes orbit-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+.planet-scene {
+    animation: orbit-float 4s ease-in-out infinite;
+}
+.planet-scene:nth-child(even) { animation-delay: -2s; }
 
 @media (max-width: 768px) {
-    .skill-scene { height: 80px; }
-    .skill-content { padding: 0 16px; gap: 12px; }
-    .skill-wrapper:hover .skill-content { transform: translateY(-10px) translateZ(40px); }
+    .planet-wrapper { width: 120px; height: 120px; }
+    .planet-scene { height: 150px; }
+    .orbit-ring { inset: -10px; }
 }
 </style>
     <div class="card-inner w-full">
         <div class="max-w-[1280px] mx-auto px-8 pb-12 pt-16">
-            <h2 class="text-center font-mono text-2xl text-[#00E5FF] uppercase tracking-[0.3em] mb-2 text-shadow-[0_0_20px_rgba(0,229,255,0.5)]">Core_Neural_Matrix</h2>
-            <p class="text-center font-mono text-[10px] text-white/40 uppercase tracking-[0.4em] mb-12">// Strict Horizontal 3D Stage Architecture</p>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-[1200px] mx-auto px-8">
+            <h2 class="text-center font-mono text-2xl text-[#00E5FF] uppercase tracking-[0.3em] mb-2 text-shadow-[0_0_20px_rgba(0,229,255,0.5)]">Skill_Celestial_Orbit</h2>
+            <p class="text-center font-mono text-[10px] text-white/40 uppercase tracking-[0.4em] mb-16">// Floating Systems & Neural Protocols</p>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-y-12 gap-x-4 max-w-[1200px] mx-auto">
                 
-    <div class="skill-scene">
-        <div class="skill-wrapper group ">
-            <div class="skill-base"></div>
-            <div class="skill-content w-full h-full flex flex-row items-center">
-                <div class="pop-icon text-[#00E5FF] w-12 flex-shrink-0 flex items-center justify-center transition-all duration-300">
-                    <span class="material-symbols-outlined text-3xl">code</span>
+    <div class="planet-scene anim-in">
+        <div class="planet-wrapper ">
+            <div class="orbit-ring"></div>
+            <div class="planet-circle"></div>
+            <div class="planet-content">
+                <div class="planet-icon text-[#00E5FF] mb-2">
+                    <span class="material-symbols-outlined text-5xl">code</span>
                 </div>
-                <div class="flex-1 flex flex-col justify-center w-full">
-                    <div class="flex flex-row justify-between items-center w-full mb-2">
-                        <span class="font-mono text-sm text-white font-bold tracking-[0.2em] uppercase">Python</span>
-                        <span class="font-mono text-xs text-[#00E5FF]">95%</span>
-                    </div>
-                    <div class="w-full h-[2px] bg-white/10 relative rounded overflow-hidden">
-                        <div class="absolute top-0 left-0 h-full bg-[#00E5FF] shadow-[0_0_10px_#00E5FF] progress-line" style="width: 95%;"></div>
-                    </div>
-                </div>
+                <h3 class="font-mono text-[10px] text-white font-bold tracking-[0.2em] uppercase">Python</h3>
+                <div class="w-8 h-[1px] bg-[#00E5FF]/40 mt-2"></div>
             </div>
         </div>
     </div>
-    <div class="skill-scene">
-        <div class="skill-wrapper group purple-mode">
-            <div class="skill-base"></div>
-            <div class="skill-content w-full h-full flex flex-row items-center">
-                <div class="pop-icon text-[#8B5CF6] w-12 flex-shrink-0 flex items-center justify-center transition-all duration-300">
-                    <span class="material-symbols-outlined text-3xl">bolt</span>
+    <div class="planet-scene anim-in">
+        <div class="planet-wrapper purple-mode">
+            <div class="orbit-ring"></div>
+            <div class="planet-circle"></div>
+            <div class="planet-content">
+                <div class="planet-icon text-[#8B5CF6] mb-2">
+                    <span class="material-symbols-outlined text-5xl">bolt</span>
                 </div>
-                <div class="flex-1 flex flex-col justify-center w-full">
-                    <div class="flex flex-row justify-between items-center w-full mb-2">
-                        <span class="font-mono text-sm text-white font-bold tracking-[0.2em] uppercase">FastAPI</span>
-                        <span class="font-mono text-xs text-[#8B5CF6]">88%</span>
-                    </div>
-                    <div class="w-full h-[2px] bg-white/10 relative rounded overflow-hidden">
-                        <div class="absolute top-0 left-0 h-full bg-[#8B5CF6] shadow-[0_0_10px_#8B5CF6] progress-line" style="width: 88%;"></div>
-                    </div>
-                </div>
+                <h3 class="font-mono text-[10px] text-white font-bold tracking-[0.2em] uppercase">FastAPI</h3>
+                <div class="w-8 h-[1px] bg-[#8B5CF6]/40 mt-2"></div>
             </div>
         </div>
     </div>
-    <div class="skill-scene">
-        <div class="skill-wrapper group ">
-            <div class="skill-base"></div>
-            <div class="skill-content w-full h-full flex flex-row items-center">
-                <div class="pop-icon text-[#00E5FF] w-12 flex-shrink-0 flex items-center justify-center transition-all duration-300">
-                    <span class="material-symbols-outlined text-3xl">psychology</span>
+    <div class="planet-scene anim-in">
+        <div class="planet-wrapper ">
+            <div class="orbit-ring"></div>
+            <div class="planet-circle"></div>
+            <div class="planet-content">
+                <div class="planet-icon text-[#00E5FF] mb-2">
+                    <span class="material-symbols-outlined text-5xl">psychology</span>
                 </div>
-                <div class="flex-1 flex flex-col justify-center w-full">
-                    <div class="flex flex-row justify-between items-center w-full mb-2">
-                        <span class="font-mono text-sm text-white font-bold tracking-[0.2em] uppercase">AI / LLM</span>
-                        <span class="font-mono text-xs text-[#00E5FF]">92%</span>
-                    </div>
-                    <div class="w-full h-[2px] bg-white/10 relative rounded overflow-hidden">
-                        <div class="absolute top-0 left-0 h-full bg-[#00E5FF] shadow-[0_0_10px_#00E5FF] progress-line" style="width: 92%;"></div>
-                    </div>
-                </div>
+                <h3 class="font-mono text-[10px] text-white font-bold tracking-[0.2em] uppercase">AI / LLM</h3>
+                <div class="w-8 h-[1px] bg-[#00E5FF]/40 mt-2"></div>
             </div>
         </div>
     </div>
-    <div class="skill-scene">
-        <div class="skill-wrapper group purple-mode">
-            <div class="skill-base"></div>
-            <div class="skill-content w-full h-full flex flex-row items-center">
-                <div class="pop-icon text-[#8B5CF6] w-12 flex-shrink-0 flex items-center justify-center transition-all duration-300">
-                    <span class="material-symbols-outlined text-3xl">neurology</span>
+    <div class="planet-scene anim-in">
+        <div class="planet-wrapper purple-mode">
+            <div class="orbit-ring"></div>
+            <div class="planet-circle"></div>
+            <div class="planet-content">
+                <div class="planet-icon text-[#8B5CF6] mb-2">
+                    <span class="material-symbols-outlined text-5xl">neurology</span>
                 </div>
-                <div class="flex-1 flex flex-col justify-center w-full">
-                    <div class="flex flex-row justify-between items-center w-full mb-2">
-                        <span class="font-mono text-sm text-white font-bold tracking-[0.2em] uppercase">Deep Learning</span>
-                        <span class="font-mono text-xs text-[#8B5CF6]">85%</span>
-                    </div>
-                    <div class="w-full h-[2px] bg-white/10 relative rounded overflow-hidden">
-                        <div class="absolute top-0 left-0 h-full bg-[#8B5CF6] shadow-[0_0_10px_#8B5CF6] progress-line" style="width: 85%;"></div>
-                    </div>
-                </div>
+                <h3 class="font-mono text-[10px] text-white font-bold tracking-[0.2em] uppercase">Deep Learning</h3>
+                <div class="w-8 h-[1px] bg-[#8B5CF6]/40 mt-2"></div>
             </div>
         </div>
     </div>
-    <div class="skill-scene">
-        <div class="skill-wrapper group ">
-            <div class="skill-base"></div>
-            <div class="skill-content w-full h-full flex flex-row items-center">
-                <div class="pop-icon text-[#00E5FF] w-12 flex-shrink-0 flex items-center justify-center transition-all duration-300">
-                    <span class="material-symbols-outlined text-3xl">database</span>
+    <div class="planet-scene anim-in">
+        <div class="planet-wrapper ">
+            <div class="orbit-ring"></div>
+            <div class="planet-circle"></div>
+            <div class="planet-content">
+                <div class="planet-icon text-[#00E5FF] mb-2">
+                    <span class="material-symbols-outlined text-5xl">database</span>
                 </div>
-                <div class="flex-1 flex flex-col justify-center w-full">
-                    <div class="flex flex-row justify-between items-center w-full mb-2">
-                        <span class="font-mono text-sm text-white font-bold tracking-[0.2em] uppercase">SQL / NoSQL</span>
-                        <span class="font-mono text-xs text-[#00E5FF]">90%</span>
-                    </div>
-                    <div class="w-full h-[2px] bg-white/10 relative rounded overflow-hidden">
-                        <div class="absolute top-0 left-0 h-full bg-[#00E5FF] shadow-[0_0_10px_#00E5FF] progress-line" style="width: 90%;"></div>
-                    </div>
-                </div>
+                <h3 class="font-mono text-[10px] text-white font-bold tracking-[0.2em] uppercase">SQL / NoSQL</h3>
+                <div class="w-8 h-[1px] bg-[#00E5FF]/40 mt-2"></div>
             </div>
         </div>
     </div>
-    <div class="skill-scene">
-        <div class="skill-wrapper group purple-mode">
-            <div class="skill-base"></div>
-            <div class="skill-content w-full h-full flex flex-row items-center">
-                <div class="pop-icon text-[#8B5CF6] w-12 flex-shrink-0 flex items-center justify-center transition-all duration-300">
-                    <span class="material-symbols-outlined text-3xl">cloud</span>
+    <div class="planet-scene anim-in">
+        <div class="planet-wrapper purple-mode">
+            <div class="orbit-ring"></div>
+            <div class="planet-circle"></div>
+            <div class="planet-content">
+                <div class="planet-icon text-[#8B5CF6] mb-2">
+                    <span class="material-symbols-outlined text-5xl">cloud</span>
                 </div>
-                <div class="flex-1 flex flex-col justify-center w-full">
-                    <div class="flex flex-row justify-between items-center w-full mb-2">
-                        <span class="font-mono text-sm text-white font-bold tracking-[0.2em] uppercase">AWS Cloud</span>
-                        <span class="font-mono text-xs text-[#8B5CF6]">82%</span>
-                    </div>
-                    <div class="w-full h-[2px] bg-white/10 relative rounded overflow-hidden">
-                        <div class="absolute top-0 left-0 h-full bg-[#8B5CF6] shadow-[0_0_10px_#8B5CF6] progress-line" style="width: 82%;"></div>
-                    </div>
-                </div>
+                <h3 class="font-mono text-[10px] text-white font-bold tracking-[0.2em] uppercase">AWS Cloud</h3>
+                <div class="w-8 h-[1px] bg-[#8B5CF6]/40 mt-2"></div>
             </div>
         </div>
     </div>
