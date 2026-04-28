@@ -4,6 +4,39 @@ const navBtns = document.querySelectorAll('.nav-btn');
 let currentIndex   = 0;
 let isTransitioning = false;
 
+// Navigation Popup Logic
+function showNavPopup() {
+    const popup = document.getElementById('navPopup');
+    const icon = document.getElementById('navPopupIcon');
+    const text = document.getElementById('navPopupText');
+    if (!popup || !text) return;
+
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
+    if (isMobile) {
+        icon.textContent = "👈👉";
+        text.textContent = "Swipe left/right to explore";
+    } else {
+        icon.textContent = "🖱️";
+        text.textContent = "Click arrows or use keyboard to explore";
+    }
+
+    setTimeout(() => {
+        popup.classList.add('active');
+    }, 4500); // Show after rocket loader finishes
+
+    // Hide after 6 seconds or on interaction
+    const hidePopup = () => {
+        popup.classList.remove('active');
+        document.removeEventListener('click', hidePopup);
+        document.removeEventListener('keydown', hidePopup);
+        document.removeEventListener('touchstart', hidePopup);
+    };
+    setTimeout(hidePopup, 12000);
+    document.addEventListener('click', hidePopup);
+    document.addEventListener('keydown', hidePopup);
+    document.addEventListener('touchstart', hidePopup);
+}
+
 function triggerCardAnimations(card) {
     if (!card) return;
     card.querySelectorAll('.skill-card, .project-card, .cert-card, .contact-link-card, .hack-title, .hack-desc, .stats-row, .hack-badge, .contact-panel h2, .contact-subtitle, .cs-card, .skill-3d-card').forEach(el => {
@@ -212,8 +245,8 @@ if(document.getElementById('csModalClose')) document.getElementById('csModalClos
     setTimeout(() => { tL.style.transition = 'transform 0.5s ease-out'; tR.style.transition = 'transform 0.5s ease-out'; tL.style.transform = 'translateX(-100%)'; tR.style.transform = 'translateX(100%)'; }, 1000);
   };
 
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', () => { buildLoader(); buildTransitionElements(); }, { once: true });
-  else { buildLoader(); buildTransitionElements(); }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', () => { buildLoader(); buildTransitionElements(); showNavPopup(); }, { once: true });
+  else { buildLoader(); buildTransitionElements(); showNavPopup(); }
 })();
 
 // Neural Matrix Extras

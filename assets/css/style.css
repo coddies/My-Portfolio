@@ -266,58 +266,90 @@ h1, h2, h3, .syne-font {
 
 
 
-/* Never show tooltip on active button — only on hover */
-
-.nav-btn.active .nav-tooltip {
-
-    opacity: 0 !important;
-
-    pointer-events: none !important;
-
-    transform: translateX(10px) !important;
-
-}
-
-
-
+/* Nav Tooltips */
 .nav-tooltip {
-
     position: absolute;
-
-    right: 58px;
-
-    background: var(--purple);
-
-    color: var(--text-white);
-
+    bottom: calc(100% + 15px);
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    background: rgba(10, 15, 22, 0.95);
+    border: 1px solid var(--cyan);
+    color: white;
     padding: 6px 14px;
-
     border-radius: 8px;
-
-    font-size: 13px;
-
+    font-size: 11px;
     font-weight: 600;
-
     white-space: nowrap;
-
     opacity: 0;
-
+    visibility: hidden;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 10px 30px rgba(0, 229, 255, 0.2);
     pointer-events: none;
-
-    transition: transform 0.3s ease, opacity 0.3s ease;
-
-    transform: translateX(10px);
-
+    z-index: 1000;
 }
 
+.nav-tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 6px;
+    border-style: solid;
+    border-color: var(--cyan) transparent transparent transparent;
+}
 
-
-.nav-btn:hover .nav-tooltip {
-
+.nav-btn:hover .nav-tooltip,
+.nav-btn.active .nav-tooltip {
     opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
 
-    transform: translateX(0);
+/* Nav Instruction Popup */
+.nav-popup {
+    position: fixed;
+    bottom: 120px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: rgba(0, 229, 255, 0.1);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(0, 229, 255, 0.3);
+    padding: 12px 24px;
+    border-radius: 99px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+}
 
+.nav-popup.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+
+.nav-popup-icon {
+    font-size: 20px;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {transform: translateX(0);}
+    40% {transform: translateX(10px);}
+    60% {transform: translateX(5px);}
+}
+
+.nav-popup-text {
+    color: white;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
 }
 
 
