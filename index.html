@@ -174,13 +174,14 @@
 
 
 
+
 <section id="card-3" class="card state-below">
     <style>
-/* === MULTILATERAL SOLAR SYSTEM SKILLS === */
+/* === FIX: UPRIGHT TEXT ON HOVER === */
 .solar-universe { 
     position: relative; 
     width: 100%; 
-    height: 800px; 
+    height: 850px; 
     display: flex; 
     align-items: center; 
     justify-content: center; 
@@ -229,14 +230,26 @@
     width: 48px; 
     height: 48px; 
     border-radius: 50%;
+    pointer-events: auto; 
+    cursor: crosshair;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Animation keeps the planet div compensated against orbit rotation */
+}
+
+/* THE FIX: We use an inner div for visual styles and hover effects 
+   This ensures the .planet's transform: rotate() from animation is NEVER overridden */
+.planet-inner {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
     background: rgba(6, 11, 20, 0.95); 
     border: 1px solid rgba(0, 229, 255, 0.4);
     display: flex; 
     flex-direction: column; 
     align-items: center; 
     justify-content: center;
-    pointer-events: auto; 
-    cursor: crosshair;
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
 }
@@ -246,8 +259,8 @@
     animation-play-state: paused !important; 
 }
 
-.planet:hover { 
-    transform: scale(1.6) !important; 
+.planet:hover .planet-inner { 
+    transform: scale(1.6); 
     z-index: 100; 
     border-color: #00E5FF; 
     box-shadow: 0 0 30px rgba(0, 229, 255, 0.7); 
@@ -298,9 +311,11 @@
                 <div class="orbit-ring" style="width: 180px; height: 180px;"></div>
                 <div class="orbit-wrapper" style="width: 180px; height: 180px; animation: orbit 25s linear infinite;">
                     
-                    <div class="planet  p-0" style="animation: anti-orbit 25s linear infinite ;">
-                        <span class="planet-text">Python</span>
-                        <span class="material-symbols-outlined text-[#00E5FF] text-2xl">code</span>
+                    <div class="planet p-0" style="animation: anti-orbit 25s linear infinite ;">
+                        <div class="planet-inner ">
+                            <span class="planet-text">Python</span>
+                            <span class="material-symbols-outlined text-[#00E5FF] text-2xl">code</span>
+                        </div>
                     </div>
                 </div>
 
@@ -308,14 +323,18 @@
                 <div class="orbit-ring" style="width: 290px; height: 290px; border-color: rgba(139, 92, 246, 0.3);"></div>
                 <div class="orbit-wrapper" style="width: 290px; height: 290px; animation: orbit 35s linear infinite reverse;">
                     
-                    <div class="planet border-[#8B5CF6] p-0" style="animation: anti-orbit 35s linear infinite reverse;">
-                        <span class="planet-text">FastAPI</span>
-                        <span class="material-symbols-outlined text-[#8B5CF6] text-2xl">bolt</span>
+                    <div class="planet p-0" style="animation: anti-orbit 35s linear infinite reverse;">
+                        <div class="planet-inner border-[#8B5CF6]">
+                            <span class="planet-text">FastAPI</span>
+                            <span class="material-symbols-outlined text-[#8B5CF6] text-2xl">bolt</span>
+                        </div>
                     </div>
                     
-                    <div class="planet border-[#8B5CF6] p-180" style="animation: anti-orbit 35s linear infinite reverse;">
-                        <span class="planet-text">Vibe Coding</span>
-                        <span class="material-symbols-outlined text-[#8B5CF6] text-2xl">auto_fix</span>
+                    <div class="planet p-180" style="animation: anti-orbit 35s linear infinite reverse;">
+                        <div class="planet-inner border-[#8B5CF6]">
+                            <span class="planet-text">Vibe Coding</span>
+                            <span class="material-symbols-outlined text-[#8B5CF6] text-2xl">auto_fix</span>
+                        </div>
                     </div>
                 </div>
 
@@ -323,14 +342,18 @@
                 <div class="orbit-ring" style="width: 400px; height: 400px;"></div>
                 <div class="orbit-wrapper" style="width: 400px; height: 400px; animation: orbit 45s linear infinite;">
                     
-                    <div class="planet  p-0" style="animation: anti-orbit 45s linear infinite ;">
-                        <span class="planet-text">AI / LLM</span>
-                        <span class="material-symbols-outlined text-[#00E5FF] text-2xl">memory</span>
+                    <div class="planet p-0" style="animation: anti-orbit 45s linear infinite ;">
+                        <div class="planet-inner ">
+                            <span class="planet-text">AI / LLM</span>
+                            <span class="material-symbols-outlined text-[#00E5FF] text-2xl">memory</span>
+                        </div>
                     </div>
                     
-                    <div class="planet  p-180" style="animation: anti-orbit 45s linear infinite ;">
-                        <span class="planet-text">Problem Solving</span>
-                        <span class="material-symbols-outlined text-[#00E5FF] text-2xl">architecture</span>
+                    <div class="planet p-180" style="animation: anti-orbit 45s linear infinite ;">
+                        <div class="planet-inner ">
+                            <span class="planet-text">Problem Solving</span>
+                            <span class="material-symbols-outlined text-[#00E5FF] text-2xl">architecture</span>
+                        </div>
                     </div>
                 </div>
 
@@ -338,14 +361,18 @@
                 <div class="orbit-ring" style="width: 510px; height: 510px; border-color: rgba(139, 92, 246, 0.2);"></div>
                 <div class="orbit-wrapper" style="width: 510px; height: 510px; animation: orbit 55s linear infinite reverse;">
                     
-                    <div class="planet border-[#8B5CF6] p-0" style="animation: anti-orbit 55s linear infinite reverse;">
-                        <span class="planet-text">AWS Cloud</span>
-                        <span class="material-symbols-outlined text-[#8B5CF6] text-2xl">cloud</span>
+                    <div class="planet p-0" style="animation: anti-orbit 55s linear infinite reverse;">
+                        <div class="planet-inner border-[#8B5CF6]">
+                            <span class="planet-text">AWS Cloud</span>
+                            <span class="material-symbols-outlined text-[#8B5CF6] text-2xl">cloud</span>
+                        </div>
                     </div>
                     
-                    <div class="planet border-[#8B5CF6] p-180" style="animation: anti-orbit 55s linear infinite reverse;">
-                        <span class="planet-text">SQL / DB</span>
-                        <span class="material-symbols-outlined text-[#8B5CF6] text-2xl">database</span>
+                    <div class="planet p-180" style="animation: anti-orbit 55s linear infinite reverse;">
+                        <div class="planet-inner border-[#8B5CF6]">
+                            <span class="planet-text">SQL / DB</span>
+                            <span class="material-symbols-outlined text-[#8B5CF6] text-2xl">database</span>
+                        </div>
                     </div>
                 </div>
 
@@ -353,14 +380,18 @@
                 <div class="orbit-ring" style="width: 620px; height: 620px;"></div>
                 <div class="orbit-wrapper" style="width: 620px; height: 620px; animation: orbit 65s linear infinite;">
                     
-                    <div class="planet  p-0" style="animation: anti-orbit 65s linear infinite ;">
-                        <span class="planet-text">HTML5</span>
-                        <span class="material-symbols-outlined text-[#00E5FF] text-2xl">html</span>
+                    <div class="planet p-0" style="animation: anti-orbit 65s linear infinite ;">
+                        <div class="planet-inner ">
+                            <span class="planet-text">HTML5</span>
+                            <span class="material-symbols-outlined text-[#00E5FF] text-2xl">html</span>
+                        </div>
                     </div>
                     
-                    <div class="planet  p-180" style="animation: anti-orbit 65s linear infinite ;">
-                        <span class="planet-text">CSS3</span>
-                        <span class="material-symbols-outlined text-[#00E5FF] text-2xl">css</span>
+                    <div class="planet p-180" style="animation: anti-orbit 65s linear infinite ;">
+                        <div class="planet-inner ">
+                            <span class="planet-text">CSS3</span>
+                            <span class="material-symbols-outlined text-[#00E5FF] text-2xl">css</span>
+                        </div>
                     </div>
                 </div>
 
@@ -368,14 +399,18 @@
                 <div class="orbit-ring" style="width: 730px; height: 730px; border-color: rgba(139, 92, 246, 0.2);"></div>
                 <div class="orbit-wrapper" style="width: 730px; height: 730px; animation: orbit 75s linear infinite reverse;">
                     
-                    <div class="planet border-[#8B5CF6] p-0" style="animation: anti-orbit 75s linear infinite reverse;">
-                        <span class="planet-text">Video Editing</span>
-                        <span class="material-symbols-outlined text-[#8B5CF6] text-2xl">movie</span>
+                    <div class="planet p-0" style="animation: anti-orbit 75s linear infinite reverse;">
+                        <div class="planet-inner border-[#8B5CF6]">
+                            <span class="planet-text">Video Editing</span>
+                            <span class="material-symbols-outlined text-[#8B5CF6] text-2xl">movie</span>
+                        </div>
                     </div>
                     
-                    <div class="planet border-[#8B5CF6] p-180" style="animation: anti-orbit 75s linear infinite reverse;">
-                        <span class="planet-text">Content Creator</span>
-                        <span class="material-symbols-outlined text-[#8B5CF6] text-2xl">video_camera_front</span>
+                    <div class="planet p-180" style="animation: anti-orbit 75s linear infinite reverse;">
+                        <div class="planet-inner border-[#8B5CF6]">
+                            <span class="planet-text">Content Creator</span>
+                            <span class="material-symbols-outlined text-[#8B5CF6] text-2xl">video_camera_front</span>
+                        </div>
                     </div>
                 </div>
 
