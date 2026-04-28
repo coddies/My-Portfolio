@@ -303,12 +303,16 @@
 }
     </style>
     <!-- Use inline styles to override any global flex-direction: row -->
-    <div class="card-inner w-full" style="display: flex !important; flex-direction: column !important; align-items: center !important; justify-content: flex-start !important; padding-top: 100px !important;">
+    <div class="card-inner w-full" style="display: block !important; position: relative !important; overflow: visible !important;">
         
-        <!-- Heading Block -->
-        <div class="z-20 text-center w-full px-6 mb-12">
-            <h2 id="skills-matrix-title" class="font-h2 text-3xl md:text-5xl text-white font-bold mb-2 uppercase tracking-widest transition-opacity duration-500">Intelligence_Matrix</h2>
-            <p id="skills-matrix-sub" class="font-mono text-[10px] md:text-xs text-white/40 uppercase tracking-[0.4em] transition-opacity duration-500">
+        <!-- STATUS TERMINAL WINDOW (Top Left) -->
+        <div class="z-20 absolute top-8 left-8 text-left pointer-events-none" style="border-left: 3px solid #00E5FF; padding-left: 15px; background: rgba(6,11,20,0.4); backdrop-filter: blur(5px); padding-top: 10px; padding-bottom: 10px; padding-right: 20px; border-radius: 0 4px 4px 0;">
+            <div class="flex items-center gap-2 mb-1">
+                <span class="w-2 h-2 rounded-full bg-[#00E5FF] animate-pulse"></span>
+                <span class="font-mono text-[10px] text-[#00E5FF]/60 tracking-widest uppercase">System_Status: Active</span>
+            </div>
+            <h2 id="skills-matrix-title" class="font-mono text-xl md:text-2xl text-white font-bold uppercase tracking-widest">Intelligence_Matrix</h2>
+            <p id="skills-matrix-sub" class="font-mono text-[9px] md:text-[10px] text-[#00E5FF] uppercase tracking-[0.2em] opacity-80">
                 // Machine Learning & Data Engineering Stack
             </p>
         </div>
@@ -316,25 +320,45 @@
         <script>
             (function() {
                 const titles = [
-                    { h: "Intelligence_Matrix", p: "// Machine Learning & Data Engineering Stack" },
-                    { h: "Core_Neural_Toolkit", p: "// Active Tech Stack & Development Frameworks" },
-                    { h: "System_Capabilities", p: "// Orbiting Technologies & AI Ecosystem" }
+                    { h: "Intelligence_Matrix", p: "// Machine Learning & Data Engineering Stack", c: "#00E5FF" },
+                    { h: "Core_Neural_Toolkit", p: "// Active Tech Stack & Development Frameworks", c: "#8B5CF6" },
+                    { h: "System_Capabilities", p: "// Orbiting Technologies & AI Ecosystem", c: "#FFFFFF" }
                 ];
                 let current = 0;
                 const hEl = document.getElementById('skills-matrix-title');
                 const pEl = document.getElementById('skills-matrix-sub');
                 
+                function typeEffect(element, text, callback) {
+                    let i = 0;
+                    element.textContent = "";
+                    const interval = setInterval(() => {
+                        element.textContent += text[i];
+                        i++;
+                        if (i >= text.length) {
+                            clearInterval(interval);
+                            if (callback) callback();
+                        }
+                    }, 50);
+                }
+
                 setInterval(() => {
+                    current = (current + 1) % titles.length;
+                    const next = titles[current];
+                    
+                    // Fade out current
                     hEl.style.opacity = 0;
                     pEl.style.opacity = 0;
+                    
                     setTimeout(() => {
-                        current = (current + 1) % titles.length;
-                        hEl.textContent = titles[current].h;
-                        pEl.textContent = titles[current].p;
+                        hEl.style.color = next.c;
+                        pEl.style.color = next.c;
                         hEl.style.opacity = 1;
                         pEl.style.opacity = 1;
+                        typeEffect(hEl, next.h, () => {
+                            typeEffect(pEl, next.p);
+                        });
                     }, 500);
-                }, 4000);
+                }, 6000);
             })();
         </script>
 
