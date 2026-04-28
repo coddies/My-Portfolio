@@ -172,18 +172,271 @@
 
 <section id="card-3" class="card state-below">
     <style>
-/* === ULTRA-RESPONSIVE SOLAR SYSTEM === */
+/* === BOMBPROOF RESPONSIVE SOLAR SYSTEM === */
 .solar-universe {
     position: relative;
     width: 100%;
+    height: 600px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
+    overflow: visible; 
     background: radial-gradient(circle at center, rgba(0, 229, 255, 0.05), transparent 70%);
 }
 
+.solar-system-scale {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 800px;
+    height: 800px;
+    transform: translate(-50%, -50%) scale(1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+    transform-origin: center center;
+}
+
+.core-sun {
+    position: absolute; 
+    width: 90px; 
+    height: 90px; 
+    border-radius: 50%;
+    background: radial-gradient(circle, #00E5FF 0%, transparent 80%);
+    box-shadow: 0 0 50px rgba(0, 229, 255, 0.8), 0 0 100px rgba(139, 92, 246, 0.4);
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    z-index: 20;
+    border: 1px solid rgba(0, 229, 255, 0.3);
+}
+
+@keyframes orbit { 100% { transform: rotate(360deg); } }
+@keyframes anti-orbit { 100% { transform: rotate(-360deg); } }
+
+.orbit-ring {
+    position: absolute; 
+    border: 1px dashed rgba(0, 229, 255, 0.12); 
+    border-radius: 50%;
+    pointer-events: none;
+}
+.orbit-wrapper {
+    position: absolute; 
+    border-radius: 50%; 
+    pointer-events: none;
+}
+.planet {
+    position: absolute; 
+    width: 48px; 
+    height: 48px; 
+    border-radius: 50%;
+    pointer-events: auto; 
+    cursor: crosshair;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.planet-inner {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: rgba(6, 11, 20, 0.95); 
+    border: 1px solid rgba(0, 229, 255, 0.4);
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+}
+
+.orbit-wrapper:hover, 
+.orbit-wrapper:hover .planet { 
+    animation-play-state: paused !important; 
+}
+
+.planet:hover .planet-inner { 
+    transform: scale(1.6); 
+    z-index: 100; 
+    border-color: #00E5FF; 
+    box-shadow: 0 0 30px rgba(0, 229, 255, 0.7); 
+    background: rgba(0, 229, 255, 0.2); 
+}
+.planet-text {
+    position: absolute; 
+    top: -30px; 
+    white-space: nowrap;
+    font-family: 'Space Grotesk', monospace; 
+    font-size: 8px; 
+    color: rgba(255,255,255,0.9);
+    transition: all 0.3s ease; 
+    text-transform: uppercase; 
+    letter-spacing: 0.15em;
+    pointer-events: none;
+}
+
+/* Planet Positions */
+.p-0   { top: -24px; left: calc(50% - 24px); }
+.p-180 { bottom: -24px; left: calc(50% - 24px); }
+.p-120 { top: 75%; left: 93%; }
+.p-240 { top: 75%; left: -2%; }
+
+/* MEDIA QUERIES - FORCED CENTERING */
+@media (max-width: 1200px) {
+    .solar-system-scale { transform: translate(-50%, -50%) scale(0.8); }
+}
+@media (max-width: 992px) {
+    .solar-system-scale { transform: translate(-50%, -50%) scale(0.65); }
+}
+@media (max-width: 768px) {
+    .solar-universe { height: 500px; }
+    .solar-system-scale { transform: translate(-50%, -50%) scale(0.45); }
+}
+@media (max-width: 480px) {
+    .solar-universe { height: 400px; }
+    .solar-system-scale { transform: translate(-50%, -50%) scale(0.38); }
+}
+@media (max-width: 380px) {
+    .solar-system-scale { transform: translate(-50%, -50%) scale(0.32); }
+}
+    </style>
+    <!-- Use inline styles to override any global flex-direction: row -->
+    <div class="card-inner w-full" style="display: flex !important; flex-direction: column !important; align-items: center !important; justify-content: flex-start !important; padding-top: 60px !important;">
+        
+        <!-- Heading Block -->
+        <div class="z-20 text-center w-full px-6 mb-8">
+            <h2 class="font-h2 text-3xl md:text-5xl text-white font-bold mb-2 uppercase tracking-widest">Intelligence_Matrix</h2>
+            <p class="font-mono text-[10px] md:text-xs text-white/40 uppercase tracking-[0.4em]">
+                // Machine Learning & Data Engineering Stack
+            </p>
+        </div>
+
+        <!-- Solar System Block -->
+        <div class="solar-universe">
+            <div class="solar-system-scale">
+                <div class="core-sun">
+                    <span class="material-symbols-outlined text-white text-4xl">psychology</span>
+                </div>
+
+                <!-- Orbit 1 -->
+                <div class="orbit-ring" style="width: 180px; height: 180px;"></div>
+                <div class="orbit-wrapper" style="width: 180px; height: 180px; animation: orbit 25s linear infinite;">
+                    <div class="planet p-0" style="animation: anti-orbit 25s linear infinite;">
+                        <div class="planet-inner ">
+                            <span class="planet-text">Python</span>
+                            <span class="material-symbols-outlined text-[#00E5FF] text-2xl">code</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Orbit 2 -->
+                <div class="orbit-ring" style="width: 290px; height: 290px; border-color: rgba(139, 92, 246, 0.3);"></div>
+                <div class="orbit-wrapper" style="width: 290px; height: 290px; animation: orbit 35s linear infinite reverse;">
+                    <div class="planet p-0" style="animation: anti-orbit 35s linear infinite reverse;">
+                        <div class="planet-inner border-[#8B5CF6]">
+                            <span class="planet-text">FastAPI</span>
+                            <span class="material-symbols-outlined text-[#8B5CF6] text-2xl">bolt</span>
+                        </div>
+                    </div>
+                    <div class="planet p-180" style="animation: anti-orbit 35s linear infinite reverse;">
+                        <div class="planet-inner border-[#8B5CF6]">
+                            <span class="planet-text">Vibe Coding</span>
+                            <span class="material-symbols-outlined text-[#8B5CF6] text-2xl">auto_fix</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Orbit 3 -->
+                <div class="orbit-ring" style="width: 400px; height: 400px;"></div>
+                <div class="orbit-wrapper" style="width: 400px; height: 400px; animation: orbit 45s linear infinite;">
+                    <div class="planet p-0" style="animation: anti-orbit 45s linear infinite;">
+                        <div class="planet-inner ">
+                            <span class="planet-text">AI / LLM</span>
+                            <span class="material-symbols-outlined text-[#00E5FF] text-2xl">memory</span>
+                        </div>
+                    </div>
+                    <div class="planet p-120" style="animation: anti-orbit 45s linear infinite;">
+                        <div class="planet-inner ">
+                            <span class="planet-text">Generative AI</span>
+                            <span class="material-symbols-outlined text-[#00E5FF] text-2xl">smart_toy</span>
+                        </div>
+                    </div>
+                    <div class="planet p-240" style="animation: anti-orbit 45s linear infinite;">
+                        <div class="planet-inner ">
+                            <span class="planet-text">Machine Learning</span>
+                            <span class="material-symbols-outlined text-[#00E5FF] text-2xl">hub</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Orbit 4 -->
+                <div class="orbit-ring" style="width: 510px; height: 510px; border-color: rgba(139, 92, 246, 0.2);"></div>
+                <div class="orbit-wrapper" style="width: 510px; height: 510px; animation: orbit 55s linear infinite reverse;">
+                    <div class="planet p-0" style="animation: anti-orbit 55s linear infinite reverse;">
+                        <div class="planet-inner border-[#8B5CF6]">
+                            <span class="planet-text">Data Analysis</span>
+                            <span class="material-symbols-outlined text-[#8B5CF6] text-2xl">analytics</span>
+                        </div>
+                    </div>
+                    <div class="planet p-120" style="animation: anti-orbit 55s linear infinite reverse;">
+                        <div class="planet-inner border-[#8B5CF6]">
+                            <span class="planet-text">SQL / DB</span>
+                            <span class="material-symbols-outlined text-[#8B5CF6] text-2xl">database</span>
+                        </div>
+                    </div>
+                    <div class="planet p-240" style="animation: anti-orbit 55s linear infinite reverse;">
+                        <div class="planet-inner border-[#8B5CF6]">
+                            <span class="planet-text">Problem Solving</span>
+                            <span class="material-symbols-outlined text-[#8B5CF6] text-2xl">architecture</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Orbit 5 -->
+                <div class="orbit-ring" style="width: 620px; height: 620px;"></div>
+                <div class="orbit-wrapper" style="width: 620px; height: 620px; animation: orbit 65s linear infinite;">
+                    <div class="planet p-0" style="animation: anti-orbit 65s linear infinite;">
+                        <div class="planet-inner ">
+                            <span class="planet-text">AWS Cloud</span>
+                            <span class="material-symbols-outlined text-[#00E5FF] text-2xl">cloud</span>
+                        </div>
+                    </div>
+                    <div class="planet p-120" style="animation: anti-orbit 65s linear infinite;">
+                        <div class="planet-inner ">
+                            <span class="planet-text">HTML5</span>
+                            <span class="material-symbols-outlined text-[#00E5FF] text-2xl">html</span>
+                        </div>
+                    </div>
+                    <div class="planet p-240" style="animation: anti-orbit 65s linear infinite;">
+                        <div class="planet-inner ">
+                            <span class="planet-text">CSS3</span>
+                            <span class="material-symbols-outlined text-[#00E5FF] text-2xl">css</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Orbit 6 -->
+                <div class="orbit-ring" style="width: 730px; height: 730px; border-color: rgba(139, 92, 246, 0.2);"></div>
+                <div class="orbit-wrapper" style="width: 730px; height: 730px; animation: orbit 75s linear infinite reverse;">
+                    <div class="planet p-0" style="animation: anti-orbit 75s linear infinite reverse;">
+                        <div class="planet-inner border-[#8B5CF6]">
+                            <span class="planet-text">Video Editing</span>
+                            <span class="material-symbols-outlined text-[#8B5CF6] text-2xl">movie</span>
+                        </div>
+                    </div>
+                    <div class="planet p-180" style="animation: anti-orbit 75s linear infinite reverse;">
+                        <div class="planet-inner border-[#8B5CF6]">
+                            <span class="planet-text">Content Creator</span>
+                            <span class="material-symbols-outlined text-[#8B5CF6] text-2xl">video_camera_front</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 .solar-system-scale {
     position: relative;
     width: 800px;
