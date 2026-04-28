@@ -167,6 +167,13 @@ if(document.getElementById('csModalClose')) document.getElementById('csModalClos
     setTimeout(() => {
         const pL = document.getElementById('mb-panel-left');
         const pR = document.getElementById('mb-panel-right');
+        const content = document.getElementById('mb-loader-content');
+        const stars = document.getElementById('mb-loader-stars');
+        
+        // IMMEDIATE HIDE CONTENT TO PREVENT OVERLAP
+        if (content) content.style.display = 'none';
+        if (stars) stars.style.display = 'none';
+
         if (pL) pL.style.transform = 'translateX(-100%)';
         if (pR) pR.style.transform = 'translateX(100%)';
 
@@ -179,11 +186,11 @@ if(document.getElementById('csModalClose')) document.getElementById('csModalClos
 
     // Phase 4: Cleanup
     setTimeout(()=>{ 
-        loader.remove(); 
+        if (loader) loader.remove(); 
         document.body.style.overflow = ''; 
         document.body.style.position = '';
         document.body.style.height = '';
-    }, 4000);
+    }, 3800);
   }
 
   function buildTransitionElements() {
