@@ -647,6 +647,146 @@
   draw(); setTimeout(positionTrack, 100); go(0);
 })();
 </script>
+
+    <!-- ══════════════════════════════════════════════════════════
+         3D PROTOTYPES COMPARISON ZONE
+         ══════════════════════════════════════════════════════════ -->
+    <style>
+        /* Enable vertical scrolling for card-4 to see prototypes */
+        #card-4 { overflow-y: auto !important; scrollbar-width: thin; scrollbar-color: #00E5FF transparent; }
+        #card-4::-webkit-scrollbar { width: 6px; }
+        #card-4::-webkit-scrollbar-thumb { background: #00E5FF; border-radius: 10px; }
+        
+        .proto-container { width: 100%; max-width: 1200px; margin: 100px auto; padding: 40px; color: white; font-family: 'Space Grotesk', sans-serif; }
+        .proto-label { font-family: 'Syne', sans-serif; font-size: 14px; color: #00E5FF; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 40px; text-align: center; border-bottom: 1px solid rgba(0, 229, 255, 0.2); padding-bottom: 10px; }
+        
+        /* Prototype 1: Orbital Carousel */
+        .orbital-stage { height: 600px; perspective: 1200px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+        .orbital-ring { width: 300px; height: 200px; position: relative; transform-style: preserve-3d; animation: orbitRotate 20s linear infinite; }
+        .orbital-card { position: absolute; width: 300px; height: 200px; left: 0; top: 0; background: rgba(139, 92, 246, 0.1); backdrop-filter: blur(10px); border: 1px solid rgba(0, 229, 255, 0.3); border-radius: 15px; display: flex; flex-direction: column; padding: 20px; justify-content: center; box-shadow: 0 0 30px rgba(0, 229, 255, 0.1); backface-visibility: hidden; }
+        .orbital-card:nth-child(1) { transform: rotateY(0deg) translateZ(350px); }
+        .orbital-card:nth-child(2) { transform: rotateY(90deg) translateZ(350px); }
+        .orbital-card:nth-child(3) { transform: rotateY(180deg) translateZ(350px); }
+        .orbital-card:nth-child(4) { transform: rotateY(270deg) translateZ(350px); }
+        @keyframes orbitRotate { from { transform: rotateY(0deg); } to { transform: rotateY(360deg); } }
+        .orbital-ring:hover { animation-play-state: paused; }
+
+        /* Prototype 2: Parallax Bento */
+        .bento-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; perspective: 1000px; }
+        .bento-card { height: 300px; background: #0a0c18; border-radius: 20px; position: relative; transform-style: preserve-3d; transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1); border: 1px solid rgba(139, 92, 246, 0.2); overflow: hidden; cursor: pointer; }
+        .bento-card:hover { transform: rotateX(10deg) rotateY(-10deg); border-color: #00E5FF; }
+        .bento-bg { position: absolute; inset: 0; background: radial-gradient(circle at center, rgba(139, 92, 246, 0.2), transparent); transition: transform 0.5s; transform: translateZ(-30px); }
+        .bento-content { position: relative; z-index: 2; height: 100%; display: flex; flex-direction: column; justify-content: center; padding: 30px; transform: translateZ(60px); }
+        .bento-title { font-size: 24px; font-weight: 800; color: white; margin-bottom: 10px; text-shadow: 0 10px 20px rgba(0,0,0,0.5); }
+
+        /* Prototype 3: Isometric Servers */
+        .iso-stage { height: 600px; display: flex; align-items: center; justify-content: center; perspective: 1000px; }
+        .iso-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; transform: rotateX(60deg) rotateZ(-45deg); transform-style: preserve-3d; }
+        .iso-block { width: 200px; height: 200px; background: #060b14; border: 2px solid #8B5CF6; position: relative; transform-style: preserve-3d; transition: all 0.5s ease; cursor: pointer; }
+        .iso-block::before { content: ''; position: absolute; width: 100%; height: 40px; background: rgba(139, 92, 246, 0.5); bottom: -40px; left: 0; transform-origin: top; transform: rotateX(-90deg); }
+        .iso-block::after { content: ''; position: absolute; width: 40px; height: 100%; background: rgba(139, 92, 246, 0.3); right: -40px; top: 0; transform-origin: left; transform: rotateY(90deg); }
+        .iso-block:hover { transform: translateZ(50px); box-shadow: -20px 20px 50px rgba(0, 229, 255, 0.4); border-color: #00E5FF; }
+        .iso-block-text { transform: rotateZ(45deg) rotateX(-60deg) translateY(-20px); font-size: 14px; font-weight: bold; text-align: center; display: block; color: #00E5FF; }
+        
+        @media (max-width: 768px) {
+            .bento-grid, .iso-grid { grid-template-columns: 1fr; }
+            .orbital-ring { transform: scale(0.7); }
+        }
+    </style>
+
+    <!-- PROTOTYPE 1 -->
+    <div class="proto-container">
+        <h2 class="proto-label">PROTOTYPE 1: ORBITAL CAROUSEL</h2>
+        <div class="orbital-stage">
+            <div class="orbital-ring">
+                <div class="orbital-card">
+                    <h3 style="color:#00E5FF; font-weight:800;">Neural Sentiment Analyzer</h3>
+                    <p style="font-size:12px; opacity:0.7;">Holographic Data Processing Module</p>
+                </div>
+                <div class="orbital-card">
+                    <h3 style="color:#8B5CF6; font-weight:800;">Market Pulse AI</h3>
+                    <p style="font-size:12px; opacity:0.7;">Predictive Analytics Core</p>
+                </div>
+                <div class="orbital-card">
+                    <h3 style="color:#00E5FF; font-weight:800;">Quantum Ledger</h3>
+                    <p style="font-size:12px; opacity:0.7;">Immutable Block Matrix</p>
+                </div>
+                <div class="orbital-card">
+                    <h3 style="color:#8B5CF6; font-weight:800;">Cyber Mesh</h3>
+                    <p style="font-size:12px; opacity:0.7;">Neural Network Visualization</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PROTOTYPE 2 -->
+    <div class="proto-container">
+        <h2 class="proto-label">PROTOTYPE 2: PARALLAX BENTO</h2>
+        <div class="bento-grid">
+            <div class="bento-card">
+                <div class="bento-bg"></div>
+                <div class="bento-content">
+                    <h3 class="bento-title">Neural Sentiment Analyzer</h3>
+                    <p style="color:#00E5FF; font-size:12px; font-weight:700;">// NLP ENGINE ACTIVE</p>
+                </div>
+            </div>
+            <div class="bento-card">
+                <div class="bento-bg" style="background:radial-gradient(circle at center, rgba(0, 229, 255, 0.2), transparent);"></div>
+                <div class="bento-content">
+                    <h3 class="bento-title">Market Pulse AI</h3>
+                    <p style="color:#8B5CF6; font-size:12px; font-weight:700;">// FINANCIAL FORECASTING</p>
+                </div>
+            </div>
+            <div class="bento-card">
+                <div class="bento-bg"></div>
+                <div class="bento-content">
+                    <h3 class="bento-title">Cyber Sync v2</h3>
+                    <p style="color:#00E5FF; font-size:12px; font-weight:700;">// NETWORK SECURITY</p>
+                </div>
+            </div>
+            <div class="bento-card">
+                <div class="bento-bg" style="background:radial-gradient(circle at center, rgba(0, 229, 255, 0.2), transparent);"></div>
+                <div class="bento-content">
+                    <h3 class="bento-title">Data Vortex</h3>
+                    <p style="color:#8B5CF6; font-size:12px; font-weight:700;">// BIG DATA VISUALIZER</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PROTOTYPE 3 -->
+    <div class="proto-container">
+        <h2 class="proto-label">PROTOTYPE 3: ISOMETRIC SERVERS</h2>
+        <div class="iso-stage">
+            <div class="iso-grid">
+                <div class="iso-block">
+                    <div style="padding:20px;">
+                        <span class="iso-block-text">NEURAL ANALYZER</span>
+                        <div style="width:100%; height:4px; background:#00E5FF; margin-top:10px; box-shadow: 0 0 10px #00E5FF;"></div>
+                    </div>
+                </div>
+                <div class="iso-block" style="border-color:#00E5FF;">
+                    <div style="padding:20px;">
+                        <span class="iso-block-text" style="color:#8B5CF6;">MARKET PULSE</span>
+                        <div style="width:100%; height:4px; background:#8B5CF6; margin-top:10px; box-shadow: 0 0 10px #8B5CF6;"></div>
+                    </div>
+                </div>
+                <div class="iso-block" style="border-color:#00E5FF;">
+                    <div style="padding:20px;">
+                        <span class="iso-block-text">DATA CORE</span>
+                        <div style="width:100%; height:4px; background:#00E5FF; margin-top:10px; box-shadow: 0 0 10px #00E5FF;"></div>
+                    </div>
+                </div>
+                <div class="iso-block">
+                    <div style="padding:20px;">
+                        <span class="iso-block-text" style="color:#8B5CF6;">GRID NODE</span>
+                        <div style="width:100%; height:4px; background:#8B5CF6; margin-top:10px; box-shadow: 0 0 10px #8B5CF6;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </section>
 
 <!-- ════════════════════════════
