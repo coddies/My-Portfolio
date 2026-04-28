@@ -269,9 +269,9 @@ h1, h2, h3, .syne-font {
 /* Nav Tooltips */
 .nav-tooltip {
     position: absolute;
-    bottom: calc(100% + 15px);
-    left: 50%;
-    transform: translateX(-50%) translateY(10px);
+    right: calc(100% + 15px);
+    top: 50%;
+    transform: translateY(-50%) translateX(10px);
     background: rgba(10, 15, 22, 0.95);
     border: 1px solid var(--cyan);
     color: white;
@@ -291,27 +291,26 @@ h1, h2, h3, .syne-font {
 .nav-tooltip::after {
     content: '';
     position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translateX(-50%);
+    left: 100%;
+    top: 50%;
+    transform: translateY(-50%);
     border-width: 6px;
     border-style: solid;
-    border-color: var(--cyan) transparent transparent transparent;
+    border-color: transparent transparent transparent var(--cyan);
 }
 
 .nav-btn:hover .nav-tooltip,
 .nav-btn.active .nav-tooltip {
     opacity: 1;
     visibility: visible;
-    transform: translateX(-50%) translateY(0);
+    transform: translateY(-50%) translateX(0);
 }
 
 /* Nav Instruction Popup */
 .nav-popup {
     position: fixed;
-    bottom: 120px;
-    left: 50%;
-    transform: translateX(-50%) translateY(20px);
+    bottom: 40px;
+    right: 120px;
     background: rgba(0, 229, 255, 0.1);
     backdrop-filter: blur(12px);
     border: 1px solid rgba(0, 229, 255, 0.3);
@@ -330,7 +329,7 @@ h1, h2, h3, .syne-font {
 .nav-popup.active {
     opacity: 1;
     visibility: visible;
-    transform: translateX(-50%) translateY(0);
+    transform: translateX(0) translateY(0);
 }
 
 .nav-popup-icon {
