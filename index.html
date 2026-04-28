@@ -169,188 +169,169 @@
 
 <!-- ════════ CARD 3 — SKILLS ════════ -->
 
+
 <section id="card-3" class="card state-below">
     <style>
-/* === 3D POP-UP STAGE SKILLS === */
-.skill-scene { 
-    perspective: 1200px; 
-    width: 100%; 
-    height: 100px; 
-}
-.skill-wrapper {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    transform-style: preserve-3d;
-}
-/* The Base Box (Flattens on hover) */
+/* === FIX: 3D TERMINAL SKILLS (STRICT HORIZONTAL) === */
+.skill-scene { perspective: 1200px; width: 100%; height: 90px; margin-bottom: 20px; }
+.skill-wrapper { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; cursor: crosshair; }
 .skill-base {
-    position: absolute;
-    inset: 0;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(0, 229, 255, 0.15);
-    border-radius: 8px;
+    position: absolute; inset: 0;
+    background: rgba(6, 11, 20, 0.8);
+    border: 1px solid rgba(0, 229, 255, 0.2);
+    border-radius: 4px;
     transform-origin: bottom center;
-    transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
-/* The Content (Stands up and pops out on hover) */
 .skill-content {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    padding: 0 24px;
+    position: absolute; inset: 0;
+    display: flex; flex-direction: row; align-items: center; justify-content: flex-start;
+    padding: 0 24px; gap: 20px;
     transform-origin: bottom center;
-    transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-    transform: translateZ(10px);
+    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transform: translateZ(1px);
 }
-/* PROGRESS BAR GLOW */
 .progress-line { transition: width 1.5s cubic-bezier(0.1, 0, 0.2, 1); }
 
-/* === THE 3D POP-UP HOVER LOGIC === */
+/* 3D Hover Action */
 .skill-wrapper:hover .skill-base {
-    transform: rotateX(70deg) translateY(20px) translateZ(-30px);
-    background: rgba(0, 229, 255, 0.08);
-    box-shadow: 0 0 30px rgba(0, 229, 255, 0.4);
-    border-color: rgba(0, 229, 255, 0.6);
+    transform: rotateX(75deg) translateY(20px) translateZ(-30px);
+    background: rgba(0, 229, 255, 0.05);
+    box-shadow: 0 0 40px rgba(0, 229, 255, 0.3);
+    border-color: rgba(0, 229, 255, 0.8);
 }
 .skill-wrapper.purple-mode:hover .skill-base {
-    background: rgba(139, 92, 246, 0.08);
-    box-shadow: 0 0 30px rgba(139, 92, 246, 0.4);
-    border-color: rgba(139, 92, 246, 0.6);
+    background: rgba(139, 92, 246, 0.05);
+    box-shadow: 0 0 40px rgba(139, 92, 246, 0.3);
+    border-color: rgba(139, 92, 246, 0.8);
 }
 .skill-wrapper:hover .skill-content {
-    transform: translateY(-20px) translateZ(60px);
+    transform: translateY(-20px) translateZ(50px);
 }
-.skill-wrapper:hover .skill-icon {
-    filter: drop-shadow(0 0 15px rgba(0, 229, 255, 0.8));
-    transform: scale(1.2);
-}
-.skill-wrapper.purple-mode:hover .skill-icon {
-    filter: drop-shadow(0 0 15px rgba(139, 92, 246, 0.8));
-}
+.skill-wrapper:hover .pop-icon { transform: scale(1.2); filter: drop-shadow(0 0 10px rgba(0, 229, 255, 0.8)); }
+.skill-wrapper.purple-mode:hover .pop-icon { filter: drop-shadow(0 0 10px rgba(139, 92, 246, 0.8)); }
 
 @media (max-width: 768px) {
-    .skill-scene { height: 90px; }
-    .skill-content { padding: 0 16px; }
+    .skill-scene { height: 80px; }
+    .skill-content { padding: 0 16px; gap: 12px; }
     .skill-wrapper:hover .skill-content { transform: translateY(-10px) translateZ(40px); }
 }
 </style>
     <div class="card-inner w-full">
         <div class="max-w-[1280px] mx-auto px-8 pb-12 pt-16">
             <h2 class="text-center font-mono text-2xl text-[#00E5FF] uppercase tracking-[0.3em] mb-2 text-shadow-[0_0_20px_rgba(0,229,255,0.5)]">Core_Neural_Matrix</h2>
-            <p class="text-center font-mono text-[10px] text-white/40 uppercase tracking-[0.4em] mb-12">// 3D Pop-Up Stage Architecture</p>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8 max-w-[1000px] mx-auto px-8">
+            <p class="text-center font-mono text-[10px] text-white/40 uppercase tracking-[0.4em] mb-12">// Strict Horizontal 3D Stage Architecture</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-[1200px] mx-auto px-8">
                 
-    <div class="skill-scene cursor-crosshair anim-in">
+    <div class="skill-scene">
         <div class="skill-wrapper group ">
             <div class="skill-base"></div>
-            <div class="skill-content gap-6">
-                <div class="skill-icon text-[#00E5FF] transition-all duration-500">
-                    <span class="material-symbols-outlined text-4xl">code</span>
+            <div class="skill-content w-full h-full flex flex-row items-center">
+                <div class="pop-icon text-[#00E5FF] w-12 flex-shrink-0 flex items-center justify-center transition-all duration-300">
+                    <span class="material-symbols-outlined text-3xl">code</span>
                 </div>
-                <div class="flex-1">
-                    <div class="flex justify-between items-end mb-2">
-                        <h3 class="font-mono text-lg text-white font-bold tracking-widest uppercase">Python</h3>
-                        <span class="font-mono text-[10px] text-[#00E5FF]">95%</span>
+                <div class="flex-1 flex flex-col justify-center w-full">
+                    <div class="flex flex-row justify-between items-center w-full mb-2">
+                        <span class="font-mono text-sm text-white font-bold tracking-[0.2em] uppercase">Python</span>
+                        <span class="font-mono text-xs text-[#00E5FF]">95%</span>
                     </div>
-                    <div class="w-full h-1 bg-white/10 rounded overflow-hidden">
-                        <div class="h-full bg-[#00E5FF] shadow-[0_0_10px_#00E5FF] progress-line" style="width: 95%;"></div>
+                    <div class="w-full h-[2px] bg-white/10 relative rounded overflow-hidden">
+                        <div class="absolute top-0 left-0 h-full bg-[#00E5FF] shadow-[0_0_10px_#00E5FF] progress-line" style="width: 95%;"></div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="skill-scene cursor-crosshair anim-in">
+    <div class="skill-scene">
         <div class="skill-wrapper group purple-mode">
             <div class="skill-base"></div>
-            <div class="skill-content gap-6">
-                <div class="skill-icon text-[#8B5CF6] transition-all duration-500">
-                    <span class="material-symbols-outlined text-4xl">bolt</span>
+            <div class="skill-content w-full h-full flex flex-row items-center">
+                <div class="pop-icon text-[#8B5CF6] w-12 flex-shrink-0 flex items-center justify-center transition-all duration-300">
+                    <span class="material-symbols-outlined text-3xl">bolt</span>
                 </div>
-                <div class="flex-1">
-                    <div class="flex justify-between items-end mb-2">
-                        <h3 class="font-mono text-lg text-white font-bold tracking-widest uppercase">FastAPI</h3>
-                        <span class="font-mono text-[10px] text-[#8B5CF6]">88%</span>
+                <div class="flex-1 flex flex-col justify-center w-full">
+                    <div class="flex flex-row justify-between items-center w-full mb-2">
+                        <span class="font-mono text-sm text-white font-bold tracking-[0.2em] uppercase">FastAPI</span>
+                        <span class="font-mono text-xs text-[#8B5CF6]">88%</span>
                     </div>
-                    <div class="w-full h-1 bg-white/10 rounded overflow-hidden">
-                        <div class="h-full bg-[#8B5CF6] shadow-[0_0_10px_#8B5CF6] progress-line" style="width: 88%;"></div>
+                    <div class="w-full h-[2px] bg-white/10 relative rounded overflow-hidden">
+                        <div class="absolute top-0 left-0 h-full bg-[#8B5CF6] shadow-[0_0_10px_#8B5CF6] progress-line" style="width: 88%;"></div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="skill-scene cursor-crosshair anim-in">
+    <div class="skill-scene">
         <div class="skill-wrapper group ">
             <div class="skill-base"></div>
-            <div class="skill-content gap-6">
-                <div class="skill-icon text-[#00E5FF] transition-all duration-500">
-                    <span class="material-symbols-outlined text-4xl">psychology</span>
+            <div class="skill-content w-full h-full flex flex-row items-center">
+                <div class="pop-icon text-[#00E5FF] w-12 flex-shrink-0 flex items-center justify-center transition-all duration-300">
+                    <span class="material-symbols-outlined text-3xl">psychology</span>
                 </div>
-                <div class="flex-1">
-                    <div class="flex justify-between items-end mb-2">
-                        <h3 class="font-mono text-lg text-white font-bold tracking-widest uppercase">AI / LLM</h3>
-                        <span class="font-mono text-[10px] text-[#00E5FF]">92%</span>
+                <div class="flex-1 flex flex-col justify-center w-full">
+                    <div class="flex flex-row justify-between items-center w-full mb-2">
+                        <span class="font-mono text-sm text-white font-bold tracking-[0.2em] uppercase">AI / LLM</span>
+                        <span class="font-mono text-xs text-[#00E5FF]">92%</span>
                     </div>
-                    <div class="w-full h-1 bg-white/10 rounded overflow-hidden">
-                        <div class="h-full bg-[#00E5FF] shadow-[0_0_10px_#00E5FF] progress-line" style="width: 92%;"></div>
+                    <div class="w-full h-[2px] bg-white/10 relative rounded overflow-hidden">
+                        <div class="absolute top-0 left-0 h-full bg-[#00E5FF] shadow-[0_0_10px_#00E5FF] progress-line" style="width: 92%;"></div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="skill-scene cursor-crosshair anim-in">
+    <div class="skill-scene">
         <div class="skill-wrapper group purple-mode">
             <div class="skill-base"></div>
-            <div class="skill-content gap-6">
-                <div class="skill-icon text-[#8B5CF6] transition-all duration-500">
-                    <span class="material-symbols-outlined text-4xl">neurology</span>
+            <div class="skill-content w-full h-full flex flex-row items-center">
+                <div class="pop-icon text-[#8B5CF6] w-12 flex-shrink-0 flex items-center justify-center transition-all duration-300">
+                    <span class="material-symbols-outlined text-3xl">neurology</span>
                 </div>
-                <div class="flex-1">
-                    <div class="flex justify-between items-end mb-2">
-                        <h3 class="font-mono text-lg text-white font-bold tracking-widest uppercase">Deep Learning</h3>
-                        <span class="font-mono text-[10px] text-[#8B5CF6]">85%</span>
+                <div class="flex-1 flex flex-col justify-center w-full">
+                    <div class="flex flex-row justify-between items-center w-full mb-2">
+                        <span class="font-mono text-sm text-white font-bold tracking-[0.2em] uppercase">Deep Learning</span>
+                        <span class="font-mono text-xs text-[#8B5CF6]">85%</span>
                     </div>
-                    <div class="w-full h-1 bg-white/10 rounded overflow-hidden">
-                        <div class="h-full bg-[#8B5CF6] shadow-[0_0_10px_#8B5CF6] progress-line" style="width: 85%;"></div>
+                    <div class="w-full h-[2px] bg-white/10 relative rounded overflow-hidden">
+                        <div class="absolute top-0 left-0 h-full bg-[#8B5CF6] shadow-[0_0_10px_#8B5CF6] progress-line" style="width: 85%;"></div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="skill-scene cursor-crosshair anim-in">
+    <div class="skill-scene">
         <div class="skill-wrapper group ">
             <div class="skill-base"></div>
-            <div class="skill-content gap-6">
-                <div class="skill-icon text-[#00E5FF] transition-all duration-500">
-                    <span class="material-symbols-outlined text-4xl">database</span>
+            <div class="skill-content w-full h-full flex flex-row items-center">
+                <div class="pop-icon text-[#00E5FF] w-12 flex-shrink-0 flex items-center justify-center transition-all duration-300">
+                    <span class="material-symbols-outlined text-3xl">database</span>
                 </div>
-                <div class="flex-1">
-                    <div class="flex justify-between items-end mb-2">
-                        <h3 class="font-mono text-lg text-white font-bold tracking-widest uppercase">SQL / NoSQL</h3>
-                        <span class="font-mono text-[10px] text-[#00E5FF]">90%</span>
+                <div class="flex-1 flex flex-col justify-center w-full">
+                    <div class="flex flex-row justify-between items-center w-full mb-2">
+                        <span class="font-mono text-sm text-white font-bold tracking-[0.2em] uppercase">SQL / NoSQL</span>
+                        <span class="font-mono text-xs text-[#00E5FF]">90%</span>
                     </div>
-                    <div class="w-full h-1 bg-white/10 rounded overflow-hidden">
-                        <div class="h-full bg-[#00E5FF] shadow-[0_0_10px_#00E5FF] progress-line" style="width: 90%;"></div>
+                    <div class="w-full h-[2px] bg-white/10 relative rounded overflow-hidden">
+                        <div class="absolute top-0 left-0 h-full bg-[#00E5FF] shadow-[0_0_10px_#00E5FF] progress-line" style="width: 90%;"></div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="skill-scene cursor-crosshair anim-in">
+    <div class="skill-scene">
         <div class="skill-wrapper group purple-mode">
             <div class="skill-base"></div>
-            <div class="skill-content gap-6">
-                <div class="skill-icon text-[#8B5CF6] transition-all duration-500">
-                    <span class="material-symbols-outlined text-4xl">cloud</span>
+            <div class="skill-content w-full h-full flex flex-row items-center">
+                <div class="pop-icon text-[#8B5CF6] w-12 flex-shrink-0 flex items-center justify-center transition-all duration-300">
+                    <span class="material-symbols-outlined text-3xl">cloud</span>
                 </div>
-                <div class="flex-1">
-                    <div class="flex justify-between items-end mb-2">
-                        <h3 class="font-mono text-lg text-white font-bold tracking-widest uppercase">AWS Cloud</h3>
-                        <span class="font-mono text-[10px] text-[#8B5CF6]">82%</span>
+                <div class="flex-1 flex flex-col justify-center w-full">
+                    <div class="flex flex-row justify-between items-center w-full mb-2">
+                        <span class="font-mono text-sm text-white font-bold tracking-[0.2em] uppercase">AWS Cloud</span>
+                        <span class="font-mono text-xs text-[#8B5CF6]">82%</span>
                     </div>
-                    <div class="w-full h-1 bg-white/10 rounded overflow-hidden">
-                        <div class="h-full bg-[#8B5CF6] shadow-[0_0_10px_#8B5CF6] progress-line" style="width: 82%;"></div>
+                    <div class="w-full h-[2px] bg-white/10 relative rounded overflow-hidden">
+                        <div class="absolute top-0 left-0 h-full bg-[#8B5CF6] shadow-[0_0_10px_#8B5CF6] progress-line" style="width: 82%;"></div>
                     </div>
                 </div>
             </div>
