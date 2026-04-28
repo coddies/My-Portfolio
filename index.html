@@ -315,62 +315,11 @@
         
         <!-- STATUS TERMINAL WINDOW (Top Left) -->
         <div class="z-20 absolute top-8 left-4 md:left-8 text-left pointer-events-none" style="border-left: 3px solid #00E5FF; padding-left: 15px; padding-top: 10px; padding-bottom: 10px; padding-right: 20px; width: auto; min-width: 250px; max-width: min(450px, 90vw);">
-            <h2 id="skills-matrix-title" class="font-mono text-xl md:text-2xl text-white font-bold uppercase tracking-widest transition-all duration-300">Intelligence_Matrix</h2>
-            <p id="skills-matrix-sub" class="font-mono text-[9px] md:text-[10px] text-[#00E5FF] uppercase tracking-[0.2em] opacity-80 transition-all duration-300">
+            <h2 class="font-mono text-xl md:text-2xl text-white font-bold uppercase tracking-widest">Intelligence_Matrix</h2>
+            <p class="font-mono text-[9px] md:text-[10px] text-[#00E5FF] uppercase tracking-[0.2em] opacity-80">
                 // Machine Learning & Data Engineering Stack
             </p>
         </div>
-
-        <script>
-            (function() {
-                const titles = [
-                    { h: "Intelligence_Matrix", p: "// Machine Learning & Data Engineering Stack", c: "#00E5FF" },
-                    { h: "Core_Neural_Toolkit", p: "// Active Tech Stack & Development Frameworks", c: "#8B5CF6" },
-                    { h: "System_Capabilities", p: "// Orbiting Technologies & AI Ecosystem", c: "#FFFFFF" }
-                ];
-                let current = 0;
-                const hEl = document.getElementById('skills-matrix-title');
-                const pEl = document.getElementById('skills-matrix-sub');
-                
-                let hInterval, pInterval;
-
-                function typeEffect(element, text, callback) {
-                    let i = 0;
-                    element.textContent = "";
-                    const interval = setInterval(() => {
-                        element.textContent += text[i];
-                        i++;
-                        if (i >= text.length) {
-                            clearInterval(interval);
-                            if (callback) callback();
-                        }
-                    }, 40);
-                    return interval;
-                }
-
-                setInterval(() => {
-                    current = (current + 1) % titles.length;
-                    const next = titles[current];
-                    
-                    clearInterval(hInterval);
-                    clearInterval(pInterval);
-
-                    hEl.style.opacity = 0;
-                    pEl.style.opacity = 0;
-                    
-                    setTimeout(() => {
-                        hEl.parentElement.style.borderColor = next.c;
-                        hEl.style.color = next.c;
-                        pEl.style.color = next.c;
-                        hEl.style.opacity = 1;
-                        pEl.style.opacity = 1;
-                        hInterval = typeEffect(hEl, next.h, () => {
-                            pInterval = typeEffect(pEl, next.p);
-                        });
-                    }, 400);
-                }, 6000);
-            })();
-        </script>
 
         <!-- Solar System Block -->
         <div class="solar-universe">
