@@ -314,12 +314,37 @@
     <div class="card-inner w-full" style="display: block !important; position: relative !important; overflow: visible !important;">
         
         <!-- STATUS TERMINAL WINDOW (Top Left) -->
-        <div class="z-20 absolute top-8 left-4 md:left-8 text-left pointer-events-none" style="border-left: 3px solid #00E5FF; padding-left: 15px; padding-top: 10px; padding-bottom: 10px; padding-right: 20px; width: auto; min-width: 250px; max-width: min(450px, 90vw);">
-            <h2 class="font-mono text-xl md:text-2xl text-white font-bold uppercase tracking-widest">Intelligence_Matrix</h2>
-            <p class="font-mono text-[9px] md:text-[10px] text-[#00E5FF] uppercase tracking-[0.2em] opacity-80">
-                // Machine Learning & Data Engineering Stack
-            </p>
+        <div class="z-20 absolute top-8 left-4 md:left-8 text-left pointer-events-none" style="border-left: 3px solid #00E5FF; padding-left: 15px; padding-top: 10px; padding-bottom: 10px; padding-right: 20px; width: auto; min-width: 300px; max-width: 90vw;">
+            <h2 id="skills-matrix-title" class="font-mono text-xl md:text-2xl text-[#00E5FF] font-bold uppercase tracking-widest"></h2>
+            <p id="skills-matrix-sub" class="font-mono text-[9px] md:text-[10px] text-[#00E5FF] uppercase tracking-[0.2em] opacity-80"></p>
         </div>
+
+        <script>
+            (function() {
+                const title = "Intelligence_Matrix";
+                const sub = "// Machine Learning & Data Engineering Stack";
+                const hEl = document.getElementById('skills-matrix-title');
+                const pEl = document.getElementById('skills-matrix-sub');
+                
+                function typeEffect(element, text, speed, callback) {
+                    let i = 0;
+                    element.textContent = "";
+                    const interval = setInterval(() => {
+                        element.textContent += text[i];
+                        i++;
+                        if (i >= text.length) {
+                            clearInterval(interval);
+                            if (callback) callback();
+                        }
+                    }, speed);
+                }
+
+                // Initial type
+                typeEffect(hEl, title, 60, () => {
+                    typeEffect(pEl, sub, 40);
+                });
+            })();
+        </script>
 
         <!-- Solar System Block -->
         <div class="solar-universe">
