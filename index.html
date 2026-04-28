@@ -283,7 +283,7 @@
 .p-120 { top: 75%; left: 93%; }
 .p-240 { top: 75%; left: -2%; }
 
-/* MEDIA QUERIES - EDGE CORE MOBILE FIX */
+/* MEDIA QUERIES - 3D TILTED GALAXY MOBILE FIX */
 @media (max-width: 1200px) {
     .solar-system-scale { transform: translate(-50%, -50%) scale(0.8); }
 }
@@ -291,25 +291,27 @@
     .solar-system-scale { transform: translate(-50%, -50%) scale(0.65); }
 }
 @media (max-width: 768px) {
-    .solar-universe { min-height: 500px; overflow-x: hidden; }
+    .solar-universe { min-height: 450px; perspective: 1000px; overflow: visible; }
     .solar-system-scale {
-        transform: translate(-50%, -50%) scale(0.85); /* Large and readable */
-        left: 100%; /* Push center to the right edge */
-        margin-top: 20px;
+        transform: translate(-50%, -50%) scale(0.65) rotateX(70deg); /* Flat disk tilt */
+        left: 50%; /* Back to center */
+        margin-top: -20px;
+        transform-style: preserve-3d;
     }
-    .planet-text { font-size: 14px !important; color: #fff; text-shadow: 0 0 10px rgba(0,0,0,0.8); }
+    /* Stand planets upright */
+    .planet { transform-style: preserve-3d; }
+    .planet-inner { transform: rotateX(-70deg) !important; }
+    .planet-text { 
+        font-size: 16px !important; 
+        font-weight: bold; 
+        transform: translateZ(20px); 
+        color: #fff;
+        text-shadow: 0 0 10px rgba(0,0,0,1);
+    }
 }
 @media (max-width: 480px) {
-    .solar-system-scale { 
-        transform: translate(-50%, -50%) scale(0.75); 
-        left: 105%; /* Further push for smaller screens */
-    }
-}
-@media (max-width: 380px) {
-    .solar-system-scale { 
-        transform: translate(-50%, -50%) scale(0.65); 
-        left: 110%; 
-    }
+    .solar-system-scale { transform: translate(-50%, -50%) scale(0.55) rotateX(70deg); }
+    .planet-text { font-size: 14px !important; }
 }
     </style>
     <!-- Use inline styles to override any global flex-direction: row -->
