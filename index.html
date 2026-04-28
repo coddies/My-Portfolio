@@ -283,7 +283,7 @@
 .p-120 { top: 75%; left: 93%; }
 .p-240 { top: 75%; left: -2%; }
 
-/* MEDIA QUERIES - HALF-ECLIPSE VERTICAL FIT */
+/* MEDIA QUERIES - PREMIUM MOBILE ENLARGEMENT (NOTE/EDGE) */
 @media (max-width: 1200px) {
     .solar-system-scale { transform: translate(-50%, -50%) scale(0.8); }
 }
@@ -291,19 +291,23 @@
     .solar-system-scale { transform: translate(-50%, -50%) scale(0.65); }
 }
 @media (max-width: 768px) {
-    .solar-universe { min-height: 600px; overflow: hidden; position: relative; }
+    .solar-universe { min-height: 700px; overflow: hidden; position: relative; }
     .solar-system-scale {
         position: absolute !important;
-        transform: translate(-50%, -50%) scale(0.7) !important;
-        left: 100% !important; /* Half on screen */
+        transform: translate(-50%, -50%) scale(0.9) !important;
+        left: 80% !important; /* Pull it more into view */
         top: 50% !important;
         margin: 0 !important;
     }
-    .planet-text { font-size: 14px !important; color: #fff; }
+    .planet-text { font-size: 15px !important; color: #fff; text-shadow: 0 0 10px #000; }
 }
 @media (max-width: 480px) {
-    .solar-universe { min-height: 500px; }
-    .solar-system-scale { transform: translate(-50%, -50%) scale(0.55) !important; left: 105% !important; }
+    .solar-universe { min-height: 650px; }
+    .solar-system-scale { transform: translate(-50%, -50%) scale(0.8) !important; left: 85% !important; }
+}
+@media (max-width: 380px) {
+    .solar-universe { min-height: 600px; }
+    .solar-system-scale { transform: translate(-50%, -50%) scale(0.7) !important; left: 90% !important; }
 }
     </style>
     <!-- Use inline styles to override any global flex-direction: row -->
