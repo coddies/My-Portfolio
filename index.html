@@ -475,190 +475,23 @@
      CARD 4 — PROJECTS
 ════════════════════════════ -->
 <section id="card-4" class="card state-below">
-<style>
-.px { width:100%; max-width:1250px; display:flex; flex-direction:column; gap:15px; margin:0 auto; height:90vh; justify-content:center; position:relative; z-index:2; overflow:hidden; }
-.px-top { width:100%; overflow:hidden; position:relative; height:450px; display:flex; align-items:center; justify-content:center; border-radius:24px; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.05); }
-.px-track { display:flex; position:absolute; transition:transform 0.6s cubic-bezier(0.23, 1, 0.32, 1); height:100%; align-items:center; }
-.px-card { flex-shrink:0; width:1000px; height:400px; margin:0 50px; display:flex; border-radius:20px; background:rgba(10,12,24,0.95); border:1px solid rgba(124,58,237,0.3); overflow:hidden; transition:all 0.6s ease; position:relative; box-shadow:0 30px 80px rgba(0,0,0,0.6); }
-.px-card:not(.px-active) { opacity:0.1; transform:scale(0.95); filter:blur(4px); }
-.px-card.px-active { opacity:1; transform:scale(1); border-color:rgba(124,58,237,0.5); box-shadow:0 40px 100px rgba(124,58,237,0.3); }
-.px-media { flex:1.2; height:100%; position:relative; background: radial-gradient(circle at center, rgba(124,58,237,0.1), transparent); overflow:hidden; border-right:1px solid rgba(255,255,255,0.1); z-index:1; display:flex; align-items:center; justify-content:center; }
-.px-media img { width:100%; height:100%; object-fit:cover; transition:transform 0.8s ease; opacity:0.9; display:block; }
-.px-card.px-active .px-media img { transform:scale(1.05); opacity:1; }
-.px-fallback-emoji { position:absolute; font-size:120px; opacity:0.2; z-index:0; filter:blur(2px); pointer-events:none; }
-.px-details { flex:1; padding:35px; display:flex; flex-direction:column; justify-content:center; background:linear-gradient(135deg,rgba(124,58,237,0.08) 0%,rgba(0,0,0,0) 100%); z-index:2; position:relative; }
-.px-features { list-style:none; padding:0; margin:0 0 15px 0; display:flex; flex-direction:column; gap:8px; }
-.px-features li { font-size:14px; color:#ffffff; display:flex; align-items:flex-start; gap:10px; line-height:1.4; font-weight:500; }
-.px-features li::before { content:'→'; color:var(--cyan); font-weight:700; }
-.px-tags { display:flex; flex-wrap:wrap; gap:8px; }
-.px-tag { font-size:10px; padding:4px 12px; border-radius:20px; background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); color:#fff; font-weight:600; }
-
-.px-ctrls { width:100%; min-height:150px; height:auto; padding: 25px 50px; background:rgba(15,15,30,0.6); backdrop-filter:blur(25px); border:1px solid rgba(255,255,255,0.08); border-radius:24px; display:flex; align-items:center; justify-content:space-between; box-shadow:0 30px 80px rgba(0,0,0,0.6); margin-top: 0; z-index: 5; }
-.px-info { display:flex; flex-direction:column; gap:6px; flex:1.5; }
-.px-cat-label { font-size:11px; letter-spacing:4px; text-transform:uppercase; color:var(--cyan); font-weight:800; opacity:0.9; }
-.px-title-label { font-family:'Syne',sans-serif; font-size:clamp(20px, 4vw, 32px); font-weight:800; color:#fff; margin:0; line-height:1.2; text-shadow: 0 5px 15px rgba(0,0,0,0.3); }
-.px-action { flex:1; display:flex; justify-content:center; }
-.px-gh-btn { display:inline-flex; align-items:center; justify-content:center; gap:12px; padding:15px 35px; border-radius:99px; background:linear-gradient(135deg,#ff8000, #ff4000); color:#fff; font-size:13px; font-weight:800; text-decoration:none; transition:all .4s; box-shadow:0 10px 40px rgba(255,64,0,0.2); border:none; cursor:pointer; }
-.px-gh-btn:hover {
-    transform: translateY(-10px) rotate(1deg) scale(1.05);
-    background: rgba(255,255,255,0.05);
-    color: #ff8000;
-    border: 1px solid #ff8000;
-    box-shadow: 0 15px 45px rgba(255,128,0,0.45);
-    backdrop-filter: blur(8px);
-}
-
-.px-nav-box { flex:1.5; display:flex; align-items:center; justify-content:flex-end; gap:30px; }
-.px-count-box { font-family:'Syne',sans-serif; font-size:24px; font-weight:800; color:rgba(255,255,255,0.1); }
-.px-count-box b { color:var(--cyan); }
-.px-btns-box { display: flex; gap: 10px; }
-.px-nav-btn { width:44px; height:44px; border-radius:50%; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); color:#fff; font-size:18px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all .4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-.px-nav-btn:hover { background:var(--purple); border-color:var(--purple); transform:translateY(-8px) rotate(2deg) scale(1.2); box-shadow:0 0 30px rgba(124,58,237,0.6); }
-
-
-@media(max-width:1024px) {
-  .px { height: 90vh; padding: 50px 15px 100px 15px; gap: 10px; overflow-y: hidden; }
-  .px-top { height: auto; min-height: unset; border-radius: 24px; flex: 1; display: flex; flex-direction: column; overflow: hidden; background: none; border: none; }
-  .px-track { height: 100%; position: relative; display: flex; width: 100%; }
-  .px-card { width: 100% !important; margin: 0; flex-direction: column; height: 100% !important; border-radius: 24px; border: 1px solid rgba(124,58,237,0.2); background: rgba(10,12,24,0.8); }
-  .px-media { height: 180px; flex: none; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); }
-  .px-details { display: flex; padding: 20px; flex: 1; overflow-y: auto; scrollbar-width: none; }
-  .px-features { gap: 6px; }
-  .px-features li { font-size: 13px; }
-  .px-ctrls { flex-direction: column; height: auto; min-height: unset; padding: 20px; gap: 15px; border-radius: 20px; position: static; border-top: 1px solid rgba(255,255,255,0.05); }
-  .px-info { text-align: center; }
-  .px-title-label { font-size: 24px; line-height: 1.2; }
-  .px-gh-btn { padding: 12px 30px; font-size: 12px; width: 100%; border-radius: 12px; }
-  .px-nav-box { width: 100%; justify-content: center; gap: 20px; flex-direction: row; margin-top: 0; }
-  .px-count-box { font-size: 20px; }
-  .px-nav-btn { width: 44px; height: 44px; font-size: 20px; }
-}
-
-</style>
-
-<div class="card-inner">
-<div class="px">
-  <div class="px-top">
-    <div class="px-track" id="pxTrack">
-      <div class="px-card"><div class="px-media"><img><span class="px-fallback-emoji">🎡</span></div><div class="px-details"></div></div>
-      <div class="px-card"><div class="px-media"><img><span class="px-fallback-emoji">🎬</span></div><div class="px-details"></div></div>
-      <div class="px-card"><div class="px-media"><img><span class="px-fallback-emoji">🤖</span></div><div class="px-details"></div></div>
-      <div class="px-card"><div class="px-media"><img><span class="px-fallback-emoji">📁</span></div><div class="px-details"></div></div>
-      <div class="px-card"><div class="px-media"><img><span class="px-fallback-emoji">💎</span></div><div class="px-details"></div></div>
-    </div>
-  </div>
-  <div class="px-ctrls">
-    <div class="px-info">
-      <span class="px-cat-label" id="pxCat">PROJECT PREVIEW</span>
-      <h3 class="px-title-label" id="pxTitle">Dynamic Project Title</h3>
-    </div>
-    <div class="px-action">
-      <a href="#" target="_blank" id="pxMainBtn" class="px-gh-btn">VIEW RESEARCH &nbsp; &#10142;</a>
-    </div>
-    <div class="px-nav-box">
-        <div class="px-count-box"><b id="pxCurr">1</b> / <span id="pxTotal">5</span></div>
-        <div class="px-btns-box">
-          <button class="px-nav-btn" id="pxPrev">&#8249;</button>
-          <button class="px-nav-btn" id="pxNext">&#8250;</button>
+    <div class="card-inner" style="display: block; width: 100%;">
+        <div style="width:100%; max-width:1200px; margin: 40px auto; padding: 0 40px;">
+            <div class="section-header" style="text-align: center; margin-bottom: 60px;">
+                <span class="tagline" style="color:var(--cyan);">DEPLOYMENT LOGS</span>
+                <h2 class="section-title">Projects</h2>
+                <div class="accent-line" style="margin: 10px auto; background: linear-gradient(90deg, var(--cyan), var(--purple));"></div>
+            </div>
         </div>
-    </div>
-  </div>
-</div>
-</div>
-<script>
-(function(){
-  const data=[
-    { cat:'AI & UTILITY', title:'Spin AI - Decision Maker', features: ['AI-powered item generation via Groq','Customizable wheel categories & topics','Smooth CSS animations & confetti effects','Mobile-optimized responsive design'], tags:['JS','Groq Cloud','Vite','Tailwind'], gh:'https://spin-ai-brown.vercel.app/', img:'assets/images/p1.png', emoji: '🎡' },
-    { cat:'AUTOMATION', title:'Faceless AI Video Studio', features: ['Automated script-to-video pipeline','High-end generative image integration','Natural AI voice synthesis','Batch scene processing'], tags:['Python','FFmpeg','AWS Bedrock'], gh:'https://faceless-ai-studio-tau.vercel.app/', img:'assets/images/p2.png', emoji: '🎬' },
-    { cat:'AI & NLP', title:'AI Chatbot Studio', features: ['Advanced NLU with real-time streaming','Context-aware persistent chat history','Multi-model support (Groq/OpenAI)','Responsive Dark Glass UI interface'], tags:['Python','FastAPI','React','AWS'], gh:'https://github.com/coddies/AI-Chatbot', img:'assets/images/p3.png', emoji: '🤖' },
-    { cat:'FULL STACK', title:'Student Table CRUD', features: ['FastAPI Backend integration','SQLAlchemy Database management','RESTful API development','Vanilla JS Frontend CRUD'], tags:['Python','FastAPI','SQLAlchemy','PostgreSQL'], gh:'https://github.com/coddies/Student-Table', img:'assets/images/p4.png', emoji: '📁' },
-    { cat:'FRONTEND DEVELOPMENT', title:'Premium Portfolio', features: ['Dynamic card-based transitions','Responsive Glassmorphism design','Interactive project carousel','Automated deployment pipelines'], tags:['HTML5','CSS3','JS','GitHub'], gh:'https://github.com/coddies/My-Portfolio', img:'assets/images/p5.png', emoji: '💎' },
-  ];
-  const track = document.getElementById('pxTrack'); if(!track) return;
-  const cards = track.querySelectorAll('.px-card');
-  const currEl = document.getElementById('pxCurr'); const totEl = document.getElementById('pxTotal');
-  const prevB = document.getElementById('pxPrev'); const nextB = document.getElementById('pxNext');
-  const catEl = document.getElementById('pxCat'); const titEl = document.getElementById('pxTitle');
-  const mainBtn = document.getElementById('pxMainBtn');
-  const N = data.length; if(totEl) totEl.textContent = N; let cur = 0;
 
-  function draw(){
-    data.forEach((p,i)=>{
-      const card = cards[i];
-      if(card){
-        const img = card.querySelector('img');
-        const fallback = card.querySelector('.px-fallback-emoji');
-        if(img) {
-          img.src = p.img;
-          img.onload = () => { if(fallback) fallback.style.display = 'none'; };
-          img.onerror = () => { img.style.display = 'none'; if(fallback) { fallback.style.display = 'block'; fallback.textContent = p.emoji; } };
-        }
-        const details = card.querySelector('.px-details');
-        if(details) {
-          details.innerHTML = `<ul class="px-features">${p.features.map(f=>`<li>${f}</li>`).join('')}</ul><div class="px-tags">${p.tags.map(t=>`<span class="px-tag">${t}</span>`).join('')}</div>`;
-        }
-      }
-    });
-  }
-  function positionTrack(){
-    const topW = track.parentElement.clientWidth || window.innerWidth;
-    const cardEl = track.querySelector('.px-card');
-    if(!cardEl) return;
-    if(window.innerWidth <= 1024) { 
-      // Mobile: Each card is 100% width, just translate by -cur * 100%
-      track.style.transform = `translateX(${-cur*100}%)`; 
-      track.style.left = '0'; 
-    }
-    else { 
-      // Desktop: 1000px width + 50px left margin + 50px right margin = 1100px total
-      const cardW = 1100; 
-      const offset = (topW / 2) - (cur * cardW + cardW / 2);
-      track.style.transform = `translateX(${offset}px)`; 
-      track.style.left = '0'; 
-    }
-  }
-
-  function go(idx){
-    cur = (idx + N) % N;
-    cards.forEach((c,i)=>c.classList.toggle('px-active', i===cur));
-    if(currEl) currEl.textContent = cur+1; 
-    if(catEl) catEl.textContent = data[cur].cat; 
-    if(titEl) titEl.textContent = data[cur].title; 
-    if(mainBtn) {
-       mainBtn.href = data[cur].gh;
-       // Updated to match the new dynamic titles
-       const isFaceless = data[cur].title.includes('Faceless AI');
-       const isSpin = data[cur].title.includes('Spin AI');
-       if(isFaceless || isSpin) {
-         mainBtn.innerHTML = 'VIEW LIVE APP &nbsp; &#10142;';
-       } else {
-         mainBtn.innerHTML = 'VIEW RESEARCH &nbsp; &#10142;';
-       }
-    }
-    positionTrack();
-  }
-
-  const cardSection = document.getElementById('card-4');
-  const observer = new MutationObserver((mutations) => { mutations.forEach((mutation) => { if (mutation.attributeName === 'class' && cardSection.classList.contains('state-active')) { setTimeout(positionTrack, 100); } }); });
-  observer.observe(cardSection, { attributes: true });
-  cards.forEach((c,i)=>c.addEventListener('click',()=>go(i)));
-  prevB.onclick=()=>go(cur-1); nextB.onclick=()=>go(cur+1);
-  window.addEventListener('resize', positionTrack);
-  draw(); setTimeout(positionTrack, 100); go(0);
-})();
-</script>
-
-    <!-- ══════════════════════════════════════════════════════════
-         3D PROTOTYPES COMPARISON ZONE
-         ══════════════════════════════════════════════════════════ -->
     <style>
         /* Enable vertical scrolling for card-4 to see prototypes */
         #card-4 { overflow-y: auto !important; scrollbar-width: thin; scrollbar-color: #00E5FF transparent; }
         #card-4::-webkit-scrollbar { width: 6px; }
         #card-4::-webkit-scrollbar-thumb { background: #00E5FF; border-radius: 10px; }
         
-        .proto-container { width: 100%; max-width: 1200px; margin: 100px auto; padding: 40px; color: white; font-family: 'Space Grotesk', sans-serif; }
-        .proto-label { font-family: 'Syne', sans-serif; font-size: 14px; color: #00E5FF; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 40px; text-align: center; border-bottom: 1px solid rgba(0, 229, 255, 0.2); padding-bottom: 10px; }
+        .proto-container { width: 100%; max-width: 1200px; margin: 60px auto; padding: 40px; color: white; font-family: 'Space Grotesk', sans-serif; }
+        .proto-label { font-family: 'Syne', sans-serif; font-size: 13px; color: var(--cyan); letter-spacing: 5px; text-transform: uppercase; margin-bottom: 50px; text-align: center; border-bottom: 1px solid rgba(0, 229, 255, 0.1); padding-bottom: 15px; font-weight: 800; }
         
         /* Prototype 1: Orbital Carousel */
         .orbital-stage { height: 600px; perspective: 1200px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
@@ -696,7 +529,7 @@
 
     <!-- PROTOTYPE 1 -->
     <div class="proto-container">
-        <h2 class="proto-label">PROTOTYPE 1: ORBITAL CAROUSEL</h2>
+        <h2 class="proto-label">01 // NEURAL ORBITAL MATRIX</h2>
         <div class="orbital-stage">
             <div class="orbital-ring">
                 <div class="orbital-card">
@@ -721,7 +554,7 @@
 
     <!-- PROTOTYPE 2 -->
     <div class="proto-container">
-        <h2 class="proto-label">PROTOTYPE 2: PARALLAX BENTO</h2>
+        <h2 class="proto-label">02 // HOLOGRAPHIC BENTO GRID</h2>
         <div class="bento-grid">
             <div class="bento-card">
                 <div class="bento-bg"></div>
@@ -756,7 +589,7 @@
 
     <!-- PROTOTYPE 3 -->
     <div class="proto-container">
-        <h2 class="proto-label">PROTOTYPE 3: ISOMETRIC SERVERS</h2>
+        <h2 class="proto-label">03 // ISOMETRIC SYSTEM NODES</h2>
         <div class="iso-stage">
             <div class="iso-grid">
                 <div class="iso-block">
