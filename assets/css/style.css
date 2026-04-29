@@ -358,48 +358,30 @@ h1, h2, h3, .syne-font {
 /* ── CARDS ── */
 
 .card {
-
     position: fixed;
-
     inset: 0;
-
     z-index: 5;
-
-    padding: 60px 100px 60px 60px;
-
+    padding: 60px 100px 100px 60px;
     display: flex;
-
     justify-content: center;
-
     align-items: flex-start;
-
     overflow-y: auto;
-
-    scrollbar-width: none;
-
-    -ms-overflow-style: none;
-
     transition: transform var(--card-transition), opacity var(--opacity-transition), visibility var(--opacity-transition);
-
     visibility: hidden;
-
     pointer-events: none;
-
     will-change: transform, opacity;
-
-    transform: translate3d(0, 0, 0); /* Force GPU */
-
+    transform: translate3d(0, 0, 0); 
     -webkit-overflow-scrolling: touch;
-
 }
-
-
 
 .card::-webkit-scrollbar {
-
-    display: none;
-
+    width: 6px;
 }
+.card::-webkit-scrollbar-thumb {
+    background: rgba(0, 229, 255, 0.3);
+    border-radius: 10px;
+}
+
 
 
 
@@ -453,31 +435,19 @@ h1, h2, h3, .syne-font {
 
 
 
-/* Projects Card: Fixed Viewport, no scrolling */
-
+/* Projects Card: Allow scrolling for the 3 prototypes */
 #card-4 {
-
-    overflow-y: hidden !important;
-
-    align-items: center;
-
+    overflow-y: auto !important;
+    align-items: flex-start;
 }
-
-
 
 #card-4 .card-inner {
-
-    padding: 0;
-
-    height: 100vh;
-
-    min-height: 100vh;
-
-    align-items: center;
-
-    justify-content: center;
-
+    padding: 100px 0;
+    width: 100%;
+    min-height: min-content;
+    display: block;
 }
+
 
 
 
