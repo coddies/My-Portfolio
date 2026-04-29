@@ -172,310 +172,308 @@
 
 <section id="card-3" class="card state-below">
     <style>
-        .skills-container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px;
-            color: #e4e1e8;
-            font-family: 'Lexend', sans-serif;
-            overflow-x: hidden;
-            padding-bottom: 100px;
-        }
+/* === BOMBPROOF RESPONSIVE SOLAR SYSTEM === */
+.solar-universe {
+    position: relative;
+    width: 100%;
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: visible; 
+    background: radial-gradient(circle at center, rgba(0, 229, 255, 0.05), transparent 70%);
+}
 
-        .perspective-1200 { perspective: 1200px; }
-        .preserve-3d { transform-style: preserve-3d; }
-        .backface-hidden { backface-visibility: hidden; }
-        
-        @keyframes orbital-rotation {
-            from { transform: rotateY(0deg); }
-            to { transform: rotateY(360deg); }
-        }
-        .animate-orbital { animation: orbital-rotation 20s linear infinite; }
-        .animate-orbital:hover { animation-play-state: paused; }
+.solar-system-scale {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 800px;
+    height: 800px;
+    transform: translate(-50%, -50%) scale(1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+    transform-origin: center center;
+}
 
-        .isometric-grid { transform: rotateX(60deg) rotateZ(-45deg); transform-style: preserve-3d; }
-        
-        .glass-panel {
-            background: rgba(6, 11, 20, 0.4);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
+.core-sun {
+    position: absolute; 
+    width: 90px; 
+    height: 90px; 
+    border-radius: 50%;
+    background: radial-gradient(circle, #00E5FF 0%, transparent 80%);
+    box-shadow: 0 0 50px rgba(0, 229, 255, 0.8), 0 0 100px rgba(139, 92, 246, 0.4);
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    z-index: 20;
+    border: 1px solid rgba(0, 229, 255, 0.3);
+}
 
-        .neo-glow-cyan { box-shadow: 0 0 20px rgba(0, 229, 255, 0.2); }
-        .neo-glow-purple { box-shadow: 0 0 20px rgba(139, 92, 246, 0.2); }
+@keyframes orbit { 100% { transform: rotate(360deg); } }
+@keyframes anti-orbit { 100% { transform: rotate(-360deg); } }
 
-        /* Titles */
-        .section-label {
-            color: #00E5FF;
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 12px;
-            letter-spacing: 0.3em;
-            text-transform: uppercase;
-            font-weight: 600;
-            display: block;
-            margin-bottom: 8px;
-        }
-        .section-heading {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 36px;
-            color: #ffffff;
-            font-weight: 700;
-            letter-spacing: -0.02em;
-            margin-bottom: 16px;
-        }
-        .prototype-label {
-            color: rgba(0, 229, 255, 0.6);
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 12px;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            font-weight: 600;
-            margin-bottom: 64px;
-            text-align: center;
-        }
+.orbit-ring {
+    position: absolute; 
+    border: 1px dashed rgba(0, 229, 255, 0.12); 
+    border-radius: 50%;
+    pointer-events: none;
+}
+.orbit-wrapper {
+    position: absolute; 
+    border-radius: 50%; 
+    pointer-events: none;
+}
+.planet {
+    position: absolute; 
+    width: 48px; 
+    height: 48px; 
+    border-radius: 50%;
+    pointer-events: auto; 
+    cursor: crosshair;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.planet-inner {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: rgba(6, 11, 20, 0.95); 
+    border: 1px solid rgba(0, 229, 255, 0.4);
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+}
 
-        /* Bento Grid */
-        .bento-grid {
-            display: grid;
-            grid-template-columns: repeat(1, 1fr);
-            gap: 32px;
-            perspective: 1200px;
-        }
-        @media (min-width: 768px) {
-            .bento-grid { grid-template-columns: repeat(2, 1fr); }
-        }
+.orbit-wrapper:hover, 
+.orbit-wrapper:hover .planet { 
+    animation-play-state: paused !important; 
 
-        .bento-card {
-            position: relative;
-            height: 400px;
-            transform-style: preserve-3d;
-            transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1);
-            cursor: pointer;
-        }
-        .bento-card:hover {
-            transform: rotateX(2deg) rotateY(-2deg);
-        }
+}
 
-        .bento-bg {
-            position: absolute;
-            inset: 0;
-            border-radius: 12px;
-            overflow: hidden;
-            transition: transform 0.5s;
-        }
-        .bento-card:hover .bento-bg {
-            transform: translateZ(-30px);
-        }
-        
-        .bento-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.4;
-            transform: scale(1.1);
-            transition: transform 0.7s;
-        }
-        .bento-card:hover .bento-img {
-            transform: scale(1);
-        }
+.planet:hover .planet-inner { 
+    transform: scale(1.6); 
+    z-index: 100; 
+    border-color: #00E5FF; 
+    box-shadow: 0 0 30px rgba(0, 229, 255, 0.7); 
+    background: rgba(0, 229, 255, 0.2); 
+}
+.planet-text {
+    position: absolute; 
+    top: -30px; 
+    white-space: nowrap;
+    font-family: 'Space Grotesk', monospace; 
+    font-size: 8px; 
+    color: rgba(255,255,255,0.9);
+    transition: all 0.3s ease; 
+    text-transform: uppercase; 
+    letter-spacing: 0.15em;
+    pointer-events: none;
+}
 
-        .bento-content {
-            position: relative;
-            z-index: 10;
-            padding: 32px;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            transition: transform 0.5s;
-            transform-style: preserve-3d;
-        }
-        .bento-card:hover .bento-content {
-            transform: translateZ(60px);
-        }
+/* Planet Positions */
+.p-0   { top: -24px; left: calc(50% - 24px); }
+.p-180 { bottom: -24px; left: calc(50% - 24px); }
+.p-120 { top: 75%; left: 93%; }
+.p-240 { top: 75%; left: -2%; }
 
-        /* Isometric Servers */
-        .iso-server {
-            position: relative;
-            width: 192px;
-            height: 192px;
-            transform-style: preserve-3d;
-            transition: transform 0.5s ease;
-            cursor: pointer;
-        }
-        .iso-server:hover {
-            transform: translateZ(48px);
-        }
-        .iso-top {
-            position: absolute;
-            inset: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 16px;
-            transition: all 0.5s;
-        }
-        .iso-server:hover .iso-top {
-            background: rgba(0, 229, 255, 0.1);
-            box-shadow: 0 0 20px rgba(0, 229, 255, 0.2);
-        }
-        .iso-server.purple:hover .iso-top {
-            background: rgba(139, 92, 246, 0.1);
-            box-shadow: 0 0 20px rgba(139, 92, 246, 0.2);
-        }
-
-        .iso-bottom {
-            position: absolute;
-            inset: 0;
-            transform-origin: bottom;
-            transform: rotateX(-90deg) translateY(50%);
-            height: 40px;
-        }
-        .iso-left {
-            position: absolute;
-            inset: 0;
-            transform-origin: left;
-            transform: rotateY(90deg) translateX(-50%);
-            width: 40px;
-        }
-
-        /* Responsive overrides for Orbital */
-        .orbital-stage { position: relative; padding: 96px 0; perspective: 1200px; overflow: visible; display: flex; flex-direction: column; align-items: center; }
-        .orbital-bg-text { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; pointer-events: none; }
-        .orbital-bg-text span { color: rgba(30, 41, 59, 0.2); font-weight: 900; font-size: 120px; font-family: 'Space Grotesk', sans-serif; user-select: none; }
+/* MEDIA QUERIES - PREMIUM MOBILE ENLARGEMENT (NOTE/EDGE) */
+@media (max-width: 1200px) {
+    .solar-system-scale { transform: translate(-50%, -50%) scale(0.8); }
+}
+@media (max-width: 992px) {
+    .solar-system-scale { transform: translate(-50%, -50%) scale(0.65); }
+}
+@media (max-width: 768px) {
+    .solar-universe { min-height: 700px; overflow: hidden; position: relative; }
+    .solar-system-scale {
+        position: absolute !important;
+        transform: translate(-50%, -50%) scale(0.9) !important;
+        left: 100% !important; /* Touch the edge perfectly */
+        top: 50% !important;
+        margin: 0 !important;
+    }
+    .planet-text { font-size: 15px !important; color: #fff; text-shadow: 0 0 10px #000; }
+}
+@media (max-width: 480px) {
+    .solar-universe { min-height: 650px; }
+    .solar-system-scale { transform: translate(-50%, -50%) scale(0.8) !important; left: 100% !important; }
+}
+@media (max-width: 380px) {
+    .solar-universe { min-height: 600px; }
+    .solar-system-scale { transform: translate(-50%, -50%) scale(0.7) !important; left: 105% !important; }
+}
     </style>
-
+    <!-- Use inline styles to override any global flex-direction: row -->
     <div class="card-inner w-full" style="display: block !important; position: relative !important; overflow: visible !important;">
-        <div class="skills-container">
-            
-            <div style="margin-bottom: 48px; text-align: center;">
-                <span class="section-label">INTELLIGENCE_MATRIX</span>
-                <h1 class="section-heading">Core Skills & Architecture</h1>
-                <p style="font-size: 18px; font-weight: 300; color: #849495; max-width: 600px; margin: 0 auto;">High-fidelity data decryption and market pulse synchronization using advanced quantum orbital matrices.</p>
-            </div>
+        
+        <!-- STATUS TERMINAL WINDOW (Top Left) -->
+        <div class="z-20 absolute top-8 left-4 md:left-8 text-left pointer-events-none" style="border-left: 3px solid #00E5FF; padding-left: 15px; padding-top: 10px; padding-bottom: 10px; padding-right: 20px; width: auto; min-width: 300px; max-width: 90vw;">
+            <h2 id="skills-matrix-title" class="text-xl md:text-2xl text-[#00E5FF] font-bold uppercase tracking-widest" style="font-family: 'Space Grotesk', sans-serif;"></h2>
+            <p id="skills-matrix-sub" class="text-[9px] md:text-[10px] text-[#00E5FF] uppercase tracking-[0.2em] opacity-80" style="font-family: 'Plus Jakarta Sans', sans-serif;"></p>
+        </div>
 
-            <!-- PROTOTYPE 1: ORBITAL CAROUSEL -->
-            <div class="orbital-stage">
-                <div class="orbital-bg-text">
-                    <span>ORBITAL</span>
+        <script>
+            (function() {
+                const title = "Intelligence_Matrix";
+                const sub = "// Machine Learning & Data Engineering Stack";
+                const hEl = document.getElementById('skills-matrix-title');
+                const pEl = document.getElementById('skills-matrix-sub');
+                
+                function typeEffect(element, text, speed, callback) {
+                    let i = 0;
+                    element.textContent = "";
+                    const interval = setInterval(() => {
+                        element.textContent += text[i];
+                        i++;
+                        if (i >= text.length) {
+                            clearInterval(interval);
+                            if (callback) callback();
+                        }
+                    }, speed);
+                }
+
+                // Initial type
+                typeEffect(hEl, title, 60, () => {
+                    typeEffect(pEl, sub, 40);
+                });
+            })();
+        </script>
+
+        <!-- Solar System Block -->
+        <div class="solar-universe">
+            <div class="solar-system-scale">
+                <div class="core-sun">
+                    <span class="material-symbols-outlined text-white text-4xl">psychology</span>
                 </div>
-                
-                <h2 class="prototype-label">PROTOTYPE_01 // ORBITAL CAROUSEL</h2>
-                
-                <div class="preserve-3d animate-orbital" style="position: relative; width: 288px; height: 384px;">
-                    <!-- Card 1 -->
-                    <div class="glass-panel neo-glow-cyan" style="position: absolute; inset: 0; padding: 24px; display: flex; flex-direction: column; justify-content: space-between; transform: rotateY(0deg) translateZ(300px); border-radius: 12px;">
-                        <span class="material-symbols-outlined" style="color: #00E5FF; font-size: 36px;">psychology</span>
-                        <div>
-                            <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 18px; color: #fff; font-weight: 500;">Machine Learning</h3>
-                            <p style="font-size: 12px; color: #849495; margin-top: 8px; letter-spacing: 0.1em;">PREDICTIVE MODELS</p>
-                        </div>
-                    </div>
-                    
-                    <!-- Card 2 -->
-                    <div class="glass-panel neo-glow-purple" style="position: absolute; inset: 0; padding: 24px; display: flex; flex-direction: column; justify-content: space-between; transform: rotateY(90deg) translateZ(300px); border-color: rgba(139, 92, 246, 0.3); border-radius: 12px;">
-                        <span class="material-symbols-outlined" style="color: #8B5CF6; font-size: 36px;">auto_fix</span>
-                        <div>
-                            <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 18px; color: #fff; font-weight: 500;">Generative AI</h3>
-                            <p style="font-size: 12px; color: #849495; margin-top: 8px; letter-spacing: 0.1em;">LLM INTEGRATION</p>
-                        </div>
-                    </div>
-                    
-                    <!-- Card 3 -->
-                    <div class="glass-panel neo-glow-cyan" style="position: absolute; inset: 0; padding: 24px; display: flex; flex-direction: column; justify-content: space-between; transform: rotateY(180deg) translateZ(300px); border-radius: 12px;">
-                        <span class="material-symbols-outlined" style="color: #00E5FF; font-size: 36px;">query_stats</span>
-                        <div>
-                            <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 18px; color: #fff; font-weight: 500;">Data Science</h3>
-                            <p style="font-size: 12px; color: #849495; margin-top: 8px; letter-spacing: 0.1em;">ADVANCED ANALYTICS</p>
-                        </div>
-                    </div>
-                    
-                    <!-- Card 4 -->
-                    <div class="glass-panel neo-glow-purple" style="position: absolute; inset: 0; padding: 24px; display: flex; flex-direction: column; justify-content: space-between; transform: rotateY(270deg) translateZ(300px); border-color: rgba(139, 92, 246, 0.3); border-radius: 12px;">
-                        <span class="material-symbols-outlined" style="color: #8B5CF6; font-size: 36px;">code</span>
-                        <div>
-                            <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 18px; color: #fff; font-weight: 500;">Python & FastAPI</h3>
-                            <p style="font-size: 12px; color: #849495; margin-top: 8px; letter-spacing: 0.1em;">BACKEND SYSTEMS</p>
+
+                <!-- Orbit 1 -->
+                <div class="orbit-ring" style="width: 180px; height: 180px;"></div>
+                <div class="orbit-wrapper" style="width: 180px; height: 180px; animation: orbit 25s linear infinite;">
+                    <div class="planet p-0" style="animation: anti-orbit 25s linear infinite;">
+                        <div class="planet-inner ">
+                            <span class="planet-text">Python</span>
+                            <span class="material-symbols-outlined text-[#00E5FF] text-2xl">code</span>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- PROTOTYPE 2: PARALLAX BENTO -->
-            <div style="padding: 96px 0;">
-                <h2 class="prototype-label">PROTOTYPE_02 // PARALLAX BENTO</h2>
-                
-                <div class="bento-grid">
-                    <!-- Bento Item 1 -->
-                    <div class="bento-card">
-                        <div class="bento-bg glass-panel" style="border-color: rgba(0, 229, 255, 0.2);">
-                            <img class="bento-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDcr7RqyXcAMhif1tceQcaeis1S0dLcaojmuIwhuEF2Kzcq-yOav5Z38AQo6OIK1wmBstI9FsgQNRXU9VXi9STyRY3t3CyMyfDYhBAAiad5gBBSnQHwTscgLmTmX-jVLsvFhIfduwUsIsRAOIIoPVAxmPsfq_8AOolmL7buPWtuV2SAGuUAw9VuEDZew9mULerU8Q_bz317qK6zAfFda7iPfj7fB5tidudK-sA-eBg1gz7IQ0Y6bRr_Pqu8FTyFhwrXT2SapEkp8sY" alt="AWS Cloud Architecture" />
-                        </div>
-                        <div class="bento-content">
-                            <div style="background: #00E5FF; width: 48px; height: 4px; margin-bottom: 16px; box-shadow: 0 0 15px #00E5FF;"></div>
-                            <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 30px; font-weight: 700; color: #fff; margin-bottom: 8px;">AWS Cloud Infrastructure</h3>
-                            <p style="font-size: 16px; color: rgba(0, 229, 255, 0.7);">Adaptive intelligence layer scaling serverless data streams in real-time.</p>
+                <!-- Orbit 2 -->
+                <div class="orbit-ring" style="width: 290px; height: 290px; border-color: rgba(139, 92, 246, 0.3);"></div>
+                <div class="orbit-wrapper" style="width: 290px; height: 290px; animation: orbit 35s linear infinite reverse;">
+                    <div class="planet p-0" style="animation: anti-orbit 35s linear infinite reverse;">
+                        <div class="planet-inner border-[#8B5CF6]">
+                            <span class="planet-text">FastAPI</span>
+                            <span class="material-symbols-outlined text-[#8B5CF6] text-2xl">bolt</span>
                         </div>
                     </div>
-                    
-                    <!-- Bento Item 2 -->
-                    <div class="bento-card">
-                        <div class="bento-bg glass-panel" style="border-color: rgba(139, 92, 246, 0.2);">
-                            <img class="bento-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDr5lbufPrhe-WCFVr5xsFu0nZv52Df7KELhtoBOiNhJqqekUz-NCjFFPqx3LyATwM4dejrVfGolX2AW-j14jK7Ca-4Wf7gozSYGWwogPMg_-mTRmN3HhvEpWvqeihJOY2aqtObDSMRTjH_dz0GDqm9eEBarpXIDP2fI4vd2tsWFL-_vx6CAHrtV920o2dKgj1-XEeK6mUyIN_4SiXi8JonJF3c1-sfLaJxka0VLr4PvD2snLvYclO8kd1MYKlKKO6qcTACdw1Vp-A" alt="Database Systems" />
+                    <div class="planet p-180" style="animation: anti-orbit 35s linear infinite reverse;">
+                        <div class="planet-inner border-[#8B5CF6]">
+                            <span class="planet-text">Vibe Coding</span>
+                            <span class="material-symbols-outlined text-[#8B5CF6] text-2xl">auto_fix</span>
                         </div>
-                        <div class="bento-content">
-                            <div style="background: #8B5CF6; width: 48px; height: 4px; margin-bottom: 16px; box-shadow: 0 0 15px #8B5CF6;"></div>
-                            <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 30px; font-weight: 700; color: #fff; margin-bottom: 8px;">Database & SQL Mastery</h3>
-                            <p style="font-size: 16px; color: rgba(139, 92, 246, 0.7);">Economic fluctuation monitoring across highly optimized relational stores.</p>
+                    </div>
+                </div>
+
+                <!-- Orbit 3 -->
+                <div class="orbit-ring" style="width: 400px; height: 400px;"></div>
+                <div class="orbit-wrapper" style="width: 400px; height: 400px; animation: orbit 45s linear infinite;">
+                    <div class="planet p-0" style="animation: anti-orbit 45s linear infinite;">
+                        <div class="planet-inner ">
+                            <span class="planet-text">AI / LLM</span>
+                            <span class="material-symbols-outlined text-[#00E5FF] text-2xl">memory</span>
+                        </div>
+                    </div>
+                    <div class="planet p-120" style="animation: anti-orbit 45s linear infinite;">
+                        <div class="planet-inner ">
+                            <span class="planet-text">Generative AI</span>
+                            <span class="material-symbols-outlined text-[#00E5FF] text-2xl">smart_toy</span>
+                        </div>
+                    </div>
+                    <div class="planet p-240" style="animation: anti-orbit 45s linear infinite;">
+                        <div class="planet-inner ">
+                            <span class="planet-text">Machine Learning</span>
+                            <span class="material-symbols-outlined text-[#00E5FF] text-2xl">hub</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Orbit 4 -->
+                <div class="orbit-ring" style="width: 510px; height: 510px; border-color: rgba(139, 92, 246, 0.2);"></div>
+                <div class="orbit-wrapper" style="width: 510px; height: 510px; animation: orbit 55s linear infinite reverse;">
+                    <div class="planet p-0" style="animation: anti-orbit 55s linear infinite reverse;">
+                        <div class="planet-inner border-[#8B5CF6]">
+                            <span class="planet-text">Data Analysis</span>
+                            <span class="material-symbols-outlined text-[#8B5CF6] text-2xl">analytics</span>
+                        </div>
+                    </div>
+                    <div class="planet p-120" style="animation: anti-orbit 55s linear infinite reverse;">
+                        <div class="planet-inner border-[#8B5CF6]">
+                            <span class="planet-text">SQL / DB</span>
+                            <span class="material-symbols-outlined text-[#8B5CF6] text-2xl">database</span>
+                        </div>
+                    </div>
+                    <div class="planet p-240" style="animation: anti-orbit 55s linear infinite reverse;">
+                        <div class="planet-inner border-[#8B5CF6]">
+                            <span class="planet-text">Problem Solving</span>
+                            <span class="material-symbols-outlined text-[#8B5CF6] text-2xl">architecture</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Orbit 5 -->
+                <div class="orbit-ring" style="width: 620px; height: 620px;"></div>
+                <div class="orbit-wrapper" style="width: 620px; height: 620px; animation: orbit 65s linear infinite;">
+                    <div class="planet p-0" style="animation: anti-orbit 65s linear infinite;">
+                        <div class="planet-inner ">
+                            <span class="planet-text">AWS Cloud</span>
+                            <span class="material-symbols-outlined text-[#00E5FF] text-2xl">cloud</span>
+                        </div>
+                    </div>
+                    <div class="planet p-120" style="animation: anti-orbit 65s linear infinite;">
+                        <div class="planet-inner ">
+                            <span class="planet-text">HTML5</span>
+                            <span class="material-symbols-outlined text-[#00E5FF] text-2xl">html</span>
+                        </div>
+                    </div>
+                    <div class="planet p-240" style="animation: anti-orbit 65s linear infinite;">
+                        <div class="planet-inner ">
+                            <span class="planet-text">CSS3</span>
+                            <span class="material-symbols-outlined text-[#00E5FF] text-2xl">css</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Orbit 6 -->
+                <div class="orbit-ring" style="width: 730px; height: 730px; border-color: rgba(139, 92, 246, 0.2);"></div>
+                <div class="orbit-wrapper" style="width: 730px; height: 730px; animation: orbit 75s linear infinite reverse;">
+                    <div class="planet p-0" style="animation: anti-orbit 75s linear infinite reverse;">
+                        <div class="planet-inner border-[#8B5CF6]">
+                            <span class="planet-text">Video Editing</span>
+                            <span class="material-symbols-outlined text-[#8B5CF6] text-2xl">movie</span>
+                        </div>
+                    </div>
+                    <div class="planet p-180" style="animation: anti-orbit 75s linear infinite reverse;">
+                        <div class="planet-inner border-[#8B5CF6]">
+                            <span class="planet-text">Content Creator</span>
+                            <span class="material-symbols-outlined text-[#8B5CF6] text-2xl">video_camera_front</span>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <!-- PROTOTYPE 3: ISOMETRIC SERVERS -->
-            <div style="padding: 96px 0; overflow: hidden;">
-                <h2 class="prototype-label" style="margin-bottom: 96px;">PROTOTYPE_03 // ISOMETRIC SERVERS</h2>
-                
-                <div style="display: flex; justify-content: center; align-items: center; height: 500px;">
-                    <div class="isometric-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 48px;">
-                        
-                        <!-- Server Block 1 -->
-                        <div class="iso-server">
-                            <div class="glass-panel" style="position: absolute; inset: 0; background: rgba(8, 51, 68, 0.4); border-color: rgba(0, 229, 255, 0.5);"></div>
-                            <div class="glass-panel iso-bottom" style="background: rgba(8, 51, 68, 0.3); border-color: rgba(0, 229, 255, 0.5);"></div>
-                            <div class="glass-panel iso-left" style="background: rgba(8, 51, 68, 0.3); border-color: rgba(0, 229, 255, 0.5);"></div>
-                            
-                            <div class="iso-top">
-                                <span class="material-symbols-outlined" style="color: #00E5FF; font-size: 48px; margin-bottom: 8px;">web</span>
-                                <span style="font-family: 'Space Grotesk', monospace; font-size: 10px; color: #a5f3fc; letter-spacing: 0.05em;">FRONTEND_HTML5</span>
-                            </div>
-                        </div>
-                        
-                        <!-- Server Block 2 -->
-                        <div class="iso-server purple" style="margin-top: 48px;">
-                            <div class="glass-panel" style="position: absolute; inset: 0; background: rgba(59, 7, 100, 0.4); border-color: rgba(139, 92, 246, 0.5);"></div>
-                            <div class="glass-panel iso-bottom" style="background: rgba(59, 7, 100, 0.3); border-color: rgba(139, 92, 246, 0.5);"></div>
-                            <div class="glass-panel iso-left" style="background: rgba(59, 7, 100, 0.3); border-color: rgba(139, 92, 246, 0.5);"></div>
-                            
-                            <div class="iso-top">
-                                <span class="material-symbols-outlined" style="color: #8B5CF6; font-size: 48px; margin-bottom: 8px;">movie</span>
-                                <span style="font-family: 'Space Grotesk', monospace; font-size: 10px; color: #e9d5ff; letter-spacing: 0.05em;">MEDIA_PROC</span>
-                            </div>
-                        </div>
-                        
-                    </div>
-                </div>
-            </div>
-
         </div>
     </div>
-
 </section>
-<!-- ════════════════════════════
-     CARD 4 — PROJECTS
-════════════════════════════ -->
+<!-- ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+     CARD 4 ΓÇö PROJECTS
+ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ -->
 <section id="card-4" class="card state-below">
     <div class="card-inner" style="display: block; width: 100%;">
     <style>
@@ -586,6 +584,77 @@
                 <button class="holo-btn mt-6 w-full py-3 border border-[#8B5CF6] text-[#8B5CF6] font-mono text-sm hover:bg-[#8B5CF6]/10 uppercase tracking-widest rounded" style="margin-top: 1.5rem; width: 100%; padding-top: 0.75rem; padding-bottom: 0.75rem; border: 1px solid #8B5CF6; color: #8B5CF6; font-family: monospace; font-size: 0.875rem; background: transparent; text-transform: uppercase; letter-spacing: 0.1em; border-radius: 0.25rem;">Launch Repo</button>
             </div>
 
+        </div>
+    </div>
+
+    <div style="padding: 96px 0; max-width: 1200px; margin: 0 auto; padding-left: 40px; padding-right: 40px;">
+        <h2 style="color: rgba(0, 229, 255, 0.6); font-family: 'Space Grotesk', sans-serif; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; margin-bottom: 64px; text-align: center;">PROTOTYPE_02 // PARALLAX BENTO</h2>
+        <div style="display: grid; grid-template-columns: repeat(1, 1fr); gap: 32px; perspective: 1200px;">
+            <style>
+                .bento-card { position: relative; height: 400px; transform-style: preserve-3d; transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1); cursor: pointer; border-radius: 12px; overflow: hidden; }
+                .bento-card:hover { transform: rotateX(2deg) rotateY(-2deg); }
+                .bento-card:hover .bento-bg { transform: translateZ(-30px); }
+                .bento-card:hover .bento-img { transform: scale(1); }
+                .bento-card:hover .bento-content { transform: translateZ(60px); }
+            </style>
+            <!-- Bento Item 1 -->
+            <div class="bento-card glass-panel" style="border: 1px solid rgba(0, 229, 255, 0.2); background: rgba(6, 11, 20, 0.4); backdrop-filter: blur(20px);">
+                <div class="bento-bg" style="position: absolute; inset: 0; transition: transform 0.5s;">
+                    <img class="bento-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDcr7RqyXcAMhif1tceQcaeis1S0dLcaojmuIwhuEF2Kzcq-yOav5Z38AQo6OIK1wmBstI9FsgQNRXU9VXi9STyRY3t3CyMyfDYhBAAiad5gBBSnQHwTscgLmTmX-jVLsvFhIfduwUsIsRAOIIoPVAxmPsfq_8AOolmL7buPWtuV2SAGuUAw9VuEDZew9mULerU8Q_bz317qK6zAfFda7iPfj7fB5tidudK-sA-eBg1gz7IQ0Y6bRr_Pqu8FTyFhwrXT2SapEkp8sY" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.4; transform: scale(1.1); transition: transform 0.7s;" />
+                </div>
+                <div class="bento-content" style="position: relative; z-index: 10; padding: 32px; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; transition: transform 0.5s; transform-style: preserve-3d;">
+                    <div style="background: #00E5FF; width: 48px; height: 4px; margin-bottom: 16px; box-shadow: 0 0 15px #00E5FF;"></div>
+                    <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 30px; font-weight: 700; color: #fff; margin-bottom: 8px;">Neural Sentiment</h3>
+                    <p style="font-size: 16px; color: rgba(0, 229, 255, 0.7);">Adaptive intelligence layer analyzing celestial data streams in real-time.</p>
+                </div>
+            </div>
+            <!-- Bento Item 2 -->
+            <div class="bento-card glass-panel" style="border: 1px solid rgba(139, 92, 246, 0.2); background: rgba(6, 11, 20, 0.4); backdrop-filter: blur(20px);">
+                <div class="bento-bg" style="position: absolute; inset: 0; transition: transform 0.5s;">
+                    <img class="bento-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDr5lbufPrhe-WCFVr5xsFu0nZv52Df7KELhtoBOiNhJqqekUz-NCjFFPqx3LyATwM4dejrVfGolX2AW-j14jK7Ca-4Wf7gozSYGWwogPMg_-mTRmN3HhvEpWvqeihJOY2aqtObDSMRTjH_dz0GDqm9eEBarpXIDP2fI4vd2tsWFL-_vx6CAHrtV920o2dKgj1-XEeK6mUyIN_4SiXi8JonJF3c1-sfLaJxka0VLr4PvD2snLvYclO8kd1MYKlKKO6qcTACdw1Vp-A" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.4; transform: scale(1.1); transition: transform 0.7s;" />
+                </div>
+                <div class="bento-content" style="position: relative; z-index: 10; padding: 32px; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; transition: transform 0.5s; transform-style: preserve-3d;">
+                    <div style="background: #8B5CF6; width: 48px; height: 4px; margin-bottom: 16px; box-shadow: 0 0 15px #8B5CF6;"></div>
+                    <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 30px; font-weight: 700; color: #fff; margin-bottom: 8px;">Market Pulse</h3>
+                    <p style="font-size: 16px; color: rgba(139, 92, 246, 0.7);">Economic fluctuation monitoring across orbital trade routes.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div style="padding: 96px 0; overflow: hidden;">
+        <h2 style="color: rgba(0, 229, 255, 0.6); font-family: 'Space Grotesk', sans-serif; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; margin-bottom: 96px; text-align: center;">PROTOTYPE_03 // ISOMETRIC SERVERS</h2>
+        <div style="display: flex; justify-content: center; align-items: center; height: 500px; perspective: 1200px;">
+            <style>
+                .isometric-grid { transform: rotateX(60deg) rotateZ(-45deg); transform-style: preserve-3d; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+                .iso-server { position: relative; width: 192px; height: 192px; transform-style: preserve-3d; transition: transform 0.5s ease; cursor: pointer; }
+                .iso-server:hover { transform: translateZ(48px); }
+                .iso-server:hover .iso-top { background: rgba(0, 229, 255, 0.1); box-shadow: 0 0 20px rgba(0, 229, 255, 0.2); }
+                .iso-server.purple:hover .iso-top { background: rgba(139, 92, 246, 0.1); box-shadow: 0 0 20px rgba(139, 92, 246, 0.2); }
+                .iso-top { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 16px; transition: all 0.5s; background: rgba(6, 11, 20, 0.4); border: 1px solid rgba(255, 255, 255, 0.1); }
+                .iso-bottom { position: absolute; inset: 0; transform-origin: bottom; transform: rotateX(-90deg) translateY(50%); height: 40px; background: rgba(6, 11, 20, 0.3); border: 1px solid rgba(255, 255, 255, 0.1); }
+                .iso-left { position: absolute; inset: 0; transform-origin: left; transform: rotateY(90deg) translateX(-50%); width: 40px; background: rgba(6, 11, 20, 0.3); border: 1px solid rgba(255, 255, 255, 0.1); }
+            </style>
+            <div class="isometric-grid">
+                <!-- Server Block 1 -->
+                <div class="iso-server">
+                    <div class="iso-bottom"></div>
+                    <div class="iso-left"></div>
+                    <div class="iso-top">
+                        <span class="material-symbols-outlined" style="color: #00E5FF; font-size: 48px; margin-bottom: 8px;">terminal</span>
+                        <span style="font-family: 'Space Grotesk', monospace; font-size: 10px; color: #a5f3fc; letter-spacing: 0.05em;">CORE_V1</span>
+                    </div>
+                </div>
+                <!-- Server Block 2 -->
+                <div class="iso-server purple" style="margin-top: 48px;">
+                    <div class="iso-bottom"></div>
+                    <div class="iso-left"></div>
+                    <div class="iso-top" style="border-color: rgba(139, 92, 246, 0.5);">
+                        <span class="material-symbols-outlined" style="color: #8B5CF6; font-size: 48px; margin-bottom: 8px;">memory</span>
+                        <span style="font-family: 'Space Grotesk', monospace; font-size: 10px; color: #e9d5ff; letter-spacing: 0.05em;">PROC_AI</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
