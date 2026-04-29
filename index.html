@@ -477,84 +477,115 @@
 <section id="card-4" class="card state-below">
     <div class="card-inner" style="display: block; width: 100%;">
     <style>
-.carousel-container { perspective: 1500px; width: 100%; height: 550px; display: flex; align-items: center; justify-content: center; overflow: hidden; margin-top: 40px; }
-.carousel-spinner { position: relative; width: 320px; height: 450px; transform-style: preserve-3d; animation: spin-carousel 25s linear infinite; }
-.carousel-spinner:hover { animation-play-state: paused; }
-@keyframes spin-carousel { 100% { transform: rotateY(-360deg); } }
-
-.hologram-card { 
-    position: absolute; inset: 0; 
-    background: rgba(6, 11, 20, 0.6); backdrop-filter: blur(20px); 
-    border: 1px solid rgba(0, 240, 255, 0.4); border-radius: 16px; 
-    box-shadow: 0 0 30px rgba(0, 240, 255, 0.15), inset 0 0 20px rgba(0, 240, 255, 0.1); 
-    display: flex; flex-direction: column; align-items: center; justify-content: space-between; 
-    padding: 40px 24px; transform-style: preserve-3d; 
+/* 3D Carousel Wrapper */
+.carousel-container {
+    perspective: 1500px;
+    width: 100%;
+    height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-/* Strict 3D Math for a perfect ring */
-.card-1 { transform: rotateY(0deg) translateZ(380px); }
-.card-2 { transform: rotateY(90deg) translateZ(380px); border-color: rgba(139, 92, 246, 0.5); box-shadow: 0 0 30px rgba(139, 92, 246, 0.15), inset 0 0 20px rgba(139, 92, 246, 0.1); }
-.card-3 { transform: rotateY(180deg) translateZ(380px); }
-.card-4 { transform: rotateY(270deg) translateZ(380px); border-color: rgba(139, 92, 246, 0.5); box-shadow: 0 0 30px rgba(139, 92, 246, 0.15), inset 0 0 20px rgba(139, 92, 246, 0.1); }
+.carousel-spinner {
+    position: relative;
+    width: 300px; /* Width of a single card */
+    height: 450px; /* Height of a single card */
+    transform-style: preserve-3d;
+    animation: spin-carousel 25s linear infinite;
+    transition: transform 0.5s ease;
+}
+.carousel-spinner:hover {
+    animation-play-state: paused; /* Pauses when user hovers to click */
+}
+@keyframes spin-carousel {
+    0% { transform: rotateY(0deg); }
+    100% { transform: rotateY(-360deg); }
+}
 
-/* Holographic Pop-out elements */
-.holo-icon { transform: translateZ(60px); filter: drop-shadow(0 0 20px currentColor); }
+/* The Hologram Cards */
+.hologram-card {
+    position: absolute;
+    inset: 0;
+    background: rgba(6, 11, 20, 0.6);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(0, 229, 255, 0.4);
+    border-radius: 16px;
+    box-shadow: 0 0 30px rgba(0, 229, 255, 0.1), inset 0 0 20px rgba(0, 229, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 30px 20px;
+    transform-style: preserve-3d;
+}
+.card-1 { transform: rotateY(0deg) translateZ(350px); }
+.card-2 { transform: rotateY(90deg) translateZ(350px); border-color: rgba(139, 92, 246, 0.4); box-shadow: 0 0 30px rgba(139, 92, 246, 0.1), inset 0 0 20px rgba(139, 92, 246, 0.1); }
+.card-3 { transform: rotateY(180deg) translateZ(350px); }
+.card-4 { transform: rotateY(270deg) translateZ(350px); border-color: rgba(139, 92, 246, 0.4); box-shadow: 0 0 30px rgba(139, 92, 246, 0.1), inset 0 0 20px rgba(139, 92, 246, 0.1); }
+
+/* 3D Inner Content Pop-out */
+.holo-icon { transform: translateZ(60px); filter: drop-shadow(0 0 15px currentColor); }
 .holo-text { transform: translateZ(40px); }
-.holo-btn { transform: translateZ(30px); transition: all 0.3s ease; transform-style: preserve-3d; }
-.holo-btn:hover { transform: translateZ(-15px) translateY(2px); box-shadow: 0 0 15px currentColor; }
+.holo-btn { 
+    transform: translateZ(30px); 
+    transition: all 0.3s ease; 
+    transform-style: preserve-3d;
+}
+.holo-btn:hover {
+    transform: translateZ(-10px) translateY(2px);
+    box-shadow: 0 0 10px rgba(0,229,255,0.5);
+}
 
-@media (max-width: 768px) { .carousel-spinner { transform: scale(0.65); } .carousel-container { height: 450px; } }
+/* Mobile Scale Fix */
+@media (max-width: 768px) { .carousel-spinner { transform: scale(0.6); } }
     </style>
 
-    <div class="relative z-10 w-full" style="padding-top: 40px;">
-        <div class="text-center mb-4" style="text-align: center;">
-            <span class="text-cyan-400 font-label-caps tracking-[0.3em] uppercase block mb-2" style="color: #00E5FF; font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 800; letter-spacing: 0.3em; display: block; margin-bottom: 0.5rem; text-transform: uppercase;">DEPLOYMENT_LOGS</span>
-            <h2 class="text-headline-xl font-headline-xl text-white" style="font-size: 2.5rem; font-weight: 800; font-family: 'Syne', sans-serif; color: white; margin: 0;">System Projects</h2>
-            <p class="text-body-md font-body-md text-outline max-w-2xl mx-auto mt-4" style="color: rgba(255,255,255,0.7); font-family: 'Space Grotesk', sans-serif; max-width: 42rem; margin: 1rem auto 0 auto; font-size: 1rem;">Live tracking of active neural networks, AI integrations, and automated pipelines.</p>
-        </div>
-
-        <div class="carousel-container">
-            <div class="carousel-spinner">
-                
-                <div class="hologram-card card-1 group">
-                    <span class="material-symbols-outlined text-[80px] text-cyan-400 holo-icon" style="color: #00E5FF; font-size: 80px;" data-icon="neurology">neurology</span>
-                    <div class="text-center holo-text w-full" style="text-align: center; width: 100%;">
-                        <h3 class="font-headline-md text-white text-2xl mb-2 tracking-wide" style="font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.5rem; color: #fff; margin-bottom: 0.5rem; letter-spacing: 0.025em;">Neural Sentiment</h3>
-                        <p class="text-sm text-outline font-body-md" style="color: rgba(255,255,255,0.7); font-family: 'Space Grotesk', sans-serif; font-size: 0.875rem;">Real-time biometric feedback and NLP synchronization engine.</p>
-                    </div>
-                    <button class="holo-btn w-full py-3 border border-cyan-400 text-cyan-400 font-label-caps text-xs hover:bg-cyan-400/10 uppercase tracking-widest rounded transition-colors" style="border: 1px solid #00E5FF; color: #00E5FF; background: transparent; font-family: 'Space Grotesk', sans-serif; padding: 0.75rem; width: 100%; font-weight: 700; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; border-radius: 0.25rem;">Launch Repo</button>
-                </div>
-
-                <div class="hologram-card card-2 group">
-                    <span class="material-symbols-outlined text-[80px] text-purple-400 holo-icon" style="color: #8B5CF6; font-size: 80px;" data-icon="query_stats">query_stats</span>
-                    <div class="text-center holo-text w-full" style="text-align: center; width: 100%;">
-                        <h3 class="font-headline-md text-white text-2xl mb-2 tracking-wide" style="font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.5rem; color: #fff; margin-bottom: 0.5rem; letter-spacing: 0.025em;">Market Pulse AI</h3>
-                        <p class="text-sm text-outline font-body-md" style="color: rgba(255,255,255,0.7); font-family: 'Space Grotesk', sans-serif; font-size: 0.875rem;">Predictive trend vectors using quantum orbital matrices and ML.</p>
-                    </div>
-                        <button class="holo-btn w-full py-3 border border-purple-400 text-purple-400 font-label-caps text-xs hover:bg-purple-400/10 uppercase tracking-widest rounded transition-colors" style="border: 1px solid #8B5CF6; color: #8B5CF6; background: transparent; font-family: 'Space Grotesk', sans-serif; padding: 0.75rem; width: 100%; font-weight: 700; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; border-radius: 0.25rem;">Launch Repo</button>
-                </div>
-
-                <div class="hologram-card card-3 group">
-                    <span class="material-symbols-outlined text-[80px] text-cyan-400 holo-icon" style="color: #00E5FF; font-size: 80px;" data-icon="biotech">biotech</span>
-                    <div class="text-center holo-text w-full" style="text-align: center; width: 100%;">
-                        <h3 class="font-headline-md text-white text-2xl mb-2 tracking-wide" style="font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.5rem; color: #fff; margin-bottom: 0.5rem; letter-spacing: 0.025em;">CV_VISION_OS</h3>
-                        <p class="text-sm text-outline font-body-md" style="color: rgba(255,255,255,0.7); font-family: 'Space Grotesk', sans-serif; font-size: 0.875rem;">Autonomous object detection and tracking algorithm via OpenCV.</p>
-                    </div>
-                    <button class="holo-btn w-full py-3 border border-cyan-400 text-cyan-400 font-label-caps text-xs hover:bg-cyan-400/10 uppercase tracking-widest rounded transition-colors" style="border: 1px solid #00E5FF; color: #00E5FF; background: transparent; font-family: 'Space Grotesk', sans-serif; padding: 0.75rem; width: 100%; font-weight: 700; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; border-radius: 0.25rem;">Launch Repo</button>
-                </div>
-
-                <div class="hologram-card card-4 group">
-                    <span class="material-symbols-outlined text-[80px] text-purple-400 holo-icon" style="color: #8B5CF6; font-size: 80px;" data-icon="memory">memory</span>
-                    <div class="text-center holo-text w-full" style="text-align: center; width: 100%;">
-                        <h3 class="font-headline-md text-white text-2xl mb-2 tracking-wide" style="font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.5rem; color: #fff; margin-bottom: 0.5rem; letter-spacing: 0.025em;">Holographic Viz</h3>
-                        <p class="text-sm text-outline font-body-md" style="color: rgba(255,255,255,0.7); font-family: 'Space Grotesk', sans-serif; font-size: 0.875rem;">Generative AI data visualization layered in isometric 3D.</p>
-                    </div>
-                    <button class="holo-btn w-full py-3 border border-purple-400 text-purple-400 font-label-caps text-xs hover:bg-purple-400/10 uppercase tracking-widest rounded transition-colors" style="border: 1px solid #8B5CF6; color: #8B5CF6; background: transparent; font-family: 'Space Grotesk', sans-serif; padding: 0.75rem; width: 100%; font-weight: 700; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; border-radius: 0.25rem;">Launch Repo</button>
-                </div>
-
-            </div>
-        </div>
+    <div class="text-center mb-16" style="text-align: center; margin-bottom: 4rem;">
+        <span class="text-[#00E5FF] font-mono tracking-[0.3em] uppercase text-xs" style="color: #00E5FF; font-family: monospace; letter-spacing: 0.3em; text-transform: uppercase; font-size: 0.75rem;">DEPLOYMENT LOGS</span>
+        <h2 class="text-5xl text-white font-bold mt-2" style="font-size: 3rem; color: white; font-weight: bold; margin-top: 0.5rem; line-height: 1;">Projects</h2>
     </div>
 
+    <div class="carousel-container">
+        <div class="carousel-spinner">
+            
+            <div class="hologram-card card-1">
+                <span class="material-symbols-outlined text-7xl text-[#00E5FF] holo-icon" style="font-size: 4.5rem; line-height: 1; color: #00E5FF;">psychology</span>
+                <div class="text-center holo-text mt-6" style="text-align: center; margin-top: 1.5rem;">
+                    <h3 class="text-2xl text-white font-bold tracking-wider uppercase mb-2" style="font-size: 1.5rem; color: white; font-weight: bold; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 0.5rem;">Neural Sentiment</h3>
+                    <p class="text-slate-400 text-sm" style="color: #94a3b8; font-size: 0.875rem;">Real-time biometric feedback synchronization.</p>
+                </div>
+                <button class="holo-btn mt-6 w-full py-3 border border-[#00E5FF] text-[#00E5FF] font-mono text-sm hover:bg-[#00E5FF]/10 uppercase tracking-widest rounded" style="margin-top: 1.5rem; width: 100%; padding-top: 0.75rem; padding-bottom: 0.75rem; border: 1px solid #00E5FF; color: #00E5FF; font-family: monospace; font-size: 0.875rem; background: transparent; text-transform: uppercase; letter-spacing: 0.1em; border-radius: 0.25rem;">Launch Repo</button>
+            </div>
+
+            <div class="hologram-card card-2">
+                <span class="material-symbols-outlined text-7xl text-[#8B5CF6] holo-icon" style="font-size: 4.5rem; line-height: 1; color: #8B5CF6;">query_stats</span>
+                <div class="text-center holo-text mt-6" style="text-align: center; margin-top: 1.5rem;">
+                    <h3 class="text-2xl text-white font-bold tracking-wider uppercase mb-2" style="font-size: 1.5rem; color: white; font-weight: bold; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 0.5rem;">Market Pulse AI</h3>
+                    <p class="text-slate-400 text-sm" style="color: #94a3b8; font-size: 0.875rem;">Predictive trend vectors using quantum orbital matrices.</p>
+                </div>
+                <button class="holo-btn mt-6 w-full py-3 border border-[#8B5CF6] text-[#8B5CF6] font-mono text-sm hover:bg-[#8B5CF6]/10 uppercase tracking-widest rounded" style="margin-top: 1.5rem; width: 100%; padding-top: 0.75rem; padding-bottom: 0.75rem; border: 1px solid #8B5CF6; color: #8B5CF6; font-family: monospace; font-size: 0.875rem; background: transparent; text-transform: uppercase; letter-spacing: 0.1em; border-radius: 0.25rem;">Launch Repo</button>
+            </div>
+
+            <div class="hologram-card card-3">
+                <span class="material-symbols-outlined text-7xl text-[#00E5FF] holo-icon" style="font-size: 4.5rem; line-height: 1; color: #00E5FF;">biotech</span>
+                <div class="text-center holo-text mt-6" style="text-align: center; margin-top: 1.5rem;">
+                    <h3 class="text-2xl text-white font-bold tracking-wider uppercase mb-2" style="font-size: 1.5rem; color: white; font-weight: bold; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 0.5rem;">CV_VISION_OS</h3>
+                    <p class="text-slate-400 text-sm" style="color: #94a3b8; font-size: 0.875rem;">Autonomous object detection and tracking algorithm.</p>
+                </div>
+                <button class="holo-btn mt-6 w-full py-3 border border-[#00E5FF] text-[#00E5FF] font-mono text-sm hover:bg-[#00E5FF]/10 uppercase tracking-widest rounded" style="margin-top: 1.5rem; width: 100%; padding-top: 0.75rem; padding-bottom: 0.75rem; border: 1px solid #00E5FF; color: #00E5FF; font-family: monospace; font-size: 0.875rem; background: transparent; text-transform: uppercase; letter-spacing: 0.1em; border-radius: 0.25rem;">Launch Repo</button>
+            </div>
+
+            <div class="hologram-card card-4">
+                <span class="material-symbols-outlined text-7xl text-[#8B5CF6] holo-icon" style="font-size: 4.5rem; line-height: 1; color: #8B5CF6;">memory</span>
+                <div class="text-center holo-text mt-6" style="text-align: center; margin-top: 1.5rem;">
+                    <h3 class="text-2xl text-white font-bold tracking-wider uppercase mb-2" style="font-size: 1.5rem; color: white; font-weight: bold; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 0.5rem;">Holographic Viz</h3>
+                    <p class="text-slate-400 text-sm" style="color: #94a3b8; font-size: 0.875rem;">Generative AI visualization layered in isometric 3D.</p>
+                </div>
+                <button class="holo-btn mt-6 w-full py-3 border border-[#8B5CF6] text-[#8B5CF6] font-mono text-sm hover:bg-[#8B5CF6]/10 uppercase tracking-widest rounded" style="margin-top: 1.5rem; width: 100%; padding-top: 0.75rem; padding-bottom: 0.75rem; border: 1px solid #8B5CF6; color: #8B5CF6; font-family: monospace; font-size: 0.875rem; background: transparent; text-transform: uppercase; letter-spacing: 0.1em; border-radius: 0.25rem;">Launch Repo</button>
+            </div>
+
+        </div>
+    </div>
 
     </div>
 </section>
