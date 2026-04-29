@@ -388,19 +388,11 @@ html, body {
     border-radius: 10px;
 }
 
-/* Specific fix for card-4 to ensure no horizontal jump */
+/* Projects Card: Scrollable naturally */
 #card-4 {
-    align-items: flex-start;
-    display: flex;
-    flex-direction: column;
+    overflow-y: auto !important;
 }
 
-#card-4 .card-inner {
-    width: 100%;
-    margin: 0 auto;
-    display: block;
-    padding-bottom: 100px;
-}
 
 
 
