@@ -476,294 +476,87 @@
 ════════════════════════════ -->
 <section id="card-4" class="card state-below">
     <div class="card-inner" style="display: block; width: 100%;">
-        <div style="width:100%; max-width:1200px; margin: 40px auto; padding: 0 40px;">
-            <div class="section-header" style="text-align: center; margin-bottom: 60px;">
-                <span class="tagline" style="color:var(--cyan);">DEPLOYMENT LOGS</span>
-                <h2 class="section-title">Projects</h2>
-                <div class="accent-line" style="margin: 10px auto; background: linear-gradient(90deg, var(--cyan), var(--purple));"></div>
-            </div>
-        </div>
-
     <style>
-        /* Restored card-4 native scrolling without clipping the 3D space */
+.carousel-container { perspective: 1500px; width: 100%; height: 550px; display: flex; align-items: center; justify-content: center; overflow: hidden; margin-top: 40px; }
+.carousel-spinner { position: relative; width: 320px; height: 450px; transform-style: preserve-3d; animation: spin-carousel 25s linear infinite; }
+.carousel-spinner:hover { animation-play-state: paused; }
+@keyframes spin-carousel { 100% { transform: rotateY(-360deg); } }
 
-        
-        .final-orbital-stage {
-            height: 60vh;
-            min-height: 500px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            width: 100%;
-            margin-top: -30px;
-        }
+.hologram-card { 
+    position: absolute; inset: 0; 
+    background: rgba(6, 11, 20, 0.6); backdrop-filter: blur(20px); 
+    border: 1px solid rgba(0, 240, 255, 0.4); border-radius: 16px; 
+    box-shadow: 0 0 30px rgba(0, 240, 255, 0.15), inset 0 0 20px rgba(0, 240, 255, 0.1); 
+    display: flex; flex-direction: column; align-items: center; justify-content: space-between; 
+    padding: 40px 24px; transform-style: preserve-3d; 
+}
+/* Strict 3D Math for a perfect ring */
+.card-1 { transform: rotateY(0deg) translateZ(380px); }
+.card-2 { transform: rotateY(90deg) translateZ(380px); border-color: rgba(139, 92, 246, 0.5); box-shadow: 0 0 30px rgba(139, 92, 246, 0.15), inset 0 0 20px rgba(139, 92, 246, 0.1); }
+.card-3 { transform: rotateY(180deg) translateZ(380px); }
+.card-4 { transform: rotateY(270deg) translateZ(380px); border-color: rgba(139, 92, 246, 0.5); box-shadow: 0 0 30px rgba(139, 92, 246, 0.15), inset 0 0 20px rgba(139, 92, 246, 0.1); }
 
-        .orbital-scaler {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            perspective: 1200px;
-            transform-style: preserve-3d;
-            transition: transform 0.3s ease;
-        }
+/* Holographic Pop-out elements */
+.holo-icon { transform: translateZ(60px); filter: drop-shadow(0 0 20px currentColor); }
+.holo-text { transform: translateZ(40px); }
+.holo-btn { transform: translateZ(30px); transition: all 0.3s ease; transform-style: preserve-3d; }
+.holo-btn:hover { transform: translateZ(-15px) translateY(2px); box-shadow: 0 0 15px currentColor; }
 
-        .final-orbital-ring {
-            width: 320px;
-            height: 420px;
-            position: relative;
-            transform-style: preserve-3d;
-            animation: finalOrbitRotate 25s linear infinite;
-        }
-        
-        .final-orbital-ring:hover {
-            animation-play-state: paused;
-        }
-
-        @keyframes finalOrbitRotate {
-            from { transform: rotateY(0deg); }
-            to { transform: rotateY(360deg); }
-        }
-
-        .hologram-card {
-            position: absolute;
-            width: 320px;
-            height: 420px;
-            left: 0;
-            top: 0;
-            background: rgba(6, 11, 20, 0.4);
-            backdrop-filter: blur(25px) saturate(180%);
-            -webkit-backdrop-filter: blur(25px) saturate(180%);
-            border-radius: 24px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 35px 25px;
-            text-align: center;
-            transform-style: preserve-3d;
-            backface-visibility: hidden;
-            overflow: hidden;
-        }
-
-        /* Card Positions - Pushed out on Z axis */
-        .hologram-card:nth-child(1) { transform: rotateY(0deg) translateZ(450px); }
-        .hologram-card:nth-child(2) { transform: rotateY(90deg) translateZ(450px); }
-        .hologram-card:nth-child(3) { transform: rotateY(180deg) translateZ(450px); }
-        .hologram-card:nth-child(4) { transform: rotateY(270deg) translateZ(450px); }
-
-        /* Theming - Alternating Cyan / Purple */
-        .holo-cyan {
-            border: 1px solid rgba(0, 229, 255, 0.4);
-            box-shadow: 0 0 30px rgba(0, 229, 255, 0.15), inset 0 0 20px rgba(0, 229, 255, 0.1);
-            animation: pulseCyan 3s infinite alternate;
-        }
-        .holo-purple {
-            border: 1px solid rgba(139, 92, 246, 0.4);
-            box-shadow: 0 0 30px rgba(139, 92, 246, 0.15), inset 0 0 20px rgba(139, 92, 246, 0.1);
-            animation: pulsePurple 3s infinite alternate;
-        }
-
-        @keyframes pulseCyan {
-            from { box-shadow: 0 0 20px rgba(0,229,255,0.1), inset 0 0 10px rgba(0,229,255,0.05); border-color: rgba(0,229,255,0.3); }
-            to { box-shadow: 0 0 40px rgba(0,229,255,0.3), inset 0 0 30px rgba(0,229,255,0.2); border-color: rgba(0,229,255,0.8); }
-        }
-        @keyframes pulsePurple {
-            from { box-shadow: 0 0 20px rgba(139,92,246,0.1), inset 0 0 10px rgba(139,92,246,0.05); border-color: rgba(139,92,246,0.3); }
-            to { box-shadow: 0 0 40px rgba(139,92,246,0.3), inset 0 0 30px rgba(139,92,246,0.2); border-color: rgba(139,92,246,0.8); }
-        }
-
-        /* Scanning Line Effect */
-        .hologram-card::after {
-            content: '';
-            position: absolute;
-            top: -100%;
-            left: 0;
-            width: 100%;
-            height: 50%;
-            background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.1), transparent);
-            animation: holoScan 4s linear infinite;
-            pointer-events: none;
-            z-index: 0;
-        }
-        @keyframes holoScan {
-            0% { top: -100%; }
-            100% { top: 200%; }
-        }
-
-        /* 3D Pop-out elements */
-        .holo-content-wrapper {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-between;
-            height: 100%;
-            width: 100%;
-            transform-style: preserve-3d;
-            z-index: 1;
-        }
-
-        .holo-icon {
-            font-size: 72px !important;
-            margin-top: 10px;
-            margin-bottom: 15px;
-            transform: translateZ(50px);
-            transition: transform 0.3s ease;
-        }
-        
-        .holo-cyan .holo-icon {
-            color: var(--cyan);
-            filter: drop-shadow(0 0 15px var(--cyan));
-            animation: floatIcon 3s ease-in-out infinite alternate;
-        }
-        
-        .holo-purple .holo-icon {
-            color: var(--purple);
-            filter: drop-shadow(0 0 15px var(--purple));
-            animation: floatIcon 3s ease-in-out infinite alternate-reverse;
-        }
-
-        @keyframes floatIcon {
-            from { transform: translateZ(50px) translateY(0px); }
-            to { transform: translateZ(50px) translateY(-10px); }
-        }
-
-        .holo-text-group {
-            transform-style: preserve-3d;
-            margin-bottom: 20px;
-        }
-
-        .holo-title {
-            font-family: 'Syne', sans-serif;
-            font-size: 24px;
-            font-weight: 800;
-            color: #fff;
-            margin-bottom: 12px;
-            transform: translateZ(30px);
-            text-shadow: 0 5px 15px rgba(0,0,0,0.5);
-            line-height: 1.2;
-        }
-
-        .holo-desc {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 14px;
-            color: rgba(255,255,255,0.7);
-            line-height: 1.5;
-            transform: translateZ(15px);
-        }
-
-        /* 3D Button */
-        .holo-btn {
-            padding: 14px 28px;
-            border-radius: 50px;
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 13px;
-            font-weight: 700;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            color: #fff;
-            cursor: pointer;
-            transform-style: preserve-3d;
-            transform: translateZ(20px);
-            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.3s, box-shadow 0.3s, color 0.3s;
-            text-decoration: none;
-            width: 85%;
-            margin-bottom: 10px;
-        }
-        
-        .holo-cyan .holo-btn {
-            background: rgba(0, 229, 255, 0.1);
-            border: 1px solid var(--cyan);
-            box-shadow: 0 5px 15px rgba(0,229,255,0.2);
-        }
-        .holo-cyan .holo-btn:hover {
-            background: var(--cyan);
-            color: #060B14;
-            transform: translateZ(-10px) translateY(2px);
-            box-shadow: 0 0 25px var(--cyan);
-        }
-        
-        .holo-purple .holo-btn {
-            background: rgba(139, 92, 246, 0.1);
-            border: 1px solid var(--purple);
-            box-shadow: 0 5px 15px rgba(139,92,246,0.2);
-        }
-        .holo-purple .holo-btn:hover {
-            background: var(--purple);
-            color: #fff;
-            transform: translateZ(-10px) translateY(2px);
-            box-shadow: 0 0 25px var(--purple);
-        }
-
-        /* Responsive scaling */
-        @media (max-width: 1024px) {
-            .orbital-scaler { transform: scale(0.8); }
-        }
-        @media (max-width: 768px) {
-            .orbital-scaler { transform: scale(0.6); }
-        }
-        @media (max-width: 480px) {
-            .orbital-scaler { transform: scale(0.42); }
-        }
+@media (max-width: 768px) { .carousel-spinner { transform: scale(0.65); } .carousel-container { height: 450px; } }
     </style>
 
-    <div class="final-orbital-stage">
-        <div class="orbital-scaler">
-            <div class="final-orbital-ring">
+    <div class="relative z-10 w-full" style="padding-top: 40px;">
+        <div class="text-center mb-4" style="text-align: center;">
+            <span class="text-cyan-400 font-label-caps tracking-[0.3em] uppercase block mb-2" style="color: #00E5FF; font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 800; letter-spacing: 0.3em; display: block; margin-bottom: 0.5rem; text-transform: uppercase;">DEPLOYMENT_LOGS</span>
+            <h2 class="text-headline-xl font-headline-xl text-white" style="font-size: 2.5rem; font-weight: 800; font-family: 'Syne', sans-serif; color: white; margin: 0;">System Projects</h2>
+            <p class="text-body-md font-body-md text-outline max-w-2xl mx-auto mt-4" style="color: rgba(255,255,255,0.7); font-family: 'Space Grotesk', sans-serif; max-width: 42rem; margin: 1rem auto 0 auto; font-size: 1rem;">Live tracking of active neural networks, AI integrations, and automated pipelines.</p>
+        </div>
+
+        <div class="carousel-container">
+            <div class="carousel-spinner">
                 
-                <!-- Card 1 -->
-                <div class="hologram-card holo-cyan">
-                    <div class="holo-content-wrapper">
-                        <span class="material-symbols-outlined holo-icon">neurology</span>
-                        <div class="holo-text-group">
-                            <h3 class="holo-title">Neural Sentiment Engine</h3>
-                            <p class="holo-desc">Real-time biometric feedback synchronization.</p>
-                        </div>
-                        <a href="#" class="holo-btn">LAUNCH REPO</a>
+                <div class="hologram-card card-1 group">
+                    <span class="material-symbols-outlined text-[80px] text-cyan-400 holo-icon" style="color: #00E5FF; font-size: 80px;" data-icon="neurology">neurology</span>
+                    <div class="text-center holo-text w-full" style="text-align: center; width: 100%;">
+                        <h3 class="font-headline-md text-white text-2xl mb-2 tracking-wide" style="font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.5rem; color: #fff; margin-bottom: 0.5rem; letter-spacing: 0.025em;">Neural Sentiment</h3>
+                        <p class="text-sm text-outline font-body-md" style="color: rgba(255,255,255,0.7); font-family: 'Space Grotesk', sans-serif; font-size: 0.875rem;">Real-time biometric feedback and NLP synchronization engine.</p>
                     </div>
+                    <button class="holo-btn w-full py-3 border border-cyan-400 text-cyan-400 font-label-caps text-xs hover:bg-cyan-400/10 uppercase tracking-widest rounded transition-colors" style="border: 1px solid #00E5FF; color: #00E5FF; background: transparent; font-family: 'Space Grotesk', sans-serif; padding: 0.75rem; width: 100%; font-weight: 700; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; border-radius: 0.25rem;">Launch Repo</button>
                 </div>
-                
-                <!-- Card 2 -->
-                <div class="hologram-card holo-purple">
-                    <div class="holo-content-wrapper">
-                        <span class="material-symbols-outlined holo-icon">query_stats</span>
-                        <div class="holo-text-group">
-                            <h3 class="holo-title">Market Pulse AI</h3>
-                            <p class="holo-desc">Predictive trend vectors.</p>
-                        </div>
-                        <a href="#" class="holo-btn">VIEW MANIFEST</a>
+
+                <div class="hologram-card card-2 group">
+                    <span class="material-symbols-outlined text-[80px] text-purple-400 holo-icon" style="color: #8B5CF6; font-size: 80px;" data-icon="query_stats">query_stats</span>
+                    <div class="text-center holo-text w-full" style="text-align: center; width: 100%;">
+                        <h3 class="font-headline-md text-white text-2xl mb-2 tracking-wide" style="font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.5rem; color: #fff; margin-bottom: 0.5rem; letter-spacing: 0.025em;">Market Pulse AI</h3>
+                        <p class="text-sm text-outline font-body-md" style="color: rgba(255,255,255,0.7); font-family: 'Space Grotesk', sans-serif; font-size: 0.875rem;">Predictive trend vectors using quantum orbital matrices and ML.</p>
                     </div>
+                        <button class="holo-btn w-full py-3 border border-purple-400 text-purple-400 font-label-caps text-xs hover:bg-purple-400/10 uppercase tracking-widest rounded transition-colors" style="border: 1px solid #8B5CF6; color: #8B5CF6; background: transparent; font-family: 'Space Grotesk', sans-serif; padding: 0.75rem; width: 100%; font-weight: 700; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; border-radius: 0.25rem;">Launch Repo</button>
                 </div>
-                
-                <!-- Card 3 -->
-                <div class="hologram-card holo-cyan">
-                    <div class="holo-content-wrapper">
-                        <span class="material-symbols-outlined holo-icon">biotech</span>
-                        <div class="holo-text-group">
-                            <h3 class="holo-title">CV_VISION_OS</h3>
-                            <p class="holo-desc">Autonomous object detection.</p>
-                        </div>
-                        <a href="#" class="holo-btn">LAUNCH REPO</a>
+
+                <div class="hologram-card card-3 group">
+                    <span class="material-symbols-outlined text-[80px] text-cyan-400 holo-icon" style="color: #00E5FF; font-size: 80px;" data-icon="biotech">biotech</span>
+                    <div class="text-center holo-text w-full" style="text-align: center; width: 100%;">
+                        <h3 class="font-headline-md text-white text-2xl mb-2 tracking-wide" style="font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.5rem; color: #fff; margin-bottom: 0.5rem; letter-spacing: 0.025em;">CV_VISION_OS</h3>
+                        <p class="text-sm text-outline font-body-md" style="color: rgba(255,255,255,0.7); font-family: 'Space Grotesk', sans-serif; font-size: 0.875rem;">Autonomous object detection and tracking algorithm via OpenCV.</p>
                     </div>
+                    <button class="holo-btn w-full py-3 border border-cyan-400 text-cyan-400 font-label-caps text-xs hover:bg-cyan-400/10 uppercase tracking-widest rounded transition-colors" style="border: 1px solid #00E5FF; color: #00E5FF; background: transparent; font-family: 'Space Grotesk', sans-serif; padding: 0.75rem; width: 100%; font-weight: 700; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; border-radius: 0.25rem;">Launch Repo</button>
                 </div>
-                
-                <!-- Card 4 -->
-                <div class="hologram-card holo-purple">
-                    <div class="holo-content-wrapper">
-                        <span class="material-symbols-outlined holo-icon">memory</span>
-                        <div class="holo-text-group">
-                            <h3 class="holo-title">Holographic Data Viz</h3>
-                            <p class="holo-desc">Generative AI visualization.</p>
-                        </div>
-                        <a href="#" class="holo-btn">VIEW MANIFEST</a>
+
+                <div class="hologram-card card-4 group">
+                    <span class="material-symbols-outlined text-[80px] text-purple-400 holo-icon" style="color: #8B5CF6; font-size: 80px;" data-icon="memory">memory</span>
+                    <div class="text-center holo-text w-full" style="text-align: center; width: 100%;">
+                        <h3 class="font-headline-md text-white text-2xl mb-2 tracking-wide" style="font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.5rem; color: #fff; margin-bottom: 0.5rem; letter-spacing: 0.025em;">Holographic Viz</h3>
+                        <p class="text-sm text-outline font-body-md" style="color: rgba(255,255,255,0.7); font-family: 'Space Grotesk', sans-serif; font-size: 0.875rem;">Generative AI data visualization layered in isometric 3D.</p>
                     </div>
+                    <button class="holo-btn w-full py-3 border border-purple-400 text-purple-400 font-label-caps text-xs hover:bg-purple-400/10 uppercase tracking-widest rounded transition-colors" style="border: 1px solid #8B5CF6; color: #8B5CF6; background: transparent; font-family: 'Space Grotesk', sans-serif; padding: 0.75rem; width: 100%; font-weight: 700; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; border-radius: 0.25rem;">Launch Repo</button>
                 </div>
-                
+
             </div>
         </div>
     </div>
 
 
+    </div>
 </section>
 
 <!-- ════════════════════════════
