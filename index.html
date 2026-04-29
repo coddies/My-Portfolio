@@ -485,140 +485,284 @@
         </div>
 
     <style>
-        /* Enable vertical scrolling for card-4 to see prototypes */
-        #card-4 { overflow-y: auto !important; scrollbar-width: thin; scrollbar-color: #00E5FF transparent; }
-        #card-4::-webkit-scrollbar { width: 6px; }
-        #card-4::-webkit-scrollbar-thumb { background: #00E5FF; border-radius: 10px; }
+        /* Ensure no scrollbars break the 3D illusion */
+        #card-4 { overflow: hidden !important; }
         
-        .proto-container { width: 100%; max-width: 1200px; margin: 60px auto; padding: 40px; color: white; font-family: 'Space Grotesk', sans-serif; }
-        .proto-label { font-family: 'Syne', sans-serif; font-size: 13px; color: var(--cyan); letter-spacing: 5px; text-transform: uppercase; margin-bottom: 50px; text-align: center; border-bottom: 1px solid rgba(0, 229, 255, 0.1); padding-bottom: 15px; font-weight: 800; }
-        
-        /* Prototype 1: Orbital Carousel */
-        .orbital-stage { height: 600px; perspective: 1200px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
-        .orbital-ring { width: 300px; height: 200px; position: relative; transform-style: preserve-3d; animation: orbitRotate 20s linear infinite; }
-        .orbital-card { position: absolute; width: 300px; height: 200px; left: 0; top: 0; background: rgba(139, 92, 246, 0.1); backdrop-filter: blur(10px); border: 1px solid rgba(0, 229, 255, 0.3); border-radius: 15px; display: flex; flex-direction: column; padding: 20px; justify-content: center; box-shadow: 0 0 30px rgba(0, 229, 255, 0.1); backface-visibility: hidden; }
-        .orbital-card:nth-child(1) { transform: rotateY(0deg) translateZ(350px); }
-        .orbital-card:nth-child(2) { transform: rotateY(90deg) translateZ(350px); }
-        .orbital-card:nth-child(3) { transform: rotateY(180deg) translateZ(350px); }
-        .orbital-card:nth-child(4) { transform: rotateY(270deg) translateZ(350px); }
-        @keyframes orbitRotate { from { transform: rotateY(0deg); } to { transform: rotateY(360deg); } }
-        .orbital-ring:hover { animation-play-state: paused; }
+        .final-orbital-stage {
+            height: 60vh;
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            width: 100%;
+            margin-top: -30px;
+        }
 
-        /* Prototype 2: Parallax Bento */
-        .bento-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; perspective: 1000px; }
-        .bento-card { height: 300px; background: #0a0c18; border-radius: 20px; position: relative; transform-style: preserve-3d; transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1); border: 1px solid rgba(139, 92, 246, 0.2); overflow: hidden; cursor: pointer; }
-        .bento-card:hover { transform: rotateX(10deg) rotateY(-10deg); border-color: #00E5FF; }
-        .bento-bg { position: absolute; inset: 0; background: radial-gradient(circle at center, rgba(139, 92, 246, 0.2), transparent); transition: transform 0.5s; transform: translateZ(-30px); }
-        .bento-content { position: relative; z-index: 2; height: 100%; display: flex; flex-direction: column; justify-content: center; padding: 30px; transform: translateZ(60px); }
-        .bento-title { font-size: 24px; font-weight: 800; color: white; margin-bottom: 10px; text-shadow: 0 10px 20px rgba(0,0,0,0.5); }
+        .orbital-scaler {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            perspective: 1200px;
+            transform-style: preserve-3d;
+            transition: transform 0.3s ease;
+        }
 
-        /* Prototype 3: Isometric Servers */
-        .iso-stage { height: 600px; display: flex; align-items: center; justify-content: center; perspective: 1000px; }
-        .iso-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; transform: rotateX(60deg) rotateZ(-45deg); transform-style: preserve-3d; }
-        .iso-block { width: 200px; height: 200px; background: #060b14; border: 2px solid #8B5CF6; position: relative; transform-style: preserve-3d; transition: all 0.5s ease; cursor: pointer; }
-        .iso-block::before { content: ''; position: absolute; width: 100%; height: 40px; background: rgba(139, 92, 246, 0.5); bottom: -40px; left: 0; transform-origin: top; transform: rotateX(-90deg); }
-        .iso-block::after { content: ''; position: absolute; width: 40px; height: 100%; background: rgba(139, 92, 246, 0.3); right: -40px; top: 0; transform-origin: left; transform: rotateY(90deg); }
-        .iso-block:hover { transform: translateZ(50px); box-shadow: -20px 20px 50px rgba(0, 229, 255, 0.4); border-color: #00E5FF; }
-        .iso-block-text { transform: rotateZ(45deg) rotateX(-60deg) translateY(-20px); font-size: 14px; font-weight: bold; text-align: center; display: block; color: #00E5FF; }
+        .final-orbital-ring {
+            width: 320px;
+            height: 420px;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: finalOrbitRotate 25s linear infinite;
+        }
         
+        .final-orbital-ring:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes finalOrbitRotate {
+            from { transform: rotateY(0deg); }
+            to { transform: rotateY(360deg); }
+        }
+
+        .hologram-card {
+            position: absolute;
+            width: 320px;
+            height: 420px;
+            left: 0;
+            top: 0;
+            background: rgba(6, 11, 20, 0.4);
+            backdrop-filter: blur(25px) saturate(180%);
+            -webkit-backdrop-filter: blur(25px) saturate(180%);
+            border-radius: 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 35px 25px;
+            text-align: center;
+            transform-style: preserve-3d;
+            backface-visibility: hidden;
+            overflow: hidden;
+        }
+
+        /* Card Positions - Pushed out on Z axis */
+        .hologram-card:nth-child(1) { transform: rotateY(0deg) translateZ(450px); }
+        .hologram-card:nth-child(2) { transform: rotateY(90deg) translateZ(450px); }
+        .hologram-card:nth-child(3) { transform: rotateY(180deg) translateZ(450px); }
+        .hologram-card:nth-child(4) { transform: rotateY(270deg) translateZ(450px); }
+
+        /* Theming - Alternating Cyan / Purple */
+        .holo-cyan {
+            border: 1px solid rgba(0, 229, 255, 0.4);
+            box-shadow: 0 0 30px rgba(0, 229, 255, 0.15), inset 0 0 20px rgba(0, 229, 255, 0.1);
+            animation: pulseCyan 3s infinite alternate;
+        }
+        .holo-purple {
+            border: 1px solid rgba(139, 92, 246, 0.4);
+            box-shadow: 0 0 30px rgba(139, 92, 246, 0.15), inset 0 0 20px rgba(139, 92, 246, 0.1);
+            animation: pulsePurple 3s infinite alternate;
+        }
+
+        @keyframes pulseCyan {
+            from { box-shadow: 0 0 20px rgba(0,229,255,0.1), inset 0 0 10px rgba(0,229,255,0.05); border-color: rgba(0,229,255,0.3); }
+            to { box-shadow: 0 0 40px rgba(0,229,255,0.3), inset 0 0 30px rgba(0,229,255,0.2); border-color: rgba(0,229,255,0.8); }
+        }
+        @keyframes pulsePurple {
+            from { box-shadow: 0 0 20px rgba(139,92,246,0.1), inset 0 0 10px rgba(139,92,246,0.05); border-color: rgba(139,92,246,0.3); }
+            to { box-shadow: 0 0 40px rgba(139,92,246,0.3), inset 0 0 30px rgba(139,92,246,0.2); border-color: rgba(139,92,246,0.8); }
+        }
+
+        /* Scanning Line Effect */
+        .hologram-card::after {
+            content: '';
+            position: absolute;
+            top: -100%;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.1), transparent);
+            animation: holoScan 4s linear infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+        @keyframes holoScan {
+            0% { top: -100%; }
+            100% { top: 200%; }
+        }
+
+        /* 3D Pop-out elements */
+        .holo-content-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            height: 100%;
+            width: 100%;
+            transform-style: preserve-3d;
+            z-index: 1;
+        }
+
+        .holo-icon {
+            font-size: 72px !important;
+            margin-top: 10px;
+            margin-bottom: 15px;
+            transform: translateZ(50px);
+            transition: transform 0.3s ease;
+        }
+        
+        .holo-cyan .holo-icon {
+            color: var(--cyan);
+            filter: drop-shadow(0 0 15px var(--cyan));
+            animation: floatIcon 3s ease-in-out infinite alternate;
+        }
+        
+        .holo-purple .holo-icon {
+            color: var(--purple);
+            filter: drop-shadow(0 0 15px var(--purple));
+            animation: floatIcon 3s ease-in-out infinite alternate-reverse;
+        }
+
+        @keyframes floatIcon {
+            from { transform: translateZ(50px) translateY(0px); }
+            to { transform: translateZ(50px) translateY(-10px); }
+        }
+
+        .holo-text-group {
+            transform-style: preserve-3d;
+            margin-bottom: 20px;
+        }
+
+        .holo-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 24px;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 12px;
+            transform: translateZ(30px);
+            text-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            line-height: 1.2;
+        }
+
+        .holo-desc {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 14px;
+            color: rgba(255,255,255,0.7);
+            line-height: 1.5;
+            transform: translateZ(15px);
+        }
+
+        /* 3D Button */
+        .holo-btn {
+            padding: 14px 28px;
+            border-radius: 50px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #fff;
+            cursor: pointer;
+            transform-style: preserve-3d;
+            transform: translateZ(20px);
+            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.3s, box-shadow 0.3s, color 0.3s;
+            text-decoration: none;
+            width: 85%;
+            margin-bottom: 10px;
+        }
+        
+        .holo-cyan .holo-btn {
+            background: rgba(0, 229, 255, 0.1);
+            border: 1px solid var(--cyan);
+            box-shadow: 0 5px 15px rgba(0,229,255,0.2);
+        }
+        .holo-cyan .holo-btn:hover {
+            background: var(--cyan);
+            color: #060B14;
+            transform: translateZ(-10px) translateY(2px);
+            box-shadow: 0 0 25px var(--cyan);
+        }
+        
+        .holo-purple .holo-btn {
+            background: rgba(139, 92, 246, 0.1);
+            border: 1px solid var(--purple);
+            box-shadow: 0 5px 15px rgba(139,92,246,0.2);
+        }
+        .holo-purple .holo-btn:hover {
+            background: var(--purple);
+            color: #fff;
+            transform: translateZ(-10px) translateY(2px);
+            box-shadow: 0 0 25px var(--purple);
+        }
+
+        /* Responsive scaling */
+        @media (max-width: 1024px) {
+            .orbital-scaler { transform: scale(0.8); }
+        }
         @media (max-width: 768px) {
-            .bento-grid, .iso-grid { grid-template-columns: 1fr; }
-            .orbital-ring { transform: scale(0.7); }
+            .orbital-scaler { transform: scale(0.6); }
+        }
+        @media (max-width: 480px) {
+            .orbital-scaler { transform: scale(0.42); }
         }
     </style>
 
-    <!-- PROTOTYPE 1 -->
-    <div class="proto-container">
-        <h2 class="proto-label">01 // NEURAL ORBITAL MATRIX</h2>
-        <div class="orbital-stage">
-            <div class="orbital-ring">
-                <div class="orbital-card">
-                    <h3 style="color:#00E5FF; font-weight:800;">Neural Sentiment Analyzer</h3>
-                    <p style="font-size:12px; opacity:0.7;">Holographic Data Processing Module</p>
+    <div class="final-orbital-stage">
+        <div class="orbital-scaler">
+            <div class="final-orbital-ring">
+                
+                <!-- Card 1 -->
+                <div class="hologram-card holo-cyan">
+                    <div class="holo-content-wrapper">
+                        <span class="material-symbols-rounded holo-icon">neurology</span>
+                        <div class="holo-text-group">
+                            <h3 class="holo-title">Neural Sentiment Engine</h3>
+                            <p class="holo-desc">Real-time biometric feedback synchronization.</p>
+                        </div>
+                        <a href="#" class="holo-btn">LAUNCH REPO</a>
+                    </div>
                 </div>
-                <div class="orbital-card">
-                    <h3 style="color:#8B5CF6; font-weight:800;">Market Pulse AI</h3>
-                    <p style="font-size:12px; opacity:0.7;">Predictive Analytics Core</p>
+                
+                <!-- Card 2 -->
+                <div class="hologram-card holo-purple">
+                    <div class="holo-content-wrapper">
+                        <span class="material-symbols-rounded holo-icon">query_stats</span>
+                        <div class="holo-text-group">
+                            <h3 class="holo-title">Market Pulse AI</h3>
+                            <p class="holo-desc">Predictive trend vectors.</p>
+                        </div>
+                        <a href="#" class="holo-btn">VIEW MANIFEST</a>
+                    </div>
                 </div>
-                <div class="orbital-card">
-                    <h3 style="color:#00E5FF; font-weight:800;">Quantum Ledger</h3>
-                    <p style="font-size:12px; opacity:0.7;">Immutable Block Matrix</p>
+                
+                <!-- Card 3 -->
+                <div class="hologram-card holo-cyan">
+                    <div class="holo-content-wrapper">
+                        <span class="material-symbols-rounded holo-icon">biotech</span>
+                        <div class="holo-text-group">
+                            <h3 class="holo-title">CV_VISION_OS</h3>
+                            <p class="holo-desc">Autonomous object detection.</p>
+                        </div>
+                        <a href="#" class="holo-btn">LAUNCH REPO</a>
+                    </div>
                 </div>
-                <div class="orbital-card">
-                    <h3 style="color:#8B5CF6; font-weight:800;">Cyber Mesh</h3>
-                    <p style="font-size:12px; opacity:0.7;">Neural Network Visualization</p>
+                
+                <!-- Card 4 -->
+                <div class="hologram-card holo-purple">
+                    <div class="holo-content-wrapper">
+                        <span class="material-symbols-rounded holo-icon">memory</span>
+                        <div class="holo-text-group">
+                            <h3 class="holo-title">Holographic Data Viz</h3>
+                            <p class="holo-desc">Generative AI visualization.</p>
+                        </div>
+                        <a href="#" class="holo-btn">VIEW MANIFEST</a>
+                    </div>
                 </div>
+                
             </div>
         </div>
     </div>
 
-    <!-- PROTOTYPE 2 -->
-    <div class="proto-container">
-        <h2 class="proto-label">02 // HOLOGRAPHIC BENTO GRID</h2>
-        <div class="bento-grid">
-            <div class="bento-card">
-                <div class="bento-bg"></div>
-                <div class="bento-content">
-                    <h3 class="bento-title">Neural Sentiment Analyzer</h3>
-                    <p style="color:#00E5FF; font-size:12px; font-weight:700;">// NLP ENGINE ACTIVE</p>
-                </div>
-            </div>
-            <div class="bento-card">
-                <div class="bento-bg" style="background:radial-gradient(circle at center, rgba(0, 229, 255, 0.2), transparent);"></div>
-                <div class="bento-content">
-                    <h3 class="bento-title">Market Pulse AI</h3>
-                    <p style="color:#8B5CF6; font-size:12px; font-weight:700;">// FINANCIAL FORECASTING</p>
-                </div>
-            </div>
-            <div class="bento-card">
-                <div class="bento-bg"></div>
-                <div class="bento-content">
-                    <h3 class="bento-title">Cyber Sync v2</h3>
-                    <p style="color:#00E5FF; font-size:12px; font-weight:700;">// NETWORK SECURITY</p>
-                </div>
-            </div>
-            <div class="bento-card">
-                <div class="bento-bg" style="background:radial-gradient(circle at center, rgba(0, 229, 255, 0.2), transparent);"></div>
-                <div class="bento-content">
-                    <h3 class="bento-title">Data Vortex</h3>
-                    <p style="color:#8B5CF6; font-size:12px; font-weight:700;">// BIG DATA VISUALIZER</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- PROTOTYPE 3 -->
-    <div class="proto-container">
-        <h2 class="proto-label">03 // ISOMETRIC SYSTEM NODES</h2>
-        <div class="iso-stage">
-            <div class="iso-grid">
-                <div class="iso-block">
-                    <div style="padding:20px;">
-                        <span class="iso-block-text">NEURAL ANALYZER</span>
-                        <div style="width:100%; height:4px; background:#00E5FF; margin-top:10px; box-shadow: 0 0 10px #00E5FF;"></div>
-                    </div>
-                </div>
-                <div class="iso-block" style="border-color:#00E5FF;">
-                    <div style="padding:20px;">
-                        <span class="iso-block-text" style="color:#8B5CF6;">MARKET PULSE</span>
-                        <div style="width:100%; height:4px; background:#8B5CF6; margin-top:10px; box-shadow: 0 0 10px #8B5CF6;"></div>
-                    </div>
-                </div>
-                <div class="iso-block" style="border-color:#00E5FF;">
-                    <div style="padding:20px;">
-                        <span class="iso-block-text">DATA CORE</span>
-                        <div style="width:100%; height:4px; background:#00E5FF; margin-top:10px; box-shadow: 0 0 10px #00E5FF;"></div>
-                    </div>
-                </div>
-                <div class="iso-block">
-                    <div style="padding:20px;">
-                        <span class="iso-block-text" style="color:#8B5CF6;">GRID NODE</span>
-                        <div style="width:100%; height:4px; background:#8B5CF6; margin-top:10px; box-shadow: 0 0 10px #8B5CF6;"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
 </section>
 
