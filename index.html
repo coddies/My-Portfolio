@@ -473,187 +473,501 @@
      CARD 4 — PROJECTS
 ════════════════════════════ -->
 <section id="card-4" class="card state-below">
-    <div class="card-inner" style="transform-style: preserve-3d; display: block; padding-top: 0; padding-bottom: 0;">
-    <style>
-        .perspective-1200 { perspective: 1200px; }
-        .preserve-3d { transform-style: preserve-3d; }
-        .backface-hidden { backface-visibility: hidden; }
-        
-        @keyframes orbital-rotation {
-            from { transform: rotateY(0deg); }
-            to { transform: rotateY(360deg); }
-        }
-        .animate-orbital { animation: orbital-rotation 25s linear infinite; }
-        .animate-orbital:hover { animation-play-state: paused; }
+  <div class="card-inner" style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;">
+  <style>
+    /* === PROJECTS SECTION BASE === */
+    .px {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      max-width: 1100px;
+      height: calc(100vh - 120px);
+      gap: 16px;
+      padding: 0 20px 20px 20px;
+      box-sizing: border-box;
+    }
+    .px-top {
+      position: relative;
+      flex: 1 1 0;
+      min-height: 0;
+      border-radius: 24px;
+      overflow: hidden;
+      background: rgba(6,11,20,0.7);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    /* Slider track */
+    .px-track {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+    .px-card {
+      flex: 0 0 100%;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      transition: none;
+    }
+    .px-media {
+      flex: 0 0 45%;
+      position: relative;
+      overflow: hidden;
+      border-right: 1px solid rgba(255,255,255,0.08);
+      background: #060B14;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .px-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.85;
+      transition: transform 0.5s ease, opacity 0.5s ease;
+    }
+    .px-media img:hover { transform: scale(1.04); opacity: 1; }
+    .px-fallback-emoji {
+      font-size: 90px;
+      display: none;
+      user-select: none;
+    }
+    .px-details {
+      flex: 1 1 0;
+      padding: 28px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      overflow-y: auto;
+      min-height: 0;
+    }
+    .px-details::-webkit-scrollbar { width: 4px; }
+    .px-details::-webkit-scrollbar-thumb { background: rgba(0,229,255,0.25); border-radius: 4px; }
+    .px-cat {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 4px;
+      color: rgba(0,229,255,0.7);
+      text-transform: uppercase;
+    }
+    .px-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(20px, 2.5vw, 30px);
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.2;
+      margin: 0;
+    }
+    .px-features {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .px-features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 13.5px;
+      color: rgba(255,255,255,0.75);
+      line-height: 1.5;
+    }
+    .px-features li::before {
+      content: "▹";
+      color: #00E5FF;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .px-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: auto;
+    }
+    .px-tag {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 99px;
+      border: 1px solid rgba(0,229,255,0.3);
+      color: rgba(0,229,255,0.8);
+      background: rgba(0,229,255,0.05);
+    }
+    /* Controls bar */
+    .px-ctrls {
+      flex: 0 0 auto;
+      min-height: 110px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 20px 32px;
+      border-radius: 20px;
+      background: rgba(6,11,20,0.7);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .px-info { display: flex; flex-direction: column; gap: 4px; }
+    .px-cat-label {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 4px;
+      color: rgba(0,229,255,0.6);
+      text-transform: uppercase;
+    }
+    .px-title-label {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(18px, 2.5vw, 28px);
+      font-weight: 800;
+      color: #fff;
+    }
+    .px-action { display: flex; gap: 16px; align-items: center; }
+    .px-gh-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 28px;
+      border-radius: 14px;
+      border: 1px solid rgba(0,229,255,0.5);
+      background: rgba(0,229,255,0.06);
+      color: #00E5FF;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      white-space: nowrap;
+    }
+    .px-gh-btn:hover {
+      background: rgba(0,229,255,0.15);
+      box-shadow: 0 0 20px rgba(0,229,255,0.2);
+      transform: translateY(-2px);
+    }
+    .px-nav-box { display: flex; align-items: center; gap: 16px; }
+    .px-nav-btn {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.05);
+      color: #fff;
+      font-size: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      user-select: none;
+    }
+    .px-nav-btn:hover {
+      border-color: rgba(0,229,255,0.5);
+      background: rgba(0,229,255,0.1);
+      color: #00E5FF;
+    }
+    .px-count-box {
+      font-family: 'Space Grotesk', monospace;
+      font-size: 20px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.5);
+      min-width: 60px;
+      text-align: center;
+    }
+    .px-count-box span { color: #00E5FF; }
 
-        .isometric-grid { transform: rotateX(60deg) rotateZ(-45deg); transform-style: preserve-3d; display: flex; gap: 80px; justify-content: center; }
-        
-        .glass-panel {
-            background: rgba(6, 11, 20, 0.4);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
+    /* === PROJECTS RESPONSIVE FIX === */
+    @media (max-width: 1024px) {
+      .px {
+        height: auto !important;
+        min-height: 90vh;
+        padding: 20px 16px 100px 16px;
+        gap: 12px;
+      }
+      .px-top {
+        height: 380px;
+        border-radius: 20px;
+      }
+      .px-card {
+        width: 85vw !important;
+        height: 360px !important;
+        margin: 0 8px !important;
+        flex-direction: column !important;
+      }
+      .px-media {
+        flex: none !important;
+        height: 180px !important;
+        width: 100% !important;
+        border-right: none !important;
+        border-bottom: 1px solid rgba(255,255,255,0.1) !important;
+      }
+      .px-details {
+        flex: 1 !important;
+        padding: 16px !important;
+        overflow-y: auto !important;
+      }
+      .px-features li { font-size: 12px !important; }
+      .px-ctrls {
+        flex-direction: column !important;
+        height: auto !important;
+        min-height: unset !important;
+        padding: 20px 16px !important;
+        gap: 12px !important;
+        border-radius: 16px !important;
+      }
+      .px-info { text-align: center !important; }
+      .px-title-label { font-size: clamp(18px, 4vw, 26px) !important; }
+      .px-action {
+        width: 100% !important;
+        justify-content: center !important;
+      }
+      .px-gh-btn {
+        width: 100% !important;
+        padding: 14px 20px !important;
+        font-size: 12px !important;
+        border-radius: 12px !important;
+        justify-content: center !important;
+      }
+      .px-nav-box {
+        width: 100% !important;
+        justify-content: center !important;
+        gap: 20px !important;
+        flex-direction: row !important;
+      }
+      .px-count-box { font-size: 18px !important; }
+      .px-nav-btn {
+        width: 44px !important;
+        height: 44px !important;
+        font-size: 22px !important;
+      }
+    }
+    @media (max-width: 768px) {
+      .px {
+        padding: 12px 12px 100px 12px !important;
+        gap: 10px !important;
+      }
+      .px-top {
+        height: 320px !important;
+        border-radius: 16px !important;
+      }
+      .px-card {
+        width: 92vw !important;
+        height: 300px !important;
+        margin: 0 4px !important;
+        border-radius: 16px !important;
+      }
+      .px-media { height: 140px !important; }
+      .px-fallback-emoji { font-size: 70px !important; }
+      .px-details { padding: 12px !important; }
+      .px-features li {
+        font-size: 11px !important;
+        gap: 6px !important;
+      }
+      .px-tag {
+        font-size: 9px !important;
+        padding: 3px 8px !important;
+      }
+      .px-ctrls {
+        padding: 16px 12px !important;
+        gap: 10px !important;
+        border-radius: 14px !important;
+      }
+      .px-cat-label {
+        font-size: 10px !important;
+        letter-spacing: 3px !important;
+      }
+      .px-title-label { font-size: 18px !important; }
+      .px-gh-btn {
+        padding: 12px 16px !important;
+        font-size: 11px !important;
+        gap: 8px !important;
+      }
+      .px-nav-btn {
+        width: 40px !important;
+        height: 40px !important;
+        font-size: 20px !important;
+      }
+      .px-count-box { font-size: 16px !important; }
+    }
+    @media (max-width: 480px) {
+      .px-top { height: 280px !important; }
+      .px-card {
+        width: 95vw !important;
+        height: 260px !important;
+      }
+      .px-media { height: 120px !important; }
+      .px-title-label {
+        font-size: 16px !important;
+        line-height: 1.2 !important;
+      }
+    }
+  </style>
 
-        .neo-glow-cyan { box-shadow: 0 0 20px rgba(0, 229, 255, 0.2); }
-        .neo-glow-purple { box-shadow: 0 0 20px rgba(139, 92, 246, 0.2); }
-
-        /* Orbital Carousel */
-        .carousel-container { perspective: 1500px; width: 100%; height: 500px; display: flex; align-items: center; justify-content: center; position: relative; }
-        .carousel-spinner { position: relative; width: 320px; height: 480px; transform-style: preserve-3d; animation: orbital-rotation 25s linear infinite; transition: transform 0.5s ease; }
-        .carousel-spinner:hover { animation-play-state: paused; }
-        
-        .hologram-card {
-            position: absolute; inset: 0; background: rgba(6, 11, 20, 0.6); backdrop-filter: blur(15px); border: 1px solid rgba(0, 229, 255, 0.4); border-radius: 16px;
-            box-shadow: 0 0 30px rgba(0, 229, 255, 0.1), inset 0 0 20px rgba(0, 229, 255, 0.1);
-            display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 30px 20px; transform-style: preserve-3d;
-        }
-        .card-1 { transform: rotateY(0deg) translateZ(450px); }
-        .card-2 { transform: rotateY(90deg) translateZ(450px); border-color: rgba(139, 92, 246, 0.4); box-shadow: 0 0 30px rgba(139, 92, 246, 0.1), inset 0 0 20px rgba(139, 92, 246, 0.1); }
-        .card-3 { transform: rotateY(180deg) translateZ(450px); }
-        .card-4 { transform: rotateY(270deg) translateZ(450px); border-color: rgba(139, 92, 246, 0.4); box-shadow: 0 0 30px rgba(139, 92, 246, 0.1), inset 0 0 20px rgba(139, 92, 246, 0.1); }
-
-        /* Bento Grid */
-        .bento-card { position: relative; height: 500px; transform-style: preserve-3d; transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1); cursor: pointer; border-radius: 16px; overflow: hidden; }
-        .bento-card:hover { transform: rotateX(5deg) rotateY(-5deg); }
-        .bento-bg { position: absolute; inset: 0; transition: transform 0.5s; border-radius: 16px; overflow: hidden; }
-        .bento-card:hover .bento-bg { transform: translateZ(-40px); }
-        .bento-img { width: 100%; height: 100%; object-fit: cover; opacity: 0.4; transform: scale(1.15); transition: transform 0.7s; }
-        .bento-card:hover .bento-img { transform: scale(1); }
-        .bento-content { position: relative; z-index: 10; padding: 48px; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; transition: transform 0.5s; transform-style: preserve-3d; }
-        .bento-card:hover .bento-content { transform: translateZ(100px); }
-
-        /* Isometric */
-        .iso-server { position: relative; width: 240px; height: 240px; transform-style: preserve-3d; transition: transform 0.5s ease; cursor: pointer; }
-        .iso-server:hover { transform: translateZ(80px); }
-        .iso-top { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; transition: all 0.5s; }
-        .iso-server:hover .iso-top { background: rgba(0, 229, 255, 0.15); box-shadow: 0 0 30px rgba(0, 229, 255, 0.3); }
-        .iso-server.purple:hover .iso-top { background: rgba(139, 92, 246, 0.15); box-shadow: 0 0 30px rgba(139, 92, 246, 0.3); }
-        .iso-bottom { position: absolute; inset: 0; transform-origin: bottom; transform: rotateX(-90deg) translateY(50%); height: 60px; }
-        .iso-left { position: absolute; inset: 0; transform-origin: left; transform: rotateY(90deg) translateX(-50%); width: 60px; }
-
-        @media (max-width: 1200px) {
-            .card-1, .card-2, .card-3, .card-4 { translateZ(350px); }
-        }
-        @media (max-width: 1024px) { 
-            .carousel-spinner { transform: scale(0.8); }
-            .bento-card { height: 400px; }
-        }
-    </style>
-
-    <!-- PROTOTYPE 1: ORBITAL CAROUSEL (Full Screen) -->
-    <div style="min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 80px 20px; position: relative;">
-        <div class="mb-12 text-center" style="margin-bottom: 80px;">
-            <span style="color: #00E5FF; font-family: 'Space Grotesk', sans-serif; font-size: 14px; letter-spacing: 0.5em; text-transform: uppercase; display: block; margin-bottom: 16px;">SYSTEM_OPERATIONS</span>
-            <h1 style="font-family: 'Space Grotesk', sans-serif; font-size: clamp(40px, 8vw, 72px); color: white; font-weight: 900; margin-bottom: 24px; letter-spacing: -0.03em;">PROJECT_LAB.v2</h1>
-            <p style="font-family: 'Lexend', sans-serif; font-size: 20px; color: #94a3b8; max-width: 900px; margin: 0 auto; line-height: 1.6;">High-fidelity data decryption and market pulse synchronization using advanced quantum orbital matrices.</p>
-        </div>
-
-        <div style="position: relative; width: 100%; display: flex; flex-direction: column; align-items: center; perspective: 1500px;">
-            <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; pointer-events: none; z-index: 0;">
-                <span style="color: rgba(30, 41, 59, 0.2); font-weight: 900; font-size: clamp(120px, 20vw, 250px); font-family: 'Space Grotesk', sans-serif; user-select: none;">ORBITAL</span>
-            </div>
-            
-            <h2 style="color: rgba(0, 229, 255, 0.5); font-family: 'Space Grotesk', sans-serif; font-size: 14px; letter-spacing: 0.3em; text-transform: uppercase; font-weight: 600; margin-bottom: 50px; position: relative; z-index: 1;">PROTOTYPE_01 // CAROUSEL</h2>
-            
-            <div class="carousel-container">
-                <div class="carousel-spinner">
-                    <div class="hologram-card card-1">
-                        <span class="material-symbols-outlined" style="color: #00E5FF; font-size: 84px;">psychology</span>
-                        <div style="text-align: center;">
-                            <h3 style="font-size: 28px; color: white; font-weight: 800; text-transform: uppercase; margin-bottom: 10px;">Neural Sentiment</h3>
-                            <p style="color: #cbd5e1; font-size: 15px;">Real-time biometric feedback synchronization.</p>
-                        </div>
-                        <button style="margin-top: 30px; width: 100%; padding: 16px; border: 1px solid #00E5FF; color: #00E5FF; background: transparent; text-transform: uppercase; font-size: 13px; letter-spacing: 3px; border-radius: 6px; cursor: pointer; transition: all 0.3s ease; font-weight: bold;">Launch Repo</button>
-                    </div>
-
-                    <div class="hologram-card card-2">
-                        <span class="material-symbols-outlined" style="color: #8B5CF6; font-size: 84px;">query_stats</span>
-                        <div style="text-align: center;">
-                            <h3 style="font-size: 28px; color: white; font-weight: 800; text-transform: uppercase; margin-bottom: 10px;">Market Pulse AI</h3>
-                            <p style="color: #cbd5e1; font-size: 15px;">Predictive trend vectors using quantum matrices.</p>
-                        </div>
-                        <button style="margin-top: 30px; width: 100%; padding: 16px; border: 1px solid #8B5CF6; color: #8B5CF6; background: transparent; text-transform: uppercase; font-size: 13px; letter-spacing: 3px; border-radius: 6px; cursor: pointer; transition: all 0.3s ease; font-weight: bold;">Launch Repo</button>
-                    </div>
-
-                    <div class="hologram-card card-3">
-                        <span class="material-symbols-outlined" style="color: #00E5FF; font-size: 84px;">biotech</span>
-                        <div style="text-align: center;">
-                            <h3 style="font-size: 28px; color: white; font-weight: 800; text-transform: uppercase; margin-bottom: 10px;">CV_VISION_OS</h3>
-                            <p style="color: #cbd5e1; font-size: 15px;">Autonomous object detection and tracking algorithm.</p>
-                        </div>
-                        <button style="margin-top: 30px; width: 100%; padding: 16px; border: 1px solid #00E5FF; color: #00E5FF; background: transparent; text-transform: uppercase; font-size: 13px; letter-spacing: 3px; border-radius: 6px; cursor: pointer; transition: all 0.3s ease; font-weight: bold;">Launch Repo</button>
-                    </div>
-
-                    <div class="hologram-card card-4">
-                        <span class="material-symbols-outlined" style="color: #8B5CF6; font-size: 84px;">memory</span>
-                        <div style="text-align: center;">
-                            <h3 style="font-size: 28px; color: white; font-weight: 800; text-transform: uppercase; margin-bottom: 10px;">Holographic Viz</h3>
-                            <p style="color: #cbd5e1; font-size: 15px;">Generative AI visualization layered in isometric 3D.</p>
-                        </div>
-                        <button style="margin-top: 30px; width: 100%; padding: 16px; border: 1px solid #8B5CF6; color: #8B5CF6; background: transparent; text-transform: uppercase; font-size: 13px; letter-spacing: 3px; border-radius: 6px; cursor: pointer; transition: all 0.3s ease; font-weight: bold;">Launch Repo</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <div class="px" id="pxRoot">
+    <!-- Top: card viewer -->
+    <div class="px-top">
+      <div class="px-track" id="pxTrack">
+        <!-- Cards injected by JS -->
+      </div>
     </div>
 
-    <!-- PROTOTYPE 2: PARALLAX BENTO (Full Screen) -->
-    <div style="min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 120px 60px; box-sizing: border-box; background: radial-gradient(circle at center, rgba(0, 219, 233, 0.03), transparent 70%);">
-        <h2 style="color: rgba(0, 229, 255, 0.5); font-family: 'Space Grotesk', sans-serif; font-size: 14px; letter-spacing: 0.3em; text-transform: uppercase; font-weight: 600; margin-bottom: 100px; text-align: center;">PROTOTYPE_02 // PARALLAX BENTO</h2>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(500px, 1fr)); gap: 60px; width: 100%; max-width: 1600px; perspective: 2000px;">
-            <!-- Bento Item 1 -->
-            <div class="bento-card">
-                <div class="bento-bg glass-panel" style="border-color: rgba(0, 229, 255, 0.3);">
-                    <img class="bento-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDcr7RqyXcAMhif1tceQcaeis1S0dLcaojmuIwhuEF2Kzcq-yOav5Z38AQo6OIK1wmBstI9FsgQNRXU9VXi9STyRY3t3CyMyfDYhBAAiad5gBBSnQHwTscgLmTmX-jVLsvFhIfduwUsIsRAOIIoPVAxmPsfq_8AOolmL7buPWtuV2SAGuUAw9VuEDZew9mULerU8Q_bz317qK6zAfFda7iPfj7fB5tidudK-sA-eBg1gz7IQ0Y6bRr_Pqu8FTyFhwrXT2SapEkp8sY" />
-                </div>
-                <div class="bento-content">
-                    <div style="background: #00E5FF; width: 80px; height: 6px; margin-bottom: 32px; box-shadow: 0 0 30px #00E5FF;"></div>
-                    <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 48px; font-weight: 900; color: white; margin-bottom: 16px; letter-spacing: -0.02em;">Neural Sentiment</h3>
-                    <p style="font-size: 20px; color: rgba(255, 255, 255, 0.8); line-height: 1.7;">Adaptive intelligence layer analyzing celestial data streams in real-time with zero latency quantum encryption.</p>
-                </div>
-            </div>
-            <!-- Bento Item 2 -->
-            <div class="bento-card">
-                <div class="bento-bg glass-panel" style="border-color: rgba(139, 92, 246, 0.3);">
-                    <img class="bento-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDr5lbufPrhe-WCFVr5xsFu0nZv52Df7KELhtoBOiNhJqqekUz-NCjFFPqx3LyATwM4dejrVfGolX2AW-j14jK7Ca-4Wf7gozSYGWwogPMg_-mTRmN3HhvEpWvqeihJOY2aqtObDSMRTjH_dz0GDqm9eEBarpXIDP2fI4vd2tsWFL-_vx6CAHrtV920o2dKgj1-XEeK6mUyIN_4SiXi8JonJF3c1-sfLaJxka0VLr4PvD2snLvYclO8kd1MYKlKKO6qcTACdw1Vp-A" />
-                </div>
-                <div class="bento-content">
-                    <div style="background: #8B5CF6; width: 80px; height: 6px; margin-bottom: 32px; box-shadow: 0 0 30px #8B5CF6;"></div>
-                    <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 48px; font-weight: 900; color: white; margin-bottom: 16px; letter-spacing: -0.02em;">Market Pulse</h3>
-                    <p style="font-size: 20px; color: rgba(255, 255, 255, 0.8); line-height: 1.7;">Economic fluctuation monitoring across orbital trade routes using predictive neural modeling and live telemetrics.</p>
-                </div>
-            </div>
-        </div>
+    <!-- Bottom: controls -->
+    <div class="px-ctrls">
+      <div class="px-info">
+        <div class="px-cat-label" id="pxCtrlCat">AI & UTILITY</div>
+        <div class="px-title-label" id="pxCtrlTitle">Spin AI — Decision Maker</div>
+      </div>
+      <div class="px-action">
+        <a class="px-gh-btn" id="pxGhBtn" href="#" target="_blank">
+          <span>🔗</span><span>View Project</span>
+        </a>
+      </div>
+      <div class="px-nav-box">
+        <div class="px-nav-btn" id="pxPrev">←</div>
+        <div class="px-count-box"><span id="pxCur">1</span> / <span id="pxTotal">5</span></div>
+        <div class="px-nav-btn" id="pxNext">→</div>
+      </div>
     </div>
+  </div>
 
-    <!-- PROTOTYPE 3: ISOMETRIC SERVERS (Full Screen) -->
-    <div style="min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 120px 20px; overflow: hidden; max-width: 100%; box-sizing: border-box; background: linear-gradient(to bottom, transparent, rgba(139, 92, 246, 0.03));">
-        <h2 style="color: rgba(0, 229, 255, 0.5); font-family: 'Space Grotesk', sans-serif; font-size: 14px; letter-spacing: 0.3em; text-transform: uppercase; font-weight: 600; margin-bottom: 140px; text-align: center;">PROTOTYPE_03 // ISOMETRIC SERVERS</h2>
-        <div style="display: flex; justify-content: center; align-items: center; height: 700px; perspective: 2500px;">
-            <div class="isometric-grid">
-                <!-- Server Block 1 -->
-                <div class="iso-server glass-panel" style="border-color: rgba(0, 229, 255, 0.6); background: rgba(8, 51, 68, 0.5);">
-                    <div class="iso-bottom glass-panel" style="background: rgba(8, 51, 68, 0.4); border-color: rgba(0, 229, 255, 0.6);"></div>
-                    <div class="iso-left glass-panel" style="background: rgba(8, 51, 68, 0.4); border-color: rgba(0, 229, 255, 0.6);"></div>
-                    <div class="iso-top">
-                        <span class="material-symbols-outlined" style="color: #00E5FF; font-size: 72px; margin-bottom: 16px;">terminal</span>
-                        <span style="font-family: 'Space Grotesk', monospace; font-size: 14px; color: #a5f3fc; letter-spacing: 0.15em; font-weight: 900;">CORE_V1.ULTRA</span>
-                    </div>
-                </div>
-                <!-- Server Block 2 -->
-                <div class="iso-server purple glass-panel" style="margin-top: 120px; border-color: rgba(139, 92, 246, 0.6); background: rgba(59, 7, 100, 0.5);">
-                    <div class="iso-bottom glass-panel" style="background: rgba(59, 7, 100, 0.4); border-color: rgba(139, 92, 246, 0.6);"></div>
-                    <div class="iso-left glass-panel" style="background: rgba(59, 7, 100, 0.4); border-color: rgba(139, 92, 246, 0.6);"></div>
-                    <div class="iso-top">
-                        <span class="material-symbols-outlined" style="color: #8B5CF6; font-size: 72px; margin-bottom: 16px;">memory</span>
-                        <span style="font-family: 'Space Grotesk', monospace; font-size: 14px; color: #e9d5ff; letter-spacing: 0.15em; font-weight: 900;">PROC_AI.ULTRA</span>
-                    </div>
-                </div>
-            </div>
+  <script>
+  (function(){
+    const data = [
+      {
+        cat: 'AI & UTILITY',
+        title: 'Spin AI — Decision Maker',
+        features: [
+          'AI-powered item generation via Groq Cloud',
+          'Customizable wheel categories & topics',
+          'Smooth CSS animations & confetti effects',
+          'Mobile-optimized responsive design'
+        ],
+        tags: ['JavaScript', 'Groq Cloud', 'Vite', 'Tailwind'],
+        gh: 'https://spin-ai-brown.vercel.app/',
+        img: 'assets/images/p1.png',
+        emoji: '🎡'
+      },
+      {
+        cat: 'AI AUTOMATION',
+        title: 'Faceless AI Video Studio',
+        features: [
+          'Automated script-to-video pipeline',
+          'AWS Bedrock generative image integration',
+          'Natural ElevenLabs AI voice synthesis',
+          'Batch scene processing system'
+        ],
+        tags: ['Python', 'FFmpeg', 'AWS Bedrock', 'ElevenLabs'],
+        gh: 'https://faceless-ai-studio-tau.vercel.app/',
+        img: 'assets/images/p2.png',
+        emoji: '🎬'
+      },
+      {
+        cat: 'AI & NLP',
+        title: 'AI Chatbot Studio',
+        features: [
+          'Advanced NLU with real-time streaming',
+          'Context-aware persistent chat history',
+          'Multi-model support (Groq / OpenAI)',
+          'Responsive Dark Glass UI interface'
+        ],
+        tags: ['Python', 'FastAPI', 'React', 'AWS'],
+        gh: 'https://github.com/coddies/AI-Chatbot',
+        img: 'assets/images/p3.png',
+        emoji: '🤖'
+      },
+      {
+        cat: 'FULL STACK',
+        title: 'Student Table CRUD',
+        features: [
+          'FastAPI Backend integration',
+          'SQLAlchemy Database management',
+          'RESTful API development',
+          'Vanilla JS Frontend CRUD operations'
+        ],
+        tags: ['Python', 'FastAPI', 'SQLAlchemy', 'PostgreSQL'],
+        gh: 'https://github.com/coddies/Student-Table',
+        img: 'assets/images/p4.png',
+        emoji: '📁'
+      },
+      {
+        cat: 'FRONTEND DEVELOPMENT',
+        title: 'Space Portfolio',
+        features: [
+          'Dynamic card-based section transitions',
+          'Rocket loading animation with sky tear effect',
+          'Interactive 3D isometric skills section',
+          'Fully responsive with mobile navigation'
+        ],
+        tags: ['HTML5', 'CSS3', 'JavaScript', 'GitHub'],
+        gh: 'https://github.com/coddies/My-Portfolio',
+        img: 'assets/images/p5.png',
+        emoji: '🚀'
+      }
+    ];
+
+    let cur = 0;
+    const track = document.getElementById('pxTrack');
+    const ctrlCat = document.getElementById('pxCtrlCat');
+    const ctrlTitle = document.getElementById('pxCtrlTitle');
+    const ghBtn = document.getElementById('pxGhBtn');
+    const curEl = document.getElementById('pxCur');
+    const totalEl = document.getElementById('pxTotal');
+
+    totalEl.textContent = data.length;
+
+    // Build all cards
+    data.forEach((p, i) => {
+      const card = document.createElement('div');
+      card.className = 'px-card';
+      card.style.display = i === 0 ? 'flex' : 'none';
+
+      const featuresHTML = p.features.map(f => `<li>${f}</li>`).join('');
+      const tagsHTML = p.tags.map(t => `<span class="px-tag">${t}</span>`).join('');
+
+      card.innerHTML = `
+        <div class="px-media">
+          <img src="${p.img}" alt="${p.title}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+          <div class="px-fallback-emoji" style="display:none;align-items:center;justify-content:center;width:100%;height:100%;">${p.emoji}</div>
         </div>
-    </div>
-    </div>
+        <div class="px-details">
+          <div class="px-cat">${p.cat}</div>
+          <h3 class="px-title">${p.title}</h3>
+          <ul class="px-features">${featuresHTML}</ul>
+          <div class="px-tags">${tagsHTML}</div>
+        </div>
+      `;
+      track.appendChild(card);
+    });
+
+    function goTo(n) {
+      const cards = track.querySelectorAll('.px-card');
+      cards[cur].style.display = 'none';
+      cur = (n + data.length) % data.length;
+      cards[cur].style.display = 'flex';
+      const p = data[cur];
+      ctrlCat.textContent = p.cat;
+      ctrlTitle.textContent = p.title;
+      ghBtn.href = p.gh;
+      curEl.textContent = cur + 1;
+    }
+
+    document.getElementById('pxPrev').addEventListener('click', () => goTo(cur - 1));
+    document.getElementById('pxNext').addEventListener('click', () => goTo(cur + 1));
+
+    // Init ctrl bar
+    ghBtn.href = data[0].gh;
+  })();
+  </script>
+  </div>
 </section>
+
 
 <section id="card-5" class="card state-below">
     <div class="card-inner">
