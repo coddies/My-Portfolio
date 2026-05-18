@@ -1,0 +1,70 @@
+    <div style="padding: 96px 0; max-width: 1200px; margin: 0 auto; padding-left: 40px; padding-right: 40px;">
+        <h2 style="color: rgba(0, 229, 255, 0.6); font-family: 'Space Grotesk', sans-serif; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; margin-bottom: 64px; text-align: center;">PROTOTYPE_02 // PARALLAX BENTO</h2>
+        <div style="display: grid; grid-template-columns: repeat(1, 1fr); gap: 32px; perspective: 1200px;">
+            <style>
+                .bento-card { position: relative; height: 400px; transform-style: preserve-3d; transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1); cursor: pointer; border-radius: 12px; overflow: hidden; }
+                .bento-card:hover { transform: rotateX(2deg) rotateY(-2deg); }
+                .bento-card:hover .bento-bg { transform: translateZ(-30px); }
+                .bento-card:hover .bento-img { transform: scale(1); }
+                .bento-card:hover .bento-content { transform: translateZ(60px); }
+            </style>
+            <!-- Bento Item 1 -->
+            <div class="bento-card glass-panel" style="border: 1px solid rgba(0, 229, 255, 0.2); background: rgba(6, 11, 20, 0.4); backdrop-filter: blur(20px);">
+                <div class="bento-bg" style="position: absolute; inset: 0; transition: transform 0.5s;">
+                    <img class="bento-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDcr7RqyXcAMhif1tceQcaeis1S0dLcaojmuIwhuEF2Kzcq-yOav5Z38AQo6OIK1wmBstI9FsgQNRXU9VXi9STyRY3t3CyMyfDYhBAAiad5gBBSnQHwTscgLmTmX-jVLsvFhIfduwUsIsRAOIIoPVAxmPsfq_8AOolmL7buPWtuV2SAGuUAw9VuEDZew9mULerU8Q_bz317qK6zAfFda7iPfj7fB5tidudK-sA-eBg1gz7IQ0Y6bRr_Pqu8FTyFhwrXT2SapEkp8sY" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.4; transform: scale(1.1); transition: transform 0.7s;" />
+                </div>
+                <div class="bento-content" style="position: relative; z-index: 10; padding: 32px; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; transition: transform 0.5s; transform-style: preserve-3d;">
+                    <div style="background: #00E5FF; width: 48px; height: 4px; margin-bottom: 16px; box-shadow: 0 0 15px #00E5FF;"></div>
+                    <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 30px; font-weight: 700; color: #fff; margin-bottom: 8px;">Neural Sentiment</h3>
+                    <p style="font-size: 16px; color: rgba(0, 229, 255, 0.7);">Adaptive intelligence layer analyzing celestial data streams in real-time.</p>
+                </div>
+            </div>
+            <!-- Bento Item 2 -->
+            <div class="bento-card glass-panel" style="border: 1px solid rgba(139, 92, 246, 0.2); background: rgba(6, 11, 20, 0.4); backdrop-filter: blur(20px);">
+                <div class="bento-bg" style="position: absolute; inset: 0; transition: transform 0.5s;">
+                    <img class="bento-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDr5lbufPrhe-WCFVr5xsFu0nZv52Df7KELhtoBOiNhJqqekUz-NCjFFPqx3LyATwM4dejrVfGolX2AW-j14jK7Ca-4Wf7gozSYGWwogPMg_-mTRmN3HhvEpWvqeihJOY2aqtObDSMRTjH_dz0GDqm9eEBarpXIDP2fI4vd2tsWFL-_vx6CAHrtV920o2dKgj1-XEeK6mUyIN_4SiXi8JonJF3c1-sfLaJxka0VLr4PvD2snLvYclO8kd1MYKlKKO6qcTACdw1Vp-A" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.4; transform: scale(1.1); transition: transform 0.7s;" />
+                </div>
+                <div class="bento-content" style="position: relative; z-index: 10; padding: 32px; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; transition: transform 0.5s; transform-style: preserve-3d;">
+                    <div style="background: #8B5CF6; width: 48px; height: 4px; margin-bottom: 16px; box-shadow: 0 0 15px #8B5CF6;"></div>
+                    <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 30px; font-weight: 700; color: #fff; margin-bottom: 8px;">Market Pulse</h3>
+                    <p style="font-size: 16px; color: rgba(139, 92, 246, 0.7);">Economic fluctuation monitoring across orbital trade routes.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div style="padding: 96px 0; overflow: hidden;">
+        <h2 style="color: rgba(0, 229, 255, 0.6); font-family: 'Space Grotesk', sans-serif; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; margin-bottom: 96px; text-align: center;">PROTOTYPE_03 // ISOMETRIC SERVERS</h2>
+        <div style="display: flex; justify-content: center; align-items: center; height: 500px; perspective: 1200px;">
+            <style>
+                .isometric-grid { transform: rotateX(60deg) rotateZ(-45deg); transform-style: preserve-3d; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+                .iso-server { position: relative; width: 192px; height: 192px; transform-style: preserve-3d; transition: transform 0.5s ease; cursor: pointer; }
+                .iso-server:hover { transform: translateZ(48px); }
+                .iso-server:hover .iso-top { background: rgba(0, 229, 255, 0.1); box-shadow: 0 0 20px rgba(0, 229, 255, 0.2); }
+                .iso-server.purple:hover .iso-top { background: rgba(139, 92, 246, 0.1); box-shadow: 0 0 20px rgba(139, 92, 246, 0.2); }
+                .iso-top { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 16px; transition: all 0.5s; background: rgba(6, 11, 20, 0.4); border: 1px solid rgba(255, 255, 255, 0.1); }
+                .iso-bottom { position: absolute; inset: 0; transform-origin: bottom; transform: rotateX(-90deg) translateY(50%); height: 40px; background: rgba(6, 11, 20, 0.3); border: 1px solid rgba(255, 255, 255, 0.1); }
+                .iso-left { position: absolute; inset: 0; transform-origin: left; transform: rotateY(90deg) translateX(-50%); width: 40px; background: rgba(6, 11, 20, 0.3); border: 1px solid rgba(255, 255, 255, 0.1); }
+            </style>
+            <div class="isometric-grid">
+                <!-- Server Block 1 -->
+                <div class="iso-server">
+                    <div class="iso-bottom"></div>
+                    <div class="iso-left"></div>
+                    <div class="iso-top">
+                        <span class="material-symbols-outlined" style="color: #00E5FF; font-size: 48px; margin-bottom: 8px;">terminal</span>
+                        <span style="font-family: 'Space Grotesk', monospace; font-size: 10px; color: #a5f3fc; letter-spacing: 0.05em;">CORE_V1</span>
+                    </div>
+                </div>
+                <!-- Server Block 2 -->
+                <div class="iso-server purple" style="margin-top: 48px;">
+                    <div class="iso-bottom"></div>
+                    <div class="iso-left"></div>
+                    <div class="iso-top" style="border-color: rgba(139, 92, 246, 0.5);">
+                        <span class="material-symbols-outlined" style="color: #8B5CF6; font-size: 48px; margin-bottom: 8px;">memory</span>
+                        <span style="font-family: 'Space Grotesk', monospace; font-size: 10px; color: #e9d5ff; letter-spacing: 0.05em;">PROC_AI</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

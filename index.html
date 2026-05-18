@@ -506,6 +506,19 @@
             position: absolute; inset: 0; background: rgba(6, 11, 20, 0.6); backdrop-filter: blur(15px); border: 1px solid rgba(0, 229, 255, 0.4); border-radius: 16px;
             box-shadow: 0 0 30px rgba(0, 229, 255, 0.1), inset 0 0 20px rgba(0, 229, 255, 0.1);
             display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 30px 20px; transform-style: preserve-3d;
+            transition: all 0.4s ease;
+        }
+        
+        /* Parent Card Glow when Button is Hovered */
+        .hologram-card:has(.proj-btn-cyan:hover) {
+            background: rgba(0, 229, 255, 0.1);
+            border-color: #00E5FF;
+            box-shadow: 0 0 60px rgba(0, 229, 255, 0.4), inset 0 0 30px rgba(0, 229, 255, 0.3);
+        }
+        .hologram-card:has(.proj-btn-purple:hover) {
+            background: rgba(139, 92, 246, 0.1);
+            border-color: #8B5CF6;
+            box-shadow: 0 0 60px rgba(139, 92, 246, 0.4), inset 0 0 30px rgba(139, 92, 246, 0.3);
         }
         .card-1 { transform: rotateY(0deg) translateZ(450px); }
         .card-2 { transform: rotateY(90deg) translateZ(450px); border-color: rgba(139, 92, 246, 0.4); box-shadow: 0 0 30px rgba(139, 92, 246, 0.1), inset 0 0 20px rgba(139, 92, 246, 0.1); }
@@ -513,8 +526,8 @@
         .card-4 { transform: rotateY(270deg) translateZ(450px); border-color: rgba(139, 92, 246, 0.4); box-shadow: 0 0 30px rgba(139, 92, 246, 0.1), inset 0 0 20px rgba(139, 92, 246, 0.1); }
 
         /* Bento Grid */
-        .bento-card { position: relative; height: 500px; transform-style: preserve-3d; transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1); cursor: pointer; border-radius: 16px; overflow: hidden; }
-        .bento-card:hover { transform: rotateX(5deg) rotateY(-5deg); }
+        .bento-card { position: relative; height: 500px; transform-style: preserve-3d; transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1); cursor: pointer; border-radius: 16px; overflow: hidden; }
+        /* Dynamic JS handles the 3D rotation, removing static hover */
         .bento-bg { position: absolute; inset: 0; transition: transform 0.5s; border-radius: 16px; overflow: hidden; }
         .bento-card:hover .bento-bg { transform: translateZ(-40px); }
         .bento-img { width: 100%; height: 100%; object-fit: cover; opacity: 0.4; transform: scale(1.15); transition: transform 0.7s; }
@@ -531,6 +544,84 @@
         .iso-bottom { position: absolute; inset: 0; transform-origin: bottom; transform: rotateX(-90deg) translateY(50%); height: 60px; }
         .iso-left { position: absolute; inset: 0; transform-origin: left; transform: rotateY(90deg) translateX(-50%); width: 60px; }
 
+        /* ── PROJECT BUTTONS ── */
+        @keyframes btn-ripple {
+            0%   { box-shadow: 0 0 0 0 rgba(0, 229, 255, 0.6), inset 0 0 0 0 rgba(0,229,255,0); }
+            50%  { box-shadow: 0 0 0 10px rgba(0, 229, 255, 0), inset 0 0 20px rgba(0,229,255,0.15); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 229, 255, 0), inset 0 0 0 0 rgba(0,229,255,0); }
+        }
+        @keyframes btn-ripple-purple {
+            0%   { box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.6), inset 0 0 0 0 rgba(139,92,246,0); }
+            50%  { box-shadow: 0 0 0 10px rgba(139, 92, 246, 0), inset 0 0 20px rgba(139,92,246,0.15); }
+            100% { box-shadow: 0 0 0 0 rgba(139, 92, 246, 0), inset 0 0 0 0 rgba(139,92,246,0); }
+        }
+
+        .proj-btn-cyan {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #00E5FF;
+            color: #00E5FF;
+            background: transparent;
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 3px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            margin-top: 24px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .proj-btn-cyan:hover {
+            background: rgba(0, 229, 255, 0.2);
+            color: #fff;
+            box-shadow: 0 0 25px rgba(0, 229, 255, 0.6), inset 0 0 15px rgba(0, 229, 255, 0.3);
+            text-shadow: 0 0 10px #00E5FF;
+            transform: translateY(-2px) scale(1.03);
+            letter-spacing: 4px;
+        }
+        .proj-btn-cyan:active {
+            transform: scale(0.96) translateY(0);
+            animation: btn-ripple 0.5s ease forwards;
+        }
+
+        .proj-btn-purple {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #8B5CF6;
+            color: #8B5CF6;
+            background: transparent;
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 3px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            margin-top: 24px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .proj-btn-purple:hover {
+            background: rgba(139, 92, 246, 0.2);
+            color: #fff;
+            box-shadow: 0 0 25px rgba(139, 92, 246, 0.6), inset 0 0 15px rgba(139, 92, 246, 0.3);
+            text-shadow: 0 0 10px #8B5CF6;
+            transform: translateY(-2px) scale(1.03);
+            letter-spacing: 4px;
+        }
+        .proj-btn-purple:active {
+            transform: scale(0.96) translateY(0);
+            animation: btn-ripple-purple 0.5s ease forwards;
+        }
+
         @media (max-width: 1200px) {
             .card-1, .card-2, .card-3, .card-4 { translateZ(350px); }
         }
@@ -542,55 +633,56 @@
 
     <!-- PROTOTYPE 1: ORBITAL CAROUSEL (Full Screen) -->
     <div style="min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 80px 20px; position: relative;">
-        <div class="mb-12 text-center" style="margin-bottom: 80px;">
+        <div class="mb-12 text-center" style="margin-bottom: 150px; position: relative; z-index: 10;">
             <span style="color: #00E5FF; font-family: 'Space Grotesk', sans-serif; font-size: 14px; letter-spacing: 0.5em; text-transform: uppercase; display: block; margin-bottom: 16px;">SYSTEM_OPERATIONS</span>
             <h1 style="font-family: 'Space Grotesk', sans-serif; font-size: clamp(40px, 8vw, 72px); color: white; font-weight: 900; margin-bottom: 24px; letter-spacing: -0.03em;">PROJECT_LAB.v2</h1>
-            <p style="font-family: 'Lexend', sans-serif; font-size: 20px; color: #94a3b8; max-width: 900px; margin: 0 auto; line-height: 1.6;">High-fidelity data decryption and market pulse synchronization using advanced quantum orbital matrices.</p>
+            <p style="font-family: 'Lexend', sans-serif; font-size: 20px; color: #94a3b8; max-width: 900px; margin: 0 auto; line-height: 1.6;">From AI-powered tools to full-stack backends — real projects built with passion, hosted on GitHub & live on the web.</p>
         </div>
 
-        <div style="position: relative; width: 100%; display: flex; flex-direction: column; align-items: center; perspective: 1500px;">
-            <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; pointer-events: none; z-index: 0;">
-                <span style="color: rgba(30, 41, 59, 0.2); font-weight: 900; font-size: clamp(120px, 20vw, 250px); font-family: 'Space Grotesk', sans-serif; user-select: none;">ORBITAL</span>
-            </div>
-            
-            <h2 style="color: rgba(0, 229, 255, 0.5); font-family: 'Space Grotesk', sans-serif; font-size: 14px; letter-spacing: 0.3em; text-transform: uppercase; font-weight: 600; margin-bottom: 50px; position: relative; z-index: 1;">PROTOTYPE_01 // CAROUSEL</h2>
+        <div style="position: relative; width: 100%; display: flex; flex-direction: column; align-items: center; perspective: 1500px; margin-top: 60px;">
+            <!-- Removed ORBITAL text -->
+            <h2 style="color: rgba(0, 229, 255, 0.5); font-family: 'Space Grotesk', sans-serif; font-size: 14px; letter-spacing: 0.3em; text-transform: uppercase; font-weight: 600; margin-bottom: 180px; position: relative; z-index: 1;">PROTOTYPE_01 // CAROUSEL</h2>
             
             <div class="carousel-container">
                 <div class="carousel-spinner">
+                    <!-- Card 1: Faceless AI Studio -->
                     <div class="hologram-card card-1">
-                        <span class="material-symbols-outlined" style="color: #00E5FF; font-size: 84px;">psychology</span>
+                        <span class="material-symbols-outlined" style="color: #00E5FF; font-size: 84px;">smart_toy</span>
                         <div style="text-align: center;">
-                            <h3 style="font-size: 28px; color: white; font-weight: 800; text-transform: uppercase; margin-bottom: 10px;">Neural Sentiment</h3>
-                            <p style="color: #cbd5e1; font-size: 15px;">Real-time biometric feedback synchronization.</p>
+                            <h3 style="font-size: 22px; color: white; font-weight: 800; text-transform: uppercase; margin-bottom: 10px;">Faceless AI Studio</h3>
+                            <p style="color: #cbd5e1; font-size: 14px;">🏆 AWS Nova Hackathon Winner. YouTube content tool — scripts, thumbnails, voiceovers & SEO using Amazon Nova AI.</p>
                         </div>
-                        <button style="margin-top: 30px; width: 100%; padding: 16px; border: 1px solid #00E5FF; color: #00E5FF; background: transparent; text-transform: uppercase; font-size: 13px; letter-spacing: 3px; border-radius: 6px; cursor: pointer; transition: all 0.3s ease; font-weight: bold;">Launch Repo</button>
+                        <a href="https://github.com/coddies/faceless-ai-studio" target="_blank" class="proj-btn-cyan">View on GitHub</a>
                     </div>
 
+                    <!-- Card 2: Spin AI -->
                     <div class="hologram-card card-2">
-                        <span class="material-symbols-outlined" style="color: #8B5CF6; font-size: 84px;">query_stats</span>
+                        <span class="material-symbols-outlined" style="color: #8B5CF6; font-size: 84px;">rotate_right</span>
                         <div style="text-align: center;">
-                            <h3 style="font-size: 28px; color: white; font-weight: 800; text-transform: uppercase; margin-bottom: 10px;">Market Pulse AI</h3>
-                            <p style="color: #cbd5e1; font-size: 15px;">Predictive trend vectors using quantum matrices.</p>
+                            <h3 style="font-size: 22px; color: white; font-weight: 800; text-transform: uppercase; margin-bottom: 10px;">Spin AI</h3>
+                            <p style="color: #cbd5e1; font-size: 14px;">AI-powered wheel spinner. Type any topic, Groq API fills the wheel instantly. React + Vite + Tailwind CSS.</p>
                         </div>
-                        <button style="margin-top: 30px; width: 100%; padding: 16px; border: 1px solid #8B5CF6; color: #8B5CF6; background: transparent; text-transform: uppercase; font-size: 13px; letter-spacing: 3px; border-radius: 6px; cursor: pointer; transition: all 0.3s ease; font-weight: bold;">Launch Repo</button>
+                        <a href="https://github.com/coddies/Spin-Ai" target="_blank" class="proj-btn-purple">View on GitHub</a>
                     </div>
 
+                    <!-- Card 3: AI Chatbot -->
                     <div class="hologram-card card-3">
-                        <span class="material-symbols-outlined" style="color: #00E5FF; font-size: 84px;">biotech</span>
+                        <span class="material-symbols-outlined" style="color: #00E5FF; font-size: 84px;">forum</span>
                         <div style="text-align: center;">
-                            <h3 style="font-size: 28px; color: white; font-weight: 800; text-transform: uppercase; margin-bottom: 10px;">CV_VISION_OS</h3>
-                            <p style="color: #cbd5e1; font-size: 15px;">Autonomous object detection and tracking algorithm.</p>
+                            <h3 style="font-size: 22px; color: white; font-weight: 800; text-transform: uppercase; margin-bottom: 10px;">Flux AI Chatbot</h3>
+                            <p style="color: #cbd5e1; font-size: 14px;">Conversational AI chatbot with a premium dark UI. Live at fluxai-two.vercel.app.</p>
                         </div>
-                        <button style="margin-top: 30px; width: 100%; padding: 16px; border: 1px solid #00E5FF; color: #00E5FF; background: transparent; text-transform: uppercase; font-size: 13px; letter-spacing: 3px; border-radius: 6px; cursor: pointer; transition: all 0.3s ease; font-weight: bold;">Launch Repo</button>
+                        <a href="https://github.com/coddies/AI-Chatbot" target="_blank" class="proj-btn-cyan">View on GitHub</a>
                     </div>
 
+                    <!-- Card 4: FastAPI Full App -->
                     <div class="hologram-card card-4">
-                        <span class="material-symbols-outlined" style="color: #8B5CF6; font-size: 84px;">memory</span>
+                            <span class="material-symbols-outlined" style="color: #8B5CF6; font-size: 84px;">api</span>
                         <div style="text-align: center;">
-                            <h3 style="font-size: 28px; color: white; font-weight: 800; text-transform: uppercase; margin-bottom: 10px;">Holographic Viz</h3>
-                            <p style="color: #cbd5e1; font-size: 15px;">Generative AI visualization layered in isometric 3D.</p>
+                            <h3 style="font-size: 22px; color: white; font-weight: 800; text-transform: uppercase; margin-bottom: 10px;">FastAPI Full App</h3>
+                            <p style="color: #cbd5e1; font-size: 14px;">Production-ready backend with FastAPI & Neon PostgreSQL. Full CRUD, auth, and industry-standard patterns.</p>
                         </div>
-                        <button style="margin-top: 30px; width: 100%; padding: 16px; border: 1px solid #8B5CF6; color: #8B5CF6; background: transparent; text-transform: uppercase; font-size: 13px; letter-spacing: 3px; border-radius: 6px; cursor: pointer; transition: all 0.3s ease; font-weight: bold;">Launch Repo</button>
+                        <a href="https://github.com/coddies/FastAPI-fullapp" target="_blank" class="proj-btn-purple">View on GitHub</a>
                     </div>
                 </div>
             </div>
@@ -599,36 +691,62 @@
 
     <!-- PROTOTYPE 2: PARALLAX BENTO (Full Screen) -->
     <div style="min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 120px 60px; box-sizing: border-box; background: radial-gradient(circle at center, rgba(0, 219, 233, 0.03), transparent 70%);">
-        <h2 style="color: rgba(0, 229, 255, 0.5); font-family: 'Space Grotesk', sans-serif; font-size: 14px; letter-spacing: 0.3em; text-transform: uppercase; font-weight: 600; margin-bottom: 100px; text-align: center;">PROTOTYPE_02 // PARALLAX BENTO</h2>
+        <h2 style="color: rgba(0, 229, 255, 0.5); font-family: 'Space Grotesk', sans-serif; font-size: 14px; letter-spacing: 0.3em; text-transform: uppercase; font-weight: 600; margin-bottom: 100px; text-align: center;">MY PROJECTS // FEATURED BUILDS</h2>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(500px, 1fr)); gap: 60px; width: 100%; max-width: 1600px; perspective: 2000px;">
-            <!-- Bento Item 1 -->
+            <!-- Bento Item 1: Faceless AI Studio -->
             <div class="bento-card">
                 <div class="bento-bg glass-panel" style="border-color: rgba(0, 229, 255, 0.3);">
-                    <img class="bento-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDcr7RqyXcAMhif1tceQcaeis1S0dLcaojmuIwhuEF2Kzcq-yOav5Z38AQo6OIK1wmBstI9FsgQNRXU9VXi9STyRY3t3CyMyfDYhBAAiad5gBBSnQHwTscgLmTmX-jVLsvFhIfduwUsIsRAOIIoPVAxmPsfq_8AOolmL7buPWtuV2SAGuUAw9VuEDZew9mULerU8Q_bz317qK6zAfFda7iPfj7fB5tidudK-sA-eBg1gz7IQ0Y6bRr_Pqu8FTyFhwrXT2SapEkp8sY" />
+                    <img class="bento-img" src="assets/images/faceless-preview.png" alt="Faceless AI Studio" />
                 </div>
                 <div class="bento-content">
                     <div style="background: #00E5FF; width: 80px; height: 6px; margin-bottom: 32px; box-shadow: 0 0 30px #00E5FF;"></div>
-                    <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 48px; font-weight: 900; color: white; margin-bottom: 16px; letter-spacing: -0.02em;">Neural Sentiment</h3>
-                    <p style="font-size: 20px; color: rgba(255, 255, 255, 0.8); line-height: 1.7;">Adaptive intelligence layer analyzing celestial data streams in real-time with zero latency quantum encryption.</p>
+                    <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 48px; font-weight: 900; color: white; margin-bottom: 16px; letter-spacing: -0.02em;">Faceless AI Studio</h3>
+                    <p style="font-size: 20px; color: rgba(255, 255, 255, 0.8); line-height: 1.7;">🏆 AWS Nova Hackathon Winner. All-in-one YouTube content tool — AI scripts, thumbnails, voiceovers & SEO titles powered by Amazon Nova.</p>
+                    <a href="https://faceless-ai-studio-tau.vercel.app" target="_blank" style="margin-top: 24px; display: inline-block; color: #00E5FF; font-size: 14px; font-weight: 700; text-decoration: none; letter-spacing: 2px; text-transform: uppercase;">Live App ↗</a>
                 </div>
             </div>
-            <!-- Bento Item 2 -->
+            <!-- Bento Item 2: Spin AI -->
             <div class="bento-card">
                 <div class="bento-bg glass-panel" style="border-color: rgba(139, 92, 246, 0.3);">
-                    <img class="bento-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDr5lbufPrhe-WCFVr5xsFu0nZv52Df7KELhtoBOiNhJqqekUz-NCjFFPqx3LyATwM4dejrVfGolX2AW-j14jK7Ca-4Wf7gozSYGWwogPMg_-mTRmN3HhvEpWvqeihJOY2aqtObDSMRTjH_dz0GDqm9eEBarpXIDP2fI4vd2tsWFL-_vx6CAHrtV920o2dKgj1-XEeK6mUyIN_4SiXi8JonJF3c1-sfLaJxka0VLr4PvD2snLvYclO8kd1MYKlKKO6qcTACdw1Vp-A" />
+                    <img class="bento-img" src="assets/images/spin-preview.png" alt="Spin AI" />
                 </div>
                 <div class="bento-content">
                     <div style="background: #8B5CF6; width: 80px; height: 6px; margin-bottom: 32px; box-shadow: 0 0 30px #8B5CF6;"></div>
-                    <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 48px; font-weight: 900; color: white; margin-bottom: 16px; letter-spacing: -0.02em;">Market Pulse</h3>
-                    <p style="font-size: 20px; color: rgba(255, 255, 255, 0.8); line-height: 1.7;">Economic fluctuation monitoring across orbital trade routes using predictive neural modeling and live telemetrics.</p>
+                    <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 48px; font-weight: 900; color: white; margin-bottom: 16px; letter-spacing: -0.02em;">Spin AI</h3>
+                    <p style="font-size: 20px; color: rgba(255, 255, 255, 0.8); line-height: 1.7;">AI-powered wheel spinner — type any topic, Groq API fills the wheel instantly. Confetti effects, daily spin limits, fully responsive. React + Vite.</p>
+                    <a href="https://spin-ai-brown.vercel.app" target="_blank" style="margin-top: 24px; display: inline-block; color: #8B5CF6; font-size: 14px; font-weight: 700; text-decoration: none; letter-spacing: 2px; text-transform: uppercase;">Live App ↗</a>
                 </div>
             </div>
         </div>
+        
+        <script>
+            // 3D Tilt Effect for Bento Cards
+            document.querySelectorAll('.bento-card').forEach(card => {
+                card.addEventListener('mousemove', e => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    
+                    const rotateX = ((y - centerY) / centerY) * -10; // Max 10 degrees tilt
+                    const rotateY = ((x - centerX) / centerX) * 10;
+                    
+                    card.style.transition = "transform 0.1s ease-out";
+                    card.style.transform = `perspective(2000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+                });
+
+                card.addEventListener('mouseleave', () => {
+                    card.style.transition = "transform 0.6s cubic-bezier(0.23, 1, 0.32, 1)";
+                    card.style.transform = "perspective(2000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)";
+                });
+            });
+        </script>
     </div>
 
     <!-- PROTOTYPE 3: ISOMETRIC SERVERS (Full Screen) -->
     <div style="min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 120px 20px; overflow: hidden; max-width: 100%; box-sizing: border-box; background: linear-gradient(to bottom, transparent, rgba(139, 92, 246, 0.03));">
-        <h2 style="color: rgba(0, 229, 255, 0.5); font-family: 'Space Grotesk', sans-serif; font-size: 14px; letter-spacing: 0.3em; text-transform: uppercase; font-weight: 600; margin-bottom: 140px; text-align: center;">PROTOTYPE_03 // ISOMETRIC SERVERS</h2>
+        <h2 style="color: rgba(0, 229, 255, 0.5); font-family: 'Space Grotesk', sans-serif; font-size: 14px; letter-spacing: 0.3em; text-transform: uppercase; font-weight: 600; margin-bottom: 140px; text-align: center;">MORE PROJECTS // OPEN SOURCE</h2>
         <div style="display: flex; justify-content: center; align-items: center; height: 700px; perspective: 2500px;">
             <div class="isometric-grid">
                 <!-- Server Block 1 -->
@@ -636,8 +754,9 @@
                     <div class="iso-bottom glass-panel" style="background: rgba(8, 51, 68, 0.4); border-color: rgba(0, 229, 255, 0.6);"></div>
                     <div class="iso-left glass-panel" style="background: rgba(8, 51, 68, 0.4); border-color: rgba(0, 229, 255, 0.6);"></div>
                     <div class="iso-top">
-                        <span class="material-symbols-outlined" style="color: #00E5FF; font-size: 72px; margin-bottom: 16px;">terminal</span>
-                        <span style="font-family: 'Space Grotesk', monospace; font-size: 14px; color: #a5f3fc; letter-spacing: 0.15em; font-weight: 900;">CORE_V1.ULTRA</span>
+                        <span class="material-symbols-outlined" style="color: #00E5FF; font-size: 72px; margin-bottom: 16px;">table_view</span>
+                        <span style="font-family: 'Space Grotesk', monospace; font-size: 12px; color: #a5f3fc; letter-spacing: 0.15em; font-weight: 900;">STUDENT_TABLE</span>
+                        <span style="font-family: 'Space Grotesk', sans-serif; font-size: 9px; color: rgba(165,243,252,0.6); letter-spacing: 0.1em; margin-top: 4px;">FastAPI + HTML + SQL</span>
                     </div>
                 </div>
                 <!-- Server Block 2 -->
@@ -645,8 +764,9 @@
                     <div class="iso-bottom glass-panel" style="background: rgba(59, 7, 100, 0.4); border-color: rgba(139, 92, 246, 0.6);"></div>
                     <div class="iso-left glass-panel" style="background: rgba(59, 7, 100, 0.4); border-color: rgba(139, 92, 246, 0.6);"></div>
                     <div class="iso-top">
-                        <span class="material-symbols-outlined" style="color: #8B5CF6; font-size: 72px; margin-bottom: 16px;">memory</span>
-                        <span style="font-family: 'Space Grotesk', monospace; font-size: 14px; color: #e9d5ff; letter-spacing: 0.15em; font-weight: 900;">PROC_AI.ULTRA</span>
+                        <span class="material-symbols-outlined" style="color: #8B5CF6; font-size: 72px; margin-bottom: 16px;">api</span>
+                        <span style="font-family: 'Space Grotesk', monospace; font-size: 12px; color: #e9d5ff; letter-spacing: 0.15em; font-weight: 900;">FASTAPI_APP</span>
+                        <span style="font-family: 'Space Grotesk', sans-serif; font-size: 9px; color: rgba(233,213,255,0.6); letter-spacing: 0.1em; margin-top: 4px;">Python + PostgreSQL</span>
                     </div>
                 </div>
             </div>
