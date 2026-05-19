@@ -175,24 +175,23 @@
 /* === BOMBPROOF RESPONSIVE SOLAR SYSTEM === */
 .solar-universe {
     position: relative;
-    width: 100vw;
-    margin-left: calc(-50vw + 50%);
-    height: 850px;
+    width: 100%;
+    height: 600px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    overflow: hidden; 
+    overflow: visible; 
     background: none !important;
 }
 
 .solar-system-scale {
     position: absolute;
     top: 50%;
-    left: 100%;
+    left: 50%;
     width: 800px;
     height: 800px;
-    transform: translate(-50%, -50%) scale(1.4);
+    transform: translate(-50%, -50%) scale(1);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -287,20 +286,18 @@
 
 /* MEDIA QUERIES - PREMIUM MOBILE ENLARGEMENT (NOTE/EDGE) */
 @media (max-width: 1200px) {
-    .solar-universe { height: 800px; }
-    .solar-system-scale { transform: translate(-50%, -50%) scale(1.1); left: 95%; }
+    .solar-system-scale { transform: translate(-50%, -50%) scale(0.8); }
 }
 @media (max-width: 992px) {
-    .solar-universe { height: 750px; }
-    .solar-system-scale { transform: translate(-50%, -50%) scale(0.9); left: 95%; }
+    .solar-system-scale { transform: translate(-50%, -50%) scale(0.65); }
 }
 @media (max-width: 768px) {
-    /* Tablet - Half Orbit */
-    .solar-universe { height: 700px; overflow: hidden; position: relative; }
+    /* Tablet stays centered but slightly larger */
+    .solar-universe { min-height: 550px; overflow: hidden; position: relative; }
     .solar-system-scale {
         position: absolute !important;
-        transform: translate(-50%, -50%) scale(0.8) !important;
-        left: 90% !important; 
+        transform: translate(-50%, -50%) scale(0.7) !important;
+        left: 50% !important; 
         top: 55% !important;
         margin: 0 !important;
     }
