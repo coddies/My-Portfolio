@@ -764,43 +764,6 @@
             drop-shadow(0 -10px 25px rgba(139, 92, 246, 0.3)) !important;
         }
         
-        /* Hologram scan line sweep */
-        .iso-server {
-          position: relative;
-          overflow: hidden;
-        }
-        
-        .iso-server::before {
-          content: '';
-          position: absolute;
-          left: 0;
-          top: -100%;
-          width: 100%;
-          height: 50%;
-          background: linear-gradient(
-            to bottom,
-            transparent,
-            rgba(0, 229, 255, 0.08) 40%,
-            rgba(0, 229, 255, 0.15) 50%,
-            rgba(0, 229, 255, 0.08) 60%,
-            transparent
-          );
-          z-index: 20;
-          pointer-events: none;
-          opacity: 0;
-          transition: opacity 0.3s;
-        }
-        
-        .iso-server:hover::before {
-          opacity: 1;
-          animation: holoScanLine 1s ease forwards;
-        }
-        
-        @keyframes holoScanLine {
-          0%   { top: -50%; }
-          100% { top: 120%; }
-        }
-        
         /* Flicker effect */
         @keyframes holoFlicker {
           0%, 89%, 91%, 93%, 100% { opacity: 1; }
@@ -952,27 +915,7 @@
     </div>
     </div>
 
-    <script>
-        (function(){
-          // Replace 'YOUR_EXACT_CARD_CLASS' with real class
-          const cards = document.querySelectorAll('.iso-server');
-          if(!cards.length) {
-            console.warn('Hologram: no cards found — check selector');
-            return;
-          }
-        
-          cards.forEach(card => {
-            card.addEventListener('mouseenter', () => {
-              card.style.transition = 'transform 0.35s cubic-bezier(0.23,1,0.32,1), filter 0.35s ease';
-            });
-        
-            card.addEventListener('mouseleave', () => {
-              card.style.transform = '';
-              card.style.filter = '';
-            });
-          });
-        })();
-    </script>
+
 </section>
 
 <section id="card-5" class="card state-below">
