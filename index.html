@@ -686,6 +686,22 @@
                 50% { transform: translateZ(165px); }
             }
 
+            /* Override Desktop Hover for Mobile (Keep laid down) */
+            .iso-server:hover {
+                transform: none !important;
+                z-index: 10 !important;
+            }
+            .iso-server:nth-child(1):hover {
+                animation: floatS1 4s ease-in-out infinite, holoFlicker 2.5s ease infinite !important;
+            }
+            .iso-server.purple:hover {
+                animation: floatS2 4s ease-in-out infinite, holoFlicker 2.5s ease infinite !important;
+            }
+            .iso-server:hover .iso-bottom,
+            .iso-server:hover .iso-left {
+                opacity: 1 !important;
+            }
+
             .proto-wrapper { padding-left: 20px !important; padding-right: 20px !important; margin-bottom: 60px !important; padding-top: 40px !important; padding-bottom: 40px !important; }
             .proto-3-wrapper { height: auto !important; padding: 40px 20px !important; overflow: hidden; }
         }
