@@ -264,14 +264,19 @@ if(tEl) type();
     draw();
 })();
 
-// Cursor
+// Cursor (100% Compositor Thread & GPU Accelerated Smooth Cursor)
 (function() {
     const dW = document.querySelector('.cursor-dot-wrap'), rW = document.querySelector('.cursor-ring-wrap');
     if (dW && rW && window.matchMedia('(pointer: fine)').matches) {
-        let mX = 0, mY = 0, rX = 0, rY = 0;
-        window.addEventListener('mousemove', (e) => { mX = e.clientX; mY = e.clientY; });
-        const anim = () => { dW.style.transform = `translate3d(${mX}px,${mY}px,0)`; rX += (mX-rX)*0.2; rY += (mY-rY)*0.2; rW.style.transform = `translate3d(${rX}px,${rY}px,0)`; requestAnimationFrame(anim); };
-        anim();
+        window.addEventListener('mousemove', (e) => {
+            const x = e.clientX;
+            const y = e.clientY;
+            // Update wrapper positions instantly. The smooth animations/trails are handled 
+            // entirely in CSS on the GPU/Compositor thread, making it 144Hz+ buttery smooth!
+            dW.style.transform = `translate3d(${x}px,${y}px,0)`;
+            rW.style.transform = `translate3d(${x}px,${y}px,0)`;
+        }, { passive: true });
+
         document.addEventListener('mouseover', (e) => { if (e.target.closest('a, button, .nav-btn, .skill-3d-card, .cs-card, .hybrid-cube')) document.body.classList.add('is-hovering'); });
         document.addEventListener('mouseout', (e) => { if (e.target.closest('a, button, .nav-btn, .skill-3d-card, .cs-card, .hybrid-cube')) document.body.classList.remove('is-hovering'); });
     }
