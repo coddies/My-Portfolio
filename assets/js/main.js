@@ -16,8 +16,8 @@ function showNavPopup() {
         icon.textContent = "👈👉";
         text.textContent = "Swipe left/right to explore";
     } else {
-        icon.textContent = "🖱️";
-        text.textContent = "Click arrows or use keyboard to explore";
+        icon.textContent = "⌨️";
+        text.textContent = "Use Arrow Keys ⬅️ ➡️ to explore";
     }
 
     setTimeout(() => {
