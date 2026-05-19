@@ -1021,6 +1021,20 @@
             transition: all 0.3s ease;
         }
 
+        /* 3D Cyber Heartbeat Floating Animations for Mobile */
+        @keyframes mobileBladeFloat1 {
+            0%, 100% { transform: perspective(1000px) rotateX(1deg) rotateY(-3deg) translateZ(0); }
+            50% { transform: perspective(1000px) rotateX(3deg) rotateY(1deg) translateZ(10px); }
+        }
+        @keyframes mobileBladeFloat2 {
+            0%, 100% { transform: perspective(1000px) rotateX(0deg) rotateY(-5deg) translateZ(0); }
+            50% { transform: perspective(1000px) rotateX(2deg) rotateY(-1deg) translateZ(6px); }
+        }
+        @keyframes mobileBladeFloat3 {
+            0%, 100% { transform: perspective(1000px) rotateX(2deg) rotateY(-2deg) translateZ(0); }
+            50% { transform: perspective(1000px) rotateX(4deg) rotateY(2deg) translateZ(14px); }
+        }
+
         /* Mobile Adjustments for 3D Stack */
         @media (max-width: 768px) {
             .featured-3d-scene {
@@ -1030,13 +1044,34 @@
                 padding: 24px !important;
             }
             .cyber-server-stack {
-                transform: perspective(1000px) rotateX(2deg) rotateY(-4deg) !important;
-                gap: 12px !important;
+                transform: perspective(1000px) rotateX(4deg) rotateY(-10deg) !important;
+                gap: 14px !important;
             }
             .cert-blade-row {
                 padding: 14px 16px !important;
                 border-radius: 10px !important;
+                background: rgba(255, 255, 255, 0.03) !important;
+                border: 1px solid rgba(255, 255, 255, 0.08) !important;
+                transition: transform 0.25s ease-out, background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease !important;
             }
+            
+            /* Assign the slow 3D holographic floats to each blade row */
+            .cert-blade-row:nth-child(1) { animation: mobileBladeFloat1 6s ease-in-out infinite alternate; }
+            .cert-blade-row:nth-child(2) { animation: mobileBladeFloat2 6.5s ease-in-out infinite alternate; animation-delay: 0.5s; }
+            .cert-blade-row:nth-child(3) { animation: mobileBladeFloat3 5.8s ease-in-out infinite alternate; animation-delay: 1.0s; }
+            .cert-blade-row:nth-child(4) { animation: mobileBladeFloat1 6.2s ease-in-out infinite alternate; animation-delay: 1.5s; }
+            .cert-blade-row:nth-child(5) { animation: mobileBladeFloat2 6.8s ease-in-out infinite alternate; animation-delay: 2.0s; }
+            .cert-blade-row:nth-child(6) { animation: mobileBladeFloat3 5.5s ease-in-out infinite alternate; animation-delay: 2.5s; }
+
+            /* Touch/active popping state overrides mobile animations */
+            .cert-blade-row:hover, .cert-blade-row:active {
+                animation: none !important;
+                transform: translateX(12px) translateZ(25px) scale(1.025) !important;
+                background: rgba(255, 255, 255, 0.07) !important;
+                border-color: rgba(255, 255, 255, 0.25) !important;
+                box-shadow: -10px 10px 25px rgba(0, 0, 0, 0.5) !important;
+            }
+            
             .cert-blade-row h4 {
                 font-size: 13px !important;
             }
