@@ -283,7 +283,7 @@ if(tEl) type();
 })();
 
 // Case Studies
-const caseStudiesData = [{ title: 'Faceless AI Video Studio', category: 'AI Automation', resultBadge: '🏆 AWS Nova Hackathon Winner', resultDetails: 'Cut production time by 98%.', liveLink: 'https://faceless-ai-studio-tau.vercel.app/', liveText: 'faceless-ai-studio-tau' }, { title: 'AI Chatbot Assistant', category: 'AI / NLP', resultBadge: '⚡ High Performance NLP', resultDetails: 'Automated 90% of query handling.', liveLink: 'https://github.com/coddies/AI-Chatbot', liveText: 'View Repository' }, { title: 'Modern Glassmorphism Portfolio', category: 'Frontend Development', resultBadge: '💎 Premium Design Architecture', resultDetails: 'Delivered top-tier UX.', liveLink: 'https://github.com/coddies/My-Portfolio', liveText: 'View Source Code' }];
+const caseStudiesData = [{ title: 'Neural Sentiment Engine', category: 'Deep NLP Analytics', resultBadge: '🚀 +98.2% Accurate Sentiment Mapping', resultDetails: 'Deployed custom LLM topologies and high-throughput vector index networks executing within sub-millisecond constraints under high multi-tenant loads.', liveLink: '#', liveText: 'Case Study Architecture Verified' }, { title: 'AI Chatbot Assistant', category: 'AI / NLP', resultBadge: '⚡ High Performance NLP', resultDetails: 'Automated 90% of query handling.', liveLink: 'https://github.com/coddies/AI-Chatbot', liveText: 'View Repository' }, { title: 'Modern Glassmorphism Portfolio', category: 'Frontend Development', resultBadge: '💎 Premium Design Architecture', resultDetails: 'Delivered top-tier UX.', liveLink: 'https://github.com/coddies/My-Portfolio', liveText: 'View Source Code' }];
 const csM = document.getElementById('csModal');
 function openCs(idx) {
     const d = caseStudiesData[idx]; if(!d||!csM) return;

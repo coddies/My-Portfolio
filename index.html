@@ -298,7 +298,7 @@
         overflow-x: hidden !important;
     }
     /* Tablet stays centered but slightly larger */
-    .solar-universe { min-height: 550px; overflow: hidden; position: relative; }
+    .solar-universe { min-height: 550px; overflow: visible; position: relative; }
     .solar-system-scale {
         position: absolute !important;
         transform: translate(-50%, -50%) scale(0.7) !important;
@@ -310,7 +310,7 @@
 }
 @media (max-width: 600px) {
     /* Large Mobile - Half Orbit */
-    .solar-universe { min-height: 900px; overflow: hidden; }
+    .solar-universe { min-height: 900px; overflow: visible; }
     .solar-system-scale { 
         transform: translate(-50%, -50%) scale(1.1) !important; 
         left: 100% !important; 
@@ -319,7 +319,7 @@
 }
 @media (max-width: 480px) {
     /* Standard Mobile - Half Orbit */
-    .solar-universe { min-height: 850px; overflow: hidden; }
+    .solar-universe { min-height: 850px; overflow: visible; }
     .solar-system-scale { 
         transform: translate(-50%, -50%) scale(1.0) !important; 
         left: 100% !important; 
@@ -328,7 +328,7 @@
 }
 @media (max-width: 380px) {
     /* Small Mobile - Half Orbit */
-    .solar-universe { min-height: 750px; overflow: hidden; }
+    .solar-universe { min-height: 750px; overflow: visible; }
     .solar-system-scale { 
         transform: translate(-50%, -50%) scale(0.9) !important; 
         left: 100% !important; 
@@ -337,7 +337,7 @@
 }
     </style>
     <!-- Use inline styles to override any global flex-direction: row -->
-    <div class="card-inner w-full" style="display: block !important; position: relative !important; overflow: hidden !important;">
+    <div class="card-inner w-full" style="display: block !important; position: relative !important; overflow: visible !important;">
         
         <!-- STATUS TERMINAL WINDOW (Top Left) -->
         <div class="z-20 absolute top-8 left-4 md:left-8 text-left pointer-events-none" style="border-left: 3px solid #00E5FF; padding-left: 15px; padding-top: 10px; padding-bottom: 10px; padding-right: 20px; width: auto; min-width: 300px; max-width: 90vw;">
@@ -491,7 +491,11 @@
                             <span class="material-symbols-outlined text-[#8B5CF6] text-2xl">video_camera_front</span>
                         </div>
                     </div>
+                </div>
 
+            </div>
+        </div>
+    </div>
 </section>
 
 <!-- ════════════════════════════
@@ -1396,7 +1400,6 @@
                                     <a href="${linkPath}" target="_blank" style="display: inline-block; background: var(--purple); color: white; padding: 12px 32px; border-radius: 99px; font-weight: 700; text-decoration: none; font-size: 13px; letter-spacing: 1.5px; box-shadow: 0 0 20px rgba(139,92,246,0.4); transition: all 0.3s ease;" onmouseover="this.style.background='#7c3aed'; this.style.transform='translateY(-2px)';" onmouseout="this.style.background='var(--purple)'; this.style.transform='translateY(0)';">VERIFY CREDENTIAL ↗</a>
                                 `;
                             }
-                            
                             dyDetail.innerHTML = extraContent;
                             const modalContent = certModal.querySelector('.modal-content');
                             if (modalContent) {
@@ -1415,63 +1418,450 @@
      CARD 6 — CASE STUDIES
 ════════════════════════════ -->
 <section id="card-6" class="card state-below">
-    <div class="card-inner">
-        <div style="width:100%;max-width:1100px;">
-            <div class="section-header">
-                <span class="tagline" style="color:var(--cyan);">DEEP DIVES</span>
-                <h2 class="section-title">Case Studies</h2>
-                <div class="accent-line"></div>
+    <style>
+        /* Card 6 Custom 3D Quantum Cube Styles */
+        .quantum-grid-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 32px;
+            align-items: center;
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        @media (min-width: 992px) {
+            .quantum-grid-container {
+                grid-template-columns: 3.2fr 5.6fr 3.2fr;
+            }
+        }
+
+        /* Overview Panel Glass card */
+        .q-glass-panel {
+            background: rgba(6, 11, 20, 0.45);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 20px 45px rgba(0,0,0,0.5), inset 0 0 20px rgba(255,255,255,0.02);
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .q-glass-panel:hover {
+            border-color: rgba(0, 229, 255, 0.3);
+            box-shadow: 0 30px 60px rgba(0, 229, 255, 0.1);
+            transform: translateY(-4px);
+        }
+
+        /* 3D Scene viewport */
+        .q-scene-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            padding: 40px 0;
+        }
+
+        .q-scene-3d {
+            width: 260px;
+            height: 260px;
+            perspective: 1200px;
+        }
+
+        @media (min-width: 576px) {
+            .q-scene-3d {
+                width: 300px;
+                height: 300px;
+            }
+        }
+
+        .q-cube {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: qRotateCube 18s infinite linear;
+            transition: all 0.6s ease;
+        }
+
+        .q-cube-container:hover .q-cube {
+            animation-duration: 5s;
+        }
+
+        .q-cube-face {
+            position: absolute;
+            width: 260px;
+            height: 260px;
+            border: 1px solid rgba(0, 229, 255, 0.25);
+            background: rgba(6, 11, 20, 0.85);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 10px;
+            overflow: hidden;
+            box-shadow: inset 0 0 25px rgba(0, 229, 255, 0.15), 0 0 15px rgba(0,229,255,0.05);
+            backface-visibility: visible;
+        }
+
+        @media (min-width: 576px) {
+            .q-cube-face {
+                width: 300px;
+                height: 300px;
+            }
+            .q-face-front  { transform: rotateY(0deg) translateZ(150px); }
+            .q-face-back   { transform: rotateY(180deg) translateZ(150px); }
+            .q-face-right  { transform: rotateY(90deg) translateZ(150px); }
+            .q-face-left   { transform: rotateY(-90deg) translateZ(150px); }
+            .q-face-top    { transform: rotateX(90deg) translateZ(150px); }
+            .q-face-bottom { transform: rotateX(-90deg) translateZ(150px); }
+        }
+
+        @media (max-width: 575px) {
+            .q-face-front  { transform: rotateY(0deg) translateZ(130px); }
+            .q-face-back   { transform: rotateY(180deg) translateZ(130px); }
+            .q-face-right  { transform: rotateY(90deg) translateZ(130px); }
+            .q-face-left   { transform: rotateY(-90deg) translateZ(130px); }
+            .q-face-top    { transform: rotateX(90deg) translateZ(130px); }
+            .q-face-bottom { transform: rotateX(-90deg) translateZ(130px); }
+        }
+
+        @keyframes qRotateCube {
+            from { transform: rotateX(0deg) rotateY(0deg); }
+            to { transform: rotateX(360deg) rotateY(360deg); }
+        }
+
+        /* Floating details around standard cube */
+        .q-floating-indicator {
+            position: absolute;
+            font-family: monospace;
+            font-size: 9px;
+            color: rgba(0, 229, 255, 0.6);
+            pointer-events: none;
+            display: none;
+        }
+
+        @media (min-width: 1200px) {
+            .q-floating-indicator {
+                display: block;
+            }
+        }
+
+        .q-binary-stream {
+            position: absolute;
+            inset: 0;
+            opacity: 0.15;
+            font-family: monospace;
+            font-size: 8px;
+            color: var(--cyan);
+            line-height: 1.1;
+            padding: 8px;
+            pointer-events: none;
+            overflow: hidden;
+            word-break: break-all;
+            text-align: left;
+        }
+
+        /* Shimmer bar progress */
+        @keyframes qShimmer {
+            0% { transform: translateY(100%); }
+            100% { transform: translateY(-100%); }
+        }
+
+        /* Telemetry items */
+        .q-telemetry-box {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+        }
+
+        .q-analytics-bar {
+            flex: 1;
+            background: rgba(0, 229, 255, 0.06);
+            border-top: 2px solid rgba(0, 229, 255, 0.4);
+            transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .q-analytics-bar::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent, rgba(0, 229, 255, 0.15), transparent);
+            animation: qShimmer 2s infinite linear;
+        }
+
+        .q-analytics-bar.purple-bar {
+            background: rgba(139, 92, 246, 0.06);
+            border-color: rgba(139, 92, 246, 0.4);
+        }
+
+        .q-analytics-bar.purple-bar::after {
+            background: linear-gradient(180deg, transparent, rgba(139, 92, 246, 0.15), transparent);
+        }
+
+        .q-bar-bubble {
+            position: absolute;
+            top: -28px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--cyan);
+            color: #060B14;
+            font-size: 9px;
+            font-weight: bold;
+            padding: 2px 6px;
+            border-radius: 4px;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            pointer-events: none;
+        }
+
+        .q-analytics-bar:hover .q-bar-bubble {
+            opacity: 1;
+        }
+
+        .q-analytics-bar:hover {
+            background: rgba(0, 229, 255, 0.12) !important;
+            border-color: var(--cyan) !important;
+        }
+
+        .q-analytics-bar.purple-bar:hover {
+            background: rgba(139, 92, 246, 0.12) !important;
+            border-color: var(--purple) !important;
+        }
+
+        .q-analytics-bar.purple-bar:hover .q-bar-bubble {
+            background: var(--purple);
+            color: #fff;
+        }
+    </style>
+
+    <div class="card-inner" style="padding: 40px 20px;">
+        <div style="width:100%; max-width:1100px;">
+
+            <!-- Header -->
+            <div style="margin-bottom: 40px; text-align: left;">
+                <div style="display: inline-flex; align-items: center; gap: 8px; px: 12px; padding: 6px 14px; border: 1px solid rgba(0, 229, 255, 0.2); background: rgba(0, 229, 255, 0.04); border-radius: 99px; margin-bottom: 16px;">
+                    <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--cyan); animation: pulse 2s infinite;"></span>
+                    <span style="font-family: monospace; font-size: 10px; color: var(--cyan); letter-spacing: 1px; text-transform: uppercase; font-weight: bold;">LIVE_SIMULATION_ACTIVE</span>
+                </div>
+                <h2 class="syne-font" style="font-size: 38px; color: #fff; font-weight: 800; letter-spacing: -1px; text-transform: uppercase; margin-bottom: 6px;">QUANTUM DATA CUBE</h2>
+                <div class="accent-line" style="margin: 0; width: 80px; background: linear-gradient(90deg, var(--cyan), transparent);"></div>
             </div>
-            <div class="cs-grid">
-                <div class="cs-card anim-in" data-cs="0" style="cursor: pointer;">
-                    <div class="cs-card-img cs-img-3">
-                        <span class="cs-card-tag">AI Automation</span>
+
+            <!-- Grid Content -->
+            <div class="quantum-grid-container">
+
+                <!-- COL 1: Overview & Profile -->
+                <div class="q-glass-panel" style="display: flex; flex-direction: column; gap: 20px;">
+                    <div style="position: absolute; top: 0; right: 0; padding: 12px; opacity: 0.1;">
+                        <span class="material-symbols-outlined" style="font-size: 48px; color: #fff;">info</span>
                     </div>
-                    <div class="cs-card-body">
-                        <h3 class="cs-card-title">Faceless AI Video Pipeline</h3>
-                        <p class="cs-card-summary">Content creators spend hours editing. Built an automated pipeline from script to finish video.</p>
-                        <div class="cs-card-footer">
-                            <div class="cs-tags"><span class="cs-tag">Python</span><span class="cs-tag">FFmpeg</span><span class="cs-tag">elevenlabs</span></div>
-                            <button class="cs-read-btn" data-cs="0">Read More →</button>
+                    
+                    <div>
+                        <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 16px; font-weight: 800; color: var(--cyan); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px;">PROJECT_OVERVIEW</h3>
+                        <p style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13px; color: var(--text-muted); line-height: 1.6; margin: 0;">
+                            Neural processing architecture designed for multi-dimensional data visualization. The Cube serves as a local node for deep space signal decryption and spatial sentiment mapping.
+                        </p>
+                    </div>
+
+                    <div style="border-t: 1px solid rgba(255,255,255,0.08); padding-top: 18px; display: flex; align-items: center; gap: 14px;">
+                        <div style="position: relative;">
+                            <div style="width: 48px; height: 48px; border-radius: 50%; border: 2px solid rgba(0, 229, 255, 0.4); padding: 2px;">
+                                <img src="assets/images/burhan.png" alt="Operator" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+                            </div>
+                            <div style="position: absolute; bottom: -2px; right: -2px; width: 12px; height: 12px; bg-color: #10B981; border: 2px solid #060B14; border-radius: 50%; background: #10B981;"></div>
+                        </div>
+                        <div>
+                            <div style="font-family: monospace; font-size: 12px; color: var(--cyan); font-weight: bold;">UNIT_729</div>
+                            <div style="font-family: 'Space Grotesk', sans-serif; font-size: 9px; color: #849495; text-transform: uppercase; font-weight: bold; letter-spacing: 1px;">Lead Analyst</div>
+                        </div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 8px;">
+                        <div class="q-telemetry-box">
+                            <div style="font-family: 'Space Grotesk', sans-serif; font-size: 9px; color: #849495; text-transform: uppercase; font-weight: bold; margin-bottom: 4px;">LATENCY</div>
+                            <div style="font-family: monospace; font-size: 12px; color: #fff; font-weight: bold;">0.0004ms</div>
+                        </div>
+                        <div class="q-telemetry-box">
+                            <div style="font-family: 'Space Grotesk', sans-serif; font-size: 9px; color: #849495; text-transform: uppercase; font-weight: bold; margin-bottom: 4px;">STABILITY</div>
+                            <div style="font-family: monospace; font-size: 12px; color: var(--cyan); font-weight: bold;">99.98%</div>
                         </div>
                     </div>
                 </div>
 
-                <div class="cs-card anim-in" data-cs="1" style="cursor: pointer;">
-                    <div class="cs-card-img cs-img-1">
-                        <span class="cs-card-tag">AI / NLP</span>
+                <!-- COL 2: Center rotating 3D Cube viewport -->
+                <div class="q-scene-wrapper q-cube-container" onclick="openCs(0)">
+                    
+                    <!-- Decorative layout lines -->
+                    <div class="q-floating-indicator" style="top: 0; left: -40px; border-left: 2px solid rgba(0, 229, 255, 0.3); border-top: 2px solid rgba(0, 229, 255, 0.3); padding: 8px 12px; border-top-left-radius: 6px;">
+                        DATA_FLUX: 14.8 TB/S
                     </div>
-                    <div class="cs-card-body">
-                        <h3 class="cs-card-title">AI Chatbot Assistant</h3>
-                        <p class="cs-card-summary">Users needed a smarter way to interact with data and get instant, accurate human-like responses.</p>
-                        <div class="cs-card-footer">
-                            <div class="cs-tags"><span class="cs-tag">Python</span><span class="cs-tag">LangChain</span><span class="cs-tag">OpenAI</span></div>
-                            <button class="cs-read-btn" data-cs="1">Read More →</button>
+                    <div class="q-floating-indicator" style="bottom: 0; right: -40px; border-right: 2px solid rgba(0, 229, 255, 0.3); border-bottom: 2px solid rgba(0, 229, 255, 0.3); padding: 8px 12px; border-bottom-right-radius: 6px; text-align: right;">
+                        NEURAL_NET: ACTIVE
+                    </div>
+
+                    <div class="q-scene-3d">
+                        <div class="q-cube" id="quantumCube">
+                            
+                            <!-- Front face -->
+                            <div class="q-cube-face q-face-front">
+                                <div class="q-binary-stream" id="qStreamFront"></div>
+                                <div style="text-align: center; z-index: 2;">
+                                    <span class="material-symbols-outlined" style="font-size: 42px; color: var(--cyan); margin-bottom: 8px;">hub</span>
+                                    <div style="font-weight: bold; color: var(--cyan); letter-spacing: 1.5px; font-family: 'Space Grotesk', sans-serif;">CORE_SYNC</div>
+                                </div>
+                            </div>
+                            
+                            <!-- Back face -->
+                            <div class="q-cube-face q-face-back">
+                                <div class="q-binary-stream" id="qStreamBack"></div>
+                                <div style="text-align: center; z-index: 2;">
+                                    <span class="material-symbols-outlined" style="font-size: 42px; color: var(--purple); margin-bottom: 8px;">terminal</span>
+                                    <div style="font-weight: bold; color: var(--purple); letter-spacing: 1.5px; font-family: 'Space Grotesk', sans-serif;">ROOT_ACCESS</div>
+                                </div>
+                            </div>
+
+                            <!-- Right face -->
+                            <div class="q-cube-face q-face-right">
+                                <div style="text-align: center; padding: 0 20px; width: 100%;">
+                                    <div style="width: 100%; height: 3px; background: rgba(0, 229, 255, 0.15); border-radius: 99px; margin-bottom: 12px; overflow: hidden; position: relative;">
+                                        <div style="position: absolute; inset: 0; background: var(--cyan); width: 75%; animation: pulse 2s infinite;"></div>
+                                    </div>
+                                    <div style="font-family: monospace; font-size: 8px; color: #849495; letter-spacing: 1px;">DECRYPTING...</div>
+                                </div>
+                            </div>
+
+                            <!-- Left face -->
+                            <div class="q-cube-face q-face-left">
+                                <div style="text-align: center;">
+                                    <span class="material-symbols-outlined" style="font-size: 42px; color: rgba(0,229,255,0.4); margin-bottom: 8px;">token</span>
+                                    <div style="font-weight: bold; color: #849495; letter-spacing: 1px; font-family: 'Space Grotesk', sans-serif;">ASSET_V4</div>
+                                </div>
+                            </div>
+
+                            <!-- Top face -->
+                            <div class="q-cube-face q-face-top">
+                                <div style="width: 100%; height: 100%; padding: 16px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; opacity: 0.3;">
+                                    <div style="background: rgba(0, 229, 255, 0.2);"></div><div style="background: rgba(0, 229, 255, 0.4);"></div><div style="background: rgba(0, 229, 255, 0.1);"></div><div style="background: rgba(0, 229, 255, 0.3);"></div>
+                                    <div style="background: rgba(0, 229, 255, 0.3);"></div><div style="background: rgba(0, 229, 255, 0.1);"></div><div style="background: rgba(0, 229, 255, 0.4);"></div><div style="background: rgba(0, 229, 255, 0.2);"></div>
+                                    <div style="background: rgba(0, 229, 255, 0.2);"></div><div style="background: rgba(0, 229, 255, 0.4);"></div><div style="background: rgba(0, 229, 255, 0.1);"></div><div style="background: rgba(0, 229, 255, 0.3);"></div>
+                                    <div style="background: rgba(0, 229, 255, 0.3);"></div><div style="background: rgba(0, 229, 255, 0.1);"></div><div style="background: rgba(0, 229, 255, 0.4);"></div><div style="background: rgba(0, 229, 255, 0.2);"></div>
+                                </div>
+                            </div>
+
+                            <!-- Bottom face -->
+                            <div class="q-cube-face q-face-bottom">
+                                <div style="border: 1px solid rgba(0, 229, 255, 0.2); background: rgba(0, 229, 255, 0.05); padding: 8px 12px; font-family: monospace; font-size: 8px; color: var(--cyan); border-radius: 4px;">
+                                    AXIS_LOCKED_01
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
 
-                <div class="cs-card anim-in" data-cs="2" style="cursor: pointer;">
-                    <div class="cs-card-img cs-img-2">
-                        <span class="cs-card-tag">Frontend Development</span>
+                <!-- COL 3: Analytics -->
+                <div class="q-glass-panel" style="display: flex; flex-direction: column; gap: 20px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 12px;">
+                        <h4 style="font-family: 'Space Grotesk', sans-serif; font-size: 11px; color: #849495; font-weight: bold; letter-spacing: 1px; text-transform: uppercase;">Fragmented_Analytics</h4>
+                        <span class="material-symbols-outlined" style="color: var(--cyan); animation: pulse 2s infinite;">query_stats</span>
                     </div>
-                    <div class="cs-card-body">
-                        <h3 class="cs-card-title">Modern Glassmorphism Portfolio</h3>
-                        <p class="cs-card-summary">Standard portfolios lack the premium feel and interactivity required for a modern AI developer.</p>
-                        <div class="cs-card-footer">
-                            <div class="cs-tags"><span class="cs-tag">HTML</span><span class="cs-tag">CSS</span><span class="cs-tag">JavaScript</span></div>
-                            <button class="cs-read-btn" data-cs="2">Read More →</button>
+
+                    <!-- Custom bar chart representation -->
+                    <div style="height: 120px; width: 100%; display: flex; align-items: flex-end; gap: 8px; border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding-bottom: 4px; position: relative;">
+                        <!-- Grid horizontal rules -->
+                        <div style="position: absolute; bottom: 25%; left: 0; right: 0; height: 1px; border-bottom: 1px dashed rgba(255,255,255,0.04); pointer-events: none;"></div>
+                        <div style="position: absolute; bottom: 50%; left: 0; right: 0; height: 1px; border-bottom: 1px dashed rgba(255,255,255,0.04); pointer-events: none;"></div>
+                        <div style="position: absolute; bottom: 75%; left: 0; right: 0; height: 1px; border-bottom: 1px dashed rgba(255,255,255,0.04); pointer-events: none;"></div>
+
+                        <!-- Bar 1 -->
+                        <div class="q-analytics-bar" style="height: 40%;">
+                            <div class="q-bar-bubble">40%</div>
+                        </div>
+                        <!-- Bar 2 -->
+                        <div class="q-analytics-bar" style="height: 70%;">
+                            <div class="q-bar-bubble">70%</div>
+                        </div>
+                        <!-- Bar 3 -->
+                        <div class="q-analytics-bar purple-bar" style="height: 55%;">
+                            <div class="q-bar-bubble">55%</div>
+                        </div>
+                        <!-- Bar 4 -->
+                        <div class="q-analytics-bar" style="height: 90%;">
+                            <div class="q-bar-bubble">90%</div>
+                        </div>
+                        <!-- Bar 5 -->
+                        <div class="q-analytics-bar" style="height: 60%;">
+                            <div class="q-bar-bubble">60%</div>
                         </div>
                     </div>
+
+                    <div style="display: flex; justify-content: space-around; text-align: center; margin-top: 4px;">
+                        <div>
+                            <div style="font-family: monospace; font-size: 16px; color: var(--cyan); font-weight: bold;">12.4k</div>
+                            <div style="font-family: 'Space Grotesk', sans-serif; font-size: 8px; color: #849495; text-transform: uppercase; font-weight: bold; letter-spacing: 0.5px; margin-top: 2px;">PACKETS/SEC</div>
+                        </div>
+                        <div>
+                            <div style="font-family: monospace; font-size: 16px; color: var(--purple); font-weight: bold;">0.03%</div>
+                            <div style="font-family: 'Space Grotesk', sans-serif; font-size: 8px; color: #849495; text-transform: uppercase; font-weight: bold; letter-spacing: 0.5px; margin-top: 2px;">ERROR_RATE</div>
+                        </div>
+                    </div>
+
+                    <!-- Generate Report Trigger -->
+                    <button class="cs-read-btn" data-cs="0" style="width: 100%; border: 1px solid rgba(0, 229, 255, 0.3); background: transparent; color: var(--cyan); font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 11px; padding: 12px 20px; border-radius: 6px; letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 0 15px rgba(0, 229, 255, 0.05);" onmouseover="this.style.background='var(--cyan)'; this.style.color='#060B14'; this.style.boxShadow='0 0 25px rgba(0, 229, 255, 0.45)';" onmouseout="this.style.background='transparent'; this.style.color='var(--cyan)'; this.style.boxShadow='0 0 15px rgba(0, 229, 255, 0.05)';">
+                        GENERATE REPORT
+                    </button>
+
+                    <!-- Alert message -->
+                    <div style="display: flex; align-items: flex-start; gap: 10px; border-left: 2px solid var(--cyan); background: rgba(0, 229, 255, 0.04); border-radius: 4px; padding: 10px;">
+                        <span class="material-symbols-outlined" style="color: var(--cyan); font-size: 18px; flex-shrink: 0;">warning</span>
+                        <p style="font-family: monospace; font-size: 9px; color: rgba(0,229,255,0.85); line-height: 1.4; margin: 0;">
+                            WARNING: Anomalous spectral data detected in sector 4-G. Verification required.
+                        </p>
+                    </div>
                 </div>
+
             </div>
-            
-            
-            
 
-</div>
         </div>
     </div>
+
+    <!-- Self-contained Binary Stream Generator Script inside Card 6 -->
+    <script>
+        (function() {
+            function updateBinaryStream(elementId) {
+                const el = document.getElementById(elementId);
+                if (!el) return;
+                let text = "";
+                for (let i = 0; i < 90; i++) {
+                    text += Math.round(Math.random()) + (Math.random() > 0.5 ? " " : "");
+                }
+                el.innerText = text;
+            }
+            
+            // Initial generation
+            updateBinaryStream('qStreamFront');
+            updateBinaryStream('qStreamBack');
+
+            // Interval update
+            const intervalId = setInterval(() => {
+                updateBinaryStream('qStreamFront');
+                updateBinaryStream('qStreamBack');
+            }, 600);
+
+            // Clean up interval if needed on re-renders, but since it's a static portfolio it's perfectly safe
+        })();
+    </script>
 </section>
 
 <!-- ════════════════════════════
