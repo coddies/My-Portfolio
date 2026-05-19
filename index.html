@@ -292,23 +292,23 @@
     .solar-system-scale { transform: translate(-50%, -50%) scale(0.65); }
 }
 @media (max-width: 768px) {
-    .solar-universe { min-height: 700px; overflow: hidden; position: relative; }
+    .solar-universe { min-height: 550px; overflow: hidden; position: relative; }
     .solar-system-scale {
         position: absolute !important;
-        transform: translate(-50%, -50%) scale(0.9) !important;
-        left: 100% !important; /* Touch the edge perfectly */
-        top: 50% !important;
+        transform: translate(-50%, -50%) scale(0.65) !important;
+        left: 50% !important; /* Centered perfectly */
+        top: 55% !important;
         margin: 0 !important;
     }
-    .planet-text { font-size: 15px !important; color: #fff; text-shadow: 0 0 10px #000; }
+    .planet-text { font-size: 14px !important; color: #fff; text-shadow: 0 0 10px #000; }
 }
 @media (max-width: 480px) {
-    .solar-universe { min-height: 650px; }
-    .solar-system-scale { transform: translate(-50%, -50%) scale(0.8) !important; left: 100% !important; }
+    .solar-universe { min-height: 500px; }
+    .solar-system-scale { transform: translate(-50%, -50%) scale(0.5) !important; left: 50% !important; top: 55% !important; }
 }
 @media (max-width: 380px) {
-    .solar-universe { min-height: 600px; }
-    .solar-system-scale { transform: translate(-50%, -50%) scale(0.7) !important; left: 105% !important; }
+    .solar-universe { min-height: 450px; }
+    .solar-system-scale { transform: translate(-50%, -50%) scale(0.42) !important; left: 50% !important; top: 55% !important; }
 }
     </style>
     <!-- Use inline styles to override any global flex-direction: row -->
@@ -486,7 +486,7 @@
         .animate-orbital { animation: orbital-rotation 25s linear infinite; }
         .animate-orbital:hover { animation-play-state: paused; }
 
-        .isometric-grid { transform-style: preserve-3d; display: flex; gap: 80px; justify-content: center; }
+        .isometric-grid { transform: rotateX(60deg) rotateZ(-45deg); transform-style: preserve-3d; display: flex; gap: 80px; justify-content: center; }
         
         .glass-panel {
             background: rgba(6, 11, 20, 0.4);
@@ -541,8 +541,8 @@
         .iso-top { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; transition: all 0.5s; }
         .iso-server:hover .iso-top { background: rgba(0, 229, 255, 0.15); box-shadow: 0 0 30px rgba(0, 229, 255, 0.3); }
         .iso-server.purple:hover .iso-top { background: rgba(139, 92, 246, 0.15); box-shadow: 0 0 30px rgba(139, 92, 246, 0.3); }
-        .iso-bottom { display: none; }
-        .iso-left { display: none; }
+        .iso-bottom { position: absolute; inset: 0; transform-origin: bottom; transform: rotateX(-90deg) translateY(50%); height: 60px; }
+        .iso-left { position: absolute; inset: 0; transform-origin: left; transform: rotateY(90deg) translateX(-50%); width: 60px; }
 
         /* ── PROJECT BUTTONS ── */
         @keyframes btn-ripple {
@@ -629,6 +629,66 @@
             .carousel-spinner { transform: scale(0.8); }
             .bento-card { height: 400px; }
         }
+        
+        @media (max-width: 768px) {
+            /* 3D Carousel Mobile Mini Version */
+            .proto-1-wrapper { margin-bottom: 60px !important; min-height: auto !important; padding-top: 80px !important; overflow: hidden; width: 100vw; max-width: 100%; }
+            .proto-1-title { margin-bottom: 60px !important; }
+            .carousel-container { height: 380px !important; perspective: 1000px !important; margin-bottom: 40px; }
+            .carousel-spinner {
+                width: 200px !important; height: 300px !important; 
+                transform: none; 
+                animation: orbital-rotation 20s linear infinite !important;
+                display: block; margin-top: 0;
+            }
+            .hologram-card {
+                position: absolute !important; transform: none;
+                height: 300px !important; min-height: auto; 
+                padding: 24px 16px !important;
+            }
+            .hologram-card h3 { font-size: 16px !important; margin-bottom: 8px !important; }
+            .hologram-card p { font-size: 11px !important; line-height: 1.4 !important; }
+            .hologram-card .material-symbols-outlined { font-size: 40px !important; margin-bottom: 12px !important; }
+            .proj-btn-cyan, .proj-btn-purple { padding: 10px !important; font-size: 9px !important; margin-top: auto !important; }
+            
+            .card-1 { transform: rotateY(0deg) translateZ(150px) !important; }
+            .card-2 { transform: rotateY(90deg) translateZ(150px) !important; }
+            .card-3 { transform: rotateY(180deg) translateZ(150px) !important; }
+            .card-4 { transform: rotateY(270deg) translateZ(150px) !important; }
+
+            /* Prototype 2 & 3 Mobile Fixes */
+            .bento-card { height: auto !important; min-height: 400px; }
+            .bento-content { padding: 32px 24px !important; }
+            .bento-content h3 { font-size: 32px !important; }
+            .bento-content p { font-size: 16px !important; }
+            
+            /* 3D Floating Server Stack for Mobile */
+            .isometric-grid { 
+                display: block; 
+                position: relative; 
+                width: 240px; 
+                height: 240px; 
+                transform: rotateX(60deg) rotateZ(-45deg) scale(0.8) !important; 
+                margin: 0 auto;
+                margin-top: 40px;
+                margin-bottom: 120px;
+            }
+            .iso-server { position: absolute !important; left: 0; top: 0; margin-top: 0 !important; }
+            .iso-server:nth-child(1) { animation: floatS1 4s ease-in-out infinite; }
+            .iso-server.purple { animation: floatS2 4s ease-in-out infinite; }
+            
+            @keyframes floatS1 {
+                0%, 100% { transform: translateZ(0); }
+                50% { transform: translateZ(15px); }
+            }
+            @keyframes floatS2 {
+                0%, 100% { transform: translateZ(140px); }
+                50% { transform: translateZ(165px); }
+            }
+
+            .proto-wrapper { padding-left: 20px !important; padding-right: 20px !important; margin-bottom: 60px !important; padding-top: 40px !important; padding-bottom: 40px !important; }
+            .proto-3-wrapper { height: auto !important; padding: 40px 20px !important; overflow: hidden; }
+        }
 
         /* HOLOGRAM HOVER */
         .iso-server {
@@ -639,11 +699,18 @@
         }
         
         .iso-server:hover {
-          transform: translateZ(70px) !important;
+          transform: scale(1.4) rotateZ(45deg) rotateX(-60deg) translateZ(80px) !important;
+          z-index: 100 !important;
+          animation: holoFlicker 2.5s ease infinite !important;
           filter:
             drop-shadow(0 0 12px rgba(0, 229, 255, 0.9))
             drop-shadow(0 0 30px rgba(0, 229, 255, 0.5))
             drop-shadow(0 -10px 25px rgba(0, 229, 255, 0.3)) !important;
+        }
+        
+        .iso-server:hover .iso-bottom,
+        .iso-server:hover .iso-left {
+            opacity: 0 !important;
         }
         
         /* Purple card variant */
@@ -698,14 +765,12 @@
           90%, 92% { opacity: 0.82; }
         }
         
-        .iso-server:hover {
-          animation: holoFlicker 2.5s ease infinite !important;
-        }
+        /* Combined into main hover rule */
     </style>
 
     <!-- PROTOTYPE 1: ORBITAL CAROUSEL (Full Screen) -->
-    <div style="min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 48px 20px; position: relative; margin-bottom: 120px;">
-        <div class="text-center" style="margin-bottom: 120px; position: relative; z-index: 10;">
+    <div class="proto-1-wrapper" style="min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 48px 20px; position: relative; margin-bottom: 120px;">
+        <div class="text-center proto-1-title" style="margin-bottom: 120px; position: relative; z-index: 10;">
             <span style="color: #00E5FF; font-family: 'Space Grotesk', sans-serif; font-size: 14px; letter-spacing: 0.5em; text-transform: uppercase; display: block; margin-bottom: 16px;">SYSTEM_OPERATIONS</span>
             <h1 style="font-family: 'Space Grotesk', sans-serif; font-size: clamp(28px, 4vw, 42px); color: white; font-weight: 900; margin-bottom: 16px; letter-spacing: -0.03em;">PROJECT_LAB.v2</h1>
             <p style="font-family: 'Lexend', sans-serif; font-size: 18px; color: #94a3b8; max-width: 900px; margin: 0 auto; line-height: 1.6;">From AI-powered tools to full-stack backends — real projects built with passion, hosted on GitHub & live on the web.</p>
@@ -761,11 +826,11 @@
     </div>
 
     <!-- PROTOTYPE 2: PARALLAX BENTO (Full Screen) -->
-    <div style="min-height: auto; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 60px 60px; box-sizing: border-box; margin-bottom: 60px;">
+    <div class="proto-wrapper" style="min-height: auto; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 60px 20px; box-sizing: border-box; margin-bottom: 60px;">
 
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(500px, 1fr)); gap: 60px; width: 100%; max-width: 1600px; perspective: 2000px;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr)); gap: 40px; width: 100%; max-width: 1600px; perspective: 2000px;">
             <!-- Bento Item 1: Faceless AI Studio -->
-            <div class="bento-card">
+            <div class="bento-card" onclick="window.open('https://faceless-ai-studio-tau.vercel.app', '_blank')">
                 <div class="bento-bg glass-panel" style="border-color: rgba(0, 229, 255, 0.3);">
                     <img class="bento-img" src="assets/images/faceless-preview.png" alt="Faceless AI Studio" />
                 </div>
@@ -773,11 +838,11 @@
                     <div style="background: #00E5FF; width: 80px; height: 6px; margin-bottom: 32px; box-shadow: 0 0 30px #00E5FF;"></div>
                     <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 48px; font-weight: 900; color: white; margin-bottom: 16px; letter-spacing: -0.02em;">Faceless AI Studio</h3>
                     <p style="font-size: 20px; color: rgba(255, 255, 255, 0.8); line-height: 1.7;">🏆 AWS Nova Hackathon Winner. All-in-one YouTube content tool — AI scripts, thumbnails, voiceovers & SEO titles powered by Amazon Nova.</p>
-                    <a href="https://faceless-ai-studio-tau.vercel.app" target="_blank" style="margin-top: 24px; display: inline-block; color: #00E5FF; font-size: 14px; font-weight: 700; text-decoration: none; letter-spacing: 2px; text-transform: uppercase;">Live App ↗</a>
+                    <span style="margin-top: 24px; display: inline-block; color: #00E5FF; font-size: 14px; font-weight: 700; text-decoration: none; letter-spacing: 2px; text-transform: uppercase;">Live App ↗</span>
                 </div>
             </div>
             <!-- Bento Item 2: Spin AI -->
-            <div class="bento-card">
+            <div class="bento-card" onclick="window.open('https://spin-ai-brown.vercel.app', '_blank')">
                 <div class="bento-bg glass-panel" style="border-color: rgba(139, 92, 246, 0.3);">
                     <img class="bento-img" src="assets/images/spin-preview.png" alt="Spin AI" />
                 </div>
@@ -785,7 +850,7 @@
                     <div style="background: #8B5CF6; width: 80px; height: 6px; margin-bottom: 32px; box-shadow: 0 0 30px #8B5CF6;"></div>
                     <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 48px; font-weight: 900; color: white; margin-bottom: 16px; letter-spacing: -0.02em;">Spin AI</h3>
                     <p style="font-size: 20px; color: rgba(255, 255, 255, 0.8); line-height: 1.7;">AI-powered wheel spinner — type any topic, Groq API fills the wheel instantly. Confetti effects, daily spin limits, fully responsive. React + Vite.</p>
-                    <a href="https://spin-ai-brown.vercel.app" target="_blank" style="margin-top: 24px; display: inline-block; color: #8B5CF6; font-size: 14px; font-weight: 700; text-decoration: none; letter-spacing: 2px; text-transform: uppercase;">Live App ↗</a>
+                    <span style="margin-top: 24px; display: inline-block; color: #8B5CF6; font-size: 14px; font-weight: 700; text-decoration: none; letter-spacing: 2px; text-transform: uppercase;">Live App ↗</span>
                 </div>
             </div>
         </div>
@@ -818,7 +883,7 @@
     <!-- PROTOTYPE 3: ISOMETRIC SERVERS (Full Screen) -->
     <div style="min-height: auto; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 60px 20px; overflow: hidden; max-width: 100%; box-sizing: border-box; margin-bottom: 60px;">
 
-        <div style="display: flex; justify-content: center; align-items: center; height: 700px; perspective: 2500px;">
+        <div class="proto-3-wrapper" style="display: flex; justify-content: center; align-items: center; height: 700px; perspective: 2500px;">
             <div class="isometric-grid">
                 <!-- Server Block 1 -->
                 <div class="iso-server glass-panel" style="border-color: rgba(0, 229, 255, 0.6); background: rgba(8, 51, 68, 0.5);">
