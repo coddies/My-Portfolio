@@ -132,15 +132,136 @@ function type() {
 }
 if(tEl) type();
 
-// Particles
+// Particles (Interactive Galaxy Background with Mouse Parallax & Shooting Stars)
 (function() {
     const c = document.getElementById('particles-canvas');
     if(!c) return;
     const ctx = c.getContext('2d');
+    
     let pts = [];
-    function init() { c.width = window.innerWidth; c.height = window.innerHeight; pts = []; for(let i=0; i<60; i++) pts.push({x:Math.random()*c.width, y:Math.random()*c.height, vx:(Math.random()-0.5)*0.4, vy:(Math.random()-0.5)*0.4, size:Math.random()*1.5+0.5}); }
-    function draw() { ctx.clearRect(0,0,c.width,c.height); ctx.fillStyle='rgba(0, 229, 255, 0.3)'; pts.forEach(p=>{p.x+=p.vx; p.y+=p.vy; if(p.x<0||p.x>c.width) p.vx*=-1; if(p.y<0||p.y>c.height) p.vy*=-1; ctx.beginPath(); ctx.arc(p.x,p.y,p.size,0,Math.PI*2); ctx.fill();}); requestAnimationFrame(draw); }
-    window.addEventListener('resize', init); init(); draw();
+    let shootingStars = [];
+    
+    // Parallax mouse offsets
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let targetOffsetX = 0;
+    let targetOffsetY = 0;
+    let currentOffsetX = 0;
+    let currentOffsetY = 0;
+
+    window.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        // Parallax offset strength (adjustable)
+        targetOffsetX = (mouseX - window.innerWidth / 2) * 0.08;
+        targetOffsetY = (mouseY - window.innerHeight / 2) * 0.08;
+    });
+
+    function init() {
+        c.width = window.innerWidth;
+        c.height = window.innerHeight;
+        pts = [];
+        // Increased stars to 200 for a rich galactic density
+        for(let i=0; i<200; i++) {
+            let size = Math.random() * 1.8 + 0.4;
+            pts.push({
+                x: Math.random() * c.width,
+                y: Math.random() * c.height,
+                vx: (Math.random() - 0.5) * 0.25,
+                vy: (Math.random() - 0.5) * 0.25,
+                size: size,
+                // Stars closer to screen (larger size) have deeper parallax depth
+                depth: size * 0.8,
+                // Add a pulse speed for subtle twinkling
+                pulseSpeed: Math.random() * 0.05 + 0.01,
+                pulseVal: Math.random() * Math.PI
+            });
+        }
+    }
+
+    function spawnShootingStar() {
+        // Shooting star parameters
+        shootingStars.push({
+            x: Math.random() * (c.width * 0.8), // Start in left 80%
+            y: Math.random() * (c.height * 0.4), // Start in top 40%
+            len: Math.random() * 100 + 50, // Length of tail
+            speedX: Math.random() * 12 + 8, // Diagonal speed
+            speedY: Math.random() * 6 + 4,
+            opacity: 1.0,
+            fadeSpeed: Math.random() * 0.015 + 0.01,
+            width: Math.random() * 1.5 + 0.8
+        });
+    }
+
+    function draw() {
+        ctx.clearRect(0, 0, c.width, c.height);
+        
+        // Easing parallax offsets for butter-smooth movement
+        currentOffsetX += (targetOffsetX - currentOffsetX) * 0.05;
+        currentOffsetY += (targetOffsetY - currentOffsetY) * 0.05;
+
+        // Render Stars
+        pts.forEach(p => {
+            p.x += p.vx;
+            p.y += p.vy;
+
+            // Bounce on boundary
+            if (p.x < 0 || p.x > c.width) p.vx *= -1;
+            if (p.y < 0 || p.y > c.height) p.vy *= -1;
+
+            // Calculate parallax position
+            let renderX = p.x + currentOffsetX * p.depth;
+            let renderY = p.y + currentOffsetY * p.depth;
+
+            // Twinkle effect (sine wave opacity pulsing)
+            p.pulseVal += p.pulseSpeed;
+            let opacity = 0.2 + (Math.sin(p.pulseVal) * 0.5 + 0.5) * 0.6;
+
+            ctx.beginPath();
+            ctx.fillStyle = `rgba(0, 229, 255, ${opacity})`;
+            ctx.arc(renderX, renderY, p.size, 0, Math.PI * 2);
+            ctx.fill();
+        });
+
+        // Spawn shooting stars randomly (approx once every few seconds)
+        if (Math.random() < 0.006 && shootingStars.length < 2) {
+            spawnShootingStar();
+        }
+
+        // Draw and update Shooting Stars
+        for (let i = shootingStars.length - 1; i >= 0; i--) {
+            let s = shootingStars[i];
+            s.x += s.speedX;
+            s.y += s.speedY;
+            s.opacity -= s.fadeSpeed;
+
+            if (s.opacity <= 0 || s.x > c.width || s.y > c.height) {
+                shootingStars.splice(i, 1);
+            } else {
+                ctx.beginPath();
+                // Draw a beautiful gradient tail
+                let grad = ctx.createLinearGradient(
+                    s.x, s.y, 
+                    s.x - s.len, s.y - s.len * (s.speedY / s.speedX)
+                );
+                grad.addColorStop(0, `rgba(0, 229, 255, ${s.opacity})`);
+                grad.addColorStop(0.3, `rgba(139, 92, 246, ${s.opacity * 0.6})`);
+                grad.addColorStop(1, 'rgba(0, 229, 255, 0)');
+                
+                ctx.strokeStyle = grad;
+                ctx.lineWidth = s.width;
+                ctx.moveTo(s.x, s.y);
+                ctx.lineTo(s.x - s.len, s.y - s.len * (s.speedY / s.speedX));
+                ctx.stroke();
+            }
+        }
+
+        requestAnimationFrame(draw);
+    }
+
+    window.addEventListener('resize', init);
+    init();
+    draw();
 })();
 
 // Cursor
