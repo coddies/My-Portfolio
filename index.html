@@ -47,9 +47,71 @@
     <div class="nav-btn"        data-index="6">✉️<span class="nav-tooltip">Contact</span></div>
 </nav>
 
-<!-- ════════════════════════════
-     CARD 1 — HOME
-════════════════════════════ -->
+<style>
+/* Universal Responsive Fix for Hero (Samsung A06, iPhone SE) */
+@media (max-width: 991px) {
+    #card-1 {
+        overflow-y: auto !important;
+        display: block !important; /* Override strict flex centering */
+    }
+    #card-1 .card-inner {
+        padding: 100px 20px 120px 20px !important;
+        min-height: 100svh;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+    #card-1 .hero-grid {
+        display: flex !important;
+        flex-direction: column;
+        gap: 24px !important;
+        width: 100%;
+    }
+    .hero-photo-container {
+        margin: 0 auto;
+        width: 100%;
+        max-width: 280px; /* Perfectly scales photo down on mobile */
+    }
+    .hero-photo {
+        width: 100% !important;
+        height: auto;
+        max-width: none !important;
+    }
+    .hero-right {
+        text-align: center;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .hero-name {
+        font-size: clamp(2.2rem, 12vw, 3.5rem) !important;
+        line-height: 1.1 !important;
+        margin-bottom: 12px !important;
+    }
+    .typewriter-container {
+        font-size: 16px !important;
+        min-height: 24px;
+        margin-bottom: 16px !important;
+    }
+    .hero-bio {
+        font-size: 14px !important;
+        line-height: 1.6 !important;
+        margin-bottom: 24px !important;
+    }
+    .btn-group {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 12px !important;
+    }
+    .pill-btn {
+        padding: 10px 24px !important;
+        font-size: 13px !important;
+    }
+}
+</style>
+
 <section id="card-1" class="card state-active">
     <div class="card-inner">
         <div class="hero-grid">
@@ -72,11 +134,7 @@
                     <a href="https://www.linkedin.com/in/muhammad-burhan-73a81b27b/" target="_blank" class="pill-btn btn-linkedin">LinkedIn</a>
                     <a href="Muhammad_Burhan_CV.pdf" download="Muhammad_Burhan_CV.pdf" class="pill-btn btn-cv">📄 CV</a>
                 </div>
-            
-            
-            
-
-</div>
+            </div>
         </div>
     </div>
 </section>
