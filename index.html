@@ -72,20 +72,16 @@
     }
     .hero-photo-container {
         margin: 0 auto;
-        /* Scales based on height, ensures it fits neatly */
-        width: min(50vw, 24vh);
-        height: min(50vw, 24vh);
-        border-radius: 50%;
-        overflow: hidden;
-        border: 2px solid rgba(0, 229, 255, 0.3);
-        box-shadow: 0 0 30px rgba(0,229,255,0.15);
+        width: 100%;
+        /* Limits width dynamically based on height so it doesn't overflow */
+        max-width: min(60vw, 30vh);
+        display: flex;
+        justify-content: center;
     }
     .hero-photo {
         width: 100% !important;
-        height: 100% !important;
+        height: auto !important;
         max-width: none !important;
-        object-fit: cover;
-        object-position: top center;
     }
     .hero-right {
         text-align: center;
