@@ -50,6 +50,16 @@
 <style>
 /* Smart Fluid Responsive Fix for Hero (No Scrolling on normal mobiles) */
 @media (max-width: 991px) {
+    /* Shrink bottom navigation buttons dynamically on small screens */
+    .nav-rail {
+        gap: clamp(8px, 2vw, 16px) !important;
+    }
+    .nav-btn {
+        width: clamp(40px, 11vw, 52px) !important;
+        height: clamp(40px, 11vw, 52px) !important;
+        font-size: clamp(18px, 5vw, 24px) !important;
+    }
+
     #card-1 {
         overflow: hidden !important; /* NO SCROLLING by default */
         display: flex !important;
