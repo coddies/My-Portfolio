@@ -161,8 +161,8 @@ if(tEl) type();
         c.width = window.innerWidth;
         c.height = window.innerHeight;
         pts = [];
-        // Increased stars to 200 for a rich galactic density
-        for(let i=0; i<200; i++) {
+        // Increased stars for a richer galactic density
+        for(let i=0; i<400; i++) {
             let size = Math.random() * 1.8 + 0.4;
             pts.push({
                 x: Math.random() * c.width,
