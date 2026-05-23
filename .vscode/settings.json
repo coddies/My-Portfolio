@@ -1,0 +1,69 @@
+{
+    // ── FILE ASSOCIATIONS ──
+    "files.associations": {
+        "*.html": "html",
+        "*.css": "css",
+        "*.js": "javascript",
+        "*.py": "python"
+    },
+
+    // ── EDITOR PERFORMANCE (fixes large file lag) ──
+    "editor.maxTokenizationLineLength": 20000,
+    "editor.largeFileOptimizations": true,
+    "files.maxMemoryForLargeFilesMB": 4096,
+
+    // ── HTML EXTENSION SETTINGS ──
+    "[html]": {
+        "editor.defaultFormatter": "vscode.html-language-features",
+        "editor.formatOnSave": false,
+        "editor.suggest.insertMode": "replace"
+    },
+
+    // ── CSS EXTENSION SETTINGS ──
+    "[css]": {
+        "editor.defaultFormatter": "vscode.css-language-features",
+        "editor.formatOnSave": false
+    },
+
+    // ── JAVASCRIPT SETTINGS ──
+    "[javascript]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features",
+        "editor.formatOnSave": false
+    },
+
+    // ── INTELLISENSE ──
+    "html.suggest.html5": true,
+    "css.validate": true,
+    "javascript.suggest.autoImports": false,
+
+    // ── EMMET (HTML/CSS autocomplete) ──
+    "emmet.includeLanguages": {
+        "html": "html"
+    },
+    "emmet.triggerExpansionOnTab": true,
+
+    // ── TAILWIND CSS (since you have tailwindcss installed) ──
+    "css.customData": [],
+    "editor.quickSuggestions": {
+        "strings": true
+    },
+
+    // ── DISABLE HEAVY FEATURES ON LARGE FILES ──
+    "editor.wordBasedSuggestions": "off",
+    "editor.parameterHints.enabled": false,
+
+    // ── SEARCH/FILES ──
+    "search.exclude": {
+        "**/node_modules": true,
+        "**/.git": true,
+        "**/package-lock.json": true
+    },
+    "files.exclude": {
+        "**/node_modules": true,
+        "**/.git": false
+    },
+
+    // ── ENCODING ──
+    "files.encoding": "utf8",
+    "files.eol": "\n"
+}

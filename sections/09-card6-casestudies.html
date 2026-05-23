@@ -1,0 +1,996 @@
+﻿<!--
+  +---------------------------------------------------------+
+  |  SECTION: CARD 6 - CASE STUDIES                         |
+  |  File: sections/09-card6-casestudies.html               |
+  |  Description: The interactive 3D Quantum Cube layout.   |
+  |  Includes the Faceless AI Studio case study, report     |
+  |  modal, and binary stream background animations.        |
+  |  Referenced in: index.html lines 1517-2502             |
+  +---------------------------------------------------------+
+-->
+
+<!-- ════════════════════════════
+     CARD 6 — CASE STUDIES
+════════════════════════════ -->
+<section id="card-6" class="card state-below">
+    <style>
+        /* Card 6 Custom 3D Quantum Cube Styles */
+        .quantum-grid-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 32px;
+            align-items: center;
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        @media (min-width: 992px) {
+            .quantum-grid-container {
+                grid-template-columns: 4.5fr 4fr 4.5fr;
+                gap: 40px;
+            }
+        }
+
+        /* Overview Panel Glass card */
+        .q-glass-panel {
+            background: rgba(6, 11, 20, 0.5);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 20px 45px rgba(0,0,0,0.5), inset 0 0 20px rgba(255,255,255,0.02);
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .q-glass-panel:hover {
+            border-color: rgba(0, 229, 255, 0.3);
+            box-shadow: 0 30px 60px rgba(0, 229, 255, 0.1);
+            transform: translateY(-4px);
+        }
+
+        /* 3D Scene viewport */
+        .q-scene-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            padding: 40px 0;
+        }
+
+        @media (min-width: 992px) {
+            .q-scene-wrapper {
+                transform: scale(0.75);
+                margin: -40px 0;
+            }
+        }
+
+        .q-accordion-wrapper {
+            /* Desktop default */
+        }
+
+        @media (max-width: 991px) {
+            .q-scene-wrapper {
+                transform: scale(0.7);
+                margin: -40px 0;
+            }
+            .q-desktop-header {
+                display: none !important;
+            }
+            .q-mobile-accordion-bar {
+                display: flex !important;
+                transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+            }
+            .q-mobile-accordion-bar:hover {
+                box-shadow: 0 0 25px rgba(0, 229, 255, 0.4), inset 0 0 15px rgba(0, 229, 255, 0.1) !important;
+                border-color: var(--cyan) !important;
+                transform: translateY(-2px);
+            }
+            .q-accordion-wrapper {
+                max-height: 0;
+                opacity: 0;
+                transform: translateY(-15px) scale(0.98);
+                transform-origin: top center;
+                overflow: hidden;
+                /* Buttery smooth easing without bouncing, prevents scrollbar jumping */
+                transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+                            opacity 0.4s ease-out,
+                            transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+            .q-accordion-wrapper.active {
+                /* Closer to actual mobile content height for smooth timing */
+                max-height: 1400px;
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @media (min-width: 992px) {
+            .q-desktop-header {
+                display: block !important;
+            }
+            .q-mobile-accordion-bar {
+                display: none !important;
+            }
+            .q-accordion-wrapper {
+                max-height: none !important;
+                overflow: visible !important;
+            }
+        }
+
+        .q-scene-3d {
+            width: 260px;
+            height: 260px;
+            perspective: 1200px;
+        }
+
+        @media (min-width: 576px) {
+            .q-scene-3d {
+                width: 300px;
+                height: 300px;
+            }
+        }
+
+        .q-cube {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: qRotateCube 18s infinite linear;
+            transition: all 0.6s ease;
+        }
+
+        .q-cube-container:hover .q-cube {
+            animation-duration: 5s;
+        }
+
+        .q-cube-face {
+            position: absolute;
+            width: 260px;
+            height: 260px;
+            border: 1px solid rgba(0, 229, 255, 0.25);
+            background: rgba(6, 11, 20, 0.85);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 10px;
+            overflow: hidden;
+            box-shadow: inset 0 0 25px rgba(0, 229, 255, 0.15), 0 0 15px rgba(0,229,255,0.05);
+            backface-visibility: visible;
+        }
+
+        @media (min-width: 576px) {
+            .q-cube-face {
+                width: 300px;
+                height: 300px;
+            }
+            .q-face-front  { transform: rotateY(0deg) translateZ(150px); }
+            .q-face-back   { transform: rotateY(180deg) translateZ(150px); }
+            .q-face-right  { transform: rotateY(90deg) translateZ(150px); }
+            .q-face-left   { transform: rotateY(-90deg) translateZ(150px); }
+            .q-face-top    { transform: rotateX(90deg) translateZ(150px); }
+            .q-face-bottom { transform: rotateX(-90deg) translateZ(150px); }
+        }
+
+        @media (max-width: 575px) {
+            .q-face-front  { transform: rotateY(0deg) translateZ(130px); }
+            .q-face-back   { transform: rotateY(180deg) translateZ(130px); }
+            .q-face-right  { transform: rotateY(90deg) translateZ(130px); }
+            .q-face-left   { transform: rotateY(-90deg) translateZ(130px); }
+            .q-face-top    { transform: rotateX(90deg) translateZ(130px); }
+            .q-face-bottom { transform: rotateX(-90deg) translateZ(130px); }
+        }
+
+        @keyframes qRotateCube {
+            from { transform: rotateX(0deg) rotateY(0deg); }
+            to { transform: rotateX(360deg) rotateY(360deg); }
+        }
+
+        /* Floating details around standard cube */
+        .q-floating-indicator {
+            position: absolute;
+            font-family: monospace;
+            font-size: 9px;
+            color: rgba(0, 229, 255, 0.6);
+            pointer-events: none;
+            display: none;
+        }
+
+        @media (min-width: 1200px) {
+            .q-floating-indicator {
+                display: block;
+            }
+        }
+
+        .q-binary-stream {
+            position: absolute;
+            inset: 0;
+            opacity: 0.15;
+            font-family: monospace;
+            font-size: 8px;
+            color: var(--cyan);
+            line-height: 1.1;
+            padding: 8px;
+            pointer-events: none;
+            overflow: hidden;
+            word-break: break-all;
+            text-align: left;
+        }
+
+        /* Shimmer bar progress */
+        @keyframes qShimmer {
+            0% { transform: translateY(100%); }
+            100% { transform: translateY(-100%); }
+        }
+
+        /* Telemetry items */
+        .q-telemetry-box {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+        }
+
+        .q-analytics-bar {
+            flex: 1;
+            background: rgba(0, 229, 255, 0.06);
+            border-top: 2px solid rgba(0, 229, 255, 0.4);
+            transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .q-analytics-bar::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent, rgba(0, 229, 255, 0.15), transparent);
+            animation: qShimmer 2s infinite linear;
+        }
+
+        .q-analytics-bar.purple-bar {
+            background: rgba(139, 92, 246, 0.06);
+            border-color: rgba(139, 92, 246, 0.4);
+        }
+
+        .q-analytics-bar.purple-bar::after {
+            background: linear-gradient(180deg, transparent, rgba(139, 92, 246, 0.15), transparent);
+        }
+
+        .q-bar-bubble {
+            position: absolute;
+            top: -28px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--cyan);
+            color: #060B14;
+            font-size: 9px;
+            font-weight: bold;
+            padding: 2px 6px;
+            border-radius: 4px;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            pointer-events: none;
+        }
+
+        .q-analytics-bar:hover .q-bar-bubble {
+            opacity: 1;
+        }
+
+        .q-analytics-bar:hover {
+            background: rgba(0, 229, 255, 0.12) !important;
+            border-color: var(--cyan) !important;
+        }
+
+        .q-analytics-bar.purple-bar:hover {
+            background: rgba(139, 92, 246, 0.12) !important;
+            border-color: var(--purple) !important;
+        }
+
+        .q-analytics-bar.purple-bar:hover .q-bar-bubble {
+            background: var(--purple);
+            color: #fff;
+        }
+    </style>
+
+    <style>
+        /* Premium Generate Report Button */
+        @keyframes qScanLine {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(400%); }
+        }
+        @keyframes qBtnGlow {
+            0%, 100% { box-shadow: 0 0 15px rgba(0, 229, 255, 0.2), inset 0 0 15px rgba(0, 229, 255, 0.05); }
+            50% { box-shadow: 0 0 30px rgba(0, 229, 255, 0.5), inset 0 0 20px rgba(0, 229, 255, 0.1); }
+        }
+        .q-report-btn {
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, rgba(0, 229, 255, 0.08) 0%, rgba(139, 92, 246, 0.08) 100%);
+            border: 1px solid rgba(0, 229, 255, 0.4);
+            color: var(--cyan);
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 800;
+            font-size: 11px;
+            padding: 14px 20px;
+            border-radius: 8px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            animation: qBtnGlow 3s ease-in-out infinite;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .q-report-btn::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -20%;
+            width: 40%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 229, 255, 0.15), transparent);
+            animation: qScanLine 2.5s linear infinite;
+            pointer-events: none;
+        }
+        .q-report-btn:hover {
+            background: linear-gradient(135deg, rgba(0, 229, 255, 0.2) 0%, rgba(139, 92, 246, 0.2) 100%);
+            border-color: var(--cyan);
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 0 35px rgba(0, 229, 255, 0.5), 0 8px 25px rgba(0,0,0,0.4);
+        }
+        .q-report-btn:active {
+            transform: translateY(0);
+        }
+        /* Cube face feature labels */
+        .q-face-label {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 800;
+            font-size: 9px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-top: 6px;
+        }
+        .q-face-sublabel {
+            font-family: monospace;
+            font-size: 7px;
+            opacity: 0.6;
+            margin-top: 3px;
+            letter-spacing: 1px;
+        }
+    </style>
+    <style>
+        /* ── DESKTOP HORIZONTAL GALLERY ── */
+        .cs-desktop-gallery {
+            display: flex;
+            width: 100%;
+            height: 700px;
+            gap: 20px;
+            transition: all 0.7s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        .cs-panel {
+            position: relative;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(0, 229, 255, 0.1);
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.7s cubic-bezier(0.25, 1, 0.5, 1);
+            display: flex;
+            flex-direction: column;
+        }
+        /* Default Gallery Mode (All 3 equal) */
+        .cs-desktop-gallery[data-state="gallery"] .cs-panel {
+            flex: 1 1 33.33%;
+        }
+        .cs-desktop-gallery[data-state="gallery"] .cs-panel:hover {
+            background: rgba(0, 229, 255, 0.08);
+            border-color: rgba(0, 229, 255, 0.6);
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 229, 255, 0.2), inset 0 0 30px rgba(0, 229, 255, 0.1);
+            z-index: 10;
+        }
+        /* Expanded State */
+        .cs-desktop-gallery[data-state="expanded"] .cs-panel.active {
+            flex: 1 1 85%;
+            cursor: default;
+            background: rgba(6, 11, 20, 0.95);
+            border-color: rgba(0, 229, 255, 0.3);
+        }
+        .cs-desktop-gallery[data-state="expanded"] .cs-panel.shrunk {
+            flex: 1 1 7.5%;
+            opacity: 0.4;
+            background: rgba(255, 255, 255, 0.02);
+        }
+        .cs-desktop-gallery[data-state="expanded"] .cs-panel.shrunk:hover {
+            opacity: 1;
+            background: rgba(0, 229, 255, 0.05);
+        }
+        
+        /* Content States */
+        .cs-panel-gallery-content,
+        .cs-panel-expanded-content,
+        .cs-panel-shrunk-content {
+            position: absolute;
+            inset: 0;
+            transition: opacity 0.4s ease;
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .cs-desktop-gallery[data-state="gallery"] .cs-panel-gallery-content {
+            opacity: 1;
+            pointer-events: auto;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        .cs-desktop-gallery[data-state="expanded"] .cs-panel.active .cs-panel-expanded-content {
+            opacity: 1;
+            pointer-events: auto;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+        .cs-desktop-gallery[data-state="expanded"] .cs-panel.shrunk .cs-panel-shrunk-content {
+            opacity: 1;
+            pointer-events: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .cs-shrunk-title {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            transform: rotate(180deg);
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: bold;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: #fff;
+            white-space: nowrap;
+        }
+
+        /* Responsive Wrappers */
+        @media (max-width: 991px) {
+            .cs-desktop-view { display: none !important; }
+            .cs-mobile-view { display: flex !important; flex-direction: column; gap: 16px; width: 100%; }
+        }
+        @media (min-width: 992px) {
+            .cs-desktop-view { display: flex !important; width: 100%; }
+            .cs-mobile-view { display: none !important; }
+        }
+    </style>
+
+    <div class="card-inner" style="padding: 40px 20px; width: 100%;">
+        <div class="cs-universal-wrapper" style="width:100%; max-width:1100px; display: flex; flex-direction: column; align-items: center;">
+
+            <!-- ================= MOBILE VIEW ================= -->
+            <div class="cs-mobile-view">
+                <!-- Mobile Accordion Header 1 -->
+                <div class="q-mobile-accordion-bar" style="display: flex; justify-content: space-between; align-items: center; width: 100%; cursor: pointer; padding: 20px; border-radius: 12px; border: 1px solid rgba(0, 229, 255, 0.2); background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);" onclick="toggleCsAccordion()">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--cyan); animation: pulse 2s infinite;"></span>
+                        <span style="font-family: 'Space Grotesk', sans-serif; font-weight: bold; color: #fff; letter-spacing: 2px; text-transform: uppercase; font-size: 14px;">FACELESS AI STUDIO</span>
+                    </div>
+                    <span id="cs-accordion-icon" class="material-symbols-outlined" style="color: var(--cyan); transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);">expand_more</span>
+                </div>
+
+                <!-- Grid Content (Injected inside) -->
+                <div id="cs-accordion-content" class="q-accordion-wrapper">
+                    <div id="cs-mobile-injection-point"></div>
+                </div>
+
+                <!-- Mobile Accordion Header 2 (Dummy) -->
+                <div class="q-mobile-accordion-bar" style="display: flex; justify-content: space-between; align-items: center; width: 100%; cursor: pointer; padding: 20px; border-radius: 12px; border: 1px solid rgba(139, 92, 246, 0.2); background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);" onclick="alert('Neural Vision is currently in development.')">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <span class="material-symbols-outlined" style="color: var(--purple); font-size: 16px;">lock</span>
+                        <span style="font-family: 'Space Grotesk', sans-serif; font-weight: bold; color: rgba(255,255,255,0.6); letter-spacing: 1px; text-transform: uppercase; font-size: 14px;">NEURAL VISION</span>
+                    </div>
+                    <span style="font-family: monospace; font-size: 10px; color: var(--purple);">COMING SOON</span>
+                </div>
+
+                <!-- Mobile Accordion Header 3 (Dummy) -->
+                <div class="q-mobile-accordion-bar" style="display: flex; justify-content: space-between; align-items: center; width: 100%; cursor: pointer; padding: 20px; border-radius: 12px; border: 1px solid rgba(16, 185, 129, 0.2); background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);" onclick="alert('Predictive Nexus is currently in development.')">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <span class="material-symbols-outlined" style="color: #10B981; font-size: 16px;">lock</span>
+                        <span style="font-family: 'Space Grotesk', sans-serif; font-weight: bold; color: rgba(255,255,255,0.6); letter-spacing: 1px; text-transform: uppercase; font-size: 14px;">PREDICTIVE NEXUS</span>
+                    </div>
+                    <span style="font-family: monospace; font-size: 10px; color: #10B981;">COMING SOON</span>
+                </div>
+            </div>
+
+            <!-- ================= DESKTOP VIEW ================= -->
+            <div class="cs-desktop-view">
+                <div id="cs-gallery" class="cs-desktop-gallery" data-state="gallery">
+                    
+                    <!-- Panel 1: Faceless AI -->
+                    <div id="cs-panel-1" class="cs-panel" onclick="openDesktopPanel(1)">
+                        <!-- Gallery Mode View -->
+                        <div class="cs-panel-gallery-content">
+                            <span class="material-symbols-outlined" style="font-size: 48px; color: var(--cyan); margin-bottom: 16px;">robot_2</span>
+                            <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 24px; font-weight: bold; color: #fff; text-transform: uppercase; margin-bottom: 12px; letter-spacing: 1px;">Faceless AI Studio</h3>
+                            <p style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; color: var(--text-muted); line-height: 1.6; margin-bottom: 24px;">Automated AWS Bedrock pipeline for end-to-end AI video generation.</p>
+                            <div style="display: inline-flex; align-items: center; gap: 8px; px: 12px; padding: 6px 14px; border: 1px solid rgba(0, 229, 255, 0.2); background: rgba(0, 229, 255, 0.04); border-radius: 99px;">
+                                <span style="font-family: monospace; font-size: 10px; color: var(--cyan); font-weight: bold;">VIEW CASE STUDY</span>
+                                <span class="material-symbols-outlined" style="font-size: 14px; color: var(--cyan);">arrow_forward</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Expanded Mode View -->
+                        <div class="cs-panel-expanded-content" id="cs-expanded-content-1">
+                            <div style="padding: 30px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; gap: 20px;">
+                                <div onclick="closeDesktopPanel(event)" style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.05); cursor: pointer; transition: background 0.3s;">
+                                    <span class="material-symbols-outlined" style="color: #fff;">arrow_back</span>
+                                </div>
+                                <h2 class="syne-font" style="font-size: 28px; color: #fff; font-weight: 800; text-transform: uppercase; margin: 0;">FACELESS AI STUDIO</h2>
+                            </div>
+                            <div id="cs-master-injection-point" style="flex: 1; padding: 30px;">
+                                <!-- Master Grid will be injected here -->
+                            </div>
+                        </div>
+
+                        <!-- Shrunk Mode View -->
+                        <div class="cs-panel-shrunk-content">
+                            <span class="cs-shrunk-title">FACELESS AI</span>
+                        </div>
+                    </div>
+
+                    <!-- Panel 2: Dummy -->
+                    <div id="cs-panel-2" class="cs-panel" onclick="openDesktopPanel(2)">
+                        <div class="cs-panel-gallery-content">
+                            <span class="material-symbols-outlined" style="font-size: 48px; color: var(--purple); margin-bottom: 16px;">biotech</span>
+                            <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 24px; font-weight: bold; color: #fff; text-transform: uppercase; margin-bottom: 12px; letter-spacing: 1px;">Neural Vision</h3>
+                            <p style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; color: var(--text-muted); line-height: 1.6; margin-bottom: 24px;">Advanced computer vision model for real-time object tracking and segmentation.</p>
+                            <div style="display: inline-flex; align-items: center; gap: 8px; px: 12px; padding: 6px 14px; border: 1px solid rgba(139, 92, 246, 0.2); background: rgba(139, 92, 246, 0.04); border-radius: 99px;">
+                                <span style="font-family: monospace; font-size: 10px; color: var(--purple); font-weight: bold;">COMING SOON</span>
+                            </div>
+                        </div>
+                        <div class="cs-panel-expanded-content" style="align-items: center; justify-content: center;">
+                            <div onclick="closeDesktopPanel(event)" style="position: absolute; top: 30px; left: 30px; display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.05); cursor: pointer; transition: background 0.3s; z-index: 10;">
+                                <span class="material-symbols-outlined" style="color: #fff;">arrow_back</span>
+                            </div>
+                            <span class="material-symbols-outlined" style="font-size: 80px; color: rgba(255,255,255,0.1);">lock</span>
+                            <h2 class="syne-font" style="font-size: 32px; color: #fff; margin-top: 20px;">IN DEVELOPMENT</h2>
+                        </div>
+                        <div class="cs-panel-shrunk-content">
+                            <span class="cs-shrunk-title" style="color: rgba(255,255,255,0.5);">NEURAL VISION</span>
+                        </div>
+                    </div>
+
+                    <!-- Panel 3: Dummy -->
+                    <div id="cs-panel-3" class="cs-panel" onclick="openDesktopPanel(3)">
+                        <div class="cs-panel-gallery-content">
+                            <span class="material-symbols-outlined" style="font-size: 48px; color: #10B981; margin-bottom: 16px;">network_node</span>
+                            <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 24px; font-weight: bold; color: #fff; text-transform: uppercase; margin-bottom: 12px; letter-spacing: 1px;">Predictive Nexus</h3>
+                            <p style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; color: var(--text-muted); line-height: 1.6; margin-bottom: 24px;">Time-series forecasting engine utilizing deep learning for market trends.</p>
+                            <div style="display: inline-flex; align-items: center; gap: 8px; px: 12px; padding: 6px 14px; border: 1px solid rgba(16, 185, 129, 0.2); background: rgba(16, 185, 129, 0.04); border-radius: 99px;">
+                                <span style="font-family: monospace; font-size: 10px; color: #10B981; font-weight: bold;">COMING SOON</span>
+                            </div>
+                        </div>
+                        <div class="cs-panel-expanded-content" style="align-items: center; justify-content: center;">
+                            <div onclick="closeDesktopPanel(event)" style="position: absolute; top: 30px; left: 30px; display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.05); cursor: pointer; transition: background 0.3s; z-index: 10;">
+                                <span class="material-symbols-outlined" style="color: #fff;">arrow_back</span>
+                            </div>
+                            <span class="material-symbols-outlined" style="font-size: 80px; color: rgba(255,255,255,0.1);">lock</span>
+                            <h2 class="syne-font" style="font-size: 32px; color: #fff; margin-top: 20px;">IN DEVELOPMENT</h2>
+                        </div>
+                        <div class="cs-panel-shrunk-content">
+                            <span class="cs-shrunk-title" style="color: rgba(255,255,255,0.5);">NEXUS</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- MASTER QUANTUM GRID (MOVED DYNAMICALLY) -->
+            <div id="quantum-grid-master" style="display: none;">
+                <div class="quantum-grid-container">
+
+                <!-- COL 1: Overview & Profile -->
+                <div class="q-glass-panel" style="display: flex; flex-direction: column; gap: 20px;">
+                    <div style="position: absolute; top: 0; right: 0; padding: 12px; opacity: 0.1;">
+                        <span class="material-symbols-outlined" style="font-size: 48px; color: #fff;">info</span>
+                    </div>
+                    
+                    <div>
+                        <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 16px; font-weight: 800; color: var(--cyan); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px;">PROJECT_OVERVIEW</h3>
+                        <p style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13px; color: var(--text-muted); line-height: 1.6; margin: 0;">
+                            Automated AI video generation platform built with <strong style="color:var(--cyan);">AWS Bedrock</strong> &amp; frontier Gen-AI models. Faceless AI Studio creates full videos — scripts, voiceovers, scenes — without any human face.
+                        </p>
+                        <div style="display:flex; flex-wrap:wrap; gap:6px; margin-top:12px;">
+                            <span style="background:rgba(0,229,255,0.07);border:1px solid rgba(0,229,255,0.25);color:var(--cyan);padding:3px 10px;border-radius:6px;font-size:10px;font-family:monospace;">AWS Bedrock</span>
+                            <span style="background:rgba(139,92,246,0.07);border:1px solid rgba(139,92,246,0.25);color:#a78bfa;padding:3px 10px;border-radius:6px;font-size:10px;font-family:monospace;">Python</span>
+                            <span style="background:rgba(0,229,255,0.07);border:1px solid rgba(0,229,255,0.25);color:var(--cyan);padding:3px 10px;border-radius:6px;font-size:10px;font-family:monospace;">Gen-AI</span>
+                        </div>
+                    </div>
+
+                    <div style="border-top: 1px solid rgba(255,255,255,0.08); padding-top: 18px; display: flex; align-items: center; gap: 14px;">
+                        <div style="position: relative;">
+                            <div style="width: 48px; height: 48px; border-radius: 50%; border: 2px solid rgba(0, 229, 255, 0.4); padding: 2px; overflow: hidden;">
+                                <img src="assets/images/my-img.png" alt="" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;" onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\'width:100%;height:100%;background:rgba(0,229,255,0.1);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--cyan);font-size:20px;\'>👨‍💻</div>';">
+                            </div>
+                            <div style="position: absolute; bottom: -2px; right: -2px; width: 12px; height: 12px; border: 2px solid #060B14; border-radius: 50%; background: #10B981;"></div>
+                        </div>
+                        <div>
+                            <div style="font-family: monospace; font-size: 12px; color: var(--cyan); font-weight: bold;">M. BURHAN</div>
+                            <div style="font-family: 'Space Grotesk', sans-serif; font-size: 9px; color: #849495; text-transform: uppercase; font-weight: bold; letter-spacing: 1px;">Builder &amp; Developer</div>
+                        </div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 8px;">
+                        <div class="q-telemetry-box">
+                            <div style="font-family: 'Space Grotesk', sans-serif; font-size: 9px; color: #849495; text-transform: uppercase; font-weight: bold; margin-bottom: 4px;">VIDEOS/DAY</div>
+                            <div style="font-family: monospace; font-size: 12px; color: #fff; font-weight: bold;">50+</div>
+                        </div>
+                        <div class="q-telemetry-box">
+                            <div style="font-family: 'Space Grotesk', sans-serif; font-size: 9px; color: #849495; text-transform: uppercase; font-weight: bold; margin-bottom: 4px;">UPTIME</div>
+                            <div style="font-family: monospace; font-size: 12px; color: var(--cyan); font-weight: bold;">99.9%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- COL 2: Center rotating 3D Cube viewport -->
+                <div class="q-scene-wrapper q-cube-container" onclick="openCs(0)">
+                    
+                    <!-- Decorative layout lines -->
+                    <div class="q-floating-indicator" style="top: 0; left: -40px; border-left: 2px solid rgba(0, 229, 255, 0.3); border-top: 2px solid rgba(0, 229, 255, 0.3); padding: 8px 12px; border-top-left-radius: 6px;">
+                        DATA_FLUX: 14.8 TB/S
+                    </div>
+                    <div class="q-floating-indicator" style="bottom: 0; right: -40px; border-right: 2px solid rgba(0, 229, 255, 0.3); border-bottom: 2px solid rgba(0, 229, 255, 0.3); padding: 8px 12px; border-bottom-right-radius: 6px; text-align: right;">
+                        NEURAL_NET: ACTIVE
+                    </div>
+
+                    <div class="q-scene-3d">
+                        <div class="q-cube" id="quantumCube">
+                            
+                            <!-- Front face: AI Chatbot -->
+                            <div class="q-cube-face q-face-front" style="border-color: rgba(0,229,255,0.4);">
+                                <div class="q-binary-stream" id="qStreamFront"></div>
+                                <div style="text-align: center; z-index: 2; padding: 16px;">
+                                    <span class="material-symbols-outlined" style="font-size: 38px; color: var(--cyan); display:block;">smart_toy</span>
+                                    <div class="q-face-label" style="color: var(--cyan);">AI_CHATBOT</div>
+                                    <div class="q-face-sublabel" style="color:rgba(0,229,255,0.6);">Conversational Interface</div>
+                                    <div style="margin-top:10px; display:flex; gap:4px; justify-content:center;">
+                                        <div style="height:3px; flex:1; background:rgba(0,229,255,0.2); border-radius:2px;"></div>
+                                        <div style="height:3px; flex:2; background:var(--cyan); border-radius:2px; animation:pulse 1.5s infinite;"></div>
+                                        <div style="height:3px; flex:1; background:rgba(0,229,255,0.2); border-radius:2px;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Back face: Voice Clone -->
+                            <div class="q-cube-face q-face-back" style="border-color: rgba(139,92,246,0.4);">
+                                <div class="q-binary-stream" id="qStreamBack"></div>
+                                <div style="text-align: center; z-index: 2; padding: 16px;">
+                                    <span class="material-symbols-outlined" style="font-size: 38px; color: var(--purple); display:block;">record_voice_over</span>
+                                    <div class="q-face-label" style="color: var(--purple);">VOICE_CLONE</div>
+                                    <div class="q-face-sublabel" style="color:rgba(139,92,246,0.7);">TTS Neural Engine</div>
+                                    <div style="margin-top:10px; display:flex; gap:3px; justify-content:center; align-items:center;">
+                                        <div style="width:3px; height:8px; background:var(--purple); border-radius:2px; animation:pulse 0.8s infinite;"></div>
+                                        <div style="width:3px; height:14px; background:var(--purple); border-radius:2px; animation:pulse 0.8s 0.1s infinite;"></div>
+                                        <div style="width:3px; height:10px; background:var(--purple); border-radius:2px; animation:pulse 0.8s 0.2s infinite;"></div>
+                                        <div style="width:3px; height:16px; background:var(--purple); border-radius:2px; animation:pulse 0.8s 0.3s infinite;"></div>
+                                        <div style="width:3px; height:8px; background:var(--purple); border-radius:2px; animation:pulse 0.8s 0.4s infinite;"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Right face: Scene Generator -->
+                            <div class="q-cube-face q-face-right" style="border-color: rgba(0,229,255,0.3);">
+                                <div style="text-align: center; padding: 16px; width: 100%;">
+                                    <span class="material-symbols-outlined" style="font-size: 38px; color: var(--cyan); display:block;">movie</span>
+                                    <div class="q-face-label" style="color: var(--cyan);">SCENE_GEN</div>
+                                    <div class="q-face-sublabel" style="color:rgba(0,229,255,0.6);">AI Video Builder</div>
+                                    <div style="margin-top:8px; width:100%; height:3px; background:rgba(0,229,255,0.1); border-radius:99px; overflow:hidden;">
+                                        <div style="height:100%; width:82%; background:linear-gradient(90deg,var(--cyan),var(--purple)); animation:pulse 2s infinite;"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Left face: Script AI -->
+                            <div class="q-cube-face q-face-left" style="border-color: rgba(139,92,246,0.3);">
+                                <div style="text-align: center; padding: 16px;">
+                                    <span class="material-symbols-outlined" style="font-size: 38px; color: var(--purple); display:block;">edit_note</span>
+                                    <div class="q-face-label" style="color: var(--purple);">SCRIPT_AI</div>
+                                    <div class="q-face-sublabel" style="color:rgba(139,92,246,0.7);">Auto Scriptwriter</div>
+                                    <div style="margin-top:8px; font-family:monospace; font-size:7px; color:rgba(139,92,246,0.5); text-align:left; line-height:1.6;">
+                                        &gt; generate_hook()...<br>
+                                        &gt; write_cta()...<br>
+                                        &gt; export_script ✓
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Top face: Render Engine -->
+                            <div class="q-cube-face q-face-top" style="border-color: rgba(0,229,255,0.3);">
+                                <div style="width:100%; height:100%; padding:16px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px;">
+                                    <span class="material-symbols-outlined" style="font-size:32px; color:var(--cyan);">cloud_sync</span>
+                                    <div class="q-face-label" style="color:var(--cyan);">RENDER_ENGINE</div>
+                                    <div class="q-face-sublabel" style="color:rgba(0,229,255,0.5);">AWS Bedrock Pipeline</div>
+                                </div>
+                            </div>
+
+                            <!-- Bottom face: Deployed -->
+                            <div class="q-cube-face q-face-bottom" style="border-color: rgba(16,185,129,0.4);">
+                                <div style="text-align:center; padding:12px;">
+                                    <span class="material-symbols-outlined" style="font-size:28px; color:#10B981; display:block;">rocket_launch</span>
+                                    <div style="font-family:'Space Grotesk',sans-serif; font-size:8px; font-weight:800; color:#10B981; letter-spacing:2px; margin-top:4px;">DEPLOYED_V1</div>
+                                    <div style="font-family:monospace; font-size:7px; color:rgba(16,185,129,0.6); margin-top:2px;">vercel.app ✓</div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- COL 3: Analytics -->
+                <div class="q-glass-panel" style="display: flex; flex-direction: column; gap: 20px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 12px;">
+                        <h4 style="font-family: 'Space Grotesk', sans-serif; font-size: 11px; color: #849495; font-weight: bold; letter-spacing: 1px; text-transform: uppercase;">SYSTEM_METRICS</h4>
+                        <span class="material-symbols-outlined" style="color: var(--cyan); animation: pulse 2s infinite;">query_stats</span>
+                    </div>
+
+                    <!-- Custom bar chart representation -->
+                    <div style="height: 120px; width: 100%; display: flex; align-items: flex-end; gap: 8px; border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding-bottom: 4px; position: relative;">
+                        <!-- Grid horizontal rules -->
+                        <div style="position: absolute; bottom: 25%; left: 0; right: 0; height: 1px; border-bottom: 1px dashed rgba(255,255,255,0.04); pointer-events: none;"></div>
+                        <div style="position: absolute; bottom: 50%; left: 0; right: 0; height: 1px; border-bottom: 1px dashed rgba(255,255,255,0.04); pointer-events: none;"></div>
+                        <div style="position: absolute; bottom: 75%; left: 0; right: 0; height: 1px; border-bottom: 1px dashed rgba(255,255,255,0.04); pointer-events: none;"></div>
+
+                        <!-- Bar 1 -->
+                        <div class="q-analytics-bar" style="height: 40%;">
+                            <div class="q-bar-bubble">40%</div>
+                        </div>
+                        <!-- Bar 2 -->
+                        <div class="q-analytics-bar" style="height: 70%;">
+                            <div class="q-bar-bubble">70%</div>
+                        </div>
+                        <!-- Bar 3 -->
+                        <div class="q-analytics-bar purple-bar" style="height: 55%;">
+                            <div class="q-bar-bubble">55%</div>
+                        </div>
+                        <!-- Bar 4 -->
+                        <div class="q-analytics-bar" style="height: 90%;">
+                            <div class="q-bar-bubble">90%</div>
+                        </div>
+                        <!-- Bar 5 -->
+                        <div class="q-analytics-bar" style="height: 60%;">
+                            <div class="q-bar-bubble">60%</div>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; justify-content: space-around; text-align: center; margin-top: 4px;">
+                        <div>
+                            <div style="font-family: monospace; font-size: 16px; color: var(--cyan); font-weight: bold;">50+</div>
+                            <div style="font-family: 'Space Grotesk', sans-serif; font-size: 8px; color: #849495; text-transform: uppercase; font-weight: bold; letter-spacing: 0.5px; margin-top: 2px;">VIDEOS/DAY</div>
+                        </div>
+                        <div>
+                            <div style="font-family: monospace; font-size: 16px; color: var(--purple); font-weight: bold;">98.2%</div>
+                            <div style="font-family: 'Space Grotesk', sans-serif; font-size: 8px; color: #849495; text-transform: uppercase; font-weight: bold; letter-spacing: 0.5px; margin-top: 2px;">QUALITY</div>
+                        </div>
+                    </div>
+
+                    <!-- Generate Report Trigger -->
+                    <button class="q-report-btn" onclick="openFacelessReport()">
+                        <span class="material-symbols-outlined" style="font-size:16px;">analytics</span>
+                        GENERATE REPORT
+                    </button>
+
+                    <!-- Alert message -->
+                    <div style="display: flex; align-items: flex-start; gap: 10px; border-left: 2px solid var(--cyan); background: rgba(0, 229, 255, 0.04); border-radius: 4px; padding: 10px;">
+                        <span class="material-symbols-outlined" style="color: var(--cyan); font-size: 18px; flex-shrink: 0;">warning</span>
+                        <p style="font-family: monospace; font-size: 9px; color: rgba(0,229,255,0.85); line-height: 1.4; margin: 0;">
+                            SYSTEM LIVE — Faceless AI Studio deployed on Vercel. AWS Bedrock active.
+                        </p>
+                    </div>
+                </div>
+
+            </div> <!-- /quantum-grid-master -->
+
+        </div> <!-- /cs-universal-wrapper -->
+    </div> <!-- /card-inner -->
+
+    <!-- Case Study Interaction Scripts -->
+    <script>
+        function toggleCsAccordion() {
+            const content = document.getElementById('cs-accordion-content');
+            const icon = document.getElementById('cs-accordion-icon');
+            content.classList.toggle('active');
+            if (content.classList.contains('active')) {
+                icon.style.transform = 'rotate(180deg)';
+            } else {
+                icon.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        function openDesktopPanel(id) {
+            const gallery = document.getElementById('cs-gallery');
+            if (gallery.getAttribute('data-state') === 'expanded' && document.getElementById(`cs-panel-${id}`).classList.contains('active')) {
+                return; // already open
+            }
+            gallery.setAttribute('data-state', 'expanded');
+            
+            // Manage classes
+            for (let i = 1; i <= 3; i++) {
+                const panel = document.getElementById(`cs-panel-${i}`);
+                if (i === id) {
+                    panel.classList.add('active');
+                    panel.classList.remove('shrunk');
+                } else {
+                    panel.classList.remove('active');
+                    panel.classList.add('shrunk');
+                }
+            }
+        }
+
+        function closeDesktopPanel(event) {
+            event.stopPropagation(); // prevent panel click from firing immediately
+            const gallery = document.getElementById('cs-gallery');
+            gallery.setAttribute('data-state', 'gallery');
+            
+            for (let i = 1; i <= 3; i++) {
+                const panel = document.getElementById(`cs-panel-${i}`);
+                panel.classList.remove('active');
+                panel.classList.remove('shrunk');
+            }
+        }
+
+        function moveQuantumGrid() {
+            const masterContent = document.getElementById('quantum-grid-master');
+            if (!masterContent) return;
+            
+            masterContent.style.display = 'block'; // Make it visible when moving
+            
+            if (window.innerWidth < 992) {
+                const mobileTarget = document.getElementById('cs-mobile-injection-point');
+                if (mobileTarget && masterContent.parentNode !== mobileTarget) {
+                    mobileTarget.appendChild(masterContent);
+                }
+            } else {
+                const desktopTarget = document.getElementById('cs-master-injection-point');
+                if (desktopTarget && masterContent.parentNode !== desktopTarget) {
+                    desktopTarget.appendChild(masterContent);
+                }
+            }
+        }
+
+        // Run on load and resize
+        window.addEventListener('resize', moveQuantumGrid);
+        document.addEventListener('DOMContentLoaded', moveQuantumGrid);
+    </script>
+
+    <!-- Self-contained Binary Stream Generator Script inside Card 6 -->
+    <script>
+        (function() {
+            function updateBinaryStream(elementId) {
+                const el = document.getElementById(elementId);
+                if (!el) return;
+                let text = "";
+                for (let i = 0; i < 90; i++) {
+                    text += Math.round(Math.random()) + (Math.random() > 0.5 ? " " : "");
+                }
+                el.innerText = text;
+            }
+            
+            // Initial generation
+            updateBinaryStream('qStreamFront');
+            updateBinaryStream('qStreamBack');
+
+            // Interval update
+            const intervalId = setInterval(() => {
+                updateBinaryStream('qStreamFront');
+                updateBinaryStream('qStreamBack');
+            }, 600);
+
+            // Clean up interval if needed on re-renders, but since it's a static portfolio it's perfectly safe
+        })();
+    </script>
+</section>
+
+<!-- ════ FACELESS AI REPORT MODAL ════ -->
+<div id="faceless-report-modal" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(6,11,20,0.94);backdrop-filter:blur(18px);overflow-y:auto;padding:40px 20px;">
+<style>
+.frm-close-btn{position:fixed;top:24px;right:28px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);color:#fff;width:44px;height:44px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.3s ease;z-index:10000;}
+.frm-close-btn:hover{background:rgba(0,229,255,0.15);border-color:var(--cyan);}
+.frm-inp{width:100%;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:12px 16px;color:#fff;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;resize:none;outline:none;transition:border-color 0.3s;}
+.frm-inp:focus{border-color:rgba(0,229,255,0.4);}
+.frm-sub-btn{background:linear-gradient(135deg,rgba(0,229,255,0.12),rgba(139,92,246,0.12));border:1px solid rgba(0,229,255,0.4);color:var(--cyan);font-family:'Space Grotesk',sans-serif;font-weight:800;font-size:11px;padding:12px 28px;border-radius:8px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all 0.3s;display:inline-flex;align-items:center;gap:8px;}
+.frm-sub-btn:hover{background:var(--cyan);color:#060B14;box-shadow:0 0 25px rgba(0,229,255,0.5);}
+@keyframes frmIn{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.frm-inner{animation:frmIn 0.4s cubic-bezier(0.25,1,0.5,1) both;max-width:860px;margin:0 auto;}
+</style>
+<button class="frm-close-btn" onclick="closeFacelessReport()"><span class="material-symbols-outlined" style="font-size:20px;">close</span></button>
+<div class="frm-inner">
+  <div style="text-align:center;margin-bottom:36px;">
+    <div style="display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border:1px solid rgba(0,229,255,0.2);background:rgba(0,229,255,0.04);border-radius:99px;margin-bottom:16px;">
+      <span style="width:6px;height:6px;border-radius:50%;background:var(--cyan);animation:pulse 2s infinite;display:inline-block;"></span>
+      <span style="font-family:monospace;font-size:10px;color:var(--cyan);letter-spacing:1px;text-transform:uppercase;font-weight:bold;">SYSTEM_REPORT // FACELESS AI STUDIO</span>
+    </div>
+    <h2 style="font-family:'Space Grotesk',sans-serif;font-size:30px;color:#fff;font-weight:900;margin-bottom:8px;">Project Analysis Report</h2>
+    <div style="width:60px;height:3px;background:linear-gradient(90deg,var(--cyan),var(--purple));margin:0 auto;border-radius:99px;"></div>
+  </div>
+  <!-- Stats -->
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px;margin-bottom:24px;">
+    <div style="background:rgba(0,229,255,0.05);border:1px solid rgba(0,229,255,0.15);border-radius:12px;padding:18px;text-align:center;"><div style="font-family:monospace;font-size:26px;font-weight:bold;color:var(--cyan);">50+</div><div style="font-family:'Space Grotesk',sans-serif;font-size:10px;color:#849495;text-transform:uppercase;letter-spacing:1px;margin-top:4px;">Videos/Day</div></div>
+    <div style="background:rgba(139,92,246,0.05);border:1px solid rgba(139,92,246,0.15);border-radius:12px;padding:18px;text-align:center;"><div style="font-family:monospace;font-size:26px;font-weight:bold;color:var(--purple);">98.2%</div><div style="font-family:'Space Grotesk',sans-serif;font-size:10px;color:#849495;text-transform:uppercase;letter-spacing:1px;margin-top:4px;">Quality Score</div></div>
+    <div style="background:rgba(0,229,255,0.05);border:1px solid rgba(0,229,255,0.15);border-radius:12px;padding:18px;text-align:center;"><div style="font-family:monospace;font-size:26px;font-weight:bold;color:var(--cyan);">99.9%</div><div style="font-family:'Space Grotesk',sans-serif;font-size:10px;color:#849495;text-transform:uppercase;letter-spacing:1px;margin-top:4px;">Uptime</div></div>
+    <div style="background:rgba(16,185,129,0.05);border:1px solid rgba(16,185,129,0.2);border-radius:12px;padding:18px;text-align:center;"><div style="font-family:monospace;font-size:26px;font-weight:bold;color:#10B981;">LIVE</div><div style="font-family:'Space Grotesk',sans-serif;font-size:10px;color:#849495;text-transform:uppercase;letter-spacing:1px;margin-top:4px;">Status</div></div>
+  </div>
+  <!-- Summary -->
+  <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:22px;margin-bottom:22px;">
+    <h3 style="font-family:'Space Grotesk',sans-serif;font-size:12px;color:var(--cyan);font-weight:800;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px;">📋 Project Summary</h3>
+    <p style="font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;color:rgba(255,255,255,0.7);line-height:1.8;margin:0 0 14px;"><strong style="color:#fff;">Faceless AI Studio</strong> is an automated AI video generation pipeline built on <strong style="color:var(--cyan);">AWS Bedrock</strong> and frontier Gen-AI models. It produces complete videos — AI scripts, neural voice synthesis, and scene generation — without any human face. Winner of the <strong style="color:var(--purple);">AWS Nova Hackathon</strong>, deployed live on Vercel.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;">
+      <span style="background:rgba(0,229,255,0.07);border:1px solid rgba(0,229,255,0.25);color:var(--cyan);padding:4px 12px;border-radius:6px;font-size:11px;font-family:monospace;">AWS Bedrock</span>
+      <span style="background:rgba(139,92,246,0.07);border:1px solid rgba(139,92,246,0.25);color:#a78bfa;padding:4px 12px;border-radius:6px;font-size:11px;font-family:monospace;">Python</span>
+      <span style="background:rgba(0,229,255,0.07);border:1px solid rgba(0,229,255,0.25);color:var(--cyan);padding:4px 12px;border-radius:6px;font-size:11px;font-family:monospace;">Generative AI</span>
+      <span style="background:rgba(16,185,129,0.07);border:1px solid rgba(16,185,129,0.25);color:#10B981;padding:4px 12px;border-radius:6px;font-size:11px;font-family:monospace;">Vercel</span>
+      <span style="background:rgba(139,92,246,0.07);border:1px solid rgba(139,92,246,0.25);color:#a78bfa;padding:4px 12px;border-radius:6px;font-size:11px;font-family:monospace;">FastAPI</span>
+    </div>
+  </div>
+  <!-- Features -->
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin-bottom:24px;">
+    <div style="background:rgba(0,229,255,0.03);border:1px solid rgba(0,229,255,0.1);border-radius:12px;padding:18px;"><span class="material-symbols-outlined" style="color:var(--cyan);font-size:26px;">smart_toy</span><div style="font-family:'Space Grotesk',sans-serif;font-weight:800;color:#fff;margin:8px 0 4px;">AI Chatbot</div><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;color:#849495;">Conversational interface for video topic input.</div></div>
+    <div style="background:rgba(139,92,246,0.03);border:1px solid rgba(139,92,246,0.1);border-radius:12px;padding:18px;"><span class="material-symbols-outlined" style="color:var(--purple);font-size:26px;">record_voice_over</span><div style="font-family:'Space Grotesk',sans-serif;font-weight:800;color:#fff;margin:8px 0 4px;">Voice Clone</div><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;color:#849495;">Neural TTS generating natural voiceovers.</div></div>
+    <div style="background:rgba(0,229,255,0.03);border:1px solid rgba(0,229,255,0.1);border-radius:12px;padding:18px;"><span class="material-symbols-outlined" style="color:var(--cyan);font-size:26px;">movie</span><div style="font-family:'Space Grotesk',sans-serif;font-weight:800;color:#fff;margin:8px 0 4px;">Scene Generator</div><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;color:#849495;">AI-driven visual scenes with auto B-roll.</div></div>
+    <div style="background:rgba(139,92,246,0.03);border:1px solid rgba(139,92,246,0.1);border-radius:12px;padding:18px;"><span class="material-symbols-outlined" style="color:var(--purple);font-size:26px;">edit_note</span><div style="font-family:'Space Grotesk',sans-serif;font-weight:800;color:#fff;margin:8px 0 4px;">Script AI</div><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;color:#849495;">Auto-generates viral hooks, CTAs and scripts.</div></div>
+  </div>
+  <!-- Comment Form -->
+  <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:22px;margin-bottom:20px;">
+    <h3 style="font-family:'Space Grotesk',sans-serif;font-size:12px;color:var(--cyan);font-weight:800;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:16px;">💬 Leave a Comment</h3>
+    <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:14px;">
+      <input id="frm-name" class="frm-inp" type="text" placeholder="Your Name" style="height:44px;">
+      <textarea id="frm-comment" class="frm-inp" rows="3" placeholder="Share your thoughts about this project..."></textarea>
+    </div>
+    <button class="frm-sub-btn" onclick="submitFacelessComment()">
+      <span class="material-symbols-outlined" style="font-size:16px;">send</span>SUBMIT COMMENT
+    </button>
+  </div>
+  <div id="frm-comments-list" style="margin-bottom:32px;"></div>
+  <div style="text-align:center;padding-bottom:20px;">
+    <a href="https://faceless-ai-studio-tau.vercel.app/" target="_blank" style="display:inline-flex;align-items:center;gap:10px;background:rgba(0,229,255,0.06);border:1px solid rgba(0,229,255,0.3);color:var(--cyan);padding:14px 32px;border-radius:99px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:13px;text-decoration:none;transition:all 0.3s;letter-spacing:1.5px;" onmouseover="this.style.background='var(--cyan)';this.style.color='#060B14';" onmouseout="this.style.background='rgba(0,229,255,0.06)';this.style.color='var(--cyan)';">
+      <span class="material-symbols-outlined" style="font-size:18px;">open_in_new</span>LAUNCH LIVE APP
+    </a>
+  </div>
+</div>
+</div>
+<script>
+(function(){
+  window.openFacelessReport=function(){var m=document.getElementById('faceless-report-modal');m.style.display='block';m.scrollTop=0;document.body.style.overflow='hidden';renderFrm();};
+  window.closeFacelessReport=function(){document.getElementById('faceless-report-modal').style.display='none';document.body.style.overflow='';};
+  window.submitFacelessComment=function(){
+    var n=(document.getElementById('frm-name').value||'').trim();
+    var c=(document.getElementById('frm-comment').value||'').trim();
+    if(!n||!c){alert('Please fill name and comment.');return;}
+    var arr=JSON.parse(localStorage.getItem('faceless_comments')||'[]');
+    arr.unshift({name:n,comment:c,date:new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})});
+    localStorage.setItem('faceless_comments',JSON.stringify(arr));
+    document.getElementById('frm-name').value='';document.getElementById('frm-comment').value='';
+    renderFrm();
+  };
+  function renderFrm(){
+    var list=document.getElementById('frm-comments-list');if(!list)return;
+    var arr=JSON.parse(localStorage.getItem('faceless_comments')||'[]');
+    if(!arr.length){list.innerHTML='<div style="text-align:center;font-family:monospace;font-size:12px;color:#849495;padding:16px;">No comments yet — be the first!</div>';return;}
+    list.innerHTML='<h3 style="font-family:\'Space Grotesk\',sans-serif;font-size:12px;color:var(--cyan);font-weight:800;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:14px;">💬 Comments ('+arr.length+')</h3>'+arr.map(function(c){return'<div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:10px;padding:14px;margin-bottom:10px;"><div style="display:flex;justify-content:space-between;margin-bottom:6px;"><span style="font-family:\'Space Grotesk\',sans-serif;font-size:13px;font-weight:700;color:var(--cyan);">'+c.name+'</span><span style="font-family:monospace;font-size:10px;color:#849495;">'+c.date+'</span></div><p style="font-family:\'Plus Jakarta Sans\',sans-serif;font-size:13px;color:rgba(255,255,255,0.7);line-height:1.6;margin:0;">'+c.comment+'</p></div>';}).join('');
+  }
+  var el=document.getElementById('faceless-report-modal');
+  if(el)el.addEventListener('click',function(e){if(e.target===this)closeFacelessReport();});
+})();
+</script>
+

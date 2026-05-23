@@ -1,0 +1,38 @@
+{
+    // ── RECOMMENDED EXTENSIONS FOR THIS PROJECT ──
+    // VS Code will prompt you to install these when you open the workspace.
+    "recommendations": [
+        // HTML IntelliSense & formatting
+        "ecmel.vscode-html-css",
+
+        // CSS IntelliSense (class names from linked stylesheets)
+        "zignd.html-css-class-completion",
+
+        // Live Server (open index.html in browser with hot reload)
+        "ritwickdey.liveserver",
+
+        // Tailwind CSS IntelliSense (since you use Tailwind classes)
+        "bradlc.vscode-tailwindcss",
+
+        // JavaScript IntelliSense
+        "ms-vscode.vscode-js-profile-flame",
+
+        // Prettier (code formatter)
+        "esbenp.prettier-vscode",
+
+        // Auto Rename Tag (rename both opening & closing HTML tags)
+        "formulahendry.auto-rename-tag",
+
+        // Auto Close Tag
+        "formulahendry.auto-close-tag",
+
+        // Color Highlight (shows colors inline in CSS/HTML)
+        "naumovs.color-highlight",
+
+        // Path IntelliSense (autocomplete file paths)
+        "christian-kohler.path-intellisense",
+
+        // Image Preview (preview images on hover)
+        "kisstkondoros.vscode-gutter-preview"
+    ]
+}
