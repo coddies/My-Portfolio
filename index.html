@@ -3495,7 +3495,7 @@
     <!-- BACK TO HOME BUTTON -->
     <div style="display:flex; justify-content:center; align-items:center; padding:12px 0 20px 0; width:100%; flex-shrink:0;">
       <button
-        onclick="document.querySelector('.nav-btn[data-index=\'0\']').click(); playSpaceClick();"
+        onclick="document.querySelector('.nav-btn[data-index=\'0\']').click();"
         id="nlBackBtn"
         style="
           background: transparent;
@@ -3559,37 +3559,9 @@
     setTimeout(()=>{ platforms.style.transition = 'transform 0.5s ease'; }, 800);
   });
 
-function playSpaceClick() {
-  try {
-    const ctx = new (window.AudioContext || window.webkitAudioContext)();
-    const osc1 = ctx.createOscillator();
-    const gain1 = ctx.createGain();
-    osc1.connect(gain1);
-    gain1.connect(ctx.destination);
-    osc1.type = 'sine';
-    osc1.frequency.setValueAtTime(880, ctx.currentTime);
-    osc1.frequency.exponentialRampToValueAtTime(220, ctx.currentTime + 0.25);
-    gain1.gain.setValueAtTime(0.25, ctx.currentTime);
-    gain1.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.25);
-    osc1.start(ctx.currentTime);
-    osc1.stop(ctx.currentTime + 0.25);
 
-    const osc2 = ctx.createOscillator();
-    const gain2 = ctx.createGain();
-    osc2.connect(gain2);
-    gain2.connect(ctx.destination);
-    osc2.type = 'square';
-    osc2.frequency.setValueAtTime(1200, ctx.currentTime);
-    osc2.frequency.exponentialRampToValueAtTime(300, ctx.currentTime + 0.12);
-    gain2.gain.setValueAtTime(0.08, ctx.currentTime);
-    gain2.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.12);
-    osc2.start(ctx.currentTime);
-    osc2.stop(ctx.currentTime + 0.12);
-  } catch(e) {}
-}
-
-document.querySelector('#nlBackBtn') && document.querySelector('#nlBackBtn').addEventListener('click', playSpaceClick);
-document.querySelector('.nl-transmit-btn') && document.querySelector('.nl-transmit-btn').addEventListener('click', playSpaceClick);
+  document.querySelector('#nlBackBtn') && document.querySelector('#nlBackBtn').addEventListener('click', SpaceSound.robotClick);
+  document.querySelector('.nl-transmit-btn') && document.querySelector('.nl-transmit-btn').addEventListener('click', SpaceSound.robotClick);
 
 })();
 </script>
