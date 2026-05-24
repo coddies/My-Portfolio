@@ -2672,9 +2672,14 @@
   transition: all 0.3s ease;
 }
 
+.nl-inp-wrap:hover {
+  background: rgba(0, 229, 255, 0.8);
+  box-shadow: 0 0 15px rgba(0, 229, 255, 0.3);
+}
+
 .nl-inp-wrap:focus-within {
   background: var(--cyan);
-  box-shadow: 0 0 20px rgba(0, 229, 255, 0.5);
+  box-shadow: 0 0 20px rgba(0, 229, 255, 0.6);
 }
 
 .nl-term-input, .nl-term-textarea {
@@ -2704,34 +2709,12 @@
 .h-tr { top: -1px; right: 30px; }
 .h-bl { bottom: -1px; left: 30px; }
 
-.nl-transmit-wrap {
-  position: relative;
-  align-self: center;
-  padding: 4px;
-  background: linear-gradient(90deg, var(--cyan) 25px, transparent 25px, transparent calc(100% - 25px), var(--cyan) calc(100% - 25px)),
-              linear-gradient(0deg, var(--cyan) 25px, transparent 25px, transparent calc(100% - 25px), var(--cyan) calc(100% - 25px));
-  clip-path: polygon(16px 0, calc(100% - 16px) 0, 100% 16px, 100% calc(100% - 16px), calc(100% - 16px) 100%, 16px 100%, 0 calc(100% - 16px), 0 16px);
-  margin-top: 15px;
-  box-shadow: 0 0 15px rgba(0,229,255,0.3);
-  transition: all 0.3s ease;
-}
-
-.nl-transmit-wrap:hover {
-  box-shadow: 0 0 30px rgba(0,229,255,0.6);
-}
-
-.nl-transmit-wrap::before {
-  content: ''; position: absolute; inset: 2px;
-  background: rgba(10,15,25,0.9);
-  clip-path: polygon(15px 0, calc(100% - 15px) 0, 100% 15px, 100% calc(100% - 15px), calc(100% - 15px) 100%, 15px 100%, 0 calc(100% - 15px), 0 15px);
-  z-index: 0;
-}
-
 .nl-transmit-btn {
   position: relative;
-  background: rgba(0, 229, 255, 0.15);
+  align-self: center;
+  background: rgba(10, 15, 25, 0.8);
+  border: 1px solid var(--cyan);
   color: #00E5FF;
-  border: none;
   padding: 14px 50px;
   font-family: 'Space Grotesk', sans-serif;
   font-size: 14px;
@@ -2739,17 +2722,15 @@
   letter-spacing: 3px;
   cursor: pointer;
   clip-path: polygon(14px 0, calc(100% - 14px) 0, 100% 14px, 100% calc(100% - 14px), calc(100% - 14px) 100%, 14px 100%, 0 calc(100% - 14px), 0 14px);
-  z-index: 1;
   transition: all 0.3s cubic-bezier(0.23,1,0.32,1);
-  box-shadow: inset 0 0 15px rgba(0,229,255,0.3);
-  text-shadow: 0 0 5px rgba(0,229,255,0.5);
+  box-shadow: 0 0 15px rgba(0,229,255,0.2);
+  margin-top: 15px;
 }
 
 .nl-transmit-btn:hover { 
   background: rgba(0,229,255,0.95); 
   color: #060B14; 
-  box-shadow: inset 0 0 20px rgba(255,255,255,0.6), 0 0 30px var(--cyan); 
-  text-shadow: none;
+  box-shadow: 0 0 30px var(--cyan); 
 }
 
 /* ── ISOMETRIC SOCIAL ICONS (RIGHT) ── */
@@ -3198,15 +3179,13 @@
             <div class="nl-h h-tr"></div><div class="nl-h h-bl"></div>
           </div>
           
-          <div class="nl-transmit-wrap">
-            <button class="nl-transmit-btn" onclick="
-              const n=document.getElementById('nlName').value;
-              const e=document.getElementById('nlEmail').value;
-              const m=document.getElementById('nlMsg').value;
-              if(n&&e&&m){ window.location.href='mailto:mb6679605@gmail.com?subject=Neural Link from '+n+'&body='+m; }
-              else { this.textContent='FILL ALL FIELDS'; setTimeout(()=>this.textContent='TRANSMIT',2000); }
-            ">TRANSMIT</button>
-          </div>
+          <button class="nl-transmit-btn" onclick="
+            const n=document.getElementById('nlName').value;
+            const e=document.getElementById('nlEmail').value;
+            const m=document.getElementById('nlMsg').value;
+            if(n&&e&&m){ window.location.href='mailto:mb6679605@gmail.com?subject=Neural Link from '+n+'&body='+m; }
+            else { this.textContent='FILL ALL FIELDS'; setTimeout(()=>this.textContent='TRANSMIT',2000); }
+          ">TRANSMIT</button>
         </div>
       </div>
 

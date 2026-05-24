@@ -140,10 +140,44 @@ if(tEl) type();
     
     let pts = [];
     let shootingStars = [];
+
+    var cursorDot = document.querySelector('.cursor-dot-wrap');
+    var cursorRing = document.querySelector('.cursor-ring-wrap');
+    var navPopup = document.getElementById('navPopup');
+    var navPopupText = document.getElementById('navPopupText');
+    var navPopupIcon = document.getElementById('navPopupIcon');
+
+    var mouseX = window.innerWidth / 2;
+    var mouseY = window.innerHeight / 2;
+    var dotX = mouseX;
+    var dotY = mouseY;
+    var ringX = mouseX;
+    var ringY = mouseY;
+    var aff;
+
+    // Smoothing factor (0 = stuck, 1 = instant)
+    var speedDot = 1.0; 
+    var speedRing = 0.15; 
+
+    document.addEventListener('mousemove', function(e) {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        if(!aff) aff = requestAnimationFrame(updateCursor);
+    });
+
+    function updateCursor() {
+        dotX += (mouseX - dotX) * speedDot;
+        dotY += (mouseY - dotY) * speedDot;
+        ringX += (mouseX - ringX) * speedRing;
+        ringY += (mouseY - ringY) * speedRing;
+
+        if(cursorDot) cursorDot.style.transform = `translate3d(${dotX}px, ${dotY}px, 0)`;
+        if(cursorRing) cursorRing.style.transform = `translate3d(${ringX}px, ${ringY}px, 0)`;
+
+        aff = requestAnimationFrame(updateCursor);
+    }
+    updateCursor();
     
-    // Parallax mouse offsets
-    let mouseX = window.innerWidth / 2;
-    let mouseY = window.innerHeight / 2;
     let targetOffsetX = 0;
     let targetOffsetY = 0;
     let currentOffsetX = 0;
@@ -161,8 +195,8 @@ if(tEl) type();
         c.width = window.innerWidth;
         c.height = window.innerHeight;
         pts = [];
-        // Increased stars for a richer galactic density
-        for(let i=0; i<400; i++) {
+        // Reduced star count to 150
+        for(let i=0; i<150; i++) {
             let size = Math.random() * 1.8 + 0.4;
             pts.push({
                 x: Math.random() * c.width,
