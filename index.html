@@ -3129,6 +3129,173 @@
   .nl-plat-top svg { width: 26px; height: 26px; }
 }
 
+.nl-wrap {
+  overflow: hidden !important;
+  height: 100% !important;
+  max-height: 100% !important;
+}
+
+@media (max-width: 768px) {
+  .nl-wrap {
+    overflow-y: auto !important;
+    height: auto !important;
+    max-height: none !important;
+  }
+}
+
+@media (min-width: 769px) {
+  .nl-main {
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+  }
+}
+
+.nl-back-btn {
+  position: relative;
+  bottom: auto;
+  left: auto;
+  transform: none;
+  margin-top: 16px;
+  flex-shrink: 0;
+  background: transparent;
+  border: 1px solid rgba(0,229,255,0.4);
+  color: var(--cyan);
+  padding: 10px 28px;
+  font-family: 'JetBrains Mono', 'Space Grotesk', monospace;
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+  letter-spacing: 3px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.3s ease;
+  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  z-index: 10;
+}
+
+.nl-back-btn:hover {
+  background: rgba(0,229,255,0.1);
+  border-color: var(--cyan);
+  box-shadow: 0 0 20px rgba(0,229,255,0.3), 0 0 40px rgba(0,229,255,0.1);
+  transform: translateY(-3px);
+  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+}
+
+.nl-btn-bracket {
+  color: rgba(0,229,255,0.5);
+  font-size: 16px;
+}
+
+.nl-btn-arrow {
+  color: var(--cyan);
+  font-size: 16px;
+}
+
+.nl-btn-text {
+  color: #fff;
+  letter-spacing: 3px;
+}
+
+.nl-btn-cursor {
+  animation: nlBlink 1s step-end infinite;
+  color: var(--cyan);
+}
+
+@keyframes nlBlink {
+  0%,100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* TRANSMIT button hover */
+.nl-transmit-btn {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease !important;
+}
+
+.nl-transmit-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.4s ease;
+}
+
+.nl-transmit-btn:hover::before {
+  left: 100%;
+}
+
+.nl-transmit-btn:hover {
+  transform: translateY(-3px) !important;
+  box-shadow: 0 0 30px rgba(0,229,255,0.6), 0 10px 30px rgba(0,229,255,0.3) !important;
+  letter-spacing: 4px !important;
+}
+
+.nl-transmit-btn:active {
+  transform: translateY(0px) scale(0.97) !important;
+}
+
+/* Form inputs hover + focus */
+.nl-term-input,
+.nl-term-textarea {
+  transition: all 0.3s ease !important;
+  position: relative;
+}
+
+.nl-term-input:hover,
+.nl-term-textarea:hover {
+  border-color: rgba(0,229,255,0.4) !important;
+  background: rgba(0,229,255,0.05) !important;
+}
+
+.nl-term-input:focus,
+.nl-term-textarea:focus {
+  border-color: var(--cyan) !important;
+  box-shadow: 0 0 15px rgba(0,229,255,0.25), 0 0 0 1px rgba(0,229,255,0.1) !important;
+  background: rgba(0,229,255,0.08) !important;
+}
+
+/* Social platform icons hover — stronger 3D lift */
+.nl-plat {
+  transition: transform 0.4s cubic-bezier(0.23,1,0.32,1),
+              filter 0.4s ease !important;
+}
+
+.nl-plat:hover {
+  transform: translateZ(70px) scale(1.15) !important;
+  filter:
+    drop-shadow(0 0 20px var(--pc))
+    drop-shadow(0 0 40px var(--pc))
+    drop-shadow(0 20px 30px rgba(0,0,0,0.8)) !important;
+  z-index: 20 !important;
+}
+
+.nl-plat:hover .nl-plat-top {
+  animation: holoFlicker 2s ease infinite;
+}
+
+@keyframes holoFlicker {
+  0%,88%,100% { opacity: 1; }
+  90% { opacity: 0.8; }
+  92% { opacity: 1; }
+  95% { opacity: 0.85; }
+}
+
+/* Terminal form hover */
+.nl-terminal {
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.nl-terminal:hover {
+  border-color: rgba(0,229,255,0.4) !important;
+  box-shadow: 0 0 40px rgba(0,229,255,0.15), 0 20px 60px rgba(0,0,0,0.5) !important;
+}
+
 </style>
 
 <div class="card-inner" style="padding:0; overflow:hidden;">
