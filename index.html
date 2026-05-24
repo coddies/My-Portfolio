@@ -3304,6 +3304,22 @@
   50% { opacity: 0; }
 }
 
+/* FIX: Move layout up so it's not buried */
+@media (min-width: 769px) {
+  .nl-wrap {
+    justify-content: center !important;
+    padding-top: 40px !important;
+  }
+  .nl-main {
+    align-items: center !important;
+    margin-top: -30px !important;
+  }
+  .nl-header {
+    margin-bottom: 10px !important;
+    transform: translateY(-10px) !important;
+  }
+}
+
 </style>
 
 <div class="card-inner" style="padding:0; overflow:hidden;">
