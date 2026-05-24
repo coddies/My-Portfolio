@@ -1,227 +1,38 @@
 // === SPACE SOUND ENGINE ===
 const SpaceSound = (function() {
-  let audioCtx = null;
   const isMobile = window.innerWidth < 768;
-  const soundVolume = isMobile ? 0.5 : 1.0;
+  const vol = isMobile ? 0.5 : 1.0;
+  
+  // Preload audio files
+  const rocketAudio = new Audio('assets/audio/rocket.mp3');
+  rocketAudio.volume = vol;
+  
+  const clickAudio = new Audio('assets/audio/click.mp3');
+  clickAudio.volume = vol * 0.4; // Click should be subtle
 
-  function getCtx() {
-    if (!audioCtx) {
-      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    }
-    if (audioCtx.state === 'suspended') {
-      audioCtx.resume();
-    }
-    return audioCtx;
-  }
-
-  function engineRumble(duration = 2.0) {
+  function rocketLaunch(duration) {
     try {
-      const ctx = getCtx();
-      const t = ctx.currentTime;
-      const osc1 = ctx.createOscillator();
-      const gain1 = ctx.createGain();
-      osc1.type = 'sawtooth';
-      osc1.frequency.setValueAtTime(40, t);
-      osc1.frequency.linearRampToValueAtTime(55, t + duration);
-      gain1.gain.setValueAtTime(0.0, t);
-      gain1.gain.linearRampToValueAtTime(0.18 * soundVolume, t + 0.3);
-      gain1.gain.linearRampToValueAtTime(0.22 * soundVolume, t + duration - 0.3);
-      gain1.gain.linearRampToValueAtTime(0.0, t + duration);
-      osc1.connect(gain1);
-      gain1.connect(ctx.destination);
-      osc1.start(t);
-      osc1.stop(t + duration);
-
-      const osc2 = ctx.createOscillator();
-      const gain2 = ctx.createGain();
-      const filter2 = ctx.createBiquadFilter();
-      osc2.type = 'sawtooth';
-      osc2.frequency.setValueAtTime(120, t);
-      osc2.frequency.linearRampToValueAtTime(180, t + duration);
-      filter2.type = 'bandpass';
-      filter2.frequency.value = 300;
-      filter2.Q.value = 0.8;
-      gain2.gain.setValueAtTime(0.0, t);
-      gain2.gain.linearRampToValueAtTime(0.08 * soundVolume, t + 0.5);
-      gain2.gain.linearRampToValueAtTime(0.0, t + duration);
-      osc2.connect(filter2);
-      filter2.connect(gain2);
-      gain2.connect(ctx.destination);
-      osc2.start(t);
-      osc2.stop(t + duration);
-
-      const bufferSize = ctx.sampleRate * 0.8;
-      const noiseBuffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
-      const data = noiseBuffer.getChannelData(0);
-      for (let i = 0; i < bufferSize; i++) {
-        data[i] = (Math.random() * 2 - 1) * 0.3;
-      }
-      const noiseSource = ctx.createBufferSource();
-      noiseSource.buffer = noiseBuffer;
-      const noiseFilter = ctx.createBiquadFilter();
-      noiseFilter.type = 'highpass';
-      noiseFilter.frequency.value = 2000;
-      const noiseGain = ctx.createGain();
-      noiseGain.gain.setValueAtTime(0.0, t);
-      noiseGain.gain.linearRampToValueAtTime(0.06 * soundVolume, t + 0.1);
-      noiseGain.gain.linearRampToValueAtTime(0.0, t + 0.8);
-      noiseSource.connect(noiseFilter);
-      noiseFilter.connect(noiseGain);
-      noiseGain.connect(ctx.destination);
-      noiseSource.start(t);
-    } catch(e) {}
-  }
-
-  function rocketLaunch(duration = 1.2) {
-    try {
-      const ctx = getCtx();
-      const t = ctx.currentTime;
-      const osc1 = ctx.createOscillator();
-      const gain1 = ctx.createGain();
-      osc1.type = 'sawtooth';
-      osc1.frequency.setValueAtTime(60, t);
-      osc1.frequency.exponentialRampToValueAtTime(400, t + duration * 0.6);
-      osc1.frequency.exponentialRampToValueAtTime(800, t + duration);
-      gain1.gain.setValueAtTime(0.25 * soundVolume, t);
-      gain1.gain.linearRampToValueAtTime(0.35 * soundVolume, t + duration * 0.3);
-      gain1.gain.exponentialRampToValueAtTime(0.001, t + duration);
-      osc1.connect(gain1);
-      gain1.connect(ctx.destination);
-      osc1.start(t);
-      osc1.stop(t + duration);
-
-      const bufferSize = ctx.sampleRate * duration;
-      const noiseBuffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
-      const data = noiseBuffer.getChannelData(0);
-      for (let i = 0; i < bufferSize; i++) data[i] = Math.random() * 2 - 1;
-      const noise = ctx.createBufferSource();
-      noise.buffer = noiseBuffer;
-      const noiseFilter = ctx.createBiquadFilter();
-      noiseFilter.type = 'bandpass';
-      noiseFilter.frequency.setValueAtTime(200, t);
-      noiseFilter.frequency.exponentialRampToValueAtTime(3000, t + duration);
-      noiseFilter.Q.value = 0.5;
-      const noiseGain = ctx.createGain();
-      noiseGain.gain.setValueAtTime(0.2 * soundVolume, t);
-      noiseGain.gain.exponentialRampToValueAtTime(0.001, t + duration);
-      noise.connect(noiseFilter);
-      noiseFilter.connect(noiseGain);
-      noiseGain.connect(ctx.destination);
-      noise.start(t);
-
-      const osc2 = ctx.createOscillator();
-      const gain2 = ctx.createGain();
-      osc2.type = 'sine';
-      osc2.frequency.setValueAtTime(300, t);
-      osc2.frequency.exponentialRampToValueAtTime(2000, t + duration * 0.8);
-      gain2.gain.setValueAtTime(0.05 * soundVolume, t);
-      gain2.gain.exponentialRampToValueAtTime(0.001, t + duration * 0.8);
-      osc2.connect(gain2);
-      gain2.connect(ctx.destination);
-      osc2.start(t);
-      osc2.stop(t + duration * 0.8);
-    } catch(e) {}
-  }
-
-  function skyTear(duration = 0.6) {
-    try {
-      const ctx = getCtx();
-      const t = ctx.currentTime;
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-      osc.type = 'square';
-      osc.frequency.setValueAtTime(150, t);
-      osc.frequency.exponentialRampToValueAtTime(20, t + duration * 0.3);
-      gain.gain.setValueAtTime(0.3 * soundVolume, t);
-      gain.gain.exponentialRampToValueAtTime(0.001, t + duration * 0.3);
-      osc.connect(gain);
-      gain.connect(ctx.destination);
-      osc.start(t);
-      osc.stop(t + duration * 0.3);
-
-      const bufferSize = ctx.sampleRate * duration;
-      const noiseBuffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
-      const data = noiseBuffer.getChannelData(0);
-      for (let i = 0; i < bufferSize; i++) data[i] = Math.random() * 2 - 1;
-      const noise = ctx.createBufferSource();
-      noise.buffer = noiseBuffer;
-      const filter = ctx.createBiquadFilter();
-      filter.type = 'highpass';
-      filter.frequency.value = 1000;
-      const noiseGain = ctx.createGain();
-      noiseGain.gain.setValueAtTime(0.15 * soundVolume, t);
-      noiseGain.gain.exponentialRampToValueAtTime(0.001, t + duration);
-      noise.connect(filter);
-      filter.connect(noiseGain);
-      noiseGain.connect(ctx.destination);
-      noise.start(t);
-    } catch(e) {}
-  }
-
-  function sectionWhoosh() {
-    try {
-      const ctx = getCtx();
-      const t = ctx.currentTime;
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-      osc.type = 'sawtooth';
-      osc.frequency.setValueAtTime(80, t);
-      osc.frequency.exponentialRampToValueAtTime(600, t + 0.35);
-      gain.gain.setValueAtTime(0.15 * soundVolume, t);
-      gain.gain.exponentialRampToValueAtTime(0.001, t + 0.35);
-      osc.connect(gain);
-      gain.connect(ctx.destination);
-      osc.start(t);
-      osc.stop(t + 0.35);
-
-      const bufSize = ctx.sampleRate * 0.35;
-      const buf = ctx.createBuffer(1, bufSize, ctx.sampleRate);
-      const data = buf.getChannelData(0);
-      for (let i = 0; i < bufSize; i++) data[i] = Math.random() * 2 - 1;
-      const noise = ctx.createBufferSource();
-      noise.buffer = buf;
-      const filter = ctx.createBiquadFilter();
-      filter.type = 'bandpass';
-      filter.frequency.setValueAtTime(300, t);
-      filter.frequency.exponentialRampToValueAtTime(2000, t + 0.35);
-      const ng = ctx.createGain();
-      ng.gain.setValueAtTime(0.1 * soundVolume, t);
-      ng.gain.exponentialRampToValueAtTime(0.001, t + 0.35);
-      noise.connect(filter);
-      filter.connect(ng);
-      ng.connect(ctx.destination);
-      noise.start(t);
+      rocketAudio.currentTime = 0;
+      rocketAudio.play().catch(e => console.log('Audio play blocked:', e));
     } catch(e) {}
   }
 
   function robotClick() {
     try {
-      const ctx = getCtx();
-      const t = ctx.currentTime;
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(880, t);
-      osc.frequency.exponentialRampToValueAtTime(440, t + 0.12);
-      gain.gain.setValueAtTime(0.12 * soundVolume, t);
-      gain.gain.exponentialRampToValueAtTime(0.001, t + 0.12);
-      osc.connect(gain);
-      gain.connect(ctx.destination);
-      osc.start(t);
-      osc.stop(t + 0.12);
+      // Clone node to allow rapid overlapping clicks
+      const clickClone = clickAudio.cloneNode();
+      clickClone.volume = vol * 0.4;
+      clickClone.play().catch(e => {});
     } catch(e) {}
   }
 
+  // Stub out the unused ones so we don't break existing hooks in buildLoader
+  function engineRumble() {}
+  function skyTear() {}
+  function sectionWhoosh() { robotClick(); } // Just play a click for sections to keep it clean
+
   return { engineRumble, rocketLaunch, skyTear, sectionWhoosh, robotClick };
 })();
-
-document.addEventListener('click', function unlockAudio() {
-  if (window.AudioContext || window.webkitAudioContext) {
-    const ctx = new (window.AudioContext || window.webkitAudioContext)();
-    ctx.resume().then(() => ctx.close());
-  }
-  document.removeEventListener('click', unlockAudio);
-}, { once: true });
 // === END SOUND ENGINE ===
 
 // ── CARD SWITCHING ──
@@ -563,7 +374,7 @@ if(document.getElementById('csModalClose')) document.getElementById('csModalClos
     const loader = document.getElementById('mb-loader');
     if (!loader) return;
     
-    SpaceSound.engineRumble(2.2);
+    SpaceSound.rocketLaunch();
     document.body.style.overflow = 'hidden';
     const stars = document.getElementById('mb-loader-stars');
     if (stars && stars.children.length === 0) {
@@ -577,8 +388,7 @@ if(document.getElementById('csModalClose')) document.getElementById('csModalClos
 
     // Phase 2: Launch rocket first
     setTimeout(()=>{ 
-        SpaceSound.rocketLaunch(0.9);
-        const wrap = document.getElementById('mb-rocket-wrap');
+                const wrap = document.getElementById('mb-rocket-wrap');
         const name = document.getElementById('mb-name');
         const subtitle = document.getElementById('mb-subtitle');
         if (wrap) wrap.classList.add('launching'); 
