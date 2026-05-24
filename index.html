@@ -3110,23 +3110,26 @@
 
 @media (max-width: 600px) {
   .nl-iso-platforms {
-    grid-template-columns: 95px 95px;
-    grid-template-rows: 95px 95px;
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap;
+    justify-content: center;
     gap: 12px;
-    transform: rotateX(20deg) rotateY(-10deg) rotateZ(3deg);
+    transform: none !important;
   }
-  .nl-plat-base { width: 85px; height: 85px; }
-  .nl-plat-top svg { width: 32px; height: 32px; }
+  .nl-plat-base { width: 60px; height: 60px; }
+  .nl-plat-top svg { width: 26px; height: 26px; }
+  .nl-iso-lines { display: none; }
+  .nl-term-textarea { height: 60px !important; }
+  .nl-term-input, .nl-term-textarea { padding: 10px 14px !important; }
 }
 
 @media (max-width: 400px) {
   .nl-iso-platforms {
-    grid-template-columns: 78px 78px;
-    grid-template-rows: 78px 78px;
-    gap: 10px;
+    gap: 8px;
   }
-  .nl-plat-base { width: 70px; height: 70px; }
-  .nl-plat-top svg { width: 26px; height: 26px; }
+  .nl-plat-base { width: 50px; height: 50px; }
+  .nl-plat-top svg { width: 22px; height: 22px; }
 }
 
 .nl-wrap {
@@ -3140,7 +3143,9 @@
     overflow-y: auto !important;
     height: auto !important;
     max-height: none !important;
+    padding-bottom: 120px !important;
   }
+  .nl-term-textarea { height: 80px !important; }
 }
 
 @media (min-width: 769px) {
