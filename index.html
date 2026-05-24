@@ -3098,28 +3098,25 @@
 /* ── RESPONSIVE ── */
 @media (max-width: 900px) {
   .nl-iso-platforms {
-    grid-template-columns: 120px 120px;
-    grid-template-rows: 120px 120px;
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap;
+    justify-content: center;
     gap: 16px;
-    transform: rotateX(25deg) rotateY(-12deg) rotateZ(4deg);
+    transform: none !important;
   }
-  .nl-plat-base { width: 105px; height: 105px; }
-  .nl-plat-top svg { width: 40px; height: 40px; }
+  .nl-plat-base { width: 70px; height: 70px; }
+  .nl-plat-top svg { width: 30px; height: 30px; }
+  .nl-iso-lines { display: none; }
   .nl-float-label { display: none; }
 }
 
 @media (max-width: 600px) {
   .nl-iso-platforms {
-    display: flex !important;
-    flex-direction: row !important;
-    flex-wrap: nowrap;
-    justify-content: center;
     gap: 12px;
-    transform: none !important;
   }
   .nl-plat-base { width: 60px; height: 60px; }
   .nl-plat-top svg { width: 26px; height: 26px; }
-  .nl-iso-lines { display: none; }
   .nl-term-textarea { height: 60px !important; }
   .nl-term-input, .nl-term-textarea { padding: 10px 14px !important; }
 }
@@ -3140,12 +3137,14 @@
 
 @media (max-width: 768px) {
   .nl-wrap {
+    display: block !important;
     overflow-y: auto !important;
-    height: auto !important;
-    max-height: none !important;
+    height: 100% !important;
+    max-height: 100% !important;
     padding-bottom: 120px !important;
+    -webkit-overflow-scrolling: touch;
   }
-  .nl-term-textarea { height: 80px !important; }
+  .nl-term-textarea { height: 60px !important; }
 }
 
 @media (min-width: 769px) {
