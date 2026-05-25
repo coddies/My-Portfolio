@@ -14,26 +14,39 @@ const SpaceSound = (function() {
   clickAudio.volume = isMobile ? 0.2 : 0.35;
   clickAudio.preload = 'auto';
 
-  // Jet engine startup — plays on loader, fades out after 4.5s
+  let fadeInterval = null;
+
+  // Jet engine startup — plays on loader
   function rocketLaunch() {
     try {
+      if (fadeInterval) {
+        clearInterval(fadeInterval);
+        fadeInterval = null;
+      }
       rocketAudio.currentTime = 0;
       rocketAudio.volume = vol;
-      rocketAudio.play().catch(e => {});
+      return rocketAudio.play();
+    } catch(e) {
+      return Promise.reject(e);
+    }
+  }
 
-      // Fade out gradually after 4.5 seconds
-      setTimeout(() => {
-        const fadeOut = setInterval(() => {
-          if (rocketAudio.volume > 0.05) {
-            rocketAudio.volume = Math.max(0, rocketAudio.volume - 0.05);
-          } else {
-            rocketAudio.volume = 0;
-            rocketAudio.pause();
-            clearInterval(fadeOut);
-          }
-        }, 100);
-      }, 4500);
-
+  // Stop/fade out the rocket launch sound quickly when the loader is done
+  function stopRocketLaunch() {
+    try {
+      if (fadeInterval) {
+        clearInterval(fadeInterval);
+      }
+      fadeInterval = setInterval(() => {
+        if (rocketAudio.volume > 0.05) {
+          rocketAudio.volume = Math.max(0, rocketAudio.volume - 0.08);
+        } else {
+          rocketAudio.volume = 0;
+          rocketAudio.pause();
+          clearInterval(fadeInterval);
+          fadeInterval = null;
+        }
+      }, 50);
     } catch(e) {}
   }
 
@@ -50,7 +63,7 @@ const SpaceSound = (function() {
   function skyTear() {}
   function sectionWhoosh() {}
 
-  return { engineRumble, rocketLaunch, skyTear, sectionWhoosh, robotClick };
+  return { engineRumble, rocketLaunch, stopRocketLaunch, skyTear, sectionWhoosh, robotClick };
 })();
 // === END SOUND ENGINE ===
 
@@ -394,15 +407,37 @@ if(document.getElementById('csModalClose')) document.getElementById('csModalClos
     if (!loader) return;
     
     // Play jet engine on first user interaction (browsers block auto-play without interaction)
+    let hasPlayed = false;
     const playOnFirstTouch = function() {
+      if (hasPlayed) return;
+      hasPlayed = true;
       SpaceSound.rocketLaunch();
+      removeLoaderListeners();
+    };
+
+    function removeLoaderListeners() {
+      if (!loader) return;
       loader.removeEventListener('click', playOnFirstTouch);
       loader.removeEventListener('touchstart', playOnFirstTouch);
       document.removeEventListener('keydown', playOnFirstTouch);
-    };
+    }
+
     loader.addEventListener('click', playOnFirstTouch, { once: true });
     loader.addEventListener('touchstart', playOnFirstTouch, { once: true, passive: true });
     document.addEventListener('keydown', playOnFirstTouch, { once: true });
+
+    // Try to play immediately (in case autoplay is permitted or unlocked by browser policy)
+    try {
+      const playPromise = SpaceSound.rocketLaunch();
+      if (playPromise && typeof playPromise.then === 'function') {
+        playPromise.then(() => {
+          hasPlayed = true;
+          removeLoaderListeners();
+        }).catch(e => {
+          // Autoplay blocked: will play on first click/touchstart/keydown instead
+        });
+      }
+    } catch(e) {}
 
     document.body.style.overflow = 'hidden';
     const stars = document.getElementById('mb-loader-stars');
@@ -417,7 +452,7 @@ if(document.getElementById('csModalClose')) document.getElementById('csModalClos
 
     // Phase 2: Launch rocket first
     setTimeout(()=>{ 
-                const wrap = document.getElementById('mb-rocket-wrap');
+        const wrap = document.getElementById('mb-rocket-wrap');
         const name = document.getElementById('mb-name');
         const subtitle = document.getElementById('mb-subtitle');
         if (wrap) wrap.classList.add('launching'); 
@@ -453,6 +488,8 @@ if(document.getElementById('csModalClose')) document.getElementById('csModalClos
         document.body.style.overflow = ''; 
         document.body.style.position = '';
         document.body.style.height = '';
+        SpaceSound.stopRocketLaunch();
+        removeLoaderListeners();
     }, 3800);
   }
 
