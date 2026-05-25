@@ -1,35 +1,54 @@
 // === SPACE SOUND ENGINE ===
 const SpaceSound = (function() {
   const isMobile = window.innerWidth < 768;
-  const vol = isMobile ? 0.5 : 1.0;
-  
-  // Preload audio files
+  // Desktop: 80% volume, Mobile: 50% volume
+  const vol = isMobile ? 0.5 : 0.8;
+
+  // Preload the jet engine startup sound
   const rocketAudio = new Audio('assets/audio/rocket.mp3');
   rocketAudio.volume = vol;
-  
-  const clickAudio = new Audio('assets/audio/click.mp3');
-  clickAudio.volume = vol * 0.4; // Click should be subtle
+  rocketAudio.preload = 'auto';
 
-  function rocketLaunch(duration) {
+  // Preload click sound
+  const clickAudio = new Audio('assets/audio/click.mp3');
+  clickAudio.volume = isMobile ? 0.2 : 0.35;
+  clickAudio.preload = 'auto';
+
+  // Jet engine startup — plays on loader, fades out after 4.5s
+  function rocketLaunch() {
     try {
       rocketAudio.currentTime = 0;
-      rocketAudio.play().catch(e => console.log('Audio play blocked:', e));
+      rocketAudio.volume = vol;
+      rocketAudio.play().catch(e => {});
+
+      // Fade out gradually after 4.5 seconds
+      setTimeout(() => {
+        const fadeOut = setInterval(() => {
+          if (rocketAudio.volume > 0.05) {
+            rocketAudio.volume = Math.max(0, rocketAudio.volume - 0.05);
+          } else {
+            rocketAudio.volume = 0;
+            rocketAudio.pause();
+            clearInterval(fadeOut);
+          }
+        }, 100);
+      }, 4500);
+
     } catch(e) {}
   }
 
+  // Subtle robot click for buttons
   function robotClick() {
     try {
-      // Clone node to allow rapid overlapping clicks
       const clickClone = clickAudio.cloneNode();
-      clickClone.volume = vol * 0.4;
+      clickClone.volume = isMobile ? 0.2 : 0.35;
       clickClone.play().catch(e => {});
     } catch(e) {}
   }
 
-  // Stub out the unused ones so we don't break existing hooks in buildLoader
   function engineRumble() {}
   function skyTear() {}
-  function sectionWhoosh() { robotClick(); } // Just play a click for sections to keep it clean
+  function sectionWhoosh() {}
 
   return { engineRumble, rocketLaunch, skyTear, sectionWhoosh, robotClick };
 })();
