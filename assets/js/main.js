@@ -16,6 +16,19 @@ const SpaceSound = (function() {
 
   let fadeInterval = null;
 
+  // Silent audio unlock helper
+  function unlockAudio() {
+    try {
+      const p = rocketAudio.play();
+      if (p !== undefined) {
+        p.then(() => {
+          rocketAudio.pause();
+          rocketAudio.currentTime = 0;
+        }).catch(() => {});
+      }
+    } catch(e) {}
+  }
+
   // Jet engine startup — plays on loader
   function rocketLaunch() {
     try {
@@ -28,9 +41,9 @@ const SpaceSound = (function() {
       const p = rocketAudio.play();
       if (p && typeof p.then === 'function') {
         p.then(() => {
-          console.log("🚀 Jet Engine Startup audio playing successfully!");
+          console.log("🚀 Rocket audio playing successfully!");
         }).catch(err => {
-          console.warn("⚠️ Jet Engine Startup autoplay blocked or failed:", err);
+          console.warn("⚠️ Rocket audio autoplay blocked or failed:", err);
         });
       }
       return p;
@@ -39,22 +52,15 @@ const SpaceSound = (function() {
     }
   }
 
-  // Stop/fade out the rocket launch sound quickly when the loader is done
+  // Stop/turn off the rocket launch sound instantly when the loader is done
   function stopRocketLaunch() {
     try {
       if (fadeInterval) {
         clearInterval(fadeInterval);
+        fadeInterval = null;
       }
-      fadeInterval = setInterval(() => {
-        if (rocketAudio.volume > 0.05) {
-          rocketAudio.volume = Math.max(0, rocketAudio.volume - 0.08);
-        } else {
-          rocketAudio.volume = 0;
-          rocketAudio.pause();
-          clearInterval(fadeInterval);
-          fadeInterval = null;
-        }
-      }, 50);
+      rocketAudio.pause();
+      rocketAudio.currentTime = 0;
     } catch(e) {}
   }
 
@@ -78,7 +84,7 @@ const SpaceSound = (function() {
     } catch(e) {}
   }
 
-  return { engineRumble, rocketLaunch, stopRocketLaunch, skyTear, sectionWhoosh, robotClick };
+  return { engineRumble, unlockAudio, rocketLaunch, stopRocketLaunch, skyTear, sectionWhoosh, robotClick };
 })();
 // === END SOUND ENGINE ===
 
@@ -421,36 +427,28 @@ if(document.getElementById('csModalClose')) document.getElementById('csModalClos
     const loader = document.getElementById('mb-loader');
     if (!loader) return;
     
-    // Play jet engine on first user interaction (browsers block auto-play without interaction)
-    let hasPlayed = false;
-    const playOnFirstTouch = function() {
-      if (hasPlayed) return;
-      hasPlayed = true;
-      SpaceSound.rocketLaunch();
+    // Unlock audio context silently on first user interaction
+    let hasUnlocked = false;
+    const unlockOnFirstTouch = function() {
+      if (hasUnlocked) return;
+      hasUnlocked = true;
+      SpaceSound.unlockAudio();
       removeLoaderListeners();
     };
 
     function removeLoaderListeners() {
-      document.removeEventListener('click', playOnFirstTouch);
-      document.removeEventListener('touchstart', playOnFirstTouch);
-      document.removeEventListener('keydown', playOnFirstTouch);
+      document.removeEventListener('click', unlockOnFirstTouch);
+      document.removeEventListener('touchstart', unlockOnFirstTouch);
+      document.removeEventListener('keydown', unlockOnFirstTouch);
     }
 
-    document.addEventListener('click', playOnFirstTouch, { once: true });
-    document.addEventListener('touchstart', playOnFirstTouch, { once: true, passive: true });
-    document.addEventListener('keydown', playOnFirstTouch, { once: true });
+    document.addEventListener('click', unlockOnFirstTouch, { once: true });
+    document.addEventListener('touchstart', unlockOnFirstTouch, { once: true, passive: true });
+    document.addEventListener('keydown', unlockOnFirstTouch, { once: true });
 
-    // Try to play immediately (in case autoplay is permitted or unlocked by browser policy)
+    // Try to unlock immediately (in case autoplay is permitted or unlocked by browser policy)
     try {
-      const playPromise = SpaceSound.rocketLaunch();
-      if (playPromise && typeof playPromise.then === 'function') {
-        playPromise.then(() => {
-          hasPlayed = true;
-          removeLoaderListeners();
-        }).catch(e => {
-          // Autoplay blocked: will play on first click/touchstart/keydown instead
-        });
-      }
+      SpaceSound.unlockAudio();
     } catch(e) {}
 
     document.body.style.overflow = 'hidden';
@@ -464,7 +462,7 @@ if(document.getElementById('csModalClose')) document.getElementById('csModalClos
         }
     }
 
-    // Phase 2: Launch rocket first
+    // Phase 2: Launch rocket first — play whoosh in sync with the launching animation
     setTimeout(()=>{ 
         const wrap = document.getElementById('mb-rocket-wrap');
         const name = document.getElementById('mb-name');
@@ -472,6 +470,9 @@ if(document.getElementById('csModalClose')) document.getElementById('csModalClos
         if (wrap) wrap.classList.add('launching'); 
         if (name) { name.style.transition = 'opacity 0.4s ease'; name.style.opacity = '0'; }
         if (subtitle) { subtitle.style.transition = 'opacity 0.4s ease'; subtitle.style.opacity = '0'; }
+        
+        // Start the whoosh exactly as the rocket takes off!
+        SpaceSound.rocketLaunch();
     }, 2500);
 
     // Phase 3: Wait for rocket to go up, then open panels and show Home Page
@@ -502,6 +503,7 @@ if(document.getElementById('csModalClose')) document.getElementById('csModalClos
         document.body.style.overflow = ''; 
         document.body.style.position = '';
         document.body.style.height = '';
+        // Turn off sound instantly as soon as loader finishes
         SpaceSound.stopRocketLaunch();
         removeLoaderListeners();
     }, 3800);
