@@ -454,28 +454,36 @@ if(document.getElementById('csModalClose')) document.getElementById('csModalClos
     const loader = document.getElementById('mb-loader');
     if (!loader) return;
     
-    // Unlock audio context silently on first user interaction
-    let hasUnlocked = false;
-    const unlockOnFirstTouch = function() {
-      if (hasUnlocked) return;
-      hasUnlocked = true;
-      SpaceSound.unlockAudio();
+    // Play jet engine on first user interaction (browsers block auto-play without interaction)
+    let hasPlayed = false;
+    const playOnFirstTouch = function() {
+      if (hasPlayed) return;
+      hasPlayed = true;
+      SpaceSound.rocketLaunch();
       removeLoaderListeners();
     };
 
     function removeLoaderListeners() {
-      document.removeEventListener('click', unlockOnFirstTouch);
-      document.removeEventListener('touchstart', unlockOnFirstTouch);
-      document.removeEventListener('keydown', unlockOnFirstTouch);
+      document.removeEventListener('click', playOnFirstTouch);
+      document.removeEventListener('touchstart', playOnFirstTouch);
+      document.removeEventListener('keydown', playOnFirstTouch);
     }
 
-    document.addEventListener('click', unlockOnFirstTouch, { once: true });
-    document.addEventListener('touchstart', unlockOnFirstTouch, { once: true, passive: true });
-    document.addEventListener('keydown', unlockOnFirstTouch, { once: true });
+    document.addEventListener('click', playOnFirstTouch, { once: true });
+    document.addEventListener('touchstart', playOnFirstTouch, { once: true, passive: true });
+    document.addEventListener('keydown', playOnFirstTouch, { once: true });
 
-    // Try to unlock immediately (in case autoplay is permitted or unlocked by browser policy)
+    // Try to play immediately (in case autoplay is permitted or unlocked by browser policy)
     try {
-      SpaceSound.unlockAudio();
+      const playPromise = SpaceSound.rocketLaunch();
+      if (playPromise && typeof playPromise.then === 'function') {
+        playPromise.then(() => {
+          hasPlayed = true;
+          removeLoaderListeners();
+        }).catch(e => {
+          // Autoplay blocked: will play on first click/touchstart/keydown instead
+        });
+      }
     } catch(e) {}
 
     document.body.style.overflow = 'hidden';
@@ -489,7 +497,7 @@ if(document.getElementById('csModalClose')) document.getElementById('csModalClos
         }
     }
 
-    // Phase 2: Launch rocket first — play whoosh in sync with the launching animation
+    // Phase 2: Launch rocket first
     setTimeout(()=>{ 
         const wrap = document.getElementById('mb-rocket-wrap');
         const name = document.getElementById('mb-name');
@@ -497,9 +505,6 @@ if(document.getElementById('csModalClose')) document.getElementById('csModalClos
         if (wrap) wrap.classList.add('launching'); 
         if (name) { name.style.transition = 'opacity 0.4s ease'; name.style.opacity = '0'; }
         if (subtitle) { subtitle.style.transition = 'opacity 0.4s ease'; subtitle.style.opacity = '0'; }
-        
-        // Start the whoosh exactly as the rocket takes off!
-        SpaceSound.rocketLaunch();
     }, 2500);
 
     // Phase 3: Wait for rocket to go up, then open panels and show Home Page
