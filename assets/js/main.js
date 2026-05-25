@@ -413,14 +413,95 @@ if(document.getElementById('csModalClose')) document.getElementById('csModalClos
   function buildLoader() {
     const loader = document.getElementById('mb-loader');
     if (!loader) return;
-    
-    // Play jet engine on first user interaction (browsers block auto-play without interaction)
-    let hasPlayed = false;
-    const playOnFirstTouch = function() {
-      if (hasPlayed) return;
-      hasPlayed = true;
+
+    // Create the "Click to Launch" prompt element dynamically
+    const content = document.getElementById('mb-loader-content');
+    let promptEl = null;
+    if (content) {
+      promptEl = document.createElement('div');
+      promptEl.id = 'mb-launch-prompt';
+      promptEl.style.cssText = 'margin-top: 20px; font-size: clamp(0.7rem, 2vw, 0.9rem); color: rgba(0, 212, 255, 0.8); letter-spacing: 2px; text-transform: uppercase; animation: mbPromptPulse 1.5s infinite; cursor: pointer; text-shadow: 0 0 8px rgba(0, 212, 255, 0.4); font-family: "Space Grotesk", sans-serif; transition: opacity 0.3s ease; opacity: 0;';
+      promptEl.textContent = 'Click anywhere to Launch 🚀';
+      content.appendChild(promptEl);
+      // Fade in the prompt slightly after name/subtitle appear
+      setTimeout(() => { if (promptEl) promptEl.style.opacity = '1'; }, 800);
+    }
+
+    // Inject pulsing animation styles dynamically
+    if (!document.getElementById('mb-prompt-style')) {
+      const style = document.createElement('style');
+      style.id = 'mb-prompt-style';
+      style.textContent = `
+        @keyframes mbPromptPulse {
+          0%, 100% { opacity: 0.4; transform: scale(0.97); }
+          50% { opacity: 1; transform: scale(1.03); color: #fff; text-shadow: 0 0 12px rgba(0, 212, 255, 0.8); }
+        }
+      `;
+      document.head.appendChild(style);
+    }
+
+    let hasLaunched = false;
+    let fallbackTimeout = null;
+
+    function triggerLaunch() {
+      if (hasLaunched) return;
+      hasLaunched = true;
+      
+      if (fallbackTimeout) {
+        clearTimeout(fallbackTimeout);
+      }
+
+      // Play the rocket sound
       SpaceSound.rocketLaunch();
       removeLoaderListeners();
+
+      // Fade out prompt
+      if (promptEl) {
+        promptEl.style.opacity = '0';
+        setTimeout(() => promptEl.remove(), 300);
+      }
+
+      // Start Launch animations immediately
+      const wrap = document.getElementById('mb-rocket-wrap');
+      const name = document.getElementById('mb-name');
+      const subtitle = document.getElementById('mb-subtitle');
+      if (wrap) wrap.classList.add('launching'); 
+      if (name) { name.style.transition = 'opacity 0.4s ease'; name.style.opacity = '0'; }
+      if (subtitle) { subtitle.style.transition = 'opacity 0.4s ease'; subtitle.style.opacity = '0'; }
+
+      // Phase 3: Wait for rocket to go up, then open panels and show Home Page
+      setTimeout(() => {
+        SpaceSound.skyTear(0.5);
+        const pL = document.getElementById('mb-panel-left');
+        const pR = document.getElementById('mb-panel-right');
+        const content = document.getElementById('mb-loader-content');
+        const stars = document.getElementById('mb-loader-stars');
+        
+        if (content) content.style.display = 'none';
+        if (stars) stars.style.display = 'none';
+
+        if (pL) pL.style.transform = 'translateX(-100%)';
+        if (pR) pR.style.transform = 'translateX(100%)';
+
+        const home = document.getElementById('card-1');
+        if (home) {
+            home.classList.add('section-entering');
+            setTimeout(() => home.classList.remove('section-entering'), 1000);
+        }
+      }, 700);
+
+      // Phase 4: Cleanup loader
+      setTimeout(()=>{ 
+          if (loader) loader.remove(); 
+          document.body.style.overflow = ''; 
+          document.body.style.position = '';
+          document.body.style.height = '';
+          SpaceSound.stopRocketLaunch();
+      }, 1400);
+    }
+
+    const playOnFirstTouch = function() {
+      triggerLaunch();
     };
 
     function removeLoaderListeners() {
@@ -433,19 +514,6 @@ if(document.getElementById('csModalClose')) document.getElementById('csModalClos
     document.addEventListener('touchstart', playOnFirstTouch, { once: true, passive: true });
     document.addEventListener('keydown', playOnFirstTouch, { once: true });
 
-    // Try to play immediately (in case autoplay is permitted or unlocked by browser policy)
-    try {
-      const playPromise = SpaceSound.rocketLaunch();
-      if (playPromise && typeof playPromise.then === 'function') {
-        playPromise.then(() => {
-          hasPlayed = true;
-          removeLoaderListeners();
-        }).catch(e => {
-          // Autoplay blocked: will play on first click/touchstart/keydown instead
-        });
-      }
-    } catch(e) {}
-
     document.body.style.overflow = 'hidden';
     const stars = document.getElementById('mb-loader-stars');
     if (stars && stars.children.length === 0) {
@@ -457,47 +525,10 @@ if(document.getElementById('csModalClose')) document.getElementById('csModalClos
         }
     }
 
-    // Phase 2: Launch rocket first
-    setTimeout(()=>{ 
-        const wrap = document.getElementById('mb-rocket-wrap');
-        const name = document.getElementById('mb-name');
-        const subtitle = document.getElementById('mb-subtitle');
-        if (wrap) wrap.classList.add('launching'); 
-        if (name) { name.style.transition = 'opacity 0.4s ease'; name.style.opacity = '0'; }
-        if (subtitle) { subtitle.style.transition = 'opacity 0.4s ease'; subtitle.style.opacity = '0'; }
-    }, 2500);
-
-    // Phase 3: Wait for rocket to go up, then open panels and show Home Page
-    setTimeout(() => {
-        SpaceSound.skyTear(0.5);
-        const pL = document.getElementById('mb-panel-left');
-        const pR = document.getElementById('mb-panel-right');
-        const content = document.getElementById('mb-loader-content');
-        const stars = document.getElementById('mb-loader-stars');
-        
-        // IMMEDIATE HIDE CONTENT TO PREVENT OVERLAP
-        if (content) content.style.display = 'none';
-        if (stars) stars.style.display = 'none';
-
-        if (pL) pL.style.transform = 'translateX(-100%)';
-        if (pR) pR.style.transform = 'translateX(100%)';
-
-        const home = document.getElementById('card-1');
-        if (home) {
-            home.classList.add('section-entering');
-            setTimeout(() => home.classList.remove('section-entering'), 1000);
-        }
-    }, 3100);
-
-    // Phase 4: Cleanup
-    setTimeout(()=>{ 
-        if (loader) loader.remove(); 
-        document.body.style.overflow = ''; 
-        document.body.style.position = '';
-        document.body.style.height = '';
-        SpaceSound.stopRocketLaunch();
-        removeLoaderListeners();
-    }, 3800);
+    // Set a fallback auto-launch after 4.5 seconds in case they don't click
+    fallbackTimeout = setTimeout(() => {
+      triggerLaunch();
+    }, 4500);
   }
 
   function buildTransitionElements() {
