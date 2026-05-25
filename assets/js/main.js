@@ -69,7 +69,14 @@ const SpaceSound = (function() {
 
   function engineRumble() {}
   function skyTear() {}
-  function sectionWhoosh() {}
+  function sectionWhoosh() {
+    try {
+      const whooshClone = rocketAudio.cloneNode();
+      // Set volume for section transition (subtle but clear)
+      whooshClone.volume = isMobile ? 0.35 : 0.55;
+      whooshClone.play().catch(e => {});
+    } catch(e) {}
+  }
 
   return { engineRumble, rocketLaunch, stopRocketLaunch, skyTear, sectionWhoosh, robotClick };
 })();
