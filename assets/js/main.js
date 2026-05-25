@@ -393,7 +393,17 @@ if(document.getElementById('csModalClose')) document.getElementById('csModalClos
     const loader = document.getElementById('mb-loader');
     if (!loader) return;
     
-    SpaceSound.rocketLaunch();
+    // Play jet engine on first user interaction (browsers block auto-play without interaction)
+    const playOnFirstTouch = function() {
+      SpaceSound.rocketLaunch();
+      loader.removeEventListener('click', playOnFirstTouch);
+      loader.removeEventListener('touchstart', playOnFirstTouch);
+      document.removeEventListener('keydown', playOnFirstTouch);
+    };
+    loader.addEventListener('click', playOnFirstTouch, { once: true });
+    loader.addEventListener('touchstart', playOnFirstTouch, { once: true, passive: true });
+    document.addEventListener('keydown', playOnFirstTouch, { once: true });
+
     document.body.style.overflow = 'hidden';
     const stars = document.getElementById('mb-loader-stars');
     if (stars && stars.children.length === 0) {
