@@ -25,7 +25,15 @@ const SpaceSound = (function() {
       }
       rocketAudio.currentTime = 0;
       rocketAudio.volume = vol;
-      return rocketAudio.play();
+      const p = rocketAudio.play();
+      if (p && typeof p.then === 'function') {
+        p.then(() => {
+          console.log("🚀 Jet Engine Startup audio playing successfully!");
+        }).catch(err => {
+          console.warn("⚠️ Jet Engine Startup autoplay blocked or failed:", err);
+        });
+      }
+      return p;
     } catch(e) {
       return Promise.reject(e);
     }
@@ -416,14 +424,13 @@ if(document.getElementById('csModalClose')) document.getElementById('csModalClos
     };
 
     function removeLoaderListeners() {
-      if (!loader) return;
-      loader.removeEventListener('click', playOnFirstTouch);
-      loader.removeEventListener('touchstart', playOnFirstTouch);
+      document.removeEventListener('click', playOnFirstTouch);
+      document.removeEventListener('touchstart', playOnFirstTouch);
       document.removeEventListener('keydown', playOnFirstTouch);
     }
 
-    loader.addEventListener('click', playOnFirstTouch, { once: true });
-    loader.addEventListener('touchstart', playOnFirstTouch, { once: true, passive: true });
+    document.addEventListener('click', playOnFirstTouch, { once: true });
+    document.addEventListener('touchstart', playOnFirstTouch, { once: true, passive: true });
     document.addEventListener('keydown', playOnFirstTouch, { once: true });
 
     // Try to play immediately (in case autoplay is permitted or unlocked by browser policy)
