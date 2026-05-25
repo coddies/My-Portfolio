@@ -14,7 +14,7 @@ const SpaceSound = (function() {
   clickAudio.volume = isMobile ? 0.2 : 0.35;
   clickAudio.preload = 'auto';
 
-  let fadeInterval = null;
+  let audioTimeout = null;
 
   // Silent audio unlock helper
   function unlockAudio() {
@@ -32,12 +32,18 @@ const SpaceSound = (function() {
   // Jet engine startup — plays on loader
   function rocketLaunch() {
     try {
-      if (fadeInterval) {
-        clearInterval(fadeInterval);
-        fadeInterval = null;
+      if (audioTimeout) {
+        clearTimeout(audioTimeout);
+        audioTimeout = null;
       }
       rocketAudio.currentTime = 0;
       rocketAudio.volume = vol;
+      
+      // Auto-stop fallback after 4.5 seconds
+      audioTimeout = setTimeout(() => {
+        stopRocketLaunch();
+      }, 4500);
+
       const p = rocketAudio.play();
       if (p && typeof p.then === 'function') {
         p.then(() => {
@@ -55,9 +61,9 @@ const SpaceSound = (function() {
   // Stop/turn off the rocket launch sound instantly when the loader is done
   function stopRocketLaunch() {
     try {
-      if (fadeInterval) {
-        clearInterval(fadeInterval);
-        fadeInterval = null;
+      if (audioTimeout) {
+        clearTimeout(audioTimeout);
+        audioTimeout = null;
       }
       rocketAudio.pause();
       rocketAudio.currentTime = 0;
@@ -81,6 +87,14 @@ const SpaceSound = (function() {
       // Set volume for section transition (subtle but clear)
       whooshClone.volume = isMobile ? 0.35 : 0.55;
       whooshClone.play().catch(e => {});
+
+      // Play for only 4 seconds, then turn off/pause
+      setTimeout(() => {
+        try {
+          whooshClone.pause();
+          whooshClone.currentTime = 0;
+        } catch(e) {}
+      }, 4000);
     } catch(e) {}
   }
 
