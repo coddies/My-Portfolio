@@ -198,7 +198,6 @@ window.__baseUpdateCards = updateCards;
 
 navBtns.forEach((btn, idx) => {
     btn.addEventListener('click', () => {
-        SpaceSound.robotClick();
         const isBack = idx < currentIndex;
         if (typeof mbRocketTransition === 'function') mbRocketTransition(() => window.__baseUpdateCards(idx), isBack);
         else window.__baseUpdateCards(idx);
