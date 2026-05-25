@@ -9,6 +9,11 @@ const SpaceSound = (function() {
   rocketAudio.volume = vol;
   rocketAudio.preload = 'auto';
 
+  // Preload transition whoosh sound (previous sound)
+  const transitionAudio = new Audio('assets/audio/transition.mp3');
+  transitionAudio.volume = isMobile ? 0.35 : 0.55;
+  transitionAudio.preload = 'auto';
+
   // Preload click sound
   const clickAudio = new Audio('assets/audio/click.mp3');
   clickAudio.volume = isMobile ? 0.2 : 0.35;
@@ -19,11 +24,19 @@ const SpaceSound = (function() {
   // Silent audio unlock helper
   function unlockAudio() {
     try {
-      const p = rocketAudio.play();
-      if (p !== undefined) {
-        p.then(() => {
+      const p1 = rocketAudio.play();
+      if (p1 !== undefined) {
+        p1.then(() => {
           rocketAudio.pause();
           rocketAudio.currentTime = 0;
+        }).catch(() => {});
+      }
+
+      const p2 = transitionAudio.play();
+      if (p2 !== undefined) {
+        p2.then(() => {
+          transitionAudio.pause();
+          transitionAudio.currentTime = 0;
         }).catch(() => {});
       }
     } catch(e) {}
@@ -83,7 +96,7 @@ const SpaceSound = (function() {
   function skyTear() {}
   function sectionWhoosh() {
     try {
-      const whooshClone = rocketAudio.cloneNode();
+      const whooshClone = transitionAudio.cloneNode();
       // Set volume for section transition (subtle but clear)
       whooshClone.volume = isMobile ? 0.35 : 0.55;
       whooshClone.play().catch(e => {});
