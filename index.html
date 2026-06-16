@@ -2503,7 +2503,7 @@
 <!-- ════════════════════════════
      CARD 7 — CONTACT
 ════════════════════════════ -->
-<section id="card-7" class="card state-below" style="overflow:hidden !important;">
+<section id="card-7" class="card state-below">
 <style>
 /* ══ NEURAL LINK CONTACT ══ */
 .nl-wrap {
@@ -3129,25 +3129,36 @@
   .nl-plat-top svg { width: 22px; height: 22px; }
 }
 
+/* Desktop: nl-wrap shows overflow hidden to keep layout tight */
 .nl-wrap {
-  overflow: hidden !important;
-  height: 100% !important;
-  max-height: 100% !important;
+  overflow: hidden;
+  height: 100%;
+  max-height: 100%;
 }
 
-@media (max-width: 768px) {
+/* Mobile: Enable vertical scrolling so bottom links + back button are reachable */
+@media (max-width: 900px) {
+  #card-7 {
+    overflow-y: auto !important;
+  }
+  #card-7 .card-inner {
+    overflow-y: auto !important;
+    height: auto !important;
+    min-height: 100%;
+    padding-bottom: 140px !important;
+  }
   .nl-wrap {
     display: block !important;
-    overflow-y: auto !important;
-    height: 100% !important;
-    max-height: 100% !important;
-    padding-bottom: 120px !important;
+    overflow: visible !important;
+    height: auto !important;
+    max-height: none !important;
+    padding-bottom: 100px !important;
     -webkit-overflow-scrolling: touch;
   }
   .nl-term-textarea { height: 60px !important; }
 }
 
-@media (min-width: 769px) {
+@media (min-width: 901px) {
   .nl-main {
     flex: 1;
     min-height: 0;
@@ -3309,7 +3320,7 @@
 }
 
 /* FIX: Move layout up so it's not buried */
-@media (min-width: 769px) {
+@media (min-width: 901px) {
   .nl-wrap {
     justify-content: center !important;
     padding-top: 40px !important;
@@ -3326,7 +3337,7 @@
 
 </style>
 
-<div class="card-inner" style="padding:0; overflow:hidden;">
+<div class="card-inner" style="padding:0; overflow-y:auto; display:flex; flex-direction:column;">
   <div class="nl-wrap">
 
     <!-- HEADER -->
@@ -3517,7 +3528,6 @@
           this.style.background='rgba(0,229,255,0.1)';
           this.style.boxShadow='0 0 25px rgba(0,229,255,0.4)';
           this.style.transform='translateY(-3px)';
-          playSpaceClick();
         "
         onmouseout="
           this.style.background='transparent';
@@ -3559,9 +3569,6 @@
     setTimeout(()=>{ platforms.style.transition = 'transform 0.5s ease'; }, 800);
   });
 
-
-  document.querySelector('#nlBackBtn') && document.querySelector('#nlBackBtn').addEventListener('click', SpaceSound.robotClick);
-  document.querySelector('.nl-transmit-btn') && document.querySelector('.nl-transmit-btn').addEventListener('click', SpaceSound.robotClick);
 
 })();
 </script>
