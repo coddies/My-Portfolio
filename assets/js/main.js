@@ -1,119 +1,4 @@
-// === SPACE SOUND ENGINE ===
-const SpaceSound = (function() {
-  const isMobile = window.innerWidth < 768;
-  // Desktop: 80% volume, Mobile: 50% volume
-  const vol = isMobile ? 0.5 : 0.8;
 
-  // Preload the jet engine startup sound
-  const rocketAudio = new Audio('assets/audio/rocket.mp3');
-  rocketAudio.volume = vol;
-  rocketAudio.preload = 'auto';
-
-  // Preload transition whoosh sound (previous sound)
-  const transitionAudio = new Audio('assets/audio/transition.mp3');
-  transitionAudio.volume = isMobile ? 0.35 : 0.55;
-  transitionAudio.preload = 'auto';
-
-  // Preload click sound
-  const clickAudio = new Audio('assets/audio/click.mp3');
-  clickAudio.volume = isMobile ? 0.2 : 0.35;
-  clickAudio.preload = 'auto';
-
-  let audioTimeout = null;
-
-  // Silent audio unlock helper
-  function unlockAudio() {
-    try {
-      const p1 = rocketAudio.play();
-      if (p1 !== undefined) {
-        p1.then(() => {
-          rocketAudio.pause();
-          rocketAudio.currentTime = 0;
-        }).catch(() => {});
-      }
-
-      const p2 = transitionAudio.play();
-      if (p2 !== undefined) {
-        p2.then(() => {
-          transitionAudio.pause();
-          transitionAudio.currentTime = 0;
-        }).catch(() => {});
-      }
-    } catch(e) {}
-  }
-
-  // Jet engine startup — plays on loader
-  function rocketLaunch() {
-    try {
-      if (audioTimeout) {
-        clearTimeout(audioTimeout);
-        audioTimeout = null;
-      }
-      rocketAudio.currentTime = 0;
-      rocketAudio.volume = vol;
-      
-      // Auto-stop fallback after 4.5 seconds
-      audioTimeout = setTimeout(() => {
-        stopRocketLaunch();
-      }, 4500);
-
-      const p = rocketAudio.play();
-      if (p && typeof p.then === 'function') {
-        p.then(() => {
-          console.log("🚀 Rocket audio playing successfully!");
-        }).catch(err => {
-          console.warn("⚠️ Rocket audio autoplay blocked or failed:", err);
-        });
-      }
-      return p;
-    } catch(e) {
-      return Promise.reject(e);
-    }
-  }
-
-  // Stop/turn off the rocket launch sound instantly when the loader is done
-  function stopRocketLaunch() {
-    try {
-      if (audioTimeout) {
-        clearTimeout(audioTimeout);
-        audioTimeout = null;
-      }
-      rocketAudio.pause();
-      rocketAudio.currentTime = 0;
-    } catch(e) {}
-  }
-
-  // Subtle robot click for buttons
-  function robotClick() {
-    try {
-      const clickClone = clickAudio.cloneNode();
-      clickClone.volume = isMobile ? 0.2 : 0.35;
-      clickClone.play().catch(e => {});
-    } catch(e) {}
-  }
-
-  function engineRumble() {}
-  function skyTear() {}
-  function sectionWhoosh() {
-    try {
-      const whooshClone = transitionAudio.cloneNode();
-      // Set volume for section transition (subtle but clear)
-      whooshClone.volume = isMobile ? 0.35 : 0.55;
-      whooshClone.play().catch(e => {});
-
-      // Play for only 4 seconds, then turn off/pause
-      setTimeout(() => {
-        try {
-          whooshClone.pause();
-          whooshClone.currentTime = 0;
-        } catch(e) {}
-      }, 4000);
-    } catch(e) {}
-  }
-
-  return { engineRumble, unlockAudio, rocketLaunch, stopRocketLaunch, skyTear, sectionWhoosh, robotClick };
-})();
-// === END SOUND ENGINE ===
 
 // ── CARD SWITCHING ──
 const cards   = document.querySelectorAll('.card');
@@ -453,38 +338,6 @@ if(document.getElementById('csModalClose')) document.getElementById('csModalClos
     const loader = document.getElementById('mb-loader');
     if (!loader) return;
     
-    // Play jet engine on first user interaction (browsers block auto-play without interaction)
-    let hasPlayed = false;
-    const playOnFirstTouch = function() {
-      if (hasPlayed) return;
-      hasPlayed = true;
-      SpaceSound.rocketLaunch();
-      removeLoaderListeners();
-    };
-
-    function removeLoaderListeners() {
-      document.removeEventListener('click', playOnFirstTouch);
-      document.removeEventListener('touchstart', playOnFirstTouch);
-      document.removeEventListener('keydown', playOnFirstTouch);
-    }
-
-    document.addEventListener('click', playOnFirstTouch, { once: true });
-    document.addEventListener('touchstart', playOnFirstTouch, { once: true, passive: true });
-    document.addEventListener('keydown', playOnFirstTouch, { once: true });
-
-    // Try to play immediately (in case autoplay is permitted or unlocked by browser policy)
-    try {
-      const playPromise = SpaceSound.rocketLaunch();
-      if (playPromise && typeof playPromise.then === 'function') {
-        playPromise.then(() => {
-          hasPlayed = true;
-          removeLoaderListeners();
-        }).catch(e => {
-          // Autoplay blocked: will play on first click/touchstart/keydown instead
-        });
-      }
-    } catch(e) {}
-
     document.body.style.overflow = 'hidden';
     const stars = document.getElementById('mb-loader-stars');
     if (stars && stars.children.length === 0) {
@@ -508,7 +361,6 @@ if(document.getElementById('csModalClose')) document.getElementById('csModalClos
 
     // Phase 3: Wait for rocket to go up, then open panels and show Home Page
     setTimeout(() => {
-        SpaceSound.skyTear(0.5);
         const pL = document.getElementById('mb-panel-left');
         const pR = document.getElementById('mb-panel-right');
         const content = document.getElementById('mb-loader-content');
@@ -534,9 +386,6 @@ if(document.getElementById('csModalClose')) document.getElementById('csModalClos
         document.body.style.overflow = ''; 
         document.body.style.position = '';
         document.body.style.height = '';
-        // Turn off sound instantly as soon as loader finishes
-        SpaceSound.stopRocketLaunch();
-        removeLoaderListeners();
     }, 3800);
   }
 
@@ -550,7 +399,6 @@ if(document.getElementById('csModalClose')) document.getElementById('csModalClos
   }
 
   window.mbRocketTransition = function(callback, isBack = false) {
-    SpaceSound.sectionWhoosh();
     var tL = document.getElementById('mb-trans-left'), tR = document.getElementById('mb-trans-right'), tK = document.getElementById('mb-trans-rocket');
     if (!tL || !tK) return callback && callback();
     
@@ -602,11 +450,4 @@ if(document.getElementById('csModalClose')) document.getElementById('csModalClos
 })();
 
 
-// Global Button Sound Hooks
-document.addEventListener('click', (e) => {
-    if (e.target.closest('button, .proj-btn-cyan, .proj-btn-purple, .cs-live-link')) {
-        if (typeof SpaceSound !== 'undefined' && SpaceSound.robotClick) {
-            SpaceSound.robotClick();
-        }
-    }
-});
+
