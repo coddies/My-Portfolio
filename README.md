@@ -41,6 +41,8 @@ My-Portfolio/
 │   │   ├── my-img.png      # Profile photo
 │   │   └── mb-logo.svg     # Custom favicon/logo
 │   └── certificates/       # Certificate images
+│       ├── google-ai-professional-cert.jpg
+│       ├── google-ai-essentials-cert.jpg
 │       ├── python-crash-cert.jpg
 │       ├── python-essentials-cert.jpg
 │       ├── digital-marketing-cert.jpg
