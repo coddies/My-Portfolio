@@ -1,8 +1,6 @@
 /**
- * BURHAN_OS // NEURAL_LINK
- * Interactive AI Assistant for Muhammad Burhan's Portfolio.
- * Always active with smart dual-mode: Live Groq LLM when configured,
- * and robust Local Neural Cache for instant offline/standby responses.
+ * BURHAN_OS — Burhan's portfolio AI buddy
+ * Live Groq when available, smart local fallback offline.
  */
 (function () {
   'use strict';
@@ -10,87 +8,128 @@
   const API_URL = '/api/burhan-ai';
   const HEALTH_TIMEOUT_MS = 4000;
 
+  const LINKS = {
+    linkedin: 'https://www.linkedin.com/in/muhammad-burhan-73a81b27b/',
+    github: 'https://github.com/coddies',
+    email: 'mb6679605@gmail.com',
+    portfolio: 'https://coddies.github.io/My-Portfolio/',
+    faceless: 'https://faceless-ai-studio-tau.vercel.app/',
+    flux: 'https://fluxai-two.vercel.app',
+    tiktok: 'https://www.tiktok.com/@devmburhan',
+  };
+
   function escapeHtml(text) {
     const div = document.createElement('div');
     div.textContent = text;
     return div.innerHTML;
   }
 
-  function formatText(text) {
-    return escapeHtml(text).replace(/\n/g, '<br>');
+  function linkify(text) {
+    const escaped = escapeHtml(text);
+    return escaped
+      .replace(/\n/g, '<br>')
+      .replace(
+        /(https?:\/\/[^\s<]+)/g,
+        '<a href="$1" target="_blank" rel="noopener" style="color:#00E5FF;text-decoration:underline;">$1</a>'
+      );
   }
 
-  // Local Neural Cache based on data/burhan-data.md
-  function localNeuralMatch(query) {
-    const q = query.toLowerCase().trim();
+  function normalizeQuery(q) {
+    return q.toLowerCase().trim().replace(/\s+/g, ' ');
+  }
 
-    // Greetings & general openers
+  function wantsLink(q) {
+    return (
+      q.includes('link') ||
+      q.includes('url') ||
+      q.includes('profile') ||
+      q.includes('do ') ||
+      q.includes('de do') ||
+      q.includes('bhejo') ||
+      q.includes('send')
+    );
+  }
+
+  function localNeuralMatch(rawQuery) {
+    const q = normalizeQuery(rawQuery);
+
     if (
-      q === 'hey' || q === 'hi' || q === 'hello' || q === 'helo' || q === 'hii' ||
-      q === 'salam' || q === 'assalam' || q === 'yo' || q === 'sup' ||
-      q.startsWith('hey') || q.startsWith('hi ') || q.startsWith('hello') ||
-      q === 'how are you' || q === 'whats up' || q === "what's up" ||
-      q === 'good morning' || q === 'good evening' || q === 'good afternoon'
+      q === 'hey' ||
+      q === 'hi' ||
+      q === 'hello' ||
+      q === 'helo' ||
+      q === 'hii' ||
+      q === 'salam' ||
+      q === 'assalam' ||
+      q === 'assalam o alaikum' ||
+      q === 'aoa' ||
+      q.startsWith('hey ') ||
+      q.startsWith('hi ') ||
+      q === 'how are you' ||
+      q === 'whats up'
     ) {
-      return `Hey! 👋 Welcome to BURHAN_OS Neural Link.
-
-I'm the AI assistant for Muhammad Burhan's portfolio. I can help you explore:
-
-• 👤 About Muhammad Burhan
-• 🛠️ His skills & tech stack
-• 💼 His projects
-• 🎓 Certifications
-• ✉️ How to contact him
-
-What would you like to know?`;
+      return `Hey! 👋 I'm here to tell you about Muhammad Burhan — his skills, projects, certs, and how to reach him. Just ask naturally, in English or Urdu — whatever's comfortable for you!`;
     }
 
-    if (q.includes('who') || q.includes('about') || q.includes('bio') || q.includes('burhan') || q.includes('intro') || q.includes('name')) {
-      return `Muhammad Burhan is an AI & Data Science student at Saylani Mass IT Training (SMIT) based in Chiniot, Pakistan.
+    const isAboutQuery =
+      q.includes('who') ||
+      q.includes('about') ||
+      q.includes('burhan') ||
+      q.includes('intro') ||
+      q.includes('batao') ||
+      q.includes('bata') ||
+      q.includes('kon hai') ||
+      q.includes('kaun hai') ||
+      q.includes('tell me more');
 
-Specializing in Generative AI, Machine Learning, and NLP, he builds intelligent pipelines and autonomous AI solutions with a focus on clean architecture and practical problem solving.
+    const isLinkedInQuery =
+      q.includes('linkedin') || q.includes('linkin') || q.includes('linked in');
 
-Status: Open to Work & Collaborations.`;
+    if (isAboutQuery) {
+      let reply = `Muhammad Burhan is an AI & Data Science student at Saylani Mass IT (SMIT), based in Chiniot, Pakistan. He's really into system design, problem solving, Generative AI, Agentic AI, RAG systems, n8n automations, and vibe coding.\n\nHe builds real AI products — won the AWS Nova AI Hackathon with Faceless AI Studio. Currently open to work!`;
+
+      if (wantsLink(q) || isLinkedInQuery) {
+        reply += `\n\nLinkedIn: ${LINKS.linkedin}`;
+      }
+      return reply;
     }
 
-    if (q.includes('skill') || q.includes('tech') || q.includes('stack') || q.includes('python') || q.includes('tool') || q.includes('language')) {
-      return `Core Technical Capabilities:
-• Programming: Python (Scripting, ML pipelines), FastAPI, SQL (PostgreSQL/Neon), JavaScript, HTML5/CSS3
-• AI & Machine Learning: LLMs, Groq API, Generative AI, AWS Bedrock, Amazon Nova AI, Prompt Engineering, Vibe Coding
-• Cloud & Frontend: React, Vite, Tailwind CSS, Vercel, AWS Cloud, Git & GitHub`;
+    if (isLinkedInQuery || (q.includes('link') && !q.includes('github'))) {
+      return `Sure! Here's Burhan's LinkedIn:\n${LINKS.linkedin}\n\nHe's open to work — feel free to connect!`;
     }
 
-    if (q.includes('project') || q.includes('work') || q.includes('portfolio') || q.includes('build')) {
-      return `Featured Portfolio Projects:
-1. 🏆 Faceless AI Studio — AWS Nova AI Hackathon Winner! Automated pipeline producing AI scripts, thumbnails, and neural voiceovers using AWS Bedrock & Nova.
-2. Spin AI — AI-powered decision spinner built with React & Groq API.
-3. Flux AI Chatbot — Conversational AI assistant with a futuristic glassmorphic UI.`;
+    if (q.includes('github') || q.includes('git hub')) {
+      return `Here's his GitHub — lots of AI projects there:\n${LINKS.github}`;
     }
 
-    if (q.includes('hackathon') || q.includes('award') || q.includes('win') || q.includes('aws nova')) {
-      return `🏆 AWS Nova AI Hackathon Winner!
-Muhammad Burhan achieved 1st place with "Faceless AI Studio" — an automated video generation pipeline leveraging AWS Bedrock and frontier Amazon Nova AI models.`;
+    if (q.includes('email') || q.includes('mail') || q.includes('contact') || q.includes('reach')) {
+      return `You can reach Burhan here:\n\n📧 Email: ${LINKS.email}\n💼 LinkedIn: ${LINKS.linkedin}\n🐙 GitHub: ${LINKS.github}\n\nHe's open to work — drop him a message anytime!`;
     }
 
-    if (q.includes('cert') || q.includes('course') || q.includes('google') || q.includes('coursera') || q.includes('cisco') || q.includes('degree')) {
-      return `Verified Certifications:
-• 🎓 Google AI Professional Certificate — Google via Coursera
-• ✨ Google AI Essentials — Google via Coursera
-• 🤖 Microsoft Azure AI Fundamentals — Microsoft Learn
-• 🐍 Python Essentials 1 — Cisco Networking Academy
-• 💻 Python Crash Basics — Mind Luster
-• 📈 Digital Marketing — DigiSkills
-• 🛒 E-Commerce Management — DigiSkills
-• 🧠 AI & Data Science Track — SMIT (In Progress)`;
+    if (
+      q.includes('skill') ||
+      q.includes('tech') ||
+      q.includes('stack') ||
+      q.includes('tools') ||
+      q.includes('expert')
+    ) {
+      return `Burhan's main interests: system design, problem solving, Gen AI, Agentic AI, RAG systems, n8n, vibe coding, and AI tools.\n\nTech-wise he's strong in Python, FastAPI, LLMs, Groq API, AWS Bedrock, Amazon Nova AI, Prompt Engineering, React, Vite, Tailwind, Vercel, SQL/PostgreSQL, and Git/GitHub.`;
     }
 
-    if (q.includes('contact') || q.includes('email') || q.includes('hire') || q.includes('reach') || q.includes('linkedin') || q.includes('github')) {
-      return `Direct Neural Communication Channels:
-• Email: mb6679605@gmail.com
-• LinkedIn: linkedin.com/in/muhammad-burhan-73a81b27b/
-• GitHub: github.com/coddies
+    if (q.includes('project') || q.includes('work') || q.includes('build') || q.includes('portfolio')) {
+      return `His top projects:\n\n🏆 Faceless AI Studio — AWS Nova Hackathon winner. AI video pipeline with Bedrock & Nova.\n   → ${LINKS.faceless}\n\n🎡 Spin AI — Groq-powered wheel spinner (React + Vite)\n🤖 Flux AI Chatbot — ${LINKS.flux}\n⚡ FastAPI Full App — production backend with PostgreSQL\n\nAll on GitHub: ${LINKS.github}`;
+    }
 
-Feel free to send an inquiry or collaboration proposal!`;
+    if (q.includes('hackathon') || q.includes('winner') || q.includes('aws')) {
+      return `Yeah! Burhan won the AWS Nova AI Hackathon with Faceless AI Studio 🏆\n\nIt's an automated AI video pipeline using AWS Bedrock and Amazon Nova AI.\nLive demo: ${LINKS.faceless}`;
+    }
+
+    if (q.includes('cert') || q.includes('course') || q.includes('google') || q.includes('coursera')) {
+      return `His certifications include Google AI Professional Certificate, Google AI Essentials (Coursera), Azure AI Fundamentals, Python Essentials (Cisco), and more. He's also doing the AI & Data Science track at SMIT right now.`;
+    }
+
+    if (q.includes('hire') || q.includes('available') || q.includes('open to work') || q.includes('job')) {
+      return `Yes — Burhan is open to work! Reach him at ${LINKS.email} or connect on LinkedIn: ${LINKS.linkedin}`;
     }
 
     return null;
@@ -101,10 +140,7 @@ Feel free to send an inquiry or collaboration proposal!`;
     const timer = setTimeout(() => controller.abort(), HEALTH_TIMEOUT_MS);
 
     try {
-      const res = await fetch(API_URL, {
-        method: 'GET',
-        signal: controller.signal,
-      });
+      const res = await fetch(API_URL, { method: 'GET', signal: controller.signal });
       clearTimeout(timer);
       if (!res.ok) return false;
       const data = await res.json();
@@ -117,44 +153,43 @@ Feel free to send an inquiry or collaboration proposal!`;
 
   function buildWidget(root) {
     root.innerHTML = `
-      <button class="bos-fab" id="bosFab" aria-label="Open BURHAN_OS Neural Link" title="BURHAN_OS Neural Link">&gt;_</button>
-      <div class="bos-window" id="bosWindow" role="dialog" aria-label="BURHAN_OS Chat">
+      <button class="bos-fab" id="bosFab" aria-label="Chat about Burhan's portfolio" title="BURHAN_OS — Ask me about Burhan">
+        <span class="bos-fab-icon">&gt;_</span>
+        <span class="bos-fab-label">
+          <span class="bos-fab-name">BURHAN_OS</span>
+          <span class="bos-fab-sub">Personal Agent</span>
+        </span>
+      </button>
+      <div class="bos-window" id="bosWindow" role="dialog" aria-label="Portfolio chat">
         <div class="bos-header">
           <div>
-            <div class="bos-header-title">BURHAN_OS // NEURAL_LINK</div>
+            <div class="bos-header-title">Ask about Burhan</div>
             <div class="bos-header-status standby" id="bosStatus">
               <span class="bos-status-dot standby" id="bosStatusDot"></span>
-              <span id="bosStatusText">CONNECTING...</span>
+              <span id="bosStatusText">Connecting...</span>
             </div>
           </div>
           <button class="bos-close" id="bosClose" aria-label="Close chat">✕</button>
         </div>
         <div class="bos-messages" id="bosMessages">
           <div class="bos-empty" id="bosEmpty">
-            <div style="font-weight: 700; color: var(--bos-cyan); margin-bottom: 6px; letter-spacing: 1px;">&gt; BURHAN_OS v2.4 ONLINE</div>
-            <div style="font-size: 11px; opacity: 0.8; margin-bottom: 12px;">Query any portfolio records below:</div>
-            <div style="display: flex; flex-wrap: wrap; gap: 6px; justify-content: center;">
-              <button class="bos-chip" data-q="Tell me about Muhammad Burhan">👤 About</button>
-              <button class="bos-chip" data-q="What are your core skills?">🛠️ Skills</button>
-              <button class="bos-chip" data-q="Show me your top projects">💼 Projects</button>
-              <button class="bos-chip" data-q="What certifications do you have?">🎓 Certificates</button>
-              <button class="bos-chip" data-q="How can I contact Muhammad Burhan?">✉️ Contact</button>
+            <div class="bos-welcome-title">Hey! 👋</div>
+            <div class="bos-welcome-sub">Ask me anything about Muhammad Burhan — skills, projects, certs, links. English or Urdu, both work.</div>
+            <div class="bos-chips">
+              <button class="bos-chip" data-q="Tell me about Muhammad Burhan">About Burhan</button>
+              <button class="bos-chip" data-q="What are his skills?">Skills</button>
+              <button class="bos-chip" data-q="Show his projects">Projects</button>
+              <button class="bos-chip" data-q="LinkedIn link do">LinkedIn</button>
+              <button class="bos-chip" data-q="How to contact him?">Contact</button>
             </div>
           </div>
         </div>
         <div class="bos-typing" id="bosTyping">
-          &gt; Processing neural nodes<span class="bos-typing-cursor">█</span>
+          <span class="bos-typing-dots"><span></span><span></span><span></span></span>
         </div>
         <div class="bos-input-area">
-          <input
-            class="bos-input"
-            id="bosInput"
-            type="text"
-            placeholder="Type a question (e.g. skills, projects)..."
-            autocomplete="off"
-            maxlength="1000"
-          />
-          <button class="bos-send" id="bosSend" aria-label="Send message">➤</button>
+          <input class="bos-input" id="bosInput" type="text" placeholder="Ask anything..." autocomplete="off" maxlength="1000" />
+          <button class="bos-send" id="bosSend" aria-label="Send">➤</button>
         </div>
       </div>
     `;
@@ -172,18 +207,17 @@ Feel free to send an inquiry or collaboration proposal!`;
 
     let isOpen = false;
     let isLoading = false;
-    let isLiveOnline = false;
+    const chatHistory = [];
 
     function setOnlineStatus(online) {
-      isLiveOnline = online;
       if (online) {
         statusEl.classList.remove('standby');
         statusDot.classList.remove('standby');
-        statusText.textContent = 'NEURAL LINK ONLINE';
+        statusText.textContent = 'Online';
       } else {
         statusEl.classList.add('standby');
         statusDot.classList.add('standby');
-        statusText.textContent = 'LOCAL STANDBY';
+        statusText.textContent = 'Offline mode';
       }
     }
 
@@ -196,13 +230,19 @@ Feel free to send an inquiry or collaboration proposal!`;
       if (empty) empty.remove();
 
       const msg = document.createElement('div');
-      msg.className = `bos-msg bos-msg-${role}`;
+      msg.className = `bos-msg bos-msg-${role === 'user' ? 'user' : 'ai'}`;
 
-      const prefix = role === 'ai' ? '&gt; SYSTEM: ' : '&gt; USER: ';
-      msg.innerHTML = `<span class="bos-prefix">${prefix}</span>${formatText(text)}`;
+      if (role === 'user') {
+        msg.innerHTML = linkify(text);
+      } else {
+        msg.innerHTML = linkify(text);
+      }
 
       messages.appendChild(msg);
       scrollToBottom();
+
+      chatHistory.push({ role, content: text });
+      if (chatHistory.length > 16) chatHistory.splice(0, chatHistory.length - 16);
     }
 
     function setTyping(show) {
@@ -210,22 +250,29 @@ Feel free to send an inquiry or collaboration proposal!`;
       if (show) scrollToBottom();
     }
 
+    const FAB_OPEN_HTML = `<span class="bos-fab-icon">✕</span>`;
+    const FAB_CLOSED_HTML = `
+      <span class="bos-fab-icon">&gt;_</span>
+      <span class="bos-fab-label">
+        <span class="bos-fab-name">BURHAN_OS</span>
+        <span class="bos-fab-sub">Personal Agent</span>
+      </span>
+    `;
+
     function toggleChat(open) {
       isOpen = open;
       windowEl.classList.toggle('active', open);
       fab.classList.toggle('open', open);
-      fab.innerHTML = open ? '✕' : '&gt;_';
+      fab.innerHTML = open ? FAB_OPEN_HTML : FAB_CLOSED_HTML;
       if (open) setTimeout(() => input.focus(), 250);
     }
 
     fab.addEventListener('click', () => toggleChat(!isOpen));
     closeBtn.addEventListener('click', () => toggleChat(false));
-
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && isOpen) toggleChat(false);
     });
 
-    // Quick chip buttons
     root.addEventListener('click', (e) => {
       const chip = e.target.closest('.bos-chip');
       if (chip && chip.dataset.q) {
@@ -246,40 +293,44 @@ Feel free to send an inquiry or collaboration proposal!`;
 
       let answered = false;
 
-      // Try live serverless API first
       try {
+        const historyForApi = chatHistory
+          .slice(0, -1)
+          .filter((m) => m.role === 'user' || m.role === 'assistant')
+          .slice(-6)
+          .map((m) => ({
+            role: m.role === 'user' ? 'user' : 'assistant',
+            content: m.content,
+          }));
+
         const res = await fetch(API_URL, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ message: text }),
+          body: JSON.stringify({ message: text, history: historyForApi }),
         });
 
         if (res.ok) {
           const data = await res.json();
           if (data.reply) {
-            appendMessage('ai', data.reply);
+            appendMessage('assistant', data.reply);
             answered = true;
             setOnlineStatus(true);
           }
         }
       } catch {
-        // Network / offline
+        /* fall through to local */
       }
 
-      // If live API unavailable, use intelligent Local Neural Cache
       if (!answered) {
         setOnlineStatus(false);
         const localReply = localNeuralMatch(text);
 
         if (localReply) {
-          appendMessage('ai', localReply);
+          appendMessage('assistant', localReply);
         } else {
           appendMessage(
-            'ai',
-            `I can answer questions about Muhammad Burhan's portfolio — his skills, projects, certifications, and how to contact him.\n\nTry asking something like:\n• "Tell me about Burhan"
-• "What projects has he built?"
-• "What are his skills?"
-• "How can I contact him?"`
+            'assistant',
+            `I'm not sure about that one — but I can tell you about Burhan's skills, projects, certifications, or share his LinkedIn and contact info. Just ask!`
           );
         }
       }
@@ -295,10 +346,7 @@ Feel free to send an inquiry or collaboration proposal!`;
       if (e.key === 'Enter') sendMessage();
     });
 
-    // Check health asynchronously
-    checkHealth().then((online) => {
-      setOnlineStatus(online);
-    });
+    checkHealth().then(setOnlineStatus);
   }
 
   function init() {

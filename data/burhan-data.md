@@ -17,65 +17,91 @@
 
 ### Bio
 
-Muhammad Burhan is a passionate AI & Data Science student at Saylani Mass IT Institute, dedicated to mastering machine intelligence. His focus lies in **Generative AI and NLP**, exploring how models can understand and augment human creativity.
+Muhammad Burhan is a passionate AI & Data Science student at Saylani Mass IT Institute. He loves building **Generative AI**, **Agentic AI**, and **RAG-based systems** that solve real problems — not just demos.
 
-His journey is about solving real-world problems — from Prompt Engineering and Data Science to "Vibe Coding" and the latest AI innovations.
+He's especially into **system design**, **problem solving**, **n8n automations**, **vibe coding**, and picking the right **AI tools** for the job. Whether it's an AWS Bedrock pipeline or a Groq-powered chatbot, he focuses on clean architecture and shipping things that work.
 
-### Core Focus Areas
+### Core Interests (Primary Focus)
 
-- Generative AI
-- Machine Learning
-- Data Analysis
-- Natural Language Processing (NLP)
+- System Design
+- Problem Solving
+- Generative AI & Agentic AI
+- RAG-Based Systems (Retrieval-Augmented Generation)
+- n8n Automations
+- Vibe Coding
+- AI Tools & LLM Integration
 - Prompt Engineering
+
+### Secondary Focus
+
+- Machine Learning & NLP
+- Data Analysis
+- Clean Architecture
+- Cognitive Computing
 
 ### Personal Highlights
 
-- Cognitive Computing
-- Clean Architecture
-- AWS Nova AI Hackathon Winner (Faceless AI Video Studio)
+- 🏆 AWS Nova AI Hackathon Winner (Faceless AI Video Studio)
+- Google AI Professional Certificate (20+ AI artifacts)
+- Active open-source contributor on GitHub (@coddies)
 
 ---
 
-## Skills
+## Skills (Complete List)
+
+### AI & LLM Stack
+
+| Skill | Notes |
+|-------|-------|
+| LLMs | Large language model integration & workflows |
+| Groq API | Fast inference — used in Spin AI, BURHAN_OS, chatbots |
+| Generative AI | Content, video, and text generation pipelines |
+| Agentic AI | Autonomous AI agents & multi-step workflows |
+| RAG Systems | Retrieval-Augmented Generation — knowledge-base Q&A |
+| Prompt Engineering | Structured prompts, output evaluation |
+| Vibe Coding | AI-assisted rapid prototyping & building |
+| AI Tools | Cursor, LLM APIs, automation stacks |
+| AWS Bedrock | Enterprise Gen AI on AWS |
+| Amazon Nova AI | Nova models — hackathon-winning video pipeline |
+| Machine Learning | Applied ML workflows |
+| NLP | Natural Language Processing |
 
 ### Programming & Backend
 
-| Skill | Level / Notes |
-|-------|---------------|
-| Python | Core language — essentials, scripting, ML pipelines |
-| FastAPI | Production-ready backends, CRUD, auth patterns |
-| SQL / Databases | PostgreSQL (Neon), data analysis queries |
-| HTML5 / CSS3 | Portfolio UI, responsive design, animations |
-| JavaScript | Vanilla JS, interactive UI, particles, typewriter effects |
+| Skill | Notes |
+|-------|-------|
+| Python | Core language — scripting, ML, FastAPI backends |
+| FastAPI | Production CRUD, auth, REST APIs |
+| JavaScript | Vanilla JS, interactive UIs |
+| SQL / Databases | PostgreSQL (Neon), queries & data modeling |
+| System Design | Scalable app & API architecture |
 
-### AI & Machine Learning
+### Frontend & Cloud
 
-| Skill | Level / Notes |
-|-------|---------------|
-| AI / LLM | Groq API, prompt design, conversational AI |
-| Generative AI | AWS Bedrock, content generation, video pipelines |
-| Machine Learning | Applied ML, model workflows |
-| Prompt Engineering | Structured prompting, evaluation of outputs |
-| Vibe Coding | AI-assisted rapid prototyping |
+| Skill | Notes |
+|-------|-------|
+| React | Spin AI, Flux AI Chatbot |
+| Vite | Modern React tooling |
+| Tailwind CSS | Utility-first styling |
+| HTML5 / CSS3 | Portfolio, animations, glassmorphism |
+| Vercel | Deployment & serverless |
+| AWS Cloud | Bedrock, serverless, cloud workflows |
+| Git & GitHub | Version control, open source (@coddies) |
 
-### Cloud & Tools
+### Automation & Workflow
 
-| Skill | Level / Notes |
-|-------|---------------|
-| AWS Cloud | AWS Bedrock, Nova AI models, serverless deployment |
-| React | Spin AI, Flux AI Chatbot (Vite + Tailwind) |
-| Vercel | Frontend & serverless deployment |
-| Git / GitHub | Version control, open-source projects |
+| Skill | Notes |
+|-------|-------|
+| n8n | Workflow automation & integrations |
 
 ### Soft Skills & Creative
 
 | Skill | Notes |
 |-------|-------|
-| Data Analysis | Insights, visualization, problem-solving |
-| Problem Solving | Real-world project focus |
+| Problem Solving | Real-world focus — his strongest trait |
+| Data Analysis | Insights & visualization |
 | Video Editing | Content creation |
-| Content Creator | AI & dev tips on social media |
+| Content Creator | AI & dev tips — TikTok @devmburhan |
 | Digital Marketing | DigiSkills certified |
 
 ---
@@ -86,17 +112,16 @@ His journey is about solving real-world problems — from Prompt Engineering and
 
 | Field | Details |
 |-------|---------|
-| **Description** | AWS Nova AI Hackathon **Winner**. Automated pipeline for AI video generation — scripts, thumbnails, voiceovers & SEO using Amazon Nova AI and AWS Bedrock. |
+| **Description** | 🏆 AWS Nova AI Hackathon **Winner**. Automated AI video pipeline — scripts, thumbnails, voiceovers & SEO using Amazon Nova AI and AWS Bedrock. |
 | **Tech Stack** | AWS Bedrock, Amazon Nova AI, Python, Generative AI |
 | **GitHub** | https://github.com/coddies/faceless-ai-studio |
 | **Live Demo** | https://faceless-ai-studio-tau.vercel.app/ |
-| **Highlight** | 🏆 AWS Nova AI Hackathon Winner |
 
 ### 2. Spin AI
 
 | Field | Details |
 |-------|---------|
-| **Description** | AI-powered wheel spinner. Type any topic and Groq API fills the wheel instantly. |
+| **Description** | AI-powered wheel spinner — type any topic, Groq API fills the wheel instantly. |
 | **Tech Stack** | React, Vite, Tailwind CSS, Groq API |
 | **GitHub** | https://github.com/coddies/Spin-Ai |
 
@@ -104,7 +129,7 @@ His journey is about solving real-world problems — from Prompt Engineering and
 
 | Field | Details |
 |-------|---------|
-| **Description** | Conversational AI chatbot with a premium dark UI. |
+| **Description** | Conversational AI chatbot with premium dark UI. |
 | **Tech Stack** | React, AI/LLM integration |
 | **GitHub** | https://github.com/coddies/AI-Chatbot |
 | **Live Demo** | https://fluxai-two.vercel.app |
@@ -113,9 +138,16 @@ His journey is about solving real-world problems — from Prompt Engineering and
 
 | Field | Details |
 |-------|---------|
-| **Description** | Production-ready backend with full CRUD, authentication, and industry-standard patterns. |
+| **Description** | Production-ready backend — full CRUD, auth, industry patterns. |
 | **Tech Stack** | FastAPI, Neon PostgreSQL, Python |
 | **GitHub** | https://github.com/coddies/FastAPI-fullapp |
+
+### 5. BURHAN_OS (This Chatbot)
+
+| Field | Details |
+|-------|---------|
+| **Description** | Portfolio AI assistant powered by Groq — answers from this knowledge base only. |
+| **Tech Stack** | Vercel Serverless, Groq API, Vanilla JS |
 
 ---
 
@@ -123,92 +155,59 @@ His journey is about solving real-world problems — from Prompt Engineering and
 
 ### Completed
 
-| Certificate | Issuer | Notes |
-|-------------|--------|-------|
-| Google AI Professional Certificate | Google via Coursera | 8 courses — AI fundamentals, brainstorming, research, writing, content, data analysis, app building & deployment |
-| Google AI Essentials | Google via Coursera | 5 courses — intro to AI, productivity tools, prompting, responsible AI |
-| Azure AI Fundamentals | Microsoft Learn | Foundational AI workloads on Azure — verified via Microsoft Learn |
-| Python Essentials 1 | Cisco Networking Academy | Core Python programming |
-| Python Crash Basics | Mind Luster | Python fundamentals crash course |
-| Digital Marketing | DigiSkills Training Program | Digital marketing fundamentals |
-| E-Commerce Management | DigiSkills Training Program | E-commerce operations & management |
+| Certificate | Issuer |
+|-------------|--------|
+| Google AI Professional Certificate | Google via Coursera (8 courses) |
+| Google AI Essentials | Google via Coursera (5 courses) |
+| Azure AI Fundamentals | Microsoft Learn |
+| Python Essentials 1 | Cisco Networking Academy |
+| Python Crash Basics | Mind Luster |
+| Digital Marketing | DigiSkills Training Program |
+| E-Commerce Management | DigiSkills Training Program |
 
 ### In Progress
 
 | Certificate | Issuer | Focus |
 |-------------|--------|-------|
-| AI & Data Science Track | Saylani Mass IT Training | Advanced Python, SQL, Applied ML, Neural Networks, NLP, Generative AI Agents |
+| AI & Data Science Track | Saylani Mass IT (SMIT) | Python, SQL, ML, Neural Networks, NLP, Gen AI Agents |
 
 ---
 
-## Achievements
+## Contact & Social Links (Always share full URLs when asked)
 
-- **AWS Nova AI Hackathon Winner** — Faceless AI Video Studio project
-- Building portfolio of 20+ AI artifacts (Google AI Professional Certificate)
-- Active open-source contributor on GitHub (username: coddies)
-
----
-
-## Education & Training
-
-| Program | Institution | Status |
-|---------|-------------|--------|
-| AI & Data Science | Saylani Mass IT Training (SMIT) | In Progress |
-| Google AI Professional Certificate | Coursera / Google | Completed (Sep 2026) |
-| Google AI Essentials | Coursera / Google | Completed (Sep 2026) |
-
----
-
-## Contact & Social Links
-
-| Platform | URL / Handle |
-|----------|--------------|
+| Platform | Full URL |
+|----------|----------|
 | **Email** | mb6679605@gmail.com |
-| **GitHub** | https://github.com/coddies |
 | **LinkedIn** | https://www.linkedin.com/in/muhammad-burhan-73a81b27b/ |
+| **GitHub** | https://github.com/coddies |
 | **TikTok** | https://www.tiktok.com/@devmburhan |
 | **Instagram** | https://www.instagram.com/reel/DYj58UtEyIz/ |
-| **CV Download** | Muhammad_Burhan_CV.pdf (available on portfolio) |
-| **Live Portfolio** | https://coddies.github.io/My-Portfolio/ |
+| **Portfolio** | https://coddies.github.io/My-Portfolio/ |
+| **CV** | Muhammad_Burhan_CV.pdf (download from portfolio) |
+
+**Important:** When user asks for LinkedIn, GitHub, email, or any link — always give the **full clickable URL** from this table.
 
 ---
 
-## Portfolio Website Sections
+## FAQ
 
-The portfolio website includes these navigable sections:
+**Q: Who is Muhammad Burhan?**
+A: AI & Data Science student at SMIT, Chiniot, Pakistan. Builds Gen AI, Agentic AI, and RAG systems. Hackathon winner. Open to work.
 
-1. **Home** — Hero, typewriter roles, social links, CV download
-2. **About** — Bio, terminal-style developer object, skill highlights
-3. **Skills** — Solar-system skill matrix (Python, FastAPI, AI/LLM, ML, etc.)
-4. **Projects** — PROJECT_LAB.v2 with orbital carousel & bento grid
-5. **Achievements** — Hackathon showcase, certifications timeline
-6. **Case Studies** — Detailed project analysis reports
-7. **Contact** — Neural Link terminal contact form & social isometric map
+**Q: LinkedIn profile?**
+A: https://www.linkedin.com/in/muhammad-burhan-73a81b27b/
 
----
+**Q: GitHub?**
+A: https://github.com/coddies
 
-## Tech Stack (Portfolio Site)
+**Q: Email?**
+A: mb6679605@gmail.com
 
-- HTML5, CSS3, Vanilla JavaScript
-- Glassmorphism UI, CSS animations, particle engine
-- Google Fonts: Space Grotesk, Syne, Plus Jakarta Sans
-- Hosted on GitHub Pages
+**Q: Best project?**
+A: Faceless AI Studio — AWS Nova Hackathon winner. Live: https://faceless-ai-studio-tau.vercel.app/
 
----
+**Q: Top skills?**
+A: System design, problem solving, Gen AI, Agentic AI, RAG, Groq API, AWS Bedrock, Python, FastAPI, React, n8n, vibe coding.
 
-## FAQ — Common Visitor Questions
-
-**Q: What does Muhammad Burhan do?**
-A: He is an AI & Data Science student specializing in Generative AI, NLP, and building AI-powered applications.
-
-**Q: Is he available for work?**
-A: Yes — status is "Open to Work".
-
-**Q: What is his best project?**
-A: Faceless AI Studio — winner of the AWS Nova AI Hackathon, live at faceless-ai-studio-tau.vercel.app.
-
-**Q: How to contact him?**
-A: Email mb6679605@gmail.com, or connect via LinkedIn/GitHub links above.
-
-**Q: What languages/frameworks does he know?**
-A: Python, FastAPI, JavaScript, React, SQL, HTML/CSS, AWS, and AI/LLM tools including Groq and AWS Bedrock.
+**Q: Available for work?**
+A: Yes — Open to Work.
