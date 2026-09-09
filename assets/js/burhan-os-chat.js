@@ -1,22 +1,142 @@
 /**
  * BURHAN_OS — Burhan's portfolio AI buddy
- * Live Groq when available, smart local fallback offline.
+ * The Groq LLM (via /api/burhan-ai) is the brain. When the API can't be
+ * reached we show a short, neutral "try again" line — never a fake canned
+ * answer, and never a hardcoded keyword match.
  */
 (function () {
   'use strict';
 
-  const API_URL = '/api/burhan-ai';
+  // Served from Vercel the API is same-origin (/api/burhan-ai). If the site is
+  // hosted somewhere without the serverless function (e.g. GitHub Pages), set
+  // window.BURHAN_OS_API_URL to the full Vercel endpoint before this script
+  // loads so the chatbot can still reach its brain.
+  const API_URL =
+    (typeof window !== 'undefined' && window.BURHAN_OS_API_URL) || '/api/burhan-ai';
   const HEALTH_TIMEOUT_MS = 4000;
 
+  /* ── Local Neural Cache ─────────────────────────────────────────────────────
+     Handles queries when the Groq API is not reachable (local file:// dev,
+     GitHub Pages, or no GROQ_API_KEY yet).  Live API always takes priority.
+  ──────────────────────────────────────────────────────────────────────────── */
+  // Every link that appears anywhere on the portfolio, in one place.
   const LINKS = {
     linkedin: 'https://www.linkedin.com/in/muhammad-burhan-73a81b27b/',
     github: 'https://github.com/coddies',
     email: 'mb6679605@gmail.com',
     portfolio: 'https://coddies.github.io/My-Portfolio/',
-    faceless: 'https://faceless-ai-studio-tau.vercel.app/',
-    flux: 'https://fluxai-two.vercel.app',
     tiktok: 'https://www.tiktok.com/@devmburhan',
+    instagram: 'https://www.instagram.com/reel/DYj58UtEyIz/',
+    faceless: 'https://faceless-ai-studio-tau.vercel.app/',
+    spin: 'https://spinwheelai.online/',
+    flux: 'https://fluxai-two.vercel.app',
+    fastapi: 'https://github.com/coddies/FastAPI-fullapp',
   };
+
+  // Collapse repeated letters and strip spaces/punctuation so misspellings
+  // like "githab", "gihub", "git hub", "gtihub", "linkin", "linked in" all
+  // fold toward the same token. This is a best-effort OFFLINE net only — the
+  // Groq LLM is the real brain and handles typos on its own when reachable.
+  function fuzzyNormalize(q) {
+    return q
+      .toLowerCase()
+      .replace(/[^a-z0-9\s]/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
+  // True if the query contains any of `variants`, comparing both the raw
+  // normalized text AND a space-stripped form (so "git hub" matches "github").
+  function matchesAny(norm, variants) {
+    const squished = norm.replace(/\s+/g, '');
+    return variants.some((v) => {
+      const vv = v.replace(/\s+/g, '');
+      return norm.includes(v) || squished.includes(vv);
+    });
+  }
+
+  function localNeuralCache(query) {
+    const q = fuzzyNormalize(query);
+
+    // Greetings / general openers
+    const greetings = ['hey','hi','hello','helo','hii','salam','assalam','yo','sup',
+      'how are you','whats up','good morning','good afternoon','good evening',
+      'kia hal','kya haal','kese ho','kaisa ho','namaste'];
+    if (greetings.some(g => q === g || q.startsWith(g + ' '))) {
+      return `Hey! 👋 I'm BURHAN_OS — Burhan's personal AI.\n\nAsk me about his skills, projects, certifications, or how to reach him. I'm here to help!`;
+    }
+
+    // ── Direct link requests — check the SPECIFIC platforms first, GitHub
+    //    before LinkedIn, so a misspelling never falls through to the wrong one.
+    if (matchesAny(q, ['github','githab','gihub','gitub','gthub','gtihub','git hub','hithub','repo','repository','open source'])) {
+      return `Here's Burhan's GitHub — lots of AI projects there:\n${LINKS.github}`;
+    }
+    if (matchesAny(q, ['linkedin','linkedn','linkdin','linkin','linked in','likedin','lnkedin'])) {
+      return `Here's Burhan's LinkedIn:\n${LINKS.linkedin}\n\nHe's open to work — feel free to connect!`;
+    }
+    if (matchesAny(q, ['tiktok','tik tok','tictok'])) {
+      return `Here's Burhan's TikTok:\n${LINKS.tiktok}`;
+    }
+    if (matchesAny(q, ['instagram','insta','instgram','ig'])) {
+      return `Here's Burhan's Instagram:\n${LINKS.instagram}`;
+    }
+    if (matchesAny(q, ['portfolio','website','web site','site'])) {
+      return `Here's Burhan's portfolio:\n${LINKS.portfolio}`;
+    }
+    if (matchesAny(q, ['faceless'])) {
+      return `Faceless AI Studio — 🏆 AWS Nova Hackathon winner. Automated AI video pipeline (AWS Bedrock & Amazon Nova):\n${LINKS.faceless}`;
+    }
+    if (matchesAny(q, ['spin','wheel','spinwheel','spin ai'])) {
+      return `Spin AI — an AI-powered wheel spinner (React + Vite + Groq API):\n${LINKS.spin}`;
+    }
+    if (matchesAny(q, ['flux','chatbot'])) {
+      return `Flux AI Chatbot — a conversational AI with a premium dark UI:\n${LINKS.flux}`;
+    }
+
+    // Contact / email / hire
+    if (matchesAny(q, ['contact','email','e mail','mail','gmail','reach','kaise milein','kaise contact','rabta'])) {
+      return `How to reach Burhan:\n\n📧 Email: ${LINKS.email}\n💼 LinkedIn: ${LINKS.linkedin}\n🐙 GitHub: ${LINKS.github}\n\nHe's open to work — drop him a message anytime!`;
+    }
+
+    // About / bio
+    if (matchesAny(q, ['who','about','bio','burhan','intro','tell me','batao','batayen','uske bare','himself','kaun','kon'])) {
+      return `Muhammad Burhan is an AI & Data Science student at Saylani Mass IT Training (SMIT), Chiniot, Pakistan.\n\nHe builds Gen AI pipelines, Agentic AI systems, and RAG applications. Won the AWS Nova AI Hackathon. Open to work & collaborations.\n\nLinkedIn: ${LINKS.linkedin}`;
+    }
+
+    // Skills
+    if (matchesAny(q, ['skill','tech','stack','python','tools','expert','kya janta','kia aata','abilities'])) {
+      return `Burhan's core interests: system design, Gen AI, Agentic AI, RAG systems, n8n, vibe coding.\n\nTech stack:\n• Languages: Python, JavaScript, HTML5, CSS3, SQL\n• AI/ML: LLMs, Groq API, AWS Bedrock, Amazon Nova AI, Prompt Engineering, Machine Learning, NLP, Data Analysis\n• Frontend: React, Vite, Tailwind CSS\n• Backend: FastAPI, PostgreSQL\n• Tools: Git, GitHub, Vercel, AWS Cloud\n• Other: Video Editing, Content Creation`;
+    }
+
+    // Projects
+    if (matchesAny(q, ['project','work','build','bana','app','apps','kia banaya'])) {
+      return `Top projects:\n\n🏆 Faceless AI Studio — AWS Nova Hackathon Winner! Automated AI video pipeline using AWS Bedrock & Nova.\n${LINKS.faceless}\n\n🎡 Spin AI — AI-powered wheel spinner (React + Groq API)\n${LINKS.spin}\n\n🤖 Flux AI Chatbot — Conversational AI with glassmorphic UI\n${LINKS.flux}\n\nAll projects: ${LINKS.github}`;
+    }
+
+    // Hackathon / AWS
+    if (matchesAny(q, ['hackathon','winner','aws','nova','award','jeeta','jeet'])) {
+      return `🏆 Yes! Burhan won the AWS Nova AI Hackathon with "Faceless AI Studio".\n\nIt's a fully automated AI video pipeline — scripts, thumbnails, voiceovers — all generated using AWS Bedrock & Amazon Nova AI.\n\nLive: ${LINKS.faceless}`;
+    }
+
+    // Certifications
+    if (matchesAny(q, ['cert','course','google','coursera','cisco','degree','diploma','qualification','taleem'])) {
+      return `Verified Certifications:\n🎓 Google AI Professional Certificate — Coursera\n✨ Google AI Essentials — Coursera\n🤖 Microsoft Azure AI Fundamentals — Microsoft Learn\n🐍 Python Essentials 1 — Cisco Networking Academy\n💻 Python Crash Basics — Mind Luster\n📈 Digital Marketing — DigiSkills\n🛒 E-Commerce Management — DigiSkills\n🧠 AI & Data Science Track — SMIT (In Progress)`;
+    }
+
+    // Location
+    if (matchesAny(q, ['where','location','city','country','reh','kahan','address'])) {
+      return `Burhan is based in Chiniot, Pakistan.`;
+    }
+
+    // Availability / job
+    if (matchesAny(q, ['available','job','hire','open to work','freelance','internship','kaam','naukri'])) {
+      return `Yes! Burhan is currently Open to Work.\n\nBest way to reach him:\n📧 ${LINKS.email}\n💼 ${LINKS.linkedin}`;
+    }
+
+    // No match
+    return null;
+  }
+
 
   function escapeHtml(text) {
     const div = document.createElement('div');
@@ -25,114 +145,24 @@
   }
 
   function linkify(text) {
-    const escaped = escapeHtml(text);
-    return escaped
+    return escapeHtml(text)
       .replace(/\n/g, '<br>')
-      .replace(
-        /(https?:\/\/[^\s<]+)/g,
-        '<a href="$1" target="_blank" rel="noopener" style="color:#00E5FF;text-decoration:underline;">$1</a>'
-      );
-  }
-
-  function normalizeQuery(q) {
-    return q.toLowerCase().trim().replace(/\s+/g, ' ');
-  }
-
-  function wantsLink(q) {
-    return (
-      q.includes('link') ||
-      q.includes('url') ||
-      q.includes('profile') ||
-      q.includes('do ') ||
-      q.includes('de do') ||
-      q.includes('bhejo') ||
-      q.includes('send')
-    );
-  }
-
-  function localNeuralMatch(rawQuery) {
-    const q = normalizeQuery(rawQuery);
-
-    if (
-      q === 'hey' ||
-      q === 'hi' ||
-      q === 'hello' ||
-      q === 'helo' ||
-      q === 'hii' ||
-      q === 'salam' ||
-      q === 'assalam' ||
-      q === 'assalam o alaikum' ||
-      q === 'aoa' ||
-      q.startsWith('hey ') ||
-      q.startsWith('hi ') ||
-      q === 'how are you' ||
-      q === 'whats up'
-    ) {
-      return `Hey! 👋 I'm here to tell you about Muhammad Burhan — his skills, projects, certs, and how to reach him. Just ask naturally, in English or Urdu — whatever's comfortable for you!`;
-    }
-
-    const isAboutQuery =
-      q.includes('who') ||
-      q.includes('about') ||
-      q.includes('burhan') ||
-      q.includes('intro') ||
-      q.includes('batao') ||
-      q.includes('bata') ||
-      q.includes('kon hai') ||
-      q.includes('kaun hai') ||
-      q.includes('tell me more');
-
-    const isLinkedInQuery =
-      q.includes('linkedin') || q.includes('linkin') || q.includes('linked in');
-
-    if (isAboutQuery) {
-      let reply = `Muhammad Burhan is an AI & Data Science student at Saylani Mass IT (SMIT), based in Chiniot, Pakistan. He's really into system design, problem solving, Generative AI, Agentic AI, RAG systems, n8n automations, and vibe coding.\n\nHe builds real AI products — won the AWS Nova AI Hackathon with Faceless AI Studio. Currently open to work!`;
-
-      if (wantsLink(q) || isLinkedInQuery) {
-        reply += `\n\nLinkedIn: ${LINKS.linkedin}`;
-      }
-      return reply;
-    }
-
-    if (isLinkedInQuery || (q.includes('link') && !q.includes('github'))) {
-      return `Sure! Here's Burhan's LinkedIn:\n${LINKS.linkedin}\n\nHe's open to work — feel free to connect!`;
-    }
-
-    if (q.includes('github') || q.includes('git hub')) {
-      return `Here's his GitHub — lots of AI projects there:\n${LINKS.github}`;
-    }
-
-    if (q.includes('email') || q.includes('mail') || q.includes('contact') || q.includes('reach')) {
-      return `You can reach Burhan here:\n\n📧 Email: ${LINKS.email}\n💼 LinkedIn: ${LINKS.linkedin}\n🐙 GitHub: ${LINKS.github}\n\nHe's open to work — drop him a message anytime!`;
-    }
-
-    if (
-      q.includes('skill') ||
-      q.includes('tech') ||
-      q.includes('stack') ||
-      q.includes('tools') ||
-      q.includes('expert')
-    ) {
-      return `Burhan's main interests: system design, problem solving, Gen AI, Agentic AI, RAG systems, n8n, vibe coding, and AI tools.\n\nTech stack: Python, FastAPI, LLMs, API (Groq), AWS Bedrock, Amazon Nova, Prompt Engineering, Machine Learning, NLP, Data Analysis, React, Vite, Tailwind, HTML5, CSS3, JavaScript, SQL/PostgreSQL, Git/GitHub, Vercel, AWS Cloud, Video Editing, Content Creator.`;
-    }
-
-    if (q.includes('project') || q.includes('work') || q.includes('build') || q.includes('portfolio')) {
-      return `His top projects:\n\n🏆 Faceless AI Studio — AWS Nova Hackathon winner. AI video pipeline with Bedrock & Nova.\n   → ${LINKS.faceless}\n\n🎡 Spin AI — Groq-powered wheel spinner (React + Vite)\n🤖 Flux AI Chatbot — ${LINKS.flux}\n⚡ FastAPI Full App — production backend with PostgreSQL\n\nAll on GitHub: ${LINKS.github}`;
-    }
-
-    if (q.includes('hackathon') || q.includes('winner') || q.includes('aws')) {
-      return `Yeah! Burhan won the AWS Nova AI Hackathon with Faceless AI Studio 🏆\n\nIt's an automated AI video pipeline using AWS Bedrock and Amazon Nova AI.\nLive demo: ${LINKS.faceless}`;
-    }
-
-    if (q.includes('cert') || q.includes('course') || q.includes('google') || q.includes('coursera')) {
-      return `His certifications include Google AI Professional Certificate, Google AI Essentials (Coursera), Azure AI Fundamentals, Python Essentials (Cisco), and more. He's also doing the AI & Data Science track at SMIT right now.`;
-    }
-
-    if (q.includes('hire') || q.includes('available') || q.includes('open to work') || q.includes('job')) {
-      return `Yes — Burhan is open to work! Reach him at ${LINKS.email} or connect on LinkedIn: ${LINKS.linkedin}`;
-    }
-
-    return null;
+      .replace(/(https?:\/\/[^\s<]+)/g, function (match) {
+        // Keep the anchor to a clean full URL — don't swallow trailing
+        // punctuation (e.g. a sentence-ending "." or a closing ")") into it.
+        const trailing = match.match(/[.,;:!?)\]]+$/);
+        const url = trailing ? match.slice(0, -trailing[0].length) : match;
+        const tail = trailing ? trailing[0] : '';
+        return (
+          '<a href="' +
+          url +
+          '" target="_blank" rel="noopener" ' +
+          'style="color:#00E5FF;text-decoration:underline;">' +
+          url +
+          '</a>' +
+          tail
+        );
+      });
   }
 
   async function checkHealth() {
@@ -174,7 +204,7 @@
         <div class="bos-messages" id="bosMessages">
           <div class="bos-empty" id="bosEmpty">
             <div class="bos-welcome-title">Hey! 👋</div>
-            <div class="bos-welcome-sub">Ask me anything about Muhammad Burhan — skills, projects, certs, links. English or Urdu, both work.</div>
+            <div class="bos-welcome-sub">Ask me anything about Muhammad Burhan — his skills, projects, certifications, and how to reach him.</div>
             <div class="bos-chips">
               <button class="bos-chip" data-q="Tell me about Muhammad Burhan">About Burhan</button>
               <button class="bos-chip" data-q="What are his skills?">Skills</button>
@@ -231,12 +261,7 @@
 
       const msg = document.createElement('div');
       msg.className = `bos-msg bos-msg-${role === 'user' ? 'user' : 'ai'}`;
-
-      if (role === 'user') {
-        msg.innerHTML = linkify(text);
-      } else {
-        msg.innerHTML = linkify(text);
-      }
+      msg.innerHTML = linkify(text);
 
       messages.appendChild(msg);
       scrollToBottom();
@@ -318,19 +343,19 @@
           }
         }
       } catch {
-        /* fall through to local */
+        /* network error — fall through to the neutral offline notice below */
       }
 
       if (!answered) {
         setOnlineStatus(false);
-        const localReply = localNeuralMatch(text);
-
+        // Try local cache first — works on file:// or when API key is missing
+        const localReply = localNeuralCache(text);
         if (localReply) {
           appendMessage('assistant', localReply);
         } else {
           appendMessage(
             'assistant',
-            `I'm not sure about that one — but I can tell you about Burhan's skills, projects, certifications, or share his LinkedIn and contact info. Just ask!`
+            `I can answer questions about Muhammad Burhan — his skills, projects, certifications, and how to reach him.\n\nTry asking:\n• "Tell me about Burhan"\n• "What are his skills?"\n• "Show his projects"\n• "How to contact him?"`
           );
         }
       }

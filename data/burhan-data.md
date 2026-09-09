@@ -125,6 +125,7 @@ He's especially into **system design**, **problem solving**, **n8n automations**
 | **Description** | AI-powered wheel spinner — type any topic, Groq API fills the wheel instantly. |
 | **Tech Stack** | React, Vite, Tailwind CSS, Groq API |
 | **GitHub** | https://github.com/coddies/Spin-Ai |
+| **Live Demo** | https://spinwheelai.online/ |
 
 ### 3. Flux AI Chatbot
 
