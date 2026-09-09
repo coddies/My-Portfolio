@@ -13,7 +13,19 @@
   --bos-glass: rgba(255, 255, 255, 0.06);
   --bos-border: rgba(0, 229, 255, 0.35);
   font-family: 'JetBrains Mono', 'Fira Code', 'Space Grotesk', monospace;
-  z-index: 9999;
+  z-index: 100000 !important;
+}
+
+#burhan-os-root, #burhan-os-root * {
+  cursor: auto !important;
+}
+
+.bos-fab, .bos-close, .bos-send, .bos-chip {
+  cursor: pointer !important;
+}
+
+.bos-input {
+  cursor: text !important;
 }
 
 #burhan-os-root.hidden {
@@ -43,7 +55,7 @@
   box-shadow: 0 0 20px rgba(0, 229, 255, 0.25), inset 0 0 12px rgba(0, 229, 255, 0.05);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
   animation: bosFabPulse 3s ease-in-out infinite;
-  z-index: 9999;
+  z-index: 100000 !important;
 }
 
 .bos-fab:hover {
@@ -83,7 +95,7 @@
   visibility: hidden;
   transform: translateY(16px) scale(0.96);
   transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
-  z-index: 9998;
+  z-index: 100000 !important;
 }
 
 .bos-window.active {
@@ -121,6 +133,11 @@
   color: #10B981;
   letter-spacing: 1px;
   margin-top: 3px;
+  transition: color 0.3s ease;
+}
+
+.bos-header-status.standby {
+  color: #f59e0b;
 }
 
 .bos-status-dot {
@@ -130,6 +147,31 @@
   background: #10B981;
   box-shadow: 0 0 8px #10B981;
   animation: bosBlink 2s ease-in-out infinite;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.bos-status-dot.standby {
+  background: #f59e0b;
+  box-shadow: 0 0 8px #f59e0b;
+}
+
+.bos-chip {
+  background: rgba(0, 229, 255, 0.08);
+  border: 1px solid rgba(0, 229, 255, 0.3);
+  color: var(--bos-cyan);
+  padding: 6px 12px;
+  border-radius: 99px;
+  font-size: 11px;
+  font-family: inherit;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.bos-chip:hover {
+  background: var(--bos-cyan);
+  color: #060B14;
+  box-shadow: 0 0 14px rgba(0, 229, 255, 0.5);
+  transform: translateY(-1px);
 }
 
 @keyframes bosBlink {

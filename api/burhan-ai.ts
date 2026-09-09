@@ -8,11 +8,11 @@ import Groq from 'groq-sdk';
  * or is unavailable (Groq deprecates models periodically).
  */
 const GROQ_MODELS = [
+  'llama-3.3-70b-versatile',
+  'llama-3.1-8b-instant',
   'openai/gpt-oss-120b',
   'qwen/qwen3.6-27b',
   'openai/gpt-oss-20b',
-  'llama-3.3-70b-versatile',
-  'llama-3.1-8b-instant',
 ] as const;
 
 const OUT_OF_SCOPE_REPLY =
@@ -108,18 +108,6 @@ async function callGroqWithFallback(
   throw lastError ?? new Error('All Groq models exhausted');
 }
 
-async function healthCheck(groq: Groq): Promise<boolean> {
-  try {
-    await groq.chat.completions.create({
-      model: GROQ_MODELS[GROQ_MODELS.length - 1],
-      messages: [{ role: 'user', content: 'ping' }],
-      max_tokens: 1,
-    });
-    return true;
-  } catch {
-    return false;
-  }
-}
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -130,22 +118,24 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(200).end();
   }
 
+  if (req.method === 'GET') {
+    const hasKey = Boolean(process.env.GROQ_API_KEY);
+    return res.status(200).json({
+      online: hasKey,
+      system: 'BURHAN_OS',
+      status: hasKey ? 'active' : 'standby',
+    });
+  }
+
   const apiKey = process.env.GROQ_API_KEY;
   if (!apiKey) {
-    return res.status(503).json({ online: false, error: 'GROQ_API_KEY not configured' });
+    return res.status(503).json({
+      online: false,
+      error: 'GROQ_API_KEY not configured in Vercel Environment Variables.',
+    });
   }
 
   const groq = new Groq({ apiKey });
-
-  if (req.method === 'GET') {
-    try {
-      loadKnowledgeBase();
-      const online = await healthCheck(groq);
-      return res.status(online ? 200 : 503).json({ online, system: 'BURHAN_OS' });
-    } catch {
-      return res.status(503).json({ online: false, system: 'BURHAN_OS' });
-    }
-  }
 
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
