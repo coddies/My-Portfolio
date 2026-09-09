@@ -77,6 +77,29 @@ My-Portfolio/
 
 ---
 
+## 🤖 BURHAN_OS Neural Link (AI Chatbot)
+
+Interactive terminal-themed AI assistant powered by Groq. Answers **only** from `data/burhan-data.md` — no hallucinations.
+
+| Feature | Details |
+|---------|---------|
+| **UI** | Floating `>_` button, glassmorphism, cyan/amber terminal theme |
+| **API** | Vercel serverless `/api/burhan-ai` |
+| **Models** | Auto-fallback: gpt-oss-120b → qwen3.6-27b → gpt-oss-20b → llama |
+| **Visibility** | Widget hidden if API/LLM is offline (e.g. on GitHub Pages) |
+
+### Deploy on Vercel
+
+```bash
+npm install
+# Add GROQ_API_KEY in Vercel project settings (or copy .env.example → .env.local)
+vercel deploy
+```
+
+> GitHub Pages serves the static site only — the chatbot requires Vercel for the API route.
+
+---
+
 ## 🚀 Getting Started
 
 ```bash
@@ -85,6 +108,9 @@ git clone https://github.com/coddies/My-Portfolio.git
 
 # Open in browser (no build step needed)
 open index.html
+
+# Local dev with AI chatbot
+npm install && vercel dev
 ```
 
 ---

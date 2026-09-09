@@ -1,0 +1,19 @@
+{
+  "name": "burhan-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Muhammad Burhan AI & Data Science Portfolio with BURHAN_OS Neural Link",
+  "scripts": {
+    "dev": "vercel dev",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "groq-sdk": "^0.12.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "@vercel/node": "^5.0.0",
+    "typescript": "^5.7.0",
+    "vercel": "^39.0.0"
+  }
+}

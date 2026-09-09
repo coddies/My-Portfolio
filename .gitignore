@@ -3,3 +3,7 @@ package-lock.json
 output.css
 .DS_Store
 *.log
+.env
+.env.local
+.env.*.local
+.vercel

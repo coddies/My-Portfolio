@@ -1,0 +1,356 @@
+/* ═══════════════════════════════════════════
+   BURHAN_OS // NEURAL_LINK — Chat Widget
+   Matches portfolio: #060B14, #00E5FF, glass
+   ═══════════════════════════════════════════ */
+
+#burhan-os-root {
+  --bos-bg: rgba(10, 15, 30, 0.95);
+  --bos-cyan: #00E5FF;
+  --bos-purple: #8B5CF6;
+  --bos-amber: #f97316;
+  --bos-amber-dark: #ea580c;
+  --bos-muted: rgba(255, 255, 255, 0.55);
+  --bos-glass: rgba(255, 255, 255, 0.06);
+  --bos-border: rgba(0, 229, 255, 0.35);
+  font-family: 'JetBrains Mono', 'Fira Code', 'Space Grotesk', monospace;
+  z-index: 9999;
+}
+
+#burhan-os-root.hidden {
+  display: none !important;
+}
+
+/* ── FAB Trigger ── */
+.bos-fab {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 1px solid var(--bos-cyan);
+  background: rgba(6, 11, 20, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: var(--bos-cyan);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -1px;
+  box-shadow: 0 0 20px rgba(0, 229, 255, 0.25), inset 0 0 12px rgba(0, 229, 255, 0.05);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  animation: bosFabPulse 3s ease-in-out infinite;
+  z-index: 9999;
+}
+
+.bos-fab:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 35px rgba(0, 229, 255, 0.5), inset 0 0 20px rgba(0, 229, 255, 0.1);
+}
+
+.bos-fab.open {
+  animation: none;
+  border-color: var(--bos-purple);
+  color: var(--bos-purple);
+  box-shadow: 0 0 25px rgba(139, 92, 246, 0.4);
+}
+
+@keyframes bosFabPulse {
+  0%, 100% { box-shadow: 0 0 18px rgba(0, 229, 255, 0.2), inset 0 0 10px rgba(0, 229, 255, 0.04); }
+  50% { box-shadow: 0 0 32px rgba(0, 229, 255, 0.45), inset 0 0 16px rgba(0, 229, 255, 0.08); }
+}
+
+/* ── Chat Window ── */
+.bos-window {
+  position: fixed;
+  bottom: 96px;
+  right: 24px;
+  width: 400px;
+  height: 550px;
+  display: flex;
+  flex-direction: column;
+  background: var(--bos-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--bos-border);
+  border-radius: 14px;
+  box-shadow: 0 0 40px rgba(0, 229, 255, 0.12), 0 20px 60px rgba(0, 0, 0, 0.6);
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(16px) scale(0.96);
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+  z-index: 9998;
+}
+
+.bos-window.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+
+/* ── Header ── */
+.bos-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  border-bottom: 1px solid rgba(0, 229, 255, 0.2);
+  background: rgba(0, 0, 0, 0.25);
+  flex-shrink: 0;
+}
+
+.bos-header-title {
+  font-family: 'Space Grotesk', 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--bos-cyan);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  text-shadow: 0 0 12px rgba(0, 229, 255, 0.4);
+}
+
+.bos-header-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 9px;
+  color: #10B981;
+  letter-spacing: 1px;
+  margin-top: 3px;
+}
+
+.bos-status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #10B981;
+  box-shadow: 0 0 8px #10B981;
+  animation: bosBlink 2s ease-in-out infinite;
+}
+
+@keyframes bosBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+
+.bos-close {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.6);
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.bos-close:hover {
+  border-color: var(--bos-cyan);
+  color: var(--bos-cyan);
+  box-shadow: 0 0 12px rgba(0, 229, 255, 0.3);
+}
+
+/* ── Messages Area ── */
+.bos-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  background: rgba(6, 11, 20, 0.6);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  scroll-behavior: smooth;
+}
+
+.bos-messages::-webkit-scrollbar { width: 4px; }
+.bos-messages::-webkit-scrollbar-track { background: transparent; }
+.bos-messages::-webkit-scrollbar-thumb { background: rgba(0, 229, 255, 0.25); border-radius: 4px; }
+
+.bos-empty {
+  color: var(--bos-muted);
+  font-size: 12px;
+  line-height: 1.7;
+  padding: 20px 8px;
+  text-align: center;
+}
+
+.bos-cursor {
+  animation: bosCursorBlink 1s step-end infinite;
+  color: var(--bos-cyan);
+}
+
+@keyframes bosCursorBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* ── Message Bubbles ── */
+.bos-msg {
+  max-width: 88%;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 12px;
+  line-height: 1.65;
+  animation: bosMsgIn 0.35s ease forwards;
+  word-break: break-word;
+}
+
+@keyframes bosMsgIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.bos-msg-ai {
+  align-self: flex-start;
+  background: rgba(30, 41, 59, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.bos-msg-ai .bos-prefix {
+  color: var(--bos-cyan);
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: 0.5px;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.bos-msg-user {
+  align-self: flex-end;
+  background: linear-gradient(135deg, var(--bos-amber), var(--bos-amber-dark));
+  color: #1a1a1a;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.bos-msg-user .bos-prefix {
+  color: rgba(0, 0, 0, 0.65);
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: 0.5px;
+  display: block;
+  margin-bottom: 4px;
+}
+
+/* ── Typing Indicator ── */
+.bos-typing {
+  align-self: flex-start;
+  padding: 10px 16px;
+  background: rgba(30, 41, 59, 0.85);
+  border: 1px solid rgba(0, 229, 255, 0.15);
+  border-radius: 10px;
+  font-size: 12px;
+  color: var(--bos-cyan);
+  display: none;
+}
+
+.bos-typing.visible { display: block; }
+
+.bos-typing-cursor {
+  animation: bosCursorBlink 0.8s step-end infinite;
+}
+
+/* ── Input Area ── */
+.bos-input-area {
+  display: flex;
+  gap: 8px;
+  padding: 12px 14px;
+  border-top: 1px solid rgba(0, 229, 255, 0.25);
+  background: rgba(0, 0, 0, 0.35);
+  flex-shrink: 0;
+}
+
+.bos-input {
+  flex: 1;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 10px 14px;
+  color: #fff;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 12px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.bos-input::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.bos-input:focus {
+  border-color: var(--bos-cyan);
+  box-shadow: 0 0 12px rgba(0, 229, 255, 0.15);
+}
+
+.bos-send {
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--bos-cyan);
+  border-radius: 8px;
+  background: rgba(0, 229, 255, 0.1);
+  color: var(--bos-cyan);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.bos-send:hover:not(:disabled) {
+  background: var(--bos-cyan);
+  color: #060B14;
+  box-shadow: 0 0 20px rgba(0, 229, 255, 0.4);
+}
+
+.bos-send:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ── Desktop: avoid nav rail overlap ── */
+@media (min-width: 992px) {
+  .bos-fab {
+    bottom: 32px;
+    right: 96px;
+  }
+  .bos-window {
+    right: 96px;
+    bottom: 104px;
+  }
+}
+
+/* ── Mobile: bottom sheet ── */
+@media (max-width: 991px) {
+  .bos-fab {
+    bottom: 72px;
+    right: 16px;
+    width: 54px;
+    height: 54px;
+    font-size: 16px;
+  }
+
+  .bos-window {
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    height: 85vh;
+    max-height: 600px;
+    border-radius: 16px 16px 0 0;
+    transform: translateY(100%);
+  }
+
+  .bos-window.active {
+    transform: translateY(0);
+  }
+}
