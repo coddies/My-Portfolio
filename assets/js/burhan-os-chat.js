@@ -113,7 +113,7 @@
       q.includes('tools') ||
       q.includes('expert')
     ) {
-      return `Burhan's main interests: system design, problem solving, Gen AI, Agentic AI, RAG systems, n8n, vibe coding, and AI tools.\n\nTech-wise he's strong in Python, FastAPI, LLMs, Groq API, AWS Bedrock, Amazon Nova AI, Prompt Engineering, React, Vite, Tailwind, Vercel, SQL/PostgreSQL, and Git/GitHub.`;
+      return `Burhan's main interests: system design, problem solving, Gen AI, Agentic AI, RAG systems, n8n, vibe coding, and AI tools.\n\nTech stack: Python, FastAPI, LLMs, API (Groq), AWS Bedrock, Amazon Nova, Prompt Engineering, Machine Learning, NLP, Data Analysis, React, Vite, Tailwind, HTML5, CSS3, JavaScript, SQL/PostgreSQL, Git/GitHub, Vercel, AWS Cloud, Video Editing, Content Creator.`;
     }
 
     if (q.includes('project') || q.includes('work') || q.includes('build') || q.includes('portfolio')) {

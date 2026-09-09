@@ -1,6 +1,6 @@
 # Muhammad Burhan — Portfolio Knowledge Base
 
-> Source of truth for BURHAN_OS Neural Link. All answers must come from this file only.
+> Source of truth for BURHAN_OS. All answers must come from this file only.
 
 ---
 
@@ -54,7 +54,7 @@ He's especially into **system design**, **problem solving**, **n8n automations**
 | Skill | Notes |
 |-------|-------|
 | LLMs | Large language model integration & workflows |
-| Groq API | Fast inference — used in Spin AI, BURHAN_OS, chatbots |
+| API | Fast LLM inference via Groq — used in Spin AI, BURHAN_OS, chatbots |
 | Generative AI | Content, video, and text generation pipelines |
 | Agentic AI | Autonomous AI agents & multi-step workflows |
 | RAG Systems | Retrieval-Augmented Generation — knowledge-base Q&A |
@@ -83,7 +83,8 @@ He's especially into **system design**, **problem solving**, **n8n automations**
 | React | Spin AI, Flux AI Chatbot |
 | Vite | Modern React tooling |
 | Tailwind CSS | Utility-first styling |
-| HTML5 / CSS3 | Portfolio, animations, glassmorphism |
+| HTML5 | Semantic markup, portfolio structure |
+| CSS3 | Animations, glassmorphism, responsive design |
 | Vercel | Deployment & serverless |
 | AWS Cloud | Bedrock, serverless, cloud workflows |
 | Git & GitHub | Version control, open source (@coddies) |
@@ -207,7 +208,7 @@ A: mb6679605@gmail.com
 A: Faceless AI Studio — AWS Nova Hackathon winner. Live: https://faceless-ai-studio-tau.vercel.app/
 
 **Q: Top skills?**
-A: System design, problem solving, Gen AI, Agentic AI, RAG, Groq API, AWS Bedrock, Python, FastAPI, React, n8n, vibe coding.
+A: System design, problem solving, Gen AI, Agentic AI, RAG, API (Groq), AWS Bedrock, Python, FastAPI, React, n8n, vibe coding, Machine Learning, Data Analysis, HTML5, CSS3, Video Editing, Content Creator.
 
 **Q: Available for work?**
 A: Yes — Open to Work.
