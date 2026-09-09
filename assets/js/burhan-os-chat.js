@@ -24,6 +24,27 @@
   function localNeuralMatch(query) {
     const q = query.toLowerCase().trim();
 
+    // Greetings & general openers
+    if (
+      q === 'hey' || q === 'hi' || q === 'hello' || q === 'helo' || q === 'hii' ||
+      q === 'salam' || q === 'assalam' || q === 'yo' || q === 'sup' ||
+      q.startsWith('hey') || q.startsWith('hi ') || q.startsWith('hello') ||
+      q === 'how are you' || q === 'whats up' || q === "what's up" ||
+      q === 'good morning' || q === 'good evening' || q === 'good afternoon'
+    ) {
+      return `Hey! 👋 Welcome to BURHAN_OS Neural Link.
+
+I'm the AI assistant for Muhammad Burhan's portfolio. I can help you explore:
+
+• 👤 About Muhammad Burhan
+• 🛠️ His skills & tech stack
+• 💼 His projects
+• 🎓 Certifications
+• ✉️ How to contact him
+
+What would you like to know?`;
+    }
+
     if (q.includes('who') || q.includes('about') || q.includes('bio') || q.includes('burhan') || q.includes('intro') || q.includes('name')) {
       return `Muhammad Burhan is an AI & Data Science student at Saylani Mass IT Training (SMIT) based in Chiniot, Pakistan.
 
@@ -251,14 +272,14 @@ Feel free to send an inquiry or collaboration proposal!`;
         const localReply = localNeuralMatch(text);
 
         if (localReply) {
-          appendMessage(
-            'ai',
-            `${localReply}\n\n[Node: Local Neural Cache. Configure GROQ_API_KEY on Vercel for dynamic frontier LLM reasoning.]`
-          );
+          appendMessage('ai', localReply);
         } else {
           appendMessage(
             'ai',
-            `Error 404: Data not found in local neural cache for this query.\n\nNote: Live AI generation is awaiting GROQ_API_KEY configuration in Vercel Environment Variables.`
+            `I can answer questions about Muhammad Burhan's portfolio — his skills, projects, certifications, and how to contact him.\n\nTry asking something like:\n• "Tell me about Burhan"
+• "What projects has he built?"
+• "What are his skills?"
+• "How can I contact him?"`
           );
         }
       }
