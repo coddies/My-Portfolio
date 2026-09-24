@@ -2,7 +2,7 @@ import type { VercelRequest, VercelResponse } from '@vercel/node';
 import fs from 'fs';
 import path from 'path';
 import Groq from 'groq-sdk';
-import OpenRouter from '@openrouter/sdk';
+import { OpenRouter } from '@openrouter/sdk';
 
 // ─── Model Lists ─────────────────────────────────────────────────────────────
 // Fast/cheap model for simple lookups (greetings, single-fact queries)
@@ -117,7 +117,7 @@ function sanitizeHistory(raw: unknown): ChatMessage[] {
 
 // ─── Jev Routing Layer ────────────────────────────────────────────────────────
 async function runJevDecision(
-  openrouter: OpenRouter,
+  openrouter: InstanceType<typeof OpenRouter>,
   userMessage: string
 ): Promise<JevDecision | null> {
   try {
