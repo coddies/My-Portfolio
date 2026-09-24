@@ -100,7 +100,7 @@
 
     // About / bio
     if (matchesAny(q, ['who','about','bio','burhan','intro','tell me','batao','batayen','uske bare','himself','kaun','kon'])) {
-      return `Muhammad Burhan is an AI & Data Science student at Saylani Mass IT Training (SMIT), Chiniot, Pakistan.\n\nHe builds Gen AI pipelines, Agentic AI systems, and RAG applications. Won the AWS Nova AI Hackathon. Open to work & collaborations.\n\nLinkedIn: ${LINKS.linkedin}`;
+      return `Muhammad Burhan is an undergraduate student pursuing BS Computer Science at Virtual University of Pakistan, based in Chiniot, Pakistan.\n\nHe builds Gen AI pipelines, Agentic AI systems, and RAG applications. Won the AWS Nova AI Hackathon. Open to work & collaborations.\n\nLinkedIn: ${LINKS.linkedin}`;
     }
 
     // Skills

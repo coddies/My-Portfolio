@@ -9,15 +9,16 @@
 | Field | Value |
 |-------|-------|
 | **Full Name** | Muhammad Burhan |
-| **Role** | AI & Data Science Student |
-| **Institution** | Saylani Mass IT Training (SMIT) |
+| **Role** | Undergraduate Student |
+| **University** | Virtual University of Pakistan |
+| **Degree** | BS Computer Science |
 | **Location** | Chiniot, Pakistan |
 | **Status** | Open to Work |
 | **Tagline** | Turning complex data into intelligent solutions through code, creativity, and problem-solving |
 
 ### Bio
 
-Muhammad Burhan is a passionate AI & Data Science student at Saylani Mass IT Institute. He loves building **Generative AI**, **Agentic AI**, and **RAG-based systems** that solve real problems — not just demos.
+Muhammad Burhan is an undergraduate student pursuing BS Computer Science at Virtual University of Pakistan. He loves building **Generative AI**, **Agentic AI**, and **RAG-based systems** that solve real problems — not just demos.
 
 He's especially into **system design**, **problem solving**, **n8n automations**, **vibe coding**, and picking the right **AI tools** for the job. Whether it's an AWS Bedrock pipeline or a Groq-powered chatbot, he focuses on clean architecture and shipping things that work.
 
@@ -172,6 +173,7 @@ He's especially into **system design**, **problem solving**, **n8n automations**
 | Certificate | Issuer | Focus |
 |-------------|--------|-------|
 | AI & Data Science Track | Saylani Mass IT (SMIT) | Python, SQL, ML, Neural Networks, NLP, Gen AI Agents |
+| BS Computer Science | Virtual University of Pakistan | Currently Enrolled |
 
 ---
 
@@ -194,7 +196,7 @@ He's especially into **system design**, **problem solving**, **n8n automations**
 ## FAQ
 
 **Q: Who is Muhammad Burhan?**
-A: AI & Data Science student at SMIT, Chiniot, Pakistan. Builds Gen AI, Agentic AI, and RAG systems. Hackathon winner. Open to work.
+A: Undergraduate student (BS Computer Science) at Virtual University of Pakistan, based in Chiniot, Pakistan. Builds Gen AI, Agentic AI, and RAG systems. Hackathon winner. Open to work.
 
 **Q: LinkedIn profile?**
 A: https://www.linkedin.com/in/muhammad-burhan-73a81b27b/
