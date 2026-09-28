@@ -1,0 +1,4 @@
+/* Theme tokens — extend for day/night toggle in assets/js/theme.js */
+:root {
+  color-scheme: dark;
+}

@@ -1,0 +1,252 @@
+/* ── CARD 2: ABOUT ── */
+
+#card-2 { background: transparent; }
+
+
+
+.about-grid {
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    max-width: 1100px; /* Scaled up */
+
+    gap: 64px;
+
+    align-items: center;
+
+}
+
+
+
+/* About photo — Sync with hero-photo style, adds spin-in entry */
+
+.about-photo {
+
+    width: 100%;
+
+    max-width: 400px;
+
+    height: auto;
+
+    display: block;
+
+    background: transparent;
+
+    filter: drop-shadow(0 15px 30px rgba(0, 229, 255, 0.4));
+
+    opacity: 0;
+
+    transform: translateY(20px);
+
+    transition: 
+
+        opacity 0.6s ease-out 0.2s,
+
+        transform 0.6s ease-out 0.2s;
+
+    animation: floatPhotoAbout 4s ease-in-out infinite;
+
+}
+
+
+
+@keyframes floatPhotoAbout {
+
+    0%   { transform: translateY(0px); }
+
+    50%  { transform: translateY(-12px); }
+
+    100% { transform: translateY(0px); }
+
+}
+
+
+
+.about-photo.anim-in {
+
+    opacity: 1;
+
+    transform: translateY(0);
+
+}
+
+
+
+.tagline {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--cyan);
+    font-weight: 700;
+    display: block;
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+
+
+.section-title { font-size: 52px; margin-bottom: 16px; }
+
+
+
+.accent-line {
+
+    width: 50px;
+
+    height: 3px;
+
+    background: linear-gradient(90deg, var(--purple), var(--cyan));
+
+    margin: 0 0 24px;
+
+}
+
+
+
+.about-bio {
+
+    color: var(--text-muted);
+
+    line-height: 1.75;
+
+    font-size: 14px;
+
+    margin-bottom: 28px;
+
+}
+
+
+
+.info-grid {
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 12px;
+
+}
+
+
+
+.info-box {
+
+    background: var(--glass-bg);
+
+    border: 1px solid var(--glass-border);
+
+    border-radius: 16px;
+
+    padding: 18px 22px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 6px;
+
+}
+
+
+
+.info-label {
+
+    font-size: 11px;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+
+    color: var(--cyan);
+
+    opacity: 0.8;
+
+}
+
+
+
+#readMoreBtn {
+
+    background: none;
+
+    border: none;
+
+    color: var(--cyan);
+
+    padding: 0;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    margin-top: 12px;
+
+    font-size: 13px;
+
+    transition: all 0.3s ease;
+
+    font-family: inherit;
+
+    text-decoration: underline;
+
+    text-decoration-color: transparent;
+
+    text-underline-offset: 4px;
+
+    display: inline-block;
+
+}
+
+
+
+#readMoreBtn:hover {
+
+    color: var(--text-white);
+
+    text-decoration-color: var(--cyan);
+
+    text-shadow: 0 0 12px rgba(0, 229, 255, 0.7);
+
+    transform: translateY(-2px);
+
+}
+
+
+
+/* %% HYBRID NEURAL MATRIX ABOUT CSS %% */
+
+.skill-hover-glow:hover {
+
+    transform: scale(1.05) translateX(10px);
+
+}
+
+.skill-hover-glow:hover span:last-child {
+
+    color: var(--cyan) !important;
+
+    text-shadow: 0 0 8px rgba(0, 229, 255, 0.5);
+
+}
+
+@keyframes pulse-code {
+
+    0%, 100% { opacity: 1; text-shadow: 0 0 2px currentColor; }
+
+    50% { opacity: 0.7; text-shadow: 0 0 10px currentColor; }
+
+}
+
+.pulse-code {
+
+    animation: pulse-code 2s infinite ease-in-out;
+
+}
+
+
+
+
+
+

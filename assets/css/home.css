@@ -1,0 +1,274 @@
+/* Smart Fluid Responsive Fix for Hero (No Scrolling on normal mobiles) */
+@media (max-width: 991px) {
+    /* Shrink bottom navigation buttons dynamically on small screens */
+    .nav-rail {
+        gap: clamp(6px, 1.5vw, 12px) !important;
+    }
+    .nav-btn {
+        width: clamp(36px, 9vw, 44px) !important;
+        height: clamp(36px, 9vw, 44px) !important;
+        font-size: clamp(16px, 4.5vw, 20px) !important;
+    }
+    .nav-btn .material-symbols-outlined {
+        font-size: clamp(16px, 4vw, 20px) !important;
+    }
+    
+    /* Move popup up so it doesn't overlap the bottom nav rail */
+    .nav-popup {
+        bottom: 85px !important;
+        right: 50% !important;
+        transform: translateX(50%) !important;
+        padding: 8px 16px !important;
+        white-space: nowrap;
+    }
+    .nav-popup.active {
+        transform: translateX(50%) translateY(0) !important;
+    }
+
+    #card-1 {
+        overflow: hidden !important; /* NO SCROLLING by default */
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+    }
+    #card-1 .card-inner {
+        padding: 5vh 20px !important; /* Fluid vertical padding based on screen height */
+        height: 100svh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    #card-1 .hero-grid {
+        display: flex !important;
+        flex-direction: column;
+        gap: max(1.5vh, 12px) !important; /* Gap shrinks if screen is short */
+        width: 100%;
+        align-items: center;
+    }
+    .hero-photo-container {
+        margin: 0 auto;
+        width: 100%;
+        /* Limits width dynamically based on height so it doesn't overflow */
+        max-width: min(60vw, 30vh);
+        display: flex;
+        justify-content: center;
+    }
+    .hero-photo {
+        width: 100% !important;
+        height: auto !important;
+        max-width: none !important;
+    }
+    .hero-right {
+        text-align: center;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .hero-right .tagline {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        text-align: center !important;
+        width: 100% !important;
+        margin: 0 auto 8px auto !important;
+        letter-spacing: 1.5px !important;
+        line-height: 1.5 !important;
+        gap: 2px !important;
+    }
+    .hero-right .tagline .tagline-dot {
+        display: none !important;
+    }
+    .hero-right .tagline span {
+        display: block !important;
+        text-align: center !important;
+        width: 100% !important;
+        margin: 0 auto !important;
+    }
+    .hero-name {
+        /* Scales with both height and width so it fits perfectly */
+        font-size: clamp(2rem, min(8vw, 6vh), 3.2rem) !important;
+        line-height: 1.1 !important;
+        margin-bottom: max(1vh, 8px) !important;
+    }
+    .typewriter-container {
+        font-size: clamp(14px, 2vh, 16px) !important;
+        min-height: 24px;
+        margin-bottom: max(1vh, 8px) !important;
+    }
+    .hero-bio {
+        font-size: clamp(12px, 1.8vh, 14px) !important;
+        line-height: 1.5 !important;
+        margin-bottom: max(1.5vh, 16px) !important;
+        max-width: 95%;
+    }
+    .btn-group {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: max(1vh, 8px) !important;
+    }
+    .pill-btn {
+        padding: min(1.5vh, 12px) 20px !important;
+        font-size: 13px !important;
+    }
+}
+
+/* ONLY enable scroll if the screen is absurdly short (like landscape mode on a phone) */
+@media (max-width: 991px) and (max-height: 620px) {
+    #card-1 {
+        overflow-y: auto !important;
+        display: block !important;
+    }
+    #card-1 .card-inner {
+        height: auto;
+        min-height: 100svh;
+        padding-top: 80px !important;
+        padding-bottom: 100px !important;
+    }
+}
+
+/* ── CARD 1: HERO ── */
+
+#card-1 {
+
+    overflow-y: auto; /* Allow scrolling on mobile if content cut off */
+
+    align-items: center;
+
+}
+
+
+
+@media (min-height: 700px) {
+
+    #card-1 {
+
+        overflow-y: hidden; /* Lock if enough height */
+
+    }
+
+}
+
+#card-1 .hero-grid {
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    max-width: 1100px; /* Scaled up */
+
+    gap: 64px;
+
+    align-items: center;
+
+}
+
+
+
+/* Profile photo — floating with side glow, NO box */
+
+.hero-photo {
+
+    width: 100%;
+
+    max-width: 450px; /* Increased for better laptop view */
+
+    height: auto;
+
+    display: block;
+
+    background: transparent;
+
+    filter: drop-shadow(0 15px 30px rgba(124,58,237,0.3));
+
+    animation: floatPhoto 4s ease-in-out infinite;
+
+}
+
+
+
+@keyframes floatPhoto {
+
+    0%   { transform: translateY(0px); }
+
+    50%  { transform: translateY(-10px); }
+
+    100% { transform: translateY(0px); }
+
+}
+
+
+
+.typewriter-container {
+
+    font-size: 20px;
+
+    color: var(--cyan);
+
+    height: 30px;
+
+    margin-bottom: 20px;
+
+    font-weight: 600;
+
+}
+
+
+
+.cursor {
+
+    display: inline-block;
+
+    width: 2px;
+
+    background-color: var(--cyan);
+
+    margin-left: 4px;
+
+    animation: blink 0.8s infinite;
+
+}
+
+
+
+@keyframes blink { 50% { opacity: 0; } }
+
+
+
+.hero-name {
+
+    font-size: clamp(2rem, 8vw, 4.5rem); /* Re-balanced for two-line fit */
+
+    line-height: 1.05;
+
+    margin-bottom: 20px;
+
+    text-transform: uppercase;
+
+    letter-spacing: -1px;
+
+}
+
+
+
+.hero-bio {
+
+    color: var(--text-muted);
+
+    line-height: 1.6;
+
+    margin-bottom: 32px;
+
+    max-width: 400px;
+
+}
+
+
+
+.btn-group { display: flex; gap: 16px; flex-wrap: wrap; }
+
+
+
+
+

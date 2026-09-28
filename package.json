@@ -5,6 +5,7 @@
   "description": "Muhammad Burhan AI & Data Science Portfolio with BURHAN_OS Neural Link",
   "scripts": {
     "dev": "vercel dev",
+    "preview": "npx --yes serve . -p 4173",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

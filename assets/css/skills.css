@@ -1,0 +1,304 @@
+/* ── CARD 3: SKILLS ── */
+
+#card-3 { background: transparent; overflow-y: auto; }
+
+
+
+.section-header { text-align: center; margin-bottom: 40px; }
+
+.section-header .tagline { text-align: center; }
+
+.section-header .accent-line { margin: 0 auto 0; }
+
+
+
+.skills-grid {
+
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 20px;
+
+    max-width: 1000px;
+
+    width: 100%;
+
+}
+
+
+
+.skill-card {
+
+    background: rgba(255,255,255,0.07);
+
+    border: 1px solid rgba(255,255,255,0.13);
+
+    backdrop-filter: blur(12px);
+
+    border-radius: 20px;
+
+    padding: 30px 24px;
+
+    transform: translate3d(0, 0, 0);
+
+    will-change: transform;
+
+    transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.4s ease, box-shadow 0.4s ease !important;
+
+    opacity: 0;
+
+    transform: scale(0.85);
+
+}
+
+
+
+.skill-card.anim-in {
+
+    opacity: 1;
+
+    transform: scale(1);
+
+}
+
+
+
+.skill-card:hover {
+
+    transform: translateY(-12px) scale(1.03) !important;
+
+    border-color: rgba(0, 229, 255, 0.6) !important;
+
+    box-shadow: 0 15px 40px rgba(0, 229, 255, 0.35) !important;
+
+}
+
+
+
+.skill-emoji   { font-size: 32px; margin-bottom: 14px; display: block; }
+
+.skill-name    { font-weight: 700; font-size: 16px; margin-bottom: 14px; display: block; }
+
+
+
+.progress-container {
+
+    width: 100%;
+
+    height: 4px;
+
+    background: rgba(255,255,255,0.1);
+
+    border-radius: 2px;
+
+    overflow: hidden;
+
+}
+
+
+
+.progress-bar {
+
+    height: 100%;
+
+    width: 0%;
+
+    background: linear-gradient(90deg, var(--purple), var(--cyan));
+
+    border-radius: 2px;
+
+    transition: width 1.5s cubic-bezier(0.1,0,0.2,1);
+
+}
+
+
+
+/* ── PREMIUM SKILLS CATEGORIES ── */
+
+.skills-wrapper {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 40px;
+
+}
+
+.skill-category {
+
+    background: rgba(255, 255, 255, 0.02);
+
+    border: 1px solid rgba(255, 255, 255, 0.05);
+
+    border-radius: 20px;
+
+    padding: 25px;
+
+    transition: transform 0.3s ease, border-color 0.3s ease;
+
+}
+
+.skill-category:hover {
+
+    border-color: rgba(124, 58, 237, 0.2);
+
+    transform: translateY(-5px);
+
+}
+
+.category-title {
+
+    font-family: 'Syne', sans-serif;
+
+    font-size: 18px;
+
+    font-weight: 800;
+
+    color: var(--cyan);
+
+    margin-bottom: 20px;
+
+    letter-spacing: 1px;
+
+    text-transform: uppercase;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+}
+
+.category-title::after {
+
+    content: "";
+
+    flex: 1;
+
+    height: 1px;
+
+    background: linear-gradient(90deg, rgba(0, 229, 255, 0.3), transparent);
+
+}
+
+
+
+/* ── 5. SKILL CARDS — shimmer + spring hover ── */
+
+.skill-card {
+
+    position: relative;
+
+    overflow: hidden;
+
+}
+
+.skill-card::after {
+
+    content: '';
+
+    position: absolute;
+
+    top: 0; left: -100%;
+
+    width: 60%;
+
+    height: 100%;
+
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+
+    transform: skewX(-20deg);
+
+    transition: none;
+
+    pointer-events: none;
+
+}
+
+.skill-card:hover::after {
+
+    animation: skillShimmer 0.55s ease forwards;
+
+}
+
+@keyframes skillShimmer {
+
+    from { left: -100%; }
+
+    to   { left: 140%; }
+
+}
+
+
+
+/* ── FIX 5B: Skill bars staggered (extra specificity) ── */
+
+.progress-bar {
+
+    transition: width 1.2s cubic-bezier(0.1, 0, 0.2, 1) !important;
+
+}
+
+
+
+/* ── 3D HOLOGRAPHIC SKILLS CARDS ── */
+.skill-3d-card {
+    position: relative;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px);
+    border-radius: 20px;
+    height: 180px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transform-style: preserve-3d;
+    transition: transform 0.1s ease-out, box-shadow 0.3s ease;
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+.skill-3d-card[data-color="#00E5FF"] { border: 1px solid rgba(0, 229, 255, 0.2); }
+.skill-3d-card[data-color="#8B5CF6"] { border: 1px solid rgba(139, 92, 246, 0.2); }
+
+.skill-3d-card:hover {
+    transition: transform 0.1s ease-out;
+    z-index: 10;
+}
+.skill-3d-card[data-color="#00E5FF"]:hover { box-shadow: -15px 15px 40px rgba(0,0,0,0.6), inset 0 0 30px rgba(0, 229, 255, 0.2), 0 0 20px rgba(0, 229, 255, 0.3); }
+.skill-3d-card[data-color="#8B5CF6"]:hover { box-shadow: -15px 15px 40px rgba(0,0,0,0.6), inset 0 0 30px rgba(139, 92, 246, 0.2), 0 0 20px rgba(139, 92, 246, 0.3); }
+
+.skill-3d-content {
+    transform: translateZ(50px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    pointer-events: none;
+    transition: transform 0.3s ease;
+}
+.skill-3d-card:hover .skill-3d-content {
+    transform: translateZ(70px);
+}
+.skill-3d-icon {
+    font-size: 50px;
+    transition: filter 0.3s ease;
+}
+.skill-3d-card[data-color="#00E5FF"] .skill-3d-icon { filter: drop-shadow(0 10px 10px rgba(0, 229, 255, 0.4)); }
+.skill-3d-card[data-color="#8B5CF6"] .skill-3d-icon { filter: drop-shadow(0 10px 10px rgba(139, 92, 246, 0.4)); }
+.skill-3d-card[data-color="#00E5FF"]:hover .skill-3d-icon { filter: drop-shadow(0 20px 20px rgba(0, 229, 255, 0.9)); }
+.skill-3d-card[data-color="#8B5CF6"]:hover .skill-3d-icon { filter: drop-shadow(0 20px 20px rgba(139, 92, 246, 0.9)); }
+
+.skill-3d-title {
+    margin-top: 15px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 0 5px 10px rgba(0,0,0,0.8);
+    transition: color 0.3s ease;
+}
+.skill-3d-card[data-color="#00E5FF"]:hover .skill-3d-title { color: #00E5FF; }
+.skill-3d-card[data-color="#8B5CF6"]:hover .skill-3d-title { color: #8B5CF6; }
+

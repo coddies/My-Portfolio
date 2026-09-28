@@ -1,0 +1,478 @@
+/* ── CARD 4: PROJECTS SHOWCASE ── */
+
+#card-4 { background: transparent; }
+
+
+
+.showcase-card-override { padding: 0 !important; overflow: hidden !important; }
+
+.showcase-inner { padding: 0 !important; width: 100%; height: 100%; align-items: stretch !important; flex-direction: column; position: relative; }
+
+
+
+.project-slide-container {
+
+    flex: 1;
+
+    width: 100%;
+
+    position: relative;
+
+    overflow: hidden;
+
+}
+
+
+
+.sc-slide {
+
+    position: absolute;
+
+    inset: 0;
+
+    display: flex;
+
+    flex-direction: row;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+}
+
+.sc-slide.sc-active {
+
+    opacity: 1;
+
+    pointer-events: all;
+
+    z-index: 2;
+
+}
+
+
+
+/* LEFT SIDE */
+
+.sc-left {
+
+    width: 45%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    padding: 0 8%;
+
+    position: relative;
+
+}
+
+.sc-watermark {
+
+    position: absolute;
+
+    left: 40px;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    font-size: 220px;
+
+    opacity: 0.03;
+
+    font-family: 'Syne', sans-serif;
+
+    font-weight: 800;
+
+    color: var(--text-white);
+
+    pointer-events: none;
+
+    z-index: 0;
+
+}
+
+.sc-content-wrap { position: relative; z-index: 1; }
+
+.sc-tag { font-size: 11px; letter-spacing: 3px; color: var(--cyan); text-transform: uppercase; font-weight: 700; margin-bottom: 16px; display: block; }
+
+.sc-title { font-family: 'Syne', sans-serif; font-size: 3rem; font-weight: 800; margin-bottom: 24px; line-height: 1.1; color: var(--text-white); }
+
+.sc-desc { color: var(--text-muted); font-size: 16px; line-height: 1.6; margin-bottom: 32px; }
+
+
+
+.sc-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 40px; }
+
+.sc-badges .tech-pill {
+
+    background: rgba(0, 229, 255,0.1); color: var(--cyan); font-size: 11px; padding: 6px 12px; border-radius: 6px; font-weight: 600;
+
+}
+
+
+
+.sc-buttons { display: flex; gap: 16px; }
+
+.sc-btn-fill, .sc-btn-outline {
+
+    padding: 14px 28px; border-radius: 8px; font-weight: 600; font-size: 14px; text-decoration: none; transition: 0.3s;
+
+}
+
+.sc-btn-fill { background: var(--purple); color: white; border: 1px solid var(--purple); }
+
+.sc-btn-fill:hover { background: transparent; color: var(--purple); }
+
+.sc-btn-outline { background: transparent; border: 1px solid var(--glass-border); color: var(--text-white); }
+
+.sc-btn-outline:hover { border-color: var(--cyan); color: var(--cyan); }
+
+
+
+/* RIGHT SIDE */
+
+.sc-right {
+
+    width: 55%;
+
+    position: relative;
+
+    padding: 40px 60px 40px 20px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+}
+
+.sc-preview {
+
+    width: 100%;
+
+    height: 100%;
+
+    max-height: 600px;
+
+    background: var(--glass-bg);
+
+    border: 1px solid var(--glass-border);
+
+    backdrop-filter: blur(15px);
+
+    border-radius: 24px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    position: relative;
+
+    overflow: hidden;
+
+    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+
+}
+
+.sc-preview:hover { transform: scale(1.02); }
+
+.sc-preview-glow { position: absolute; inset: 0; background: radial-gradient(circle at center, rgba(124,58,237,0.15), transparent); pointer-events: none; }
+
+.sc-emoji { font-size: 120px; z-index: 1; filter: drop-shadow(0 15px 30px rgba(0,0,0,0.5)); margin-bottom: 20px;}
+
+.sc-preview-title { position: absolute; bottom: 40px; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 28px; letter-spacing: -0.5px; opacity: 0.8; }
+
+
+
+/* BOTTOM Navigation Section */
+
+.showcase-bottom-bar {
+
+    width: 100%;
+
+    padding: 20px 40px 30px 40px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    z-index: 10;
+
+}
+
+.progress-indicator-track {
+
+    width: 100%;
+
+    max-width: 400px;
+
+    height: 2px;
+
+    background: rgba(255,255,255,0.05);
+
+    border-radius: 3px;
+
+    margin-bottom: 24px;
+
+    overflow: hidden;
+
+}
+
+.progress-indicator-fill {
+
+    height: 100%;
+
+    width: 0%;
+
+    background: linear-gradient(90deg, var(--purple), var(--cyan));
+
+    transition: width 0.4s ease;
+
+}
+
+
+
+.showcase-nav-row {
+
+    display: flex;
+
+    flex-direction: row;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 40px;
+
+}
+
+.sc-btn-prev {
+
+    width: 120px;
+
+    height: 48px;
+
+    border-radius: 99px;
+
+    background: rgba(255,255,255,0.06);
+
+    border: 1px solid rgba(255,255,255,0.2);
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    cursor: pointer;
+
+    font-weight: 600;
+
+    font-size: 13px;
+
+    transition: 0.3s;
+
+    user-select: none;
+
+}
+
+.sc-btn-prev:hover {
+
+    background: rgba(124,58,237,0.3);
+
+    border-color: var(--purple);
+
+}
+
+.sc-btn-next {
+
+    width: 120px;
+
+    height: 48px;
+
+    border-radius: 99px;
+
+    background: linear-gradient(135deg, var(--purple), var(--cyan));
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    cursor: pointer;
+
+    font-weight: 600;
+
+    font-size: 13px;
+
+    box-shadow: 0 4px 15px rgba(124,58,237,0.3);
+
+    transition: 0.3s;
+
+    user-select: none;
+
+}
+
+.sc-btn-next:hover { opacity: 0.85; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0, 229, 255,0.4); }
+
+
+
+.sc-counter { font-family: 'Syne', sans-serif; font-size: 24px; font-weight: 800; display:flex; align-items:center;}
+
+#sc-curr { color: var(--cyan); }
+
+.sc-divider { color: var(--text-muted); margin: 0 12px; font-weight: 400; opacity: 0.3; }
+
+#sc-total { color: var(--text-muted); opacity: 0.7; }
+
+
+
+/* ANIMATIONS */
+
+@keyframes scSlideInRight {
+
+  from { opacity:0; transform: translateX(60px); }
+
+  to   { opacity:1; transform: translateX(0); }
+
+}
+
+@keyframes scSlideInLeft {
+
+  from { opacity:0; transform: translateX(-60px); }
+
+  to   { opacity:1; transform: translateX(0); }
+
+}
+
+@keyframes scSlideOutLeft {
+
+  from { opacity:1; transform: translateX(0); }
+
+  to   { opacity:0; transform: translateX(-60px); }
+
+}
+
+@keyframes scSlideOutRight {
+
+  from { opacity:1; transform: translateX(0); }
+
+  to   { opacity:0; transform: translateX(60px); }
+
+}
+
+
+
+.anim-in-right { animation: scSlideInRight 400ms ease forwards; }
+
+.anim-in-left  { animation: scSlideInLeft 400ms ease forwards; }
+
+.anim-out-left { animation: scSlideOutLeft 400ms ease forwards; }
+
+.anim-out-right{ animation: scSlideOutRight 400ms ease forwards; }
+
+
+
+/* ── 6. PROJECT CARDS — hologram border trace + scan line ── */
+
+.px-card {
+
+    position: relative;
+
+    overflow: hidden;
+
+}
+
+.px-card::before {
+
+    content: '';
+
+    position: absolute;
+
+    inset: 0;
+
+    border-radius: inherit;
+
+    background: transparent;
+
+    pointer-events: none;
+
+    z-index: 10;
+
+    opacity: 0;
+
+    transition: opacity 0.3s ease;
+
+    box-shadow: inset 0 0 0 1px rgba(0, 229, 255,0);
+
+}
+
+.px-card.px-active::before {
+
+    opacity: 1;
+
+    box-shadow: inset 0 0 0 1.5px rgba(0, 229, 255,0.35);
+
+}
+
+
+
+/* Hologram scan line */
+
+.px-card .hologram-scan {
+
+    position: absolute;
+
+    left: 0; right: 0;
+
+    height: 3px;
+
+    background: linear-gradient(90deg, transparent, rgba(0, 229, 255,0.5), transparent);
+
+    pointer-events: none;
+
+    z-index: 20;
+
+    opacity: 0;
+
+    top: 0;
+
+    transition: opacity 0.2s ease;
+
+}
+
+.px-card:hover .hologram-scan {
+
+    opacity: 1;
+
+    animation: hologramScan 1.8s linear infinite;
+
+}
+
+@keyframes hologramScan {
+
+    0%   { top: 0%;    opacity: 0; }
+
+    5%   { opacity: 1; }
+
+    95%  { opacity: 1; }
+
+    100% { top: 100%;  opacity: 0; }
+
+}
+
+
+

@@ -1,0 +1,479 @@
+:root {
+
+    --bg-deep: #060B14;
+
+    --bg-gradient: radial-gradient(circle at 50% 50%, #1a1a2e 0%, #060B14 100%);
+
+    --purple: #7c3aed;
+
+    --cyan: #00E5FF;
+
+    --pink: #ec4899;
+
+    --text-white: #ffffff;
+
+    --text-muted: rgba(255, 255, 255, 0.6);
+
+    --glass-bg: rgba(255, 255, 255, 0.06);
+
+    --glass-border: rgba(255, 255, 255, 0.14);
+
+    --card-transition: 550ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+    --opacity-transition: 450ms ease-out;
+
+    --shadow-rgb: 255, 255, 255;
+
+}
+
+
+
+
+
+*, *::before, *::after {
+
+    margin: 0;
+
+    padding: 0;
+
+    box-sizing: border-box;
+
+    -webkit-font-smoothing: antialiased;
+
+}
+
+
+
+body {
+
+    background-color: var(--bg-deep);
+
+    color: var(--text-white);
+
+    font-family: 'Plus Jakarta Sans', sans-serif;
+
+    overflow: hidden;
+
+    height: 100vh;
+
+    width: 100%;
+
+    max-width: 100%;
+
+    font-size: 18px;
+
+    background: var(--bg-gradient);
+
+    transition: background 0.5s ease, color 0.5s ease;
+
+}
+
+
+
+
+
+/* PARTICLES CANVAS */
+
+#particles-canvas {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 0;
+
+    pointer-events: none;
+
+}
+
+
+
+/* KEYFRAMES */
+
+@keyframes fadeUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+
+@keyframes fadeLeft { from { opacity: 0; transform: translateX(-30px); } to { opacity: 1; transform: translateX(0); } }
+
+@keyframes glowPulse { 0%, 100% { box-shadow: 0 0 15px rgba(0, 229, 255, 0.3); } 50% { box-shadow: 0 0 35px rgba(0, 229, 255, 0.7), 0 0 60px rgba(124, 58, 237, 0.4); } }
+
+@keyframes borderFlow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+
+@keyframes floatAnim { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-8px); } }
+
+@keyframes scanLine { 0% { left: -60%; } 100% { left: 110%; } }
+
+@keyframes typeGlow { 0%, 100% { text-shadow: 0 0 10px rgba(0, 229, 255, 0.5); } 50% { text-shadow: 0 0 25px rgba(0, 229, 255, 1), 0 0 50px rgba(124, 58, 237, 0.5); } }
+
+
+
+/* HERO ANIMATIONS */
+
+.hero-right .tagline { animation: fadeUp .6s ease .1s both; }
+
+.hero-right .hero-name { animation: fadeUp .6s ease .2s both; }
+
+.hero-right .typewriter-container { animation: fadeUp .6s ease .3s both; }
+
+.hero-right .hero-bio { animation: fadeUp .6s ease .4s both; }
+
+.hero-right .btn-group { animation: fadeUp 1s cubic-bezier(0.25, 1, 0.5, 1) .7s both; }
+
+.hero-left { animation: fadeLeft .8s ease .1s both; }
+
+
+
+.hero-photo {
+
+    width: 100%;
+
+    max-width: 450px;
+
+    height: auto;
+
+    display: block;
+
+    background: transparent;
+
+    filter: drop-shadow(0 15px 30px rgba(124,58,237,0.3));
+
+    animation: floatPhoto 4s ease-in-out infinite;
+
+}
+
+
+
+@keyframes floatPhoto {
+
+    0%   { transform: translateY(0px); }
+
+    50%  { transform: translateY(-10px); }
+
+    100% { transform: translateY(0px); }
+
+}
+
+
+
+h1, h2, h3, .syne-font {
+
+    font-family: 'Plus Jakarta Sans', sans-serif;
+
+    font-weight: 800;
+
+    letter-spacing: -0.5px;
+
+}
+
+
+
+
+
+/* ── CARDS ── */
+
+html, body {
+    overflow-x: hidden !important;
+    width: 100%;
+}
+
+.card {
+    position: fixed;
+    inset: 0;
+    z-index: 5;
+    padding: 60px 80px 100px 60px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Start from top for scrolling */
+    overflow-y: auto;
+    overflow-x: hidden !important;
+    transition: transform var(--card-transition), opacity var(--opacity-transition), visibility var(--opacity-transition);
+    visibility: hidden;
+    pointer-events: none;
+    will-change: transform, opacity;
+    transform: translate3d(0, 0, 0); 
+    -webkit-overflow-scrolling: touch;
+}
+
+.card::-webkit-scrollbar {
+    width: 6px;
+}
+.card::-webkit-scrollbar-thumb {
+    background: rgba(0, 229, 255, 0.3);
+    border-radius: 10px;
+}
+
+/* Projects Card: Scrollable naturally */
+#card-4 {
+    overflow-y: auto !important;
+}
+
+
+
+
+
+
+/* Base card behavior: Scrollable if content overflows */
+
+.card-inner {
+
+    width: 100%;
+
+    min-height: 100%;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    padding: 40px 0;
+
+}
+
+
+
+/* Home Card: No scrolling unless absolutely necessary on tiny screens */
+
+#card-1 {
+
+    overflow-y: hidden;
+
+    align-items: center;
+
+}
+
+
+
+/* About Card: Allow scrolling on mobile */
+
+#card-2 {
+
+    overflow-y: auto;
+
+}
+
+
+
+#card-2.about-expanded {
+
+    overflow-y: auto;
+
+}
+
+
+
+/* Projects Card: Allow scrolling for the 3 prototypes */
+#card-4 {
+    overflow-y: auto !important;
+    align-items: flex-start;
+}
+
+#card-4 .card-inner {
+    padding: 100px 0;
+    width: 100%;
+    min-height: min-content;
+    display: block;
+}
+
+
+
+
+
+
+.card.state-active {
+
+    transform: translateX(0);
+
+    opacity: 1;
+
+    visibility: visible;
+
+    pointer-events: all;
+
+}
+
+
+
+/* state-above = went to left (previous), state-below = to the right (next) */
+
+.card.state-above {
+
+    transform: translateX(-35px);
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    pointer-events: none;
+
+}
+
+
+
+.card.state-below {
+
+    transform: translateX(35px);
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    pointer-events: none;
+
+}
+
+
+
+.card-inner {
+
+    width: 100%;
+
+    min-height: 101%; /* Force minimal scroll capability for some browsers if needed, but we control via overflow */
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    padding: 60px 0;
+
+}
+
+
+
+/* ── UTILS ── */
+
+.gradient-text {
+
+    background: linear-gradient(90deg, #fff, var(--cyan));
+
+    background-clip: text;
+
+    -webkit-background-clip: text;
+
+    -webkit-text-fill-color: transparent;
+
+}
+
+
+
+.pill-btn {
+
+    padding: 12px 28px;
+
+    border-radius: 99px;
+
+    font-weight: 600;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    position: relative;
+
+    overflow: hidden;
+
+}
+
+
+
+.btn-github {
+
+    background: var(--purple);
+
+    color: var(--text-white);
+
+    border: 1px solid var(--purple);
+
+}
+
+
+
+.btn-github:hover {
+
+    background: rgba(255,255,255,0.05);
+
+    color: var(--purple);
+
+    border-color: var(--purple);
+
+    transform: translateY(-10px) rotate(1deg) scale(1.05);
+
+    box-shadow: 0 15px 45px rgba(124,58,237,0.45);
+
+    backdrop-filter: blur(8px);
+
+}
+
+
+
+.btn-linkedin {
+
+    background: transparent;
+
+    border: 1px solid var(--glass-border);
+
+    color: var(--text-white);
+
+}
+
+
+
+.btn-linkedin:hover {
+
+    background: var(--purple);
+
+    border-color: var(--purple);
+
+    color: var(--text-white);
+
+    transform: translateY(-10px) rotate(1deg) scale(1.05);
+
+    box-shadow: 0 15px 45px rgba(124,58,237,0.45);
+
+}
+
+
+
+.btn-cv {
+
+    background: linear-gradient(90deg, var(--purple), var(--cyan));
+
+    color: var(--text-white);
+
+    border: none;
+
+    box-shadow: 0 4px 15px rgba(0, 229, 255, 0.2);
+
+}
+
+
+
+.btn-cv:hover {
+
+    transform: translateY(-10px) rotate(1deg) scale(1.05);
+
+    background: rgba(255,255,255,0.05);
+
+    border: 1px solid var(--cyan);
+
+    color: var(--cyan);
+
+    box-shadow: 0 15px 45px rgba(0, 229, 255, 0.45);
+
+    backdrop-filter: blur(8px);
+
+}
+
+
+
+
+
