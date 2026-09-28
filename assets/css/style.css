@@ -824,7 +824,7 @@ html, body {
 
 /* ── CARD 2: ABOUT ── */
 
-#card-2 { background: rgba(124,58,237,0.04); }
+#card-2 { background: transparent; }
 
 
 
@@ -1041,7 +1041,7 @@ html, body {
 
 /* ── CARD 3: SKILLS ── */
 
-#card-3 { background: rgba(124,58,237,0.06); overflow-y: auto; }
+#card-3 { background: transparent; overflow-y: auto; }
 
 
 
@@ -1157,7 +1157,7 @@ html, body {
 
 /* ── CARD 4: PROJECTS SHOWCASE ── */
 
-#card-4 { background: rgba(0, 229, 255,0.05); }
+#card-4 { background: transparent; }
 
 
 
@@ -1545,7 +1545,7 @@ html, body {
 
 /* ── CARD 5: HACKATHON ── */
 
-#card-5 { background: rgba(124,58,237,0.1); }
+#card-5 { background: transparent; }
 
 
 
@@ -1763,7 +1763,7 @@ html, body {
 
 /* ── CARD 6: CERTIFICATIONS ── */
 
-#card-6 { background: rgba(236,72,153,0.05); }
+#card-6 { background: transparent; }
 
 
 
@@ -1953,7 +1953,7 @@ html, body {
 
 /* ── CARD 7: CONTACT ── */
 
-#card-7 { background: rgba(0, 229, 255,0.05); }
+#card-7 { background: transparent; }
 
 
 
