@@ -2906,15 +2906,16 @@ html, body {
     h2.syne-font        { font-size: 7.5vw !important; }
 
     .tagline {
-        display: block;
+        display: block !important;
         font-size: 10px;
         letter-spacing: 1.5px;
-        text-align: center;
+        text-align: center !important;
         white-space: normal;
         word-break: break-word;
-        max-width: 90vw;
-        width: 100%;
-        margin: 0 auto 8px auto;
+        max-width: 100% !important;
+        width: 100% !important;
+        align-self: stretch !important;
+        margin: 0 auto 8px auto !important;
         line-height: 1.5;
     }
 
