@@ -116,18 +116,26 @@
         flex-direction: column;
         align-items: center;
     }
-    .hero-right .tagline,
-    .tagline {
+    .hero-right .tagline {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        text-align: center !important;
+        width: 100% !important;
+        margin: 0 auto 8px auto !important;
+        letter-spacing: 1.5px !important;
+        line-height: 1.5 !important;
+        gap: 2px !important;
+    }
+    .hero-right .tagline .tagline-dot {
+        display: none !important;
+    }
+    .hero-right .tagline span {
         display: block !important;
         text-align: center !important;
         width: 100% !important;
-        max-width: 100% !important;
-        align-self: stretch !important;
-        margin: 0 auto 8px auto !important;
-        letter-spacing: 1.5px !important;
-        line-height: 1.6 !important;
-        white-space: normal !important;
-        word-break: break-word !important;
+        margin: 0 auto !important;
     }
     .hero-name {
         /* Scales with both height and width so it fits perfectly */
@@ -181,7 +189,7 @@
                 </div>
             </div>
             <div class="hero-right">
-                <div class="tagline" style="display: block !important; width: 100% !important; max-width: 100% !important; text-align: center !important; align-self: stretch !important; margin: 0 auto 8px auto !important;">Undergraduate Student · BS Computer Science</div>
+                <div class="tagline"><span>Undergraduate Student</span><span class="tagline-dot"> · </span><span>BS Computer Science</span></div>
                 <h1 class="hero-name">Muhammad <br><span class="gradient-text">Burhan</span></h1>
                 <div class="typewriter-container">
                     <span id="typewriter"></span><span class="cursor"></span>

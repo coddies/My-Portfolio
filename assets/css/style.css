@@ -2906,17 +2906,26 @@ html, body {
     h2.syne-font        { font-size: 7.5vw !important; }
 
     .tagline {
-        display: block !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
         font-size: 10px;
         letter-spacing: 1.5px;
         text-align: center !important;
-        white-space: normal;
-        word-break: break-word;
         max-width: 100% !important;
         width: 100% !important;
-        align-self: stretch !important;
         margin: 0 auto 8px auto !important;
         line-height: 1.5;
+        gap: 2px !important;
+    }
+    .tagline .tagline-dot {
+        display: none !important;
+    }
+    .tagline span {
+        display: block !important;
+        text-align: center !important;
+        width: 100% !important;
     }
 
 
