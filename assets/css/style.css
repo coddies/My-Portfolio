@@ -899,21 +899,14 @@ html, body {
 
 
 .tagline {
-
     font-size: 11px;
-
     letter-spacing: 3px;
-
     text-transform: uppercase;
-
     color: var(--cyan);
-
     font-weight: 700;
-
     display: block;
-
     margin-bottom: 8px;
-
+    text-align: center;
 }
 
 
@@ -2912,7 +2905,16 @@ html, body {
 
     h2.syne-font        { font-size: 7.5vw !important; }
 
-    .tagline            { font-size: 10px; letter-spacing: 2px; }
+    .tagline {
+        font-size: 10px;
+        letter-spacing: 1.5px;
+        text-align: center;
+        white-space: normal;
+        word-break: break-word;
+        max-width: 90vw;
+        line-height: 1.5;
+    }
+
 
 
 
