@@ -1,24 +1,33 @@
 /* ══════════════════════════════════════════════════════════════════
-   INTELLIGENCE_MATRIX v3.2 — SCI-FI TERMINAL ARC & FLOATING SUB-ORBIT
-   SANS-SERIF TYPOGRAPHY | FLOATING MODULES | SKILL DETAIL POPOVERS
+   INTELLIGENCE_MATRIX v3.3 — FULL-BLEED COSMIC TRAJECTORY SYSTEM
+   FULL VIEWPORT EXTENSION (0 TO 100vh) | INFINITE PLANETARY LINE
    STRICT CONSTRAINT: TOUCHES ONLY #card-3 (Skills Section)
    ══════════════════════════════════════════════════════════════════ */
 
+/* Override global .card padding (60px 80px 100px 60px) to allow edge-to-edge trajectory line */
 #card-3 {
-  background: transparent !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  inset: 0 !important;
+  position: fixed !important;
+  width: 100vw !important;
+  height: 100vh !important;
   overflow: hidden !important;
-  height: 100% !important;
+  background: transparent !important;
 }
 
-/* ── ROOT CONTAINER ── */
-.im-root {
-  display: flex !important;
-  flex-direction: column !important;
+#card-3 .card-inner,
+#card-3 .im-root {
+  padding: 0 !important;
+  margin: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  max-width: 100vw !important;
+  min-height: 100vh !important;
   position: relative !important;
   overflow: hidden !important;
-  height: 100% !important;
-  width: 100% !important;
-  padding: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
   background: transparent !important;
   font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
 }
@@ -26,8 +35,8 @@
 /* ── HEADER TERMINAL BANNER (Top Left) ── */
 .im-header {
   position: absolute;
-  top: 24px;
-  left: 28px;
+  top: 36px;
+  left: 48px;
   z-index: 40;
   border-left: 3px solid #00E5FF;
   padding: 8px 24px 8px 16px;
@@ -60,33 +69,34 @@
   min-height: 1.3em;
 }
 
-/* ── MAIN 2-COLUMN VIEWPORT ── */
+/* ── MAIN 2-COLUMN VIEWPORT (Edge-to-Edge Fullscreen) ── */
 .im-layout {
   display: flex;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   position: relative;
   z-index: 2;
+  overflow: hidden;
 }
 
 /* ══════════════════════════════════════════════════════════════════
    LEFT COLUMN: CATEGORY BOXES
-   Increased gap (24px) | No vertical dividing line | Floating animations
+   Generous gap (22px) | Zero-gravity float animations
    ══════════════════════════════════════════════════════════════════ */
 .im-cats {
-  width: 330px;
+  width: 340px;
   max-width: 32vw;
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 22px; /* Increased comfortable gap */
-  padding: 96px 0 32px 32px;
+  gap: 22px;
+  padding: 100px 0 40px 48px;
   z-index: 25;
   position: relative;
 }
 
-/* ── FLOATING EFFECT WRAPPER (Like floating terminal/cards in portfolio) ── */
+/* ── FLOATING EFFECT WRAPPER (Staggered zero-gravity float) ── */
 @keyframes imFloatBox {
   0%, 100% {
     transform: translateY(0);
@@ -101,7 +111,6 @@
   animation: imFloatBox 5.5s ease-in-out infinite;
 }
 
-/* Staggered floating delays */
 .im-cat-float:nth-child(1) { animation-delay: 0s; }
 .im-cat-float:nth-child(2) { animation-delay: 0.8s; }
 .im-cat-float:nth-child(3) { animation-delay: 1.6s; }
@@ -233,7 +242,6 @@
   font-size: 13px;
 }
 
-/* Stable sans-serif text — NO hover flicker or jump */
 .im-cat-name {
   font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 13px;
@@ -319,13 +327,15 @@
 }
 
 /* ══════════════════════════════════════════════════════════════════
-   RIGHT STAGE: CLEAN DEEP-SPACE & CONTINUOUS CRISP TILTED LINE
+   RIGHT STAGE: CLEAN DEEP-SPACE & INFINITE TILTED LASER LINE
+   FULL BLEED FROM SCREEN TOP (0) TO SCREEN BOTTOM (100vh)
    ══════════════════════════════════════════════════════════════════ */
 .im-stage {
   flex: 1;
   position: relative;
   overflow: hidden;
-  height: 100%;
+  height: 100vh;
+  width: 100%;
   background: radial-gradient(ellipse at 55% 50%, rgba(10, 25, 42, 0.35) 0%, transparent 70%);
 }
 
@@ -342,12 +352,13 @@
 /* ── SINGLE THIN CRISP TILTED TRAJECTORY LINE (SVG) ── */
 .im-line-svg {
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   pointer-events: none;
   z-index: 3;
-  overflow: visible;
+  overflow: visible !important;
 }
 
 /* ══════════════════════════════════════════════════════════════════
@@ -620,7 +631,6 @@
 
 /* ══════════════════════════════════════════════════════════════════
    FLOATING DETAIL POPOVER (Opened on Hovering an Orbit Skill Moon)
-   Shows concise skill info with floating effect & cyan neon styling
    ══════════════════════════════════════════════════════════════════ */
 @keyframes imFloatPopover {
   0%, 100% {
@@ -710,9 +720,13 @@
    RESPONSIVE DESIGN (Tablets & Mobile)
    ══════════════════════════════════════════════════════════════════ */
 @media (max-width: 1024px) {
+  .im-header {
+    top: 24px;
+    left: 28px;
+  }
   .im-cats {
     width: 290px;
-    padding-left: 20px;
+    padding-left: 28px;
     gap: 16px;
   }
   .im-cat-name {
@@ -727,6 +741,7 @@
 @media (max-width: 768px) {
   .im-layout {
     flex-direction: column;
+    height: 100vh;
   }
 
   .im-header {
@@ -737,7 +752,6 @@
     border-radius: 4px;
   }
 
-  /* Horizontal category selector bar on mobile */
   .im-cats {
     width: 100%;
     max-width: 100%;
@@ -756,7 +770,7 @@
 
   .im-cat-float {
     width: auto;
-    animation: none; /* Disable vertical float on horizontal mobile bar */
+    animation: none;
   }
 
   .im-cat-wrap {
@@ -778,7 +792,6 @@
     font-size: 18px !important;
   }
 
-  /* Right Stage centered below */
   .im-stage {
     flex: 1;
     min-height: 420px;
