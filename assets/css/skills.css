@@ -1,304 +1,802 @@
-/* ── CARD 3: SKILLS ── */
+/* ══════════════════════════════════════════════════════════════════
+   INTELLIGENCE_MATRIX v3.2 — SCI-FI TERMINAL ARC & FLOATING SUB-ORBIT
+   SANS-SERIF TYPOGRAPHY | FLOATING MODULES | SKILL DETAIL POPOVERS
+   STRICT CONSTRAINT: TOUCHES ONLY #card-3 (Skills Section)
+   ══════════════════════════════════════════════════════════════════ */
 
-#card-3 { background: transparent; overflow-y: auto; }
-
-
-
-.section-header { text-align: center; margin-bottom: 40px; }
-
-.section-header .tagline { text-align: center; }
-
-.section-header .accent-line { margin: 0 auto 0; }
-
-
-
-.skills-grid {
-
-    display: grid;
-
-    grid-template-columns: repeat(4, 1fr);
-
-    gap: 20px;
-
-    max-width: 1000px;
-
-    width: 100%;
-
+#card-3 {
+  background: transparent !important;
+  overflow: hidden !important;
+  height: 100% !important;
 }
 
-
-
-.skill-card {
-
-    background: rgba(255,255,255,0.07);
-
-    border: 1px solid rgba(255,255,255,0.13);
-
-    backdrop-filter: blur(12px);
-
-    border-radius: 20px;
-
-    padding: 30px 24px;
-
-    transform: translate3d(0, 0, 0);
-
-    will-change: transform;
-
-    transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.4s ease, box-shadow 0.4s ease !important;
-
-    opacity: 0;
-
-    transform: scale(0.85);
-
+/* ── ROOT CONTAINER ── */
+.im-root {
+  display: flex !important;
+  flex-direction: column !important;
+  position: relative !important;
+  overflow: hidden !important;
+  height: 100% !important;
+  width: 100% !important;
+  padding: 0 !important;
+  background: transparent !important;
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
 }
 
+/* ── HEADER TERMINAL BANNER (Top Left) ── */
+.im-header {
+  position: absolute;
+  top: 24px;
+  left: 28px;
+  z-index: 40;
+  border-left: 3px solid #00E5FF;
+  padding: 8px 24px 8px 16px;
+  pointer-events: none;
+  background: linear-gradient(90deg, rgba(0, 229, 255, 0.08), rgba(6, 11, 20, 0.4) 60%, transparent);
+  border-radius: 0 6px 6px 0;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
 
+.im-header-title {
+  font-family: 'Space Grotesk', monospace;
+  font-size: clamp(14px, 1.8vw, 22px);
+  color: #00E5FF;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  margin: 0;
+  text-shadow: 0 0 12px rgba(0, 229, 255, 0.5);
+  min-height: 1.3em;
+}
 
-.skill-card.anim-in {
+.im-header-sub {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: rgba(0, 229, 255, 0.7);
+  text-transform: uppercase;
+  letter-spacing: 0.24em;
+  margin: 4px 0 0;
+  min-height: 1.3em;
+}
 
-    opacity: 1;
+/* ── MAIN 2-COLUMN VIEWPORT ── */
+.im-layout {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 2;
+}
 
+/* ══════════════════════════════════════════════════════════════════
+   LEFT COLUMN: CATEGORY BOXES
+   Increased gap (24px) | No vertical dividing line | Floating animations
+   ══════════════════════════════════════════════════════════════════ */
+.im-cats {
+  width: 330px;
+  max-width: 32vw;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 22px; /* Increased comfortable gap */
+  padding: 96px 0 32px 32px;
+  z-index: 25;
+  position: relative;
+}
+
+/* ── FLOATING EFFECT WRAPPER (Like floating terminal/cards in portfolio) ── */
+@keyframes imFloatBox {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-7px);
+  }
+}
+
+.im-cat-float {
+  width: 100%;
+  animation: imFloatBox 5.5s ease-in-out infinite;
+}
+
+/* Staggered floating delays */
+.im-cat-float:nth-child(1) { animation-delay: 0s; }
+.im-cat-float:nth-child(2) { animation-delay: 0.8s; }
+.im-cat-float:nth-child(3) { animation-delay: 1.6s; }
+.im-cat-float:nth-child(4) { animation-delay: 2.4s; }
+.im-cat-float:nth-child(5) { animation-delay: 3.2s; }
+
+/* ── CATEGORY BOX OUTER WRAPPER (Chamfered Diagonal Cuts) ── */
+.im-cat-wrap {
+  position: relative;
+  padding: 1px;
+  background: rgba(0, 229, 255, 0.22);
+  clip-path: polygon(
+    14px 0,
+    calc(100% - 14px) 0,
+    100% 14px,
+    100% calc(100% - 14px),
+    calc(100% - 14px) 100%,
+    14px 100%,
+    0 calc(100% - 14px),
+    0 14px
+  );
+  transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* ── INNER SLATE GLASS CONTAINER ── */
+.im-cat-inner {
+  width: 100%;
+  min-height: 66px;
+  background: rgba(7, 19, 30, 0.92);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  padding: 18px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  clip-path: polygon(
+    13px 0,
+    calc(100% - 13px) 0,
+    100% 13px,
+    100% calc(100% - 13px),
+    calc(100% - 13px) 100%,
+    13px 100%,
+    0 calc(100% - 13px),
+    0 13px
+  );
+  position: relative;
+  overflow: hidden;
+  transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+  box-sizing: border-box;
+}
+
+/* Shimmer Light Reflection Sweep (matches portfolio transmit buttons) */
+.im-cat-inner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 80%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.08),
+    rgba(0, 229, 255, 0.16),
+    transparent
+  );
+  transform: skewX(-25deg);
+  transition: left 0.6s ease;
+  pointer-events: none;
+}
+
+/* Corner Tick Accents (matches Contact Section .nl-b) */
+.im-corner {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border: 2px solid rgba(0, 229, 255, 0.45);
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+.im-c-tl { top: -2px; left: 14px; border-right: none; border-bottom: none; transform: skewX(-45deg); }
+.im-c-tr { top: -2px; right: 14px; border-left: none; border-bottom: none; transform: skewX(45deg); }
+.im-c-bl { bottom: -2px; left: 14px; border-right: none; border-top: none; transform: skewX(45deg); }
+.im-c-br { bottom: -2px; right: 14px; border-left: none; border-top: none; transform: skewX(-45deg); }
+
+/* Sci-fi Diagonal Striped Hash Marker (.nl-h) */
+.im-hash {
+  position: absolute;
+  width: 22px;
+  height: 3px;
+  background: repeating-linear-gradient(
+    45deg,
+    rgba(0, 229, 255, 0.32),
+    rgba(0, 229, 255, 0.32) 2px,
+    transparent 2px,
+    transparent 4px
+  );
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+.im-h-top { top: -1px; right: 38px; }
+.im-h-bot { bottom: -1px; left: 38px; }
+
+/* ── CONTENT ELEMENTS INSIDE CATEGORY BOX (Sans-Serif, Stable on Hover) ── */
+.im-cat-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  flex: 1;
+}
+
+.im-cat-idx {
+  font-family: 'Plus Jakarta Sans', monospace;
+  font-size: 13px;
+  font-weight: 700;
+  color: #00E5FF;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.im-cat-bracket {
+  color: rgba(0, 229, 255, 0.4);
+  font-size: 13px;
+}
+
+/* Stable sans-serif text — NO hover flicker or jump */
+.im-cat-name {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: #FFFFFF;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.25;
+}
+
+.im-cat-icon {
+  font-size: 22px !important;
+  color: rgba(0, 229, 255, 0.65);
+  transition: transform 0.35s ease, color 0.35s ease;
+  flex-shrink: 0;
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   HOVER & ACTIVE STATES (Clean halo glow, text remains stable)
+   ══════════════════════════════════════════════════════════════════ */
+.im-cat-wrap:hover {
+  transform: translateX(12px);
+  background: rgba(0, 240, 255, 0.7);
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.35), inset 0 0 10px rgba(0, 240, 255, 0.15);
+}
+
+.im-cat-wrap:hover .im-cat-inner {
+  background: rgba(10, 26, 42, 0.95);
+}
+
+.im-cat-wrap:hover .im-cat-inner::before {
+  left: 140%;
+}
+
+.im-cat-wrap:hover .im-cat-icon {
+  color: #00F0FF;
+  transform: scale(1.15);
+  filter: drop-shadow(0 0 8px rgba(0, 240, 255, 0.9));
+}
+
+.im-cat-wrap:hover .im-corner {
+  border-color: #00F0FF;
+  box-shadow: 0 0 6px rgba(0, 240, 255, 0.8);
+}
+
+/* ACTIVE / LOCKED OPEN STATE */
+.im-cat-wrap.active {
+  transform: translateX(16px);
+  background: #00F0FF;
+  box-shadow:
+    0 0 25px rgba(0, 240, 255, 0.65),
+    0 0 50px rgba(0, 240, 255, 0.25),
+    inset 0 0 15px rgba(0, 240, 255, 0.2);
+}
+
+.im-cat-wrap.active .im-cat-inner {
+  background: rgba(8, 28, 46, 0.96);
+  border-left: 3px solid #00F0FF;
+}
+
+.im-cat-wrap.active .im-cat-icon {
+  color: #00F0FF;
+  transform: scale(1.2);
+  filter: drop-shadow(0 0 12px #00F0FF);
+}
+
+.im-cat-wrap.active .im-corner {
+  border-color: #00F0FF;
+  box-shadow: 0 0 8px #00F0FF;
+}
+
+.im-cat-wrap.active .im-hash {
+  background: repeating-linear-gradient(
+    45deg,
+    #00F0FF,
+    #00F0FF 2px,
+    transparent 2px,
+    transparent 4px
+  );
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   RIGHT STAGE: CLEAN DEEP-SPACE & CONTINUOUS CRISP TILTED LINE
+   ══════════════════════════════════════════════════════════════════ */
+.im-stage {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  background: radial-gradient(ellipse at 55% 50%, rgba(10, 25, 42, 0.35) 0%, transparent 70%);
+}
+
+/* Floating Space Dust Canvas */
+.im-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* ── SINGLE THIN CRISP TILTED TRAJECTORY LINE (SVG) ── */
+.im-line-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 3;
+  overflow: visible;
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   1-BY-1 STEP VERTICAL SCROLL STAGE
+   Strictly ONE single category node is visible at any given time!
+   ══════════════════════════════════════════════════════════════════ */
+.im-node-viewport {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  overflow: visible;
+  pointer-events: none;
+}
+
+/* Center Focal Point Position on the Tilted Line (x: 55%, y: 50%) */
+.im-single-node {
+  position: absolute;
+  left: 55%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+  pointer-events: auto;
+  transition:
+    transform 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.5s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 90px;
+  height: 90px;
+}
+
+/* Transition states along the tilted trajectory line */
+.im-single-node.entering-from-bottom {
+  transform: translate(calc(-50% - 60px), calc(-50% + 380px)) scale(0.65);
+  opacity: 0;
+  filter: blur(6px);
+}
+
+.im-single-node.entering-from-top {
+  transform: translate(calc(-50% + 60px), calc(-50% - 380px)) scale(0.65);
+  opacity: 0;
+  filter: blur(6px);
+}
+
+.im-single-node.exiting-to-top {
+  transform: translate(calc(-50% + 60px), calc(-50% - 380px)) scale(0.65);
+  opacity: 0;
+  filter: blur(6px);
+  pointer-events: none;
+}
+
+.im-single-node.exiting-to-bottom {
+  transform: translate(calc(-50% - 60px), calc(-50% + 380px)) scale(0.65);
+  opacity: 0;
+  filter: blur(6px);
+  pointer-events: none;
+}
+
+/* ── CENTER CATEGORY PLANET NODE ── */
+.im-planet-core-wrap {
+  position: relative;
+  width: 82px;
+  height: 82px;
+  cursor: pointer;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Outer Pulsing Cyber Hex / Ring */
+.im-planet-aura {
+  position: absolute;
+  inset: -14px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(0, 240, 255, 0.45);
+  box-shadow: 0 0 25px rgba(0, 240, 255, 0.35);
+  animation: imAuraPulse 3s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes imAuraPulse {
+  0%, 100% {
     transform: scale(1);
-
+    opacity: 0.4;
+    border-color: rgba(0, 240, 255, 0.4);
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.2);
+  }
+  50% {
+    transform: scale(1.18);
+    opacity: 0.85;
+    border-color: rgba(0, 240, 255, 0.85);
+    box-shadow: 0 0 35px rgba(0, 240, 255, 0.5);
+  }
 }
 
-
-
-.skill-card:hover {
-
-    transform: translateY(-12px) scale(1.03) !important;
-
-    border-color: rgba(0, 229, 255, 0.6) !important;
-
-    box-shadow: 0 15px 40px rgba(0, 229, 255, 0.35) !important;
-
+/* Core Planet Sphere */
+.im-planet-core {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, rgba(14, 38, 62, 0.98), rgba(4, 10, 18, 0.98) 75%);
+  border: 2px solid #00F0FF;
+  box-shadow:
+    0 0 30px rgba(0, 240, 255, 0.6),
+    inset 0 0 18px rgba(0, 240, 255, 0.35);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  position: relative;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  backdrop-filter: blur(8px);
 }
 
+.im-planet-core .material-symbols-outlined {
+  font-size: 28px !important;
+  color: #00F0FF;
+  filter: drop-shadow(0 0 8px #00F0FF);
+  transition: all 0.3s ease;
+}
 
+.im-planet-core-label {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 8.5px;
+  font-weight: 800;
+  color: #00F0FF;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-shadow: 0 0 8px rgba(0, 240, 255, 0.8);
+  margin-top: 1px;
+}
 
-.skill-emoji   { font-size: 32px; margin-bottom: 14px; display: block; }
+/* Hovering over center planet */
+.im-planet-core-wrap:hover .im-planet-core {
+  transform: scale(1.12);
+  box-shadow:
+    0 0 45px rgba(0, 240, 255, 0.85),
+    inset 0 0 25px rgba(0, 240, 255, 0.5);
+}
 
-.skill-name    { font-weight: 700; font-size: 16px; margin-bottom: 14px; display: block; }
+.im-planet-core-wrap:hover .im-planet-aura {
+  animation-duration: 1.5s;
+}
 
+/* ══════════════════════════════════════════════════════════════════
+   CIRCULAR SUB-ORBIT SYSTEM (Moons Rotating Continuously)
+   Upright icons & labels at all times!
+   ══════════════════════════════════════════════════════════════════ */
+.im-suborbit-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 20;
+}
 
+/* Thin Crisp Orbit Trajectory Guide Ring */
+.im-orbit-guide-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 1px dashed rgba(0, 240, 255, 0.28);
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.08);
+  pointer-events: none;
+  transition: width 0.4s ease, height 0.4s ease, border-color 0.4s ease;
+}
 
-.progress-container {
+/* Inner faint cosmic alignment circle */
+.im-orbit-inner-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 1px solid rgba(0, 240, 255, 0.08);
+  pointer-events: none;
+}
 
+/* ── INDIVIDUAL SKILL MOON BADGE (Sans-Serif Typography) ── */
+.im-moon-badge {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 8px 16px;
+  background: rgba(6, 16, 28, 0.94);
+  border: 1px solid rgba(0, 240, 255, 0.42);
+  border-radius: 24px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow:
+    0 0 14px rgba(0, 240, 255, 0.18),
+    0 4px 16px rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  pointer-events: auto;
+  white-space: nowrap;
+  user-select: none;
+  transition:
+    border-color 0.25s ease,
+    background 0.25s ease,
+    box-shadow 0.25s ease,
+    scale 0.25s ease;
+  z-index: 25;
+}
+
+.im-moon-badge .material-symbols-outlined {
+  font-size: 15px !important;
+  color: #00F0FF;
+  line-height: 1;
+  pointer-events: none;
+  transition: transform 0.25s ease;
+  filter: drop-shadow(0 0 4px rgba(0, 240, 255, 0.6));
+}
+
+.im-moon-text {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  color: #FFFFFF;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  pointer-events: none;
+  line-height: 1;
+}
+
+/* PYTHON: Core Language Special Highlight Badge */
+.im-moon-badge.im-python-core {
+  background: rgba(10, 32, 54, 0.96);
+  border: 1.5px solid #00F0FF;
+  box-shadow:
+    0 0 20px rgba(0, 240, 255, 0.55),
+    inset 0 0 10px rgba(0, 240, 255, 0.2);
+}
+
+.im-moon-badge.im-python-core .im-moon-text {
+  color: #00F0FF;
+  text-shadow: 0 0 10px rgba(0, 240, 255, 0.8);
+}
+
+/* Skill Moon Hover State */
+.im-moon-badge:hover {
+  scale: 1.14;
+  background: rgba(12, 36, 60, 0.98);
+  border-color: #00F0FF;
+  box-shadow:
+    0 0 25px rgba(0, 240, 255, 0.8),
+    0 8px 24px rgba(0, 0, 0, 0.8);
+  z-index: 50;
+}
+
+.im-moon-badge:hover .material-symbols-outlined {
+  transform: scale(1.2);
+  filter: drop-shadow(0 0 10px #00F0FF);
+}
+
+.im-moon-badge:hover .im-moon-text {
+  color: #00F0FF;
+  text-shadow: 0 0 8px #00F0FF;
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   FLOATING DETAIL POPOVER (Opened on Hovering an Orbit Skill Moon)
+   Shows concise skill info with floating effect & cyan neon styling
+   ══════════════════════════════════════════════════════════════════ */
+@keyframes imFloatPopover {
+  0%, 100% {
+    transform: translate(-50%, 0);
+  }
+  50% {
+    transform: translate(-50%, -5px);
+  }
+}
+
+.im-skill-popover {
+  position: absolute;
+  bottom: calc(100% + 14px);
+  left: 50%;
+  transform: translate(-50%, 0);
+  width: 220px;
+  background: rgba(6, 16, 28, 0.96);
+  border: 1px solid #00F0FF;
+  border-radius: 10px;
+  padding: 11px 14px;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow:
+    0 0 25px rgba(0, 240, 255, 0.45),
+    0 10px 30px rgba(0, 0, 0, 0.75);
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.22s ease, visibility 0.22s ease;
+  z-index: 100;
+  animation: imFloatPopover 3.2s ease-in-out infinite;
+  text-align: left;
+  white-space: normal;
+}
+
+/* Downward indicator arrow */
+.im-skill-popover::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: #00F0FF;
+}
+
+.im-moon-badge:hover .im-skill-popover {
+  opacity: 1;
+  visibility: visible;
+}
+
+.im-pop-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid rgba(0, 240, 255, 0.2);
+}
+
+.im-pop-icon {
+  font-size: 16px !important;
+  color: #00F0FF;
+  filter: drop-shadow(0 0 6px #00F0FF);
+}
+
+.im-pop-title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 11.5px;
+  font-weight: 800;
+  color: #00F0FF;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.im-pop-desc {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 10.5px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.42;
+  margin: 0;
+  letter-spacing: 0.01em;
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   RESPONSIVE DESIGN (Tablets & Mobile)
+   ══════════════════════════════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .im-cats {
+    width: 290px;
+    padding-left: 20px;
+    gap: 16px;
+  }
+  .im-cat-name {
+    font-size: 11.5px;
+  }
+  .im-cat-inner {
+    padding: 16px 16px;
+    min-height: 60px;
+  }
+}
+
+@media (max-width: 768px) {
+  .im-layout {
+    flex-direction: column;
+  }
+
+  .im-header {
+    position: relative;
+    top: 0;
+    left: 0;
+    margin: 16px 16px 0;
+    border-radius: 4px;
+  }
+
+  /* Horizontal category selector bar on mobile */
+  .im-cats {
     width: 100%;
+    max-width: 100%;
+    flex-direction: row;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    gap: 12px;
+    padding: 12px 16px;
+    justify-content: flex-start;
+  }
+  .im-cats::-webkit-scrollbar {
+    display: none;
+  }
 
-    height: 4px;
+  .im-cat-float {
+    width: auto;
+    animation: none; /* Disable vertical float on horizontal mobile bar */
+  }
 
-    background: rgba(255,255,255,0.1);
+  .im-cat-wrap {
+    flex-shrink: 0;
+    min-width: 170px;
+  }
+  .im-cat-wrap.active, .im-cat-wrap:hover {
+    transform: translateY(-4px);
+  }
+  .im-cat-inner {
+    padding: 14px 16px;
+    min-height: 54px;
+    gap: 8px;
+  }
+  .im-cat-name {
+    font-size: 11px;
+  }
+  .im-cat-icon {
+    font-size: 18px !important;
+  }
 
-    border-radius: 2px;
-
-    overflow: hidden;
-
-}
-
-
-
-.progress-bar {
-
-    height: 100%;
-
-    width: 0%;
-
-    background: linear-gradient(90deg, var(--purple), var(--cyan));
-
-    border-radius: 2px;
-
-    transition: width 1.5s cubic-bezier(0.1,0,0.2,1);
-
-}
-
-
-
-/* ── PREMIUM SKILLS CATEGORIES ── */
-
-.skills-wrapper {
-
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 40px;
-
-}
-
-.skill-category {
-
-    background: rgba(255, 255, 255, 0.02);
-
-    border: 1px solid rgba(255, 255, 255, 0.05);
-
-    border-radius: 20px;
-
-    padding: 25px;
-
-    transition: transform 0.3s ease, border-color 0.3s ease;
-
-}
-
-.skill-category:hover {
-
-    border-color: rgba(124, 58, 237, 0.2);
-
-    transform: translateY(-5px);
-
-}
-
-.category-title {
-
-    font-family: 'Syne', sans-serif;
-
-    font-size: 18px;
-
-    font-weight: 800;
-
-    color: var(--cyan);
-
-    margin-bottom: 20px;
-
-    letter-spacing: 1px;
-
-    text-transform: uppercase;
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 10px;
-
-}
-
-.category-title::after {
-
-    content: "";
-
+  /* Right Stage centered below */
+  .im-stage {
     flex: 1;
+    min-height: 420px;
+    width: 100%;
+  }
 
-    height: 1px;
+  .im-single-node {
+    left: 50% !important;
+    top: 50% !important;
+  }
 
-    background: linear-gradient(90deg, rgba(0, 229, 255, 0.3), transparent);
-
+  .im-moon-badge {
+    padding: 6px 12px;
+  }
+  .im-moon-text {
+    font-size: 9.5px;
+  }
+  .im-moon-badge .material-symbols-outlined {
+    font-size: 13px !important;
+  }
 }
-
-
-
-/* ── 5. SKILL CARDS — shimmer + spring hover ── */
-
-.skill-card {
-
-    position: relative;
-
-    overflow: hidden;
-
-}
-
-.skill-card::after {
-
-    content: '';
-
-    position: absolute;
-
-    top: 0; left: -100%;
-
-    width: 60%;
-
-    height: 100%;
-
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
-
-    transform: skewX(-20deg);
-
-    transition: none;
-
-    pointer-events: none;
-
-}
-
-.skill-card:hover::after {
-
-    animation: skillShimmer 0.55s ease forwards;
-
-}
-
-@keyframes skillShimmer {
-
-    from { left: -100%; }
-
-    to   { left: 140%; }
-
-}
-
-
-
-/* ── FIX 5B: Skill bars staggered (extra specificity) ── */
-
-.progress-bar {
-
-    transition: width 1.2s cubic-bezier(0.1, 0, 0.2, 1) !important;
-
-}
-
-
-
-/* ── 3D HOLOGRAPHIC SKILLS CARDS ── */
-.skill-3d-card {
-    position: relative;
-    background: rgba(255, 255, 255, 0.03);
-    backdrop-filter: blur(12px);
-    border-radius: 20px;
-    height: 180px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    transform-style: preserve-3d;
-    transition: transform 0.1s ease-out, box-shadow 0.3s ease;
-    cursor: pointer;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-}
-.skill-3d-card[data-color="#00E5FF"] { border: 1px solid rgba(0, 229, 255, 0.2); }
-.skill-3d-card[data-color="#8B5CF6"] { border: 1px solid rgba(139, 92, 246, 0.2); }
-
-.skill-3d-card:hover {
-    transition: transform 0.1s ease-out;
-    z-index: 10;
-}
-.skill-3d-card[data-color="#00E5FF"]:hover { box-shadow: -15px 15px 40px rgba(0,0,0,0.6), inset 0 0 30px rgba(0, 229, 255, 0.2), 0 0 20px rgba(0, 229, 255, 0.3); }
-.skill-3d-card[data-color="#8B5CF6"]:hover { box-shadow: -15px 15px 40px rgba(0,0,0,0.6), inset 0 0 30px rgba(139, 92, 246, 0.2), 0 0 20px rgba(139, 92, 246, 0.3); }
-
-.skill-3d-content {
-    transform: translateZ(50px);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    pointer-events: none;
-    transition: transform 0.3s ease;
-}
-.skill-3d-card:hover .skill-3d-content {
-    transform: translateZ(70px);
-}
-.skill-3d-icon {
-    font-size: 50px;
-    transition: filter 0.3s ease;
-}
-.skill-3d-card[data-color="#00E5FF"] .skill-3d-icon { filter: drop-shadow(0 10px 10px rgba(0, 229, 255, 0.4)); }
-.skill-3d-card[data-color="#8B5CF6"] .skill-3d-icon { filter: drop-shadow(0 10px 10px rgba(139, 92, 246, 0.4)); }
-.skill-3d-card[data-color="#00E5FF"]:hover .skill-3d-icon { filter: drop-shadow(0 20px 20px rgba(0, 229, 255, 0.9)); }
-.skill-3d-card[data-color="#8B5CF6"]:hover .skill-3d-icon { filter: drop-shadow(0 20px 20px rgba(139, 92, 246, 0.9)); }
-
-.skill-3d-title {
-    margin-top: 15px;
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 18px;
-    font-weight: 700;
-    color: #fff;
-    text-shadow: 0 5px 10px rgba(0,0,0,0.8);
-    transition: color 0.3s ease;
-}
-.skill-3d-card[data-color="#00E5FF"]:hover .skill-3d-title { color: #00E5FF; }
-.skill-3d-card[data-color="#8B5CF6"]:hover .skill-3d-title { color: #8B5CF6; }
-
