@@ -13,9 +13,9 @@
         font-size: clamp(16px, 4vw, 20px) !important;
     }
     
-    /* Move popup up so it doesn't overlap the bottom nav rail */
+    /* Move popup up so it doesn't overlap the bottom nav rail or AI FAB */
     .nav-popup {
-        bottom: 85px !important;
+        bottom: 128px !important;
         right: 50% !important;
         transform: translateX(50%) !important;
         padding: 8px 16px !important;
@@ -167,23 +167,24 @@
 
 
 /* Profile photo — floating with side glow, NO box */
-
 .hero-photo {
-
     width: 100%;
-
     max-width: 450px; /* Increased for better laptop view */
-
     height: auto;
-
     display: block;
-
     background: transparent;
-
-    filter: drop-shadow(0 15px 30px rgba(124,58,237,0.3));
-
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    filter: drop-shadow(0 15px 30px rgba(124, 58, 237, 0.35));
     animation: floatPhoto 4s ease-in-out infinite;
+    transition: filter 0.4s ease, transform 0.4s ease;
+}
 
+.hero-photo-container:hover .hero-photo,
+.hero-photo:hover {
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    filter: drop-shadow(0 10px 30px rgba(0, 229, 255, 0.55)) drop-shadow(0 20px 50px rgba(124, 58, 237, 0.45)) !important;
 }
 
 
