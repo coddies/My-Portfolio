@@ -1,4 +1,4 @@
-﻿# 🚀 Muhammad Burhan | AI & Full-Stack Portfolio
+# 🚀 Muhammad Burhan | AI & Full-Stack Portfolio
 
 <div align="center">
 
@@ -413,7 +413,7 @@ npm run typecheck
 > Update this section every time a significant change is made to the portfolio.
 
 | Date | Change |
-|------|--------|
+| 2026-11-17 | **Rocket System Removal & Fast Initial Loader Optimization**: (1) Removed the rocket SVG and launch animations completely from the project — both from the initial loader (`#mb-rocket-wrap`) and section switching transitions (`#mb-trans-rocket`). (2) Reduced initial loader duration from 3.8s down to a snappy ~1.4s–1.6s (fade text at 850ms, sleek panel split at 1100ms, cleanup at 1600ms) with deep-space starry background. (3) Replaced transition rocket launch with sleek, minimal split-panel slide transitions (`tL`/`tR` transform). (4) Updated navigation Home icon to standard `home` Material icon. (5) Replaced lingering rocket emojis in About terminal and Achievements with cyber icons (`⚡`, `smart_toy`). All other portfolio animations (particles, 3D orbits, matrix terminal, carousel) preserved 100% untouched. Files: `index.html`, `assets/js/loader.js`, `assets/js/nav.js`, `assets/css/animations.css`, `assets/css/responsive.css`, `assets/css/style.css`, `assets/sections/about.html`, `assets/sections/achievements.html`, `assets/sections/casestudies.html`, `assets/sections/skills.html`, `README.md`. |
 | 2026-11-17 | **Contact Section — Neural Link Connection Lines Redesign**: Replaced the old isometric constellation parallelogram SVG with **direct icon-to-icon dashed cyan connection lines** between all 4 social platform hexagons (GitHub ↔ LinkedIn, GitHub ↔ TikTok, LinkedIn ↔ Instagram, TikTok ↔ Instagram). Added subtle purple cross-diagonal links. Upgraded animated dot system to 5 glowing nimateMotion dots each travelling along their own dedicated path track with staggered offsets for a network traffic effect. Added colored node marker rings at each icon's center matching platform brand colors. Files: `assets/sections/contact.html`. |
 | 2026-11-12 | **Skills Section — Trajectory Line, Vertical Blade Tabs & Mobile Layout**: Extended tilted laser trajectory line to full-screen bleed coordinates, extended tick marks edge-to-edge behind category buttons on mobile. Redesigned 5 category tabs into slim vertical blade tabs with upright text and active drop effect. Centered planetary orbit on mobile. Files: `assets/sections/skills.html`, `assets/css/skills.css`. |
 | 2026-11-12 | **Projects Section — 3D Glass Carousel Restore & Gap Fix**: Restored translucent glass backgrounds on all 4 hologram cards. Increased vertical gap between header text and carousel to prevent text/card collision. Files: `assets/sections/projects.html`. |

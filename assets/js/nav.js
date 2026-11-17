@@ -23,7 +23,7 @@ function showNavPopup() {
 
     setTimeout(() => {
         popup.classList.add('active');
-    }, 4500); // Show after rocket loader finishes
+    }, 2200); // Show shortly after loader finishes
 
     // Hide after 6 seconds or on interaction
     const hidePopup = () => {

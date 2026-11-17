@@ -145,7 +145,16 @@ He's especially into **system design**, **problem solving**, **n8n automations**
 | **Tech Stack** | FastAPI, Neon PostgreSQL, Python |
 | **GitHub** | https://github.com/coddies/FastAPI-fullapp |
 
-### 5. BURHAN_OS (This Chatbot)
+### 5. Finish AI (Case Study — Team Leader)
+
+| Field | Details |
+|-------|---------|
+| **Role** | Team Leader (SMIT Team) |
+| **Description** | AI-powered career & job intelligence platform that analyzes job roles and generates personalized step-by-step career roadmaps. |
+| **GitHub** | https://github.com/coddies/SMIT-Team |
+| **Live Demo** | https://finishai-pi.vercel.app/ |
+
+### 6. BURHAN_OS (This Chatbot)
 
 | Field | Details |
 |-------|---------|
@@ -162,18 +171,21 @@ He's especially into **system design**, **problem solving**, **n8n automations**
 |-------------|--------|
 | Google AI Professional Certificate | Google via Coursera (8 courses) |
 | Google AI Essentials | Google via Coursera (5 courses) |
+| Google Prompting Essentials | Google via Coursera |
 | Azure AI Fundamentals | Microsoft Learn |
 | Python Essentials 1 | Cisco Networking Academy |
+| C++ Essentials 1 | Cisco Networking Academy |
 | Python Crash Basics | Mind Luster |
 | Digital Marketing | DigiSkills Training Program |
 | E-Commerce Management | DigiSkills Training Program |
 
-### In Progress
+### Experience & In Progress
 
-| Certificate | Issuer | Focus |
-|-------------|--------|-------|
-| AI & Data Science Track | Saylani Mass IT (SMIT) | Python, SQL, ML, Neural Networks, NLP, Gen AI Agents |
-| BS Computer Science | Virtual University of Pakistan | Currently Enrolled |
+| Role / Program | Organization / Issuer | Status / Focus |
+|----------------|-----------------------|----------------|
+| BS Computer Science (Undergraduate) | Virtual University of Pakistan | In Progress (Currently Enrolled) |
+| AI Intern (Experience Letter) | ARPINAX TECHNOLOGIES Solutions | Currently Working |
+| AI & Data Science Track | Saylani Mass IT (SMIT) | In Progress — Python, SQL, ML, Neural Networks, NLP, Gen AI Agents |
 
 ---
 
