@@ -24,25 +24,58 @@
         .neo-glow-purple { box-shadow: 0 0 20px rgba(139, 92, 246, 0.2); }
 
         /* Orbital Carousel */
-        .carousel-container { perspective: 1500px; width: 100%; height: 500px; display: flex; align-items: center; justify-content: center; position: relative; }
-        .carousel-spinner { position: relative; width: 320px; height: 480px; transform-style: preserve-3d; animation: orbital-rotation 25s linear infinite; transition: transform 0.5s ease; }
+        .proto-1-wrapper {
+            overflow-x: hidden;
+            overflow-y: visible !important;
+        }
+        .carousel-container {
+            perspective: 1500px;
+            width: 100%;
+            max-width: 100vw;
+            height: 540px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: visible;
+            margin-top: clamp(60px, 9vh, 110px);
+        }
+        .carousel-spinner {
+            position: relative;
+            width: 320px;
+            height: 480px;
+            transform-style: preserve-3d;
+            animation: orbital-rotation 25s linear infinite;
+            transition: transform 0.5s ease;
+        }
         .carousel-spinner:hover { animation-play-state: paused; }
         
         .hologram-card {
-            position: absolute; inset: 0; background: rgba(6, 11, 20, 0.6); backdrop-filter: blur(15px); border: 1px solid rgba(0, 229, 255, 0.4); border-radius: 16px;
+            position: absolute;
+            inset: 0;
+            background: rgba(6, 11, 20, 0.6);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(0, 229, 255, 0.4);
+            border-radius: 16px;
             box-shadow: 0 0 30px rgba(0, 229, 255, 0.1), inset 0 0 20px rgba(0, 229, 255, 0.1);
-            display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 30px 20px; transform-style: preserve-3d;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            padding: 30px 20px;
+            transform-style: preserve-3d;
             transition: all 0.4s ease;
         }
         
         /* Parent Card Glow when Button is Hovered */
         .hologram-card:has(.proj-btn-cyan:hover) {
-            background: rgba(0, 229, 255, 0.1);
+            background: rgba(0, 229, 255, 0.12);
             border-color: #00E5FF;
             box-shadow: 0 0 60px rgba(0, 229, 255, 0.4), inset 0 0 30px rgba(0, 229, 255, 0.3);
         }
         .hologram-card:has(.proj-btn-purple:hover) {
-            background: rgba(139, 92, 246, 0.1);
+            background: rgba(139, 92, 246, 0.12);
             border-color: #8B5CF6;
             box-shadow: 0 0 60px rgba(139, 92, 246, 0.4), inset 0 0 30px rgba(139, 92, 246, 0.3);
         }
@@ -149,44 +182,121 @@
         }
 
         @media (max-width: 1200px) {
-            .card-1, .card-2, .card-3, .card-4 { translateZ(350px); }
+            .carousel-container { height: 480px; }
+            .carousel-spinner { transform: scale(0.9); }
+            .card-1 { transform: rotateY(0deg) translateZ(400px); }
+            .card-2 { transform: rotateY(90deg) translateZ(400px); }
+            .card-3 { transform: rotateY(180deg) translateZ(400px); }
+            .card-4 { transform: rotateY(270deg) translateZ(400px); }
         }
         @media (max-width: 1024px) { 
-            .carousel-spinner { transform: scale(0.8); }
+            .proto-1-wrapper {
+                width: 100%;
+                max-width: 100vw;
+                overflow-x: hidden;
+                overflow-y: visible !important;
+            }
+            .carousel-container {
+                max-width: 100vw;
+                height: 460px;
+                overflow: visible;
+            }
+            .carousel-spinner { transform: scale(0.82); }
+            .card-1 { transform: rotateY(0deg) translateZ(360px); }
+            .card-2 { transform: rotateY(90deg) translateZ(360px); }
+            .card-3 { transform: rotateY(180deg) translateZ(360px); }
+            .card-4 { transform: rotateY(270deg) translateZ(360px); }
             .bento-card { height: 400px; }
         }
         
         @media (max-width: 768px) {
-            /* 3D Carousel Mobile Mini Version */
-            .proto-1-wrapper { margin-bottom: 60px !important; min-height: auto !important; padding-top: 80px !important; overflow: hidden; width: 100vw; max-width: 100%; }
-            .proto-1-title { margin-bottom: 60px !important; }
-            .carousel-container { height: 380px !important; perspective: 1000px !important; margin-bottom: 40px; }
+            /* 3D Carousel Mobile Mini Version — All 4 Glass Cards Visible in Orbital Space */
+            .proto-1-wrapper {
+                margin-bottom: 60px !important;
+                min-height: auto !important;
+                padding-top: clamp(40px, 6vh, 60px) !important;
+                padding-bottom: 40px !important;
+                overflow: visible !important;
+                width: 100% !important;
+                max-width: 100% !important;
+                box-sizing: border-box !important;
+            }
+            .proto-1-title {
+                margin-bottom: 52px !important;
+                padding: 0 12px !important;
+            }
+            .proto-1-title p {
+                font-size: clamp(12px, 3.4vw, 15px) !important;
+                line-height: 1.5 !important;
+            }
+            .carousel-container {
+                height: 380px !important;
+                perspective: 850px !important;
+                margin-top: 36px !important;
+                margin-bottom: 30px !important;
+                max-width: 100% !important;
+                width: 100% !important;
+                overflow: visible !important;
+            }
             .carousel-spinner {
-                width: 200px !important; height: 300px !important; 
-                transform: none; 
+                width: 180px !important;
+                height: 300px !important;
+                transform-style: preserve-3d !important;
                 animation: orbital-rotation 20s linear infinite !important;
-                display: block; margin-top: 0;
+                display: block;
+                margin: 0 auto !important;
             }
             .hologram-card {
-                position: absolute !important; transform: none;
-                height: 300px !important; min-height: auto; 
-                padding: 24px 16px !important;
+                position: absolute !important;
+                inset: 0 !important;
+                width: 180px !important;
+                height: 300px !important;
+                min-height: auto;
+                padding: 22px 14px !important;
+                background: rgba(6, 11, 20, 0.6) !important;
+                backdrop-filter: blur(12px) !important;
+                -webkit-backdrop-filter: blur(12px) !important;
+                border: 1px solid rgba(0, 229, 255, 0.45) !important;
+                border-radius: 14px !important;
+                transform-style: preserve-3d !important;
+                backface-visibility: visible !important;
+                -webkit-backface-visibility: visible !important;
+                box-sizing: border-box !important;
             }
-            .hologram-card h3 { font-size: 16px !important; margin-bottom: 8px !important; }
-            .hologram-card p { font-size: 11px !important; line-height: 1.4 !important; }
-            .hologram-card .material-symbols-outlined { font-size: 40px !important; margin-bottom: 12px !important; }
-            .proj-btn-cyan, .proj-btn-purple { padding: 10px !important; font-size: 9px !important; margin-top: auto !important; }
-            
-            .card-1 { transform: rotateY(0deg) translateZ(150px) !important; }
-            .card-2 { transform: rotateY(90deg) translateZ(150px) !important; }
-            .card-3 { transform: rotateY(180deg) translateZ(150px) !important; }
-            .card-4 { transform: rotateY(270deg) translateZ(150px) !important; }
+            .hologram-card h3 {
+                font-size: 15px !important;
+                margin-bottom: 6px !important;
+            }
+            .hologram-card p {
+                font-size: 11px !important;
+                line-height: 1.38 !important;
+            }
+            .hologram-card .material-symbols-outlined {
+                font-size: 44px !important;
+                margin-bottom: 8px !important;
+            }
+            .proj-btn-cyan, .proj-btn-purple {
+                padding: 9px 10px !important;
+                font-size: 9.5px !important;
+                letter-spacing: 1.8px !important;
+                margin-top: auto !important;
+                min-height: 36px !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                box-sizing: border-box !important;
+            }
+
+            .card-1 { transform: rotateY(0deg) translateZ(220px) !important; }
+            .card-2 { transform: rotateY(90deg) translateZ(220px) !important; }
+            .card-3 { transform: rotateY(180deg) translateZ(220px) !important; }
+            .card-4 { transform: rotateY(270deg) translateZ(220px) !important; }
 
             /* Prototype 2 & 3 Mobile Fixes */
-            .bento-card { height: auto !important; min-height: 400px; }
-            .bento-content { padding: 32px 24px !important; }
-            .bento-content h3 { font-size: 32px !important; }
-            .bento-content p { font-size: 16px !important; }
+            .bento-card { height: auto !important; min-height: 360px !important; max-width: 100% !important; }
+            .bento-content { padding: 24px 18px !important; }
+            .bento-content h3 { font-size: clamp(24px, 6vw, 32px) !important; }
+            .bento-content p { font-size: clamp(13px, 3.2vw, 15px) !important; }
             
             /* 3D Floating Server Stack for Mobile */
             .isometric-grid { 
@@ -230,6 +340,22 @@
 
             .proto-wrapper { padding-left: 20px !important; padding-right: 20px !important; margin-bottom: 60px !important; padding-top: 40px !important; padding-bottom: 40px !important; }
             .proto-3-wrapper { height: auto !important; padding: 40px 20px !important; overflow: hidden; }
+        }
+
+        @media (max-width: 360px) {
+            .carousel-spinner {
+                width: 160px !important;
+                height: 280px !important;
+            }
+            .hologram-card {
+                width: 160px !important;
+                height: 280px !important;
+                padding: 14px 10px !important;
+            }
+            .card-1 { transform: rotateY(0deg) translateZ(180px) !important; }
+            .card-2 { transform: rotateY(90deg) translateZ(180px) !important; }
+            .card-3 { transform: rotateY(180deg) translateZ(180px) !important; }
+            .card-4 { transform: rotateY(270deg) translateZ(180px) !important; }
         }
 
         /* HOLOGRAM HOVER */
@@ -280,14 +406,14 @@
     </style>
 
     <!-- PROTOTYPE 1: ORBITAL CAROUSEL (Full Screen) -->
-    <div class="proto-1-wrapper" style="min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 48px 20px; position: relative; margin-bottom: 120px;">
-        <div class="text-center proto-1-title" style="margin-bottom: 120px; position: relative; z-index: 10;">
-            <span style="color: #00E5FF; font-family: 'Space Grotesk', sans-serif; font-size: 14px; letter-spacing: 0.5em; text-transform: uppercase; display: block; margin-bottom: 16px;">SYSTEM_OPERATIONS</span>
+    <div class="proto-1-wrapper" style="min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 48px 20px; position: relative; margin-bottom: 80px;">
+        <div class="text-center proto-1-title" style="margin-bottom: 72px; position: relative; z-index: 10;">
+            <span style="color: #00E5FF; font-family: 'Space Grotesk', sans-serif; font-size: 14px; letter-spacing: 0.5em; text-transform: uppercase; display: block; margin-bottom: 12px;">SYSTEM_OPERATIONS</span>
             <h1 style="font-family: 'Space Grotesk', sans-serif; font-size: clamp(28px, 4vw, 42px); color: white; font-weight: 900; margin-bottom: 16px; letter-spacing: -0.03em;">PROJECT_LAB.v2</h1>
-            <p style="font-family: 'Lexend', sans-serif; font-size: 18px; color: #94a3b8; max-width: 900px; margin: 0 auto; line-height: 1.6;">From AI-powered tools to full-stack backends — real projects built with passion, hosted on GitHub & live on the web.</p>
+            <p style="font-family: 'Lexend', sans-serif; font-size: 17px; color: #94a3b8; max-width: 900px; margin: 0 auto; line-height: 1.55;">From AI-powered tools to full-stack backends — real projects built with passion, hosted on GitHub & live on the web.</p>
         </div>
 
-        <div style="position: relative; width: 100%; display: flex; flex-direction: column; align-items: center; perspective: 1500px; margin-top: 40px;">
+        <div style="position: relative; width: 100%; display: flex; flex-direction: column; align-items: center; perspective: 1500px; margin-top: 30px;">
             <!-- Removed ORBITAL text -->
             
             <div class="carousel-container">

@@ -32,16 +32,16 @@
           </filter>
         </defs>
 
-        <!-- Ambient Wide Cyan Glow along the line (Running far past edges from y=-300 to y=1300) -->
-        <line x1="806" y1="-300" x2="294" y2="1300"
-              stroke="#00F0FF" stroke-width="6" opacity="0.3" filter="url(#imLaserGlow)"/>
+        <!-- Ambient Wide Cyan Glow along the line (Running full screen through top buttons y=-1000 to y=2000) -->
+        <line x1="1030" y1="-1000" x2="70" y2="2000"
+              stroke="#00F0FF" stroke-width="6" opacity="0.32" filter="url(#imLaserGlow)"/>
 
-        <!-- Crisp Solid Core Trajectory Line (Completely edge to edge across entire screen) -->
-        <line x1="806" y1="-300" x2="294" y2="1300"
+        <!-- Crisp Solid Core Trajectory Line (Completely edge to edge across entire screen & behind buttons) -->
+        <line x1="1030" y1="-1000" x2="70" y2="2000"
               stroke="#00F0FF" stroke-width="1.8" opacity="0.95"/>
 
         <!-- Bright White Laser Thread for High Contrast & Sharpness -->
-        <line x1="806" y1="-300" x2="294" y2="1300"
+        <line x1="1030" y1="-1000" x2="70" y2="2000"
               stroke="#FFFFFF" stroke-width="0.75" opacity="0.85"/>
 
         <!-- Center Focal Alignment Markers on the Tilted Line (x=550, y=500) -->
@@ -49,13 +49,19 @@
         <circle cx="550" cy="500" r="2.5" fill="#FFFFFF"/>
         <line x1="480" y1="500" x2="620" y2="500" stroke="#00F0FF" stroke-width="0.8" opacity="0.5" stroke-dasharray="2 4"/>
 
-        <!-- Measurement Tick Markings along the continuous trajectory line -->
-        <line x1="684" y1="60"  x2="696" y2="60"  stroke="#00F0FF" stroke-width="1.2" opacity="0.75"/>
-        <line x1="640" y1="200" x2="652" y2="200" stroke="#00F0FF" stroke-width="1.2" opacity="0.75"/>
-        <line x1="592" y1="350" x2="604" y2="350" stroke="#00F0FF" stroke-width="1.2" opacity="0.75"/>
-        <line x1="496" y1="650" x2="508" y2="650" stroke="#00F0FF" stroke-width="1.2" opacity="0.75"/>
-        <line x1="448" y1="800" x2="460" y2="800" stroke="#00F0FF" stroke-width="1.2" opacity="0.75"/>
-        <line x1="404" y1="940" x2="416" y2="940" stroke="#00F0FF" stroke-width="1.2" opacity="0.75"/>
+        <!-- Extended Measurement Tick Markings along the continuous trajectory line -->
+        <line x1="864" y1="-480" x2="876" y2="-480" stroke="#00F0FF" stroke-width="1.2" opacity="0.75"/>
+        <line x1="818" y1="-340" x2="830" y2="-340" stroke="#00F0FF" stroke-width="1.2" opacity="0.75"/>
+        <line x1="774" y1="-200" x2="786" y2="-200" stroke="#00F0FF" stroke-width="1.2" opacity="0.75"/>
+        <line x1="730" y1="-70"  x2="742" y2="-70"  stroke="#00F0FF" stroke-width="1.2" opacity="0.75"/>
+        <line x1="684" y1="60"   x2="696" y2="60"   stroke="#00F0FF" stroke-width="1.2" opacity="0.75"/>
+        <line x1="640" y1="200"  x2="652" y2="200"  stroke="#00F0FF" stroke-width="1.2" opacity="0.75"/>
+        <line x1="592" y1="350"  x2="604" y2="350"  stroke="#00F0FF" stroke-width="1.2" opacity="0.75"/>
+        <line x1="496" y1="650"  x2="508" y2="650"  stroke="#00F0FF" stroke-width="1.2" opacity="0.75"/>
+        <line x1="448" y1="800"  x2="460" y2="800"  stroke="#00F0FF" stroke-width="1.2" opacity="0.75"/>
+        <line x1="404" y1="940"  x2="416" y2="940"  stroke="#00F0FF" stroke-width="1.2" opacity="0.75"/>
+        <line x1="358" y1="1080" x2="370" y2="1080" stroke="#00F0FF" stroke-width="1.2" opacity="0.75"/>
+        <line x1="314" y1="1220" x2="326" y2="1220" stroke="#00F0FF" stroke-width="1.2" opacity="0.75"/>
       </svg>
 
       <!-- Viewport: Strictly ONE active category node visible at a time -->
@@ -191,6 +197,21 @@
     }, 50);
   })();
 
+  function calcBaseRadius(count) {
+    var w = window.innerWidth;
+    if (w <= 360) {
+      return 74;
+    } else if (w <= 400) {
+      return 84;
+    } else if (w <= 440) {
+      return 94;
+    } else if (w <= 768) {
+      return 115;
+    } else {
+      return (count >= 7 ? 174 : 160);
+    }
+  }
+
   /* ── 4. RENDER SCI-FI FLOATING CATEGORY BOXES ── */
   var catsContainer = document.getElementById('imCatsContainer');
 
@@ -217,7 +238,7 @@
           '<span class="im-cat-bracket">[</span>' +
           '<span class="im-cat-idx">' + cat.indexStr + '</span>' +
           '<span class="im-cat-bracket">]</span>' +
-          '<span class="im-cat-name">' + cat.title + '</span>' +
+          '<span class="im-cat-name" data-short="' + cat.shortTitle + '">' + cat.title + '</span>' +
         '</div>' +
         '<span class="material-symbols-outlined im-cat-icon">' + cat.icon + '</span>' +
       '</div>';
@@ -233,14 +254,16 @@
     wrap.addEventListener('mouseenter', function () {
       isHoveredBoost = true;
       targetSpeed = rotationSpeed * 1.8;
-      targetRadius = 178;
+      var curCat = CATEGORIES[currentIndex] || cat;
+      targetRadius = calcBaseRadius(curCat.skills.length) * 1.08;
     });
 
     wrap.addEventListener('mouseleave', function () {
       isHoveredBoost = false;
       if (!isMoonHovered) {
         targetSpeed = rotationSpeed;
-        targetRadius = 162;
+        var curCat = CATEGORIES[currentIndex] || cat;
+        targetRadius = calcBaseRadius(curCat.skills.length);
       }
     });
 
@@ -257,8 +280,8 @@
     node.className = 'im-single-node';
     node.dataset.catId = cat.id;
 
-    // Radius calculation based on skill count to ensure zero overlaps
-    var baseR = window.innerWidth <= 768 ? 120 : (cat.skills.length >= 7 ? 174 : 160);
+    // Dynamic viewport-relative radius to eliminate left/right screen overflows
+    var baseR = calcBaseRadius(cat.skills.length);
     targetRadius = baseR;
     currentRadius = baseR;
 
@@ -303,12 +326,12 @@
     planetWrap.addEventListener('mouseenter', function () {
       isHoveredBoost = true;
       targetSpeed = rotationSpeed * 1.9;
-      targetRadius = (window.innerWidth <= 768 ? 130 : 182);
+      targetRadius = baseR * 1.08;
     });
     planetWrap.addEventListener('mouseleave', function () {
       isHoveredBoost = false;
       targetSpeed = rotationSpeed;
-      targetRadius = (window.innerWidth <= 768 ? 120 : (cat.skills.length >= 7 ? 174 : 160));
+      targetRadius = baseR;
     });
 
     // Hover listeners on each skill moon badge (pauses spin & reveals detail popover)
@@ -340,11 +363,15 @@
     var prevId = currentIndex;
     currentIndex = nextId;
 
-    // Update Left Category Boxes
+    // Update Category Boxes & center active pill horizontally on mobile
     var wraps = catsContainer.querySelectorAll('.im-cat-wrap');
     wraps.forEach(function (w) {
       var id = parseInt(w.dataset.catId, 10);
-      w.classList.toggle('active', id === nextId);
+      var isAct = id === nextId;
+      w.classList.toggle('active', isAct);
+      if (isAct && window.innerWidth <= 768 && typeof w.scrollIntoView === 'function') {
+        w.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+      }
     });
 
     // Create incoming single category node
@@ -491,6 +518,15 @@
       if (currentIndex > 0) {
         selectCategory(currentIndex - 1);
       }
+    }
+  });
+
+  /* ── 10. DYNAMIC RESIZE LISTENER ── */
+  window.addEventListener('resize', function () {
+    if (CATEGORIES[currentIndex]) {
+      var r = calcBaseRadius(CATEGORIES[currentIndex].skills.length);
+      targetRadius = r;
+      currentRadius = r;
     }
   });
 

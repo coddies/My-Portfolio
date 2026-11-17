@@ -84,14 +84,14 @@
    Generous gap (22px) | Zero-gravity float animations
    ══════════════════════════════════════════════════════════════════ */
 .im-cats {
-  width: 340px;
-  max-width: 32vw;
+  width: clamp(340px, 28vw, 440px);
+  max-width: 40vw;
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 22px;
-  padding: 100px 0 40px 48px;
+  gap: 20px;
+  padding: 80px 0 40px 48px;
   z-index: 25;
   position: relative;
 }
@@ -244,14 +244,14 @@
 
 .im-cat-name {
   font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 13px;
+  font-size: clamp(12px, 1.05vw, 13.5px);
   font-weight: 700;
   color: #FFFFFF;
   text-transform: uppercase;
   letter-spacing: 0.04em;
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  overflow: visible;
+  text-overflow: clip;
   line-height: 1.25;
 }
 
@@ -739,77 +739,241 @@
 }
 
 @media (max-width: 768px) {
+  #card-3 {
+    height: 100dvh !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  #card-3::-webkit-scrollbar {
+    display: none;
+  }
+  #card-3 .card-inner,
+  #card-3 .im-root {
+    height: auto !important;
+    min-height: 100dvh !important;
+    overflow: visible !important;
+  }
   .im-layout {
     flex-direction: column;
-    height: 100vh;
+    height: auto;
+    min-height: 100dvh;
+    padding-bottom: 110px;
+    box-sizing: border-box;
+    overflow: visible;
   }
 
   .im-header {
     position: relative;
     top: 0;
     left: 0;
-    margin: 16px 16px 0;
+    margin: 12px 64px 6px 14px;
+    padding: 6px 14px 6px 10px;
     border-radius: 4px;
+    z-index: 30;
+  }
+  .im-header-title {
+    font-size: 11px;
+  }
+  .im-header-sub {
+    font-size: 8.5px;
   }
 
+  /* 5 Slim Vertical Top-to-Bottom Hanging Tabs in 1 Centered Row + Active Drop Effect */
   .im-cats {
-    width: 100%;
+    width: calc(100vw - 16px);
     max-width: 100%;
+    margin: 6px auto 10px;
+    display: flex;
     flex-direction: row;
-    overflow-x: auto;
-    overflow-y: hidden;
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
-    gap: 12px;
-    padding: 12px 16px;
-    justify-content: flex-start;
-  }
-  .im-cats::-webkit-scrollbar {
-    display: none;
+    flex-wrap: nowrap;
+    gap: clamp(6px, 2.2vw, 12px);
+    padding: 8px 4px 18px 4px;
+    justify-content: center;
+    align-items: flex-start;
+    position: relative !important;
+    z-index: 25 !important;
+    flex-shrink: 0;
+    overflow: visible;
+    box-sizing: border-box;
   }
 
   .im-cat-float {
-    width: auto;
+    width: clamp(34px, 10.5vw, 44px);
+    flex: 0 0 clamp(34px, 10.5vw, 44px);
+    min-width: 0;
     animation: none;
+    box-sizing: border-box;
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
+  /* Inactive vertical tabs stay slightly raised above */
   .im-cat-wrap {
-    flex-shrink: 0;
-    min-width: 170px;
-  }
-  .im-cat-wrap.active, .im-cat-wrap:hover {
-    transform: translateY(-4px);
-  }
-  .im-cat-inner {
-    padding: 14px 16px;
-    min-height: 54px;
-    gap: 8px;
-  }
-  .im-cat-name {
-    font-size: 11px;
-  }
-  .im-cat-icon {
-    font-size: 18px !important;
+    width: 100%;
+    min-width: 0;
+    opacity: 0.78;
+    transform: translateY(-6px) scale(0.96);
+    transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.28s ease, box-shadow 0.35s ease, background 0.3s ease;
+    clip-path: polygon(
+      8px 0,
+      calc(100% - 8px) 0,
+      100% 8px,
+      100% calc(100% - 8px),
+      calc(100% - 8px) 100%,
+      8px 100%,
+      0 calc(100% - 8px),
+      0 8px
+    );
   }
 
+  .im-cat-wrap:hover {
+    transform: translateY(-1px) scale(0.99);
+    opacity: 0.96;
+  }
+
+  /* Active vertical tab drops downwards with Apple Liquid Glass Glow */
+  .im-cat-wrap.active {
+    opacity: 1;
+    transform: translateY(10px) scale(1.04);
+    margin-bottom: 0;
+    z-index: 12;
+    box-shadow:
+      0 14px 26px rgba(0, 240, 255, 0.42),
+      0 0 18px rgba(0, 240, 255, 0.55),
+      inset 0 1px 0 rgba(255, 255, 255, 0.45);
+  }
+
+  .im-cat-inner {
+    padding: 9px 2px 10px 2px;
+    min-height: clamp(134px, 34vw, 162px);
+    height: auto;
+    gap: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    clip-path: polygon(
+      7px 0,
+      calc(100% - 7px) 0,
+      100% 7px,
+      100% calc(100% - 7px),
+      calc(100% - 7px) 100%,
+      7px 100%,
+      0 calc(100% - 7px),
+      0 7px
+    );
+    background: linear-gradient(160deg, rgba(255, 255, 255, 0.1) 0%, rgba(7, 19, 32, 0.86) 65%) !important;
+    backdrop-filter: blur(20px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.28);
+  }
+
+  .im-cat-wrap.active .im-cat-inner {
+    background: linear-gradient(160deg, rgba(0, 240, 255, 0.24) 0%, rgba(8, 28, 48, 0.92) 72%) !important;
+    border-left: none;
+    border-top: 2px solid #00F0FF;
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.45), inset 0 0 18px rgba(0, 240, 255, 0.2);
+  }
+
+  .im-cat-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    min-width: 0;
+    flex: 1;
+    overflow: visible;
+    order: 2;
+  }
+
+  .im-cat-bracket {
+    display: none;
+  }
+
+  .im-cat-idx {
+    font-size: 8.5px;
+    line-height: 1;
+  }
+
+  /* Vertical upright top-to-bottom letters inside each slim vertical blade */
+  .im-cat-name {
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+    font-size: 0 !important;
+    line-height: 1;
+    white-space: nowrap;
+    overflow: visible;
+  }
+  .im-cat-name::after {
+    content: attr(data-short);
+    font-family: 'JetBrains Mono', 'Space Grotesk', monospace;
+    font-size: clamp(7.5px, 2.1vw, 8.5px);
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    line-height: 1.15;
+    color: #FFFFFF;
+    text-transform: uppercase;
+  }
+
+  .im-cat-icon {
+    font-size: 16px !important;
+    order: 1;
+  }
+
+  /* Centered Stage & Planetary Orbit System on Mobile — Full Bleed Trajectory Line */
   .im-stage {
     flex: 1;
-    min-height: 420px;
+    min-height: clamp(290px, 50dvh, 410px);
     width: 100%;
+    max-width: 100vw;
+    position: relative;
+    overflow: visible !important; /* Allow line to pass behind buttons to screen top */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Full edge-to-edge diagonal trajectory line running behind buttons on mobile */
+  .im-line-svg {
+    transform: translateX(-5%);
+    overflow: visible !important;
+    z-index: 2 !important;
+    pointer-events: none !important;
   }
 
   .im-single-node {
     left: 50% !important;
     top: 50% !important;
+    transform: translate(-50%, -50%);
   }
 
+  /* Center category planet node precisely inside orbit ring on mobile (no double translate!) */
+  .im-planet-core-wrap {
+    transform: scale(0.86);
+  }
+
+  /* Skill Moon Badges scaled fluidly so they never clip at screen edges */
   .im-moon-badge {
-    padding: 6px 12px;
+    padding: 4px 8px;
   }
   .im-moon-text {
-    font-size: 9.5px;
+    font-size: clamp(8px, 2.2vw, 9px);
+    letter-spacing: 0.03em;
   }
   .im-moon-badge .material-symbols-outlined {
-    font-size: 13px !important;
+    font-size: 12px !important;
+  }
+
+  /* Detail Popover on mobile */
+  .im-skill-popover {
+    width: min(200px, 75vw);
+    padding: 7px 9px;
+  }
+  .im-pop-title {
+    font-size: 10px;
+  }
+  .im-pop-desc {
+    font-size: 9px;
   }
 }

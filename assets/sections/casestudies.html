@@ -481,13 +481,19 @@
                     <div id="cs-mobile-injection-point"></div>
                 </div>
 
-                <!-- Mobile Accordion Header 2 (Dummy) -->
-                <div class="q-mobile-accordion-bar" style="display: flex; justify-content: space-between; align-items: center; width: 100%; cursor: pointer; padding: 20px; border-radius: 12px; border: 1px solid rgba(139, 92, 246, 0.2); background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);" onclick="alert('Neural Vision is currently in development.')">
-                    <div style="display: flex; align-items: center; gap: 12px;">
-                        <span class="material-symbols-outlined" style="color: var(--purple); font-size: 16px;">lock</span>
-                        <span style="font-family: 'Space Grotesk', sans-serif; font-weight: bold; color: rgba(255,255,255,0.6); letter-spacing: 1px; text-transform: uppercase; font-size: 14px;">NEURAL VISION</span>
+                <!-- Mobile Accordion Header 2: FINISH AI -->
+                <div class="q-mobile-accordion-bar" style="display: flex; justify-content: space-between; align-items: center; width: 100%; cursor: pointer; padding: 20px; border-radius: 12px; border: 1px solid rgba(139, 92, 246, 0.35); background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);" onclick="toggleFinishAccordion()">
+                    <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                        <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--purple); animation: pulse 2s infinite; flex-shrink: 0;"></span>
+                        <span style="font-family: 'Space Grotesk', sans-serif; font-weight: bold; color: #fff; letter-spacing: 2px; text-transform: uppercase; font-size: 14px;">FINISH AI</span>
+                        <span style="font-family: monospace; font-size: 9px; color: #c4b5fd; background: rgba(139, 92, 246, 0.16); border: 1px solid rgba(139, 92, 246, 0.4); padding: 2px 8px; border-radius: 99px; letter-spacing: 1px;">TEAM LEADER</span>
                     </div>
-                    <span style="font-family: monospace; font-size: 10px; color: var(--purple);">COMING SOON</span>
+                    <span id="cs-finish-accordion-icon" class="material-symbols-outlined" style="color: var(--purple); transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);">expand_more</span>
+                </div>
+
+                <!-- Finish AI Mobile Accordion Content -->
+                <div id="cs-finish-accordion-content" class="q-accordion-wrapper">
+                    <div id="cs-finish-mobile-injection"></div>
                 </div>
 
                 <!-- Mobile Accordion Header 3 (Dummy) -->
@@ -536,25 +542,36 @@
                         </div>
                     </div>
 
-                    <!-- Panel 2: Dummy -->
+                    <!-- Panel 2: Finish AI (Live Case Study — Team Leader) -->
                     <div id="cs-panel-2" class="cs-panel" onclick="openDesktopPanel(2)">
                         <div class="cs-panel-gallery-content">
-                            <span class="material-symbols-outlined" style="font-size: 48px; color: var(--purple); margin-bottom: 16px;">biotech</span>
-                            <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 24px; font-weight: bold; color: #fff; text-transform: uppercase; margin-bottom: 12px; letter-spacing: 1px;">Neural Vision</h3>
-                            <p style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; color: var(--text-muted); line-height: 1.6; margin-bottom: 24px;">Advanced computer vision model for real-time object tracking and segmentation.</p>
-                            <div style="display: inline-flex; align-items: center; gap: 8px; px: 12px; padding: 6px 14px; border: 1px solid rgba(139, 92, 246, 0.2); background: rgba(139, 92, 246, 0.04); border-radius: 99px;">
-                                <span style="font-family: monospace; font-size: 10px; color: var(--purple); font-weight: bold;">COMING SOON</span>
+                            <span class="material-symbols-outlined" style="font-size: 48px; color: var(--purple); margin-bottom: 14px;">route</span>
+                            <div style="display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border: 1px solid rgba(139, 92, 246, 0.45); background: rgba(139, 92, 246, 0.14); border-radius: 99px; margin-bottom: 12px;">
+                                <span style="font-family: monospace; font-size: 10px; color: #ddd6fe; font-weight: bold; letter-spacing: 1px;">TEAM LEADER // SMIT</span>
+                            </div>
+                            <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 24px; font-weight: bold; color: #fff; text-transform: uppercase; margin-bottom: 12px; letter-spacing: 1px;">Finish AI</h3>
+                            <p style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; color: var(--text-muted); line-height: 1.6; margin-bottom: 24px;">AI-powered platform led as Team Leader that extracts job role intelligence and generates personalized learning &amp; career roadmaps.</p>
+                            <div style="display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border: 1px solid rgba(139, 92, 246, 0.35); background: rgba(139, 92, 246, 0.08); border-radius: 99px;">
+                                <span style="font-family: monospace; font-size: 10px; color: #c4b5fd; font-weight: bold;">VIEW CASE STUDY</span>
+                                <span class="material-symbols-outlined" style="font-size: 14px; color: #c4b5fd;">arrow_forward</span>
                             </div>
                         </div>
-                        <div class="cs-panel-expanded-content" style="align-items: center; justify-content: center;">
-                            <div onclick="closeDesktopPanel(event)" style="position: absolute; top: 30px; left: 30px; display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.05); cursor: pointer; transition: background 0.3s; z-index: 10;">
-                                <span class="material-symbols-outlined" style="color: #fff;">arrow_back</span>
+                        <div class="cs-panel-expanded-content" id="cs-expanded-content-2">
+                            <div style="padding: 30px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
+                                <div style="display: flex; align-items: center; gap: 20px;">
+                                    <div onclick="closeDesktopPanel(event)" style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.06); cursor: pointer; transition: background 0.3s;">
+                                        <span class="material-symbols-outlined" style="color: #fff;">arrow_back</span>
+                                    </div>
+                                    <h2 class="syne-font" style="font-size: 28px; color: #fff; font-weight: 800; text-transform: uppercase; margin: 0;">FINISH AI</h2>
+                                </div>
+                                <span style="font-family: monospace; font-size: 11px; color: #ddd6fe; background: rgba(139, 92, 246, 0.18); border: 1px solid rgba(139, 92, 246, 0.45); padding: 6px 14px; border-radius: 99px; letter-spacing: 1px; font-weight: 700;">ROLE: TEAM LEADER</span>
                             </div>
-                            <span class="material-symbols-outlined" style="font-size: 80px; color: rgba(255,255,255,0.1);">lock</span>
-                            <h2 class="syne-font" style="font-size: 32px; color: #fff; margin-top: 20px;">IN DEVELOPMENT</h2>
+                            <div id="cs-finish-desktop-injection" style="flex: 1; padding: 30px;">
+                                <!-- Finish AI Master Grid will be injected here -->
+                            </div>
                         </div>
                         <div class="cs-panel-shrunk-content">
-                            <span class="cs-shrunk-title" style="color: rgba(255,255,255,0.5);">NEURAL VISION</span>
+                            <span class="cs-shrunk-title" style="color: #c4b5fd;">FINISH AI</span>
                         </div>
                     </div>
 
@@ -788,6 +805,143 @@
 
             </div> <!-- /quantum-grid-master -->
 
+            <!-- FINISH AI MASTER QUANTUM GRID (MOVED DYNAMICALLY) -->
+            <div id="finish-grid-master" style="display: none;">
+                <div class="quantum-grid-container">
+
+                <!-- COL 1: Overview, Team Leader Role & Links -->
+                <div class="q-glass-panel" style="display: flex; flex-direction: column; gap: 18px; border-color: rgba(139, 92, 246, 0.28);">
+                    <div style="position: absolute; top: 0; right: 0; padding: 12px; opacity: 0.12;">
+                        <span class="material-symbols-outlined" style="font-size: 48px; color: var(--purple);">groups</span>
+                    </div>
+
+                    <div>
+                        <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 16px; font-weight: 800; color: #c4b5fd; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 10px;">PROJECT_OVERVIEW</h3>
+                        <p style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13px; color: rgba(255,255,255,0.78); line-height: 1.65; margin: 0;">
+                            <strong style="color:#fff;">Finish AI</strong> is an intelligent career &amp; skill-building platform that generates targeted <strong style="color:var(--cyan);">job insights</strong> and step-by-step <strong style="color:#c4b5fd;">personalized roadmaps</strong>. Built cleanly with the SMIT team under my leadership as <strong style="color:var(--cyan);">Team Leader</strong>.
+                        </p>
+                        <div style="display:flex; flex-wrap:wrap; gap:6px; margin-top:12px;">
+                            <span style="background:rgba(139,92,246,0.14);border:1px solid rgba(139,92,246,0.38);color:#ddd6fe;padding:3px 10px;border-radius:6px;font-size:10px;font-family:monospace;">Team Leader</span>
+                            <span style="background:rgba(0,229,255,0.08);border:1px solid rgba(0,229,255,0.28);color:var(--cyan);padding:3px 10px;border-radius:6px;font-size:10px;font-family:monospace;">Job Insights</span>
+                            <span style="background:rgba(139,92,246,0.08);border:1px solid rgba(139,92,246,0.28);color:#c4b5fd;padding:3px 10px;border-radius:6px;font-size:10px;font-family:monospace;">AI Roadmaps</span>
+                            <span style="background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.28);color:#34d399;padding:3px 10px;border-radius:6px;font-size:10px;font-family:monospace;">Vercel</span>
+                        </div>
+                    </div>
+
+                    <div style="border-top: 1px solid rgba(255,255,255,0.08); padding-top: 16px; display: flex; align-items: center; gap: 14px;">
+                        <div style="position: relative;">
+                            <div style="width: 48px; height: 48px; border-radius: 50%; border: 2px solid rgba(139, 92, 246, 0.55); padding: 2px; overflow: hidden;">
+                                <img src="assets/images/my-img.png" alt="Muhammad Burhan" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;" onerror="this.style.display='none';">
+                            </div>
+                            <div style="position: absolute; bottom: -2px; right: -2px; width: 12px; height: 12px; border: 2px solid #060B14; border-radius: 50%; background: var(--cyan);"></div>
+                        </div>
+                        <div>
+                            <div style="font-family: monospace; font-size: 12px; color: #fff; font-weight: bold;">M. BURHAN</div>
+                            <div style="font-family: 'Space Grotesk', sans-serif; font-size: 9px; color: #c4b5fd; text-transform: uppercase; font-weight: bold; letter-spacing: 1px;">Team Leader &amp; Architect</div>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 4px;">
+                        <a href="https://finishai-pi.vercel.app/" target="_blank" rel="noopener" style="display:flex; align-items:center; justify-content:center; gap:8px; background:linear-gradient(135deg, rgba(139,92,246,0.22), rgba(0,229,255,0.16)); border:1px solid rgba(0,229,255,0.5); color:#fff; padding:11px 16px; border-radius:10px; font-family:'Space Grotesk',sans-serif; font-size:11px; font-weight:800; letter-spacing:1.5px; text-transform:uppercase; text-decoration:none; box-shadow:0 6px 20px rgba(0,229,255,0.18);">
+                            <span class="material-symbols-outlined" style="font-size:16px; color:var(--cyan);">open_in_new</span>
+                            LAUNCH LIVE APP
+                        </a>
+                        <a href="https://github.com/coddies/SMIT-Team" target="_blank" rel="noopener" style="display:flex; align-items:center; justify-content:center; gap:8px; background:rgba(255,255,255,0.05); border:1px solid rgba(139,92,246,0.4); color:#ddd6fe; padding:10px 16px; border-radius:10px; font-family:'Space Grotesk',sans-serif; font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; text-decoration:none;">
+                            <span class="material-symbols-outlined" style="font-size:16px;">code</span>
+                            GITHUB REPO (SMIT-TEAM)
+                        </a>
+                    </div>
+                </div>
+
+                <!-- COL 2: Finish AI Center Rotating 3D Cube -->
+                <div class="q-scene-wrapper q-cube-container">
+                    <div class="q-floating-indicator" style="top: 0; left: -36px; border-left: 2px solid rgba(139, 92, 246, 0.45); border-top: 2px solid rgba(139, 92, 246, 0.45); padding: 8px 12px; border-top-left-radius: 6px; color: #c4b5fd;">
+                        ROLE: TEAM_LEADER
+                    </div>
+                    <div class="q-floating-indicator" style="bottom: 0; right: -36px; border-right: 2px solid rgba(0, 229, 255, 0.4); border-bottom: 2px solid rgba(0, 229, 255, 0.4); padding: 8px 12px; border-bottom-right-radius: 6px; text-align: right;">
+                        ROADMAP_AI: LIVE
+                    </div>
+
+                    <div class="q-scene-3d">
+                        <div class="q-cube">
+                            <div class="q-cube-face q-face-front" style="border-color: rgba(139,92,246,0.45);">
+                                <div style="text-align: center; z-index: 2; padding: 16px;">
+                                    <span class="material-symbols-outlined" style="font-size: 38px; color: #c4b5fd; display:block;">work_outline</span>
+                                    <div class="q-face-label" style="color: #c4b5fd;">JOB_MATCHER</div>
+                                    <div class="q-face-sublabel" style="color:rgba(196,181,253,0.75);">Role &amp; Skill Analysis</div>
+                                </div>
+                            </div>
+                            <div class="q-cube-face q-face-back" style="border-color: rgba(0,229,255,0.45);">
+                                <div style="text-align: center; z-index: 2; padding: 16px;">
+                                    <span class="material-symbols-outlined" style="font-size: 38px; color: var(--cyan); display:block;">route</span>
+                                    <div class="q-face-label" style="color: var(--cyan);">ROADMAP_GEN</div>
+                                    <div class="q-face-sublabel" style="color:rgba(0,229,255,0.7);">Step-by-Step Paths</div>
+                                </div>
+                            </div>
+                            <div class="q-cube-face q-face-right" style="border-color: rgba(139,92,246,0.38);">
+                                <div style="text-align: center; padding: 16px;">
+                                    <span class="material-symbols-outlined" style="font-size: 38px; color: var(--purple); display:block;">supervisor_account</span>
+                                    <div class="q-face-label" style="color: #c4b5fd;">TEAM_LEADER</div>
+                                    <div class="q-face-sublabel" style="color:rgba(196,181,253,0.7);">SMIT Collaboration</div>
+                                </div>
+                            </div>
+                            <div class="q-cube-face q-face-left" style="border-color: rgba(0,229,255,0.38);">
+                                <div style="text-align: center; padding: 16px;">
+                                    <span class="material-symbols-outlined" style="font-size: 38px; color: var(--cyan); display:block;">psychology</span>
+                                    <div class="q-face-label" style="color: var(--cyan);">CAREER_AI</div>
+                                    <div class="q-face-sublabel" style="color:rgba(0,229,255,0.7);">Smart Recommendations</div>
+                                </div>
+                            </div>
+                            <div class="q-cube-face q-face-top" style="border-color: rgba(16,185,129,0.4);">
+                                <div style="text-align: center; padding: 16px;">
+                                    <span class="material-symbols-outlined" style="font-size: 34px; color: #34d399; display:block;">rocket_launch</span>
+                                    <div class="q-face-label" style="color: #34d399;">FINISH_AI</div>
+                                    <div class="q-face-sublabel" style="color:rgba(52,211,153,0.75);">finishai-pi.vercel.app</div>
+                                </div>
+                            </div>
+                            <div class="q-cube-face q-face-bottom" style="border-color: rgba(0,229,255,0.4);">
+                                <div style="text-align: center; padding: 12px;">
+                                    <span class="material-symbols-outlined" style="font-size: 28px; color: var(--cyan); display:block;">verified</span>
+                                    <div class="q-face-label" style="color: var(--cyan);">SHIPPED_PROD</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- COL 3: Capabilities & Team Delivery Metrics -->
+                <div class="q-glass-panel" style="display: flex; flex-direction: column; gap: 18px; border-color: rgba(139, 92, 246, 0.28);">
+                    <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 12px;">
+                        <h4 style="font-family: 'Space Grotesk', sans-serif; font-size: 11px; color: #cbd5e1; font-weight: bold; letter-spacing: 1px; text-transform: uppercase;">CORE_CAPABILITIES</h4>
+                        <span class="material-symbols-outlined" style="color: var(--purple);">hub</span>
+                    </div>
+
+                    <div style="display: flex; flex-direction: column; gap: 10px;">
+                        <div style="background: rgba(139,92,246,0.08); border: 1px solid rgba(139,92,246,0.22); border-radius: 10px; padding: 12px;">
+                            <div style="font-family: 'Space Grotesk', sans-serif; font-size: 12px; font-weight: 800; color: #fff; margin-bottom: 4px;">🎯 Job Intelligence Engine</div>
+                            <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 11.5px; color: rgba(255,255,255,0.72); line-height: 1.5;">Breaks down target job roles, required tech skills, and market expectations.</div>
+                        </div>
+                        <div style="background: rgba(0,229,255,0.06); border: 1px solid rgba(0,229,255,0.22); border-radius: 10px; padding: 12px;">
+                            <div style="font-family: 'Space Grotesk', sans-serif; font-size: 12px; font-weight: 800; color: #fff; margin-bottom: 4px;">🗺️ AI Learning Roadmap Builder</div>
+                            <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 11.5px; color: rgba(255,255,255,0.72); line-height: 1.5;">Generates personalized step-by-step study &amp; career execution roadmaps.</div>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.12); border-radius: 10px; padding: 12px;">
+                            <div style="font-family: 'Space Grotesk', sans-serif; font-size: 12px; font-weight: 800; color: #fff; margin-bottom: 4px;">👑 SMIT Team Leadership</div>
+                            <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 11.5px; color: rgba(255,255,255,0.72); line-height: 1.5;">Directed architecture, sprint tasks, and production deployment as Team Leader.</div>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; align-items: flex-start; gap: 10px; border-left: 2px solid var(--purple); background: rgba(139, 92, 246, 0.08); border-radius: 4px; padding: 10px;">
+                        <span class="material-symbols-outlined" style="color: #c4b5fd; font-size: 18px; flex-shrink: 0;">check_circle</span>
+                        <p style="font-family: monospace; font-size: 9.5px; color: rgba(221,214,254,0.9); line-height: 1.45; margin: 0;">
+                            SHIPPED LIVE — Built with SMIT Team. Active at finishai-pi.vercel.app
+                        </p>
+                    </div>
+                </div>
+
+                </div>
+            </div> <!-- /finish-grid-master -->
+
         </div> <!-- /cs-universal-wrapper -->
     </div> <!-- /card-inner -->
 
@@ -801,6 +955,16 @@
                 icon.style.transform = 'rotate(180deg)';
             } else {
                 icon.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        function toggleFinishAccordion() {
+            const content = document.getElementById('cs-finish-accordion-content');
+            const icon = document.getElementById('cs-finish-accordion-icon');
+            if (!content) return;
+            content.classList.toggle('active');
+            if (icon) {
+                icon.style.transform = content.classList.contains('active') ? 'rotate(180deg)' : 'rotate(0deg)';
             }
         }
 
@@ -837,25 +1001,31 @@
         }
 
         function moveQuantumGrid() {
-            const masterContent = document.getElementById('quantum-grid-master');
-            if (!masterContent) return;
-            
-            masterContent.style.display = 'block'; // Make it visible when moving
-            
-            if (window.innerWidth < 992) {
-                const mobileTarget = document.getElementById('cs-mobile-injection-point');
-                if (mobileTarget && masterContent.parentNode !== mobileTarget) {
-                    mobileTarget.appendChild(masterContent);
+            const pairs = [
+                {
+                    el: document.getElementById('quantum-grid-master'),
+                    mobile: document.getElementById('cs-mobile-injection-point'),
+                    desktop: document.getElementById('cs-master-injection-point')
+                },
+                {
+                    el: document.getElementById('finish-grid-master'),
+                    mobile: document.getElementById('cs-finish-mobile-injection'),
+                    desktop: document.getElementById('cs-finish-desktop-injection')
                 }
-            } else {
-                const desktopTarget = document.getElementById('cs-master-injection-point');
-                if (desktopTarget && masterContent.parentNode !== desktopTarget) {
-                    desktopTarget.appendChild(masterContent);
+            ];
+
+            pairs.forEach(function (pair) {
+                if (!pair.el) return;
+                pair.el.style.display = 'block';
+                const target = window.innerWidth < 992 ? pair.mobile : pair.desktop;
+                if (target && pair.el.parentNode !== target) {
+                    target.appendChild(pair.el);
                 }
-            }
+            });
         }
 
-        // Run on load and resize
+        // Run immediately (section may load dynamically after DOMContentLoaded) & on resize
+        moveQuantumGrid();
         window.addEventListener('resize', moveQuantumGrid);
         document.addEventListener('DOMContentLoaded', moveQuantumGrid);
     </script>
